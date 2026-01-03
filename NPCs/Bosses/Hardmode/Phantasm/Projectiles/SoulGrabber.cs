@@ -14,6 +14,7 @@ public class SoulGrabber : ModProjectile
 	public override void SetStaticDefaults()
 	{
 		Main.projFrames[Type] = 6;
+		Data.Sets.ProjectileSets.DontReflect[Type] = true;
 	}
 	public override void SetDefaults()
     {

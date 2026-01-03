@@ -21,6 +21,10 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
 public class SoulDagger : ModProjectile
 {
 	public int alpha = 255;
+	public override void SetStaticDefaults()
+	{
+		Data.Sets.ProjectileSets.DontReflect[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Projectile.width = 9;
@@ -32,7 +36,6 @@ public class SoulDagger : ModProjectile
 		Projectile.hostile = true;
 		Projectile.scale = 1.3f;
 		Projectile.timeLeft = 99999999;
-		//Projectile.GetGlobalProjectile<AvalonGlobalProjectileInstance>().notReflect = true;
 	}
 	public override void OnHitPlayer(Player target, Player.HurtInfo info)
 	{

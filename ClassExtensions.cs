@@ -157,14 +157,14 @@ public static class ClassExtensions
 	}
 
 	/// <summary>
-	/// Return the <see cref="Player"/> instance of this NPC's target.
+	/// Returns the <see cref="Player"/> instance of this NPC's target.
 	/// </summary>
 	/// <param name="npc"></param>
 	/// <returns></returns>
 	public static Player PlayerTarget(this NPC npc) => Main.player[npc.target];
 
 	/// <summary>
-	/// Return the <see cref="Player"/> instance of this Projectile's owner.
+	/// Returns the <see cref="Player"/> instance of this Projectile's owner.
 	/// </summary>
 	/// <param name="proj"></param>
 	/// <returns></returns>

@@ -18,6 +18,7 @@ public class PhantomBlade : ModProjectile
 	{
 		ProjectileID.Sets.TrailCacheLength[Type] = 8;
 		ProjectileID.Sets.TrailingMode[Type] = 2;
+		Data.Sets.ProjectileSets.DontReflect[Type] = true;
 	}
 	public override void SetDefaults()
 	{

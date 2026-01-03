@@ -11626,7 +11626,7 @@ Mods: {
 
 			Dissolving: {
 				DisplayName: Dissolving
-				Description: Mods.Avalon.Buffs.Dissolving.Description
+				Description: You are dissolving in the acid
 			}
 		}
 

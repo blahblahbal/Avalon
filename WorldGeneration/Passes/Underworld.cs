@@ -341,10 +341,21 @@ internal class Underworld : GenPass
 		}
 		#endregion
 
-		progress.Message = "Generating Hellcastle and the Phantom Garden";
-		int hellcastleOriginX = (Main.maxTilesX / 2) - 200;
+		progress.Message = "Generating Hellcastle and Phantom Garden";
+
+		int hellcastleOriginX = Main.maxTilesX / 2;
+		if (GenVars.dungeonSide == -1)
+		{
+			hellcastleOriginX = Main.maxTilesX - Main.maxTilesX / 5 * 2;
+		}
+		else
+		{
+			hellcastleOriginX = Main.maxTilesX / 5 * 2;
+		}
+		Utils.GetHellcastleXCoord(hellcastleOriginX, Main.maxTilesY - 330, 400, 150, ref hellcastleOriginX);
 		int ashenLeft = hellcastleOriginX - 125;
 		int ashenRight = hellcastleOriginX + 525;
+
 
 
 		//if (Main.drunkWorld)

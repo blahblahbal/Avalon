@@ -815,6 +815,47 @@ public class Utils
 		return true;
 	}
 	#endregion
+
+	public static void GetHellcastleXCoord(int x, int y, int xLength, int yLength, ref int xCoord)
+	{
+		bool leftSideActive = false;
+		bool rightSideActive = false;
+		for (int i = y; i < y + yLength; i++)
+		{
+			if (Main.tile[x, i].HasTile && (Main.tile[x, i].TileType == TileID.LihzahrdBrick ||
+				Main.tile[x, i].WallType == WallID.LihzahrdBrickUnsafe))
+			{
+				leftSideActive = true;
+				break;
+			}
+		}
+		for (int i = y; i < y + yLength; i++)
+		{
+			if (Main.tile[x + xLength, i].HasTile && (Main.tile[x + xLength, i].TileType == TileID.LihzahrdBrick ||
+				Main.tile[x + xLength, i].WallType == WallID.LihzahrdBrickUnsafe))
+			{
+				rightSideActive = true;
+				break;
+			}
+		}
+		if (leftSideActive || rightSideActive)
+		{
+			if (xCoord > Main.maxTilesX / 2) xCoord--;
+			else if (xCoord < Main.maxTilesX / 2) xCoord++;
+			else return;
+			if (xCoord < 100)
+			{
+				xCoord = 100;
+				return;
+			}
+			if (xCoord > Main.maxTilesX - 100)
+			{
+				xCoord = Main.maxTilesX - 100;
+				return;
+			}
+			GetHellcastleXCoord(xCoord, y, xLength, yLength, ref xCoord);
+		}
+	}
 	public static void GetCMXCoord(int x, int y, int xLength, int ylength, ref int xCoord)
 	{
 		bool leftSideActive = false;

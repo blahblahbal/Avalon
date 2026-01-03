@@ -20,6 +20,11 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
 
 public class PhantomDagger : SoulDagger
 {
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		Data.Sets.ProjectileSets.DontReflect[Type] = true;
+	}
 	public override void OnHitPlayer(Player target, Player.HurtInfo info)
 	{
 		if (Main.rand.NextBool(3))

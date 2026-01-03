@@ -12,7 +12,12 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
 
 public class PhantomGrabber : SoulGrabber
 {
-    public override void AI()
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		Data.Sets.ProjectileSets.DontReflect[Type] = true;
+	}
+	public override void AI()
     {
 		Projectile.frameCounter++;
 		Projectile.frame = (Projectile.frameCounter / 5) % 6;
