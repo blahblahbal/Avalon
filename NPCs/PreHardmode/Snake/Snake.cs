@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.NPCs.PreHardmode
+namespace Avalon.NPCs.PreHardmode.Snake
 {
 	public class SnakeHead : SnakeHeadTemplate
 	{

@@ -5,7 +5,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Hostile;
+namespace Avalon.NPCs.PreHardmode.BloodshotEye;
 
 public class BloodshotShot : ModProjectile
 {
@@ -29,7 +29,7 @@ public class BloodshotShot : ModProjectile
     }
     public override bool PreDraw(ref Color lightColor)
     {
-        Texture2D tex = TextureAssets.Extra[89].Value;
+        Texture2D tex = TextureAssets.Extra[ExtrasID.ThePerfectGlow].Value;
         Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, tex.Width, tex.Height), Color.DarkRed * 0.8f, Projectile.rotation, tex.Size() / 2f, Projectile.height / 16f, SpriteEffects.None);
         return false;
     }

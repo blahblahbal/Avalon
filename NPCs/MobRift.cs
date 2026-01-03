@@ -2,6 +2,8 @@ using Avalon.Common;
 using Avalon.NPCs.Hardmode.Cougher;
 using Avalon.NPCs.Hardmode.Ickslime;
 using Avalon.NPCs.Hardmode.Viris;
+using Avalon.NPCs.PreHardmode.Bactus;
+using Avalon.NPCs.PreHardmode.Pyrasite;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -119,8 +121,8 @@ public class MobRift : ModNPC
                         else
                         {
                             int t = Main.rand.Next(2);
-                            if (t == 0) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<PreHardmode.Bactus>());
-                            if (t == 1) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<PreHardmode.PyrasiteHead>());
+                            if (t == 0) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Bactus>());
+                            if (t == 1) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<PyrasiteHead>());
                             //if (t == 2) NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, NPCID.BloodCrawler);
                         }
                     }
@@ -227,8 +229,8 @@ public class MobRift : ModNPC
                         else
                         {
                             int t = Main.rand.Next(2);
-                            if (t == 0) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<PreHardmode.Bactus>());
-                            if (t == 1) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<PreHardmode.PyrasiteHead>());
+                            if (t == 0) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<Bactus>());
+                            if (t == 1) NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.position.X, (int)NPC.position.Y, ModContent.NPCType<PyrasiteHead>());
                         }
                     }
                 }

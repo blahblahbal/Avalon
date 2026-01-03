@@ -31,6 +31,10 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles
 			Projectile.timeLeft = 600;
 			Projectile.scale = 0.5f;
 		}
+		public override void OnHitPlayer(Player target, Player.HurtInfo info)
+		{
+			Phantasm.ApplyShadowCurse(target);
+		}
 		public override void AI()
 		{
 			NPC owner = Main.npc[(int)Projectile.ai[0]];
@@ -99,11 +103,11 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles
 				int max = (int)Math.Floor((Projectile.ai[1]) / mid.Height);
 				for (int i = 0; i < max; i++)
 				{
-					Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0, (mid.Height * i)).RotatedBy(Projectile.rotation), mid, drawColor, Projectile.rotation, new Vector2(start.Width / 2, 0), new Vector2((Projectile.scale * x) + (((float)Math.Sin(Main.timeForVisualEffects * 0.2f + (i * 0.5f))) * 0.3f * Projectile.scale), 1f), SpriteEffects.None);
+					Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0, (mid.Height * i)).RotatedBy(Projectile.rotation), mid, drawColor, Projectile.rotation, new Vector2(start.Width / 2, 0), new Vector2((Projectile.scale * x) + (((float)Math.Sin(Main.timeForVisualEffects * -0.2f + (i * 0.5f))) * 0.3f * Projectile.scale), 1f), SpriteEffects.None);
 				}
-				Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0, mid.Height * max).RotatedBy(Projectile.rotation), new Rectangle(mid.X, mid.Y, mid.Width, (int)(mid.Height * ((Projectile.ai[1] / 30f) - max))), drawColor, Projectile.rotation, new Vector2(start.Width / 2, 0), new Vector2((Projectile.scale * x) + (((float)Math.Sin(Main.timeForVisualEffects * 0.2f + (max * 0.5f))) * 0.3f * Projectile.scale), 1), SpriteEffects.None);
+				Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0, mid.Height * max).RotatedBy(Projectile.rotation), new Rectangle(mid.X, mid.Y, mid.Width, (int)(mid.Height * ((Projectile.ai[1] / 30f) - max))), drawColor, Projectile.rotation, new Vector2(start.Width / 2, 0), new Vector2((Projectile.scale * x) + (((float)Math.Sin(Main.timeForVisualEffects * -0.2f + (max * 0.5f))) * 0.3f * Projectile.scale), 1), SpriteEffects.None);
 
-				Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0, Projectile.ai[1] - 1).RotatedBy(Projectile.rotation), end, drawColor, Projectile.rotation, new Vector2(start.Width / 2, 0), new Vector2((Projectile.scale * x) + (((float)Math.Sin(Main.timeForVisualEffects * 0.2f + (max * 0.5f))) * 0.3f * Projectile.scale), 1), SpriteEffects.None);
+				Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0, Projectile.ai[1] - 1).RotatedBy(Projectile.rotation), end, drawColor, Projectile.rotation, new Vector2(start.Width / 2, 0), new Vector2((Projectile.scale * x) + (((float)Math.Sin(Main.timeForVisualEffects * -0.2f + (max * 0.5f))) * 0.3f * Projectile.scale), 1), SpriteEffects.None);
 
 				drawColor *= 0.5f;
 			}

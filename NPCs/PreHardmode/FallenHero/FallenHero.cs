@@ -11,8 +11,9 @@ using Terraria.ModLoader;
 using Terraria.Localization;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Melee.PreHardmode.MinersSword;
+using Avalon;
 
-namespace Avalon.NPCs.PreHardmode;
+namespace Avalon.NPCs.PreHardmode.FallenHero;
 
 public class FallenHero : ModNPC
 {

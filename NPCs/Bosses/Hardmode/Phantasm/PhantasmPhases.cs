@@ -1,5 +1,7 @@
+using Avalon.Common;
 using Avalon.Dusts;
 using Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
+using Avalon.Particles;
 using Avalon.UI;
 using Microsoft.Xna.Framework;
 using ReLogic.Utilities;
@@ -7,6 +9,7 @@ using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.Graphics.CameraModifiers;
+using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -34,7 +37,7 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 				d.noGravity = true;
 				d.scale = Main.rand.NextFloat(2);
 				d.velocity = NPC.velocity;
-				if (NPC.ai[1] > dashInterval && NPC.ai[1] % 7 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
+				if (NPC.ai[1] > dashInterval && NPC.ai[1] % (Main.expertMode? 7 : 10) == 0 && Main.netMode != NetmodeID.MultiplayerClient)
 				{
 					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity.RotatedBy(MathHelper.PiOver2) * 0.3f, ModContent.ProjectileType<LostSoul>(), projDamage, 1,-1,target.whoAmI);
 					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity.RotatedBy(-MathHelper.PiOver2) * 0.3f, ModContent.ProjectileType<LostSoul>(), projDamage, 1, -1, target.whoAmI);
@@ -60,11 +63,11 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			}
 			if (NPC.ai[0] > 600 && NPC.ai[1] < dashInterval)
 			{
-				Transition();
 				NPC.TargetClosest();
 				phase = (byte)Main.rand.Next(1,3);
 				NPC.ai[0] = phase == 1 ? Main.rand.Next(-120, -60) : 0;
 				NPC.ai[1] = 0;
+				Transition();
 			}
 		}
 		private void Phase1_Swords()
@@ -73,9 +76,7 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			NPC.velocity = NPC.velocity.LengthClamp(10);
 			NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
 
-			int pause = 20;
-			if (Main.expertMode) pause = 15;
-			if (NPC.ai[0] % pause == 0 && NPC.ai[0] <= pause * 5)
+			if (NPC.ai[0] % 15 == 0 && NPC.ai[0] <= 15 * 5)
 			{
 				if(Main.netMode != NetmodeID.MultiplayerClient)
 				{
@@ -86,12 +87,11 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			NPC.ai[0]++;
 			if (NPC.ai[0] > 300)
 			{
-				Transition();
 				NPC.TargetClosest();
 				phase = (byte)Main.rand.Next(3);
 				NPC.ai[0] = 0;
 				NPC.ai[1] = 0;
-				NPC.netUpdate = true;
+				Transition();
 			}
 		}
 		private void Phase2_Hands()
@@ -103,7 +103,7 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			NPC.velocity = NPC.velocity.LengthClamp(12);
 			NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
 
-			if (NPC.ai[0] % 15 == 0 && NPC.ai[0] > 60)
+			if (NPC.ai[0] % (Main.expertMode ? 15 : 17) == 0 && NPC.ai[0] > 60)
 			{
 				if(Main.netMode != NetmodeID.MultiplayerClient)
 				{
@@ -112,11 +112,10 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			}
 			if (NPC.ai[0] >= 60 * 10)
 			{
-				Transition();
 				phase = (byte)Main.rand.Next(2);
 				NPC.ai[1] = 0;
 				NPC.ai[0] = 0;
-				NPC.netUpdate = true;
+				Transition();
 			}
 		}
 		private void Phase3_Transition()
@@ -129,54 +128,87 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			NPC.netUpdate = true;
 			if (NPC.ai[0] > 60)
 			{
-				PunchCameraModifier modifier = new PunchCameraModifier(target.Center, Main.rand.NextVector2Circular(1, 1), 8f, 7f, 45, 3000f);
-				Main.instance.CameraModifiers.Add(modifier);
+				if (ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
+				{
+					PunchCameraModifier modifier = new PunchCameraModifier(target.Center, Main.rand.NextVector2Circular(1, 1), 8f, 7f, 45, 3000f);
+					Main.instance.CameraModifiers.Add(modifier);
+				}
+				for(int i = 0; i < 10; i++)
+				{
+					PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+					s.LocalPosition = NPC.Center;
+					s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(6f, 12f);
+					s.Rotation = s.Velocity.ToRotation();
+					s.Scale = new Vector2(6f, 2f);
+					s.DrawVerticalAxis = false;
+					s.FadeInEnd = Main.rand.Next(3,10);
+					s.FadeOutStart = s.FadeInEnd;
+					s.FadeOutEnd = Main.rand.Next(20,40);
+					s.AdditiveAmount = 1f;
+					s.ColorTint = new Color(Main.rand.NextFloat(0.2f,0.7f), 0.9f, 1f);
+					Main.ParticleSystem_World_OverPlayers.Add(s);
+				}
+				for (int i = 0; i < 10; i++)
+				{
+					PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+					s.LocalPosition = NPC.Center;
+					s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(12f, 24f);
+					s.Rotation = s.Velocity.ToRotation();
+					s.Scale = new Vector2(3f, 1f);
+					s.DrawVerticalAxis = false;
+					s.FadeInEnd = Main.rand.Next(3, 5);
+					s.FadeOutStart = s.FadeInEnd;
+					s.FadeOutEnd = Main.rand.Next(10, 30);
+					s.AdditiveAmount = 1f;
+					s.ColorTint = Color.White;
+					Main.ParticleSystem_World_OverPlayers.Add(s);
+				}
 				for (int i = 0; i < 40; i++)
 				{
 					int num890 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.DungeonSpirit, 0f, 0f, 0, default, 1f);
-					Main.dust[num890].velocity *= 5f;
+					Main.dust[num890].velocity *= Main.rand.NextFloat(10f);
 					Main.dust[num890].scale = 1.5f;
 					Main.dust[num890].noGravity = true;
 					Main.dust[num890].fadeIn = 2f;
 				}
-				for (int i = 0; i < 20; i++)
-				{
-					int num893 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1f);
-					Main.dust[num893].velocity *= 2f;
-					Main.dust[num893].scale = 1.5f;
-					Main.dust[num893].noGravity = true;
-					Main.dust[num893].fadeIn = 3f;
-				}
-				for (int i = 0; i < 40; i++)
-				{
-					int num892 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.SpectreStaff, 0f, 0f, 0, default(Color), 1f);
-					Main.dust[num892].velocity *= 5f;
-					Main.dust[num892].scale = 1.5f;
-					Main.dust[num892].noGravity = true;
-					Main.dust[num892].fadeIn = 2f;
-				}
-				for (int i = 0; i < 40; i++)
-				{
-					int num891 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1f);
-					Main.dust[num891].velocity *= 10f;
-					Main.dust[num891].scale = 1.5f;
-					Main.dust[num891].noGravity = true;
-					Main.dust[num891].fadeIn = 1.5f;
-				}
+				//for (int i = 0; i < 20; i++)
+				//{
+				//	int num893 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1f);
+				//	Main.dust[num893].velocity *= 2f;
+				//	Main.dust[num893].scale = 1.5f;
+				//	Main.dust[num893].noGravity = true;
+				//	Main.dust[num893].fadeIn = 3f;
+				//}
+				//for (int i = 0; i < 40; i++)
+				//{
+				//	int num892 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.SpectreStaff, 0f, 0f, 0, default(Color), 1f);
+				//	Main.dust[num892].velocity *= 5f;
+				//	Main.dust[num892].scale = 1.5f;
+				//	Main.dust[num892].noGravity = true;
+				//	Main.dust[num892].fadeIn = 2f;
+				//}
+				//for (int i = 0; i < 40; i++)
+				//{
+				//	int num891 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.DungeonSpirit, 0f, 0f, 0, default(Color), 1f);
+				//	Main.dust[num891].velocity *= 10f;
+				//	Main.dust[num891].scale = 1.5f;
+				//	Main.dust[num891].noGravity = true;
+				//	Main.dust[num891].fadeIn = 1.5f;
+				//}
 
-				if (Main.netMode != NetmodeID.MultiplayerClient)
-				{
-					//NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<PhantoplasmaBall>(),NPC.whoAmI,NPC.whoAmI);
-					for (int i = 0; i < 12; i++)
-					{
-						Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2Circular(12, 12), ModContent.ProjectileType<LostSoul>(), projDamage, 1, -1, target.whoAmI);
-					}
-				}
-				Transition();
+				//if (Main.netMode != NetmodeID.MultiplayerClient)
+				//{
+				//	//NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<PhantoplasmaBall>(),NPC.whoAmI,NPC.whoAmI);
+				//	for (int i = 0; i < 12; i++)
+				//	{
+				//		Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2Circular(12, 12), ModContent.ProjectileType<LostSoul>(), projDamage, 1, -1, target.whoAmI);
+				//	}
+				//}
 				SoundEngine.PlaySound(SoundID.Roar, NPC.position);
 				NPC.ai[0] = 0;
 				NPC.ai[1] = -200;
 				phase = 4;
+				Transition();
 			}
 		}
 		private void Phase4_Dash2()
@@ -195,7 +227,7 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 				d.noGravity = true;
 				d.scale = Main.rand.NextFloat(2);
 				d.velocity = NPC.velocity;
-				if (NPC.ai[1] > dashInterval && NPC.ai[1] % 7 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
+				if (NPC.ai[1] > dashInterval && NPC.ai[1] % (Main.expertMode ? 7 : 10) == 0 && Main.netMode != NetmodeID.MultiplayerClient)
 				{
 					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity.RotatedBy(MathHelper.PiOver2) * 0.3f, ModContent.ProjectileType<LostSoul>(), projDamage, 1, -1, target.whoAmI);
 					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity.RotatedBy(-MathHelper.PiOver2) * 0.3f, ModContent.ProjectileType<LostSoul>(), projDamage, 1, -1, target.whoAmI);
@@ -222,10 +254,10 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			if (NPC.ai[0] > 600 && NPC.ai[1] < dashInterval)
 			{
 				NPC.TargetClosest();
-				Transition();
 				phase = (byte)Main.rand.Next(4, 8);
 				NPC.ai[0] = 0;
 				NPC.ai[1] = 0;
+				Transition();
 			}
 
 			// below is the double dash thing
@@ -283,7 +315,7 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			NPC.velocity = NPC.velocity.LengthClamp(14);
 			NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
 
-			if (NPC.ai[0] % 11 == 0 && NPC.ai[0] > 60)
+			if (NPC.ai[0] % (Main.expertMode ? 11 : 15) == 0 && NPC.ai[0] > 60)
 			{
 				if (Main.netMode != NetmodeID.MultiplayerClient)
 				{
@@ -295,7 +327,6 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 				phase = (byte)Main.rand.Next(4, 8);
 				NPC.ai[1] = 0;
 				NPC.ai[0] = 0;
-				NPC.netUpdate = true;
 				Transition();
 			}
 		}
@@ -305,9 +336,7 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			NPC.velocity = NPC.velocity.LengthClamp(10);
 			NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
 
-			int pause = 20;
-			if (Main.expertMode) pause = 10;
-			if (NPC.ai[0] % pause == 0 && NPC.ai[0] < pause * 9)
+			if (NPC.ai[0] % 10 == 0 && NPC.ai[0] < 10 * 9)
 			{
 				if (Main.netMode != NetmodeID.MultiplayerClient)
 				{
@@ -323,12 +352,11 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			}
 			if (NPC.ai[0] > 400)
 			{
-				Transition();
 				NPC.TargetClosest();
 				phase = (byte)Main.rand.Next(4, 8);
 				NPC.ai[0] = 0;
 				NPC.ai[1] = 0;
-				NPC.netUpdate = true;
+				Transition();
 			}
 		}
 		private void Phase7_SawHandsScary()
@@ -350,9 +378,8 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 					NPC.ai[0] = 0;
 					NPC.ai[1] = 0;
 					NPC.TargetClosest();
-					Transition();
 					phase = (byte)Main.rand.Next(4, 8);
-					NPC.netUpdate = true;
+					Transition();
 					return;
 				}
 
@@ -384,49 +411,93 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			NPC.netUpdate = true;
 			if (NPC.ai[0] > 60)
 			{
-				PunchCameraModifier modifier = new PunchCameraModifier(target.Center, Main.rand.NextVector2Circular(1, 1), 8f, 7f, 45, 3000f);
-				Main.instance.CameraModifiers.Add(modifier);
+				if (ModContent.GetInstance<AvalonClientConfig>().AdditionalScreenshakes)
+				{
+					PunchCameraModifier modifier = new PunchCameraModifier(target.Center, Main.rand.NextVector2Circular(1, 1), 8f, 7f, 45, 3000f);
+					Main.instance.CameraModifiers.Add(modifier);
+				}
+				for (int i = 0; i < 10; i++)
+				{
+					PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+					s.LocalPosition = NPC.Center;
+					s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(6f, 12f);
+					s.Rotation = s.Velocity.ToRotation();
+					s.Scale = new Vector2(6f, 2f);
+					s.DrawVerticalAxis = false;
+					s.FadeInEnd = Main.rand.Next(3, 10);
+					s.FadeOutStart = s.FadeInEnd;
+					s.FadeOutEnd = Main.rand.Next(20, 40);
+					s.AdditiveAmount = 1f;
+					s.ColorTint = new Color(1f, 0f, 0.2f);
+					Main.ParticleSystem_World_OverPlayers.Add(s);
+				}
+				for (int i = 0; i < 10; i++)
+				{
+					PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+					s.LocalPosition = NPC.Center;
+					s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(12f, 24f);
+					s.Rotation = s.Velocity.ToRotation();
+					s.Scale = new Vector2(3f, 1f);
+					s.DrawVerticalAxis = false;
+					s.FadeInEnd = Main.rand.Next(3, 5);
+					s.FadeOutStart = s.FadeInEnd;
+					s.FadeOutEnd = Main.rand.Next(10, 30);
+					s.AdditiveAmount = 1f;
+					s.ColorTint = new Color(Main.rand.NextFloat(0.2f, 0.7f), 0.9f, 1f);
+					Main.ParticleSystem_World_OverPlayers.Add(s);
+				}
 				for (int i = 0; i < 40; i++)
 				{
-					int num890 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
-					Main.dust[num890].velocity *= 5f;
+					int num890 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default, 1f);
+					Main.dust[num890].velocity *= Main.rand.NextFloat(10f);
 					Main.dust[num890].scale = 1.5f;
 					Main.dust[num890].noGravity = true;
 					Main.dust[num890].fadeIn = 2f;
 				}
-				for (int i = 0; i < 20; i++)
-				{
-					int num893 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
-					Main.dust[num893].velocity *= 2f;
-					Main.dust[num893].scale = 1.5f;
-					Main.dust[num893].noGravity = true;
-					Main.dust[num893].fadeIn = 3f;
-				}
-				for (int i = 0; i < 40; i++)
-				{
-					int num892 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.SpectreStaff, 0f, 0f, 0, default(Color), 1f);
-					Main.dust[num892].velocity *= 5f;
-					Main.dust[num892].scale = 1.5f;
-					Main.dust[num892].noGravity = true;
-					Main.dust[num892].fadeIn = 2f;
-				}
-				for (int i = 0; i < 40; i++)
-				{
-					int num891 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
-					Main.dust[num891].velocity *= 10f;
-					Main.dust[num891].scale = 1.5f;
-					Main.dust[num891].noGravity = true;
-					Main.dust[num891].fadeIn = 1.5f;
-				}
+
+				//PunchCameraModifier modifier = new PunchCameraModifier(target.Center, Main.rand.NextVector2Circular(1, 1), 8f, 7f, 45, 3000f);
+				//Main.instance.CameraModifiers.Add(modifier);
+				//for (int i = 0; i < 40; i++)
+				//{
+				//	int num890 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
+				//	Main.dust[num890].velocity *= 5f;
+				//	Main.dust[num890].scale = 1.5f;
+				//	Main.dust[num890].noGravity = true;
+				//	Main.dust[num890].fadeIn = 2f;
+				//}
+				//for (int i = 0; i < 20; i++)
+				//{
+				//	int num893 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
+				//	Main.dust[num893].velocity *= 2f;
+				//	Main.dust[num893].scale = 1.5f;
+				//	Main.dust[num893].noGravity = true;
+				//	Main.dust[num893].fadeIn = 3f;
+				//}
+				//for (int i = 0; i < 40; i++)
+				//{
+				//	int num892 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.SpectreStaff, 0f, 0f, 0, default(Color), 1f);
+				//	Main.dust[num892].velocity *= 5f;
+				//	Main.dust[num892].scale = 1.5f;
+				//	Main.dust[num892].noGravity = true;
+				//	Main.dust[num892].fadeIn = 2f;
+				//}
+				//for (int i = 0; i < 40; i++)
+				//{
+				//	int num891 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default(Color), 1f);
+				//	Main.dust[num891].velocity *= 10f;
+				//	Main.dust[num891].scale = 1.5f;
+				//	Main.dust[num891].noGravity = true;
+				//	Main.dust[num891].fadeIn = 1.5f;
+				//}
 
 				if (Main.netMode != NetmodeID.MultiplayerClient)
 				{
 					//NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<PhantoplasmaBall>(), NPC.whoAmI, NPC.whoAmI,1);
-					for (int i = 0; i < 12; i++)
-					{
-						Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2Circular(12, 12), ModContent.ProjectileType<Phantom>(), projDamage, 1, -1, target.whoAmI);
-					}
-					for(int i = 0; i < 4; i++)
+					//for (int i = 0; i < 12; i++)
+					//{
+					//	Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Main.rand.NextVector2Circular(12, 12), ModContent.ProjectileType<Phantom>(), projDamage, 1, -1, target.whoAmI);
+					//}
+					for (int i = 0; i < 4; i++)
 					{
 						Projectile.NewProjectile(NPC.GetSource_FromThis(), eyePos, Vector2.One.RotatedBy(i * MathHelper.PiOver2) * 5, ModContent.ProjectileType<PhantasmOrbSpawner>(), 0, 1, -1, NPC.whoAmI);
 					}
@@ -437,8 +508,8 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 				SoundEngine.PlaySound(SoundID.Roar, NPC.position);
 				NPC.ai[0] = 0;
 				NPC.ai[1] = -200;
+				phase = 13;
 				Transition();
-				phase = 12;
 			}
 		}
 		private void Phase9_Dash3()
@@ -457,7 +528,7 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 				d.noGravity = true;
 				d.scale = Main.rand.NextFloat(2);
 				d.velocity = NPC.velocity;
-				if (NPC.ai[1] > dashInterval && NPC.ai[1] % 6 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
+				if (NPC.ai[1] > dashInterval && NPC.ai[1] % (Main.expertMode? 6 : 9) == 0 && Main.netMode != NetmodeID.MultiplayerClient)
 				{
 					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity.RotatedBy(MathHelper.PiOver2) * 0.3f, ModContent.ProjectileType<Phantom>(), projDamage, 1, -1, target.whoAmI);
 					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.velocity.RotatedBy(-MathHelper.PiOver2) * 0.3f, ModContent.ProjectileType<Phantom>(), projDamage, 1, -1, target.whoAmI);
@@ -483,11 +554,11 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			}
 			if (NPC.ai[0] > 500 && NPC.ai[1] < dashInterval)
 			{
-				Transition();
 				NPC.TargetClosest();
-				phase = (byte)Main.rand.Next(9, 13);
+				phase = (byte)Main.rand.Next(9, 14);
 				NPC.ai[0] = 0;
 				NPC.ai[1] = 0;
+				Transition();
 			}
 		}
 		private void Phase10_ZoinksItsTheGayBlades()
@@ -512,15 +583,14 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			}
 			if (NPC.ai[0] > 300)
 			{
-				Transition();
 				NPC.TargetClosest();
-				phase = (byte)Main.rand.Next(9, 13);
+				phase = (byte)Main.rand.Next(9, 14);
 				NPC.ai[0] = 0;
 				NPC.ai[1] = 0;
-				NPC.netUpdate = true;
+				Transition();
 			}
 		}
-		private void Phase12_PhantasmalDeathrayLikeMoonlordOMQCantBelieveTheySTOLEFROMAVALONOnceAgainTrulyPatheticRelogicWhyWouldYouDoThatLikeSeriouslyGuysWhatTheHellWhyWouldYouDoThatStealingIsWrongDontDoItGuysWTFGenuinelyCannotBelieveThisWouldHappenManWhatTheHellITRUSTEDYOURELOGICBUTyouGoAndDOTHISWHATTHEHELLISeriouslyCannotBelieveThatTheyWouldDoThatLikeReallyWhatTheHellGuysLikeComeOnWTFDudesAndDudettesAndNoneOfTheAbovesTheRenameBoxIsSoLongThatItGoesOffTheScreenWhenYouTryToRenameThisMethodWhichIsKindaFunnyIThinkInMyOpinionIDKThoughItsJustMySenseofHumorNotYoursYouAreAllowedToDisagreeAllYouWantIWontReallyCareAllThatMuchButIMIghtMentallySendNeedlesToYourMindOrSomethingLikeThatIfYouTellMeYouDisagree()
+		private void Phase13_PhantasmalDeathrayLikeMoonlordOMQCantBelieveTheySTOLEFROMAVALONOnceAgainTrulyPatheticRelogicWhyWouldYouDoThatLikeSeriouslyGuysWhatTheHellWhyWouldYouDoThatStealingIsWrongDontDoItGuysWTFGenuinelyCannotBelieveThisWouldHappenManWhatTheHellITRUSTEDYOURELOGICBUTyouGoAndDOTHISWHATTHEHELLISeriouslyCannotBelieveThatTheyWouldDoThatLikeReallyWhatTheHellGuysLikeComeOnWTFDudesAndDudettesAndNoneOfTheAbovesTheRenameBoxIsSoLongThatItGoesOffTheScreenWhenYouTryToRenameThisMethodWhichIsKindaFunnyIThinkInMyOpinionIDKThoughItsJustMySenseofHumorNotYoursYouAreAllowedToDisagreeAllYouWantIWontReallyCareAllThatMuchButIMIghtMentallySendNeedlesToYourMindOrSomethingLikeThatIfYouTellMeYouDisagree()
 		{
 			NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
 			NPC.ai[0]++;
@@ -535,10 +605,28 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 				NPC.velocity *= 0.9f;
 				if (NPC.ai[0] < beamStart)
 				{
-					Vector2 vector = Main.rand.NextVector2Circular(1, 1);
-					Dust d = Dust.NewDustPerfect(NPC.Center + vector * 130,ModContent.DustType<PhantoplasmDust>(),-vector * 6, 128);
-					d.noGravity = true;
-					d.scale = 3;
+					if (Main.rand.Next(60) < NPC.ai[0] - 60) 
+					{
+						Vector2 vector = Main.rand.NextVector2Circular(1, 1);
+						Dust d = Dust.NewDustPerfect(NPC.Center + vector * 130, ModContent.DustType<PhantoplasmDust>(), -vector * 6, 128);
+						d.noGravity = true;
+						d.scale = 1;
+						vector = Main.rand.NextVector2Circular(1, 1);
+						PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+						s.LocalPosition = NPC.Center + vector * 230;
+						s.Velocity = -vector;
+						s.AccelerationPerFrame = -vector * 0.6f;
+						s.Rotation = s.Velocity.ToRotation();
+						s.Scale = new Vector2(3f, 1f);
+						s.DrawVerticalAxis = false;
+						s.FadeInEnd = Main.rand.Next(3, 10);
+						s.FadeOutStart = s.FadeInEnd;
+						s.FadeOutEnd = 30;
+						s.AdditiveAmount = 1f;
+						float whiteness = Main.rand.NextFloat(0.5f);
+						s.ColorTint = new Color(1f, whiteness, 0.2f + whiteness);
+						Main.ParticleSystem_World_OverPlayers.Add(s);
+					}
 				}
 			}
 			else
@@ -571,12 +659,12 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 
 			if (NPC.ai[0] > beamStart + ContentSamples.ProjectilesByType[ModContent.ProjectileType<PhantomDeathray>()].timeLeft)
 			{
-				Transition();
 				NPC.TargetClosest();
-				phase = (byte)Main.rand.Next(9, 12);
+				phase = (byte)Main.rand.Next(9, 13);
 				NPC.ai[0] = 0;
 				NPC.ai[1] = 0;
 				NPC.netUpdate = true;
+				Transition();
 			}
 		}
 		private SlotId beamSound = SlotId.Invalid;
@@ -599,9 +687,9 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 					NPC.ai[0] = 0;
 					NPC.ai[1] = 0;
 					NPC.TargetClosest();
-					Transition();
-					phase = (byte)Main.rand.Next(9, 13);
+					phase = (byte)Main.rand.Next(9, 14);
 					NPC.netUpdate = true;
+					Transition();
 					return;
 				}
 
@@ -622,6 +710,29 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			{
 				NPC.ai[0] = 0;
 				NPC.ai[1]++;
+			}
+		}
+		private void Phase12_Hands3()
+		{
+			NPC.ai[0]++;
+			NPC.velocity += NPC.Center.DirectionTo(target.Center + new Vector2(0, 500).RotatedBy(NPC.ai[0] * 0.04f * NPC.direction)) * 1.2f;
+			NPC.velocity = NPC.velocity.LengthClamp(14);
+			NPC.rotation = Utils.AngleLerp(NPC.velocity.X * -0.04f, NPC.rotation, 0.94f);
+
+			if (NPC.ai[0] % (Main.expertMode ? 12 : 14) == 0 && NPC.ai[0] > 60)
+			{
+				if (Main.netMode != NetmodeID.MultiplayerClient)
+				{
+					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(-Math.Sign(NPC.Center.X - target.Center.X) * Main.rand.NextFloat(3, 5), Main.rand.NextFloat(-0.3f, 0.3f)), ModContent.ProjectileType<PhantomGrabber>(), handDamage, 1, -1, NPC.whoAmI, NPC.ai[0]);
+				}
+			}
+			if (NPC.ai[0] >= 60 * 10)
+			{
+				phase = (byte)Main.rand.Next(9, 14);
+				NPC.ai[1] = 0;
+				NPC.ai[0] = 0;
+				NPC.netUpdate = true;
+				Transition();
 			}
 		}
 	}

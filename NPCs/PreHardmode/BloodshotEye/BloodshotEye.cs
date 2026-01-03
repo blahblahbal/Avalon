@@ -2,7 +2,6 @@ using System;
 using Avalon.Common;
 using Avalon.Items.Banners;
 using Avalon.Items.Material;
-using Avalon.Projectiles.Hostile;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -12,8 +11,9 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
 using System.IO;
+using Avalon;
 
-namespace Avalon.NPCs.PreHardmode;
+namespace Avalon.NPCs.PreHardmode.BloodshotEye;
 
 public class BloodshotEye : ModNPC
 {

@@ -11,7 +11,7 @@ using Terraria.Enums;
 using Terraria.DataStructures;
 using Terraria.Localization;
 
-namespace Avalon.NPCs.PreHardmode;
+namespace Avalon.NPCs.PreHardmode.Fly;
 
 public class Fly : ModNPC
 {

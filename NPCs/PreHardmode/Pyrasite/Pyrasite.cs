@@ -1,3 +1,4 @@
+using Avalon;
 using Avalon.Common.Players;
 using Avalon.Items.Material;
 using Microsoft.Xna.Framework;
@@ -8,7 +9,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Avalon.NPCs.PreHardmode;
+namespace Avalon.NPCs.PreHardmode.Pyrasite;
 
 public class PyrasiteHead : WormHead
 {
@@ -66,7 +67,7 @@ public class PyrasiteHead : WormHead
 	{
 		if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
 		{
-			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, ModContent.GoreType<Gores.PyrasiteHead>(), 1f);
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("PyrasiteGoreHead").Type, 1f);
 			for (int i = 0; i < 10; i++)
 			{
 				Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-2, 2), 128, default, Main.rand.NextFloat(1, 1.5f));
@@ -139,7 +140,7 @@ public class PyrasiteHead : WormHead
 		{
 			if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
 			{
-				Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, ModContent.GoreType<Gores.PyrasiteBody>(), 1f);
+				Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("PyrasiteGoreBody").Type, 1f);
 				for (int i = 0; i < 10; i++)
 				{
 					Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-2, 2), 128, default, Main.rand.NextFloat(1, 1.5f));
@@ -190,7 +191,7 @@ public class PyrasiteTail : WormTail
 	{
 		if (NPC.life <= 0 && Main.netMode != NetmodeID.Server)
 		{
-			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, ModContent.GoreType<Gores.PyrasiteTail>(), 1f);
+			Gore.NewGore(NPC.GetSource_FromThis(), NPC.position, NPC.velocity, Mod.Find<ModGore>("PyrasiteGoreTail").Type, 1f);
 			for (int i = 0; i < 10; i++)
 			{
 				Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-2, 2), 128, default, Main.rand.NextFloat(1, 1.5f));

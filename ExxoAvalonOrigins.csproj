@@ -15,6 +15,15 @@
 		<Compile Remove="DrawMagics\**" />
 		<EmbeddedResource Remove="DrawMagics\**" />
 		<Folder Include="Items\Weapons\Magic\Superhardmode\MagmafrostBolt\" />
+		<Folder Include="NPCs\PreHardmode\Bactus\Gores\" />
+		<Folder Include="NPCs\PreHardmode\BloodshotEye\Gores\" />
+		<Folder Include="NPCs\PreHardmode\BoneFish\Gores\" />
+		<Folder Include="NPCs\PreHardmode\FallenHero\Gores\" />
+		<Folder Include="NPCs\PreHardmode\Mosquito\Gores\" />
+		<Folder Include="NPCs\PreHardmode\Pyrasite\Gores\" />
+		<Folder Include="NPCs\PreHardmode\Rafflesia\Gores\" />
+		<Folder Include="NPCs\PreHardmode\RedArowana\Gores\" />
+		<Folder Include="NPCs\PreHardmode\Shadlopod\Gores\" />
 		<Folder Include="Projectiles\Hostile\Phantasm\" />
 		<None Remove="DrawMagics\**" />
 		<Folder Remove=".vs\ExxoAvalonOrigins\v17\" />

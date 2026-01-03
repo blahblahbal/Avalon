@@ -1,10 +1,12 @@
 using Avalon.Dusts;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -91,6 +93,66 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 		{
 			NPC.frameCounter++;
 			NPC.frame.Y = frameHeight * (int)((NPC.frameCounter / 5) % 4);
+		}
+		public override void HitEffect(NPC.HitInfo hit)
+		{
+			if (NPC.life > 0) return;
+			NPC target = Main.npc[(int)NPC.ai[0]];
+			int iterations = (int)(NPC.Center.Distance(target.Center) / 16);
+			for (int i = 0; i < iterations; i++)
+			{
+				PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+				s.LocalPosition = Vector2.Lerp(NPC.Center,target.Center, i / (float)iterations) + Main.rand.NextVector2Circular(8,8);
+				s.Rotation = target.Center.DirectionTo(NPC.Center).ToRotation();
+				s.Velocity = target.velocity * (i / (float)iterations);
+				s.Scale = new Vector2(3f, 1f) * Main.rand.NextFloat(0.5f,1f);
+				s.DrawVerticalAxis = false;
+				s.FadeInEnd = Main.rand.Next(3, 10);
+				s.FadeOutStart = s.FadeInEnd;
+				s.FadeOutEnd = Main.rand.Next(15, 35);
+				s.AdditiveAmount = 1f;
+				s.ColorTint = Color.Lerp(new Color(0.6f, 0f, 1f, 0f), new Color(0.3f, 0.7f, 1f, 0f), NPC.localAI[0]);
+				Main.ParticleSystem_World_OverPlayers.Add(s);
+			}
+
+			for (int i = 0; i < 20; i++)
+			{
+				PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+				s.LocalPosition = NPC.Center;
+				s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(6f, 12f);
+				s.Rotation = s.Velocity.ToRotation();
+				s.Scale = new Vector2(6f, 2f);
+				s.DrawVerticalAxis = false;
+				s.FadeInEnd = Main.rand.Next(3, 10);
+				s.FadeOutStart = s.FadeInEnd;
+				s.FadeOutEnd = Main.rand.Next(20, 40);
+				s.AdditiveAmount = 1f;
+				s.ColorTint = new Color(Main.rand.NextFloat(0.2f, 0.7f), 0.9f, 1f);
+				Main.ParticleSystem_World_OverPlayers.Add(s);
+			}
+			for (int i = 0; i < 20; i++)
+			{
+				PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+				s.LocalPosition = NPC.Center;
+				s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(12f, 24f);
+				s.Rotation = s.Velocity.ToRotation();
+				s.Scale = new Vector2(3f, 1f);
+				s.DrawVerticalAxis = false;
+				s.FadeInEnd = Main.rand.Next(3, 5);
+				s.FadeOutStart = s.FadeInEnd;
+				s.FadeOutEnd = Main.rand.Next(10, 30);
+				s.AdditiveAmount = 1f;
+				s.ColorTint = Color.White;
+				Main.ParticleSystem_World_OverPlayers.Add(s);
+			}
+			for (int i = 0; i < 40; i++)
+			{
+				int num890 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<PhantoplasmDust>(), 0f, 0f, 0, default, 1f);
+				Main.dust[num890].velocity *= Main.rand.NextFloat(10f);
+				Main.dust[num890].scale = 1.5f;
+				Main.dust[num890].noGravity = true;
+				Main.dust[num890].fadeIn = 2f;
+			}
 		}
 	}
 }

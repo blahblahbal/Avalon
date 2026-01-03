@@ -16,6 +16,11 @@ public class SoulGrabber : ModProjectile
 		Main.projFrames[Type] = 6;
 		Data.Sets.ProjectileSets.DontReflect[Type] = true;
 	}
+
+	public override void OnHitPlayer(Player target, Player.HurtInfo info)
+	{
+		Phantasm.ApplyShadowCurse(target);
+	}
 	public override void SetDefaults()
     {
 		ProjectileID.Sets.TrailCacheLength[Type] = 10;
