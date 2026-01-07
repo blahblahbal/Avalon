@@ -2,6 +2,7 @@ using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using Terraria;
 using Terraria.Graphics;
 using Terraria.ID;
@@ -12,6 +13,7 @@ namespace Avalon.Systems;
 // for now just used for darkening postdraw of tiles when actuated
 public class TileGlowDrawing : ModSystem
 {
+	[Obsolete("Use the vanilla actColor method on your tile struct instead")]
 	public static Color ActuatedColor(Color oldColor, Tile tile)
 	{
 		if (!tile.IsActuated)

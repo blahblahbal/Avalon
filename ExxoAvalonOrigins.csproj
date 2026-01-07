@@ -11,53 +11,10 @@
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 	<ItemGroup>
-		<AdditionalFiles Remove="DrawMagics\**" />
-		<Compile Remove="DrawMagics\**" />
-		<EmbeddedResource Remove="DrawMagics\**" />
-		<Folder Include="Items\Weapons\Magic\Superhardmode\MagmafrostBolt\" />
-		<Folder Include="NPCs\Bosses\Hardmode\Mechasting\Gores\" />
-		<Folder Include="NPCs\Bosses\Hardmode\WallOfSteel\Gores\" />
-		<Folder Include="NPCs\Bosses\PreHardmode\BacteriumPrime\Gores\" />
-		<Folder Include="NPCs\Bosses\PreHardmode\DesertBeak\Gores\" />
-		<Folder Include="NPCs\Bosses\PreHardmode\KingSting\Gores\" />
-		<Folder Include="NPCs\PreHardmode\Bactus\Gores\" />
-		<Folder Include="NPCs\PreHardmode\BloodshotEye\Gores\" />
-		<Folder Include="NPCs\PreHardmode\BoneFish\Gores\" />
-		<Folder Include="NPCs\PreHardmode\FallenHero\Gores\" />
-		<Folder Include="NPCs\PreHardmode\Mosquito\Gores\" />
-		<Folder Include="NPCs\PreHardmode\Pyrasite\Gores\" />
-		<Folder Include="NPCs\PreHardmode\Rafflesia\Gores\" />
-		<Folder Include="NPCs\PreHardmode\RedArowana\Gores\" />
-		<Folder Include="NPCs\PreHardmode\Shadlopod\Gores\" />
-		<Folder Include="Projectiles\Hostile\BacteriumPrime\" />
-		<Folder Include="Projectiles\Hostile\DesertBeak\" />
-		<Folder Include="Projectiles\Hostile\KingSting\" />
-		<Folder Include="Projectiles\Hostile\Mechasting\" />
-		<Folder Include="Projectiles\Hostile\Phantasm\" />
-		<Folder Include="Projectiles\Hostile\WallOfSteel\" />
-		<None Remove="DrawMagics\**" />
 		<Folder Remove=".vs\ExxoAvalonOrigins\v17\" />
 		<AdditionalFiles Remove=".vs\ExxoAvalonOrigins\v17\**" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Remove="effects\PixelChange.fx" />
-		<None Remove="Items\Weapons\Magic\AquaImpact.png" />
-		<None Remove="Projectiles\Magic\AquaBlast.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="Krafs.Publicizer" Version="2.3.0">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="tModLoader.CodeAssist" Version="0.1.5" />
-
-		<Publicize Include="FNA" MemberPattern="^Microsoft.Xna.Framework.Graphics\.SpriteBatch\..*" />
-		<Publicize Include="tModLoader:Terraria.ModLoader.RecipeLoader.FirstRecipeForItem" />
-	</ItemGroup>
-	<ItemGroup>
-		<Reference Include="Microsoft.Xna.Framework.Input.Touch">
-			<HintPath>S:\terraria stuff\Terraria Remaster\github\1.1AvalonRemaster\bin\Debug\net40\Microsoft.Xna.Framework.Input.Touch.dll</HintPath>
-		</Reference>
 		<Reference Include="AltLibrary">
 			<HintPath>dllReferences\AltLibrary_v2.1.1.3.dll</HintPath>
 		</Reference>
@@ -67,5 +24,15 @@
 		<Reference Include="ThoriumMod">
 			<HintPath>dllReferences\ThoriumMod_v1.7.2.4.dll</HintPath>
 		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Krafs.Publicizer" Version="2.3.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="tModLoader.CodeAssist" Version="0.1.5" />
+
+		<Publicize Include="FNA" MemberPattern="^Microsoft.Xna.Framework.Graphics\.SpriteBatch\..*" />
+		<Publicize Include="tModLoader" MemberPattern="^Terraria\.(Tile\.actColor|ModLoader\.RecipeLoader\.FirstRecipeForItem)" />
 	</ItemGroup>
 </Project>
