@@ -104,8 +104,13 @@ public class ExtraMana : ModHook
 				if (Main.LocalPlayer.dye[slot].type != ItemID.None)
 				{
 					GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
-					return ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>(
+					Asset<Texture2D> asset = origManaTexture;
+					if (manaTier > 1)
+					{
+						asset = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>(
 						$"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Mana{manaTier}", AssetRequestMode.ImmediateLoad);
+					}
+					return asset;
 				}
 			}
 

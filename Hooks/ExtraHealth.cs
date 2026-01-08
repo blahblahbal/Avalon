@@ -1,11 +1,13 @@
-using System;
 using Avalon.Common;
 using Avalon.Items.Accessories.Vanity;
+using Avalon.Items.Weapons.Melee.SolarSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using ReLogic.Content;
+using System;
+using System.Reflection;
 using Terraria;
 using Terraria.GameContent.UI.ResourceSets;
 using Terraria.Graphics.Shaders;
@@ -19,40 +21,40 @@ public class ExtraHealth : ModHook
 {
     protected override void Apply()
     {
-        //IL_ClassicPlayerResourcesDisplaySet.DrawLife += ILDrawLife;
-        //IL_HorizontalBarsPlayerResourcesDisplaySet.LifeFillingDrawer += ILLifeFillingDrawer;
-        //IL_FancyClassicPlayerResourcesDisplaySet.HeartFillingDrawer += ILHeartFillingDrawer;
-    }
+		IL_ClassicPlayerResourcesDisplaySet.DrawLife += ILDrawLife;
+		//IL_HorizontalBarsPlayerResourcesDisplaySet.LifeFillingDrawer += ILLifeFillingDrawer;
+		//IL_FancyClassicPlayerResourcesDisplaySet.HeartFillingDrawer += ILHeartFillingDrawer;
+	}
 
     private static void ILDrawLife(ILContext il)
     {
         var c = new ILCursor(il);
 
-        c.GotoNext(i => i.MatchLdcR8(0.9))
-            .GotoNext(i => i.MatchLdsfld(out _))
-            .GotoNext(i => i.MatchCallvirt(out _))
-            .Emit(OpCodes.Ldloc, 10);
+		int index_varNum = -1;
+		int snapshot_varNum = -1;
 
-        c.EmitDelegate<Func<Asset<Texture2D>, int, Asset<Texture2D>>>((sprite, index) =>
-        {
+		c.GotoNext(MoveType.After, i => i.MatchLdloc(out snapshot_varNum), i => i.MatchLdarg(0), i => i.MatchLdloc(out index_varNum), i => i.MatchLdcI4(1), i => i.MatchSub(), i => i.MatchLdloc(out _));
+		c.EmitLdloc(index_varNum);
+		c.EmitLdloc(snapshot_varNum);
+		c.EmitDelegate((Asset<Texture2D> sprite, int i, PlayerStatsSnapshot snapshot) =>
+		{
 			int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
 			if (slot != -1)
 			{
 				if (Main.LocalPlayer.dye[slot].type != ItemID.None)
 				{
 					GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
-					return ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/DyeableHeart");
 				}
 			}
 
 			int crystalFruitCount = (Main.LocalPlayer.statLifeMax - 500) / 5;
-            if (index - 1 < crystalFruitCount)
-            {
-                return ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Heart3");
-            }
+			if (i - 1 < crystalFruitCount)
+			{
+				return ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/Heart3");
+			}
 
-            return sprite;
-        });
+			return sprite;
+		});
     }
 
     private static void ILLifeFillingDrawer(ILContext il)
