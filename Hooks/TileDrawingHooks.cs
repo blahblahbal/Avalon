@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Reflection;
 using Avalon.Systems;
 using Avalon.Tiles;
 using Avalon.Tiles.Furniture;
@@ -33,12 +34,12 @@ namespace Avalon.Hooks
 				//Use Main.spriteBatch for rendering
 				if (type == ModContent.TileType<CoolGemsparkBlock>())
 				{
-					Color color = TileGlowDrawing.ActuatedColor(new Color(CoolGemsparkBlock.R, CoolGemsparkBlock.G, CoolGemsparkBlock.B, 255), Main.tile[i, j]);
+					Color color = Main.tile[i, j].actColor(new Color(CoolGemsparkBlock.R, CoolGemsparkBlock.G, CoolGemsparkBlock.B, 255));
 					drawdata.finalColor = color;
 				}
 				if (type == ModContent.TileType<WarmGemsparkBlock>())
 				{
-					Color color = TileGlowDrawing.ActuatedColor(new Color(255, WarmGemsparkBlock.G, 0, 255), Main.tile[i, j]);
+					Color color = Main.tile[i, j].actColor(new Color(255, WarmGemsparkBlock.G, 0, 255));
 					drawdata.finalColor = color;
 				}
 			});

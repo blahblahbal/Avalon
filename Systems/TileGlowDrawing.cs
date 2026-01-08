@@ -16,12 +16,7 @@ public class TileGlowDrawing : ModSystem
 	[Obsolete("Use the vanilla actColor method on your tile struct instead")]
 	public static Color ActuatedColor(Color oldColor, Tile tile)
 	{
-		if (!tile.IsActuated)
-		{
-			return oldColor;
-		}
-		double num = 0.4;
-		return new Color((int)(byte)(num * (double)(int)oldColor.R), (int)(byte)(num * (double)(int)oldColor.G), (int)(byte)(num * (double)(int)oldColor.B), (int)oldColor.A);
+		return tile.actColor(oldColor);
 	}
 
 	public static Color ActuatedRetroWallColor(Color oldColor, Tile tile)
@@ -60,7 +55,7 @@ public class TileGlowDrawing : ModSystem
 		Vector2 pos = new Vector2(i * 16, j * 16) + zero - Main.screenPosition;
 		var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
 		var halfFrame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 8);
-		color = ActuatedColor(color, tile);
+		color = tile.actColor(color);
 		if (tile.Slope == SlopeType.Solid && !tile.IsHalfBlock)
 		{
 			Main.spriteBatch.Draw(glow.Value, pos, frame, color);

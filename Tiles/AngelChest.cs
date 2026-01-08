@@ -11,6 +11,7 @@ using Avalon.Buffs.AdvancedBuffs;
 using ThoriumMod.Projectiles;
 using Terraria.GameContent;
 using Avalon.Systems;
+using Avalon.Reflection;
 
 namespace Avalon.Tiles
 {
@@ -68,7 +69,7 @@ namespace Avalon.Tiles
 			Texture2D texture2 = TextureAssets.Tile[TileID.Containers].Value;
 			Vector2 pos = new Vector2(i * 16 - Main.screenPosition.X, j * 16 - Main.screenPosition.Y) + zero;
 			Color tileLight = Lighting.GetColor(i, j);
-			tileLight = TileGlowDrawing.ActuatedColor(tileLight, tile);
+			tileLight = tile.actColor(tileLight);
 			Color color = tileLight;
 			tileLight *= 1 - visability;
 			color *= visability;

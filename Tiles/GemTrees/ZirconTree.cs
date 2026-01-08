@@ -25,6 +25,7 @@ using Avalon.Dusts;
 using Avalon.Items.Material.Ores;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Systems;
+using Avalon.Reflection;
 
 namespace Avalon.Tiles.GemTrees
 {
@@ -266,7 +267,7 @@ namespace Avalon.Tiles.GemTrees
 							vector.X += num7 * 2f;
 							vector.Y += Math.Abs(num7) * 2f;
 							Color color6 = Lighting.GetColor(x, y);
-							color6 = TileGlowDrawing.ActuatedColor(color6, tile);
+							color6 = tile.actColor(color6);
 							if (tile.IsTileFullbright)
 							{
 								color6 = Color.White;
@@ -297,7 +298,7 @@ namespace Avalon.Tiles.GemTrees
 							}
 							position2.X += Math.Abs(num4) * 2f;
 							Color color4 = Lighting.GetColor(x, y);
-							color4 = TileGlowDrawing.ActuatedColor(color4, tile);
+							color4 = tile.actColor(color4);
 							if (tile.IsTileFullbright)
 							{
 								color4 = Color.White;
@@ -328,7 +329,7 @@ namespace Avalon.Tiles.GemTrees
 							}
 							position.X -= Math.Abs(num20) * 2f;
 							Color color2 = Lighting.GetColor(x, y);
-							color2 = TileGlowDrawing.ActuatedColor(color2, tile);
+							color2 = tile.actColor(color2);
 							if (tile.IsTileFullbright)
 							{
 								color2 = Color.White;

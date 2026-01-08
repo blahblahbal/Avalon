@@ -207,6 +207,11 @@ public class ExxoAvalonOrigins : Mod
 		AWorldListItemHelper.Unload();
 		BackgroundHelper.Unload();
 
+		while (ModHook.RegisteredHooks.TryDequeue(out ModHook? hook))
+		{
+			hook.UnApplyHook();
+		}
+
 		Mod = null!;
 	}
 	public override void PostSetupContent()

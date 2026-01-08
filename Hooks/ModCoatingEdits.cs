@@ -1,10 +1,18 @@
 using Avalon.Common;
+using Avalon.Reflection;
 using Microsoft.Xna.Framework;
+using Mono.Cecil.Cil;
+using MonoMod.Cil;
+using MonoMod.RuntimeDetour;
+using rail;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 using Terraria;
+using Terraria.GameContent.Drawing;
 using Terraria.Graphics.Light;
 using Terraria.ID;
+using ThoriumMod.Items.ThrownItems;
 
 namespace Avalon.Hooks
 {
@@ -12,8 +20,8 @@ namespace Avalon.Hooks
 	{
 		protected override void Apply()
 		{
-			On_Main.DrawTileEntities += SetDrawTileEntitiesActuator;
-			On_Main.DrawTiles += SetDrawActuator;
+			//On_Main.DrawTileEntities += SetDrawTileEntitiesActuator;
+			//On_Main.DrawTiles += SetDrawActuator;
 			On_Tile.CopyPaintAndCoating += CopyModCoating;
 			On_WorldGen.paintCoatTile += paintModCoatingTile;
 			On_WorldGen.paintCoatWall += paintModCoatingWall;
@@ -21,8 +29,51 @@ namespace Avalon.Hooks
 			On_TileLightScanner.GetTileMask += LightTileMask;
 			On_WorldGen.coatingColor += modCoatingColor;
 			On_WorldGen.coatingColors += modCoatingColors;
+
+			MassTileRenderingsILHook.TileRenderingMethods += EditActuationOfAllTileDrawing;
+			IL_Tile.actColor_Color += actColorModifer;
+			IL_Tile.actColor_refVector3 += actColorModifer;
+			
+			//For some dogshit reason, sliced block and the ref in getfinallight get inlined, this means tiles such as dirt and grass refuse to get actuated
+			//here we rejit them so actuation edits still allow the tiles to get tinted by the actucoating
+			IL_TileDrawing.DrawSingleTile_SlicedBlock += _ => { };
+			IL_TileDrawing.GetFinalLight_Tile_ushort_refVector3_refVector3 += _ => { };
 		}
 
+		protected override void UnApply()
+		{
+			MassTileRenderingsILHook.TileRenderingMethods -= EditActuationOfAllTileDrawing;
+		}
+
+		private void actColorModifer(ILContext il)
+		{
+			ILCursor c = new(il);
+			c.GotoNext(MoveType.After, i => i.MatchCall<Tile>("inActive"));
+			c.EmitLdarg(0);
+			c.EmitDelegate((bool inActive, ref Tile self) =>
+			{
+				bool isActuated = inActive;
+				if (self.Get<AvalonTileData>().IsTileActupainted)
+				{
+					isActuated = !isActuated;
+				}
+				return isActuated;
+			});
+		}
+
+		private void EditActuationOfAllTileDrawing(MonoMod.Cil.ILContext il)
+		{
+			ILCursor c = new(il);
+			while (c.TryGotoNext(MoveType.After, i => i.MatchCall<Tile>("inActive")))
+			{
+				c.EmitDelegate((bool inActive) =>
+				{
+					return true;
+				}); 
+			}
+		}
+
+		#region Paint/Coating stuff
 		private List<Color> modCoatingColors(On_WorldGen.orig_coatingColors orig, Tile tile, bool block)
 		{
 			List<Color> _coatingColors = (List<Color>)typeof(WorldGen).GetField("_coatingColors", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Public | BindingFlags.Instance).GetValue(null);
@@ -53,6 +104,7 @@ namespace Avalon.Hooks
 				return orig.Invoke(coating);
 		}
 
+		//1.4.5 GlobalTile will have a hook for this
 		private LightMaskMode LightTileMask(On_TileLightScanner.orig_GetTileMask orig, TileLightScanner self, Tile tile)
 		{
 			if (tile.IsActuated && tile.Get<AvalonTileData>().IsTileActupainted && Main.tileBlockLight[tile.TileType])
@@ -170,126 +222,6 @@ namespace Avalon.Hooks
 			orig.Invoke(ref self, other);
 			self.Get<AvalonTileData>().IsTileActupainted = other.Get<AvalonTileData>().IsTileActupainted;
 		}
-
-		private void SetDrawTileEntitiesActuator(On_Main.orig_DrawTileEntities orig, Main self, bool solidLayer, bool overRenderTargets, bool intoRenderTargets)
-		{
-			Vector2 unscaledPosition = Main.Camera.UnscaledPosition;
-			Vector2 vector = new((float)Main.offScreenRange, (float)Main.offScreenRange);
-			if (Main.drawToScreen)
-			{
-				vector = Vector2.Zero;
-			}
-			GetScreenDrawArea(unscaledPosition, vector + (Main.Camera.UnscaledPosition - Main.Camera.ScaledPosition), out var firstTileX, out var lastTileX, out var firstTileY, out var lastTileY);
-			SetVisualActuation(firstTileX, firstTileY, lastTileX, lastTileY);
-			orig.Invoke(self, solidLayer, overRenderTargets, intoRenderTargets);
-			ResetActuators(firstTileX, firstTileY, lastTileX, lastTileY);
-		}
-
-		private void SetDrawActuator(On_Main.orig_DrawTiles orig, Main self, bool solidLayer, bool forRenderTargets, bool intoRenderTargets, int waterStyleOverride)
-		{
-			Vector2 unscaledPosition = Main.Camera.UnscaledPosition;
-			Vector2 vector = new((float)Main.offScreenRange, (float)Main.offScreenRange);
-			if (Main.drawToScreen)
-			{
-				vector = Vector2.Zero;
-			}
-			GetScreenDrawArea(unscaledPosition, vector + (Main.Camera.UnscaledPosition - Main.Camera.ScaledPosition), out var firstTileX, out var lastTileX, out var firstTileY, out var lastTileY);
-			SetVisualActuation(firstTileX, firstTileY, lastTileX, lastTileY);
-			orig.Invoke(self, solidLayer, forRenderTargets, intoRenderTargets, waterStyleOverride);
-			ResetActuators(firstTileX, firstTileY, lastTileX, lastTileY);
-		}
-
-		private static void SetVisualActuation(int firstTileX, int firstTileY, int lastTileX, int lastTileY)
-		{
-			for (int j = firstTileX - 2; j < lastTileX + 2; j++)
-			{
-				for (int i = firstTileY; i < lastTileY + 4; i++)
-				{
-					Tile tile = Main.tile[j, i];
-					if (tile.HasTile)
-					{
-						if (tile.Get<AvalonTileData>().IsTileActupainted)
-						{
-							tile.IsActuated = !tile.IsActuated;
-						}
-					}
-				}
-			}
-		}
-
-		private static void ResetActuators(int firstTileX, int firstTileY, int lastTileX, int lastTileY)
-		{
-			for (int j = firstTileX - 2; j < lastTileX + 2; j++)
-			{
-				for (int i = firstTileY; i < lastTileY + 4; i++)
-				{
-					Tile tile = Main.tile[j, i];
-					if (tile.HasTile)
-					{
-						if (tile.Get<AvalonTileData>().IsTileActupainted)
-						{
-							tile.IsActuated = !tile.IsActuated;
-						}
-					}
-				}
-			}
-		}
-
-		private static void GetScreenDrawArea(Vector2 screenPosition, Vector2 offSet, out int firstTileX, out int lastTileX, out int firstTileY, out int lastTileY)
-		{
-			firstTileX = (int)((screenPosition.X - offSet.X) / 16f - 1f);
-			lastTileX = (int)((screenPosition.X + (float)Main.screenWidth + offSet.X) / 16f) + 2;
-			firstTileY = (int)((screenPosition.Y - offSet.Y) / 16f - 1f);
-			lastTileY = (int)((screenPosition.Y + (float)Main.screenHeight + offSet.Y) / 16f) + 5;
-			if (firstTileX < 4)
-			{
-				firstTileX = 4;
-			}
-			if (lastTileX > Main.maxTilesX - 4)
-			{
-				lastTileX = Main.maxTilesX - 4;
-			}
-			if (firstTileY < 4)
-			{
-				firstTileY = 4;
-			}
-			if (lastTileY > Main.maxTilesY - 4)
-			{
-				lastTileY = Main.maxTilesY - 4;
-			}
-			if (Main.sectionManager.AnyUnfinishedSections)
-			{
-				TimeLogger.DetailedDrawReset();
-				WorldGen.SectionTileFrameWithCheck(firstTileX, firstTileY, lastTileX, lastTileY);
-				TimeLogger.DetailedDrawTime(5);
-			}
-			if (Main.sectionManager.AnyNeedRefresh)
-			{
-				WorldGen.RefreshSections(firstTileX, firstTileY, lastTileX, lastTileY);
-			}
-		}
-
-		public static bool SolidTileNoActuator(int i, int j, bool noDoors = false)
-		{
-			try
-			{
-				if (Main.tile[i, j] == null)
-				{
-					return true;
-				}
-				if (Main.tile[i, j].HasTile && Main.tileSolid[Main.tile[i, j].TileType] && !Main.tileSolidTop[Main.tile[i, j].TileType] && !Main.tile[i, j].IsHalfBlock && Main.tile[i, j].Slope == 0)
-				{
-					if (noDoors && Main.tile[i, j].TileType == 10)
-					{
-						return false;
-					}
-					return true;
-				}
-			}
-			catch
-			{
-			}
-			return false;
-		}
+		#endregion
 	}
 }

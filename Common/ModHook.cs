@@ -27,7 +27,29 @@ public abstract class ModHook : ModType
         applied = true;
     }
 
-    protected sealed override void Register() => RegisteredHooks.Enqueue(this);
+	public void UnApplyHook()
+	{
+		if (!applied)
+		{
+			return;
+		}
+
+		foreach (ModHook hook in HookDependencies)
+		{
+			hook.UnApplyHook();
+		}
+
+		UnApply();
+		applied = false;
+	}
+
+
+	protected sealed override void Register() => RegisteredHooks.Enqueue(this);
 
     protected abstract void Apply();
+
+	/// <summary>
+	/// Used by hooks that are applied manually to methods, this is so that edits can be unapplied appropriately
+	/// </summary>
+	protected virtual void UnApply() { }
 }
