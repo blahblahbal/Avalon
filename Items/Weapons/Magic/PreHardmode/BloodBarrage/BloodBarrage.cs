@@ -43,7 +43,7 @@ public class BloodBarrage : ModItem
 	};
 	public override float UseTimeMultiplier(Player player)
 	{
-		if (!player.HasBuff(ModContent.BuffType<Buffs.Debuffs.SanguineSacrifice>()))
+		if (player.HasBuff(ModContent.BuffType<Buffs.Debuffs.SanguineSacrifice>()))
 		{
 			return 0.5f;
 		}
