@@ -1,7 +1,7 @@
 using Avalon.Common;
 using Avalon.Dusts;
-using Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
 using Avalon.Particles;
+using Avalon.Projectiles.Hostile.Phantasm;
 using Avalon.UI;
 using Microsoft.Xna.Framework;
 using ReLogic.Utilities;

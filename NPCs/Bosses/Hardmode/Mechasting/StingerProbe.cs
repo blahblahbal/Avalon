@@ -1,6 +1,6 @@
 using Avalon;
 using Avalon.Common;
-using Avalon.NPCs.Bosses.Hardmode.Mechasting.Projectiles;
+using Avalon.Projectiles.Hostile.Mechasting;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;

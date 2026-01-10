@@ -1,0 +1,29 @@
+using Avalon;
+using Avalon.NPCs.Bosses.Hardmode.Phantasm;
+using Microsoft.Xna.Framework;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+namespace Avalon.Projectiles.Hostile.Phantasm
+{
+	public class PhantasmOrbSpawner : ModProjectile
+	{
+		public override void SetDefaults()
+		{
+			Projectile.hide = true;
+			Projectile.aiStyle = -1;
+			Projectile.extraUpdates = 100;
+			Projectile.timeLeft = 100;
+			Projectile.Size = new Vector2(16);
+		}
+		public override void OnKill(int timeLeft)
+		{
+			 if(Main.netMode!= NetmodeID.MultiplayerClient)
+			{
+				Point point = (Projectile.Center - (Projectile.oldVelocity * 16)).ToPoint();
+				NPC.NewNPC(Projectile.GetSource_FromThis(), point.X, point.Y, ModContent.NPCType<PhantasmHealthOrbs>(), 0, Projectile.ai[0], Main.rand.NextFloat(MathHelper.TwoPi));
+			}
+		}
+	}
+}

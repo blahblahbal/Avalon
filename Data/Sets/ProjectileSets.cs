@@ -1,5 +1,5 @@
 using Avalon.Items.Weapons.Melee.Hardmode.PossessedFlamesaw;
-using Avalon.NPCs.Bosses.Hardmode.WallOfSteel.Projectiles;
+using Avalon.Projectiles.Hostile.WallofSteel;
 using Terraria.ID;
 using Terraria.ModLoader;
 

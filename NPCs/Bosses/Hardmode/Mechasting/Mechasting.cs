@@ -1,6 +1,6 @@
 using Avalon.Items.Material;
 using Avalon.Items.Vanity;
-using Avalon.NPCs.Bosses.Hardmode.Mechasting.Projectiles;
+using Avalon.Projectiles.Hostile.Mechasting;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using System;

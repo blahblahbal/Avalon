@@ -1,5 +1,5 @@
 ﻿using Avalon.Dusts;
-using Avalon.NPCs.Bosses.PreHardmode.BacteriumPrime.Projectiles;
+using Avalon.Projectiles.Hostile.BacteriumPrime;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;

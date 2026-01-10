@@ -12,6 +12,7 @@ using Terraria.ModLoader;
 using Terraria.Localization;
 using System.IO;
 using Avalon;
+using Avalon.Projectiles.Hostile;
 
 namespace Avalon.NPCs.PreHardmode.BloodshotEye;
 

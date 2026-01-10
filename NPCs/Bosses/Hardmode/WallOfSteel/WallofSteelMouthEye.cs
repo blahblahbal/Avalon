@@ -1,6 +1,6 @@
 using Avalon;
 using Avalon.Common;
-using Avalon.NPCs.Bosses.Hardmode.WallOfSteel.Projectiles;
+using Avalon.Projectiles.Hostile.WallofSteel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;

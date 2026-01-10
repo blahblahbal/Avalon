@@ -4,7 +4,7 @@ using Avalon.Items.Material;
 using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Weapons.Magic.Superhardmode.MagicCleaver;
 using Avalon.Items.Weapons.Ranged.Superhardmode.FleshBoiler;
-using Avalon.NPCs.Bosses.Hardmode.WallOfSteel.Projectiles;
+using Avalon.Projectiles.Hostile.WallofSteel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
