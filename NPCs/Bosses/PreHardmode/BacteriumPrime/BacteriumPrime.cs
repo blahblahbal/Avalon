@@ -1,6 +1,5 @@
 using Avalon;
 using Avalon.Biomes;
-using Avalon.Dusts;
 using Avalon.Items.BossBags;
 using Avalon.Items.Material;
 using Avalon.Items.Material.Ores;
@@ -8,12 +7,14 @@ using Avalon.Items.Pets;
 using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Placeable.Trophy.Relics;
 using Avalon.Items.Vanity;
-using Avalon.NPCs.Bosses.PreHardmode.BacteriumPrime.Projectiles;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
@@ -22,14 +23,6 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Bosses.PreHardmode.BacteriumPrime;
-public class ContagionLenient : ModBiome
-{
-	public override int Music => -1;
-	public override bool IsBiomeActive(Player player)
-	{
-		return ModContent.GetInstance<BiomeTileCounts>().ContagionTiles >= 75;
-	}
-}
 
 [AutoloadBossHead]
 public class BacteriumPrime : ModNPC
@@ -41,7 +34,7 @@ public class BacteriumPrime : ModNPC
 	}
 	public override void BossHeadSlot(ref int index)
 	{
-		if (NPC.ai[3] == 60)
+		if (!NPC.dontTakeDamage)
 		{
 			index = secondStageHeadSlot;
 		}
@@ -55,25 +48,19 @@ public class BacteriumPrime : ModNPC
 	}
 	public override void SetStaticDefaults()
 	{
-		//DisplayName.SetDefault("Bacterium Prime");
-
-		// Add this in for bosses that have a summon item, requires corresponding code in the item (See MinionBossSummonItem.cs)
 		NPCID.Sets.MPAllowedEnemies[Type] = true;
-		// Automatically group with other bosses
 		NPCID.Sets.BossBestiaryPriority.Add(Type);
-
 		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
 		{
 			Position = new Vector2(0, 10f),
 			PortraitPositionYOverride = 8,
-			Velocity = 1f // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+			Velocity = 1f
 		};
 		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 
 		Main.npcFrameCount[NPC.type] = 8;
 		NPCID.Sets.TrailCacheLength[NPC.type] = 12;
-		NPCID.Sets.TrailingMode[NPC.type] = 7;
-
+		NPCID.Sets.TrailingMode[NPC.type] = 0;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
 	}
 	public override void SetDefaults()
@@ -81,23 +68,20 @@ public class BacteriumPrime : ModNPC
 		NPC.damage = 27;
 		NPC.boss = true;
 		NPC.noTileCollide = true;
-		NPC.lifeMax = 3100;
+		NPC.lifeMax = 1250;
 		NPC.defense = 9;
 		NPC.noGravity = true;
-		NPC.width = 120;
+		NPC.width = NPC.height = 90;
 		NPC.aiStyle = -1;
 		NPC.npcSlots = 6f;
 		NPC.value = 50000f;
-		NPC.timeLeft = NPC.activeTime * 30;
-		NPC.height = 120;
 		NPC.HitSound = SoundID.NPCHit8;
 		NPC.DeathSound = SoundID.NPCDeath21;
 		NPC.knockBackResist = 0f;
-		DrawOffsetY = 14;
 		NPC.timeLeft = 200000;
+		NPC.dontTakeDamage = true;
 		Music = ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/BacteriumPrime") : MusicID.Boss5;
 		SpawnModBiomes = new int[] { ModContent.GetInstance<Contagion>().Type, ModContent.GetInstance<UndergroundContagion>().Type };
-		//bossBag = ModContent.ItemType<Items.BossBags.BacteriumPrimeBossBag>();
 	}
 	public override void OnKill()
 	{
@@ -126,401 +110,167 @@ public class BacteriumPrime : ModNPC
 		npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<BacteriumPrimeRelic>()));
 		npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<PetriDish>(), 4));
 	}
-	const float Phase2Health = 0.6f;
-	const float Phase2part2Health = 0.3f;
-	const float Phase2part3Health = 0.15f;
-	float LorR = MathHelper.PiOver4;
+	private Player Target { get => Main.player[NPC.target]; }
 	public override void AI()
 	{
-		int projDmg = 8;
-		float speed;
+		Lighting.AddLight(NPC.Center, new Vector3(0.8f, 1.4f, 0) * NPC.Opacity * (0.3f + MathF.Sin((float)Main.timeForVisualEffects * 0.04f) * 0.15f));
+		// this is for the afterimages
+		NPC.localAI[3] = (int)Main.timeForVisualEffects % 6;
 
-		if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead || !Main.player[NPC.target].InModBiome(ModContent.GetInstance<ContagionLenient>()))
+		// despawning and targetting
+		if (!NPC.HasValidTarget)
 		{
-			NPC.TargetClosest(false);
-		}
-		Player Target = Main.player[NPC.target];
-
-		if (Target.dead || (!Main.player[NPC.target].InModBiome(ModContent.GetInstance<ContagionLenient>())))
-			NPC.ai[3] = -2;
-		if (NPC.ai[3] == -2)
-		{
-			NPC.noTileCollide = true;
-			NPC.velocity.Y += 0.1f;
-			NPC.velocity.X *= 0.99f;
-			if (NPC.timeLeft > 60)
+			NPC.TargetClosest();
+			if (!NPC.HasValidTarget)
 			{
-				NPC.timeLeft = 60;
+				NPC.despawnEncouraged = true;
 			}
 		}
-
-		#region Phase 1
-		if (Main.expertMode)
-			speed = 5;
+		if (NPC.despawnEncouraged)
+		{
+			NPC.velocity.Y -= 0.1f;
+			NPC.alpha += 10;
+			return;
+		}
+		// count the tendrils
+		if (NPC.dontTakeDamage)
+		{
+			NPC.ReflectProjectiles(NPC.Hitbox);
+			Phase1();
+		}
 		else
-			speed = 4;
-
-		if (NPC.ai[3] == 0)
 		{
-			if (NPC.noTileCollide || NPC.Center.Distance(Target.Center) > 40 * 16)
-				NPC.velocity += NPC.Center.DirectionTo(Target.Center) * 0.13f;
-			else
-			{
-				NPC.velocity += NPC.Center.DirectionTo(Target.Center) * 0.023f;
-			}
+			Phase2();
+		}
+	}
+	private void Phase1()
+	{
+		bool outside = Main.tile[NPC.Center.ToTileCoordinates()].WallType == 0;
 
-			//Main.NewText(LastCollide.X + " " + LastCollide.Y);
-			//if (NPC.collideY || NPC.collideX)
-			//{
-			//    if (Vector2.Distance(LastCollide, NPC.position) < 12000)
-			//        NPC.noTileCollide = true;
-			//    Main.NewText(Vector2.Distance(LastCollide, NPC.position));
-			//}
+		int tendrilType = ModContent.NPCType<BacteriumTendril>();
+		List<int> tendrilWHOAMIs = new();
+		foreach (NPC n in Main.ActiveNPCs)
+		{
+			if (n.type == tendrilType && n.ai[3] == NPC.whoAmI)
+			{
+				tendrilWHOAMIs.Add(n.whoAmI);
+			}
+		}
+		// shooting
+		NPC.ai[2]+= outside? 1.5f : 1;
+		if (NPC.ai[2] >= 170 + (tendrilWHOAMIs.Count * 20) && tendrilWHOAMIs.Count > 0)
+		{
+			int rand = tendrilWHOAMIs[Main.rand.Next(tendrilWHOAMIs.Count)];
+			if (Main.npc[rand].ai[2] == 0)
+			{
+				Main.npc[rand].ai[2] = 1;
+				Main.npc[rand].netUpdate = true;
+				NPC.ai[2] = 0;
+			}
+		}
 
-			if (NPC.collideX)
-			{
-				NPC.velocity.X = NPC.oldVelocity.X * -1.2f;
-			}
-			if (NPC.collideY)
-			{
-				NPC.velocity.Y = NPC.oldVelocity.Y * -1.2f;
-			}
-			if (NPC.collideX || NPC.collideY)
-			{
-				if (Main.rand.NextBool(6))
-					NPC.velocity = new Vector2(Main.rand.NextFloat(speed / 2, speed), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation());
-				NPC.ai[1] += 100;
-			}
-			if (NPC.noTileCollide)
-			{
-				NPC.alpha = (int)(MathHelper.Lerp(128, NPC.alpha, 0.9f));
-			}
-			else
-			{
-				NPC.alpha = (int)(MathHelper.Lerp(0, NPC.alpha, 0.9f));
-			}
-
-			if (Collision.SolidCollision(NPC.position + new Vector2(20, 20), NPC.height - 40, NPC.width - 40) && NPC.ai[1] > 360)
-			{
-				NPC.ai[1] = -Main.rand.Next(-100, 100);
-				NPC.noTileCollide = true;
-			}
+		if (NPC.ai[0] > 0) // Dash attack
+		{
+			float dashDuration = 80;
 			NPC.ai[1]++;
-			if (NPC.ai[1] > 360 && !Collision.SolidCollision(NPC.position, NPC.width, NPC.height))
+			if (NPC.ai[1] < 60)
 			{
-				//NPC.ai[1] = 0;
-				NPC.noTileCollide = false;
+				NPC.velocity *= 0.99f;
 			}
-			if (NPC.ai[1] > 1400)
+			else if (NPC.ai[1] == 60)
 			{
-				NPC.ai[1] = -Main.rand.Next(-100, 100);
-				NPC.noTileCollide = true;
-			}
-
-			if (Main.rand.NextBool(20) && Main.netMode != NetmodeID.MultiplayerClient)
-			{
-				Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<BacteriumGas>(), projDmg, 0, -1, 1);
-			}
-
-			NPC.ai[0]++;
-			if (NPC.ai[0] > 570)
-			{
-				float rotate = Main.rand.NextFloat(0, MathHelper.TwoPi);
-				int d = Dust.NewDust(NPC.Center + new Vector2(0, 180).RotatedBy(rotate), 0, 0, DustID.CorruptGibs, 0, 0, 50, default, 2);
-				Main.dust[d].velocity = new Vector2(0, -13).RotatedBy(rotate) + NPC.velocity;
-				Main.dust[d].noGravity = true;
-			}
-			if (NPC.ai[0] == 630)
-			{
-				if (Main.rand.NextBool())
-				{
-					LorR *= -1;
-				}
+				NPC.ai[3] = Main.rand.NextBool() ? -1 : 1;
 				NPC.netUpdate = true;
-				NPC.ai[0] = -60;
-				NPC.velocity = NPC.Center.DirectionTo(Target.Center).RotatedBy(LorR) * MathHelper.Clamp((NPC.Center.Distance(Target.position) * 0.025f), 10, 60);
-				SoundEngine.PlaySound(SoundID.ForceRoarPitched, NPC.position);
+				for (int i = 0; i < NPC.oldPos.Length; i++)
+				{
+					NPC.oldPos[i] = Vector2.Zero;
+				}
+				NPC.localAI[0] = 1;
+				SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
+				NPC.velocity = NPC.Center.DirectionTo(Target.Center).RotatedBy(MathHelper.PiOver2 * NPC.ai[3]) * 13;
 			}
-			if (NPC.ai[0] < -5)
+			else if (NPC.ai[1] < 60 + dashDuration)
 			{
-				NPC.ai[1] = -Main.rand.Next(50, 200);
-				NPC.noTileCollide = true;
-				speed = -NPC.ai[0];
-				NPC.velocity = NPC.velocity.RotatedBy(LorR * Main.rand.NextFloat(-0.001f, -0.025f));
+				NPC.velocity = NPC.velocity.RotatedBy(NPC.ai[3] * -(MathHelper.Pi / dashDuration));
 			}
-			if (NPC.ai[0] % 4 == 0 && Main.netMode != NetmodeID.MultiplayerClient && NPC.ai[0] < 60)
+			else if (NPC.ai[1] > 60 + dashDuration)
 			{
-				Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(2, 2), ModContent.ProjectileType<BacteriumGas>(), projDmg, 0, -1, 1);
+				NPC.ai[0] = NPC.ai[1] = 0;
+				NPC.velocity = NPC.Center.DirectionTo(Target.Center) * 3;
 			}
-
-			//NPC.ai[0]++;
-			//if (NPC.ai[0] > 120 && BactusCount < MaxBacCount)
-			//{
-			//    NPC.ai[0] = 0;
-			//    NPC Summon = NPC.NewNPCDirect(NPC.GetSource_FromThis(),NPC.Center + Main.rand.NextVector2CircularEdge(1000,1000),ModContent.NPCType<BactusMinion>(),0,0,0,0,0,NPC.target);
-			//    Summon.velocity = Summon.position.DirectionTo(Target.position) * 6;
-			//    for(int i = 0; i < 20; i++)
-			//    {
-			//        Dust summonDust = Dust.NewDustPerfect(Summon.Center, DustID.CorruptGibs, Main.rand.NextVector2Circular(8, 8), 128, default, 1.5f);
-			//        summonDust.noGravity = true;
-			//    }
-			//}
-			NPC.velocity.X = MathHelper.Clamp(NPC.velocity.X, -speed, speed);
-			NPC.velocity.Y = MathHelper.Clamp(NPC.velocity.Y, -speed, speed);
 		}
-		#endregion Phase 1
-
-		if (NPC.life <= NPC.lifeMax * Phase2Health && NPC.ai[3] < 60 && NPC.ai[3] >= 0)
+		else // simple flying
 		{
-			NPC.alpha = (int)(MathHelper.Lerp(64, NPC.alpha, 0.9f));
-			NPC.ai[3]++;
-			NPC.velocity *= 0.98f;
-
-			float rotate = Main.rand.NextFloat(0, MathHelper.TwoPi);
-			int d = Dust.NewDust(NPC.Center + new Vector2(0, 180).RotatedBy(rotate), 0, 0, DustID.CorruptGibs, 0, 0, 50, default, 2);
-			Main.dust[d].velocity = new Vector2(0, -13).RotatedBy(rotate) + NPC.velocity;
-			Main.dust[d].noGravity = true;
-			if (Main.rand.NextBool(3) && Main.netMode != NetmodeID.MultiplayerClient)
+			if (tendrilWHOAMIs.Count == 0)
 			{
-				Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(3, 3), ModContent.ProjectileType<BacteriumGas>(), projDmg, 0, -1, 1);
+				NPC.ai[3]++;
+				NPC.velocity *= 0.98f;
+				if (NPC.ai[3] == 60)
+				{
+					NPC.dontTakeDamage = false;
+				}
+			}
+			else
+			{
+				float speedMultiplier = 1f;
+				float accelMultiplier = 1f;
+				if (NPC.Center.Distance(Target.Center) > 800)
+				{
+					speedMultiplier = accelMultiplier = 3f;
+				}
+				if (Collision.SolidCollision(NPC.position, NPC.width, NPC.height) || outside)
+				{
+					accelMultiplier *= 7f;
+				}
+				NPC.SimpleFlyMovement(NPC.Center.DirectionTo(Target.Center) * Utils.Remap(tendrilWHOAMIs.Count, 0, 10, 3f, 1f) * speedMultiplier, Utils.Remap(tendrilWHOAMIs.Count, 0, 10, 0.007f, 0.003f) * accelMultiplier);
 			}
 		}
-		if (NPC.ai[3] == 59)
+		if (NPC.localAI[0] > 0 && NPC.ai[1] < 60 && NPC.dontTakeDamage)
+			NPC.localAI[0] -= 0.05f;
+	}
+	private void Phase2()
+	{
+		NPC.localAI[0] = 1;
+	}
+	public override void OnSpawn(IEntitySource source)
+	{
+		int tendril = ModContent.NPCType<BacteriumTendril>();
+		for(int i = 0; i < 12; i++)
 		{
-			NPC.ai[0] = 0;
-			NPC.ai[1] = 0;
-			NPC.ai[2] = 0;
-			//NPC.knockBackResist = 0f;
-			NPC.TargetClosest(false);
-			NPC.defense += 8;
-			NPC.noTileCollide = true;
-			//NPC.knockBackResist += 0.03f;
-			SoundEngine.PlaySound(SoundID.ForceRoar);
+			NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.Center.X, (int)NPC.Center.Y,tendril,NPC.whoAmI,i / 12f * MathHelper.TwoPi, Main.rand.Next(100), 0, NPC.whoAmI);
 		}
-
-		#region Phase 2
-		if (Main.expertMode)
-			speed = 5.3f;
-		else
-			speed = 4.3f;
-		if (NPC.life <= NPC.lifeMax * Phase2part2Health)
-			speed += 1.3f;
-		if (NPC.life <= NPC.lifeMax * Phase2part3Health && Main.expertMode)
-			speed += 0.3f;
-
-		if (NPC.ai[3] == 60)
-		{
-			if (!Collision.SolidCollision(NPC.position + new Vector2(NPC.width / 3, NPC.height / 3), NPC.width / 3, NPC.height / 3) || NPC.ai[1] > 199)
-			{
-				if (NPC.ai[1] < 190 && NPC.life < Phase2part2Health * NPC.lifeMax)
-					NPC.ai[1] += 4;
-				if (NPC.ai[1] < 190 && NPC.life < Phase2part3Health * NPC.lifeMax)
-					NPC.ai[1] += 4;
-				NPC.ai[1]++;
-			}
-
-			if (Main.rand.NextBool(30) && Main.netMode != NetmodeID.MultiplayerClient)
-			{
-				Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width * 0.6f, NPC.height * 0.6f), Main.rand.NextVector2Circular(1, 1), ModContent.ProjectileType<BacteriumGas>(), projDmg, 0, -1, 1);
-			}
-
-			int MushroomCount = 0;
-			for (int i = 0; i < Main.projectile.Length; i++)
-			{
-				if (Main.projectile[i].type == ModContent.ProjectileType<MushroomWall>() || Main.projectile[i].type == ModContent.ProjectileType<SporeSeed>())
-				{
-					MushroomCount++;
-				}
-			}
-
-			if (NPC.ai[1] > 200)
-			{
-				if (NPC.ai[0] == 0)
-				{
-					float rotate = Main.rand.NextFloat(0, MathHelper.TwoPi);
-					int d = Dust.NewDust(NPC.Center + new Vector2(0, 120).RotatedBy(rotate), 0, 0, DustID.PirateStaff, 0, 0, 50, default, 2);
-					Main.dust[d].velocity = new Vector2(0, -9).RotatedBy(rotate) + NPC.velocity;
-					Main.dust[d].noGravity = true;
-					//Main.dust[d].fadeIn = 1.2f;
-				}
-				else if (MushroomCount < 2 && NPC.position.Y < Main.worldSurface * 16 + 30 * 16 && Main.rand.NextBool())
-				{
-					float rotate = Main.rand.NextFloat(0, MathHelper.TwoPi);
-					int d = Dust.NewDust(NPC.Center + new Vector2(0, 120).RotatedBy(rotate), 0, 0, ModContent.DustType<ContagionWeapons>(), 0, 0, 50, default, 2);
-					Main.dust[d].velocity = new Vector2(0, -9).RotatedBy(rotate) + NPC.velocity;
-					Main.dust[d].noGravity = true;
-				}
-				else
-				{
-					float rotate = Main.rand.NextFloat(0, MathHelper.TwoPi);
-					int d = Dust.NewDust(NPC.Center + new Vector2(0, 120).RotatedBy(rotate), 0, 0, DustID.CorruptGibs, 0, 0, 50, default, 2);
-					Main.dust[d].velocity = new Vector2(0, -9).RotatedBy(rotate) + NPC.velocity;
-					Main.dust[d].noGravity = true;
-				}
-				NPC.velocity *= 0.94f;
-			}
-			if (NPC.ai[1] >= 240)
-			{
-				SoundEngine.PlaySound(SoundID.Item95, NPC.Center);
-				if (Main.netMode != NetmodeID.MultiplayerClient)
-				{
-					if (NPC.ai[0] == 0)
-					{
-						for (int i = 0; i < Main.rand.Next(2, 4); i++)
-						{
-							Vector2 ShootDirection = NPC.Center.DirectionTo(Target.Center).RotatedByRandom(0.3f) * Main.rand.NextFloat(6, 3) + new Vector2(0, Main.rand.NextFloat(-4, 0));
-							int M = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<CorrosiveMucus>(), (int)(NPC.damage * 0.3f), 0, -1);
-							//if(Main.expertMode)
-							//Main.projectile[M].damage = (int)(Main.projectile[M].damage * 0.5f);
-						}
-						//for (int i = 0; i < Main.rand.Next(3, 6); i++)
-						//{
-						//    Vector2 ShootDirection = NPC.Center.DirectionTo(Target.Center).RotatedByRandom(0.1f) * Main.rand.NextFloat(9, 8);
-						//    Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, ShootDirection, ModContent.ProjectileType<BacteriumGas>(), (int)(NPC.damage * 0.2f), 0, -1,1);
-						//}
-					}
-					else if (MushroomCount < 2 && NPC.position.Y < Main.worldSurface * 16 + 30 * 16)
-					{
-						if (Main.netMode != NetmodeID.MultiplayerClient)
-						{
-							Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), NPC.Center,
-								new Vector2(Main.rand.NextFloat(4f, 7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation()),
-								ModContent.ProjectileType<SporeSeed>(), projDmg, 0, 255, Target.Center.X);
-						}
-					}
-					else
-					{
-						int Balls = 3;
-						if (Main.expertMode)
-							Balls = Main.rand.Next(3, 5);
-						for (int i = 0; i < Balls; i++)
-						{
-							// Bouncy Ball
-							if (Main.netMode != NetmodeID.MultiplayerClient)
-							{
-								int P = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(Main.rand.NextFloat(4f, 7f), 0).RotatedBy(NPC.Center.DirectionTo(Target.Center).ToRotation() + MathHelper.Pi / (Balls * 2) - (i * MathHelper.Pi / (Balls * 2))), ModContent.ProjectileType<BouncyBoogerBall>(), projDmg, 0, 255);
-								Main.projectile[P].timeLeft = Main.rand.Next(300, 400);
-								Main.projectile[P].ai[0] = Main.rand.Next(1, 3);
-								if (Main.expertMode)
-								{
-									if (Main.rand.NextBool())
-									{
-										Main.projectile[P].velocity *= 1.5f;
-										Main.projectile[P].timeLeft = (int)(Main.projectile[P].timeLeft * 1.5f);
-									}
-								}
-							}
-						}
-					}
-				}
-				NPC.ai[0] = Main.rand.Next(3);
-				if (NPC.life >= NPC.lifeMax * Phase2part2Health)
-					NPC.ai[1] = Main.rand.Next(-60, 60);
-				else
-				{
-					NPC.ai[1] = Main.rand.Next(-20, 80);
-				}
-			}
-
-			//NPC.ai[0]++;
-			//if (NPC.ai[0] > 20 && BactusCount < MaxBacCount)
-			//{
-			//    NPC.ai[0] = 0;
-			//    NPC Summon = NPC.NewNPCDirect(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2CircularEdge(1000, 1000), ModContent.NPCType<BactusMinion>(), 0, 0, 0, 0, 0, NPC.target);
-			//    Summon.velocity = Summon.position.DirectionTo(Target.position) * 6;
-			//    for (int i = 0; i < 20; i++)
-			//    {
-			//        Dust summonDust = Dust.NewDustPerfect(Summon.Center, DustID.CorruptGibs, Main.rand.NextVector2Circular(8, 8), 128, default, 1.5f);
-			//        summonDust.noGravity = true;
-			//    }
-			//}
-			//NPC.velocity += NPC.Center.DirectionTo(Target.Center) * 0.26f;
-			if (NPC.ai[1] < 200)
-			{
-				if (Target.Center != NPC.Center)
-				{
-					NPC.velocity = Vector2.Lerp(NPC.Center.DirectionTo(Target.Center) * speed, NPC.velocity, 0.96f);
-					NPC.velocity.X = MathHelper.Clamp(NPC.velocity.X, -speed, speed);
-					NPC.velocity.Y = MathHelper.Clamp(NPC.velocity.Y, -5, 5);
-				}
-			}
-		}
-		#endregion Phase 2
-
-		if (Main.rand.NextBool(5))
-		{
-			int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.CorruptGibs, Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-3, 2), 128, default, Main.rand.NextFloat(1.2f, 1.7f));
-			Main.dust[d].noGravity = true;
-		}
-
-
-
-		//if(NPC.alpha > 255)
-		//{
-		//    NPC.active = false;
-		//}
-		float maxRotate = 0.4f;
-		if (NPC.ai[3] is < 1 or > 59)
-			NPC.rotation = MathHelper.Clamp(NPC.velocity.X * 0.03f, -maxRotate, maxRotate);
 	}
 	public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 	{
-		int frameHeight = TextureAssets.Npc[Type].Value.Height / Main.npcFrameCount[NPC.type];
-		Rectangle frame = NPC.frame;
-		Vector2 drawPos = NPC.position + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition;
-		float alphaThingHackyWow = 0;
-		for (int i = 11; i > 0; i -= 2)
+		for (int i = NPCID.Sets.TrailCacheLength[Type] - 1; i >= 0; i--)
 		{
-			alphaThingHackyWow += 0.03f;
-			Main.EntitySpriteDraw(TextureAssets.Npc[Type].Value, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, new Color(drawColor.R / 2 * alphaThingHackyWow * (NPC.ai[3] / 120), drawColor.G, 0, 128) * alphaThingHackyWow * (NPC.ai[3] / 60), NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
+			float percent = i / (float)NPCID.Sets.TrailCacheLength[Type];
+			percent += (1f / NPCID.Sets.TrailCacheLength[Type]) * (NPC.localAI[3] / 6f);
+			spriteBatch.Draw(TextureAssets.Npc[Type].Value, NPC.oldPos[i] - screenPos + NPC.Size / 2, NPC.frame, Color.Lerp(NPC.GetNPCColorTintedByBuffs(new Color(Lighting.GetSubLight(NPC.oldPos[i] + NPC.Size / 2))), Color.Black, 0.2f + (percent * 0.2f)) * (1f - percent) * 0.3f * NPC.Opacity * NPC.localAI[0], NPC.oldRot[i], new Vector2(66), NPC.scale, SpriteEffects.None, 0);
 		}
-
-		if (NPC.ai[0] < 0 && NPC.ai[3] == 0)
-		{
-			alphaThingHackyWow = 0;
-			for (int i = 11; i > 0; i -= 2)
-			{
-				alphaThingHackyWow += 0.07f * (NPC.ai[0] / -60);
-				Main.EntitySpriteDraw(TextureAssets.Npc[Type].Value, NPC.oldPos[i] + new Vector2(NPC.width / 2, NPC.height / 2) - Main.screenPosition, frame, new Color(drawColor.R * alphaThingHackyWow, drawColor.G * alphaThingHackyWow, drawColor.B * alphaThingHackyWow, 128 * alphaThingHackyWow) * alphaThingHackyWow, NPC.oldRot[i], new Vector2(NPC.frame.Width / 2, NPC.frame.Height / 2), NPC.scale, SpriteEffects.None, 0);
-			}
-		}
-		//Main.EntitySpriteDraw(texture, drawPos, frame, drawColor, NPC.rotation, new Vector2(NPC.frame.Width / 2,NPC.frame.Height / 2), NPC.scale,SpriteEffects.None,0);
-		return true;
+		spriteBatch.Draw(TextureAssets.Npc[Type].Value, NPC.Center - screenPos, NPC.frame, drawColor * NPC.Opacity, NPC.rotation, new Vector2(66), NPC.scale, SpriteEffects.None, 0);
+		return false;
 	}
 
 	public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
 	{
-		if (Main.expertMode)
-			target.AddBuff(BuffID.Blackout, 3 * 60);
-
-		target.AddBuff(BuffID.Darkness, 5 * 60);
 	}
 	public override void FindFrame(int frameHeight)
 	{
-		NPC.frameCounter += 1.0;
-		if (NPC.frameCounter > 6.0)
+		NPC.frameCounter ++;
+		if (NPC.frameCounter > 6)
 		{
-			NPC.frameCounter = 0.0;
-			NPC.frame.Y = NPC.frame.Y + frameHeight;
-		}
-
-		if (NPC.ai[3] <= 59f)
-		{
-			if (NPC.frame.Y > frameHeight * 3)
+			NPC.frameCounter = 0;
+			NPC.frame.Y += frameHeight;
+			if (NPC.dontTakeDamage)
 			{
-				NPC.frame.Y = 0;
+				if (NPC.frame.Y > frameHeight * 3)
+					NPC.frame.Y = 0;
 			}
-		}
-		else
-		{
-			if (NPC.frame.Y < frameHeight * 4)
+			else
 			{
-				NPC.frame.Y = frameHeight * 4;
-			}
-
-			if (NPC.frame.Y > frameHeight * 7)
-			{
-				NPC.frame.Y = frameHeight * 4;
+				if (NPC.frame.Y > frameHeight * 7)
+					NPC.frame.Y = frameHeight * 4;
 			}
 		}
 	}
@@ -549,15 +299,5 @@ public class BacteriumPrime : ModNPC
 			Main.dust[d2].velocity += NPC.velocity * Main.rand.NextFloat(0.2f, 0.8f);
 			Main.dust[d2].noGravity = true;
 		}
-		if (NPC.life <= 0)
-		{
-			for (int i = 0; i < 8; i++)
-				Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(NPC.width / 2, NPC.height / 2), Main.rand.NextVector2Circular(3, 3), ModContent.ProjectileType<BacteriumGas>(), NPC.damage / 3, 0, -1, 1);
-		}
-	}
-
-	public override bool? CanFallThroughPlatforms()
-	{
-		return true;
 	}
 }
