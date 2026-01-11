@@ -12,6 +12,7 @@ using Terraria.ModLoader;
 using Terraria.Localization;
 using Terraria.DataStructures;
 using Avalon;
+using Avalon.Projectiles.Hostile;
 
 namespace Avalon.NPCs.PreHardmode.Shadlopod;
 
@@ -90,7 +91,7 @@ public class Shadlopod : ModNPC
             if ((int)NPC.ai[1] % 120 == 0 && TargetValidForShootingAt)
             {
                 //Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Bottom, NPC.Bottom.DirectionTo(Main.player[NPC.target].Center) * 12,ProjectileID.CursedFlameHostile,24,0);
-                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + new Vector2(0, 16).RotatedBy(NPC.rotation), new Vector2(0, 2).RotatedBy(NPC.rotation), ModContent.ProjectileType<DarkeningInk>(), 8, 0, ai0: NPC.target);
+                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + new Vector2(0, 16).RotatedBy(NPC.rotation), new Vector2(0, 2).RotatedBy(NPC.rotation), ModContent.ProjectileType<ShadlopodInk>(), 8, 0, ai0: NPC.target);
                 SoundEngine.PlaySound(SoundID.Item64, NPC.position);
             }
 

@@ -4,7 +4,6 @@ using Avalon.Dusts;
 using Avalon.Items.Material;
 using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Weapons.Magic.Hardmode.PhantomKnives;
-using Avalon.NPCs.Bosses.Hardmode.Phantasm.Projectiles;
 using Avalon.Particles;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;

@@ -10352,6 +10352,9 @@ Mods: {
 			OutbreakProj.DisplayName: Outbreak Tick
 			CanisterFire.DisplayName: Canister Fire
 			CanisterFireLinger.DisplayName: Lingering Canister Fire
+			TendrilShot.DisplayName: Tendril Shot
+			CougherCough.DisplayName: Cougher Cough
+			ShadlopodInk.DisplayName: Shadlopod Ink
 		}
 
 		NPCs: {
@@ -10822,6 +10825,7 @@ Mods: {
 			SnakeBody.DisplayName: Snake Body
 			SnakeHead.DisplayName: Snake Head
 			SnakeTail.DisplayName: Snake Tail
+			BacteriumTendril.DisplayName: Bacterium Tendril
 		}
 
 		Buffs: {

@@ -11,7 +11,7 @@ using Terraria.GameContent;
 using Avalon.Items.Material;
 using Avalon.Items.Placeable.Trophy;
 using Avalon;
-using Avalon.NPCs.Bosses.PreHardmode.KingSting.Projectiles;
+using Avalon.Projectiles.Hostile.KingSting;
 
 namespace Avalon.NPCs.Bosses.PreHardmode.KingSting;
 

@@ -13,6 +13,7 @@
 	<ItemGroup>
 		<Folder Remove=".vs\ExxoAvalonOrigins\v17\" />
 		<AdditionalFiles Remove=".vs\ExxoAvalonOrigins\v17\**" />
+		<Folder Include="NPCs\Bosses\Hardmode\Mechasting\Projectiles\" />
 	</ItemGroup>
 	<ItemGroup>
 		<Reference Include="AltLibrary">
