@@ -1,6 +1,5 @@
 using Avalon.Data.Sets;
-using Avalon.Tiles.Contagion.ContagionGrasses;
-using Avalon.Tiles.Contagion.SmallPlants;
+using Avalon.Tiles.Contagion;
 using Avalon.Walls.Contagion.ContagionGrassWall;
 using Terraria;
 using Terraria.ID;

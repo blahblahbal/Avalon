@@ -17,7 +17,7 @@ public class CoughwoodChest : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe()
-			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 8)
+			.AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 8)
 			.AddRecipeGroup("IronBar", 2)
 			.AddTile(TileID.WorkBenches)
 			.SortAfterFirstRecipesOf(ModContent.ItemType<CoughwoodChair>())

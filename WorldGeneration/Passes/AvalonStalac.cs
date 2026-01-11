@@ -3,8 +3,7 @@ using Terraria.IO;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using Avalon.Tiles.Contagion.Chunkstone;
-using Avalon.Tiles.Contagion.ContagionStalagmites;
+using Avalon.Tiles.Contagion;
 
 namespace Avalon.WorldGeneration.Passes
 {

@@ -4,7 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using ReLogic.Utilities;
-using Avalon.Tiles.Contagion.IckyAltar;
+using Avalon.Tiles.Contagion;
 
 namespace Avalon.WorldGeneration.Passes
 {

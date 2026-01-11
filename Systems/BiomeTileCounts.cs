@@ -1,10 +1,5 @@
 using Avalon.Tiles;
-using Avalon.Tiles.Contagion.Chunkstone;
-using Avalon.Tiles.Contagion.ContagionGrasses;
-using Avalon.Tiles.Contagion.HardenedSnotsand;
-using Avalon.Tiles.Contagion.Snotsand;
-using Avalon.Tiles.Contagion.Snotsandstone;
-using Avalon.Tiles.Contagion.YellowIce;
+using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Furniture;
 using Avalon.Tiles.Savanna;
 using Microsoft.Xna.Framework;
@@ -21,8 +16,8 @@ public class BiomeTileCounts : ModSystem
 	public const int DarkMatterTilesHardLimit = 250000;
 
 	public int WorldDarkMatterTiles;
-	public int ContagionTiles { get; private set; }
-	public int SavannaTiles { get; private set; }
+	public int ContagionTiles { get; set; }
+	public int SavannaTiles { get; set; }
 	public int HellCastleTiles { get; private set; }
 	public int DarkTiles { get; private set; }
 	public int CaesiumTiles { get; private set; }
@@ -30,8 +25,7 @@ public class BiomeTileCounts : ModSystem
 	public int CrystalTiles { get; private set; }
 	public int DungeonAltTiles { get; private set; }
 	public int DarkMonolithTiles { get; private set; }
-	public int ContagionDesertTiles { get; private set; }
-
+	public int ContagionDesertTiles { get; set; }
 	public int AshenOvergrowthTiles { get; private set; }
 
 	public override void TileCountsAvailable(ReadOnlySpan<int> tileCounts)

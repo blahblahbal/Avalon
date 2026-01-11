@@ -1,5 +1,5 @@
 using Avalon.Tiles;
-using Avalon.Tiles.Contagion.IckyAltar;
+using Avalon.Tiles.Contagion;
 using Avalon.Walls;
 using Terraria.ModLoader;
 

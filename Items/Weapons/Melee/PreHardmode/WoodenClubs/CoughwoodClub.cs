@@ -1,5 +1,5 @@
 using Avalon.Items.Tools.PreHardmode;
-using Avalon.Tiles.Contagion.Coughwood;
+using Avalon.Items.Placeable.Tile;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;

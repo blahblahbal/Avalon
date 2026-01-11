@@ -17,7 +17,7 @@ using Avalon.Items.Other;
 using Avalon.Items.Pets;
 using Avalon.Items.Placeable.Furniture;
 using Avalon.Items.Placeable.MusicBoxes;
-using Avalon.Items.Placeable.Seed;
+using Avalon.Items.Placeable.HerbsAndSeeds;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Potions.Buff;
 using Avalon.Items.Potions.Other;
@@ -38,9 +38,7 @@ using Avalon.Tiles.Ancient.AncientIronBrick;
 using Avalon.Tiles.Ancient.AncientOrangeBrick;
 using Avalon.Tiles.Ancient.AncientPurpleBrick;
 using Avalon.Tiles.Ancient.AncientYellowBrick;
-using Avalon.Tiles.Contagion.Chunkstone;
-using Avalon.Tiles.Contagion.ContagionChest;
-using Avalon.Tiles.Contagion.Coughwood;
+using Avalon.Tiles.Contagion;
 using Microsoft.Xna.Framework;
 using ModLiquidLib.ModLoader;
 using System;
@@ -157,7 +155,7 @@ public class AvalonGlobalItem : GlobalItem
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<ChunkstoneBlock>()] = ItemID.EbonstoneBlock;
 
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.ApocalyptusWood>()] = ItemID.Wood;
-		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Coughwood>()] = ItemID.Wood;
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.Coughwood>()] = ItemID.Wood;
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.BleachedEbony>()] = ItemID.Wood;
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Items.Placeable.Tile.ResistantWood>()] = ItemID.Wood;
 
@@ -180,7 +178,7 @@ public class AvalonGlobalItem : GlobalItem
 		// misc items
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<StaminaCrystal>()] = ModContent.ItemType<EnergyCrystal>();
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<UnstableCatalyzer>()] = ModContent.ItemType<Items.Placeable.Crafting.Catalyzer>();
-		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<ContagionKey>()] = ModContent.ItemType<ContagionChest>();
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<ContagionKey>()] = ModContent.ItemType<Items.Placeable.Furniture.ContagionChest>();
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<PlagueCrate>()] = ModContent.ItemType<ContagionCrate>();
 
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Zircon>()] = ItemID.Diamond;

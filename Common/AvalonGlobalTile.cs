@@ -5,8 +5,7 @@ using Avalon.Items.Weapons.Ranged.PreHardmode.Icicle;
 using Avalon.NPCs.Hardmode.CursedScepter;
 using Avalon.NPCs.Hardmode.InfectedPickaxe;
 using Avalon.Tiles;
-using Avalon.Tiles.Contagion.ContagionChest;
-using Avalon.Tiles.Contagion.SmallPlants;
+using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Furniture.OrangeDungeon;
 using Avalon.Tiles.Furniture.PurpleDungeon;
 using Avalon.Tiles.Furniture.YellowDungeon;
@@ -32,7 +31,7 @@ public class AvalonGlobalTile : GlobalTile
 		int type = 0;
 		Tile tileSafely = Framing.GetTileSafely(X, Y);
 		if (!(tileSafely.TileType == ModContent.TileType<OrangeDungeonChest>() || tileSafely.TileType == ModContent.TileType<PurpleDungeonChest>() ||
-			tileSafely.TileType == ModContent.TileType<YellowDungeonChest>() || tileSafely.TileType == ModContent.TileType<ContagionChestTile>())) return false;
+			tileSafely.TileType == ModContent.TileType<YellowDungeonChest>() || tileSafely.TileType == ModContent.TileType<ContagionChest>())) return false;
 		int type2 = tileSafely.TileType;
 		int num2 = tileSafely.TileFrameX / 36;
 

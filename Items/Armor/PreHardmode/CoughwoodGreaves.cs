@@ -1,5 +1,5 @@
 using Avalon.Common.Extensions;
-using Avalon.Tiles.Contagion.Coughwood;
+using Avalon.Items.Placeable.Tile;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

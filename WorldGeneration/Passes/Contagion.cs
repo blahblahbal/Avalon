@@ -1,13 +1,6 @@
 using Avalon.Common;
 using Avalon.Tiles;
-using Avalon.Tiles.Contagion.Chunkstone;
-using Avalon.Tiles.Contagion.ContagionGrasses;
-using Avalon.Tiles.Contagion.HardenedSnotsand;
-using Avalon.Tiles.Contagion.IckyAltar;
-using Avalon.Tiles.Contagion.SnotOrb;
-using Avalon.Tiles.Contagion.Snotsand;
-using Avalon.Tiles.Contagion.Snotsandstone;
-using Avalon.Tiles.Contagion.YellowIce;
+using Avalon.Tiles.Contagion;
 using Avalon.Walls.Contagion.ChunkstoneWall;
 using Microsoft.Xna.Framework;
 using System;

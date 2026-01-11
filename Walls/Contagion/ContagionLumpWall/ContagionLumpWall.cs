@@ -1,4 +1,4 @@
-using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;

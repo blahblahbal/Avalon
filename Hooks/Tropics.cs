@@ -12,7 +12,7 @@ using Mono.Cecil.Cil;
 using Terraria;
 using System.Reflection;
 using Avalon.Tiles.Savanna;
-using Avalon.Tiles.Contagion.ContagionGrasses;
+using Avalon.Tiles.Contagion;
 
 namespace Avalon.Hooks;
 

@@ -1,6 +1,5 @@
 using Terraria.ModLoader;
 using Terraria.ID;
-using Avalon.Tiles.Contagion.Chunkstone;
 using Avalon.Walls.Contagion.ChunkstoneWall;
 
 namespace Avalon.Data.Sets

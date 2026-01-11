@@ -7,7 +7,7 @@ using Terraria.WorldBuilding;
 using System;
 using System.Reflection;
 using System.Linq;
-using Avalon.Tiles.Contagion.IckyAltar;
+using Avalon.Tiles.Contagion;
 
 namespace Avalon.Hooks
 {

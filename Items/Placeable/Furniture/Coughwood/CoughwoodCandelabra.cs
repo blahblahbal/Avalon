@@ -17,7 +17,7 @@ public class CoughwoodCandelabra : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe()
-			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 5)
+			.AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 5)
 			.AddIngredient(ItemID.Torch, 3)
 			.AddTile(TileID.WorkBenches)
 			.SortAfterFirstRecipesOf(ModContent.ItemType<CoughwoodBookcase>())

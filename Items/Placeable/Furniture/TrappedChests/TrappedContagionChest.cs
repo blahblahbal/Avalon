@@ -1,4 +1,3 @@
-using Avalon.Tiles.Contagion.ContagionChest;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

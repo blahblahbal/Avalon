@@ -1,5 +1,5 @@
 using Avalon.Items.Placeable.Tile;
-using Avalon.Tiles.Contagion.Snotsand;
+using Avalon.Tiles.Contagion;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;

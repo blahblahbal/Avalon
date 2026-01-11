@@ -3,13 +3,6 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using Avalon.ModSupport;
-using Avalon.Tiles.Contagion.Chunkstone;
-using Avalon.Tiles.Contagion.SmallPlants;
-using Avalon.Tiles.Contagion.ContagionGrasses;
-using Avalon.Tiles.Contagion.Snotsand;
-using Avalon.Tiles.Contagion.YellowIce;
-using Avalon.Tiles.Contagion.Snotsandstone;
-using Avalon.Tiles.Contagion.HardenedSnotsand;
 using Avalon.Walls.Contagion.HardenedSnotsandWall;
 using Avalon.Walls.Contagion.SnotsandstoneWall;
 using Avalon.Walls.Contagion.ChunkstoneWall;
@@ -18,6 +11,7 @@ using Avalon.Walls.Contagion.ContagionMouldWall;
 using Avalon.Walls.Contagion.ContagionBoilWall;
 using Avalon.Walls.Contagion.ContagionCystWall;
 using Avalon.Walls.Contagion.ContagionGrassWall;
+using Avalon.Tiles.Contagion;
 
 namespace Avalon.Hooks
 {

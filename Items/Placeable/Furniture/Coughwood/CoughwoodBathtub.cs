@@ -18,7 +18,7 @@ public class CoughwoodBathtub : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe()
-			.AddIngredient(itemID: ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 14)
+			.AddIngredient(itemID: ModContent.ItemType<Tile.Coughwood>(), 14)
 			.AddTile(TileID.Sawmill)
 			.SortAfterFirstRecipesOf(ModContent.ItemType<CoughwoodBeam>())
 			.Register();

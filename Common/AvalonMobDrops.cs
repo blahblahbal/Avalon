@@ -10,7 +10,7 @@ using Avalon.Items.Material.Shards;
 using Avalon.Items.Material.TomeMats;
 using Avalon.Items.Other;
 using Avalon.Items.Placeable.Painting;
-using Avalon.Items.Placeable.Seed;
+using Avalon.Items.Placeable.HerbsAndSeeds;
 using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Potions.Buff;
 using Avalon.Items.Tools.PreHardmode;

@@ -1,5 +1,6 @@
 using Avalon.Common.Extensions;
 using Avalon.Items.Weapons.Melee.PreHardmode.WoodenClubs;
+using Avalon.Items.Placeable.Tile;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -16,7 +17,7 @@ public class CoughwoodBow : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe(1)
-			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 10)
+			.AddIngredient(ModContent.ItemType<Coughwood>(), 10)
 			.AddTile(TileID.WorkBenches)
 			.SortBeforeFirstRecipesOf(ModContent.ItemType<CoughwoodClub>())
 			.Register();

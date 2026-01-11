@@ -1,6 +1,6 @@
-using Avalon.Tiles.Contagion.Coughwood;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Avalon.Items.Placeable.Tile;
 
 namespace Avalon.Items.Placeable.Beam;
 

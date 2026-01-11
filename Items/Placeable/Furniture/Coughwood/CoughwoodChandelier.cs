@@ -17,7 +17,7 @@ public class CoughwoodChandelier : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe()
-			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 4)
+			.AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 4)
 			.AddIngredient(ItemID.Torch, 4)
 			.AddIngredient(ItemID.Chain)
 			.AddTile(TileID.Anvils)

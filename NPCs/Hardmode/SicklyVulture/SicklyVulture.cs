@@ -6,7 +6,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.GameContent.Bestiary;
 using Terraria.Localization;
 using Microsoft.Xna.Framework;
-using Avalon.Tiles.Contagion.Snotsand;
+using Avalon.Tiles.Contagion;
 
 namespace Avalon.NPCs.Hardmode.SicklyVulture;
 

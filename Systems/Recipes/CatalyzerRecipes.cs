@@ -3,8 +3,7 @@ using Avalon.Items.Material;
 using Avalon.Items.Material.Bars;
 using Avalon.Items.Material.Ores;
 using Avalon.Items.Placeable.Tile;
-using Avalon.Tiles.Contagion.Chunkstone;
-using Avalon.Tiles.Contagion.Coughwood;
+using Avalon.Tiles.Contagion;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -106,7 +105,7 @@ internal class CatalyzerRecipes : ModSystem
             .DisableDecraft()
             .Register();
 
-        Recipe.Create(ModContent.ItemType<Coughwood>(), 50)
+        Recipe.Create(ModContent.ItemType<Items.Placeable.Tile.Coughwood>(), 50)
             .AddIngredient(ItemID.Shadewood, 50)
             .AddIngredient(ModContent.ItemType<Sulphur>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
@@ -114,7 +113,7 @@ internal class CatalyzerRecipes : ModSystem
             .Register();
 
         Recipe.Create(ItemID.Pearlwood, 50)
-            .AddIngredient(ModContent.ItemType<Coughwood>(), 50)
+            .AddIngredient(ModContent.ItemType<Items.Placeable.Tile.Coughwood>(), 50)
             .AddIngredient(ModContent.ItemType<Sulphur>())
             .AddTile(ModContent.TileType<Tiles.Catalyzer>())
             .DisableDecraft()

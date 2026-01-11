@@ -1,4 +1,4 @@
-using Avalon.Tiles.Contagion.Snotsand;
+using Avalon.Items.Placeable.Tile;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -35,7 +35,7 @@ public class VomitWater : ModItem
         CreateRecipe(10)
             .AddIngredient(ItemID.BottledWater, 10)
             .AddIngredient(ModContent.ItemType<SnotsandBlock>())
-            .AddIngredient(ModContent.ItemType<Placeable.Seed.ContagionSeeds>())
+            .AddIngredient(ModContent.ItemType<Placeable.HerbsAndSeeds.ContagionSeeds>())
             .Register();
     }
 }

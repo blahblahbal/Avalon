@@ -7,7 +7,7 @@ using Avalon.Items.Accessories.Info;
 using Avalon.Items.Consumables;
 using Avalon.Items.Material;
 using Avalon.Items.Other;
-using Avalon.Items.Placeable.Seed;
+using Avalon.Items.Placeable.HerbsAndSeeds;
 using Avalon.Items.Placeable.Tile;
 using Avalon.ModSupport;
 using Avalon.NPCs.Bosses.Hardmode.WallOfSteel;

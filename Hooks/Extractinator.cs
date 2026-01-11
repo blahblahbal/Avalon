@@ -1,13 +1,8 @@
 using Avalon.Common;
-using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent;
-using Avalon.Tiles.Contagion.Chunkstone;
-using Avalon.Tiles.Contagion.Snotsandstone;
-using Avalon.Projectiles;
-using Avalon.Tiles.Contagion.Snotsand;
-using Avalon.Tiles.Contagion.HardenedSnotsand;
+using Avalon.Items.Placeable.Tile;
 
 namespace Avalon.Hooks
 {

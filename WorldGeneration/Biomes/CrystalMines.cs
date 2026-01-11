@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Avalon.Tiles.Contagion.SnotOrb;
+using Avalon.Tiles.Contagion;
 using Avalon.Tiles.CrystalMines;
 using Avalon.Walls;
 using Microsoft.Xna.Framework;

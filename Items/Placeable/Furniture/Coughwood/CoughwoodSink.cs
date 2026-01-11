@@ -17,7 +17,7 @@ public class CoughwoodSink : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe()
-			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 6)
+			.AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 6)
 			.AddIngredient(ItemID.WaterBucket)
 			.AddTile(TileID.WorkBenches)
 			.SortBeforeFirstRecipesOf(ModContent.ItemType<CoughwoodPiano>())

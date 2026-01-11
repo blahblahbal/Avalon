@@ -1,7 +1,6 @@
 using Avalon.Common;
 using Avalon.Tiles;
-using Avalon.Tiles.Contagion.BigPlants;
-using Avalon.Tiles.Contagion.Snotsand;
+using Avalon.Tiles.Contagion;
 using Microsoft.Xna.Framework;
 using MonoMod.Cil;
 using System;

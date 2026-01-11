@@ -42,7 +42,7 @@ using Terraria.ModLoader.IO;
 
 namespace Avalon.Common.Players;
 
-public class AvalonPlayer : ModPlayer
+public partial class AvalonPlayer : ModPlayer
 {
 	#region solar system vars
 	public LinkedList<int>[] Planets { get; } = new LinkedList<int>[9]
@@ -659,6 +659,21 @@ public class AvalonPlayer : ModPlayer
 		}
 	}
 
+	public LinkedListNode<int> ObtainExistingPlanet(int index, int planetNum)
+	{
+		int diff = index + 1 - Planets[planetNum].Count;
+		if (diff > 0)
+		{
+			for (int i = 0; i < diff; i++)
+			{
+				Planets[planetNum].AddLast(Planets[planetNum].Count);
+			}
+
+			return Planets[planetNum].Last;
+		}
+
+		return Planets[planetNum].Find(index);
+	}
 	public override void PreUpdate()
 	{
 		playerOldVelocity[2] = playerOldVelocity[1];
@@ -1461,21 +1476,7 @@ public class AvalonPlayer : ModPlayer
 			}
 		}
 	}
-	public LinkedListNode<int> ObtainExistingPlanet(int index, int planetNum)
-	{
-		int diff = index + 1 - Planets[planetNum].Count;
-		if (diff > 0)
-		{
-			for (int i = 0; i < diff; i++)
-			{
-				Planets[planetNum].AddLast(Planets[planetNum].Count);
-			}
-
-			return Planets[planetNum].Last;
-		}
-
-		return Planets[planetNum].Find(index);
-	}
+	
 	public override void SaveData(TagCompound tag)
 	{
 		tag["Avalon:StatStam"] = Player.GetModPlayer<AvalonStaminaPlayer>().StatStam;

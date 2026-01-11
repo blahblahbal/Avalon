@@ -21,11 +21,11 @@ public class CoughwoodPlatform : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe(2)
-			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>())
+			.AddIngredient(ModContent.ItemType<Tile.Coughwood>())
 			.SortAfterFirstRecipesOf(ItemID.AshWoodPlatform)
 			.Register();
 
-		Recipe.Create(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>())
+		Recipe.Create(ModContent.ItemType<Tile.Coughwood>())
 			.AddIngredient(this, 2)
 			.DisableDecraft()
 			.SortAfterFirstRecipesOf(Type)

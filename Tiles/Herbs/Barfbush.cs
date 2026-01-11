@@ -5,8 +5,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Avalon.Common.Templates;
-using Avalon.Tiles.Contagion.Chunkstone;
-using Avalon.Tiles.Contagion.ContagionGrasses;
+using Avalon.Tiles.Contagion;
 
 namespace Avalon.Tiles.Herbs;
 

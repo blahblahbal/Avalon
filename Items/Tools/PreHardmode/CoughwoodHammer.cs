@@ -1,4 +1,5 @@
 using Avalon.Items.Armor.PreHardmode;
+using Avalon.Items.Placeable.Tile;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -14,7 +15,7 @@ public class CoughwoodHammer : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe(1)
-			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 8)
+			.AddIngredient(ModContent.ItemType<Coughwood>(), 8)
 			.AddTile(TileID.WorkBenches)
 			.SortAfterFirstRecipesOf(ModContent.ItemType<CoughwoodGreaves>())
 			.Register();

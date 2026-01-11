@@ -1,6 +1,5 @@
 using Avalon.Tiles;
-using Avalon.Tiles.Contagion.Chunkstone;
-using Avalon.Tiles.Contagion.Snotsand;
+using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Savanna;
 using Microsoft.Xna.Framework;
 using System;

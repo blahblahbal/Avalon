@@ -6,9 +6,7 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.GameContent.Drawing;
 using Terraria.Map;
-using Avalon.Tiles.Contagion.SmallPlants;
-using Avalon.Tiles.Contagion.ContagionGrasses;
-using Avalon.Tiles.Contagion.Snotsand;
+using Avalon.Tiles.Contagion;
 
 namespace Avalon.Hooks;
 

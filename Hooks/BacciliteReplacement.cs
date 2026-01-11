@@ -5,10 +5,7 @@ using Avalon.Tiles.Ores;
 using Terraria.ID;
 using MonoMod.Cil;
 using Avalon.ModSupport;
-using Avalon.Tiles.Contagion.Chunkstone;
-using Avalon.Tiles.Contagion.ContagionGrasses;
-using Avalon.Tiles.Contagion.ContagionPot;
-using Avalon.Tiles.Contagion.Snotsand;
+using Avalon.Tiles.Contagion;
 
 namespace Avalon.Hooks
 {

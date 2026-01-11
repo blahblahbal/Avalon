@@ -1,7 +1,7 @@
 using Avalon.Items.Material;
 using Avalon.Items.Material.Bars;
 using Avalon.Items.Material.Herbs;
-using Avalon.Tiles.Contagion.Chunkstone;
+using Avalon.Items.Placeable.Tile;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

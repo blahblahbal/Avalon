@@ -17,7 +17,7 @@ public class CoughwoodDresser : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe()
-			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 16)
+			.AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 16)
 			.AddTile(TileID.Sawmill)
 			.SortBeforeFirstRecipesOf(ModContent.ItemType<CoughwoodChandelier>())
 			.Register();

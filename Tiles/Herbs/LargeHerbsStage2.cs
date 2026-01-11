@@ -1,5 +1,5 @@
 using Avalon.Common;
-using Avalon.Items.Placeable.Seed;
+using Avalon.Items.Placeable.HerbsAndSeeds;
 using Avalon.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

@@ -1,5 +1,5 @@
 using Avalon.Items.Placeable.Furniture;
-using Avalon.Tiles.Contagion.YellowIce;
+using Avalon.Tiles.Contagion;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

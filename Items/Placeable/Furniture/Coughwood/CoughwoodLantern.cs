@@ -17,7 +17,7 @@ public class CoughwoodLantern : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe()
-			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>(), 6)
+			.AddIngredient(ModContent.ItemType<Tile.Coughwood>(), 6)
 			.AddIngredient(ItemID.Torch)
 			.AddTile(TileID.WorkBenches)
 			.SortBeforeFirstRecipesOf(ModContent.ItemType<CoughwoodLamp>())

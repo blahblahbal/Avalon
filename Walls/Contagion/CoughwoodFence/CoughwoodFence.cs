@@ -1,3 +1,4 @@
+using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -20,12 +21,12 @@ public class CoughwoodFenceItem : ModItem
 	public override void AddRecipes()
 	{
 		CreateRecipe(4)
-			.AddIngredient(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>())
+			.AddIngredient(ModContent.ItemType<Coughwood>())
 			.AddTile(TileID.WorkBenches)
 			.SortAfterFirstRecipesOfIndexShift(ItemID.AshWoodFence, 1)
 			.Register();
 
-		Recipe.Create(ModContent.ItemType<Tiles.Contagion.Coughwood.Coughwood>())
+		Recipe.Create(ModContent.ItemType<Coughwood>())
 			.AddIngredient(this, 4)
 			.AddTile(TileID.WorkBenches)
 			.DisableDecraft()

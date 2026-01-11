@@ -1,12 +1,6 @@
 using System;
 using Avalon.Tiles;
-using Avalon.Tiles.Contagion.Chunkstone;
-using Avalon.Tiles.Contagion.ContagionGrasses;
-using Avalon.Tiles.Contagion.HardenedSnotsand;
-using Avalon.Tiles.Contagion.Snotsand;
-using Avalon.Tiles.Contagion.Snotsandstone;
-using Avalon.Tiles.Contagion.ThornyBushes;
-using Avalon.Tiles.Contagion.YellowIce;
+using Avalon.Tiles.Contagion;
 using Avalon.Walls.Contagion.ChunkstoneWall;
 using Avalon.Walls.Contagion.ContagionBoilWall;
 using Avalon.Walls.Contagion.ContagionCystWall;
