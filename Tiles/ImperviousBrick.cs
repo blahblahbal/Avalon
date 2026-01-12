@@ -26,7 +26,7 @@ public class ImperviousBrick : ModTile
     }
     public override bool Slope(int i, int j)
     {
-        return ModContent.GetInstance<DownedBossSystem>().DownedPhantasm;
+        return ModContent.GetInstance<SyncAvalonWorldData>().DownedPhantasm;
     }
     public override bool CanExplode(int i, int j)
     {

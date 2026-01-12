@@ -26,7 +26,7 @@ public class SkyBrick : ModTile
     }
     public override bool Slope(int i, int j)
     {
-        return ModContent.GetInstance<DownedBossSystem>().DownedDragonLord;
+        return ModContent.GetInstance<SyncAvalonWorldData>().DownedDragonLord;
     }
     public override bool CanExplode(int i, int j)
     {

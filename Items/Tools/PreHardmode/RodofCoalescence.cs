@@ -65,7 +65,7 @@ public class RodofCoalescence : ModItem
 		}
 		Point tileCoords = pointPosition.ToTileCoordinates();
 		if ((Main.tile[tileCoords.X, tileCoords.Y].WallType == WallID.LihzahrdBrickUnsafe && !NPC.downedPlantBoss && (Main.remixWorld || tileCoords.Y > Main.worldSurface) ||
-			Data.Sets.WallSets.Hellcastle[Main.tile[tileCoords.X, tileCoords.Y].WallType] && !ModContent.GetInstance<DownedBossSystem>().DownedPhantasm) ||
+			Data.Sets.WallSets.Hellcastle[Main.tile[tileCoords.X, tileCoords.Y].WallType] && !ModContent.GetInstance<SyncAvalonWorldData>().DownedPhantasm) ||
 			Collision.SolidCollision(pointPosition, player.width, player.height))
 		{
 			return false;

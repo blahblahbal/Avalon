@@ -79,7 +79,7 @@ public partial class Phantasm : ModNPC
 	public override void OnKill()
 	{
 		AvalonGlobalNPC.PhantasmBoss = -1;
-		if (!ModContent.GetInstance<DownedBossSystem>().DownedPhantasm)
+		if (!ModContent.GetInstance<SyncAvalonWorldData>().DownedPhantasm)
 		{
 			if (Main.netMode == NetmodeID.SinglePlayer)
 			{
@@ -89,7 +89,7 @@ public partial class Phantasm : ModNPC
 			{
 				ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("The spirits are stirring in the depths!"), new Color(50, 255, 130));
 			}
-			NPC.SetEventFlagCleared(ref ModContent.GetInstance<DownedBossSystem>().DownedPhantasm, -1);
+			NPC.SetEventFlagCleared(ref ModContent.GetInstance<SyncAvalonWorldData>().DownedPhantasm, -1);
 		}
 	}
 	public override void SendExtraAI(BinaryWriter writer)

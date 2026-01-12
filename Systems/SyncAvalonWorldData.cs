@@ -8,7 +8,7 @@ using Terraria.ModLoader.IO;
 
 namespace Avalon.Systems;
 
-public class DownedBossSystem : ModSystem
+public class SyncAvalonWorldData : ModSystem
 {
     public bool DownedArmageddon;
     public bool DownedBacteriumPrime;
@@ -113,9 +113,9 @@ public class DownedBossSystem : ModSystem
         };
         writer.Write(flags);
 
-        writer.Write(Common.AvalonWorld.tSick); //Putting this here since NetSend and NetRecieve are never used anywhere else
-		writer.Write(Common.AvalonWorld.retroWorld);
-		writer.Write(Common.AvalonWorld.cavesWorld);
+        writer.Write(AvalonWorld.tSick); //Putting this here since NetSend and NetRecieve are never used anywhere else
+		writer.Write(AvalonWorld.retroWorld);
+		writer.Write(AvalonWorld.cavesWorld);
 	}
 
     public override void NetReceive(BinaryReader reader)
@@ -130,8 +130,22 @@ public class DownedBossSystem : ModSystem
         DownedKingSting = flags[6];
         DownedArmageddon = flags[7];
 
-        Common.AvalonWorld.tSick = reader.ReadByte();
-		Common.AvalonWorld.retroWorld = reader.ReadBoolean();
-		Common.AvalonWorld.cavesWorld = reader.ReadBoolean();
+		AvalonWorld.tSick = reader.ReadByte();
+		AvalonWorld.retroWorld = reader.ReadBoolean();
+		AvalonWorld.cavesWorld = reader.ReadBoolean();
+	}
+
+	//Syncs data at ever tile position in a chunk
+	//LIMIT THIS TO VERY SMALL AMOUNTS OF DATA, THE MORE DATA THE LONGER THE CHUNK TAKES TO LOAD
+	public static void SendTileData(Tile tile, BinaryWriter writer)
+	{
+		writer.Write(tile.Get<AvalonTileData>().IsTileActupainted);
+		writer.Write(tile.Get<AvalonTileData>().IsWallActupainted);
+	}
+
+	public static void RecieveTIleData(Tile tile, BinaryReader reader)
+	{
+		tile.Get<AvalonTileData>().IsTileActupainted = reader.ReadBoolean();
+		tile.Get<AvalonTileData>().IsWallActupainted = reader.ReadBoolean();
 	}
 }

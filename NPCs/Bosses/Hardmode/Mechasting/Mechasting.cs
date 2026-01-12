@@ -500,9 +500,9 @@ public class Mechasting : ModNPC
     }
     public override void OnKill()
     {
-        if (!ModContent.GetInstance<DownedBossSystem>().DownedMechasting)
+        if (!ModContent.GetInstance<SyncAvalonWorldData>().DownedMechasting)
         {
-            NPC.SetEventFlagCleared(ref ModContent.GetInstance<DownedBossSystem>().DownedMechasting, -1);
+            NPC.SetEventFlagCleared(ref ModContent.GetInstance<SyncAvalonWorldData>().DownedMechasting, -1);
             //ModContent.GetInstance<AvalonWorld>().GenerateCrystalMines(); // CHANGE LATER TO OBLIVION
         }
     }

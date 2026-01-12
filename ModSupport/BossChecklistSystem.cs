@@ -36,7 +36,7 @@ public class BossChecklistSystem : ModSystem
 			Mod,
 			nameof(BacteriumPrime),
 			3f,
-			() => ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime,
+			() => ModContent.GetInstance<SyncAvalonWorldData>().DownedBacteriumPrime,
 			ModContent.NPCType<BacteriumPrime>(),
 			new Dictionary<string, object>()
 			{
@@ -60,7 +60,7 @@ public class BossChecklistSystem : ModSystem
 			Mod,
 			nameof(DesertBeak),
 			6f,
-			() => ModContent.GetInstance<DownedBossSystem>().DownedDesertBeak,
+			() => ModContent.GetInstance<SyncAvalonWorldData>().DownedDesertBeak,
 			ModContent.NPCType<DesertBeak>(),
 			new Dictionary<string, object>()
 			{

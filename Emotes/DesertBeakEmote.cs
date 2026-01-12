@@ -18,7 +18,7 @@ namespace Avalon.Emotes
         public override bool IsUnlocked()
         {
             // This emote only shows when minion boss is downed, just as vanilla do.
-            return ModContent.GetInstance<DownedBossSystem>().DownedDesertBeak;
+            return ModContent.GetInstance<SyncAvalonWorldData>().DownedDesertBeak;
         }
     }
 }

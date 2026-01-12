@@ -81,9 +81,9 @@ public class DesertBeak : ModNPC
 	public override void OnKill()
 	{
 		Terraria.GameContent.Events.Sandstorm.StopSandstorm();
-		if (!ModContent.GetInstance<DownedBossSystem>().DownedDesertBeak)
+		if (!ModContent.GetInstance<SyncAvalonWorldData>().DownedDesertBeak)
 		{
-			NPC.SetEventFlagCleared(ref ModContent.GetInstance<DownedBossSystem>().DownedDesertBeak, -1);
+			NPC.SetEventFlagCleared(ref ModContent.GetInstance<SyncAvalonWorldData>().DownedDesertBeak, -1);
 		}
 		foreach (NPC npc in Main.ActiveNPCs)
 		{

@@ -53,8 +53,8 @@ public static class ClassExtensions
 	public static bool DownedAnyPHMBoss()
 	{
 		return NPC.downedBoss1 || NPC.downedSlimeKing || NPC.downedBoss2 || NPC.downedBoss3 || NPC.downedQueenBee ||
-			NPC.downedDeerclops || ModContent.GetInstance<DownedBossSystem>().DownedDesertBeak ||
-			ModContent.GetInstance<DownedBossSystem>().DownedKingSting;
+			NPC.downedDeerclops || ModContent.GetInstance<SyncAvalonWorldData>().DownedDesertBeak ||
+			ModContent.GetInstance<SyncAvalonWorldData>().DownedKingSting;
 	}
 
 	public static Dictionary<TKey, TValue> TorchLauncherAdding<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue value)

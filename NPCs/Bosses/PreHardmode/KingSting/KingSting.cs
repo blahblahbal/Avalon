@@ -434,7 +434,7 @@ public class KingSting : ModNPC
     }
     public override void OnKill()
     {
-        ModContent.GetInstance<DownedBossSystem>().DownedKingSting = true;
+        ModContent.GetInstance<SyncAvalonWorldData>().DownedKingSting = true;
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {

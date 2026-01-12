@@ -409,7 +409,7 @@ public class AvalonWorld : ModSystem
 		}
 
 		#region desert beak natural spawning
-		if (Main.dayTime && Main.time == 0 && !ModContent.GetInstance<DownedBossSystem>().DownedDesertBeak && NPC.downedBoss3 && NPC.downedBoss2)
+		if (Main.dayTime && Main.time == 0 && !ModContent.GetInstance<SyncAvalonWorldData>().DownedDesertBeak && NPC.downedBoss3 && NPC.downedBoss2)
 		{
 			bool flag = false;
 			foreach (var player in Main.ActivePlayers)

@@ -18,6 +18,6 @@ public class ImperviousBrickWallUnsafe : ModWall
     }
     public override void KillWall(int i, int j, ref bool fail)
     {
-        if (!ModContent.GetInstance<DownedBossSystem>().DownedPhantasm) fail = true;
+        if (!ModContent.GetInstance<SyncAvalonWorldData>().DownedPhantasm) fail = true;
     }
 }

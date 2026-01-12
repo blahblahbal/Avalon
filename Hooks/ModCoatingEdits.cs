@@ -1,18 +1,15 @@
 using Avalon.Common;
 using Avalon.Reflection;
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
-using Mono.Cecil.Cil;
 using MonoMod.Cil;
-using MonoMod.RuntimeDetour;
-using rail;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.IO;
 using System.Reflection;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.Graphics.Light;
 using Terraria.ID;
-using ThoriumMod.Items.ThrownItems;
 
 namespace Avalon.Hooks
 {
@@ -20,8 +17,9 @@ namespace Avalon.Hooks
 	{
 		protected override void Apply()
 		{
-			//On_Main.DrawTileEntities += SetDrawTileEntitiesActuator;
-			//On_Main.DrawTiles += SetDrawActuator;
+			IL_NetMessage.CompressTileBlock_Inner += SendTIleData; //Please see Avalon.Systems.SyncAvalonWorldData for what tile data is being synced
+			IL_NetMessage.DecompressTileBlock_Inner += RecieveTileData;
+
 			On_Tile.CopyPaintAndCoating += CopyModCoating;
 			On_WorldGen.paintCoatTile += paintModCoatingTile;
 			On_WorldGen.paintCoatWall += paintModCoatingWall;
@@ -74,6 +72,50 @@ namespace Avalon.Hooks
 		}
 
 		#region Paint/Coating stuff
+		private void RecieveTileData(ILContext il)
+		{
+			ILCursor c = new(il);
+			c.GotoNext(MoveType.Before, i => i.MatchLdsfld<Main>(nameof(Main.sectionManager)));
+			c.EmitLdarg(0);
+			c.EmitLdarg(1);
+			c.EmitLdarg(2);
+			c.EmitLdarg(3);
+			c.EmitLdarg(4);
+			c.EmitDelegate((BinaryReader reader, int xStart, int yStart, int width, int height) =>
+			{
+				for (int i = yStart; i < yStart + height; i++)
+				{
+					for (int j = xStart; j < xStart + width; j++)
+					{
+						Tile tile = Main.tile[j, i];
+						SyncAvalonWorldData.RecieveTIleData(tile, reader);
+					}
+				}
+			});
+		}
+
+		private void SendTIleData(ILContext il)
+		{
+			ILCursor c = new(il);
+			while (c.TryGotoNext(MoveType.Before, i => i.MatchRet())) ;
+			c.EmitLdarg(0);
+			c.EmitLdarg(1);
+			c.EmitLdarg(2);
+			c.EmitLdarg(3);
+			c.EmitLdarg(4);
+			c.EmitDelegate((System.IO.BinaryWriter writer, int xStart, int yStart, int width, int height) =>
+			{
+				for (int i = yStart; i < yStart + height; i++)
+				{
+					for (int j = xStart; j < xStart + width; j++)
+					{
+						Tile tile2 = Main.tile[j, i];
+						SyncAvalonWorldData.SendTileData(tile2, writer);
+					}
+				}
+			});
+		}
+
 		private List<Color> modCoatingColors(On_WorldGen.orig_coatingColors orig, Tile tile, bool block)
 		{
 			List<Color> _coatingColors = (List<Color>)typeof(WorldGen).GetField("_coatingColors", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Public | BindingFlags.Instance).GetValue(null);

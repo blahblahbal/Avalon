@@ -258,7 +258,7 @@ public class AvalonGlobalNPC : GlobalNPC
 		Condition contagion = new Condition("Contagion", () => ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldGeneration.Enums.WorldEvil.Contagion);
 		AltLibrarySupport.ReplaceShopConditions(ref corruption, ref crimson, ref contagion);
 		Condition notContagion = new Condition("Not Contagion", () => !contagion.IsMet());
-		Condition downedBP = new Condition("BacteriumPrime", () => ModContent.GetInstance<DownedBossSystem>().DownedBacteriumPrime);
+		Condition downedBP = new Condition("BacteriumPrime", () => ModContent.GetInstance<SyncAvalonWorldData>().DownedBacteriumPrime);
 
 		if (shop.NpcType == NPCID.Merchant)
 		{
