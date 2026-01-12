@@ -277,7 +277,7 @@ public class VanillaItemRecipeCreator : ModSystem
 			.AddIngredient(ItemID.FallenStar, 25)
 			.AddRecipeGroup("AdamantiteBar", 10)
 			.AddTile(TileID.WorkBenches)
-			.AddCondition(Language.GetOrRegister(Language.GetTextValue("Mods.Avalon.RecipeConditions.retroWorld")), () => AvalonWorld.retroWorld)
+			.AddCondition(Heartstone.RetroWorld)
 			.SortAfterFirstRecipesOf(ItemID.SolarTablet)
 			.Register();
 		#endregion
