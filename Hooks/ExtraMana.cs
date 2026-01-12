@@ -6,6 +6,7 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using ReLogic.Content;
 using System;
+using System.Threading;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.ResourceSets;
@@ -21,16 +22,81 @@ public class ExtraMana : ModHook
 	private const int ManaPerCrystal = 20;
 	private const int MaxManaTier = 6;
 
+	public static RenderTarget2D testRT;
+
 	protected override void Apply()
 	{
 		On_PlayerStatsSnapshot.ctor += OnPlayerStatsSnapshotCtor;
 		On_FancyClassicPlayerResourcesDisplaySet.StarFillingDrawer += OnStarFillingDrawer;
+		On_FancyClassicPlayerResourcesDisplaySet.HeartFillingDrawer += On_FancyClassicPlayerResourcesDisplaySet_HeartFillingDrawer;
 		On_HorizontalBarsPlayerResourcesDisplaySet.ManaFillingDrawer += OnManaFillingDrawer;
+		On_HorizontalBarsPlayerResourcesDisplaySet.LifeFillingDrawer += On_HorizontalBarsPlayerResourcesDisplaySet_LifeFillingDrawer;
 		IL_ClassicPlayerResourcesDisplaySet.DrawMana += ILClassicDrawMana;
 
 		On_HorizontalBarsPlayerResourcesDisplaySet.Draw += On_HorizontalBarsPlayerResourcesDisplaySet_Draw;
 		On_FancyClassicPlayerResourcesDisplaySet.Draw += On_FancyClassicPlayerResourcesDisplaySet_Draw;
 		On_ClassicPlayerResourcesDisplaySet.Draw += On_ClassicPlayerResourcesDisplaySet_Draw;
+
+		if (!Main.dedServ)
+		{
+			using var eventSlim = new ManualResetEventSlim();
+
+			Main.QueueMainThreadAction(() =>
+			{
+				testRT = new RenderTarget2D(Main.graphics.GraphicsDevice, Main.screenWidth, Main.screenHeight);
+
+				eventSlim.Set();
+			});
+
+			eventSlim.Wait();
+
+			Main.graphics.GraphicsDevice.DeviceReset += OnDeviceReset;
+		}
+	}
+
+	private static void OnDeviceReset(object sender, EventArgs eventArgs)
+	{
+		var gd = (GraphicsDevice)sender;
+
+		var parameters = gd.PresentationParameters;
+
+		testRT?.Dispose();
+		testRT = new RenderTarget2D(gd, parameters.BackBufferWidth, parameters.BackBufferHeight);
+	}
+
+	//public override void Unload()
+	//{
+	//	Main.graphics.GraphicsDevice.DeviceReset -= OnDeviceReset;
+
+	//	if (testRT is not null)
+	//	{
+	//		using var eventSlim = new ManualResetEventSlim();
+
+	//		Main.QueueMainThreadAction(() =>
+	//		{
+	//			testRT.Dispose();
+	//			eventSlim.Set();
+	//		});
+
+	//		eventSlim.Wait();
+
+	//		testRT = null;
+	//	}
+	//}
+
+
+	private void On_HorizontalBarsPlayerResourcesDisplaySet_LifeFillingDrawer(On_HorizontalBarsPlayerResourcesDisplaySet.orig_LifeFillingDrawer orig, HorizontalBarsPlayerResourcesDisplaySet self, int elementIndex, int firstElementIndex, int lastElementIndex, out Asset<Texture2D> sprite, out Vector2 offset, out float drawScale, out Rectangle? sourceRect)
+	{
+		orig.Invoke(self, elementIndex, firstElementIndex, lastElementIndex, out sprite, out offset, out drawScale, out sourceRect);
+		int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
+		if (slot != -1)
+		{
+			if (Main.LocalPlayer.dye[slot].type != ItemID.None)
+			{
+				ArmorShaderData data = GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer);
+				data.Apply(Main.LocalPlayer, new Terraria.DataStructures.DrawData { texture = sprite.Value, effect = (SpriteEffects)0, rotation = 0f, position = offset });
+			}
+		}
 	}
 
 	private void On_ClassicPlayerResourcesDisplaySet_Draw(On_ClassicPlayerResourcesDisplaySet.orig_Draw orig, ClassicPlayerResourcesDisplaySet self)
@@ -131,14 +197,14 @@ public class ExtraMana : ModHook
 	{
 		orig(self, elementIndex, firstElementIndex, lastElementIndex, out sprite, out offset, out drawScale,
 			out sourceRect);
-
 		int manaTier = GetManaTier(lastElementIndex, elementIndex);
 		int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
 		if (slot != -1)
 		{
 			if (Main.LocalPlayer.dye[slot].type != ItemID.None)
 			{
-				GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
+				ArmorShaderData data = GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer);
+				data.Apply(Main.LocalPlayer, new Terraria.DataStructures.DrawData { texture = sprite.Value, effect = (SpriteEffects)0, rotation = 0f, position = offset });
 			}
 		}
 
@@ -164,15 +230,33 @@ public class ExtraMana : ModHook
 		{
 			if (Main.LocalPlayer.dye[slot].type != ItemID.None)
 			{
-				GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
+				ArmorShaderData data = GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer);
+				data.Apply(Main.LocalPlayer, new Terraria.DataStructures.DrawData { texture = sprite.Value, effect = (SpriteEffects)0, rotation = 0f, position = offset });
 			}
 		}
+
 
 		int manaTier = GetManaTier(lastElementIndex, elementIndex);
 		if (manaTier > 1)
 		{
 			sprite = ExxoAvalonOrigins.Mod.Assets.Request<Texture2D>(
 				$"{ExxoAvalonOrigins.TextureAssetsPath}/UI/BarMana{manaTier}", AssetRequestMode.ImmediateLoad);
+		}
+	}
+
+	private void On_FancyClassicPlayerResourcesDisplaySet_HeartFillingDrawer(On_FancyClassicPlayerResourcesDisplaySet.orig_HeartFillingDrawer orig, FancyClassicPlayerResourcesDisplaySet self, int elementIndex, int firstElementIndex, int lastElementIndex, out Asset<Texture2D> sprite, out Vector2 offset, out float drawScale, out Rectangle? sourceRect)
+	{
+		orig(self, elementIndex, firstElementIndex, lastElementIndex, out sprite, out offset, out drawScale,
+			out sourceRect);
+
+		int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
+		if (slot != -1)
+		{
+			if (Main.LocalPlayer.dye[slot].type != ItemID.None)
+			{
+				ArmorShaderData data = GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer);
+				data.Apply(Main.LocalPlayer, new Terraria.DataStructures.DrawData { texture = sprite.Value, effect = (SpriteEffects)0, rotation = 0f, position = offset });
+			}
 		}
 	}
 }

@@ -1,10 +1,13 @@
 using Avalon.Common.Players;
+using Avalon.Hooks;
 using Avalon.Items.Accessories.Vanity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using ReLogic.Graphics;
+using System.Transactions;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.ResourceSets;
 using Terraria.Graphics.Shaders;
@@ -234,6 +237,15 @@ class StaminaBar : UIState
 			sprite = stamFillPink;
 		}
 		FillBarByValues(elementIndex, sprite, stamSegmentsBarsCount, stamPercent, out offset, out drawScale, out sourceRect);
+		//int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
+		//if (slot != -1)
+		//{
+		//	if (Main.LocalPlayer.dye[slot].type != ItemID.None)
+		//	{
+		//		ArmorShaderData data = GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer);
+		//		data.Apply(Main.LocalPlayer, new Terraria.DataStructures.DrawData { texture = sprite.Value, effect = (SpriteEffects)0, rotation = 0f, position = offset });
+		//	}
+		//}
 	}
 	private static void FillBarByValues(int elementIndex, Asset<Texture2D> sprite, int segmentsCount, float fillPercent, out Vector2 offset, out float drawScale, out Rectangle? sourceRect)
 	{
@@ -287,14 +299,6 @@ class StaminaBar : UIState
 		resourceDrawSettings.OffsetSpriteAnchorByTexturePercentile = Vector2.Zero;
 		resourceDrawSettings.Draw(spriteBatch, ref isHovered);
 		resourceDrawSettings = default;
-		int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
-		if (slot != -1)
-		{
-			if (Main.LocalPlayer.dye[slot].type != ItemID.None)
-			{
-				GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
-			}
-		}
 		resourceDrawSettings.ElementCount = fancyStamCount;
 		resourceDrawSettings.ElementIndexOffset = 0;
 		resourceDrawSettings.TopLeftAnchor = vector + new Vector2(15f, 16f);
@@ -343,6 +347,16 @@ class StaminaBar : UIState
 		if (elementIndex == lastStaminaFillingIndex && num > 0f)
 		{
 			drawScale += Main.cursorScale - 1f;
+		}
+
+		int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
+		if (slot != -1)
+		{
+			if (Main.LocalPlayer.dye[slot].type != ItemID.None)
+			{
+				ArmorShaderData data = GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer);
+				data.Apply(Main.LocalPlayer, new Terraria.DataStructures.DrawData { texture = sprite.Value, effect = (SpriteEffects)0, rotation = 0f, position = offset });
+			}
 		}
 	}
 	private void StaminaPanelDrawerFancy(int elementIndex, int firstElementIndex, int lastElementIndex, out Asset<Texture2D> sprite, out Vector2 offset, out float drawScale, out Rectangle? sourceRect)
@@ -426,14 +440,6 @@ class StaminaBar : UIState
 			resourceDrawSettings.OffsetSpriteAnchorByTexturePercentile = Vector2.Zero;
 			resourceDrawSettings.Draw(spriteBatch, ref isHovered);
 			resourceDrawSettings = default;
-			int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
-			if (slot != -1)
-			{
-				if (Main.LocalPlayer.dye[slot].type != ItemID.None)
-				{
-					GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
-				}
-			}
 			resourceDrawSettings.ElementCount = stamSegmentsBarsCount;
 			resourceDrawSettings.ElementIndexOffset = 0;
 			resourceDrawSettings.TopLeftAnchor = vector + new Vector2(6f, 6f);
@@ -442,7 +448,41 @@ class StaminaBar : UIState
 			resourceDrawSettings.OffsetPerDrawByTexturePercentile = Vector2.Zero;
 			resourceDrawSettings.OffsetSpriteAnchor = Vector2.Zero;
 			resourceDrawSettings.OffsetSpriteAnchorByTexturePercentile = Vector2.Zero;
-			resourceDrawSettings.Draw(spriteBatch, ref isHovered);
+
+			spriteBatch.End(); //end spritebatch
+
+			GraphicsDevice graphicsDevice = Main.instance.GraphicsDevice; //create graphics device
+			graphicsDevice.SetRenderTarget(ExtraMana.testRT); //set the RT to mine
+			graphicsDevice.Clear(Color.Transparent); //clear? I dont fully understand why
+
+			spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, Main.UIScaleMatrix); //Start SB
+
+			resourceDrawSettings.Draw(spriteBatch, ref isHovered); //draw assets
+
+			spriteBatch.End(); //end sb
+
+			graphicsDevice.SetRenderTarget(Main.screenTarget); //set RT to the screen
+			graphicsDevice.Clear(Color.Transparent);
+
+			spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend); //Start sb again
+			spriteBatch.Draw(Main.screenTargetSwap, Vector2.Zero, Color.White); //draw the RT
+
+			var drawData = new DrawData(ExtraMana.testRT, Vector2.Zero, Color.White); //Apply shaders
+			int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
+			if (slot != -1)
+			{
+				if (Main.LocalPlayer.dye[slot].type != ItemID.None)
+				{
+					ArmorShaderData data = GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer);
+					data.Apply(Main.LocalPlayer, drawData);
+				}
+			}
+			drawData.Draw(Main.spriteBatch); //draw the drawdata? again dont fully understand
+
+			spriteBatch.End(); //end SB
+
+			spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, Main.UIScaleMatrix); //start sb for the last time
+
 			stamHovered = isHovered;
 
 			if (stamHovered)
@@ -573,11 +613,12 @@ class StaminaBar : UIState
 				var position = new Vector2(dimensions.X + scaleOffsetX + (texture.Width / 2f), dimensions.Y + (barSpacing * (i - 1)) + (texture.Height / 2f));
 
 				int slot = Main.LocalPlayer.ReturnEquippedDyeInSlot(ModContent.ItemType<ResourceBarSkin>());
-				if (slot != -1 && slot != 0 && slot != 1)
+				if (slot != -1)
 				{
 					if (Main.LocalPlayer.dye[slot].type != ItemID.None)
 					{
-						GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer).Apply();
+						ArmorShaderData data = GameShaders.Armor.GetSecondaryShader(Main.LocalPlayer.dye[slot].dye, Main.LocalPlayer);
+						data.Apply(Main.LocalPlayer, new Terraria.DataStructures.DrawData { texture = texture, effect = (SpriteEffects)0, rotation = 0f, position = position });
 					}
 				}
 				spriteBatch.Draw(texture, position, null, new Color(intensity, intensity, intensity, alpha), 0f, origin, scale, SpriteEffects.None, 0f);
