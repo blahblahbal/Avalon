@@ -1,5 +1,5 @@
 using Avalon.Common;
-using Avalon.Tiles;
+using Avalon.Tiles.Hellcastle;
 using Terraria;
 using Terraria.IO;
 using Terraria.ModLoader;
@@ -22,7 +22,7 @@ internal class Ectovines : GenPass
 				{
 					if (num587 > 0 && !Main.tile[num586, num589].HasTile)
 					{
-						Main.tile[num586, num589].TileType = (ushort)ModContent.TileType<Tiles.Ectovines>();
+						Main.tile[num586, num589].TileType = (ushort)ModContent.TileType<Tiles.Hellcastle.Ectovines>();
 						Tile t = Main.tile[num586, num589];
 						t.HasTile = true;
 						num587--;

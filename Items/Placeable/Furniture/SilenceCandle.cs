@@ -10,7 +10,7 @@ public class SilenceCandle : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.SilenceCandle>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Functional.SilenceCandle>());
 		Item.width = 8;
 		Item.height = 18;
 		Item.value = Item.sellPrice(silver: 3);

@@ -13,7 +13,7 @@ public class TrappedBleachedEbonyChest : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.TrappedChests>(), 2);
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Functional.TrappedChests>(), 2);
 		Item.width = 26;
 		Item.height = 22;
 		Item.value = Item.sellPrice(silver: 1);

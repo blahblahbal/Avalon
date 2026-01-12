@@ -19,7 +19,7 @@ public class PathogenTorch : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToTorch(ModContent.TileType<Tiles.Furniture.PathogenTorch>(), 0, true);
+		Item.DefaultToTorch(ModContent.TileType<Tiles.Furniture.Pathogen.PathogenTorch>(), 0, true);
 		Item.value = Item.sellPrice(0, 0, 0, 40);
 		Item.notAmmo = true;
 		Item.ammo = ItemID.Torch;

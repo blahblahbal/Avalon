@@ -1,3 +1,4 @@
+using Avalon.Tiles.Blastplains;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -62,7 +63,7 @@ namespace Avalon.WorldGeneration.Structures
 						{
 							if ((double)l < (double)value.Y + num2 * 0.02)
 							{
-								if (Main.tile[k, l].TileType != ModContent.TileType<Tiles.BlastedStone>())
+								if (Main.tile[k, l].TileType != ModContent.TileType<BlastedStone>())
 								{
 									Tile t2 = Main.tile[k, l];
 									t2.HasTile = false;
@@ -71,7 +72,7 @@ namespace Avalon.WorldGeneration.Structures
 							else
 							{
 								Tile t2 = Main.tile[k, l];
-								t2.TileType = (ushort)ModContent.TileType<Tiles.BlastedStone>();
+								t2.TileType = (ushort)ModContent.TileType<BlastedStone>();
 							}
 							Tile t = Main.tile[k, l];
 							t.LiquidAmount = 0;
@@ -114,14 +115,14 @@ namespace Avalon.WorldGeneration.Structures
 				{
 					int num11 = (int)value.X + WorldGen.genRand.Next(-20, 20);
 					int num12 = (int)value.Y + WorldGen.genRand.Next(0, 20);
-					while (!Main.tile[num11, num12].HasTile && Main.tile[num11, num12].TileType != ModContent.TileType<Tiles.BlastedStone>())
+					while (!Main.tile[num11, num12].HasTile && Main.tile[num11, num12].TileType != ModContent.TileType<BlastedStone>())
 					{
 						num11 = (int)value.X + WorldGen.genRand.Next(-10, 10);
 						num12 = (int)value.Y + WorldGen.genRand.Next(0, 10);
 					}
 					int num13 = WorldGen.genRand.Next(7, 10);
 					int num14 = WorldGen.genRand.Next(7, 10);
-					WorldGen.TileRunner(num11, num12, (double)num13, num14, ModContent.TileType<Tiles.BlastedStone>(), true, 0f, 2f, true, true);
+					WorldGen.TileRunner(num11, num12, (double)num13, num14, ModContent.TileType<BlastedStone>(), true, 0f, 2f, true, true);
 					if (WorldGen.genRand.NextBool(3))
 					{
 						WorldGen.TileRunner(num11, num12, (double)(num13 - 3), num14 - 3, -1, false, 0f, 2f, true, true);
@@ -134,7 +135,7 @@ namespace Avalon.WorldGeneration.Structures
 		{
 			int xsave = x;
 			int ysave = y;
-			ushort stone = (ushort)ModContent.TileType<Tiles.BlastedStone>();
+			ushort stone = (ushort)ModContent.TileType<BlastedStone>();
 			if (x < 30) x = 30;
 			if (x > Main.maxTilesX - 30) x = Main.maxTilesX - 30;
 			if (y < (int)Main.rockLayer) y = (int)Main.rockLayer;
@@ -277,7 +278,7 @@ namespace Avalon.WorldGeneration.Structures
 
 		public static void Generate(int x, int y)
 		{
-			ushort tileStone = (ushort)ModContent.TileType<Tiles.BlastedStone>();
+			ushort tileStone = (ushort)ModContent.TileType<BlastedStone>();
 
 			int xRad = WorldGen.genRand.Next(50, 60);
 			int yRad = WorldGen.genRand.Next(30, 40);
@@ -356,18 +357,18 @@ namespace Avalon.WorldGeneration.Structures
 					t4.HasTile = true;
 					t4.TileType = tileStone;
 					WorldGen.SquareTileFrame(n, num9 + 1);
-					Utils.PlaceCustomTight(n, num9 + 2, (ushort)ModContent.TileType<Tiles.BlastedStalac>());
+					Utils.PlaceCustomTight(n, num9 + 2, (ushort)ModContent.TileType<BlastedStalac>());
 				}
 				else
 				{
-					Utils.PlaceCustomTight(n, num9 + 1, (ushort)ModContent.TileType<Tiles.BlastedStalac>());
+					Utils.PlaceCustomTight(n, num9 + 1, (ushort)ModContent.TileType<BlastedStalac>());
 				}
 			}
 		}
 
 		public static bool GenerateLavaOcean(int X, int Y)
 		{
-			ushort tileStone = (ushort)ModContent.TileType<Tiles.BlastedStone>();
+			ushort tileStone = (ushort)ModContent.TileType<BlastedStone>();
 
 			int num = 0;
 			double num12 = 0.6;
@@ -538,11 +539,11 @@ namespace Avalon.WorldGeneration.Structures
 						t4.HasTile = true;
 						t4.TileType = tileStone;
 						WorldGen.SquareTileFrame(n, num9 + 1);
-						Utils.PlaceCustomTight(n, num9 + 2, (ushort)ModContent.TileType<Tiles.BlastedStalac>());
+						Utils.PlaceCustomTight(n, num9 + 2, (ushort)ModContent.TileType<BlastedStalac>());
 					}
 					else
 					{
-						Utils.PlaceCustomTight(n, num9 + 1, (ushort)ModContent.TileType<Tiles.BlastedStalac>());
+						Utils.PlaceCustomTight(n, num9 + 1, (ushort)ModContent.TileType<BlastedStalac>());
 					}
 				}
 			}

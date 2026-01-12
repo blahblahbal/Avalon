@@ -1,3 +1,4 @@
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -8,7 +9,7 @@ public class DemonAltar : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.EvilAltarsPlaced>(), 0);
+		Item.DefaultToPlaceableTile(ModContent.TileType<EvilAltarsPlaced>(), 0);
 		Item.width = 24;
 		Item.height = 14;
 		Item.rare = ItemRarityID.Blue;

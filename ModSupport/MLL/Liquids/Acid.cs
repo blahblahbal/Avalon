@@ -4,6 +4,7 @@ using Avalon.ModSupport.MLL.Buffs;
 using Avalon.ModSupport.MLL.Dusts;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Hellcastle;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ModLiquidLib.Hooks;

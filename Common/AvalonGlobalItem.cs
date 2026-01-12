@@ -670,7 +670,7 @@ public class AvalonGlobalItem : GlobalItem
 				{
 					Tile tilePosSafe = Framing.GetTileSafely(tilePos);
 					if (player.IsInTileInteractionRange(tilePos.X, tilePos.Y, TileReachCheckSettings.Simple) &&
-						tilePosSafe.TileType == ModContent.TileType<Tiles.Furniture.Grindstone>())
+						tilePosSafe.TileType == ModContent.TileType<Tiles.Furniture.Functional.Grindstone>())
 					{
 						player.noThrow = 2;
 						player.cursorItemIconEnabled = true;

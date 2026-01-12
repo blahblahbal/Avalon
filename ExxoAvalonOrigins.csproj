@@ -14,6 +14,7 @@
 		<Folder Remove=".vs\ExxoAvalonOrigins\v17\" />
 		<AdditionalFiles Remove=".vs\ExxoAvalonOrigins\v17\**" />
 		<Folder Include="NPCs\Bosses\Hardmode\Mechasting\Projectiles\" />
+		<Folder Include="Tiles\DarkMatter\" />
 	</ItemGroup>
 	<ItemGroup>
 		<Reference Include="AltLibrary">

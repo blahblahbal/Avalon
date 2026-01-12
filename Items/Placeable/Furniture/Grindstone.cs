@@ -8,7 +8,7 @@ public class Grindstone : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Grindstone>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Functional.Grindstone>());
 		Item.width = 26;
 		Item.height = 22;
 		Item.value = Item.sellPrice(0, 3, 20);

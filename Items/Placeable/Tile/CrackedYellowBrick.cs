@@ -12,7 +12,7 @@ public class CrackedYellowBrick : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.CrackedYellowBrick>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Dungeon.CrackedYellowBrick>());
 	}
 	public override void AddRecipes()
 	{

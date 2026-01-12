@@ -4,6 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Blastplains;
 
 namespace Avalon.WorldGeneration.Passes
 {
@@ -35,18 +36,18 @@ namespace Avalon.WorldGeneration.Passes
                         }
                     }
                     // blasted stone stalac
-                    if (Main.tile[num19, num22 - 1].TileType == ModContent.TileType<Tiles.BlastedStone>() && Main.tile[num19, num22 - 1].HasTile && WorldGen.genRand.NextBool(5))
+                    if (Main.tile[num19, num22 - 1].TileType == ModContent.TileType<BlastedStone>() && Main.tile[num19, num22 - 1].HasTile && WorldGen.genRand.NextBool(5))
                     {
                         if (!Main.tile[num19, num22].HasTile && !Main.tile[num19, num22 + 1].HasTile && Main.tile[num19, num22 - 1].Slope == SlopeType.Solid)
                         {
-                            Utils.PlaceCustomTight(num19, num22, (ushort)ModContent.TileType<Tiles.BlastedStalac>());
+                            Utils.PlaceCustomTight(num19, num22, (ushort)ModContent.TileType<BlastedStalac>());
                         }
                     }
-                    if (Main.tile[num19, num22 + 1].TileType == ModContent.TileType<Tiles.BlastedStone>() && Main.tile[num19, num22 + 1].HasTile && WorldGen.genRand.NextBool(5))
+                    if (Main.tile[num19, num22 + 1].TileType == ModContent.TileType<BlastedStone>() && Main.tile[num19, num22 + 1].HasTile && WorldGen.genRand.NextBool(5))
                     {
                         if (!Main.tile[num19, num22].HasTile && !Main.tile[num19, num22 - 1].HasTile && Main.tile[num19, num22 + 1].Slope == SlopeType.Solid)
                         {
-                            Utils.PlaceCustomTight(num19, num22, (ushort)ModContent.TileType<Tiles.BlastedStalac>());
+                            Utils.PlaceCustomTight(num19, num22, (ushort)ModContent.TileType<BlastedStalac>());
                         }
                     }
                 }

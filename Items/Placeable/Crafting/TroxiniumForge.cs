@@ -9,7 +9,7 @@ public class TroxiniumForge : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.TroxiniumForge>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Crafting.TroxiniumForge>());
 		Item.width = 44;
 		Item.height = 30;
 		Item.rare = ItemRarityID.Orange;

@@ -1,6 +1,7 @@
 using Avalon.Common.Extensions;
 using Avalon.Items.Material.TomeMats;
 using Avalon.Items.Tomes.PreHardmode;
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -38,7 +39,7 @@ public class LoveUpandDown : ModItem
 			.AddIngredient(ModContent.ItemType<Gravel>(), 15)
 			.AddIngredient(ModContent.ItemType<Sandstone>(), 15)
 			.AddIngredient(ModContent.ItemType<CarbonSteel>(), 15)
-			.AddTile(ModContent.TileType<Tiles.TomeForge>())
+			.AddTile(ModContent.TileType<TomeForge>())
 			.Register();
 	}
 }

@@ -1,3 +1,5 @@
+using Avalon.Tiles.Furniture.Functional;
+using Avalon.Tiles.Furniture.Gem;
 using Microsoft.Xna.Framework;
 using System.IO;
 using Terraria;
@@ -38,16 +40,16 @@ public class SyncWiring
 		Wiring.SetCurrentUser(pindex);
 		if (t == (short)WiringType.BookcaseTeleporter)
 		{
-			Tiles.Furniture.BookcaseTeleporter.Trigger(x, y);
+			BookcaseTeleporter.Trigger(x, y);
 			Wiring.TripWire(x, y, 1, 1);
 		}
 		else if (t == (short)WiringType.GemLocks)
 		{
-			Tiles.GemLocks.HitSwitch(x, y);
+			GemLocks.HitSwitch(x, y);
 		}
 		else if (t == (short)WiringType.TrappedChests)
 		{
-			Tiles.Furniture.TrappedChests.Trigger(x, y);
+			TrappedChests.Trigger(x, y);
 			Wiring.TripWire(x, y, 2, 2);
 		}
 		else if (t == (short)WiringType.LiquidSensor)

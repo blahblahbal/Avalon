@@ -12,7 +12,7 @@ public class PurpleBrick : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.PurpleBrick>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Dungeon.PurpleBrick>());
 	}
 
 	public override void AddRecipes()

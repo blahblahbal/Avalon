@@ -1,4 +1,4 @@
-using Avalon.Tiles;
+using Avalon.Tiles.Blastplains;
 using Avalon.Tiles.CrystalMines;
 using Avalon.Tiles.Ores;
 using Avalon.WorldGeneration.Passes;
@@ -372,10 +372,10 @@ public class WorldgenHelper : ModItem
 			//Main.NewText($"{radius} {radiusTemp} {radiusNext}");
 			if (radiusNext > 1)
 			{
-				WorldGeneration.Utils.MakeCircleBordered(betweenXPos, betweenYPos, radius, ModContent.TileType<Tiles.CaesiumCrystal>(), ModContent.TileType<Tiles.Ores.CaesiumOre>(), 3, 0.5f);
+				WorldGeneration.Utils.MakeCircleBordered(betweenXPos, betweenYPos, radius, ModContent.TileType<CaesiumCrystal>(), ModContent.TileType<Tiles.Ores.CaesiumOre>(), 3, 0.5f);
 
 				// Make a square/circle of the tile
-				WorldGeneration.Utils.MakeCircleBordered(x, y, radius, ModContent.TileType<Tiles.CaesiumCrystal>(), ModContent.TileType<Tiles.Ores.CaesiumOre>(), 3, 0.5f);
+				WorldGeneration.Utils.MakeCircleBordered(x, y, radius, ModContent.TileType<CaesiumCrystal>(), ModContent.TileType<Tiles.Ores.CaesiumOre>(), 3, 0.5f);
 			}
 			else
 			{
@@ -390,15 +390,15 @@ public class WorldgenHelper : ModItem
 					if (direction == 1 && q == length)
 					{
 						Tile betweenPosUp = Framing.GetTileSafely(betweenXPosMod, betweenYPos - 1);
-						if (betweenPosUp.TileType != (ushort)ModContent.TileType<Tiles.CaesiumCrystal>())
+						if (betweenPosUp.TileType != (ushort)ModContent.TileType<CaesiumCrystal>())
 						{
 							Tile betweenPosUpL = Framing.GetTileSafely(betweenXPosMod - 1, betweenYPos - 1);
 							Tile betweenPosUpR = Framing.GetTileSafely(betweenXPosMod + 1, betweenYPos - 1);
-							if (betweenPosUpL.TileType == (ushort)ModContent.TileType<Tiles.CaesiumCrystal>())
+							if (betweenPosUpL.TileType == (ushort)ModContent.TileType<CaesiumCrystal>())
 							{
 								betweenXPosMod -= 1;
 							}
-							else if (betweenPosUpR.TileType == (ushort)ModContent.TileType<Tiles.CaesiumCrystal>())
+							else if (betweenPosUpR.TileType == (ushort)ModContent.TileType<CaesiumCrystal>())
 							{
 								betweenXPosMod += 1;
 							}
@@ -409,7 +409,7 @@ public class WorldgenHelper : ModItem
 					t.HasTile = true;
 					t.IsHalfBlock = false;
 					t.Slope = SlopeType.Solid;
-					t.TileType = (ushort)ModContent.TileType<Tiles.CaesiumCrystal>();
+					t.TileType = (ushort)ModContent.TileType<CaesiumCrystal>();
 					Tile.SmoothSlope(betweenXPosMod, betweenYPos);
 					WorldGen.SquareTileFrame(betweenXPosMod, betweenYPos);
 
@@ -420,7 +420,7 @@ public class WorldgenHelper : ModItem
 						t2.HasTile = true;
 						t2.IsHalfBlock = false;
 						t2.Slope = SlopeType.Solid;
-						t2.TileType = (ushort)ModContent.TileType<Tiles.CaesiumCrystal>();
+						t2.TileType = (ushort)ModContent.TileType<CaesiumCrystal>();
 						Tile.SmoothSlope(xMod, y);
 						WorldGen.SquareTileFrame(xMod, y);
 						Dust.QuickDust(new Point(xMod, y), Color.Blue);

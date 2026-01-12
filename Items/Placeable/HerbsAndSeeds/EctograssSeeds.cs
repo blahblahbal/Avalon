@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Tiles.Hellcastle;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -33,7 +34,7 @@ public class EctograssSeeds : ModItem
 		Terraria.Tile tile = Framing.GetTileSafely(Player.tileTargetX, Player.tileTargetY);
 		if (tile.HasTile && tile.TileType == TileID.Ash && player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, Terraria.DataStructures.TileReachCheckSettings.Simple))
 		{
-			Main.tile[Player.tileTargetX, Player.tileTargetY].TileType = (ushort)ModContent.TileType<Tiles.Ectograss>();
+			Main.tile[Player.tileTargetX, Player.tileTargetY].TileType = (ushort)ModContent.TileType<Ectograss>();
 			SoundEngine.PlaySound(SoundID.Dig, player.Center);
 			return true;
 		}

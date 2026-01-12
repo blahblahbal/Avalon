@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using Terraria.WorldBuilding;
 using Avalon.Items.Weapons.Melee.Hardmode.PossessedFlamesaw;
 using Avalon.Items.Weapons.Magic.Hardmode.Boomlash;
+using Avalon.Tiles.Furniture;
+using Avalon.Tiles.Hellcastle;
+using Avalon.Tiles.Furniture.Functional;
 
 namespace Avalon.WorldGeneration.Structures;
 
@@ -18,7 +21,7 @@ internal class Hellcastle
         Point castleBottomCenterL = new Point(x + 199, y + 150);
 		Point castleBottomCenterR = new Point(x + 200, y + 150);
 
-        MakeBox(x, y, 400, 150, ModContent.TileType<Tiles.ImperviousBrick>(), (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>());
+        MakeBox(x, y, 400, 150, ModContent.TileType<ImperviousBrick>(), (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>());
         MakePath(x, y, -1);
         MakePath(x, y, 1);
 
@@ -32,15 +35,15 @@ internal class Hellcastle
         }
 
         // make decorative pillars on top
-        MakeBox(x, y - 6, 6, 6, ModContent.TileType<Tiles.ImperviousBrick>(), ushort.MaxValue);
-        MakeBox(x + 394, y - 6, 6, 6, ModContent.TileType<Tiles.ImperviousBrick>(), ushort.MaxValue);
+        MakeBox(x, y - 6, 6, 6, ModContent.TileType<ImperviousBrick>(), ushort.MaxValue);
+        MakeBox(x + 394, y - 6, 6, 6, ModContent.TileType<ImperviousBrick>(), ushort.MaxValue);
         for (int i = x; i <= x + 400; i++)
         {
             if (i > x + 10 && i <= x + 390)
             {
                 if (i % 8 == 0)
                 {
-                    MakeBox(i, y - 3, 4, 3, ModContent.TileType<Tiles.ImperviousBrick>(), ushort.MaxValue);
+                    MakeBox(i, y - 3, 4, 3, ModContent.TileType<ImperviousBrick>(), ushort.MaxValue);
                 }
             }
         }
@@ -64,7 +67,7 @@ internal class Hellcastle
         // add platforms in various places
         AddPlatforms(x, y, 400, 150);
         AddPaintings(x, y, 400, 150, new Rectangle(largeRoomRect.X, largeRoomRect.Y, largeRoomRect.Width, largeRoomRect.Height + 4));
-        Utils.AddSpikes(x, y, 400, 150, 50, ModContent.TileType<Tiles.VenomSpike>(), WorldGen.genRand.Next(5, 10));
+        Utils.AddSpikes(x, y, 400, 150, 50, ModContent.TileType<VenomSpike>(), WorldGen.genRand.Next(5, 10));
         // unsmooth tiles such as the spikes and impervious bricks
         UnsmoothTiles(x, y, 400, 150);
         // place up to 3 devil's scythes on the shelves/platforms
@@ -105,14 +108,14 @@ internal class Hellcastle
                                 break;
                             case 1:
                                 pStyle = 1;
-                                tileType = ModContent.TileType<Tiles.Paintings2x3>();
+                                tileType = ModContent.TileType<Paintings2x3>();
                                 break;
                             case 2:
                                 pStyle = 4;
                                 break;
                             case 3:
                                 pStyle = 3;
-                                tileType = ModContent.TileType<Tiles.Paintings2x3>();
+                                tileType = ModContent.TileType<Paintings2x3>();
                                 break;
                         }
                         s1t++;
@@ -142,11 +145,11 @@ internal class Hellcastle
                                 break;
                             case 4:
                                 pStyle = 2;
-                                tileType = ModContent.TileType<Tiles.Paintings3x3>();
+                                tileType = ModContent.TileType<Paintings3x3>();
                                 break;
                             case 5:
                                 pStyle = 3;
-                                tileType = ModContent.TileType<Tiles.Paintings3x3>();
+                                tileType = ModContent.TileType<Paintings3x3>();
                                 break;
                         }
                         s2t++;
@@ -198,15 +201,15 @@ internal class Hellcastle
                                 break;
                             case 2:
                                 pStyle = 0;
-                                tileType = ModContent.TileType<Tiles.Paintings3x2>();
+                                tileType = ModContent.TileType<Paintings3x2>();
                                 break;
                             case 3:
                                 pStyle = 1;
-                                tileType = ModContent.TileType<Tiles.Paintings3x2>();
+                                tileType = ModContent.TileType<Paintings3x2>();
                                 break;
                             case 4:
                                 pStyle = 2;
-                                tileType = ModContent.TileType<Tiles.Paintings3x2>();
+                                tileType = ModContent.TileType<Paintings3x2>();
                                 break;
                         }
                         s4t++;
@@ -323,7 +326,7 @@ internal class Hellcastle
         {
             for (int j = y + 5; j < y + height - 5; j++)
             {
-                if (Main.tile[i, j].TileType == ModContent.TileType<Tiles.ImperviousBrick>())
+                if (Main.tile[i, j].TileType == ModContent.TileType<ImperviousBrick>())
                 {
                     if (Main.tile[i, j].TileType != 48 && Main.tile[i, j].TileType != 137 && Main.tile[i, j].TileType != 232 && Main.tile[i, j].TileType != 191 && Main.tile[i, j].TileType != 151 && Main.tile[i, j].TileType != 274)
                     {
@@ -581,7 +584,7 @@ internal class Hellcastle
                         {
                             case 0:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.ImperviousBrick>();
+                                tile.TileType = (ushort)ModContent.TileType<ImperviousBrick>();
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = false;
                                 tile.LiquidAmount = 0;
@@ -597,7 +600,7 @@ internal class Hellcastle
                                 break;
                             case 2:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.ImperviousBrick>();
+                                tile.TileType = (ushort)ModContent.TileType<ImperviousBrick>();
                                 tile.Slope = (SlopeType)3;
                                 tile.IsHalfBlock = false;
                                 tile.LiquidAmount = 0;
@@ -610,7 +613,7 @@ internal class Hellcastle
                                 break;
                             case 4:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.Ectograss>();
+                                tile.TileType = (ushort)ModContent.TileType<Ectograss>();
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = false;
                                 tile.LiquidAmount = 0;
@@ -631,28 +634,28 @@ internal class Hellcastle
                                 break;
                             case 7:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.ImperviousBrick>();
+                                tile.TileType = (ushort)ModContent.TileType<ImperviousBrick>();
                                 tile.Slope = (SlopeType)4;
                                 tile.IsHalfBlock = false;
                                 tile.LiquidAmount = 0;
                                 break;
                             case 8:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.Ectograss>();
+                                tile.TileType = (ushort)ModContent.TileType<Ectograss>();
                                 tile.Slope = (SlopeType)3;
                                 tile.IsHalfBlock = false;
                                 tile.LiquidAmount = 0;
                                 break;
                             case 9:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.ImperviousBrick>();
+                                tile.TileType = (ushort)ModContent.TileType<ImperviousBrick>();
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = true;
                                 tile.LiquidAmount = 0;
                                 break;
                             case 10:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.Ectograss>();
+                                tile.TileType = (ushort)ModContent.TileType<Ectograss>();
                                 tile.Slope = (SlopeType)4;
                                 tile.IsHalfBlock = false;
                                 tile.LiquidAmount = 0;
@@ -666,42 +669,42 @@ internal class Hellcastle
                                 break;
                             case 12:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.Ectograss>();
+                                tile.TileType = (ushort)ModContent.TileType<Ectograss>();
                                 tile.Slope = (SlopeType)1;
                                 tile.IsHalfBlock = false;
                                 tile.LiquidAmount = 0;
                                 break;
                             case 13:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.Ectograss>();
+                                tile.TileType = (ushort)ModContent.TileType<Ectograss>();
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = true;
                                 tile.LiquidAmount = 0;
                                 break;
                             case 14:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.ImperviousBrick>();
+                                tile.TileType = (ushort)ModContent.TileType<ImperviousBrick>();
                                 tile.Slope = (SlopeType)2;
                                 tile.IsHalfBlock = false;
                                 tile.LiquidAmount = 0;
                                 break;
                             case 15:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.ImperviousBrick>();
+                                tile.TileType = (ushort)ModContent.TileType<ImperviousBrick>();
                                 tile.Slope = (SlopeType)1;
                                 tile.IsHalfBlock = false;
                                 tile.LiquidAmount = 0;
                                 break;
                             case 16:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.Ectograss>();
+                                tile.TileType = (ushort)ModContent.TileType<Ectograss>();
                                 tile.Slope = (SlopeType)2;
                                 tile.IsHalfBlock = false;
                                 tile.LiquidAmount = 0;
                                 break;
                             case 17:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.UltraResistantWood>();
+                                tile.TileType = (ushort)ModContent.TileType<UltraResistantWood>();
                                 tile.Slope = 0;
                                 tile.IsHalfBlock = false;
                                 tile.LiquidAmount = 0;
@@ -840,11 +843,11 @@ internal class Hellcastle
         {
             for (int pyramidX = x - pyramidStep + 1; pyramidX <= x + pyramidStep + 1; pyramidX++)
             {
-                WorldGen.PlaceTile(pyramidX + 1, pyramidY, ModContent.TileType<Tiles.ImperviousBrick>());
+                WorldGen.PlaceTile(pyramidX + 1, pyramidY, ModContent.TileType<ImperviousBrick>());
             }
             pyramidStep++;
         }
-        WorldGen.PlaceTile(x + 2, y - 5, ModContent.TileType<Tiles.LibraryAltar>());
+        WorldGen.PlaceTile(x + 2, y - 5, ModContent.TileType<LibraryAltar>());
     }
     public static void AddDevilsScythes(int x, int y, int width, int height)
     {
@@ -859,7 +862,7 @@ internal class Hellcastle
                     if (t.TileType == TileID.Books && WorldGen.genRand.NextBool(50))
                     {
                         WorldGen.KillTile(i, j);
-                        WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.DevilsScythe>());
+                        WorldGen.PlaceTile(i, j, ModContent.TileType<DevilsScythe>());
                         booksPlaced++;
                     }
                 }
@@ -874,8 +877,8 @@ internal class Hellcastle
             for (int j = y; j < y + height; j++)
             {
                 Tile t = Main.tile[i, j];
-                if (t.TileType == ModContent.TileType<Tiles.VenomSpike>() ||
-                    t.TileType == ModContent.TileType<Tiles.ImperviousBrick>())
+                if (t.TileType == ModContent.TileType<VenomSpike>() ||
+                    t.TileType == ModContent.TileType<ImperviousBrick>())
                 {
                     t.Slope = SlopeType.Solid;
                 }
@@ -1195,7 +1198,7 @@ internal class Hellcastle
                 else
                 {
                     if (!Main.tile[x + i, y + j + 1].HasTile && !Main.tile[x + i, y + j].HasTile &&
-                        Main.tile[x + i, y + j - 1].HasTile && Main.tile[x + i, y + j - 1].TileType != ModContent.TileType<Tiles.VenomSpike>())
+                        Main.tile[x + i, y + j - 1].HasTile && Main.tile[x + i, y + j - 1].TileType != ModContent.TileType<VenomSpike>())
                     {
                         if (WorldGen.genRand.NextBool(30) &&
                             Utils.TileNotInRange(x + i, y + j, 5, (ushort)ModContent.TileType<Tiles.Furniture.ResistantWood.ResistantWoodLantern>()) &&

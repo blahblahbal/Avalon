@@ -13,7 +13,7 @@ public class VoltBrick : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.VoltBrick>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Bricks.VoltBrick>());
 	}
 	public override void AddRecipes()
 	{

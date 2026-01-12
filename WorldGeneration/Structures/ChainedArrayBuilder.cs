@@ -1,4 +1,5 @@
-using Avalon.Tiles;
+using Avalon.Tiles.Hellcastle;
+using Avalon.Tiles.SkyCastle;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections;
@@ -190,20 +191,20 @@ class ChainedArrayBuilder
 				{
 					selectedCell = SkyFortressArrays.Cells.Filled;
 					hiddenCellCountdown--;
-					typeTile = (ushort)ModContent.TileType<Tiles.ImperviousBrick>();
+					typeTile = (ushort)ModContent.TileType<ImperviousBrick>();
 				}
 				else if (curSegment == totalSegmentCount / 2 + (totalSegmentCount % 2 == 0 ? -1 : +1) || curSegment == totalSegmentCount / 2)
 				{
 					// todo; make this set flipped too instead of using different left/right cells
 					selectedCell = FortressCentralCells(selectedCell, totalSegmentCount, totalFloorCount, floors, sideWinderFloors, curFloor, curSegment, blockedCentreSide);
-					typeTile = (ushort)ModContent.TileType<Tiles.SkyBrick>();
+					typeTile = (ushort)ModContent.TileType<SkyBrick>();
 				}
 				else
 				{
 					var a = FortressRegularCells(totalSegmentCount, lowerHallsFloorCount, middleHallsFloorCount, upperHallsFloorCount, floors, sideWinderFloors, curFloor, curSegment, flipped, hiddenRoomLocations, leftCentre, rightCentre);
 					selectedCell = a.outCell;
 					flipped = a.flipped;
-					typeTile = (ushort)ModContent.TileType<Tiles.SkyBrick>();
+					typeTile = (ushort)ModContent.TileType<SkyBrick>();
 				}
 				floors.Add(selectedCell);
 				PlaceCell(PosX, PosY, totalSegmentCount, totalFloorCount, floors, curFloor, curSegment, typeTile, typeWall, flipped);

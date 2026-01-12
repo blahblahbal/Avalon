@@ -12,7 +12,7 @@ public class StarstoneBrick : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.StarstoneBrick>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Bricks.StarstoneBrick>());
 		Item.rare = ItemRarityID.Green;
 	}
 	public override void AddRecipes()

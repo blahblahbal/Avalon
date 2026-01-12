@@ -1,6 +1,7 @@
 using Avalon.Items.Weapons.Magic.PreHardmode.Smogscreen;
 using Avalon.Items.Weapons.Melee.PreHardmode.TetanusChakram;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Blunderblight;
+using Avalon.Tiles.Furniture;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -19,7 +20,7 @@ public class PlagueCrate : ModItem
 
     public override void SetDefaults()
     {
-        Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Crates>());
+        Item.DefaultToPlaceableTile(ModContent.TileType<Crates>());
         Item.placeStyle = 1;
         Item.width = 12; //The hitbox dimensions are intentionally smaller so that it looks nicer when fished up on a bobber
         Item.height = 12;

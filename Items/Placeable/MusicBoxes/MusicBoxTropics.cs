@@ -15,7 +15,7 @@ public class MusicBoxTropics : ModItem
 
     public override void SetDefaults()
     {
-        Item.DefaultToMusicBox(ModContent.TileType<Tiles.MusicBoxes>(), 5);
+        Item.DefaultToMusicBox(ModContent.TileType<Tiles.Furniture.Functional.MusicBoxes>(), 5);
     }
     public override bool IsLoadingEnabled(Mod mod)
     {

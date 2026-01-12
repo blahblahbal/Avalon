@@ -7,7 +7,7 @@ public class DarkMatterMonolith : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.DarkMatter.DarkMatterMonolith>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Functional.DarkMatterMonolith>());
 		Item.width = 22;
 		Item.height = 32;
 		Item.rare = ModContent.RarityType<Rarities.TealRarity>();

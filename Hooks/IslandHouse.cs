@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using MonoMod.Cil;
 using System;
+using Avalon.Tiles.Bricks;
 
 namespace Avalon.Hooks;
 
@@ -28,7 +29,7 @@ public class IslandHouse : ModHook
                     c.EmitDelegate<Func<int, int>>((i) =>
                     {
                         if (WorldGen.SavedOreTiers.Gold == TileID.Platinum)
-                            return ModContent.TileType<Tiles.MoonplateBlock>();
+                            return ModContent.TileType<MoonplateBlock>();
                         else if (WorldGen.SavedOreTiers.Gold == ModContent.TileType<Tiles.Ores.BismuthOre>())
                             return ModContent.TileType<Tiles.TwiliplateBlock>();
                         return i;

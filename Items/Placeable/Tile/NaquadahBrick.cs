@@ -12,7 +12,7 @@ public class NaquadahBrick : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.NaquadahBrick>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Bricks.NaquadahBrick>());
 	}
 	public override void AddRecipes()
 	{

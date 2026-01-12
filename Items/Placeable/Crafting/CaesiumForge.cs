@@ -15,7 +15,7 @@ public class CaesiumForge : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.CaesiumForge>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Crafting.CaesiumForge>());
 		Item.width = 44;
 		Item.height = 28;
 		Item.rare = ItemRarityID.Pink;

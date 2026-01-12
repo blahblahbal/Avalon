@@ -12,7 +12,7 @@ public class BoltstoneBrick : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.BoltstoneBrick>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Bricks.BoltstoneBrick>());
 		Item.rare = ItemRarityID.Green;
 	}
 	public override void AddRecipes()

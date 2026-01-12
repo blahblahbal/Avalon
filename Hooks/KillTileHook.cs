@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Tiles.Hellcastle;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -14,7 +15,7 @@ internal class KillTileHook : ModHook
 
     private void On_WorldGen_KillTile(On_WorldGen.orig_KillTile orig, int i, int j, bool fail, bool effectOnly, bool noItem)
     {
-        if (Main.tile[i, j].TileType == ModContent.TileType<Tiles.UltraResistantWood>() && fail)
+        if (Main.tile[i, j].TileType == ModContent.TileType<UltraResistantWood>() && fail)
         {
             return;
         }

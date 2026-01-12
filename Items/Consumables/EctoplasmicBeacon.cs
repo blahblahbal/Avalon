@@ -1,5 +1,5 @@
 using Avalon.Common.Extensions;
-using Avalon.Tiles;
+using Avalon.Tiles.Furniture.Functional;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

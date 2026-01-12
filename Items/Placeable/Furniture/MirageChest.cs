@@ -1,4 +1,4 @@
-using Avalon.Tiles;
+using Avalon.Tiles.Furniture;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;

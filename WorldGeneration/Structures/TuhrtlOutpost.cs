@@ -1,3 +1,5 @@
+using Avalon.Tiles.Furniture;
+using Avalon.Tiles.Hellcastle;
 using Avalon.Tiles.Savanna;
 using Microsoft.Xna.Framework;
 using System;
@@ -500,8 +502,8 @@ internal class TuhrtlOutpost
             num12--;
             if (num12 <= tBottom)
             {
-                WorldGen.PlaceTile(num11, num12, ModContent.TileType<Tiles.Statues>(), mute: true, forced: false, -1, 15); // other types later
-                if (Main.tile[num11, num12].TileType == ModContent.TileType<Tiles.Statues>())
+                WorldGen.PlaceTile(num11, num12, ModContent.TileType<Statues>(), mute: true, forced: false, -1, 15); // other types later
+                if (Main.tile[num11, num12].TileType == ModContent.TileType<Statues>())
                     num8 -= 1.0;
             }
         }
@@ -602,7 +604,7 @@ internal class TuhrtlOutpost
                 if (flag)
                     continue;
 
-                if (WorldGen.PlaceTile(num19, num20, ModContent.TileType<Tiles.Paintings3x3>(), mute: true, forced: false, -1, 5))
+                if (WorldGen.PlaceTile(num19, num20, ModContent.TileType<Paintings3x3>(), mute: true, forced: false, -1, 5))
                     num18--;
             }
 
@@ -610,7 +612,7 @@ internal class TuhrtlOutpost
                 break;
         }
 
-        Main.tileSolid[ModContent.TileType<Tiles.VenomSpike>()] = true;
+        Main.tileSolid[ModContent.TileType<VenomSpike>()] = true;
     }
 
     public static bool TuhrtlTrap(int x2, int y2)

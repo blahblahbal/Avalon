@@ -12,7 +12,7 @@ public class OsmiumBrick : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.OsmiumBrick>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Bricks.OsmiumBrick>());
 	}
 	public override void AddRecipes()
 	{

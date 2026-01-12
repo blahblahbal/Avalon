@@ -12,7 +12,7 @@ public class ZincBrick : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.ZincBrick>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Bricks.ZincBrick>());
 	}
 	public override void AddRecipes()
 	{

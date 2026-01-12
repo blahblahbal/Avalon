@@ -11,7 +11,7 @@ public class SkyBrickColumn : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.SkyBrickColumn>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.SkyCastle.SkyBrickColumn>());
 	}
 	public override void AddRecipes()
 	{

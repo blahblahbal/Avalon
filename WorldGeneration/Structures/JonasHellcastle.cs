@@ -1,5 +1,6 @@
-﻿using Avalon.Tiles;
+﻿using Avalon.Tiles.Furniture.Functional;
 using Avalon.Tiles.Furniture.ResistantWood;
+using Avalon.Tiles.Hellcastle;
 using Avalon.Walls;
 using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;

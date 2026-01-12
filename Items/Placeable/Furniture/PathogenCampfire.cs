@@ -7,7 +7,7 @@ public class PathogenCampfire : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.PathogenCampfire>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Pathogen.PathogenCampfire>());
 		Item.width = 12;
 		Item.height = 12;
 	}

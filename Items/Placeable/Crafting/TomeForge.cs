@@ -8,7 +8,7 @@ public class TomeForge : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.TomeForge>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Crafting.TomeForge>());
 		Item.width = 26;
 		Item.height = 26;
 		Item.rare = ItemRarityID.Orange;

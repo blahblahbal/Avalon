@@ -13,7 +13,7 @@ public class ImperviousBrick : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.ImperviousBrick>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Hellcastle.ImperviousBrick>());
 		Item.rare = ItemRarityID.Pink;
 	}
 	//public override void AddRecipes()

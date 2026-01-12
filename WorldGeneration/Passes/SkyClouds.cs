@@ -1,3 +1,4 @@
+using Avalon.Tiles.Bricks;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -177,7 +178,7 @@ namespace Avalon.WorldGeneration.Passes
 					if (Main.tile[i, j].HasTile &&
 						(Main.tile[i, j].TileType == TileID.Dirt || Main.tile[i, j].TileType == TileID.Grass ||
 						Main.tile[i, j].TileType == TileID.Trees || Main.tile[i, j].TileType == TileID.Sunplate ||
-						Main.tile[i, j].TileType == ModContent.TileType<Tiles.MoonplateBlock>() ||
+						Main.tile[i, j].TileType == ModContent.TileType<MoonplateBlock>() ||
 						Main.tile[i, j].TileType == ModContent.TileType<Tiles.TwiliplateBlock>()))
 					{
 						flag = false;

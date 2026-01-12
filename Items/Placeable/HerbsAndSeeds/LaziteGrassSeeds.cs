@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Tiles.Blastplains;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -31,9 +32,9 @@ public class LaziteGrassSeeds : ModItem
 	public override bool? UseItem(Player player)
 	{
 		Terraria.Tile tile = Framing.GetTileSafely(Player.tileTargetX, Player.tileTargetY);
-		if (tile.HasTile && tile.TileType == ModContent.TileType<Tiles.BlastedStone>() && player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, Terraria.DataStructures.TileReachCheckSettings.Simple))
+		if (tile.HasTile && tile.TileType == ModContent.TileType<BlastedStone>() && player.IsInTileInteractionRange(Player.tileTargetX, Player.tileTargetY, Terraria.DataStructures.TileReachCheckSettings.Simple))
 		{
-			Main.tile[Player.tileTargetX, Player.tileTargetY].TileType = (ushort)ModContent.TileType<Tiles.LaziteGrass>();
+			Main.tile[Player.tileTargetX, Player.tileTargetY].TileType = (ushort)ModContent.TileType<LaziteGrass>();
 			SoundEngine.PlaySound(SoundID.Dig, player.Center);
 			return true;
 		}

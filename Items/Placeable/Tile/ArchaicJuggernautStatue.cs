@@ -6,7 +6,7 @@ public class ArchaicJuggernautStatue : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.ArchaicJuggernautStatue>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.ArchaicJuggernautStatue>());
 		Item.width = 30;
 		Item.height = 30;
 	}

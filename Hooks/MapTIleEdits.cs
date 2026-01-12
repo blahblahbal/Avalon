@@ -1,6 +1,7 @@
 using Avalon.Common;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Furniture;
 using Microsoft.Xna.Framework;
 using MonoMod.Cil;
 using System;

@@ -12,7 +12,7 @@ public class DurataniumPipe : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.DurataniumPipe>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Bricks.DurataniumPipe>());
 	}
 	public override void AddRecipes()
 	{

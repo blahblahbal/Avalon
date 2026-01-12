@@ -7,7 +7,7 @@ public class BlueEyeoftheUniverse : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.EyeoftheUniverse>(), 1);
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.EyeoftheUniverse>(), 1);
 		Item.width = 50;
 		Item.height = 36;
 		Item.rare = ModContent.RarityType<Rarities.MagentaRarity>();

@@ -8,7 +8,7 @@ public class NickelAnvil : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.NickelAnvil>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Crafting.NickelAnvil>());
 		Item.value = Item.sellPrice(0, 0, 13, 0);
 	}
 	public override void AddRecipes()

@@ -12,7 +12,7 @@ public class HallowedBrick : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.HallowedBrick>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Bricks.HallowedBrick>());
 	}
 	public override void AddRecipes()
 	{

@@ -1,6 +1,6 @@
 ﻿using Avalon.Common;
 using Avalon.Common.Players;
-using Avalon.Tiles;
+using Avalon.Tiles.Blastplains;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ModLiquidLib.ModLoader;

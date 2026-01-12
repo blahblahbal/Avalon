@@ -1,5 +1,6 @@
 using Avalon.Common;
 using Avalon.Common.Players;
+using Avalon.Tiles.Hellcastle;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -29,7 +30,7 @@ public class TrapCollision : ModHook
 		{
 			if (player.GetModPlayer<AvalonPlayer>().TrapImmune)
 			{
-				if (type == TileID.Spikes || type == TileID.WoodenSpikes || type == ModContent.TileType<Tiles.VenomSpike>() ||
+				if (type == TileID.Spikes || type == TileID.WoodenSpikes || type == ModContent.TileType<VenomSpike>() ||
 					type == ModContent.TileType<Tiles.Savanna.BrambleSpikes>() ||
 					type == ModContent.TileType<Tiles.CrystalMines.ShatterShards>() ||
 					type == ModContent.TileType<Tiles.PoisonSpike>() ||
@@ -39,7 +40,7 @@ public class TrapCollision : ModHook
 				}
 			}
 			else if (!player.GetModPlayer<AvalonPlayer>().TrapImmune &&
-				(type == ModContent.TileType<Tiles.VenomSpike>() || type == ModContent.TileType<Tiles.Savanna.BrambleSpikes>() || type == ModContent.TileType<Tiles.PoisonSpike>()))
+				(type == ModContent.TileType<VenomSpike>() || type == ModContent.TileType<Tiles.Savanna.BrambleSpikes>() || type == ModContent.TileType<Tiles.PoisonSpike>()))
 			{
 				return true;
 			}
@@ -59,7 +60,7 @@ public class TrapCollision : ModHook
 	}
 	private static void OnApplyTouchDamage(On_Player.orig_ApplyTouchDamage orig, Player self, int tileId, int x, int y)
 	{
-		if (tileId == ModContent.TileType<Tiles.VenomSpike>())
+		if (tileId == ModContent.TileType<VenomSpike>())
 		{
 			int num = Main.DamageVar(90, 0f - self.luck);
 			self.AddBuff(BuffID.Venom, 180);

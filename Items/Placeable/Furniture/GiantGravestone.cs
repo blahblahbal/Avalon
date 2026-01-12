@@ -8,7 +8,7 @@ public class GiantGravestone : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.GiantGravestone>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Functional.GiantGravestone>());
 		Item.width = 26;
 		Item.height = 36;
 		Item.rare = ItemRarityID.Blue;

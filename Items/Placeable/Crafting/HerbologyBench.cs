@@ -8,7 +8,7 @@ public class HerbologyBench : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.HerbologyBench>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Crafting.HerbologyBench>());
 		Item.width = 22;
 		Item.height = 28;
 		Item.rare = ItemRarityID.Green;

@@ -9,7 +9,7 @@ public class BismuthCandle : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.BismuthCandle>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Metal.BismuthCandle>());
 		Item.width = 8;
 		Item.height = 18;
 		Item.value = Item.sellPrice(silver: 3);

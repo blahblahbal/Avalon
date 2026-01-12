@@ -4,7 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Avalon.Common.Players;
 using System;
-using Avalon.Tiles;
+using Avalon.Tiles.Furniture.Crafting;
 
 namespace Avalon.Hooks;
 

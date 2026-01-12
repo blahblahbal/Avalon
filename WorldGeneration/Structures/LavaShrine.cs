@@ -5,6 +5,7 @@ using Avalon.Items.Potions.Buff;
 using Avalon.Items.Accessories.Vanity;
 using Avalon.Items.Material.Shards;
 using Avalon.Items.Material;
+using Avalon.Tiles.Furniture.Functional;
 
 namespace Avalon.WorldGeneration.Structures;
 
@@ -919,7 +920,7 @@ class LavaShrine
             if (Main.tile[i, k].HasTile && Main.tileSolid[(int)Main.tile[i, k].TileType])
             {
                 int num = k;
-                int num2 = WorldGen.PlaceChest(i - 1, num - 1, (ushort)ModContent.TileType<Tiles.Furniture.HellfireChest>(), notNearOtherChests, 0);
+                int num2 = WorldGen.PlaceChest(i - 1, num - 1, (ushort)ModContent.TileType<HellfireChest>(), notNearOtherChests, 0);
                 if (num2 >= 0)
                 {
                     int num3 = 0;

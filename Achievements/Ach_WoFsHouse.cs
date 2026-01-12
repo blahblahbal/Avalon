@@ -1,4 +1,4 @@
-using Avalon.Tiles;
+using Avalon.Tiles.Hellcastle;
 using Terraria.Achievements;
 using Terraria.ModLoader;
 

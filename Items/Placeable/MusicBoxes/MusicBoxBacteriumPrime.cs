@@ -11,11 +11,11 @@ public class MusicBoxBacteriumPrime : ModItem
     {
         ItemID.Sets.CanGetPrefixes[Type] = false;
         if (ExxoAvalonOrigins.MusicMod != null)
-            MusicLoader.AddMusicBox(Mod, MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/BacteriumPrime"), ModContent.ItemType<MusicBoxBacteriumPrime>(), ModContent.TileType<Tiles.MusicBoxes>(), 36);
+            MusicLoader.AddMusicBox(Mod, MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/BacteriumPrime"), ModContent.ItemType<MusicBoxBacteriumPrime>(), ModContent.TileType<Tiles.Furniture.Functional.MusicBoxes>(), 36);
     }
 
     public override void SetDefaults()
     {
-        Item.DefaultToMusicBox(ModContent.TileType<Tiles.MusicBoxes>(), 1);
+        Item.DefaultToMusicBox(ModContent.TileType<Tiles.Furniture.Functional.MusicBoxes>(), 1);
     }
 }

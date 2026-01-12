@@ -3,6 +3,7 @@ using Avalon.Items.Consumables;
 using Avalon.Items.Material.Bars;
 using Avalon.Items.Material.OreChunks;
 using Avalon.Tiles;
+using Avalon.Tiles.Blastplains;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Ores;
 using Avalon.Tiles.Savanna;

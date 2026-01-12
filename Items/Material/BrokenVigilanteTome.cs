@@ -1,4 +1,5 @@
 using Avalon.Common.Extensions;
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -18,12 +19,12 @@ public class BrokenVigilanteTome : ModItem
 	{
 		CreateRecipe()
 			.AddIngredient(ItemID.BrokenHeroSword)
-			.AddTile(ModContent.TileType<Tiles.Catalyzer>())
+			.AddTile(ModContent.TileType<Catalyzer>())
 			.Register();
 
 		Recipe.Create(ItemID.BrokenHeroSword)
 			.AddIngredient(Type)
-			.AddTile(ModContent.TileType<Tiles.Catalyzer>())
+			.AddTile(ModContent.TileType<Catalyzer>())
 			.Register();
 	}
 }

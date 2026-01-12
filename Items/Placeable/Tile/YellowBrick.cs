@@ -12,7 +12,7 @@ public class YellowBrick : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.YellowBrick>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Dungeon.YellowBrick>());
 	}
 
 	public override void AddRecipes()

@@ -7,7 +7,7 @@ public class ContagionCampfire : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.ContagionCampfire>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Contagion.ContagionCampfire>());
 		Item.width = 12;
 		Item.height = 12;
 	}

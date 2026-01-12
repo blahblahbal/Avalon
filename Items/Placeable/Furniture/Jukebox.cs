@@ -8,7 +8,7 @@ public class Jukebox : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Jukebox>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Functional.Jukebox>());
 		Item.width = 26;
 		Item.height = 26;
 		Item.rare = ItemRarityID.Green;

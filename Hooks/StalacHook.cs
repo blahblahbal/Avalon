@@ -1,6 +1,6 @@
 ﻿using Avalon.Common;
 using Avalon.Data.Sets;
-using Avalon.Tiles;
+using Avalon.Tiles.Blastplains;
 using Avalon.Tiles.Savanna;
 using MonoMod.Cil;
 using Terraria;

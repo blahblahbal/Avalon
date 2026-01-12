@@ -2,6 +2,7 @@ using Avalon.Items.Material;
 using Avalon.Items.Material.Bars;
 using Avalon.Items.Material.Herbs;
 using Avalon.Items.Placeable.Tile;
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -12,7 +13,7 @@ public class IckyAltar : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.EvilAltarsPlaced>(), 2);
+		Item.DefaultToPlaceableTile(ModContent.TileType<EvilAltarsPlaced>(), 2);
 		Item.width = 24;
 		Item.height = 14;
 		Item.rare = ItemRarityID.Blue;

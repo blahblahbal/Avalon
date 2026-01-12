@@ -1,7 +1,12 @@
 using Avalon.Tiles;
+using Avalon.Tiles.Blastplains;
 using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Dungeon;
 using Avalon.Tiles.Furniture;
+using Avalon.Tiles.Furniture.Functional;
+using Avalon.Tiles.Hellcastle;
 using Avalon.Tiles.Savanna;
+using Avalon.Tiles.SkyCastle;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -39,7 +44,7 @@ public class BiomeTileCounts : ModSystem
 						 tileCounts[ModContent.TileType<ContagionJungleGrass>()] +
 						 tileCounts[ModContent.TileType<Snotsand>()] +
 						 tileCounts[ModContent.TileType<YellowIce>()];
-		DarkMonolithTiles = tileCounts[ModContent.TileType<Tiles.DarkMatter.DarkMatterMonolith>()];
+		DarkMonolithTiles = tileCounts[ModContent.TileType<DarkMatterMonolith>()];
 		AshenOvergrowthTiles = tileCounts[TileID.AshGrass] +
 							   tileCounts[TileID.AshPlants];
 

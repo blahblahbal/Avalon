@@ -1,5 +1,8 @@
 using Avalon.Tiles;
+using Avalon.Tiles.Blastplains;
 using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Furniture;
+using Avalon.Tiles.Hellcastle;
 using Avalon.Tiles.Savanna;
 using Microsoft.Xna.Framework;
 using System;
@@ -769,10 +772,10 @@ public class Utils
 			{
 				if (Main.tile[i, j].TileType == TileID.Painting2X3 || Main.tile[i, j].TileType == TileID.Painting3X3 ||
 					Main.tile[i, j].TileType == TileID.Painting3X2 || Main.tile[i, j].TileType == TileID.Painting6X4 ||
-					Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings2x3>() ||
-					Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings3x2>() ||
-					Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings3x3>() ||
-					Main.tile[i, j].TileType == ModContent.TileType<Tiles.Paintings>())
+					Main.tile[i, j].TileType == ModContent.TileType<Paintings2x3>() ||
+					Main.tile[i, j].TileType == ModContent.TileType<Paintings3x2>() ||
+					Main.tile[i, j].TileType == ModContent.TileType<Paintings3x3>() ||
+					Main.tile[i, j].TileType == ModContent.TileType<Paintings>())
 				{
 					return false;
 				}
@@ -862,7 +865,7 @@ public class Utils
 		for (int i = y; i < y + ylength; i++)
 		{
 			if (Main.tile[x, i].HasTile && (Main.tile[x, i].TileType == TileID.LihzahrdBrick ||
-				Main.tile[x, i].TileType == ModContent.TileType<Tiles.ImperviousBrick>() || Main.tileDungeon[Main.tile[x, i].TileType]) ||
+				Main.tile[x, i].TileType == ModContent.TileType<ImperviousBrick>() || Main.tileDungeon[Main.tile[x, i].TileType]) ||
 				Main.tile[x, i].WallType == WallID.LihzahrdBrickUnsafe ||
 				Main.tile[x, i].WallType == ModContent.WallType<Walls.ImperviousBrickWallUnsafe>() ||
 				Main.wallDungeon[Main.tile[x, i].WallType])
@@ -874,7 +877,7 @@ public class Utils
 		for (int i = y; i < y + ylength; i++)
 		{
 			if (Main.tile[x + xLength, i].HasTile && (Main.tile[x + xLength, i].TileType == TileID.LihzahrdBrick ||
-				Main.tile[x + xLength, i].TileType == ModContent.TileType<Tiles.ImperviousBrick>() || Main.tileDungeon[Main.tile[x + xLength, i].TileType]) ||
+				Main.tile[x + xLength, i].TileType == ModContent.TileType<ImperviousBrick>() || Main.tileDungeon[Main.tile[x + xLength, i].TileType]) ||
 				Main.tile[x + xLength, i].WallType == WallID.LihzahrdBrickUnsafe ||
 				Main.tile[x + xLength, i].WallType == ModContent.WallType<Walls.ImperviousBrickWallUnsafe>() ||
 				Main.wallDungeon[Main.tile[x + xLength, i].WallType])

@@ -1,4 +1,5 @@
 using Avalon.Items.Material.Herbs;
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,7 +10,7 @@ public class CrimsonAltar : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.EvilAltarsPlaced>(), 1);
+		Item.DefaultToPlaceableTile(ModContent.TileType<EvilAltarsPlaced>(), 1);
 		Item.width = 24;
 		Item.height = 14;
 		Item.rare = ItemRarityID.Blue;

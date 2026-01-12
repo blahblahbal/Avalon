@@ -12,7 +12,7 @@ public class BismuthBrick : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.BismuthBrick>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Bricks.BismuthBrick>());
 	}
 	public override void AddRecipes()
 	{

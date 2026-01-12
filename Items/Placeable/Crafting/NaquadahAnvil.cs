@@ -8,7 +8,7 @@ public class NaquadahAnvil : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.NaquadahAnvil>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Crafting.NaquadahAnvil>());
 		Item.width = 28;
 		Item.height = 14;
 		Item.rare = ItemRarityID.Orange;

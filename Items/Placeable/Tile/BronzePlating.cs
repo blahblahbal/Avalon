@@ -12,7 +12,7 @@ public class BronzePlating : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.BronzePlating>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Bricks.BronzePlating>());
 	}
 	public override void AddRecipes()
 	{

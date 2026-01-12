@@ -1,4 +1,5 @@
 using Avalon.Common.Extensions;
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -23,7 +24,7 @@ public class AncientBodyplate : ModItem
 			.AddIngredient(ItemID.FragmentVortex, 10)
 			.AddIngredient(ModContent.ItemType<Material.LifeDew>(), 5)
 			.AddIngredient(ModContent.ItemType<Material.GhostintheMachine>())
-			.AddTile(ModContent.TileType<Tiles.CaesiumForge>())
+			.AddTile(ModContent.TileType<CaesiumForge>())
 			.Register();
 
 		CreateRecipe(1).AddIngredient(ItemID.NebulaBreastplate).AddIngredient(ItemID.FragmentSolar, 10)
@@ -31,7 +32,7 @@ public class AncientBodyplate : ModItem
 			.AddIngredient(ItemID.FragmentVortex, 10)
 			.AddIngredient(ModContent.ItemType<Material.LifeDew>(), 5)
 			.AddIngredient(ModContent.ItemType<Material.GhostintheMachine>())
-			.AddTile(ModContent.TileType<Tiles.CaesiumForge>())
+			.AddTile(ModContent.TileType<CaesiumForge>())
 			.Register();
 
 		CreateRecipe(1).AddIngredient(ItemID.StardustBreastplate)
@@ -40,7 +41,7 @@ public class AncientBodyplate : ModItem
 			.AddIngredient(ItemID.FragmentVortex, 10)
 			.AddIngredient(ModContent.ItemType<Material.LifeDew>(), 5)
 			.AddIngredient(ModContent.ItemType<Material.GhostintheMachine>())
-			.AddTile(ModContent.TileType<Tiles.CaesiumForge>())
+			.AddTile(ModContent.TileType<CaesiumForge>())
 			.Register();
 
 		CreateRecipe(1).AddIngredient(ItemID.VortexBreastplate)
@@ -49,7 +50,7 @@ public class AncientBodyplate : ModItem
 			.AddIngredient(ItemID.FragmentSolar, 10)
 			.AddIngredient(ModContent.ItemType<Material.LifeDew>(), 5)
 			.AddIngredient(ModContent.ItemType<Material.GhostintheMachine>())
-			.AddTile(ModContent.TileType<Tiles.CaesiumForge>())
+			.AddTile(ModContent.TileType<CaesiumForge>())
 			.Register();
 	}
 	public override void UpdateEquip(Player player)

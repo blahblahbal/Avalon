@@ -8,7 +8,7 @@ public class BronzeChandelier : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.BronzeChandelier>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Metal.BronzeChandelier>());
 		Item.width = 26;
 		Item.height = 26;
 		Item.value = Item.sellPrice(silver: 7, copper: 50);

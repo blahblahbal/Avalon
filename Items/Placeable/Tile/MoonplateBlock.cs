@@ -12,7 +12,7 @@ public class MoonplateBlock : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.MoonplateBlock>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Bricks.MoonplateBlock>());
 	}
 	public override void AddRecipes()
 	{

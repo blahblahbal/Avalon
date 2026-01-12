@@ -12,7 +12,7 @@ public class TrappedUnderworldChest : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.TrappedChests>(), 1);
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Functional.TrappedChests>(), 1);
 		Item.width = 26;
 		Item.height = 22;
 		Item.value = Item.sellPrice(silver: 1);

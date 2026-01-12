@@ -1,4 +1,3 @@
-using Avalon.Assets;
 using Avalon.Common.Players;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Icicle;
@@ -6,15 +5,14 @@ using Avalon.NPCs.Hardmode.CursedScepter;
 using Avalon.NPCs.Hardmode.InfectedPickaxe;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Furniture;
 using Avalon.Tiles.Furniture.OrangeDungeon;
 using Avalon.Tiles.Furniture.PurpleDungeon;
 using Avalon.Tiles.Furniture.YellowDungeon;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -519,7 +517,7 @@ public class AvalonGlobalTile : GlobalTile
                 }
             }
             // Probably doesn't work in multiplayer
-            if (type == ModContent.TileType<Tiles.UltraResistantWood>() && Main.player[pid].inventory[Main.player[pid].selectedItem].axe < 40)
+            if (type == ModContent.TileType<Tiles.Hellcastle.UltraResistantWood>() && Main.player[pid].inventory[Main.player[pid].selectedItem].axe < 40)
             {
                 fail = true;
             }

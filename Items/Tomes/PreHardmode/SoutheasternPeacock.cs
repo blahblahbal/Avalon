@@ -1,6 +1,6 @@
 using Avalon.Common.Extensions;
 using Avalon.Items.Material.TomeMats;
-using Avalon.Tiles;
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

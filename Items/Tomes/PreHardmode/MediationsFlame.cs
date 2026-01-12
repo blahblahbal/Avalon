@@ -1,5 +1,6 @@
 using Avalon.Common.Extensions;
 using Avalon.Items.Material.TomeMats;
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -32,7 +33,7 @@ public class MediationsFlame : ModItem
 			.AddIngredient(ItemID.FallenStar, 15)
 			.AddIngredient(ItemID.MeteoriteBar, 10)
 			.AddIngredient(ModContent.ItemType<MysticalTomePage>())
-			.AddTile(ModContent.TileType<Tiles.TomeForge>())
+			.AddTile(ModContent.TileType<TomeForge>())
 			.Register();
 	}
 }

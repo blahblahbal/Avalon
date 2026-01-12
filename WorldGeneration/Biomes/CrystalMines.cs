@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.CrystalMines;
+using Avalon.Tiles.Dungeon;
+using Avalon.Tiles.Hellcastle;
 using Avalon.Walls;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -13,9 +15,9 @@ namespace Avalon.World.Biomes;
 internal class CrystalMines
 {
     private static readonly int[] blacklistedTiles = new int[] { 225, 41, 43, 44, 226, 203, 112, 25, 151, //ModContent.TileType<Tiles.TuhrtlBrick>(),
-            ModContent.TileType<Tiles.OrangeBrick>(), ModContent.TileType<Tiles.PurpleBrick>(), ModContent.TileType<Tiles.CrackedOrangeBrick>(),
-            ModContent.TileType<Tiles.CrackedPurpleBrick>(), TileID.WoodenSpikes, ModContent.TileType<Tiles.ImperviousBrick>(),
-            ModContent.TileType<Tiles.VenomSpike>() };
+            ModContent.TileType<OrangeBrick>(), ModContent.TileType<PurpleBrick>(), ModContent.TileType<CrackedOrangeBrick>(),
+            ModContent.TileType<CrackedPurpleBrick>(), TileID.WoodenSpikes, ModContent.TileType<ImperviousBrick>(),
+            ModContent.TileType<VenomSpike>() };
     private static readonly int[] blacklistedWalls = new int[]
     {
         WallID.BlueDungeonSlabUnsafe,
@@ -340,8 +342,8 @@ internal class CrystalMines
                     tile.TileType == TileID.ShadowOrbs || tile.TileType == TileID.DemonAltar ||
                     tile.TileType == ModContent.TileType<SnotOrb>() || tile.TileType == TileID.LihzahrdBrick || tile.TileType == TileID.BlueDungeonBrick ||
                     tile.TileType == TileID.PinkDungeonBrick || tile.TileType == TileID.GreenDungeonBrick || //tile.TileType == ModContent.TileType<Tiles.TuhrtlBrick>() ||
-                    tile.TileType == TileID.Statues || tile.TileType == ModContent.TileType<Tiles.PurpleBrick>() || tile.TileType == ModContent.TileType<Tiles.OrangeBrick>() ||
-                    tile.TileType == ModContent.TileType<Tiles.CrackedOrangeBrick>() || tile.TileType == ModContent.TileType<Tiles.CrackedPurpleBrick>() ||
+                    tile.TileType == TileID.Statues || tile.TileType == ModContent.TileType<PurpleBrick>() || tile.TileType == ModContent.TileType<OrangeBrick>() ||
+                    tile.TileType == ModContent.TileType<CrackedOrangeBrick>() || tile.TileType == ModContent.TileType<CrackedPurpleBrick>() ||
                     tile.WallType == WallID.LihzahrdBrickUnsafe || Main.wallDungeon[tile.WallType] || tile.TileType == TileID.Painting2X3 || tile.TileType == TileID.Painting3X2 ||
                     tile.TileType == TileID.Painting3X3 || tile.TileType == TileID.Painting4X3 || tile.TileType == TileID.Painting6X4 || Main.tileContainer[tile.TileType])
                 {

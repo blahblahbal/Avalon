@@ -8,7 +8,7 @@ public class Blahtue : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Blahtue>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Blahtue>());
 		Item.width = 20;
 		Item.height = 26;
 		Item.rare = ModContent.RarityType<BlahRarity>();

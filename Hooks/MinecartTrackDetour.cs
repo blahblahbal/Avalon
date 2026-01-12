@@ -8,6 +8,11 @@ using System;
 using System.Reflection;
 using System.Linq;
 using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Dungeon;
+using Avalon.Tiles.Furniture;
+using Avalon.Tiles.Hellcastle;
+using Avalon.Tiles.Blastplains;
+using Avalon.Tiles.Furniture.Functional;
 
 namespace Avalon.Hooks
 {
@@ -23,15 +28,15 @@ namespace Avalon.Hooks
         };
         private static readonly int[] InvalidTiles = new int[30]
         {
-            ModContent.TileType<Tiles.OrangeBrick>(), ModContent.TileType<Tiles.PurpleBrick>(), ModContent.TileType<Tiles.YellowBrick>(),
-            ModContent.TileType<Tiles.CrackedOrangeBrick>(), ModContent.TileType<Tiles.CrackedPurpleBrick>(), ModContent.TileType<Tiles.CrackedYellowBrick>(),
-            ModContent.TileType<Tiles.BlastedStone>(), TileID.IceBrick, ModContent.TileType<Tiles.ImperviousBrick>(), TileID.LavaMossBlock, TileID.Containers, TileID.Containers2,
+            ModContent.TileType<OrangeBrick>(), ModContent.TileType<PurpleBrick>(), ModContent.TileType<YellowBrick>(),
+            ModContent.TileType<CrackedOrangeBrick>(), ModContent.TileType<CrackedPurpleBrick>(), ModContent.TileType<CrackedYellowBrick>(),
+            ModContent.TileType<BlastedStone>(), TileID.IceBrick, ModContent.TileType<ImperviousBrick>(), TileID.LavaMossBlock, TileID.Containers, TileID.Containers2,
             ModContent.TileType<Tiles.Furniture.Coughwood.CoughwoodChest>(), ModContent.TileType<Tiles.Furniture.BleachedEbony.BleachedEbonyChest>(),
-            ModContent.TileType<Tiles.Furniture.HellfireChest>(), ModContent.TileType<IckyAltar>(), ModContent.TileType<Tiles.GemTrees.TourmalineTree>(),
-            ModContent.TileType<Tiles.GemTrees.PeridotTree>(), ModContent.TileType<Tiles.GemTrees.ZirconTree>(), ModContent.TileType<Tiles.Statues>(),
+            ModContent.TileType<HellfireChest>(), ModContent.TileType<IckyAltar>(), ModContent.TileType<Tiles.GemTrees.TourmalineTree>(),
+            ModContent.TileType<Tiles.GemTrees.PeridotTree>(), ModContent.TileType<Tiles.GemTrees.ZirconTree>(), ModContent.TileType<Statues>(),
             ModContent.TileType<Tiles.Savanna.PlatformLeaf>(), ModContent.TileType<Tiles.GemStashes>(), ModContent.TileType<Tiles.ChunkstoneColumn>(),
             ModContent.TileType<Tiles.CrimstoneColumn>(), ModContent.TileType<Tiles.EbonstoneColumn>(), ModContent.TileType<Tiles.Savanna.TuhrtlBrick>(),
-            ModContent.TileType<Tiles.Paintings>(), ModContent.TileType<Tiles.PlatinumChest>(), ModContent.TileType<Tiles.Savanna.Loamstone>(), TileID.PlatinumBrick
+            ModContent.TileType<Tiles.Paintings>(), ModContent.TileType<PlatinumChest>(), ModContent.TileType<Tiles.Savanna.Loamstone>(), TileID.PlatinumBrick
         };
 
         protected override void Apply()

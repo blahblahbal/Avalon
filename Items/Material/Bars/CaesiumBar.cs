@@ -1,5 +1,6 @@
 using Avalon.Common.Extensions;
 using Avalon.Items.Material.Ores;
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -26,6 +27,6 @@ public class CaesiumBar : ModItem
 	{
 		Recipe.Create(Type)
 			.AddIngredient(ModContent.ItemType<CaesiumOre>(), 8)
-			.AddTile(ModContent.TileType<Tiles.CaesiumForge>()).Register();
+			.AddTile(ModContent.TileType<CaesiumForge>()).Register();
 	}
 }

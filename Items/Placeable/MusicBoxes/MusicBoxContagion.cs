@@ -11,11 +11,11 @@ public class MusicBoxContagion : ModItem
     {
         ItemID.Sets.CanGetPrefixes[Type] = false;
         if (ExxoAvalonOrigins.MusicMod != null)
-            MusicLoader.AddMusicBox(Mod, MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/Contagion"), ModContent.ItemType<MusicBoxContagion>(), ModContent.TileType<Tiles.MusicBoxes>(), 0);
+            MusicLoader.AddMusicBox(Mod, MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/Contagion"), ModContent.ItemType<MusicBoxContagion>(), ModContent.TileType<Tiles.Furniture.Functional.MusicBoxes>(), 0);
     }
 
     public override void SetDefaults()
     {
-        Item.DefaultToMusicBox(ModContent.TileType<Tiles.MusicBoxes>(), 0);
+        Item.DefaultToMusicBox(ModContent.TileType<Tiles.Furniture.Functional.MusicBoxes>(), 0);
     }
 }

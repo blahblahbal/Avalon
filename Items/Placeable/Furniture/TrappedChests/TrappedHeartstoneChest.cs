@@ -13,7 +13,7 @@ public class TrappedHeartstoneChest : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.TrappedChests>(), 4);
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Functional.TrappedChests>(), 4);
 		Item.width = 26;
 		Item.height = 22;
 		Item.value = Item.sellPrice(silver: 1);

@@ -1,4 +1,5 @@
 using Avalon.Common.Extensions;
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -36,7 +37,7 @@ public class DragonOrb : ModItem
 			.AddIngredient(ModContent.ItemType<MysticalTotem>())
 			.AddIngredient(ModContent.ItemType<DewofHerbs>(), 3)
 			.AddIngredient(ModContent.ItemType<MysticalClaw>(), 4)
-			.AddTile(ModContent.TileType<Tiles.TomeForge>())
+			.AddTile(ModContent.TileType<TomeForge>())
 			.Register();
 	}
 }

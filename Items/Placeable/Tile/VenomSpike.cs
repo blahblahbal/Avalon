@@ -13,7 +13,7 @@ public class VenomSpike : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.VenomSpike>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Hellcastle.VenomSpike>());
 		Item.value = Item.sellPrice(copper: 10);
 	}
 	public override void AddRecipes()

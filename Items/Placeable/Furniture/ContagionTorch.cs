@@ -17,7 +17,7 @@ public class ContagionTorch : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToTorch(ModContent.TileType<Tiles.Furniture.ContagionTorch>(), 0, false);
+		Item.DefaultToTorch(ModContent.TileType<Tiles.Furniture.Contagion.ContagionTorch>(), 0, false);
 		Item.value = Item.sellPrice(0, 0, 0, 40);
 		Item.notAmmo = true;
 		Item.ammo = ItemID.Torch;

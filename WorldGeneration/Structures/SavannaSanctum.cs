@@ -1,3 +1,5 @@
+using Avalon.Tiles.Bricks;
+using Avalon.Tiles.Furniture.Functional;
 using Avalon.Tiles.Savanna;
 using Terraria;
 using Terraria.ID;
@@ -13,7 +15,7 @@ namespace Avalon.WorldGeneration.Structures
             if (t == 0)
                 t = TileID.IridescentBrick;
             else if (t == 1)
-                t = (ushort)ModContent.TileType<Tiles.BismuthBrick>();
+                t = (ushort)ModContent.TileType<BismuthBrick>();
             else if (t == 2)
                 t = (ushort)ModContent.TileType<Loamstone>();
 
@@ -73,7 +75,7 @@ namespace Avalon.WorldGeneration.Structures
             else if (t == 2)
             {
                 t = (ushort)ModContent.TileType<Loamstone>();
-                t2 = (ushort)ModContent.TileType<Tiles.MoonplateBlock>();
+                t2 = (ushort)ModContent.TileType<MoonplateBlock>();
 				wallType = (ushort)ModContent.WallType<Walls.MoonWall>();
 			}
             //i = vertical, j = horizontal
@@ -132,7 +134,7 @@ namespace Avalon.WorldGeneration.Structures
                                     if (tile.TileType != (ushort)ModContent.TileType<TuhrtlBrick>())
                                         tile.IsHalfBlock = false;
                                     if (tile.TileType != (ushort)ModContent.TileType<TuhrtlBrick>() && confirmPlatforms == 1)
-                                        WorldGen.AddBuriedChest(k, l, contain: GenSystem.GetNextSavannaChestItem(), Style: 0, chestTileType: (ushort)ModContent.TileType<Tiles.PlatinumChest>());
+                                        WorldGen.AddBuriedChest(k, l, contain: GenSystem.GetNextSavannaChestItem(), Style: 0, chestTileType: (ushort)ModContent.TileType<PlatinumChest>());
                                     if (tile.TileType != (ushort)ModContent.TileType<TuhrtlBrick>())
                                         tile.WallType = wallType;
                                     break;

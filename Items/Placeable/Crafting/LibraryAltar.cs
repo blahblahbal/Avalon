@@ -7,7 +7,7 @@ public class LibraryAltar : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.LibraryAltar>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Functional.LibraryAltar>());
 		Item.width = 32;
 		Item.height = 32;
 		Item.rare = ItemRarityID.Blue;

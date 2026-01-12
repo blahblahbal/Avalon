@@ -1,5 +1,7 @@
 using Avalon.Common;
 using Avalon.Tiles;
+using Avalon.Tiles.Blastplains;
+using Avalon.Tiles.Hellcastle;
 using Avalon.Tiles.Ores;
 using Avalon.WorldGeneration.Structures;
 using Microsoft.Xna.Framework;

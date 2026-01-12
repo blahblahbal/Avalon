@@ -7,7 +7,7 @@ public class BookcaseTeleporter : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.BookcaseTeleporter>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Functional.BookcaseTeleporter>());
 		Item.width = 20;
 		Item.height = 20;
 		Item.value = Item.sellPrice(copper: 60);

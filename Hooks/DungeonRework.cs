@@ -3,6 +3,8 @@ using Avalon.Items.Weapons.Melee.Hardmode.VirulentScythe;
 using Avalon.ModSupport;
 using Avalon.ModSupport.MLL.Liquids;
 using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Dungeon;
+using Avalon.Tiles.Furniture;
 using Avalon.Tiles.Furniture.OrangeDungeon;
 using Avalon.Tiles.Furniture.PurpleDungeon;
 using Avalon.Tiles.Furniture.YellowDungeon;
@@ -320,13 +322,13 @@ public class DungeonRemoveCrackedBricks : GenPass
                         switch (RandDungeonColour)
                         {
                             case 0:
-                                Main.tile[i, j].TileType = (ushort)ModContent.TileType<Tiles.OrangeBrick>();
+                                Main.tile[i, j].TileType = (ushort)ModContent.TileType<OrangeBrick>();
                                 break;
                             case 1:
-                                Main.tile[i, j].TileType = (ushort)ModContent.TileType<Tiles.PurpleBrick>();
+                                Main.tile[i, j].TileType = (ushort)ModContent.TileType<PurpleBrick>();
                                 break;
                             case 2:
-                                Main.tile[i, j].TileType = (ushort)ModContent.TileType<Tiles.YellowBrick>();
+                                Main.tile[i, j].TileType = (ushort)ModContent.TileType<YellowBrick>();
                                 break;
                         }
                     }
@@ -658,13 +660,13 @@ public class DungeonRemoveCrackedBricks : GenPass
                         switch (RandDungeonColour)
                         {
                             case 0:
-                                WorldGen.PlaceTile(i, j + 2, ModContent.TileType<Tiles.Statues>(), true, style: 3);
+                                WorldGen.PlaceTile(i, j + 2, ModContent.TileType<Statues>(), true, style: 3);
                                 break;
                             case 1:
-                                WorldGen.PlaceTile(i, j + 2, ModContent.TileType<Tiles.Statues>(), true, style: 13);
+                                WorldGen.PlaceTile(i, j + 2, ModContent.TileType<Statues>(), true, style: 13);
                                 break;
                             case 2:
-                                WorldGen.PlaceTile(i, j + 2, ModContent.TileType<Tiles.Statues>(), true, style: 14);
+                                WorldGen.PlaceTile(i, j + 2, ModContent.TileType<Statues>(), true, style: 14);
                                 break;
                         }
                     }
@@ -706,13 +708,13 @@ public class DungeonRemoveCrackedBricks : GenPass
                     switch (RandDungeonColour)
                     {
                         case 0:
-                            WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.CrackedOrangeBrick>(), true);
+                            WorldGen.PlaceTile(i, j, ModContent.TileType<CrackedOrangeBrick>(), true);
                             break;
                         case 1:
-                            WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.CrackedPurpleBrick>(), true);
+                            WorldGen.PlaceTile(i, j, ModContent.TileType<CrackedPurpleBrick>(), true);
                             break;
                         case 2:
-                            WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.CrackedYellowBrick>(), true);
+                            WorldGen.PlaceTile(i, j, ModContent.TileType<CrackedYellowBrick>(), true);
                             break;
                     }
                 }

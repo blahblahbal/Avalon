@@ -1,7 +1,7 @@
 using Avalon.Common.Extensions;
 using Avalon.Common.Players;
 using Avalon.Items.Material;
-using Avalon.Tiles;
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;

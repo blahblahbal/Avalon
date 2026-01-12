@@ -201,7 +201,7 @@ public class ContagionAltBiome : AltBiome
 		FleshChestTileStyle = 7;
 		*/
 
-		FountainTile = ModContent.TileType<Tiles.Furniture.WaterFountains>();
+		FountainTile = ModContent.TileType<Tiles.Furniture.Functional.WaterFountains>();
 		FountainTileStyle = 0;
 
 		SeedType = ModContent.ItemType<ContagionSeeds>();

@@ -1,5 +1,8 @@
 using Avalon.Dusts;
 using Avalon.Items.Placeable.Furniture;
+using Avalon.Tiles.Furniture.Contagion;
+using Avalon.Tiles.Furniture.Gem;
+using Avalon.Tiles.Furniture.Pathogen;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -40,11 +43,11 @@ internal class TorchLauncherSets
 		{ ItemID.JungleTorch,           "Tiles_4" },
 		{ ItemID.MushroomTorch,         "Tiles_4" },
 		{ ItemID.ShimmerTorch,          "Tiles_4" },
-		{ ItemType<BrownTorch>(),       GetInstance<Tiles.Furniture.BrownTorch>().Texture },
-		{ ItemType<ContagionTorch>(),   GetInstance<Tiles.Furniture.ContagionTorch>().Texture },
-		{ ItemType<CyanTorch>(),        GetInstance<Tiles.Furniture.CyanTorch>().Texture },
-		{ ItemType<LimeTorch>(),        GetInstance<Tiles.Furniture.LimeTorch>().Texture },
-		{ ItemType<PathogenTorch>(),    GetInstance<Tiles.Furniture.PathogenTorch>().Texture },
+		{ ItemType<Items.Placeable.Furniture.BrownTorch>(),       GetInstance<Tiles.Furniture.Gem.BrownTorch>().Texture },
+		{ ItemType<Items.Placeable.Furniture.ContagionTorch>(),   GetInstance<Tiles.Furniture.Contagion.ContagionTorch>().Texture },
+		{ ItemType<Items.Placeable.Furniture.CyanTorch>(),        GetInstance<Tiles.Furniture.Gem.CyanTorch>().Texture },
+		{ ItemType<Items.Placeable.Furniture.LimeTorch>(),        GetInstance<Tiles.Furniture.Gem.LimeTorch>().Texture },
+		{ ItemType<Items.Placeable.Furniture.PathogenTorch>(),    GetInstance<Tiles.Furniture.Pathogen.PathogenTorch>().Texture },
 		{ ItemType<SavannaTorch>(),     GetInstance<Tiles.Savanna.SavannaTorch>().Texture },
 		{ ItemType<SlimeTorch>(),       GetInstance<Tiles.Furniture.SlimeTorch>().Texture },
 		{ ItemType<StarTorch>(),        GetInstance<Tiles.Furniture.StarTorch>().Texture }
@@ -76,14 +79,14 @@ internal class TorchLauncherSets
 		{ ItemID.JungleTorch,           "Flame_0" },
 		{ ItemID.MushroomTorch,         "Flame_0" },
 		{ ItemID.ShimmerTorch,          "Flame_0" },
-		{ ItemType<BrownTorch>(),       GetInstance<Tiles.Furniture.BrownTorch>().Texture + "_Flame" },
-		{ ItemType<ContagionTorch>(),   GetInstance<Tiles.Furniture.ContagionTorch>().Texture + "_Flame" },
-		{ ItemType<CyanTorch>(),        GetInstance<Tiles.Furniture.CyanTorch>().Texture + "_Flame" },
-		{ ItemType<LimeTorch>(),        GetInstance<Tiles.Furniture.LimeTorch>().Texture + "_Flame" },
-		{ ItemType<PathogenTorch>(),    GetInstance<Tiles.Furniture.PathogenTorch>().Texture + "_Flame" },
-		{ ItemType<SavannaTorch>(),     GetInstance<Tiles.Savanna.SavannaTorch>().Texture + "_Flame" },
-		{ ItemType<SlimeTorch>(),       GetInstance<Tiles.Furniture.SlimeTorch>().Texture + "_Flame" },
-		{ ItemType<StarTorch>(),        GetInstance<Tiles.Furniture.StarTorch>().Texture + "_Flame" }
+		{ ItemType<Items.Placeable.Furniture.BrownTorch>(),       GetInstance<Tiles.Furniture.Gem.BrownTorch>().Texture + "_Flame" },
+		{ ItemType<Items.Placeable.Furniture.ContagionTorch>(),   GetInstance<Tiles.Furniture.Contagion.ContagionTorch>().Texture + "_Flame" },
+		{ ItemType<Items.Placeable.Furniture.CyanTorch>(),        GetInstance<Tiles.Furniture.Gem.CyanTorch>().Texture + "_Flame" },
+		{ ItemType<Items.Placeable.Furniture.LimeTorch>(),        GetInstance<Tiles.Furniture.Gem.LimeTorch>().Texture + "_Flame" },
+		{ ItemType<Items.Placeable.Furniture.PathogenTorch>(),    GetInstance<Tiles.Furniture.Pathogen.PathogenTorch>().Texture + "_Flame" },
+		{ ItemType<Items.Placeable.Furniture.SavannaTorch>(),     GetInstance<Tiles.Savanna.SavannaTorch>().Texture + "_Flame" },
+		{ ItemType<Items.Placeable.Furniture.SlimeTorch>(),       GetInstance<Tiles.Furniture.SlimeTorch>().Texture + "_Flame" },
+		{ ItemType<Items.Placeable.Furniture.StarTorch>(),        GetInstance<Tiles.Furniture.StarTorch>().Texture + "_Flame" }
 	};
 
 	public static Dictionary<int, int> DebuffType = new Dictionary<int, int>()
@@ -112,11 +115,11 @@ internal class TorchLauncherSets
 		{ ItemID.JungleTorch,           -1 },
 		{ ItemID.MushroomTorch,         -1 },
 		{ ItemID.ShimmerTorch,          -1 },
-		{ ItemType<BrownTorch>(),       -1 },
-		{ ItemType<ContagionTorch>(),   -1 },
-		{ ItemType<CyanTorch>(),        -1 },
-		{ ItemType<LimeTorch>(),        -1 },
-		{ ItemType<PathogenTorch>(),    -1 },
+		{ ItemType<Items.Placeable.Furniture.BrownTorch>(),       -1 },
+		{ ItemType<Items.Placeable.Furniture.ContagionTorch>(),   -1 },
+		{ ItemType<Items.Placeable.Furniture.CyanTorch>(),        -1 },
+		{ ItemType<Items.Placeable.Furniture.LimeTorch>(),        -1 },
+		{ ItemType<Items.Placeable.Furniture.PathogenTorch>(),    -1 },
 		{ ItemType<SavannaTorch>(),     -1 },
 		{ ItemType<SlimeTorch>(),       -1 },
 		{ ItemType<StarTorch>(),        -1 }
@@ -152,11 +155,11 @@ internal class TorchLauncherSets
 		{ ItemID.JungleTorch, DustID.JungleTorch },
 		{ ItemID.MushroomTorch, DustID.MushroomTorch },
 		{ ItemID.ShimmerTorch, DustID.ShimmerTorch },
-		{ ItemType<BrownTorch>(), DustType<BrownTorchDust>() },
-		{ ItemType<ContagionTorch>(), DustID.JungleTorch },
-		{ ItemType<CyanTorch>(), DustType<CyanTorchDust>() },
-		{ ItemType<LimeTorch>(), DustType<LimeTorchDust>() },
-		{ ItemType<PathogenTorch>(), DustType<PathogenDust>() },
+		{ ItemType<Items.Placeable.Furniture.BrownTorch>(), DustType<BrownTorchDust>() },
+		{ ItemType<Items.Placeable.Furniture.ContagionTorch>(), DustID.JungleTorch },
+		{ ItemType<Items.Placeable.Furniture.CyanTorch>(), DustType<CyanTorchDust>() },
+		{ ItemType<Items.Placeable.Furniture.LimeTorch>(), DustType<LimeTorchDust>() },
+		{ ItemType<Items.Placeable.Furniture.PathogenTorch>(), DustType<PathogenDust>() },
 		{ ItemType<SavannaTorch>(), DustID.JungleTorch },
 		{ ItemType<SlimeTorch>(), DustID.t_Slime },
 		{ ItemType<StarTorch>(), -2 }
@@ -192,11 +195,11 @@ internal class TorchLauncherSets
 		{ ItemID.JungleTorch, new Vector3(0.75f, 1.45f, 0.9f) },
 		{ ItemID.MushroomTorch, new Vector3(0.3f, 0.78f, 1.2f) },
 		{ ItemID.ShimmerTorch, new Vector3(0f, 0f, 0f) }, //
-		{ ItemType<BrownTorch>(), new Vector3(1.1f, 0.75f, 0.5f) },
-		{ ItemType<ContagionTorch>(), new Vector3(0.8f, 1.4f, 0f) },
-		{ ItemType<CyanTorch>(), new Vector3(0f, 1f, 1f) },
-		{ ItemType<LimeTorch>(), new Vector3(0.714f, 1f, 0f) },
-		{ ItemType<PathogenTorch>(), new Vector3(0.5f, 0f, 2f) },
+		{ ItemType<Items.Placeable.Furniture.BrownTorch>(), new Vector3(1.1f, 0.75f, 0.5f) },
+		{ ItemType<Items.Placeable.Furniture.ContagionTorch>(), new Vector3(0.8f, 1.4f, 0f) },
+		{ ItemType<Items.Placeable.Furniture.CyanTorch>(), new Vector3(0f, 1f, 1f) },
+		{ ItemType<Items.Placeable.Furniture.LimeTorch>(), new Vector3(0.714f, 1f, 0f) },
+		{ ItemType<Items.Placeable.Furniture.PathogenTorch>(), new Vector3(0.5f, 0f, 2f) },
 		{ ItemType<SavannaTorch>(), new Vector3(0.69f, 1f, 0.42f) },
 		{ ItemType<SlimeTorch>(), new Vector3(0.25f, 0.72f, 1f) },
 		{ ItemType<StarTorch>(), new Vector3(1f, 0.945f, 0.2f) }

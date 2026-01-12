@@ -8,7 +8,7 @@ public class BasaltObelisk : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.BasaltObelisk>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Functional.BasaltObelisk>());
 		Item.width = 26;
 		Item.height = 36;
 		Item.rare = ItemRarityID.Orange;

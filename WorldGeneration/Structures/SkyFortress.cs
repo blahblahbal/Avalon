@@ -1,3 +1,6 @@
+using Avalon.Tiles.Furniture;
+using Avalon.Tiles.Furniture.Functional;
+using Avalon.Tiles.SkyCastle;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -707,13 +710,13 @@ public class SkyFortress
                                 break;
                             case 1:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.SkyBrick>();
+                                tile.TileType = (ushort)ModContent.TileType<SkyBrick>();
                                 tile.Slope = SlopeType.Solid;
                                 tile.IsHalfBlock = false;
                                 break;
                             case 2:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.SkyBrick>();
+                                tile.TileType = (ushort)ModContent.TileType<SkyBrick>();
                                 tile.Slope = SlopeType.Solid;
                                 tile.IsHalfBlock = true;
                                 break;
@@ -738,7 +741,7 @@ public class SkyFortress
                                 break;
                             case 5:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.SkyBrick>();
+                                tile.TileType = (ushort)ModContent.TileType<SkyBrick>();
                                 tile.Slope = SlopeType.SlopeUpRight;
                                 tile.IsHalfBlock = false;
                                 break;
@@ -751,7 +754,7 @@ public class SkyFortress
                                 break;
                             case 7:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.SkyBrick>();
+                                tile.TileType = (ushort)ModContent.TileType<SkyBrick>();
                                 tile.Slope = SlopeType.SlopeUpLeft;
                                 tile.IsHalfBlock = false;
                                 break;
@@ -766,13 +769,13 @@ public class SkyFortress
                                 break;
                             case 9:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.SkyBrick>();
+                                tile.TileType = (ushort)ModContent.TileType<SkyBrick>();
                                 tile.Slope = SlopeType.SlopeDownRight;
                                 tile.IsHalfBlock = false;
                                 break;
                             case 10:
                                 tile.HasTile = true;
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.SkyBrick>();
+                                tile.TileType = (ushort)ModContent.TileType<SkyBrick>();
                                 tile.Slope = SlopeType.SlopeDownLeft;
                                 tile.IsHalfBlock = false;
                                 break;
@@ -792,7 +795,7 @@ public class SkyFortress
                             case 28:
                             case 49:
                             case 50:
-                                tile.TileType = (ushort)ModContent.TileType<Tiles.SkyBrickColumn>();
+                                tile.TileType = (ushort)ModContent.TileType<SkyBrickColumn>();
                                 tile.Slope = SlopeType.Solid;
                                 tile.IsHalfBlock = false;
                                 tile.HasTile = true;
@@ -905,7 +908,7 @@ public class SkyFortress
                                     tile.HasTile = false;
                                     tile.Slope = SlopeType.Solid;
                                     tile.IsHalfBlock = false;
-                                    WorldGen.PlaceTile(k, l, ModContent.TileType<Tiles.Furniture.BookcaseTeleporter>(), true, true, -1, 0);
+                                    WorldGen.PlaceTile(k, l, ModContent.TileType<BookcaseTeleporter>(), true, true, -1, 0);
                                 }
                                 break;
                             case 32:
@@ -921,7 +924,7 @@ public class SkyFortress
                                     tile.HasTile = false;
                                     tile.Slope = SlopeType.Solid;
                                     tile.IsHalfBlock = false;
-                                    WorldGen.PlaceTile(k, l, ModContent.TileType<Tiles.PlatinumChest>(), true, true, -1, 0);
+                                    WorldGen.PlaceTile(k, l, ModContent.TileType<PlatinumChest>(), true, true, -1, 0);
                                 }
                                 break;
                             case 34:
@@ -957,7 +960,7 @@ public class SkyFortress
                                     tile.HasTile = false;
                                     tile.Slope = SlopeType.Solid;
                                     tile.IsHalfBlock = false;
-                                    WorldGen.PlaceTile(k, l, ModContent.TileType<Tiles.Statues>(), true, true, -1, 1);
+                                    WorldGen.PlaceTile(k, l, ModContent.TileType<Statues>(), true, true, -1, 1);
                                 }
                                 break;
                             case 38:
@@ -1121,7 +1124,7 @@ public class SkyFortress
                                     tile.HasTile = false;
                                     tile.Slope = SlopeType.Solid;
                                     tile.IsHalfBlock = false;
-                                    WorldGen.PlaceTile(k, l, ModContent.TileType<Tiles.Statues>(), true, true, -1, 4);
+                                    WorldGen.PlaceTile(k, l, ModContent.TileType<Statues>(), true, true, -1, 4);
                                 }
                                 break;
                             case 62:
@@ -1297,7 +1300,7 @@ public class SkyFortress
             if (Main.tile[i, k].HasTile && Main.tileSolid[Main.tile[i, k].TileType])
             {
                 int num = k;
-                int num2 = WorldGen.PlaceChest(i - 1, num - 1, (ushort)ModContent.TileType<Tiles.PlatinumChest>(), notNearOtherChests);
+                int num2 = WorldGen.PlaceChest(i - 1, num - 1, (ushort)ModContent.TileType<PlatinumChest>(), notNearOtherChests);
                 if (num2 >= 0)
                 {
                     //Main.chest[num2].item[0].SetDefaults(ModContent.ItemType<Items.Consumables.DragonBait>(), false);

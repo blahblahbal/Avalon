@@ -17,7 +17,7 @@ public class LimeTorch : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToTorch(ModContent.TileType<Tiles.Furniture.LimeTorch>(), 0, false);
+		Item.DefaultToTorch(ModContent.TileType<Tiles.Furniture.Gem.LimeTorch>(), 0, false);
 		Item.value = Item.sellPrice(0, 0, 0, 40);
 		Item.notAmmo = true;
 		Item.ammo = ItemID.Torch;

@@ -8,7 +8,7 @@ public class Catalyzer : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Catalyzer>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Crafting.Catalyzer>());
 		Item.width = 26;
 		Item.height = 26;
 		Item.rare = ItemRarityID.LightRed;

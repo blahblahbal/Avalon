@@ -11,6 +11,6 @@ public class BlastedStone : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.BlastedStone>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Blastplains.BlastedStone>());
 	}
 }

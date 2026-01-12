@@ -1,3 +1,4 @@
+using Avalon.Tiles.Furniture;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -7,7 +8,7 @@ public class HallowStatue : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Statues>(), 5);
+		Item.DefaultToPlaceableTile(ModContent.TileType<Statues>(), 5);
 		Item.width = 20;
 		Item.height = 20;
 		Item.value = Item.sellPrice(copper: 60);

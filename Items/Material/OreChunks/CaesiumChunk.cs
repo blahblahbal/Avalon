@@ -1,4 +1,5 @@
 using Avalon.Common.Extensions;
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -22,7 +23,7 @@ public class CaesiumChunk : ModItem
 	{
 		Recipe.Create(ModContent.ItemType<Bars.CaesiumBar>())
 			.AddIngredient(Type, 8)
-			.AddTile(ModContent.TileType<Tiles.CaesiumForge>())
+			.AddTile(ModContent.TileType<CaesiumForge>())
 			.SortAfterFirstRecipesOf(ModContent.ItemType<Bars.CaesiumBar>())
 			.Register();
 	}

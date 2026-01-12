@@ -6,6 +6,7 @@ using Terraria.WorldBuilding;
 using Terraria.IO;
 using Microsoft.Xna.Framework;
 using System;
+using Avalon.Tiles.Dungeon;
 
 namespace Avalon.WorldGeneration.Passes;
 
@@ -36,12 +37,12 @@ internal class Shrines : GenPass
             ModContent.TileType<Tiles.Savanna.TuhrtlBrick>(),
             //ModContent.TileType<Tiles.TropicalGrass>(),
             //ModContent.TileType<Tiles.Loam>(),
-            ModContent.TileType<Tiles.OrangeBrick>(),
-            ModContent.TileType<Tiles.PurpleBrick>(),
-            ModContent.TileType<Tiles.YellowBrick>(),
-            ModContent.TileType<Tiles.CrackedOrangeBrick>(),
-            ModContent.TileType<Tiles.CrackedPurpleBrick>(),
-            ModContent.TileType<Tiles.CrackedYellowBrick>(),
+            ModContent.TileType<OrangeBrick>(),
+            ModContent.TileType<PurpleBrick>(),
+            ModContent.TileType<YellowBrick>(),
+            ModContent.TileType<CrackedOrangeBrick>(),
+            ModContent.TileType<CrackedPurpleBrick>(),
+            ModContent.TileType<CrackedYellowBrick>(),
             TileID.Mud,
             TileID.JungleGrass,
             TileID.CrimtaneBrick,

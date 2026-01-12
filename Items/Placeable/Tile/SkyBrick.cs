@@ -12,7 +12,7 @@ public class SkyBrick : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.SkyBrick>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.SkyCastle.SkyBrick>());
 		Item.rare = ItemRarityID.Lime;
 	}
 }

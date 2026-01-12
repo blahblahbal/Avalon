@@ -1,4 +1,5 @@
 using Avalon.Common.Extensions;
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -26,7 +27,7 @@ public class MysticalTomePage : ModItem
 			.AddIngredient(ItemID.FallenStar)
 			.AddRecipeGroup(RecipeGroupID.IronBar)
 			.AddRecipeGroup(RecipeGroupID.Wood, 3)
-			.AddTile(ModContent.TileType<Tiles.TomeForge>())
+			.AddTile(ModContent.TileType<TomeForge>())
 			.Register();
 	}
 }

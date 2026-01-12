@@ -1,5 +1,6 @@
 using Avalon.Common.Extensions;
 using Avalon.Items.Material.TomeMats;
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -31,7 +32,7 @@ public class TomorrowsPhoenix : ModItem
 			.AddIngredient(ItemID.FallenStar, 15)
 			.AddIngredient(ModContent.ItemType<MysticalClaw>(), 3)
 			.AddIngredient(ModContent.ItemType<MysticalTomePage>())
-			.AddTile(ModContent.TileType<Tiles.TomeForge>())
+			.AddTile(ModContent.TileType<TomeForge>())
 			.Register();
 	}
 }

@@ -12,7 +12,7 @@ public class RhodiumBrick : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.RhodiumBrick>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Bricks.RhodiumBrick>());
 	}
 	public override void AddRecipes()
 	{

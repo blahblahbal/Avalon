@@ -1,5 +1,6 @@
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Hellcastle;
 using Avalon.Walls;
 using Terraria.ModLoader;
 

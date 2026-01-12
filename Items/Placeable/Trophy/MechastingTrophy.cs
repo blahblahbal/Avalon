@@ -1,3 +1,4 @@
+using Avalon.Tiles.Furniture;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -8,7 +9,7 @@ public class MechastingTrophy : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.BossTrophy>(), 7);
+		Item.DefaultToPlaceableTile(ModContent.TileType<BossTrophy>(), 7);
 		Item.width = 30;
 		Item.height = 30;
 		Item.rare = ItemRarityID.Blue;

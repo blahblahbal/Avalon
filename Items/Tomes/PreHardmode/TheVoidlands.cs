@@ -1,5 +1,6 @@
 using Avalon.Common.Extensions;
 using Avalon.Items.Material.TomeMats;
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -35,7 +36,7 @@ public class TheVoidlands : ModItem
 			.AddIngredient(ModContent.ItemType<EternitysMoon>())
 			.AddIngredient(ModContent.ItemType<MediationsFlame>())
 			.AddIngredient(ModContent.ItemType<MysticalTomePage>(), 2)
-			.AddTile(ModContent.TileType<Tiles.TomeForge>())
+			.AddTile(ModContent.TileType<TomeForge>())
 			.Register();
 
 		CreateRecipe(1)
@@ -45,7 +46,7 @@ public class TheVoidlands : ModItem
 			.AddIngredient(ModContent.ItemType<TomeofDistance>())
 			.AddIngredient(ModContent.ItemType<TomeoftheRiverSpirits>())
 			.AddIngredient(ModContent.ItemType<MysticalTomePage>(), 2)
-			.AddTile(ModContent.TileType<Tiles.TomeForge>())
+			.AddTile(ModContent.TileType<TomeForge>())
 			.Register();
 
 		CreateRecipe(1)
@@ -56,7 +57,7 @@ public class TheVoidlands : ModItem
 			.AddIngredient(ModContent.ItemType<EternitysMoon>())
 			.AddIngredient(ModContent.ItemType<MediationsFlame>())
 			.AddIngredient(ModContent.ItemType<MysticalTomePage>(), 2)
-			.AddTile(ModContent.TileType<Tiles.TomeForge>())
+			.AddTile(ModContent.TileType<TomeForge>())
 			.Register();
 
 		CreateRecipe(1)
@@ -66,7 +67,7 @@ public class TheVoidlands : ModItem
 			.AddIngredient(ModContent.ItemType<TaleoftheRedLotus>())
 			.AddIngredient(ModContent.ItemType<TomeoftheRiverSpirits>())
 			.AddIngredient(ModContent.ItemType<MysticalTomePage>(), 2)
-			.AddTile(ModContent.TileType<Tiles.TomeForge>())
+			.AddTile(ModContent.TileType<TomeForge>())
 			.Register();
 	}
 }

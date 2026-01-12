@@ -2,6 +2,7 @@ using Avalon.Common;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Furniture;
 using Avalon.Tiles.Furniture.Coughwood;
+using Avalon.Tiles.Furniture.Functional;
 using Avalon.Tiles.Savanna;
 using Microsoft.Xna.Framework;
 using System;

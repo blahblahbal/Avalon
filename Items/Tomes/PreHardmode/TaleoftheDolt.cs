@@ -1,4 +1,5 @@
 using Avalon.Common.Extensions;
+using Avalon.Tiles.Furniture.Crafting;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -28,7 +29,7 @@ public class TaleoftheDolt : ModItem
 		CreateRecipe(1)
 			.AddIngredient(ModContent.ItemType<FlankersTome>())
 			.AddIngredient(ModContent.ItemType<MistyPeachBlossoms>())
-			.AddTile(ModContent.TileType<Tiles.TomeForge>())
+			.AddTile(ModContent.TileType<TomeForge>())
 			.Register();
 	}
 }

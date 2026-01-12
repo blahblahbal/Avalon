@@ -13,7 +13,7 @@ public class OrangeBrick : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.OrangeBrick>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Dungeon.OrangeBrick>());
 	}
 	public override void AddRecipes()
 	{

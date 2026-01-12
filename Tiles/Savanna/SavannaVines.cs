@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Avalon.Reflection;
 using Avalon.Dusts;
+using Avalon.Tiles.Hellcastle;
 
 namespace Avalon.Tiles.Savanna;
 

@@ -8,7 +8,7 @@ public class BismuthChandelier : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.BismuthChandelier>());
+		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Furniture.Metal.BismuthChandelier>());
 		Item.width = 26;
 		Item.height = 26;
 		Item.value = Item.sellPrice(silver: 60);

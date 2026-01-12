@@ -24,6 +24,7 @@ using Avalon.Items.Weapons.Magic.PreHardmode.FrozenLyre;
 using Avalon.Items.Weapons.Magic.PreHardmode.GlacierStaff;
 using Avalon.Items.Weapons.Magic.PreHardmode.Smogscreen;
 using Avalon.Items.Weapons.Magic.Hardmode.Boomlash;
+using Avalon.Tiles.Furniture.Crafting;
 
 namespace Avalon.Systems.Recipes;
 
@@ -153,8 +154,8 @@ public static class SushiRecipes
 		//Recipe.Create(ModContent.ItemType<Items.Material.PointingLaser>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.SuperhardmodeToken>(), 50).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
 		//Recipe.Create(ModContent.ItemType<Items.Material.AlienDevice>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.SuperhardmodeToken>(), 60).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
 		//Recipe.Create(ModContent.ItemType<Items.Material.Rock>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.SuperhardmodeToken>(), 40).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
-		Recipe.Create(ModContent.ItemType<GhostintheMachine>()).AddIngredient(ModContent.ItemType<HellcastleToken>(), 10).AddTile(ModContent.TileType<Tiles.CaesiumForge>()).DisableDecraft().Register();
-		Recipe.Create(ModContent.ItemType<Boomlash>()).AddIngredient(ModContent.ItemType<HellcastleToken>(), 30).AddTile(ModContent.TileType<Tiles.CaesiumForge>()).DisableDecraft().Register();
+		Recipe.Create(ModContent.ItemType<GhostintheMachine>()).AddIngredient(ModContent.ItemType<HellcastleToken>(), 10).AddTile(ModContent.TileType<CaesiumForge>()).DisableDecraft().Register();
+		Recipe.Create(ModContent.ItemType<Boomlash>()).AddIngredient(ModContent.ItemType<HellcastleToken>(), 30).AddTile(ModContent.TileType<CaesiumForge>()).DisableDecraft().Register();
 		//Recipe.Create(ModContent.ItemType<Items.Weapons.Magic.Terraspin>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.MechastingToken>(), 60).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
 		//Recipe.Create(ModContent.ItemType<Items.Weapons.Ranged.QuadroCannon>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.MechastingToken>(), 45).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();
 		//Recipe.Create(ModContent.ItemType<Items.Weapons.Summon.ReflectorStaff>()).AddIngredient(ModContent.ItemType<ModSupport.Tokens.MechastingToken>(), 45).AddTile(ModContent.TileType<Tiles.SolariumAnvil>()).DisableDecraft().Register();

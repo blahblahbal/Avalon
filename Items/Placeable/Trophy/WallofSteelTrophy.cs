@@ -1,3 +1,4 @@
+using Avalon.Tiles.Furniture;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -8,7 +9,7 @@ public class WallofSteelTrophy : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.BossTrophy>(), 6);
+		Item.DefaultToPlaceableTile(ModContent.TileType<BossTrophy>(), 6);
 		Item.width = 30;
 		Item.height = 30;
 		Item.rare = ItemRarityID.Blue;
