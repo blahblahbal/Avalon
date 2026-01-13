@@ -31,10 +31,9 @@ using ThoriumMod.Items.ThrownItems;
 using ThoriumMod.NPCs;
 using ThoriumMod.NPCs.Depths;
 using Avalon.Items.Placeable.Crafting;
-using Avalon.NPCs.Hardmode.IrateBones;
-using Avalon.NPCs.PreHardmode.FallenHero;
-using Avalon.NPCs.PreHardmode.Mosquito;
-using Avalon.NPCs.PreHardmode.RedArowana;
+using Avalon.NPCs.Savanna;
+using Avalon.NPCs.BloodMoon;
+using Avalon.NPCs.Dungeon;
 
 namespace Avalon.ModSupport.Thorium;
 

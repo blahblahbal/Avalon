@@ -1,8 +1,6 @@
-using Avalon.NPCs.Hardmode.Ickslime;
-using Avalon.NPCs.Hardmode.MineralSlime;
-using Avalon.NPCs.PreHardmode.AmberSlime;
-using Avalon.NPCs.PreHardmode.InfestedAmberSlime;
-using Avalon.NPCs.PreHardmode.OreSlime;
+using Avalon.NPCs.Contagion;
+using Avalon.NPCs.Savanna;
+using Avalon.NPCs.Underground;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

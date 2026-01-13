@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
+using Avalon.NPCs.Template;
 
 namespace Avalon.NPCs.Bosses.Hardmode.WallOfSteel;
 

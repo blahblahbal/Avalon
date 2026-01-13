@@ -1,8 +1,8 @@
 using Avalon.Common.Players;
 using Avalon.Items.Material;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Icicle;
-using Avalon.NPCs.Hardmode.CursedScepter;
-using Avalon.NPCs.Hardmode.InfectedPickaxe;
+using Avalon.NPCs.Contagion;
+using Avalon.NPCs.Dungeon;
 using Avalon.Tiles;
 using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Furniture;

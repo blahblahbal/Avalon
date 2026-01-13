@@ -1,6 +1,6 @@
 using Avalon;
 using Avalon.Dusts;
-using Avalon.NPCs.PreHardmode.Bactus;
+using Avalon.NPCs.Contagion;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;

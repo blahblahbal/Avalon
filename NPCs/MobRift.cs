@@ -1,9 +1,5 @@
 using Avalon.Common;
-using Avalon.NPCs.Hardmode.Cougher;
-using Avalon.NPCs.Hardmode.Ickslime;
-using Avalon.NPCs.Hardmode.Viris;
-using Avalon.NPCs.PreHardmode.Bactus;
-using Avalon.NPCs.PreHardmode.Pyrasite;
+using Avalon.NPCs.Contagion;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;

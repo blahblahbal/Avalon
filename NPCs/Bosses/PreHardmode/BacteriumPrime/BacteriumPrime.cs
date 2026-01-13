@@ -81,7 +81,7 @@ public class BacteriumPrime : ModNPC
 		NPC.timeLeft = 200000;
 		NPC.dontTakeDamage = true;
 		Music = ExxoAvalonOrigins.MusicMod != null ? MusicLoader.GetMusicSlot(ExxoAvalonOrigins.MusicMod, "Sounds/Music/BacteriumPrime") : MusicID.Boss5;
-		SpawnModBiomes = new int[] { ModContent.GetInstance<Contagion>().Type, ModContent.GetInstance<UndergroundContagion>().Type };
+		SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type, ModContent.GetInstance<UndergroundContagion>().Type };
 	}
 	public override void OnKill()
 	{

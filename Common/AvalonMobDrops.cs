@@ -26,22 +26,16 @@ using Avalon.Items.Weapons.Ranged.PreHardmode.Longbow;
 using Avalon.ModSupport;
 using Avalon.ModSupport.Tokens;
 using Avalon.NPCs.Bosses.Hardmode.Mechasting;
-using Avalon.NPCs.Hardmode.BaskingSpewer;
-using Avalon.NPCs.Hardmode.ContaminatedGhoul;
-using Avalon.NPCs.Hardmode.Cougher;
-using Avalon.NPCs.Hardmode.CursedFlamer;
-using Avalon.NPCs.Hardmode.IrateBones;
-using Avalon.NPCs.Hardmode.ViralMummy;
-using Avalon.NPCs.Hardmode.Viris;
-using Avalon.NPCs.PreHardmode.Bactus;
-using Avalon.NPCs.PreHardmode.BloodshotEye;
-using Avalon.NPCs.PreHardmode.FallenHero;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Avalon.NPCs.Contagion;
+using Avalon.NPCs.Corruption;
+using Avalon.NPCs.BloodMoon;
+using Avalon.NPCs.Dungeon;
 
 namespace Avalon.Common;
 

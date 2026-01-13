@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Avalon;
-using Avalon.NPCs.PreHardmode.Bactus;
+using Avalon.NPCs.Contagion;
 
 namespace Avalon.Tiles.Contagion;
 
