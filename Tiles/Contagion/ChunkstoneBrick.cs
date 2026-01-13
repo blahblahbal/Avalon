@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Tiles.Contagion;
 
+[LegacyName("ChunkstoneBrickTile")]
 public class ChunkstoneBrick : ModTile
 {
     public override void SetStaticDefaults()

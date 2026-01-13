@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Tiles.Contagion;
 
+[LegacyName("CoughwoodTile")]
 public class Coughwood : ModTile
 {
     public override void SetStaticDefaults()

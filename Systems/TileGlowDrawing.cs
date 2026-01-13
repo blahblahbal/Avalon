@@ -48,7 +48,7 @@ public class TileGlowDrawing : ModSystem
 		return new VertexColors(TopLeft, TopRight, BottomLeft, BottomRight);
 	}
 
-	public static void DrawGlowmask(int i, int j, Color color, Asset<Texture2D> glow)
+	public static void DrawGlowmask(int i, int j, Color color, Asset<Texture2D> glow, int xOffset = 0, int yOffset = 0)
 	{
 		Tile tile = Main.tile[i, j];
 		var zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
@@ -57,7 +57,7 @@ public class TileGlowDrawing : ModSystem
 			zero = Vector2.Zero;
 		}
 
-		Vector2 pos = new Vector2(i * 16, j * 16) + zero - Main.screenPosition;
+		Vector2 pos = new Vector2(i * 16 + xOffset, j * 16 + yOffset) + zero - Main.screenPosition;
 		var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
 		var halfFrame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 8);
 		color = ActuatedColor(color, tile);

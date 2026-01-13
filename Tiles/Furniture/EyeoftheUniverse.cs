@@ -1,6 +1,8 @@
 using Avalon;
+using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,9 +12,12 @@ namespace Avalon.Tiles.Furniture;
 
 public class EyeoftheUniverse : ModTile
 {
-    public override void SetStaticDefaults()
-    {
-        Main.tileFrameImportant[Type] = true;
+	private Asset<Texture2D> glow;
+	public override void SetStaticDefaults()
+	{
+		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+
+		Main.tileFrameImportant[Type] = true;
         Main.tileLavaDeath[Type] = true;
         TileID.Sets.FramesOnKillWall[Type] = true; // Necessary since Style3x3Wall uses AnchorWall
         TileObjectData.newTile.CopyFrom(TileObjectData.Style3x3Wall);
@@ -37,18 +42,8 @@ public class EyeoftheUniverse : ModTile
 
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
-        Tile tile = Main.tile[i, j];
-        var zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
-        if (Main.drawToScreen)
-        {
-            zero = Vector2.Zero;
-        }
-
-        Vector2 pos = new Vector2(i * 16, j * 16) + zero - Main.screenPosition;
-        var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
-        Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Tiles/EyeoftheUniverse_Glow").Value, pos, frame,
-            Color.White);
-    }
+		TileGlowDrawing.DrawGlowmask(i, j, Color.White, glow);
+	}
 
     public override bool CreateDust(int i, int j, ref int type)
     {

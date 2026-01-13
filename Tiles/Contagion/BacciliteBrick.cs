@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Tiles.Contagion;
 
+[LegacyName("BacciliteBrickTile")]
 public class BacciliteBrick : ModTile
 {
 	public override void SetStaticDefaults()

@@ -1,10 +1,12 @@
+using Avalon.Common;
+using Avalon.Items.Placeable.Statue;
+using Avalon.Systems;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Avalon.Common;
-using Avalon.Items.Placeable.Statue;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
@@ -20,9 +22,12 @@ namespace Avalon.Tiles.Furniture;
 
 public class Statues : ModTile
 {
-    public override void SetStaticDefaults()
-    {
-        Main.tileFrameImportant[Type] = true;
+	private Asset<Texture2D> glow;
+	public override void SetStaticDefaults()
+	{
+		glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+
+		Main.tileFrameImportant[Type] = true;
         Main.tileObsidianKill[Type] = true;
 
         TileObjectData.newTile.CopyFrom(TileObjectData.Style2xX);
@@ -189,19 +194,8 @@ public class Statues : ModTile
     }
     public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
     {
-        Tile tile = Main.tile[i, j];
-        var zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
-        if (Main.drawToScreen)
-        {
-            zero = Vector2.Zero;
-        }
-        int offsetY = 2;
-
-        Vector2 pos = new Vector2(i * 16, j * 16 + offsetY) + zero - Main.screenPosition;
-        var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
-        Main.spriteBatch.Draw(Mod.Assets.Request<Texture2D>("Tiles/Statues_Glow").Value, pos, frame,
-            Color.White);
-    }
+		TileGlowDrawing.DrawGlowmask(i, j, Color.White, glow, yOffset: 2);
+	}
 }
 
 public class ExampleStatueModWorld : ModSystem
