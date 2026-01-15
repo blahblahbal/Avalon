@@ -27,7 +27,6 @@ using Avalon.Items.Tools.Superhardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode.FlowerOfTheJungle;
 using Avalon.Items.Weapons.Magic.PreHardmode.FrozenLyre;
 using Avalon.Items.Weapons.Magic.PreHardmode.GlacierStaff;
-using Avalon.Items.Weapons.Melee.PreHardmode.DesertLongsword;
 using Avalon.Items.Weapons.Ranged.PreHardmode.EggCannon;
 using Avalon.Prefixes;
 using Avalon.Reflection;
@@ -52,6 +51,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using Avalon.Items.Weapons.Melee.Swords;
 
 namespace Avalon.Common;
 

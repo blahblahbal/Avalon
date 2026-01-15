@@ -6,11 +6,11 @@ using Microsoft.Xna.Framework;
 using Avalon.Items.Potions.Buff;
 using System.Collections.Generic;
 using Terraria.WorldBuilding;
-using Avalon.Items.Weapons.Melee.Hardmode.PossessedFlamesaw;
 using Avalon.Items.Weapons.Magic.Hardmode.Boomlash;
 using Avalon.Tiles.Furniture;
 using Avalon.Tiles.Hellcastle;
 using Avalon.Tiles.Furniture.Functional;
+using Avalon.Items.Weapons.Melee.Boomerangs;
 
 namespace Avalon.WorldGeneration.Structures;
 

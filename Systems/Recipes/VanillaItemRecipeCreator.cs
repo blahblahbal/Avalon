@@ -1,23 +1,18 @@
-using Terraria.ModLoader;
-using Terraria;
-using Terraria.ID;
+using Avalon.Items.Accessories.PreHardmode;
+using Avalon.Items.Fish;
 using Avalon.Items.Material;
-using Avalon.Items.Weapons.Melee.PreHardmode;
-using Avalon.Items.Material.Shards;
-using Avalon.Items.Material.Ores;
 using Avalon.Items.Material.Bars;
 using Avalon.Items.Material.Herbs;
-using Avalon.Items.Tools.PreHardmode;
-using Avalon.Items.Accessories.PreHardmode;
-using Avalon.Items.Placeable.Tile;
-using Avalon.Items.Fish;
-using Avalon.Items.Consumables;
 using Avalon.Items.Material.OreChunks;
-using Terraria.Localization;
-using Avalon.Common;
-using Avalon.Items.Weapons.Melee.PreHardmode.OreSwords;
-using Avalon.Items.Weapons.Melee.PreHardmode.Snotsabre;
+using Avalon.Items.Material.Ores;
+using Avalon.Items.Material.Shards;
+using Avalon.Items.Placeable.Tile;
+using Avalon.Items.Tools.PreHardmode;
+using Avalon.Items.Weapons.Melee.Swords;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Icicle;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Avalon.Systems.Recipes;
 

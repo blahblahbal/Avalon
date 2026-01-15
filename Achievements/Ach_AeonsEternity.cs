@@ -1,4 +1,4 @@
-using Avalon.Items.Weapons.Melee.PreHardmode.AeonsEternity;
+using Avalon.Items.Weapons.Melee.Swords;
 using System.Collections.Generic;
 using Terraria.Achievements;
 using Terraria.ModLoader;

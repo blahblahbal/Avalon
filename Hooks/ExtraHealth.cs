@@ -1,13 +1,11 @@
 using Avalon.Common;
 using Avalon.Items.Accessories.Vanity;
-using Avalon.Items.Weapons.Melee.SolarSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using ReLogic.Content;
 using System;
-using System.Reflection;
 using Terraria;
 using Terraria.GameContent.UI.ResourceSets;
 using Terraria.Graphics.Shaders;

@@ -1,4 +1,5 @@
-using Avalon.Items.Weapons.Melee.PreHardmode.DesertLongsword;
+using Avalon.Items.Weapons.Melee.Swords;
+using Avalon.Projectiles.Melee.Swords;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;

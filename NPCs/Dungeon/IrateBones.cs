@@ -1,11 +1,5 @@
-using System;
-using Avalon.Common;
 using Avalon.Items.Banners;
-using Avalon.Items.Material;
-using Avalon.Items.Vanity;
-using Avalon.Items.Weapons.Melee.PreHardmode;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;

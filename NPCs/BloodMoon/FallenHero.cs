@@ -10,8 +10,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
 using Avalon.Items.Material;
-using Avalon.Items.Weapons.Melee.PreHardmode.MinersSword;
 using Avalon;
+using Avalon.Items.Weapons.Melee.Swords;
 
 namespace Avalon.NPCs.BloodMoon;
 

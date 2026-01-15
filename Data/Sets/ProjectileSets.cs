@@ -1,5 +1,6 @@
-using Avalon.Items.Weapons.Melee.Hardmode.PossessedFlamesaw;
+using Avalon.Items.Weapons.Melee.Boomerangs;
 using Avalon.Projectiles.Hostile.WallofSteel;
+using Avalon.Projectiles.Melee.Boomerangs;
 using Terraria.ID;
 using Terraria.ModLoader;
 

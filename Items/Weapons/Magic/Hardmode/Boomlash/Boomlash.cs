@@ -1,6 +1,7 @@
 using Avalon.Common.Extensions;
-using Avalon.Items.Weapons.Melee.PreHardmode.AeonsEternity;
+using Avalon.Items.Weapons.Melee.Swords;
 using Avalon.Particles;
+using Avalon.Projectiles.Melee.Swords;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;

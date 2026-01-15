@@ -1,7 +1,7 @@
 using Avalon;
 using Avalon.Items.Accessories.PreHardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode.Smogscreen;
-using Avalon.Items.Weapons.Melee.PreHardmode.TetanusChakram;
+using Avalon.Items.Weapons.Melee.Boomerangs;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Blunderblight;
 using Avalon.NPCs.Bosses.PreHardmode.BacteriumPrime;
 using Microsoft.Xna.Framework;

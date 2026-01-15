@@ -1,5 +1,5 @@
 using Avalon.Common;
-using Avalon.Items.Weapons.Melee.Hardmode.VirulentScythe;
+using Avalon.Items.Weapons.Melee.Boomerangs;
 using Avalon.ModSupport;
 using Avalon.ModSupport.MLL.Liquids;
 using Avalon.Tiles.Contagion;

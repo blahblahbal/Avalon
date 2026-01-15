@@ -1,5 +1,5 @@
 using Avalon.Items.Weapons.Magic.PreHardmode.Smogscreen;
-using Avalon.Items.Weapons.Melee.PreHardmode.TetanusChakram;
+using Avalon.Items.Weapons.Melee.Boomerangs;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Blunderblight;
 using Avalon.Tiles.Furniture;
 using Terraria;

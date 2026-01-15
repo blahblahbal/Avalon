@@ -1,4 +1,4 @@
-using Avalon.Items.Weapons.Melee.Hardmode.VertexOfExcalibur;
+using Avalon.Items.Weapons.Melee.Swords;
 using Terraria.Achievements;
 using Terraria.ModLoader;
 

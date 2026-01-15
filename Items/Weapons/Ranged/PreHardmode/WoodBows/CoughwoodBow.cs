@@ -1,9 +1,9 @@
 using Avalon.Common.Extensions;
-using Avalon.Items.Weapons.Melee.PreHardmode.WoodenClubs;
 using Avalon.Items.Placeable.Tile;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Avalon.Items.Weapons.Melee.Maces.WoodenClubs;
 
 namespace Avalon.Items.Weapons.Ranged.PreHardmode.WoodBows;
 

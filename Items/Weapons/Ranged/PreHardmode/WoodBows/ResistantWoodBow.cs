@@ -1,4 +1,4 @@
-using Avalon.Items.Weapons.Melee.PreHardmode.WoodenClubs;
+using Avalon.Items.Weapons.Melee.Maces.WoodenClubs;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;

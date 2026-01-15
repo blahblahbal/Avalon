@@ -18,10 +18,6 @@ using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Magic.Hardmode.Sunstorm;
 using Avalon.Items.Weapons.Magic.PreHardmode.BloodBarrage;
 using Avalon.Items.Weapons.Magic.PreHardmode.ChaosTome;
-using Avalon.Items.Weapons.Melee.PreHardmode.GoblinDagger;
-using Avalon.Items.Weapons.Melee.PreHardmode.MarrowMasher;
-using Avalon.Items.Weapons.Melee.PreHardmode.MinersSword;
-using Avalon.Items.Weapons.Melee.PreHardmode.SanguineKatana;
 using Avalon.Items.Weapons.Ranged.PreHardmode.Longbow;
 using Avalon.ModSupport;
 using Avalon.ModSupport.Tokens;
@@ -36,6 +32,8 @@ using Avalon.NPCs.Contagion;
 using Avalon.NPCs.Corruption;
 using Avalon.NPCs.BloodMoon;
 using Avalon.NPCs.Dungeon;
+using Avalon.Items.Weapons.Melee.Swords;
+using Avalon.Items.Weapons.Melee.Maces;
 
 namespace Avalon.Common;
 

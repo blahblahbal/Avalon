@@ -1,5 +1,5 @@
 using Avalon.Common;
-using Avalon.Items.Weapons.Melee.Hardmode.MasterSword;
+using Avalon.Items.Weapons.Melee.Swords;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
