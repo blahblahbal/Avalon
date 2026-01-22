@@ -770,8 +770,6 @@ Mods: {
 			Blowpipes: For use with Blowpipes
 			TempleKey: Opens the lihzahrd temple door
 			PoisonDart: For use with Blowpipes and Blowgun
-			IceBlade: Shoots a giant snowflake
-			Frostbrand: Shoots a spread of giant snowflakes
 			Extractinator: <right> with a prefixed item while on your hotbar to remove the prefix
 			MonsterBanner: Increased damage to and defense from the following:
 			UpgradeStage: "Upgrade stage: "
@@ -795,7 +793,6 @@ Mods: {
 				'Not to be confused with a picksaw'
 				Can mine Chlorophyte, Xanthophyte, and Caesium Ore
 				'''
-			MandibleBlade: Throws sand that confuses your enemies
 		}
 
 		Jukebox: {
@@ -2577,7 +2574,7 @@ Mods: {
 
 			DesertLongSword: {
 				DisplayName: Desert Long Sword
-				Tooltip: Throws sand that confuses your enemies
+				Tooltip: Shoots a sandy tornado
 			}
 
 			SanguineKatana: {
@@ -10355,6 +10352,7 @@ Mods: {
 			TendrilShot.DisplayName: Tendril Shot
 			CougherCough.DisplayName: Cougher Cough
 			ShadlopodInk.DisplayName: Shadlopod Ink
+			DesertLongswordTornado.DisplayName: Desert Longsword Tornado
 		}
 
 		NPCs: {

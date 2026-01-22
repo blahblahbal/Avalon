@@ -16,8 +16,8 @@ using Avalon.Items.Material.Ores;
 using Avalon.Items.Other;
 using Avalon.Items.Pets;
 using Avalon.Items.Placeable.Furniture;
-using Avalon.Items.Placeable.MusicBoxes;
 using Avalon.Items.Placeable.HerbsAndSeeds;
+using Avalon.Items.Placeable.MusicBoxes;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Potions.Buff;
 using Avalon.Items.Potions.Other;
@@ -31,13 +31,11 @@ using Avalon.Items.Weapons.Ranged.PreHardmode.EggCannon;
 using Avalon.Prefixes;
 using Avalon.Reflection;
 using Avalon.Tiles;
-using Avalon.Tiles.Ancient;
 using Avalon.Tiles.Ancient.AncientAdamantiteBrick;
 using Avalon.Tiles.Ancient.AncientIronBrick;
 using Avalon.Tiles.Ancient.AncientOrangeBrick;
 using Avalon.Tiles.Ancient.AncientPurpleBrick;
 using Avalon.Tiles.Ancient.AncientYellowBrick;
-using Avalon.Tiles.Contagion;
 using Microsoft.Xna.Framework;
 using ModLiquidLib.ModLoader;
 using System;
@@ -51,7 +49,6 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
-using Avalon.Items.Weapons.Melee.Swords;
 
 namespace Avalon.Common;
 
@@ -162,8 +159,6 @@ public class AvalonGlobalItem : GlobalItem
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<UnderworldKey>()] = ModContent.ItemType<UnderworldChest>();
 
 		// weapons
-		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<DesertLongsword>()] = ItemID.AntlionClaw;
-		ItemID.Sets.ShimmerTransformToItem[ItemID.AntlionClaw] = ModContent.ItemType<DesertLongsword>();
 
 		//ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<AncientDartRifle>()] = ItemID.DartRifle;
 		//ItemID.Sets.ShimmerTransformToItem[ItemID.DartRifle] = ModContent.ItemType<AncientDartRifle>();
@@ -178,7 +173,7 @@ public class AvalonGlobalItem : GlobalItem
 		// misc items
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<StaminaCrystal>()] = ModContent.ItemType<EnergyCrystal>();
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<UnstableCatalyzer>()] = ModContent.ItemType<Items.Placeable.Crafting.Catalyzer>();
-		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<ContagionKey>()] = ModContent.ItemType<Items.Placeable.Furniture.ContagionChest>();
+		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<ContagionKey>()] = ModContent.ItemType<ContagionChest>();
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<PlagueCrate>()] = ModContent.ItemType<ContagionCrate>();
 
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Zircon>()] = ItemID.Diamond;
@@ -2588,33 +2583,6 @@ public class AvalonGlobalItem : GlobalItem
 			//case ItemID.Vine:
 			//    tooltips.Add(new TooltipLine(Mod, "Rope", "Can be climbed on"));
 			//    break;
-			case ItemID.IceBlade:
-				foreach (TooltipLine tooltip in tooltips)
-				{
-					if (tooltip.Name == "Tooltip0")
-					{
-						tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.IceBlade");
-					}
-				}
-				break;
-			case ItemID.AntlionClaw:
-				foreach (TooltipLine tooltip in tooltips)
-				{
-					if (tooltip.Name == "Tooltip0")
-					{
-						tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.MandibleBlade");
-					}
-				}
-				break;
-			case ItemID.Frostbrand:
-				foreach (TooltipLine tooltip in tooltips)
-				{
-					if (tooltip.Name == "Tooltip0")
-					{
-						tooltip.Text = Language.GetTextValue("Mods.Avalon.TooltipEdits.Frostbrand");
-					}
-				}
-				break;
 			case ItemID.DeathbringerPickaxe:
 			case ItemID.NightmarePickaxe:
 				foreach (TooltipLine tooltip in tooltips)
