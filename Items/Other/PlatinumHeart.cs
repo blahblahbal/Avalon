@@ -1,25 +1,8 @@
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.Audio;
+using Avalon.Common.Templates;
 
 namespace Avalon.Items.Other;
 
-public class PlatinumHeart : ModItem
+public class PlatinumHeart : LifePickupItem
 {
-    public override void SetStaticDefaults()
-    {
-        ItemID.Sets.IgnoresEncumberingStone[Type] = true;
-        ItemID.Sets.IsAPickup[Type] = true;
-    }
-    public override void SetDefaults()
-    {
-        Item.Size = new Vector2(12);
-    }
-
-    public override bool CanPickup(Player player)
-    {
-        return true;
-    }
+	public override float HealAmount => 50;
 }

@@ -1,4 +1,6 @@
 ﻿using Avalon.Dusts;
+using Avalon.Items.Material;
+using Avalon.Items.Material.Ores;
 using Avalon.Projectiles.Hostile.BacteriumPrime;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,6 +9,7 @@ using System;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -27,22 +30,32 @@ public class BacteriumTendril : ModNPC
 	{
 		Chain = ModContent.Request<Texture2D>(Texture + "_Chain");
 	}
+
+	public override void ModifyNPCLoot(NPCLoot npcLoot)
+	{
+		npcLoot.Add(new CommonDrop(ModContent.ItemType<Booger>(), 2, 2, 5, 3));
+		npcLoot.Add(new CommonDrop(ModContent.ItemType<BacciliteOre>(), 2, 5, 12, 3));
+		npcLoot.Add(new CommonDrop(ItemID.Heart, 2));
+	}
 	public override void SetDefaults()
 	{
 		NPC.damage = 27;
 		NPC.noTileCollide = true;
-		NPC.lifeMax = 450;
-		NPC.defense = 3;
+		NPC.lifeMax = 500;
 		NPC.noGravity = true;
 		NPC.width = NPC.height = 30;
 		NPC.aiStyle = -1;
 		NPC.npcSlots = 0;
 		NPC.HitSound = SoundID.NPCHit25;
 		NPC.DeathSound = SoundID.NPCDeath12;
-		NPC.knockBackResist = 0.5f;
+		NPC.knockBackResist = 0.25f;
 		NPC.timeLeft = 200000;
 		NPC.netAlways = true;
 		NPC.dontCountMe = true; // don't count with radar
+	}
+	public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
+	{
+		NPC.lifeMax = (int)(NPC.lifeMax * balance * bossAdjustment);
 	}
 	private NPC Owner { get => Main.npc[(int)NPC.ai[3]]; }
 	private Player Target { get => Main.player[NPC.target]; }
@@ -71,7 +84,7 @@ public class BacteriumTendril : ModNPC
 		}
 
 		NPC.alpha = Owner.alpha;
-		NPC.ai[0] += 0.005f;
+		NPC.ai[0] += 0.002f;
 		NPC.ai[1]++;
 
 		if(!Owner.active || Owner.type != ModContent.NPCType<BacteriumPrime>())
@@ -112,7 +125,7 @@ public class BacteriumTendril : ModNPC
 		//{
 		//	spriteBatch.Draw(Chain.Value, ConnectionPoint - (direction * i * Chain.Height() / divisions) - screenPos + new Vector2(0, (MathF.Sin(i / (float)iterations * MathHelper.Pi) * (iterations / 1.5f)) + (iterations / 3f)), new Rectangle(0,(i % divisions) * Chain.Height() / divisions,Chain.Width(),Chain.Height() / 2), drawColor * NPC.Opacity, rotation, new Vector2(Chain.Width() / 2, Chain.Height()), NPC.scale, SpriteEffects.None, 0);
 		//}
-		Color glowColor = NPC.GetNPCColorTintedByBuffs(new Color(0.8f, 1f, 0f, 0f)) * NPC.Opacity * (Math.Abs(NPC.ai[2]) / 60f);
+		Color glowColor = NPC.GetNPCColorTintedByBuffs(new Color(1f, 0.9f, 0f, 0f)) * NPC.Opacity * (Math.Abs(NPC.ai[2]) / 60f);
 		if (NPC.ai[2] != 0)
 		{
 			for (int i = 0; i < 4; i++)

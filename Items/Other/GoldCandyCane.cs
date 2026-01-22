@@ -1,25 +1,2 @@
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.Audio;
-
 namespace Avalon.Items.Other;
-
-public class GoldCandyCane : ModItem
-{
-    public override void SetStaticDefaults()
-    {
-        ItemID.Sets.IgnoresEncumberingStone[Type] = true;
-        ItemID.Sets.IsAPickup[Type] = true;
-    }
-    public override void SetDefaults()
-    {
-        Item.Size = new Vector2(12);
-    }
-
-    public override bool CanPickup(Player player)
-    {
-        return true;
-    }
-}
+public class GoldCandyCane : GoldHeart;

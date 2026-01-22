@@ -326,8 +326,7 @@ public partial class AvalonPlayer : ModPlayer
 	public bool BrokenWeaponry;
 	public bool Unloaded;
 	public bool Lucky;
-	public bool Heartsick;
-	public bool HeartsickElixir;
+	public float HeartPickupValueMultiplier;
 	public bool AdvancedBattle;
 	public bool AdvancedCalming;
 	public int TimeSlowCounter;
@@ -444,10 +443,9 @@ public partial class AvalonPlayer : ModPlayer
 		AdvancedBattle = false;
 		AdvancedCalming = false;
 		Lucky = false;
-		Heartsick = false;
 		NinjaElixir = false;
 		NinjaPotion = false;
-		HeartsickElixir = false;
+		HeartPickupValueMultiplier = 1f;
 		CaesiumPoison = false;
 		Pathogen = false;
 		HungryMinion = false;

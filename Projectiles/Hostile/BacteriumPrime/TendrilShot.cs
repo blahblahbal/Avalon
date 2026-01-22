@@ -27,7 +27,7 @@ public class TendrilShot : ModProjectile
 		Dust d = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<SimpleColorableGlowyDust>(), Projectile.velocity * 0.2f + Main.rand.NextVector2Circular(1, 1));
 		d.scale = 1.5f;
 		d.noGravity = true;
-		d.color = new Color(0.5f, 0.55f, 0.2f, 0.3f);
+		d.color = new Color(0.55f, 0.5f, 0.2f, 0.3f);
 
 		Projectile.ai[1]++;
 
@@ -46,7 +46,7 @@ public class TendrilShot : ModProjectile
 		{
 			Projectile.Kill();
 		}
-		else if (Projectile.ai[1] > 540)
+		else if (Projectile.ai[1] > 520)
 		{
 			Projectile.velocity *= 0.98f;
 		}
@@ -55,10 +55,10 @@ public class TendrilShot : ModProjectile
 	{
 		for (int i = 0; i < 10; i++)
 		{
-			Dust d2 = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<SimpleColorableGlowyDust>(), Main.rand.NextVector2Circular(5, 5));
-			d2.scale = 1.5f;
-			d2.noGravity = true;
-			d2.color = new Color(0.5f, 0.55f, 0.2f, 0.3f);
+			Dust d = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<SimpleColorableGlowyDust>(), Main.rand.NextVector2Circular(5, 5));
+			d.scale = 1.5f;
+			d.noGravity = true;
+			d.color = new Color(0.55f, 0.5f, 0.2f, 0.3f);
 		}
 	}
 }

@@ -2793,12 +2793,12 @@ Mods: {
 
 			HeartsickPotion: {
 				DisplayName: Heartsick Potion
-				Tooltip: Life hearts restore 25 life instead of 20
+				Tooltip: Life pickups restore 25% more life
 			}
 
 			AdvHeartsickPotion: {
 				DisplayName: Heartsick Elixir
-				Tooltip: Life hearts restore 30 life instead of 20
+				Tooltip: Life pickups restore 50% more life
 			}
 
 			ImmortalityPotion: {
@@ -10901,12 +10901,12 @@ Mods: {
 
 			Heartsick: {
 				DisplayName: Heartsick
-				Description: Hearts restore 25 life
+				Description: Life pickups restore 25% more life
 			}
 
 			AdvHeartsick: {
 				DisplayName: Advanced Heartsick
-				Description: Hearts restore 30 life
+				Description: Life pickups restore 50% more life
 			}
 
 			ImmortalityCooldown: {

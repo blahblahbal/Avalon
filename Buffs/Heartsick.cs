@@ -8,6 +8,6 @@ public class Heartsick : ModBuff
 {
     public override void Update(Player player, ref int buffIndex)
     {
-        player.GetModPlayer<AvalonPlayer>().Heartsick = true;
+        player.GetModPlayer<AvalonPlayer>().HeartPickupValueMultiplier += 0.25f;
     }
 }

@@ -65,6 +65,7 @@ public class BacteriumPrime : ModNPC
 	}
 	public override void SetDefaults()
 	{
+		AfterimageOpacity = 0f;
 		NPC.damage = 27;
 		NPC.boss = true;
 		NPC.noTileCollide = true;
@@ -111,10 +112,11 @@ public class BacteriumPrime : ModNPC
 		npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<PetriDish>(), 4));
 	}
 	private Player Target { get => Main.player[NPC.target]; }
+	private float AfterimageOpacity = 0f;
 	public override void AI()
 	{
 		Lighting.AddLight(NPC.Center, new Vector3(0.8f, 1.4f, 0) * NPC.Opacity * (0.3f + MathF.Sin((float)Main.timeForVisualEffects * 0.04f) * 0.15f));
-		// this is for the afterimages
+		// this is for the afterimage's spacing
 		NPC.localAI[3] = (int)Main.timeForVisualEffects % 6;
 
 		// despawning and targetting
@@ -132,7 +134,7 @@ public class BacteriumPrime : ModNPC
 			NPC.alpha += 10;
 			return;
 		}
-		// count the tendrils
+
 		if (NPC.dontTakeDamage)
 		{
 			NPC.ReflectProjectiles(NPC.Hitbox);
@@ -185,7 +187,7 @@ public class BacteriumPrime : ModNPC
 				{
 					NPC.oldPos[i] = Vector2.Zero;
 				}
-				NPC.localAI[0] = 1;
+				AfterimageOpacity = 1;
 				SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
 				NPC.velocity = NPC.Center.DirectionTo(Target.Center).RotatedBy(MathHelper.PiOver2 * NPC.ai[3]) * 13;
 			}
@@ -204,10 +206,11 @@ public class BacteriumPrime : ModNPC
 			if (tendrilWHOAMIs.Count == 0)
 			{
 				NPC.ai[3]++;
-				NPC.velocity *= 0.98f;
+				NPC.velocity *= 0.96f;
+				NPC.rotation += NPC.ai[3] * 0.1f;
 				if (NPC.ai[3] == 60)
 				{
-					NPC.dontTakeDamage = false;
+					Transition();
 				}
 			}
 			else
@@ -225,19 +228,29 @@ public class BacteriumPrime : ModNPC
 				NPC.SimpleFlyMovement(NPC.Center.DirectionTo(Target.Center) * Utils.Remap(tendrilWHOAMIs.Count, 0, 10, 3f, 1f) * speedMultiplier, Utils.Remap(tendrilWHOAMIs.Count, 0, 10, 0.007f, 0.003f) * accelMultiplier);
 			}
 		}
-		if (NPC.localAI[0] > 0 && NPC.ai[1] < 60 && NPC.dontTakeDamage)
-			NPC.localAI[0] -= 0.05f;
+		if (AfterimageOpacity > 0 && NPC.ai[1] < 60 && NPC.dontTakeDamage)
+			AfterimageOpacity -= 0.05f;
+	}
+	private void Transition()
+	{
+		NPC.dontTakeDamage = false;
+		int tendril = ModContent.NPCType<BacteriumTendril>();
+		for (int i = 0; i < 8; i++)
+		{
+			Vector2 spawnLocation = NPC.Center + new Vector2(60, 0).RotatedBy(i / 8f * MathHelper.TwoPi);
+			NPC.NewNPC(NPC.GetSource_FromThis(), (int)spawnLocation.X, (int)spawnLocation.Y, tendril, NPC.whoAmI, i / 8f * MathHelper.TwoPi, Main.rand.Next(100), 0, NPC.whoAmI);
+		}
 	}
 	private void Phase2()
 	{
-		NPC.localAI[0] = 1;
 	}
 	public override void OnSpawn(IEntitySource source)
 	{
 		int tendril = ModContent.NPCType<BacteriumTendril>();
 		for(int i = 0; i < 12; i++)
 		{
-			NPC.NewNPC(NPC.GetSource_FromThis(), (int)NPC.Center.X, (int)NPC.Center.Y,tendril,NPC.whoAmI,i / 12f * MathHelper.TwoPi, Main.rand.Next(100), 0, NPC.whoAmI);
+			Vector2 spawnLocation = NPC.Center + new Vector2(60, 0).RotatedBy(i / 12f * MathHelper.TwoPi);
+			NPC.NewNPC(NPC.GetSource_FromThis(), (int)spawnLocation.X, (int)spawnLocation.Y,tendril,NPC.whoAmI,i / 12f * MathHelper.TwoPi, Main.rand.Next(100), 0, NPC.whoAmI);
 		}
 	}
 	public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -246,7 +259,7 @@ public class BacteriumPrime : ModNPC
 		{
 			float percent = i / (float)NPCID.Sets.TrailCacheLength[Type];
 			percent += (1f / NPCID.Sets.TrailCacheLength[Type]) * (NPC.localAI[3] / 6f);
-			spriteBatch.Draw(TextureAssets.Npc[Type].Value, NPC.oldPos[i] - screenPos + NPC.Size / 2, NPC.frame, Color.Lerp(NPC.GetNPCColorTintedByBuffs(new Color(Lighting.GetSubLight(NPC.oldPos[i] + NPC.Size / 2))), Color.Black, 0.2f + (percent * 0.2f)) * (1f - percent) * 0.3f * NPC.Opacity * NPC.localAI[0], NPC.oldRot[i], new Vector2(66), NPC.scale, SpriteEffects.None, 0);
+			spriteBatch.Draw(TextureAssets.Npc[Type].Value, NPC.oldPos[i] - screenPos + NPC.Size / 2, NPC.frame, Color.Lerp(NPC.GetNPCColorTintedByBuffs(new Color(Lighting.GetSubLight(NPC.oldPos[i] + NPC.Size / 2))), Color.Black, 0.2f + (percent * 0.2f)) * (1f - percent) * 0.3f * NPC.Opacity * AfterimageOpacity, NPC.oldRot[i], new Vector2(66), NPC.scale, SpriteEffects.None, 0);
 		}
 		spriteBatch.Draw(TextureAssets.Npc[Type].Value, NPC.Center - screenPos, NPC.frame, drawColor * NPC.Opacity, NPC.rotation, new Vector2(66), NPC.scale, SpriteEffects.None, 0);
 		return false;
