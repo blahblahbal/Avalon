@@ -43,7 +43,7 @@ public class CraniumCrusherProj : MaceTemplate, ISyncedOnHitEffect
 			{
 				PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
 				s.LocalPosition = target.Hitbox.ClosestPointInRect(Projectile.Center);
-				s.Velocity = Vector2.Normalize(Projectile.position - Projectile.oldPos[5]).RotatedBy((-MathHelper.PiOver4 * player.direction * -Projectile.ai[0]) + Main.rand.NextFloat(-1.5f, 1.5f)) * Main.rand.NextFloat(4, 7);
+				s.Velocity = Projectile.position.DirectionTo(Projectile.oldPos[0]).RotatedBy((-MathHelper.PiOver4 * player.direction * -Projectile.ai[0]) + Main.rand.NextFloat(-1.5f, 1.5f)) * Main.rand.NextFloat(4, 7);
 				s.LocalPosition += s.Velocity * 3;
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(4f, 0.7f);
@@ -66,7 +66,7 @@ public class CraniumCrusherProj : MaceTemplate, ISyncedOnHitEffect
 			{
 				PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
 				s.LocalPosition = target.Hitbox.ClosestPointInRect(Projectile.Center);
-				s.Velocity = Vector2.Normalize(Projectile.position - Projectile.oldPos[5]).RotatedBy((-MathHelper.PiOver4 * player.direction * -Projectile.ai[0]) + Main.rand.NextFloat(-0.5f, 0.5f)) * Main.rand.NextFloat(1, 7);
+				s.Velocity = Projectile.position.DirectionTo(Projectile.oldPos[0]).RotatedBy((-MathHelper.PiOver4 * player.direction * -Projectile.ai[0]) + Main.rand.NextFloat(-0.5f, 0.5f)) * Main.rand.NextFloat(1, 7);
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(3f, 0.3f);
 				s.DrawVerticalAxis = false;
