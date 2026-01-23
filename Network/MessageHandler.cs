@@ -32,6 +32,9 @@ public class MessageHandler
 			case MessageID.SyncParticle:
 				SyncParticles.HandlePacket(reader, fromWho);
 				break;
+			case MessageID.SyncOnHit:
+				SyncOnHit.HandlePacket(reader, fromWho);
+				break;
 				//case MessageID.StaminaHeal:
 				//    StaminaHeal.HandlePacket(reader, fromWho);
 				//    break;

@@ -1,5 +1,6 @@
 using Avalon;
 using Avalon.Common.Extensions;
+using Avalon.Common.Interfaces;
 using Avalon.Dusts;
 using Avalon.Particles;
 using Avalon.Projectiles.Melee.Swords;
@@ -13,7 +14,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Swords;
 
-public class AeonsEternity : ModItem
+public class AeonsEternity : ModItem, ISyncedOnHitEffect
 {
 	public override Color? GetAlpha(Color lightColor)
 	{
@@ -25,11 +26,7 @@ public class AeonsEternity : ModItem
 		Item.rare = ItemRarityID.Pink;
 		Item.value = Item.sellPrice(0, 5);
 	}
-	public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
-	{
-		ParticleSystem.AddParticle(new AeonStarburst(), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, Color.Cyan, Main.rand.NextFloat(MathHelper.TwoPi), 1.5f);
-	}
-	public override void OnHitPvp(Player player, Player target, Player.HurtInfo hurtInfo)
+	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
 	{
 		ParticleSystem.AddParticle(new AeonStarburst(), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, Color.Cyan, Main.rand.NextFloat(MathHelper.TwoPi), 1.5f);
 	}

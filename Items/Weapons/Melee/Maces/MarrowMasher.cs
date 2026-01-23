@@ -22,6 +22,7 @@ public class MarrowMasher : ModItem
 		Item.ArmorPenetration = 15;
 		Item.rare = ItemRarityID.Green;
 		Item.value = Item.sellPrice(silver: 40);
+		Item.UseSound = SoundID.DD2_MonkStaffSwing;
 	}
 	public override bool MeleePrefix()
 	{

@@ -1,4 +1,5 @@
 using Avalon.Common.Extensions;
+using Avalon.Common.Interfaces;
 using Avalon.Data.Sets;
 using Avalon.Projectiles.Melee.Maces;
 using Microsoft.Xna.Framework;
@@ -22,6 +23,7 @@ public class CraniumCrusher : ModItem
 		Item.ArmorPenetration = 15;
 		Item.rare = ItemRarityID.Yellow;
 		Item.value = Item.sellPrice(0, 0, 40);
+		Item.UseSound = SoundID.DD2_MonkStaffSwing with { Pitch = -0.5f };
 	}
 	public override bool MeleePrefix()
 	{
