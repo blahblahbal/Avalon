@@ -18,7 +18,6 @@ using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Magic.Hardmode.Sunstorm;
 using Avalon.Items.Weapons.Magic.PreHardmode.BloodBarrage;
 using Avalon.Items.Weapons.Magic.PreHardmode.ChaosTome;
-using Avalon.Items.Weapons.Ranged.PreHardmode.Longbow;
 using Avalon.ModSupport;
 using Avalon.ModSupport.Tokens;
 using Avalon.NPCs.Bosses.Hardmode.Mechasting;
@@ -34,6 +33,7 @@ using Avalon.NPCs.BloodMoon;
 using Avalon.NPCs.Dungeon;
 using Avalon.Items.Weapons.Melee.Swords;
 using Avalon.Items.Weapons.Melee.Maces;
+using Avalon.Items.Weapons.Ranged.Longbows;
 
 namespace Avalon.Common;
 

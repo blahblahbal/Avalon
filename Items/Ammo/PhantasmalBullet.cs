@@ -13,7 +13,7 @@ public class PhantasmalBullet : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToBullet(18, ModContent.ProjectileType<Projectiles.Ranged.PhantasmalBullet>(), 11f, 6f);
+		Item.DefaultToBullet(18, ModContent.ProjectileType<Projectiles.Ranged.Ammo.PhantasmalBullet>(), 11f, 6f);
 		Item.rare = ModContent.RarityType<Rarities.SapphirephlyRarity>();
 		Item.value = Item.sellPrice(0, 0, 2, 40);
 	}

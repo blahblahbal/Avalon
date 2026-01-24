@@ -1,6 +1,6 @@
 using Avalon.Common.Players;
 using Avalon.Items.Material;
-using Avalon.Items.Weapons.Ranged.PreHardmode.Icicle;
+using Avalon.Items.Weapons.Ranged.Thrown;
 using Avalon.NPCs.Contagion;
 using Avalon.NPCs.Dungeon;
 using Avalon.Tiles;

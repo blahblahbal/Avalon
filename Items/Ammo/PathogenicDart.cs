@@ -15,7 +15,7 @@ public class PathogenicDart : ModItem
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.CursedDart);
-        Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.PathogenicDart>();
+        Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.Ammo.PathogenicDart>();
     }
     public override void AddRecipes()
     {

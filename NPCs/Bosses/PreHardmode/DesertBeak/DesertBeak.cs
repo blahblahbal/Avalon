@@ -7,7 +7,7 @@ using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Placeable.Trophy.Relics;
 using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Magic.PreHardmode.TomeoftheDistantPast;
-using Avalon.Items.Weapons.Ranged.PreHardmode.EggCannon;
+using Avalon.Items.Weapons.Ranged.Misc;
 using Avalon.Projectiles.Hostile.DesertBeak;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;

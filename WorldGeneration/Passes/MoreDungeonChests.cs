@@ -5,8 +5,8 @@ using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using Microsoft.Xna.Framework;
 using Avalon.Tiles;
-using Avalon.Items.Weapons.Ranged.Hardmode.Hellrazer;
 using Avalon.Tiles.Furniture.Functional;
+using Avalon.Items.Weapons.Ranged.Guns;
 
 namespace Avalon.WorldGeneration.Passes;
 

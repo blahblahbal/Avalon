@@ -15,7 +15,7 @@ public class IckyArrow : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToArrow(8, ModContent.ProjectileType<Projectiles.Ranged.IckyArrow>(), 3.4f, 2f);
+		Item.DefaultToArrow(8, ModContent.ProjectileType<Projectiles.Ranged.Ammo.IckyArrow>(), 3.4f, 2f);
 		Item.rare = ItemRarityID.Blue;
 		Item.value = Item.sellPrice(0, 0, 0, 8);
 	}

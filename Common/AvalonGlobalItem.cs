@@ -4,7 +4,6 @@ using Avalon.DropConditions;
 using Avalon.Items.Accessories.Expert;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.PreHardmode;
-using Avalon.Items.Ammo;
 using Avalon.Items.Armor.PreHardmode;
 using Avalon.Items.Consumables;
 using Avalon.Items.Dyes;
@@ -27,8 +26,10 @@ using Avalon.Items.Tools.Superhardmode;
 using Avalon.Items.Weapons.Magic.PreHardmode.FlowerOfTheJungle;
 using Avalon.Items.Weapons.Magic.PreHardmode.FrozenLyre;
 using Avalon.Items.Weapons.Magic.PreHardmode.GlacierStaff;
-using Avalon.Items.Weapons.Ranged.PreHardmode.EggCannon;
+using Avalon.Items.Weapons.Ranged.Misc;
 using Avalon.Prefixes;
+using Avalon.Projectiles.Ranged.Ammo;
+using Avalon.Projectiles.Ranged.Misc;
 using Avalon.Reflection;
 using Avalon.Tiles;
 using Avalon.Tiles.Ancient.AncientAdamantiteBrick;
@@ -1598,7 +1599,7 @@ public class AvalonGlobalItem : GlobalItem
 			LeadingConditionRule crimsonRule = new LeadingConditionRule(crimson);
 			crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimtaneOre, 1, 30, 90));
 			crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.CrimsonSeeds, 1, 1, 3));
-			crimsonRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BloodyArrow>(), 1, 20, 50));
+			crimsonRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<Items.Ammo.BloodyArrow>(), 1, 20, 50));
 			crimsonRule.OnSuccess(ItemDropRule.Common(ItemID.BloodMoonStarter, 12));
 			itemLoot.Add(crimsonRule);
 
@@ -1606,7 +1607,7 @@ public class AvalonGlobalItem : GlobalItem
 			LeadingConditionRule contagionRule = new LeadingConditionRule(contagionCondition);
 			contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 1, 30, 90));
 			contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ContagionSeeds>(), 1, 1, 3));
-			contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<IckyArrow>(), 1, 20, 50));
+			contagionRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<Items.Ammo.IckyArrow>(), 1, 20, 50));
 			contagionRule.OnSuccess(ItemDropRule.Common(ItemID.BloodMoonStarter, 12));
 			itemLoot.Add(contagionRule);
 		}
@@ -2964,20 +2965,20 @@ public class AvalonGlobalItem : GlobalItem
 	{
 		if (item.useAmmo == AmmoID.Arrow || item.useAmmo == AmmoID.Bullet || item.useAmmo == AmmoID.Rocket)
 		{
-			if (type == ModContent.ProjectileType<Projectiles.Ranged.ShroomiteArrow>())
+			if (type == ModContent.ProjectileType<ShroomiteArrow>())
 			{
 				ShroomiteAmmoCounter++;
 				if (ShroomiteAmmoCounter == 1)
 				{
-					type = ModContent.ProjectileType<Projectiles.Ranged.ShroomiteBullet>();
+					type = ModContent.ProjectileType<ShroomiteBullet>();
 				}
 				else if (ShroomiteAmmoCounter == 2)
 				{
-					type = ModContent.ProjectileType<Projectiles.Ranged.ShroomiteRocket>();
+					type = ModContent.ProjectileType<ShroomiteRocket>();
 				}
 				else if (ShroomiteAmmoCounter == 3)
 				{
-					type = ModContent.ProjectileType<Projectiles.Ranged.ShroomiteArrow>();
+					type = ModContent.ProjectileType<ShroomiteArrow>();
 					ShroomiteAmmoCounter = 0;
 				}
 			}

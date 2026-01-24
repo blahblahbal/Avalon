@@ -1,5 +1,5 @@
 using Avalon.Common;
-using Avalon.Items.Weapons.Ranged.PreHardmode.Thompson;
+using Avalon.Items.Weapons.Ranged.Bows;
 using Avalon.ModSupport;
 using Avalon.World.Passes;
 using Avalon.WorldGeneration.Enums;

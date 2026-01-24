@@ -14,7 +14,7 @@ public class UltrabrightRazorbladeBullet : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToBullet(17, ModContent.ProjectileType<Projectiles.Ranged.UltrabrightRazorbladeBullet>(), 10f, 3.5f);
+		Item.DefaultToBullet(17, ModContent.ProjectileType<Projectiles.Ranged.Ammo.UltrabrightRazorbladeBullet>(), 10f, 3.5f);
 		Item.rare = ItemRarityID.Cyan;
 		Item.value = Item.sellPrice(0, 0, 2);
 	}

@@ -15,7 +15,7 @@ public class PathogenicBullet : ModItem
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.CursedBullet);
-        Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.PathogenicBullet>();
+        Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.Ammo.PathogenicBullet>();
     }
     public override void AddRecipes()
     {

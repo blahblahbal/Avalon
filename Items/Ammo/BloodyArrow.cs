@@ -14,7 +14,7 @@ public class BloodyArrow : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToArrow(10, ModContent.ProjectileType<Projectiles.Ranged.BloodyArrow>(), 3.4f, 3f);
+		Item.DefaultToArrow(10, ModContent.ProjectileType<Projectiles.Ranged.Ammo.BloodyArrow>(), 3.4f, 3f);
 		Item.rare = ItemRarityID.Blue;
 		Item.value = Item.sellPrice(0, 0, 0, 8);
 	}

@@ -1,3 +1,4 @@
+using Avalon.Projectiles.Ranged.Ammo;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -21,7 +22,7 @@ public class ShroomiteAmmunition : ModItem
 		Item.rare = ItemRarityID.Blue;
 		Item.width = 16;
 		Item.knockBack = 3f;
-		Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.ShroomiteArrow>();
+		Item.shoot = ModContent.ProjectileType<ShroomiteArrow>();
 		Item.value = Item.sellPrice(0, 0, 0, 8);
 		Item.maxStack = 9999;
 		Item.height = 16;

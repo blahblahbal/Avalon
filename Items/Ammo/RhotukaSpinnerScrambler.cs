@@ -14,7 +14,7 @@ public class RhotukaSpinnerScrambler : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToSpinner(10, ModContent.ProjectileType<Projectiles.Ranged.RhotukaSpinnerScrambler>(), 6f, 2f);
+		Item.DefaultToSpinner(10, ModContent.ProjectileType<Projectiles.Ranged.Ammo.RhotukaSpinnerScrambler>(), 6f, 2f);
 		Item.rare = ItemRarityID.Cyan;
 		Item.value = Item.sellPrice(0, 0, 0, 8);
 	}

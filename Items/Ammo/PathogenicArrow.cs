@@ -15,7 +15,7 @@ public class PathogenicArrow : ModItem
     public override void SetDefaults()
     {
         Item.CloneDefaults(ItemID.CursedArrow);
-        Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.PathogenicArrow>();
+        Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.Ammo.PathogenicArrow>();
     }
     public override void AddRecipes()
     {

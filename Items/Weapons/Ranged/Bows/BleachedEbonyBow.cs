@@ -1,0 +1,22 @@
+using Avalon.Items.Weapons.Melee.Maces.WoodenClubs;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+namespace Avalon.Items.Weapons.Ranged.Bows;
+
+public class BleachedEbonyBow : ModItem
+{
+	public override void SetDefaults()
+	{
+		Item.CloneDefaults(ItemID.RichMahoganyBow);
+	}
+	public override void AddRecipes()
+	{
+		CreateRecipe(1)
+			.AddIngredient(ModContent.ItemType<Placeable.Tile.BleachedEbony>(), 10)
+			.AddTile(TileID.WorkBenches)
+			.SortBeforeFirstRecipesOf(ModContent.ItemType<BleachedEbonyClub>())
+			.Register();
+	}
+}

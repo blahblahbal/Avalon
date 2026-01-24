@@ -9,7 +9,7 @@ using Avalon.Items.Material.Shards;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Weapons.Melee.Swords;
-using Avalon.Items.Weapons.Ranged.PreHardmode.Icicle;
+using Avalon.Items.Weapons.Ranged.Thrown;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
