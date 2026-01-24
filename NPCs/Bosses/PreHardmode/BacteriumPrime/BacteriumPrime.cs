@@ -194,11 +194,14 @@ public class BacteriumPrime : ModNPC
 			else if (NPC.ai[1] < 60 + dashDuration)
 			{
 				NPC.velocity = NPC.velocity.RotatedBy(NPC.ai[3] * -(MathHelper.Pi / dashDuration));
+				if (NPC.ai[1] > 30 + dashDuration)
+				{
+					NPC.velocity *= 0.95f;
+				}
 			}
 			else if (NPC.ai[1] > 60 + dashDuration)
 			{
 				NPC.ai[0] = NPC.ai[1] = 0;
-				NPC.velocity = NPC.Center.DirectionTo(Target.Center) * 3;
 			}
 		}
 		else // simple flying

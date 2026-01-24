@@ -55,7 +55,7 @@ public class BacteriumTendril : ModNPC
 	}
 	public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
 	{
-		NPC.lifeMax = (int)(NPC.lifeMax * balance * bossAdjustment);
+		NPC.lifeMax = (int)(NPC.lifeMax * balance * bossAdjustment * 0.75f);
 	}
 	private NPC Owner { get => Main.npc[(int)NPC.ai[3]]; }
 	private Player Target { get => Main.player[NPC.target]; }
