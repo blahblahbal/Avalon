@@ -23,6 +23,8 @@ public class DesertLongswordTornado : ModProjectile
 		Projectile.penetrate = -1;
 		Projectile.ignoreWater = true;
 		Projectile.alpha = 255;
+		Projectile.usesLocalNPCImmunity = true;
+		Projectile.localNPCHitCooldown = 20;
 	}
 	public override void AI()
 	{
@@ -58,5 +60,9 @@ public class DesertLongswordTornado : ModProjectile
 			Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos + new Vector2(0, -i), frame, color * Projectile.Opacity, Projectile.rotation + MathHelper.PiOver4 * i * -0.04f * Projectile.direction, new Vector2(TextureAssets.Projectile[Type].Value.Width, TextureAssets.Projectile[Type].Value.Height) / 2, scale, Projectile.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
 		}
 		return false;
+	}
+	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+	{
+		target.velocity.Y = -hit.Knockback * 5.5f;
 	}
 }

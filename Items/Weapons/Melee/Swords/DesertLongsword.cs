@@ -18,7 +18,7 @@ public class DesertLongsword : ModItem
 		Item.rare = ItemRarityID.Green;
 		Item.width = Item.height = 28;
 		Item.useTime = 27;
-		Item.knockBack = 3f;
+		Item.knockBack = 5f;
 		Item.DamageType = DamageClass.Melee;
 		Item.useStyle = ItemUseStyleID.Swing;
 		Item.value = Item.sellPrice(0, 0, 54, 0);
@@ -38,6 +38,7 @@ public class DesertLongsword : ModItem
 	}
 	public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
 	{
+		knockback *= 0.4f;
 		damage = (int)(damage * 0.45f);
 		velocity = new Vector2(Math.Sign(velocity.X) * velocity.Length(), velocity.Y * 0.2f);
 		position += velocity * 3;
