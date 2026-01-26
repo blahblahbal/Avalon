@@ -35,6 +35,9 @@ public class MessageHandler
 			case MessageID.SyncOnHit:
 				SyncOnHit.HandlePacket(reader, fromWho);
 				break;
+			case MessageID.SyncLongbowArrowEffect:
+				SyncLongbowArrowEffect.HandlePacket(reader, fromWho);
+				break;
 				//case MessageID.StaminaHeal:
 				//    StaminaHeal.HandlePacket(reader, fromWho);
 				//    break;

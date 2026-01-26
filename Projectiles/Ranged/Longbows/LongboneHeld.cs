@@ -1,18 +1,18 @@
 ﻿using Avalon.Common.Templates;
+using Avalon.Network;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
-using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 
 namespace Avalon.Projectiles.Ranged.Longbows;
 
 public class LongboneHeld : LongbowTemplate
 {
+	public override Vector2 NotificationFlashOffset => new Vector2(8,0);
 	public override void SetDefaults()
 	{
 		base.SetDefaults();
@@ -23,7 +23,17 @@ public class LongboneHeld : LongbowTemplate
 	public override void Shoot(IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, float Power)
 	{
 		Projectile P = Projectile.NewProjectileDirect(source, position, velocity * Main.rand.NextFloat(0.5f + (Power / 2f), 1), type, damage, knockback, Projectile.owner);
-		P.GetGlobalProjectile<LongboneCurseArrow>().Longbone = (byte)(Power * 4f);
+		ApplyArrowEffect(P, Power);
+	}
+	public override bool ArrowEffect(Projectile projectile, float Power, byte variant = 0)
+	{
+		byte p = (byte)(Power * 4f);
+		if (p > 0)
+		{
+			projectile.GetGlobalProjectile<LongboneCurseArrow>().Longbone = p;
+			return true;
+		}
+		return false;
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
@@ -49,15 +59,6 @@ public class LongboneCurseArrow : GlobalProjectile
 {
 	public override bool InstancePerEntity => true;
 	public byte Longbone;
-	public override void SendExtraAI(Projectile projectile, BitWriter bitWriter, BinaryWriter binaryWriter)
-	{
-		binaryWriter.Write(Longbone);
-	}
-	public override void ReceiveExtraAI(Projectile projectile, BitReader bitReader, BinaryReader binaryReader)
-	{
-		Longbone = binaryReader.ReadByte();
-	}
-
 	public override void PostAI(Projectile projectile)
 	{
 		if (Longbone > 0)
@@ -65,7 +66,6 @@ public class LongboneCurseArrow : GlobalProjectile
 			Dust d = Dust.NewDustPerfect(projectile.Center, 172, projectile.velocity * 0.5f);
 			d.noGravity = true;
 			d.scale = 0.6f + (Longbone / 4f);
-			projectile.netUpdate = true;
 		}
 	}
 	public override void OnKill(Projectile projectile, int timeLeft)

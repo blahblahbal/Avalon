@@ -10,5 +10,6 @@ public enum MessageID
 	SyncLockUnlock = 5,
 	SyncSkyBlessing = 6,
 	SyncParticle = 7,
-	SyncOnHit = 8
+	SyncOnHit = 8,
+	SyncLongbowArrowEffect = 9
 }

@@ -3,19 +3,56 @@ using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 
 namespace Avalon.Projectiles.Ranged.Longbows;
 
 public class MoonforceHeld : LongbowTemplate
 {
+	public override void MakeNotificationFlash()
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+			s.LocalPosition = Projectile.Center + new Vector2(8,0).RotatedBy(Projectile.rotation);
+			s.Velocity = new Vector2(4, 0).RotatedBy(i * MathHelper.PiOver2);
+			s.Rotation = s.Velocity.ToRotation();
+			s.Scale = new Vector2(6f, 0.75f);
+			s.DrawVerticalAxis = false;
+			s.FadeInEnd = 5;
+			s.FadeOutStart = s.FadeInEnd;
+			s.FadeOutEnd = 15;
+			s.AdditiveAmount = 1f;
+			s.ColorTint = Color.Lerp(Color.Magenta, Color.Red, Main.masterColor) with { A = 0 };
+			Main.ParticleSystem_World_OverPlayers.Add(s);
+
+			PrettySparkleParticle s2 = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+			s2.LocalPosition = Projectile.Center + new Vector2(8, 0).RotatedBy(Projectile.rotation);
+			s2.Velocity = new Vector2(2).RotatedBy(i * MathHelper.PiOver2);
+			s2.Rotation = s2.Velocity.ToRotation();
+			s2.Scale = new Vector2(4f, 0.5f);
+			s2.DrawVerticalAxis = false;
+			s2.FadeInEnd = 5;
+			s2.FadeOutStart = s.FadeInEnd;
+			s2.FadeOutEnd = 15;
+			s2.AdditiveAmount = 1f;
+			s2.ColorTint = Color.Lerp(Color.Blue, Color.Magenta, Main.masterColor) with { A = 0 };
+			Main.ParticleSystem_World_OverPlayers.Add(s2);
+		}
+		for(int i = 0; i < 15; i++)
+		{
+			Dust d = Dust.NewDustPerfect(Projectile.Center + new Vector2(8, 0).RotatedBy(Projectile.rotation), Main.rand.Next(DustID.CorruptTorch, DustID.JungleTorch));
+			d.velocity = Main.rand.NextVector2Circular(8, 8);
+			d.fadeIn = 1;
+			d.noGravity = true;
+		}
+	}
 	public override void PostAI()
 	{
 		if (Main.player[Projectile.owner].channel)
@@ -29,25 +66,31 @@ public class MoonforceHeld : LongbowTemplate
 	}
 	public override void Shoot(IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, float Power)
 	{
+		base.Shoot(source,position,velocity,type,damage,knockback,Power);
 		SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
-		//float ScaleMod = 1 + (Power * 5);
-		Projectile P = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, Projectile.owner);
+	}
+	public override bool ArrowEffect(Projectile projectile, float Power, byte variant = 0)
+	{
 		if (Power > 0.3f)
 		{
 			SoundEngine.PlaySound(SoundID.Item9, Projectile.Center);
-			P.GetGlobalProjectile<LongbowGlobalProj>().LongbowArrow = true;
-			P.usesLocalNPCImmunity = true;
-			P.localNPCHitCooldown = 30;
-			P.extraUpdates++;
-			//P.Resize((int)(P.width * ScaleMod), (int)(P.height * ScaleMod));
-			P.GetGlobalProjectile<MoonlightArrowVisuals>().ScaleMod = 1 + (Power * 5);
-			P.GetGlobalProjectile<MoonlightArrowVisuals>().Moonlight = true;
-			if (P.penetrate > 0)
-				P.penetrate += (int)(Power * 6);
-			P.usesLocalNPCImmunity = true;
-			P.localNPCHitCooldown = 30;
-			P.netUpdate = true;
+			projectile.usesLocalNPCImmunity = true;
+			projectile.localNPCHitCooldown = 30;
+			projectile.extraUpdates++;
+
+			float ScaleMod = 1 + (Power * 5);
+			projectile.Resize((int)(projectile.width * ScaleMod), (int)(projectile.height * ScaleMod));
+
+			if (projectile.penetrate > 0)
+				projectile.penetrate += (int)(Power * 6);
+
+			projectile.GetGlobalProjectile<MoonlightArrowVisuals>().Moonlight = true;
+
+			projectile.usesLocalNPCImmunity = true;
+			projectile.localNPCHitCooldown = 30;
+			return true;
 		}
+		return false;
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
@@ -73,19 +116,6 @@ public class MoonlightArrowVisuals : GlobalProjectile
 {
 	public override bool InstancePerEntity => true;
 	public bool Moonlight;
-	public float ScaleMod;
-	private bool Resized;
-	public override void SendExtraAI(Projectile projectile, BitWriter bitWriter, BinaryWriter binaryWriter)
-	{
-		bitWriter.WriteBit(Moonlight);
-		binaryWriter.Write(ScaleMod);
-	}
-	public override void ReceiveExtraAI(Projectile projectile, BitReader bitReader, BinaryReader binaryReader)
-	{
-		Moonlight = bitReader.ReadBit();
-		ScaleMod = binaryReader.ReadSingle();
-	}
-
 	public override bool TileCollideStyle(Projectile projectile, ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
 	{
 		if (Moonlight)
@@ -95,21 +125,10 @@ public class MoonlightArrowVisuals : GlobalProjectile
 		}
 		return base.TileCollideStyle(projectile, ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
 	}
-	public override bool PreAI(Projectile projectile)
-	{
-		if (Moonlight && !Resized)
-		{
-			projectile.Resize((int)(projectile.width * ScaleMod), (int)(projectile.height * ScaleMod));
-			projectile.netUpdate = true;
-			Resized = true;
-		}
-		return base.PreAI(projectile);
-	}
 	public override void PostAI(Projectile projectile)
 	{
 		if (Moonlight)
 		{
-			projectile.netUpdate = true;
 			Dust d = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, Main.rand.Next(DustID.CorruptTorch, DustID.JungleTorch));
 			d.velocity = projectile.velocity.RotatedByRandom(0.1f) * 0.5f * (projectile.extraUpdates + 1);
 			d.scale = MathHelper.Clamp(projectile.width / 30, 0.2f, 100);

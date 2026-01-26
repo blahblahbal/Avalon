@@ -1,16 +1,15 @@
-using Microsoft.VisualBasic;
+using Avalon.Network;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using ReLogic.Utilities;
-using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 
 namespace Avalon.Common.Templates
 {
@@ -21,7 +20,6 @@ namespace Avalon.Common.Templates
 		{
 			return false;
 		}
-
 		public virtual SoundStyle shootSound => new SoundStyle("Avalon/Sounds/Item/LongbowShot") { Pitch = 0.2f, Volume = 0.7f };
 		public virtual float HowFarShouldTheBowBeHeldFromPlayer => 25;
 		public override void SetDefaults()
@@ -44,6 +42,22 @@ namespace Avalon.Common.Templates
 			Main.projFrames[Type] = 4;
 		}
 		SlotId BowPullSound = SlotId.Invalid;
+		/// <summary>
+		/// Return false if nothing happens so it doesn't sync.
+		/// </summary>
+		/// <param name="projectile"></param>
+		/// <param name="Power"></param>
+		/// <param name="variant"></param>
+		/// <returns></returns>
+		public virtual bool ArrowEffect(Projectile projectile, float Power, byte variant = 0)
+		{
+			return false;
+		}
+		public void ApplyArrowEffect(Projectile projectile, float Power, byte variant = 0)
+		{
+			if (ArrowEffect(projectile, Power, variant))
+				SyncLongbowArrowEffect.SendPacket(Type, Projectile.owner, projectile.identity, Power, variant);
+		}
 		public override void AI()
 		{
 			MoveHands();
@@ -63,7 +77,7 @@ namespace Avalon.Common.Templates
 			}
 			if ((!player.channel || Notified) && SoundEngine.TryGetActiveSound(BowPullSound, out ActiveSound sound) && sound != null && sound.IsPlaying)
 			{
-				sound.Volume = 0;
+				sound.Stop();
 			}
 			if (player.channel)
 			{
@@ -100,6 +114,7 @@ namespace Avalon.Common.Templates
 				Notified = true;
 				FullPowerGlow = 1;
 				SoundEngine.PlaySound(SoundID.MaxMana);
+				MakeNotificationFlash();
 			}
 			FullPowerGlow -= 0.05f;
 			// Arrow light
@@ -109,14 +124,33 @@ namespace Avalon.Common.Templates
 			Lighting.AddLight(drawPos, new Vector3(AmmoProj.light));
 			if (player.whoAmI == Main.myPlayer)
 			{
-				NetMessage.SendData(MessageID.PlayerControls, -1, -1, null, player.whoAmI);
+				NetMessage.SendData(Terraria.ID.MessageID.PlayerControls, -1, -1, null, player.whoAmI);
 			}
 			Projectile.netUpdate = true;
 		}
-
+		public virtual Vector2 NotificationFlashOffset => Vector2.Zero;
+		public virtual void MakeNotificationFlash()
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
+				s.LocalPosition = Projectile.Center + NotificationFlashOffset.RotatedBy(Projectile.rotation);
+				s.Velocity = new Vector2(2, 0).RotatedBy(i * MathHelper.PiOver2);
+				s.Rotation = s.Velocity.ToRotation();
+				s.Scale = new Vector2(4f, 0.5f);
+				s.DrawVerticalAxis = false;
+				s.FadeInEnd = 5;
+				s.FadeOutStart = s.FadeInEnd;
+				s.FadeOutEnd = 15;
+				s.AdditiveAmount = 1f;
+				s.ColorTint = NotificationColor;
+				Main.ParticleSystem_World_OverPlayers.Add(s);
+			}
+		}
 		public virtual void Shoot(IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, float Power)
 		{
-			Projectile.NewProjectile(source, position, velocity, type, damage, knockback, Projectile.owner);
+			Projectile p = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, Projectile.owner);
+			ApplyArrowEffect(p, Power, 0);
 		}
 		public void MoveHands()
 		{
@@ -208,26 +242,6 @@ namespace Avalon.Common.Templates
 		public override bool ShouldUpdatePosition()
 		{
 			return false;
-		}
-	}
-	public class LongbowGlobalProj : GlobalProjectile
-	{
-		public override bool InstancePerEntity => true;
-		public bool LongbowArrow;
-		public override void SendExtraAI(Projectile projectile, BitWriter bitWriter, BinaryWriter binaryWriter)
-		{
-			bitWriter.WriteBit(LongbowArrow);
-		}
-		public override void ReceiveExtraAI(Projectile projectile, BitReader bitReader, BinaryReader binaryReader)
-		{
-			LongbowArrow = bitReader.ReadBit();
-		}
-		public override void PostAI(Projectile projectile)
-		{
-			if (LongbowArrow)
-			{
-				projectile.netUpdate = true;
-			}
 		}
 	}
 }

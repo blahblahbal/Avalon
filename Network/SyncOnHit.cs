@@ -1,4 +1,5 @@
 using Avalon.Common.Interfaces;
+using Microsoft.Xna.Framework;
 using System.IO;
 using System.Linq;
 using Terraria;
@@ -13,45 +14,32 @@ public class SyncOnHit
 	public static void SendPacket(bool item, int damageDealer, Player player, NPC target, bool crit, int hitDirection)
 	{
 		if (Main.netMode == NetmodeID.SinglePlayer)
-		{
-			return; // no sending packets in singleplayer :D
-		}
+			return;
 		ModPacket packet = MessageHandler.GetPacket(MessageID.SyncOnHit);
 		packet.WriteFlags(crit, hitDirection == 1, item);
-		packet.Write(damageDealer);
+		packet.Write((short)damageDealer);
 		packet.Write((byte)player.whoAmI);
-		packet.Write(target.whoAmI);
+		packet.Write((short)target.whoAmI);
 		packet.Send(ignoreClient: player.whoAmI);
 	}
 	public static void HandlePacket(BinaryReader reader, int fromWho)
 	{
 		reader.ReadFlags(out bool crit, out bool hitDir, out  bool item);
-		int damagedealer = reader.ReadInt32();
+		short damagedealer = reader.ReadInt16();
 		byte player = reader.ReadByte();
-		int target = reader.ReadInt32();
-		if (player == Main.myPlayer)
-			return;
-		if (item)
+		short target = reader.ReadInt16();
+		if (Main.netMode == NetmodeID.Server)
 		{
-			if (Main.netMode == NetmodeID.Server)
-			{
-				SendPacket(true, damagedealer, Main.player[player], Main.npc[target],crit,hitDir? 1 : -1);
-			}
-			if (ContentSamples.ItemsByType[damagedealer].ModItem is ISyncedOnHitEffect i)
-			{
-				i.SyncedOnHitNPC(Main.player[player], Main.npc[target], crit, hitDir ? 1 : -1);
-			}
+			SendPacket(item, damagedealer, Main.player[player], Main.npc[target], crit, hitDir ? 1 : -1);
 		}
-		else
+
+		if (item && ContentSamples.ItemsByType[damagedealer].ModItem is ISyncedOnHitEffect i)
 		{
-			if (Main.netMode == NetmodeID.Server)
-			{
-				SendPacket(false, damagedealer, Main.player[player], Main.npc[target], crit, hitDir ? 1 : -1);
-			}
-			if (Main.projectile.FirstOrDefault(x => x.identity == damagedealer).ModProjectile is ISyncedOnHitEffect i)
-			{
-				i.SyncedOnHitNPC(Main.player[player], Main.npc[target], crit, hitDir ? 1 : -1);
-			}
+			i.SyncedOnHitNPC(Main.player[player], Main.npc[target], crit, hitDir ? 1 : -1);
+		}
+		else if (Main.projectile.FirstOrDefault(x => x.identity == damagedealer && x.owner == player).ModProjectile is ISyncedOnHitEffect i2)
+		{
+			i2.SyncedOnHitNPC(Main.player[player], Main.npc[target], crit, hitDir ? 1 : -1);
 		}
 	}
 }

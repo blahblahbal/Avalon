@@ -1,9 +1,6 @@
 ﻿using Avalon.Network;
-using System;
-using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
