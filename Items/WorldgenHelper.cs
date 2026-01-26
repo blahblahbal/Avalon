@@ -46,7 +46,8 @@ public class WorldgenHelper : ModItem
 
 		if (player.ItemAnimationJustStarted)
 		{
-			JonasHellcastle.Generate(x, y);
+			WorldGeneration.Structures.IceShrine.Generate(x, y);
+			//JonasHellcastle.Generate(x, y);
 			//bool top = WorldGen.genRand.NextBool();
 			//CreateOvalCave(x, y, 20, top ? -5f : 5f, WorldGen.genRand.NextFloat(-.4f, .4f), top);
 			//WorldGeneration.Biomes.Basalt.PlaceBasalt();

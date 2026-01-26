@@ -9548,12 +9548,16 @@ Mods: {
 
 			SilenceCandle: {
 				DisplayName: Silence Candle
-				Tooltip: Enemy spawns are disabled
+				Tooltip: Disables enemy spawns
 			}
 
 			ResourceBarSkin: {
 				DisplayName: Resource Bar Skin
-				Tooltip: ""
+				Tooltip:
+					'''
+					Allows you to dye your HP, Mana, and Stamina bars
+					Works in the vanity slot
+					'''
 			}
 
 			StaffStatue: {
@@ -10099,6 +10103,11 @@ Mods: {
 
 			ShadewoodClub: {
 				DisplayName: Shadewood Club
+				Tooltip: ""
+			}
+
+			CaesiumSlab: {
+				DisplayName: Caesium Slab
 				Tooltip: ""
 			}
 		}

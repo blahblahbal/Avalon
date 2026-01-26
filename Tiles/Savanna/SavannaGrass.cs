@@ -20,8 +20,8 @@ public class SavannaGrass : ModTile
         Main.tileMerge[Type][TileID.Grass] = true;
         Main.tileMerge[TileID.JungleGrass][Type] = true;
         Main.tileMerge[Type][TileID.JungleGrass] = true;
-        TileID.Sets.Conversion.Grass[Type] = true;
         DustType = ModContent.DustType<Dusts.TropicalDust>();
+		TileID.Sets.Conversion.JungleGrass[Type] = true;
         //TileID.Sets.CanBeDugByShovel[Type] = true;
         //TileID.Sets.ResetsHalfBrickPlacementAttempt[Type] = false;
         //TileID.Sets.GrassSpecial[Type] = true;

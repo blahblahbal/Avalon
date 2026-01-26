@@ -1,4 +1,3 @@
-using Avalon.Items.Consumables;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -20,10 +19,10 @@ class IceShrine
             case 1: width = 8; break;
             case 2: width = 10; break;
         }
-        #region walls/other
-        for (int fX = x - width - mult * 4 + 3; fX <= x + mult * 4 + 1 + width; fX++)
+		#region walls/other
+		for (int fX = x - width - mult * 4 + 3; fX <= x + mult * 4 + 1 + width; fX++)
         {
-            for (int fY = y + mult + 4; fY <= y + 13 + mod1; fY++)
+            for (int fY = y + mult + 4; fY <= y + 13 + mod1 - 3; fY++)
             {
                 Tile tile = Main.tile[fX, fY];
                 tile.LiquidAmount = 0;
@@ -34,40 +33,29 @@ class IceShrine
                     if (fX > x + mult * 4 + 6 - width && fX < x + mult * 4 + 6 ||
                         fX > x - mult * 4 - 1 && fX < x - mult * 4 + width - 2)
                     {
-                        Main.tile[fX, fY].TileType = 0;
+                       // Main.tile[fX, fY].TileType = 0;
                         Main.tile[fX, fY].WallType = WallID.IceBrick;
                         WorldGen.SquareWallFrame(fX, fY);
                     }
                     if (fX > x + mult * 4 + 6 - 2 * width + 2 && fX < x + mult * 4 + 6 - width + 2 ||
                         fX > x - mult * 4 + width - 3 && fX < x - mult * 4 + 2 * width - 4)
                     {
-                        Main.tile[fX, fY].TileType = 0;
+                        //Main.tile[fX, fY].TileType = 0;
                         Main.tile[fX, fY].WallType = WallID.IceBrick;
                         WorldGen.SquareWallFrame(fX, fY);
                     }
                     if (fX <= x + mult * 4 + 6 - 2 * width + 2 && fX >= x - mult * 4 + 2 * width - 4)
                     {
-                        Main.tile[fX, fY].TileType = 0;
+                        //Main.tile[fX, fY].TileType = 0;
                         Main.tile[fX, fY].WallType = WallID.IceBrick;
                         WorldGen.SquareWallFrame(fX, fY);
                     }
                 }
             }
         }
-        for (int fX = x - width - mult * 4 + 2; fX <= x + mult * 4 + 1 + width; fX++)
-        {
-            for (int fY = y + mult + 4; fY <= y + 13 + mod1; fY++)
-            {
-                if (Main.tile[fX, fY].TileType >= 0 && Main.tile[fX, fY].WallType != WallID.IceBrick)
-                {
-                    Tile tile = Main.tile[fX, fY];
-                    tile.HasTile = true;
-                }
-            }
-        }
-        #endregion
-        #region tower1
-        for (int tower1X = x - mult * 4; tower1X >= x - width - mult * 4; tower1X--)
+		#endregion
+		#region tower1
+		for (int tower1X = x - mult * 4; tower1X >= x - width - mult * 4; tower1X--)
         {
             if (tower1X % 2 == 0)
             {
