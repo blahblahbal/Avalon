@@ -45,6 +45,11 @@ public class ExxoAvalonOrigins : Mod
 	public static readonly Mod? Confection = ModLoader.TryGetMod("TheConfectionRebirth", out Mod obtainedMod) ? obtainedMod : null;
 
 	/// <summary>
+	///     Gets the instance of the Magic Storage mod.
+	/// </summary>
+	public static readonly Mod? MagicStorage = ModLoader.TryGetMod("MagicStorage", out Mod obtainedMod) ? obtainedMod : null;
+
+	/// <summary>
 	///     Gets the instance of the Depths mod.
 	/// </summary>
 	public static readonly Mod? Depths = ModLoader.TryGetMod("TheDepths", out Mod obtainedMod) ? obtainedMod : null;

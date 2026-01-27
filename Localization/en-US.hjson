@@ -10110,6 +10110,26 @@ Mods: {
 				DisplayName: Caesium Slab
 				Tooltip: ""
 			}
+
+			BacciliteCore.DisplayName: Baccilite Core
+
+			BacciliteStorageUnitItem: {
+				DisplayName: Baccilite Storage Unit
+				Tooltip:
+					'''
+					A component for storing items in a Magic Storage storage system
+					Can store up to 80 items
+					'''
+			}
+
+			BacciliteUpgrade: {
+				DisplayName: Baccilite Upgrade
+				Tooltip:
+					'''
+					Upgrades Storage Unit to 80 capacity
+					<right> a Storage Unit to use
+					'''
+			}
 		}
 
 		InfoDisplays: {
@@ -11943,6 +11963,7 @@ Mods: {
 			AcidDropletTile.MapEntry: Dripping Acid
 			BloodDropletTile.MapEntry: Dripping Blood
 			AlkalineJellyfishJarTile.MapEntry: Alkaline Jellyfish Jar
+			BacciliteStorageUnitTile.MapEntry: Baccilite Storage Unit Tile
 		}
 
 		Prefixes: {

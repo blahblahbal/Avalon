@@ -20,6 +20,9 @@
 		<Reference Include="AltLibrary">
 			<HintPath>dllReferences\AltLibrary_v2.1.1.3.dll</HintPath>
 		</Reference>
+		<Reference Include="MagicStorage">
+		  <HintPath>dllReferences\MagicStorage.dll</HintPath>
+		</Reference>
 		<Reference Include="ModLiquidLib">
 			<HintPath>dllReferences\ModLiquidLib_v2025.11.1.dll</HintPath>
 		</Reference>

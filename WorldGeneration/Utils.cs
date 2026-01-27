@@ -4,6 +4,7 @@ using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Furniture;
 using Avalon.Tiles.Hellcastle;
 using Avalon.Tiles.Savanna;
+using Avalon.Walls;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -825,7 +826,8 @@ public class Utils
 		for (int i = y; i < y + yLength; i++)
 		{
 			if (Main.tile[x, i].HasTile && (Main.tile[x, i].TileType == TileID.LihzahrdBrick ||
-				Main.tile[x, i].WallType == WallID.LihzahrdBrickUnsafe))
+				Main.tile[x, i].WallType == WallID.LihzahrdBrickUnsafe || Main.tile[x, i].TileType == ModContent.TileType<TuhrtlBrick>() ||
+				Main.tile[x, i].WallType == ModContent.WallType<TuhrtlBrickWallUnsafe>()))
 			{
 				leftSideActive = true;
 				break;
@@ -834,7 +836,8 @@ public class Utils
 		for (int i = y; i < y + yLength; i++)
 		{
 			if (Main.tile[x + xLength, i].HasTile && (Main.tile[x + xLength, i].TileType == TileID.LihzahrdBrick ||
-				Main.tile[x + xLength, i].WallType == WallID.LihzahrdBrickUnsafe))
+				Main.tile[x + xLength, i].WallType == WallID.LihzahrdBrickUnsafe || Main.tile[x + xLength, i].TileType == ModContent.TileType<TuhrtlBrick>() ||
+				Main.tile[x + xLength, i].WallType == ModContent.WallType<TuhrtlBrickWallUnsafe>()))
 			{
 				rightSideActive = true;
 				break;
@@ -954,7 +957,7 @@ public class Utils
 	}
 
 	/// <summary>
-	/// This method is used for both the Crystal Mines and the Caesium Blastplains. 
+	/// This method is used for both the Crystal Mines and the Caesium Blastplains.
 	/// </summary>
 	/// <param name="i"></param>
 	/// <param name="j"></param>
