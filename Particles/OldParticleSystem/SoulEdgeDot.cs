@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace Avalon.Particles
+namespace Avalon.Particles.OldParticleSystem
 {
-    public class SoulEdgeDot : Particle
+    public class SoulEdgeDot : LegacyParticleDeleteSoon
     {
         public override void Update()
         {

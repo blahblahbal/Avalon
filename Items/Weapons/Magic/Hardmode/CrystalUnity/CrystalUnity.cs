@@ -1,7 +1,7 @@
 using Avalon;
 using Avalon.Common.Extensions;
 using Avalon.Dusts;
-using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Avalon.Projectiles.Magic;
 using Microsoft.Xna.Framework;
 using System;
@@ -101,7 +101,7 @@ public class CrystalUnityShard : ModProjectile
 			//d.velocity += Projectile.velocity;
 		}
 		SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
-		ParticleSystem.AddParticle(new ColorableSparkle(), Projectile.Center, default, new Color(Colors[GemType].R, Colors[GemType].G, Colors[GemType].B, 0));
+		OldParticleSystemDeleteSoon.AddParticle(new ColorableSparkle(), Projectile.Center, default, new Color(Colors[GemType].R, Colors[GemType].G, Colors[GemType].B, 0));
 	}
 	public override void AI()
 	{

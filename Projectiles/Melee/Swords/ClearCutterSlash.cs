@@ -1,6 +1,6 @@
 ﻿using Avalon.Common.Templates;
 using Avalon.Items.Weapons.Melee.Swords;
-using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -50,7 +50,7 @@ public class ClearCutterSlash : EnergySlashTemplate
 		ParticleOrchestraSettings settings = new ParticleOrchestraSettings();
 		settings.PositionInWorld = target.Hitbox.ClosestPointInRect(Main.player[Projectile.owner].Center);
 		Vector2 positionslansdglag = Main.rand.NextVector2FromRectangle(target.Hitbox);
-		ParticleSystem.AddParticle(new CrystalSparkle(), positionslansdglag, Vector2.Zero, default);
+		OldParticleSystemDeleteSoon.AddParticle(new CrystalSparkle(), positionslansdglag, Vector2.Zero, default);
 		if (Main.netMode == NetmodeID.MultiplayerClient)
 		{
 			Network.SyncParticles.SendPacket(ParticleType.CrystalSparkle, positionslansdglag, Vector2.Zero, default, Projectile.owner);
@@ -64,7 +64,7 @@ public class ClearCutterSlash : EnergySlashTemplate
 			{
 				settings.PositionInWorld = Main.MouseWorld + new Vector2(0, Dist).RotatedBy(rand);
 				//ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.Excalibur, settings);
-				ParticleSystem.AddParticle(new CrystalSparkle(), settings.PositionInWorld, Vector2.Zero, default, 1);
+				OldParticleSystemDeleteSoon.AddParticle(new CrystalSparkle(), settings.PositionInWorld, Vector2.Zero, default, 1);
 				Projectile P = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), settings.PositionInWorld, new Vector2(0, 30).RotatedBy(rand), ProjectileID.StarCloakStar, (int)(Projectile.damage * 0.4f), Projectile.knockBack, Projectile.owner, 0, target.position.Y);
 			}
 		}

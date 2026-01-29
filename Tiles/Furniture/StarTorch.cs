@@ -9,8 +9,8 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework.Graphics;
-using Avalon.Particles;
 using ReLogic.Content;
+using Avalon.Particles.OldParticleSystem;
 
 namespace Avalon.Tiles.Furniture
 {
@@ -101,7 +101,7 @@ namespace Avalon.Tiles.Furniture
 				//pos.MovementVector = new Vector2(Main.rand.Next(-2, 3), Main.rand.Next(1, 4));
 				////pos.IndexOfPlayerWhoInvokedThis = 255;
 				//ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.SilverBulletSparkle, pos);
-				ParticleSystem.AddParticle(new Particles.StarTorch(),
+				OldParticleSystemDeleteSoon.AddParticle(new Particles.OldParticleSystem.StarTorch(),
 					new Vector2(i, j) * 16 + new Vector2(Main.rand.Next(4, 13), Main.rand.Next(2, 6)), // position
 					new Vector2(Main.rand.NextFloat(-0.02f, 0.03f), Main.rand.NextFloat(-0.4f, -0.5f)), // velocity
 					Color.White, // color

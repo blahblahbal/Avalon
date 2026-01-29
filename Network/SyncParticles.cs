@@ -1,5 +1,5 @@
 using Avalon.Common.Players;
-using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using System.IO;
 using Terraria;
@@ -38,7 +38,7 @@ internal class SyncParticles
 		}
 		else
 		{
-			ParticleSystem.AddParticle(type, pos, vel, default, default, default, default);
+			OldParticleSystemDeleteSoon.AddParticle(type, pos, vel, default, default, default, default);
 		}
 	}
 }

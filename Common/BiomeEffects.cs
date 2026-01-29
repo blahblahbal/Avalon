@@ -1,5 +1,6 @@
 using Avalon.Common.Players;
 using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -25,16 +26,16 @@ namespace Avalon.Common
 
                 if (Player.position.Y > (Main.UnderworldLayer - 100) * 16)
                 {
-                    Particle particleType = new HellEmbers();
+                    LegacyParticleDeleteSoon particleType = new HellEmbers();
                     if ((Player.GetModPlayer<AvalonBiomePlayer>().ZoneNearHellcastle || Player.GetModPlayer<AvalonBiomePlayer>().ZoneHellcastle) && !Main.rand.NextBool(6))
                     {
                         particleType = new SoulEmbers();
                     }
 
                     if (Main.rand.NextBool(20))
-                    ParticleSystem.AddParticle(particleType, new Vector2(Main.rand.Next(-2000,2000) + Player.position.X, MathHelper.Clamp(Player.position.Y + 600,Main.UnderworldLayer * 16, (Main.maxTilesY - 37) * 16)), new Vector2(Main.rand.NextFloat(-5,5), -1), default);
+                    OldParticleSystemDeleteSoon.AddParticle(particleType, new Vector2(Main.rand.Next(-2000,2000) + Player.position.X, MathHelper.Clamp(Player.position.Y + 600,Main.UnderworldLayer * 16, (Main.maxTilesY - 37) * 16)), new Vector2(Main.rand.NextFloat(-5,5), -1), default);
                     if(Main.rand.NextBool(3) && Player.position.Y > (Main.UnderworldLayer - 40) * 16)
-                        ParticleSystem.AddParticle(particleType, new Vector2(Main.rand.Next(-2000, 2000) + Player.position.X, MathHelper.Clamp(Player.position.Y + 600, Main.UnderworldLayer * 16, (Main.maxTilesY - 37) * 16)), new Vector2(Main.rand.NextFloat(-5, 5), -1), default);
+                        OldParticleSystemDeleteSoon.AddParticle(particleType, new Vector2(Main.rand.Next(-2000, 2000) + Player.position.X, MathHelper.Clamp(Player.position.Y + 600, Main.UnderworldLayer * 16, (Main.maxTilesY - 37) * 16)), new Vector2(Main.rand.NextFloat(-5, 5), -1), default);
                 }
             }
         }

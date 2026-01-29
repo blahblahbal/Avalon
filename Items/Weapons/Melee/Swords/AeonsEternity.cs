@@ -28,7 +28,7 @@ public class AeonsEternity : ModItem, ISyncedOnHitEffect
 	}
 	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
 	{
-		ParticleSystem.AddParticle(new AeonStarburst(), Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, Color.Cyan, Main.rand.NextFloat(MathHelper.TwoPi), 1.5f);
+		ParticleSystem.NewParticle(new AeonStarburst(Vector2.Zero, Color.Cyan, Main.rand.NextFloat(MathHelper.TwoPi), 1.5f), Main.rand.NextVector2FromRectangle(target.Hitbox));
 	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{

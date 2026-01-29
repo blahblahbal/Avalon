@@ -4,7 +4,7 @@ using Avalon.Dusts;
 using Avalon.Items.Material;
 using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Weapons.Magic.Hardmode.PhantomKnives;
-using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,7 +20,7 @@ using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using static Avalon.Particles.ParticleSystem;
+using static Avalon.Particles.OldParticleSystem.OldParticleSystemDeleteSoon;
 
 namespace Avalon.NPCs.Bosses.Hardmode.Phantasm;
 

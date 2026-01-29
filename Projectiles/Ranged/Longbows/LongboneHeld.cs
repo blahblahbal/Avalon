@@ -1,6 +1,6 @@
 ﻿using Avalon.Common.Templates;
 using Avalon.Network;
-using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -73,8 +73,8 @@ public class LongboneCurseArrow : GlobalProjectile
 		if (Longbone > 0)
 		{
 			SoundEngine.PlaySound(SoundID.Item20, projectile.position);
-			Particle p = ParticleSystem.AddParticle(new ColorExplosion(), projectile.Center, default, new Color(32, 77, 255, 64), Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.1f, 0.35f) + (Longbone * 0.1f));
-			ParticleSystem.AddParticle(new ColorExplosion(), p.Position, default, new Color(64, 128, 255, 64), p.ai1 + MathHelper.PiOver2, p.ai2 * 0.8f);
+			LegacyParticleDeleteSoon p = OldParticleSystemDeleteSoon.AddParticle(new ColorExplosion(), projectile.Center, default, new Color(32, 77, 255, 64), Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.1f, 0.35f) + (Longbone * 0.1f));
+			OldParticleSystemDeleteSoon.AddParticle(new ColorExplosion(), p.Position, default, new Color(64, 128, 255, 64), p.ai1 + MathHelper.PiOver2, p.ai2 * 0.8f);
 			for (int i = 0; i < Longbone * 7; i++)
 			{
 				float rand = Main.rand.NextFloat(0, MathHelper.TwoPi);

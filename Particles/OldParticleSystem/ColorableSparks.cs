@@ -1,14 +1,12 @@
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
-using Terraria.GameContent;
-using Terraria.ID;
 using Terraria;
-using Terraria.ModLoader;
+using Terraria.GameContent;
 
-namespace Avalon.Particles
+namespace Avalon.Particles.OldParticleSystem
 {
-    public class ColorableSparkle : Particle
+    public class ColorableSparkle : LegacyParticleDeleteSoon
     { 
         public override void Update()
         {

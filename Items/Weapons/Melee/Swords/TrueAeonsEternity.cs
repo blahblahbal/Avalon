@@ -2,6 +2,7 @@ using Avalon;
 using Avalon.Common.Extensions;
 using Avalon.Dusts;
 using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Avalon.Projectiles.Melee.Swords;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -49,7 +50,7 @@ public class TrueAeonsEternity : ModItem
 			Vector2 vector2 = outwardDirection2.RotatedBy(-1f * (float)player.direction * player.gravDir) * Main.rand.NextFloat(34,120);
 
 			float percent = player.itemAnimation / (float)player.itemAnimationMax;
-			ParticleSystem.AddParticle(new TrueAeonSlash(vector2,player,Main.rand.NextFloat(0.3f,1f),Main.rand.NextFloat(MathHelper.PiOver2,MathHelper.Pi) * Math.Max(percent,0.5f),player.direction,Main.rand.NextFloat(20f,35f), new Color(Main.rand.Next(200), 100, 255, 0)), player.Center);
+			OldParticleSystemDeleteSoon.AddParticle(new TrueAeonSlash(vector2,player,Main.rand.NextFloat(0.3f,1f),Main.rand.NextFloat(MathHelper.PiOver2,MathHelper.Pi) * Math.Max(percent,0.5f),player.direction,Main.rand.NextFloat(20f,35f), new Color(Main.rand.Next(200), 100, 255, 0)), player.Center);
 		}
 	}
 	public override void AddRecipes()

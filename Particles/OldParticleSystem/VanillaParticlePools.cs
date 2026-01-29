@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Terraria.GameContent.Drawing;
 using Terraria.Graphics.Renderers;
 
-namespace Avalon.Particles;
+namespace Avalon.Particles.OldParticleSystem;
 
 public class VanillaParticlePools
 {

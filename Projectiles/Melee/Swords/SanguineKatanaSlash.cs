@@ -1,6 +1,7 @@
 ﻿using Avalon.Common.Templates;
 using Avalon.Items.Weapons.Melee.Swords;
 using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -58,7 +59,7 @@ public class SanguineKatanaSlash : EnergySlashTemplate
 		SoundEngine.PlaySound(SoundID.NPCHit1, target.position);
 		Vector2 pos = vector - new Vector2(0, 24);
 		Vector2 vel = new Vector2(Main.rand.NextFloat(-0.5f, 0.5f), 1);
-		ParticleSystem.AddParticle(new SanguineCuts(), pos, vel, default);
+		OldParticleSystemDeleteSoon.AddParticle(new SanguineCuts(), pos, vel, default);
 		if (Main.netMode == NetmodeID.MultiplayerClient)
 		{
 			Network.SyncParticles.SendPacket(ParticleType.SanguineCuts, pos, vel, default, Projectile.owner);

@@ -6,9 +6,9 @@ using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace Avalon.Particles
+namespace Avalon.Particles.OldParticleSystem
 {
-    public class TrueAeonSlash : Particle
+    public class TrueAeonSlash : LegacyParticleDeleteSoon
     {
 		public Vector2 Offset = Vector2.Zero;
 		public Player Owner = null;

@@ -1,5 +1,4 @@
-﻿using Avalon.Items.Weapons.Melee.Swords;
-using Avalon.Particles;
+﻿using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -120,10 +119,10 @@ public class AeonStar : ModProjectile
 		{
 			lastStar = Projectile;
 		}
-		ParticleSystem.AddParticle(new AeonStarburst(), Projectile.Center, Vector2.Zero, Color.Yellow, Projectile.rotation, 2);
+		ParticleSystem.NewParticle(new AeonStarburst(Vector2.Zero, Color.Yellow, Projectile.rotation, 2), Projectile.Center);
 		if (lastStar == Projectile)
 		{
-			ParticleSystem.AddParticle(new AeonStarburst(), Projectile.Center, Vector2.Zero, Color.Red, Projectile.rotation + MathHelper.Pi, 3);
+			ParticleSystem.NewParticle(new AeonStarburst(Vector2.Zero, Color.Red, Projectile.rotation + MathHelper.Pi, 3), Projectile.Center);
 		}
 	}
 }

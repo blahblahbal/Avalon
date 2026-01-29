@@ -6,9 +6,9 @@ using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace Avalon.Particles
+namespace Avalon.Particles.OldParticleSystem
 {
-	public class SanguineCuts : Particle
+	public class SanguineCuts : LegacyParticleDeleteSoon
 	{
 		public override void OnSpawn()
 		{

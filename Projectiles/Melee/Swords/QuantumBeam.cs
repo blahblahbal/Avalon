@@ -1,4 +1,5 @@
 ﻿using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -62,7 +63,7 @@ public class QuantumBeam : ModProjectile
 		if (Projectile.ai[1] < -1 && Projectile.ai[2] == 0)
 		{
 			Projectile.ai[2]++;
-			ParticleSystem.AddParticle(new QuantumPortal(), Projectile.Center, default, default);
+			OldParticleSystemDeleteSoon.AddParticle(new QuantumPortal(), Projectile.Center, default, default);
 		}
 		if (Projectile.ai[1] == -1)
 		{

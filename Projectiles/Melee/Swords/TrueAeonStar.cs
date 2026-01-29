@@ -117,13 +117,12 @@ public class TrueAeonStar : ModProjectile
 				Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2CircularEdge(4, 4) * Main.rand.NextFloat(0.8f, 1f), ModContent.ProjectileType<TrueAeonStarShard>(), Projectile.damage * 4, Projectile.knockBack, Projectile.owner, ai1: -1, ai2: Main.rand.NextFloat(14, 24));
 			}
 		}
-		ParticleSystem.AddParticle(new AeonStarburst(), Projectile.Center, Vector2.Zero, new Color(Main.rand.Next(200), 100, 255, 0), Projectile.rotation, 3);
+		ParticleSystem.NewParticle(new AeonStarburst(Vector2.Zero, new Color(Main.rand.Next(200), 100, 255, 0), Projectile.rotation, 3), Projectile.Center);
+		//OldParticleSystemDeleteSoon.AddParticle(new AeonStarburst(), Projectile.Center, Vector2.Zero, new Color(Main.rand.Next(200), 100, 255, 0), Projectile.rotation, 3);
 		for (int i = 0; i < 3; i++)
 		{
 			Vector2 velocity = Main.rand.NextVector2CircularEdge(8, 8) * Main.rand.NextFloat(0.6f, 1.2f);
-			AeonStarburst a = new AeonStarburst();
-			a.BurstTime = Main.rand.Next(25, 45);
-			ParticleSystem.AddParticle(a, Projectile.Center, velocity, new Color(Main.rand.Next(200), 100, 255, 0), velocity.ToRotation() + MathHelper.PiOver2, 1f);
+			ParticleSystem.NewParticle(new AeonStarburst(velocity, new Color(Main.rand.Next(200), 100, 255, 0), velocity.ToRotation() + MathHelper.PiOver2, 1), Projectile.Center);
 		}
 	}
 }

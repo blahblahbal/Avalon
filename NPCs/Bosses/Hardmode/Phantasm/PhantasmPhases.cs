@@ -1,6 +1,6 @@
 using Avalon.Common;
 using Avalon.Dusts;
-using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Avalon.Projectiles.Hostile.Phantasm;
 using Avalon.UI;
 using Microsoft.Xna.Framework;

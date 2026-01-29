@@ -6,9 +6,9 @@ using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace Avalon.Particles
+namespace Avalon.Particles.OldParticleSystem
 {
-    public class EnergyRevolverParticle : Particle
+    public class EnergyRevolverParticle : LegacyParticleDeleteSoon
     {
         public override void Update()
         {

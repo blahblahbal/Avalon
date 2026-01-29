@@ -29,17 +29,12 @@ public class SyncOnHit
 		byte player = reader.ReadByte();
 		short target = reader.ReadInt16();
 		if (Main.netMode == NetmodeID.Server)
-		{
 			SendPacket(item, damagedealer, Main.player[player], Main.npc[target], crit, hitDir ? 1 : -1);
-		}
 
 		if (item && ContentSamples.ItemsByType[damagedealer].ModItem is ISyncedOnHitEffect i)
-		{
 			i.SyncedOnHitNPC(Main.player[player], Main.npc[target], crit, hitDir ? 1 : -1);
-		}
+
 		else if (Main.projectile.FirstOrDefault(x => x.identity == damagedealer && x.owner == player).ModProjectile is ISyncedOnHitEffect i2)
-		{
 			i2.SyncedOnHitNPC(Main.player[player], Main.npc[target], crit, hitDir ? 1 : -1);
-		}
 	}
 }

@@ -5,10 +5,11 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
+using Avalon;
 
-namespace Avalon.Particles
+namespace Avalon.Particles.OldParticleSystem
 {
-	public class StarTorch : Particle
+	public class StarTorch : LegacyParticleDeleteSoon
 	{
 		public override void Update()
 		{

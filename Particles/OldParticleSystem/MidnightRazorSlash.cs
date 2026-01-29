@@ -6,10 +6,10 @@ using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace Avalon.Particles
+namespace Avalon.Particles.OldParticleSystem
 {
 	// todo: everything (I'm not doing it cause idk how to make the particles draw the same as the vanilla night's edge one)
-	public class MidnightRazorSlash : Particle
+	public class MidnightRazorSlash : LegacyParticleDeleteSoon
 	{
 		public override void OnSpawn()
 		{

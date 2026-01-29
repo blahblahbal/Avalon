@@ -3,7 +3,7 @@ using Avalon.Common.Interfaces;
 using Avalon.Common.Templates;
 using Avalon.Dusts;
 using Avalon.Items.Weapons.Melee.Maces;
-using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;

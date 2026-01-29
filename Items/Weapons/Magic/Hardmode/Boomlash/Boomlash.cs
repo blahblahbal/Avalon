@@ -1,6 +1,6 @@
 using Avalon.Common.Extensions;
 using Avalon.Items.Weapons.Melee.Swords;
-using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Avalon.Projectiles.Melee.Swords;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -110,7 +110,7 @@ public class BoomlashProj : ModProjectile
 	}
 	public override void OnKill(int timeLeft)
 	{
-		ParticleSystem.AddParticle(new ExplosionParticle(), Projectile.Center, Vector2.Zero, default, Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.9f, 1.2f));
+		OldParticleSystemDeleteSoon.AddParticle(new ExplosionParticle(), Projectile.Center, Vector2.Zero, default, Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.9f, 1.2f));
 		if (Main.myPlayer == Projectile.owner)
 		{
 			int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AeonExplosion>(), Projectile.damage, Projectile.knockBack, Projectile.owner);

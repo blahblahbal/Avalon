@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -134,7 +135,7 @@ public class AdvShockwave : ModBuff
 			} // END iterate through NPCs
 
 			var Sound = SoundEngine.PlaySound(SoundID.Item14, player.position);
-			ParticleSystem.AddParticle(new ShockwaveParticle(), player.Center + new Vector2(0, (player.height * 0.5f * player.gravDir)), Vector2.Zero, default, Radius);
+			OldParticleSystemDeleteSoon.AddParticle(new ShockwaveParticle(), player.Center + new Vector2(0, (player.height * 0.5f * player.gravDir)), Vector2.Zero, default, Radius);
 			if (SoundEngine.TryGetActiveSound(Sound, out ActiveSound sound) && sound != null && sound.IsPlaying)
 			{
 				sound.Volume = MathHelper.Clamp(fall_dist / 7f, 0.2f, 3);

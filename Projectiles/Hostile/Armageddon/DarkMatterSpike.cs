@@ -1,4 +1,4 @@
-using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -97,7 +97,7 @@ namespace Avalon.Projectiles.Hostile.Armageddon
 
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Top, Vector2.Zero, ModContent.ProjectileType<DarkMatterSpike>(), Projectile.damage, 0, Projectile.owner);
                 SoundEngine.PlaySound(Spawn, Projectile.position);
-                ParticleSystem.AddParticle(new ColorExplosion(), Projectile.Top, default, new Color(64,0,78,128),Main.rand.NextFloatDirection(),0.5f);
+                OldParticleSystemDeleteSoon.AddParticle(new ColorExplosion(), Projectile.Top, default, new Color(64,0,78,128),Main.rand.NextFloatDirection(),0.5f);
             }
             if(Projectile.tileCollide)
                 Projectile.velocity.Y += 4;

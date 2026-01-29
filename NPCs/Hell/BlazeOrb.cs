@@ -1,5 +1,5 @@
 using Avalon;
-using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -91,7 +91,7 @@ public class BlazeOrb : ModNPC
         }
         if (Collision.SolidCollision(NPC.position, NPC.width, NPC.height) && Main.netMode != NetmodeID.MultiplayerClient)
         {
-            ParticleSystem.AddParticle(new ExplosionParticle(), NPC.Center, Vector2.Zero, default, Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.9f, 1.2f));
+            OldParticleSystemDeleteSoon.AddParticle(new ExplosionParticle(), NPC.Center, Vector2.Zero, default, Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.9f, 1.2f));
 
             for(int i = 0; i < 20; i++)
             {

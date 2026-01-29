@@ -4,7 +4,7 @@ using Avalon.Common;
 using Avalon.Dusts;
 using Avalon.Items.Weapons.Magic;
 using Avalon.NPCs.Bosses.Hardmode.Phantasm;
-using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;

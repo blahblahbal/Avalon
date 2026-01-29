@@ -1,6 +1,6 @@
 using Avalon.Common.Extensions;
 using Avalon.Common.Templates;
-using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -36,8 +36,8 @@ public class EnergyRevolver : ModItem
 		Vector2 newPos = position + new Vector2(0, -6 * player.direction).RotatedBy(velocity.ToRotation());
 		Vector2 beamStartPos = newPos + Vector2.Normalize(velocity) * 50;
 		Projectile.NewProjectile(source, newPos, velocity, type, damage, knockback, player.whoAmI, beamStartPos.X, beamStartPos.Y);
-		ParticleSystem.AddParticle(new EnergyRevolverParticle(), beamStartPos, Vector2.Normalize(velocity) * 2, new Color(64, 255, 255, 0), 0, 0.8f, 14);
-		ParticleSystem.AddParticle(new EnergyRevolverParticle(), beamStartPos, default, new Color(64, 64, 255, 0), 0, 1, 20);
+		OldParticleSystemDeleteSoon.AddParticle(new EnergyRevolverParticle(), beamStartPos, Vector2.Normalize(velocity) * 2, new Color(64, 255, 255, 0), 0, 0.8f, 14);
+		OldParticleSystemDeleteSoon.AddParticle(new EnergyRevolverParticle(), beamStartPos, default, new Color(64, 64, 255, 0), 0, 1, 20);
 		return false;
 	}
 	public override Vector2? HoldoutOffset()
@@ -89,7 +89,7 @@ public class EnergyLaser : ModProjectile
 		if (Projectile.ai[2] == 600)
 		{
 			Projectile.damage = 0;
-			ParticleSystem.AddParticle(new EnergyRevolverParticle(), Projectile.Center, default, new Color(64, 255, 255, 0), 0, 1, 14);
+			OldParticleSystemDeleteSoon.AddParticle(new EnergyRevolverParticle(), Projectile.Center, default, new Color(64, 255, 255, 0), 0, 1, 14);
 			Projectile.velocity = Vector2.Zero;
 			for (int i = 0; i < 10; i++)
 			{
@@ -116,7 +116,7 @@ public class EnergyLaser : ModProjectile
 		Projectile.damage = (int)(Projectile.damage * 0.9f);
 		if (Main.rand.NextBool(6))
 			target.AddBuff(BuffID.OnFire3, 60 * 3);
-		ParticleSystem.AddParticle(new EnergyRevolverParticle(), Projectile.Center, default, new Color(64, 128, 255, 0), 0, Main.rand.NextFloat(0.9f, 1.1f), 14);
+		OldParticleSystemDeleteSoon.AddParticle(new EnergyRevolverParticle(), Projectile.Center, default, new Color(64, 128, 255, 0), 0, Main.rand.NextFloat(0.9f, 1.1f), 14);
 		for (int i = 0; i < 10; i++)
 		{
 			Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.Torch, Main.rand.NextVector2Circular(3, 3), 24);
@@ -128,7 +128,7 @@ public class EnergyLaser : ModProjectile
 	{
 		if (Main.rand.NextBool(6))
 			target.AddBuff(BuffID.OnFire3, 60 * 3);
-		ParticleSystem.AddParticle(new EnergyRevolverParticle(), Projectile.Center, default, new Color(64, 128, 255, 0), 0, Main.rand.NextFloat(0.9f, 1.1f), 14);
+		OldParticleSystemDeleteSoon.AddParticle(new EnergyRevolverParticle(), Projectile.Center, default, new Color(64, 128, 255, 0), 0, Main.rand.NextFloat(0.9f, 1.1f), 14);
 		for (int i = 0; i < 10; i++)
 		{
 			Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.Torch, Main.rand.NextVector2Circular(3, 3), 24);

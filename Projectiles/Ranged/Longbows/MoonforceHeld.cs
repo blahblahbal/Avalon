@@ -1,5 +1,5 @@
 ﻿using Avalon.Common.Templates;
-using Avalon.Particles;
+using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -140,14 +140,14 @@ public class MoonlightArrowVisuals : GlobalProjectile
 	{
 		if (Moonlight)
 		{
-			ParticleSystem.AddParticle(new MoonforceParticle(), Main.rand.NextVector2FromRectangle(target.Hitbox), projectile.velocity * 0.2f, default, (projectile.width * 2f) / 128f);
+			OldParticleSystemDeleteSoon.AddParticle(new MoonforceParticle(), Main.rand.NextVector2FromRectangle(target.Hitbox), projectile.velocity * 0.2f, default, (projectile.width * 2f) / 128f);
 		}
 	}
 	public override void OnHitPlayer(Projectile projectile, Player target, Player.HurtInfo info)
 	{
 		if (Moonlight)
 		{
-			ParticleSystem.AddParticle(new MoonforceParticle(), Main.rand.NextVector2FromRectangle(target.Hitbox), projectile.velocity * 0.2f, default, (projectile.width * 2f) / 128f);
+			OldParticleSystemDeleteSoon.AddParticle(new MoonforceParticle(), Main.rand.NextVector2FromRectangle(target.Hitbox), projectile.velocity * 0.2f, default, (projectile.width * 2f) / 128f);
 		}
 	}
 	public override void OnKill(Projectile projectile, int timeLeft)
@@ -164,7 +164,7 @@ public class MoonlightArrowVisuals : GlobalProjectile
 				d.noGravity = true;
 				d.fadeIn = Main.rand.NextFloat(0, 2);
 			}
-			ParticleSystem.AddParticle(new MoonforceParticle(), projectile.Center, projectile.velocity * 0.2f, default, 1.4f);
+			OldParticleSystemDeleteSoon.AddParticle(new MoonforceParticle(), projectile.Center, projectile.velocity * 0.2f, default, 1.4f);
 		}
 	}
 	public override bool PreDraw(Projectile projectile, ref Color lightColor)
