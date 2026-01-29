@@ -1,5 +1,5 @@
+using Avalon;
 using Avalon.Common;
-using Avalon.Items.Placeable.Painting;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent.Generation;
@@ -7,7 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
-namespace Avalon.Tiles;
+namespace Avalon.Tiles.Furniture;
 
 /// <summary>
 /// 6x4 Painting tile

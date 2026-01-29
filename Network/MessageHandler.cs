@@ -8,13 +8,13 @@ public class MessageHandler
 	public static ModPacket GetPacket(MessageID messageID, int capacity = 256)
 	{
 		ModPacket message = ExxoAvalonOrigins.Mod.GetPacket(capacity);
-		message.Write((int)messageID);
+		message.Write((byte)messageID);
 		return message;
 	}
 
 	public static void HandlePacket(BinaryReader reader, int fromWho)
 	{
-		MessageID id = (MessageID)reader.ReadInt32();
+		MessageID id = (MessageID)reader.ReadByte();
 		switch (id)
 		{
 			//case MessageID.SyncTime:
@@ -37,6 +37,9 @@ public class MessageHandler
 				break;
 			case MessageID.SyncLongbowArrowEffect:
 				SyncLongbowArrowEffect.HandlePacket(reader, fromWho);
+				break;
+			case MessageID.SyncPhantasmSpawn:
+				SyncPhantasmSpawn.HandlePacket(reader, fromWho);
 				break;
 				//case MessageID.StaminaHeal:
 				//    StaminaHeal.HandlePacket(reader, fromWho);

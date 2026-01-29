@@ -176,9 +176,6 @@ public class EctoHand : ModNPC
 			NPC.rotation = Utils.AngleLerp(NPC.rotation, armRotation + MathHelper.Pi, 0.05f);
 		}
 
-		if (Main.LocalPlayer.HeldItem.type != 1)
-			NPC.velocity = Vector2.Zero;
-
 		if (Main.rand.NextBool(15))
         {
             int num1225 = Dust.NewDust(NPC.Center + new Vector2(Main.rand.NextFloat(0, NPC.Center.Distance(new Vector2(NPC.ai[1], NPC.ai[2]))), 0).RotatedBy(NPC.Center.DirectionTo(new Vector2(NPC.ai[1], NPC.ai[2])).ToRotation()), (int)(NPC.width * 0.1f),

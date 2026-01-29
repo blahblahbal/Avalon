@@ -184,7 +184,7 @@ internal class Hellcastle
                         if (Utils.HasEnoughRoomForPaintingType(i, j, 6, 4) && Utils.NoPaintingsInRange(i, j, 10) &&
                             Utils.IsValidPlacementForPaintingInHellcastle(i, j, 6, 4, excludedZone))
                         {
-                            WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.Paintings>(), style: pStyle);
+                            WorldGen.PlaceTile(i, j, ModContent.TileType<Paintings>(), style: pStyle);
                         }
                     }
                     if (paintingSize == 3) // 3x2

@@ -1,6 +1,6 @@
 using Avalon.Common.Extensions;
 using Avalon.Rarities;
-using Avalon.Tiles;
+using Avalon.Tiles.Furniture;
 using Terraria;
 using Terraria.ModLoader;
 

@@ -36,7 +36,7 @@ namespace Avalon.Hooks
             ModContent.TileType<Tiles.GemTrees.PeridotTree>(), ModContent.TileType<Tiles.GemTrees.ZirconTree>(), ModContent.TileType<Statues>(),
             ModContent.TileType<Tiles.Savanna.PlatformLeaf>(), ModContent.TileType<Tiles.GemStashes>(), ModContent.TileType<Tiles.ChunkstoneColumn>(),
             ModContent.TileType<Tiles.CrimstoneColumn>(), ModContent.TileType<Tiles.EbonstoneColumn>(), ModContent.TileType<Tiles.Savanna.TuhrtlBrick>(),
-            ModContent.TileType<Tiles.Paintings>(), ModContent.TileType<PlatinumChest>(), ModContent.TileType<Tiles.Savanna.Loamstone>(), TileID.PlatinumBrick
+            ModContent.TileType<Paintings>(), ModContent.TileType<PlatinumChest>(), ModContent.TileType<Tiles.Savanna.Loamstone>(), TileID.PlatinumBrick
         };
 
         protected override void Apply()

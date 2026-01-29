@@ -6,7 +6,7 @@ using Avalon.NPCs.Dungeon;
 using Avalon.NPCs.Hell;
 using Avalon.NPCs.Hellcastle;
 using Avalon.NPCs.Savanna;
-using Avalon.Tiles;
+using Avalon.Tiles.Furniture.Functional;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;

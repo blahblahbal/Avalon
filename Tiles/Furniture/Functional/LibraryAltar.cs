@@ -1,4 +1,5 @@
 using Avalon.Items.Consumables;
+using Avalon.Network;
 using Avalon.NPCs.Bosses.Hardmode.Phantasm;
 using Microsoft.Xna.Framework;
 using System;
@@ -53,23 +54,12 @@ public class LibraryAltar : ModTile
 			}
 			vector.X -= Math.Sign(Main.tile[i, j].TileFrameX - 32) * 16;
 			vector.Y -= 16 * 28;
-
-
-			SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/NPC/PhantasmJumpscareScary2024") { Volume = 0.8f, }, vector);
-			//SoundEngine.PlaySound(SoundID.ScaryScream, vector);
-			for (int x = 0; x < 35; x++)
-			{
-				Dust d = Dust.NewDustPerfect(vector, DustID.DungeonSpirit);
-				d.noGravity = true;
-				d.velocity = Main.rand.NextVector2Circular(30, 30);
-				d.scale = 2;
-			}
-
-
-			NPC.SpawnBoss((int)vector.X, (int)vector.Y, ModContent.NPCType<Phantasm>(), Main.myPlayer);
-			return true;
+			if (Main.netMode == NetmodeID.SinglePlayer)
+				NPC.SpawnBoss((int)vector.X, (int)vector.Y, ModContent.NPCType<Phantasm>(), Main.myPlayer);
+			else
+				SyncPhantasmSpawn.SendPacket((int)vector.X, (int)vector.Y,Main.myPlayer);
+				return true;
 		}
-
 		return base.RightClick(i, j);
 	}
 }

@@ -103,6 +103,7 @@ public partial class Phantasm : ModNPC
 	}
 	public override void AI()
 	{
+		
 		Dust d = Dust.NewDustDirect(NPC.position, NPC.width, NPC.height, DustID.DungeonSpirit);
 		d.noGravity = true;
 		d.scale = Main.rand.NextFloat(1);
@@ -124,11 +125,13 @@ public partial class Phantasm : ModNPC
 				NPC.dontTakeDamage = false;
 			}
 		}
-
-		Vector2 vector = NPC.Center;
-		NPC.scale = Utils.Remap(NPC.life, 0, NPC.lifeMax, Main.expertMode? 0.7f : 1f, 1.6f);
-		NPC.Size = new Vector2(66 * NPC.scale);
-		NPC.Center = vector;
+		if (NPC.justHit || NPC.lifeRegen < 0)
+		{
+			Vector2 vector = NPC.Center;
+			NPC.scale = Utils.Remap(NPC.life, 0, NPC.lifeMax, Main.expertMode ? 0.7f : 1f, 1.6f);
+			NPC.Size = new Vector2(66 * NPC.scale);
+			NPC.Center = vector;
+		}
 
 		if (!NPC.HasValidTarget)
 		{
@@ -148,6 +151,15 @@ public partial class Phantasm : ModNPC
 			case 200:
 				if (NPC.ai[0] == 0)
 				{
+					SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/NPC/PhantasmJumpscareScary2024") { Volume = 0.8f, }, NPC.Center);
+					//SoundEngine.PlaySound(SoundID.ScaryScream, vector);
+					for (int x = 0; x < 35; x++)
+					{
+						Dust d2 = Dust.NewDustPerfect(NPC.Center, DustID.DungeonSpirit);
+						d2.noGravity = true;
+						d2.velocity = Main.rand.NextVector2Circular(30, 30);
+						d2.scale = 2;
+					}
 					NPC.velocity.Y = 10;
 				}
 				NPC.velocity *= 0.96f;

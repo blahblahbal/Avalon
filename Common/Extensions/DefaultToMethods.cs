@@ -1,6 +1,7 @@
 using Avalon.Items.Ammo;
 using Avalon.Items.Material;
 using Avalon.Tiles;
+using Avalon.Tiles.Furniture.Functional;
 using System;
 using Terraria;
 using Terraria.Audio;

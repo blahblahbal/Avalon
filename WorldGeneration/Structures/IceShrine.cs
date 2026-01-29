@@ -1,3 +1,4 @@
+using Avalon.Tiles.Furniture;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -294,7 +295,7 @@ class IceShrine
         else if (stylez == 4)
         {
             stylez = 8;
-            paintingType = ModContent.TileType<Tiles.Paintings>();
+            paintingType = ModContent.TileType<Paintings>();
         }
         int stylez2 = Main.rand.Next(5);
         if (stylez2 == 0) stylez2 = 12;
@@ -303,12 +304,12 @@ class IceShrine
         else if (stylez2 == 3)
         {
             stylez2 = 0;
-            paintingType = ModContent.TileType<Tiles.Paintings>();
+            paintingType = ModContent.TileType<Paintings>();
         }
         else if (stylez2 == 4)
         {
             stylez2 = 5;
-            paintingType = ModContent.TileType<Tiles.Paintings>();
+            paintingType = ModContent.TileType<Paintings>();
         }
         WorldGen.PlaceTile(x - 7, y + 9 + mod1, TileID.Benches, style: 27);
         WorldGen.PlaceTile(x + 11, y + 9 + mod1, TileID.Benches, style: 27);

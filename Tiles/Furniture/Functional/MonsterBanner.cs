@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 using static Terraria.GameContent.Drawing.TileDrawing;
 
-namespace Avalon.Tiles;
+namespace Avalon.Tiles.Furniture.Functional;
 
 public class MonsterBanner : ModTile
 {

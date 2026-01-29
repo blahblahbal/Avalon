@@ -11,5 +11,6 @@ public enum MessageID
 	SyncSkyBlessing = 6,
 	SyncParticle = 7,
 	SyncOnHit = 8,
-	SyncLongbowArrowEffect = 9
+	SyncLongbowArrowEffect = 9,
+	SyncPhantasmSpawn = 10
 }
