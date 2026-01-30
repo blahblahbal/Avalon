@@ -37,16 +37,15 @@ public class MarrowMasherProj : MaceTemplate, ISyncedOnHitEffect
 		//Main.NewText("Name: " + player.name + " Target:" + target.TypeName + $" ({target.whoAmI})");
 		//Main.NewText("Target pos: " + target.Center.ToString() + "Player Pos: " + player.Center.ToString());
 		//Main.NewText($"Crit: {crit} dir: {hitDirection}");
-		ParticleSystem.NewParticle(new AeonStarburst(Vector2.Zero, Color.Red, 0, 2, 16), target.Center);
+		Vector2 closestPoint = target.Hitbox.ClosestPointInRect(Projectile.Center);
+		float VelocityDirection = (Projectile.rotation + MathHelper.PiOver4) * Owner.direction * SwingDirection * Owner.gravDir;
 		if (crit)
 		{
 			SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundMiss);
 			for (int i = 0; i < 5; i++)
 			{
 				SparkleParticle s = new();
-				s.Position = target.Hitbox.ClosestPointInRect(Projectile.Center);
-				s.Velocity = Projectile.position.DirectionTo(Projectile.oldPos[0]).RotatedBy((-MathHelper.PiOver4 * player.direction * -Projectile.ai[0]) + Main.rand.NextFloat(-2f, 2f)) * Main.rand.NextFloat(3, 6);
-				s.Position += s.Velocity;
+				s.Velocity = Vector2.One.RotatedBy(VelocityDirection + Main.rand.NextFloat(-2f, 2f)) * Main.rand.NextFloat(3, 6);
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(4f, 0.7f);
 				s.DrawVerticalAxis = false;
@@ -55,8 +54,8 @@ public class MarrowMasherProj : MaceTemplate, ISyncedOnHitEffect
 				s.FadeOutEnd = Main.rand.Next(15, 20);
 				s.AdditiveAmount = 1f;
 				s.ColorTint = new Color(0.85f, 0.5f, 0.5f);
-				ParticleSystem.NewParticle(s,s.Position);
-				Dust d = Dust.NewDustPerfect(s.Position, ModContent.DustType<SimpleColorableGlowyDust>(), Main.rand.NextVector2Circular(3,3));
+				ParticleSystem.NewParticle(s, closestPoint + s.Velocity);
+				Dust d = Dust.NewDustPerfect(closestPoint, ModContent.DustType<SimpleColorableGlowyDust>(), Main.rand.NextVector2Circular(3,3));
 				d.noGravity = true;
 				d.color = s.ColorTint;
 				d.color.A = 0;
@@ -67,9 +66,7 @@ public class MarrowMasherProj : MaceTemplate, ISyncedOnHitEffect
 			for (int i = 0; i < 3; i++)
 			{
 				SparkleParticle s = new();
-				//s.Position = target.Hitbox.ClosestPointInRect(Projectile.Center);
-				s.Position = target.Center;
-				s.Velocity = Projectile.position.DirectionTo(Projectile.oldPos[0]).RotatedBy((-MathHelper.PiOver4) + Main.rand.NextFloat(-1.5f, 1.5f)) * Main.rand.NextFloat(3, 5);
+				s.Velocity = Vector2.One.RotatedBy(VelocityDirection + Main.rand.NextFloat(-1.5f, 1.5f)) * Main.rand.NextFloat(3, 5);
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(3f, 0.3f);
 				s.DrawVerticalAxis = false;
@@ -78,7 +75,7 @@ public class MarrowMasherProj : MaceTemplate, ISyncedOnHitEffect
 				s.FadeOutEnd = Main.rand.Next(10, 15);
 				s.AdditiveAmount = 0.25f;
 				s.ColorTint = new Color(0.85f, 0.5f, 0.5f);
-				ParticleSystem.NewParticle(s, s.Position);
+				ParticleSystem.NewParticle(s, closestPoint);
 			}
 		}
 	}
