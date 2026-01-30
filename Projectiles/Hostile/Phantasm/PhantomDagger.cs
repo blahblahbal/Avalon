@@ -4,6 +4,7 @@ using Avalon.Common;
 using Avalon.Dusts;
 using Avalon.Items.Weapons.Magic;
 using Avalon.NPCs.Bosses.Hardmode.Phantasm;
+using Avalon.Particles;
 using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -68,8 +69,7 @@ public class PhantomDagger : SoulDagger
 			d.scale = 1;
 			if (Main.rand.NextBool(3))
 			{
-				PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
-				s.LocalPosition = Projectile.Center;
+				SparkleParticle s = new();
 				s.Velocity = new Vector2(0, Main.rand.NextFloat(7.5f)).RotatedBy(Projectile.rotation + Main.rand.NextFloat(-0.3f, 0.3f));
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(5f, 0.7f);
@@ -79,7 +79,7 @@ public class PhantomDagger : SoulDagger
 				s.FadeOutEnd = Main.rand.Next(20, 40);
 				s.AdditiveAmount = 1f;
 				s.ColorTint = new Color(1f, 0f, 0.2f);
-				Main.ParticleSystem_World_OverPlayers.Add(s);
+				ParticleSystem.NewParticle(s, Projectile.Center);
 			}
 
 			if (Projectile.timeLeft == 1)

@@ -20,6 +20,7 @@ public class SparkleParticle : Particle
 	public float FadeOutEnd = 45f;
 	public bool DrawHorizontalAxis = true;
 	public bool DrawVerticalAxis = true;
+	public Color HighlightColor = new Color(1f,1f,1f,0.5f);
 
 	public Vector2 AccelerationPerFrame;
 
@@ -53,8 +54,7 @@ public class SparkleParticle : Particle
 	}
 	public override void Draw(SpriteBatch spriteBatch, Vector2 ScreenPos)
 	{
-		Color color = Color.White * Opacity * 0.9f;
-		color.A /= 2;
+		Color color = HighlightColor * Opacity * 0.9f;
 		Texture2D value = TextureAssets.Extra[ExtrasID.SharpTears].Value;
 		Color color2 = ColorTint * Opacity * 0.5f;
 		color2.A = (byte)((float)(int)color2.A * (1f - AdditiveAmount));
@@ -76,6 +76,8 @@ public class SparkleParticle : Particle
 		{
 			spriteBatch.Draw(value, position, null, color2, 0f + Rotation, origin, vector2, effects, 0f);
 		}
+		if (HighlightColor == Color.Transparent)
+			return;
 		if (DrawHorizontalAxis)
 		{
 			spriteBatch.Draw(value, position, null, color3, (float)Math.PI / 2f + Rotation, origin, vector * 0.6f, effects, 0f);

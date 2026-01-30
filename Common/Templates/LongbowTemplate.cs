@@ -1,5 +1,5 @@
 using Avalon.Network;
-using Avalon.Particles.OldParticleSystem;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Utilities;
@@ -7,7 +7,6 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
-using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -133,8 +132,7 @@ namespace Avalon.Common.Templates
 		{
 			for (int i = 0; i < 4; i++)
 			{
-				PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
-				s.LocalPosition = Projectile.Center + NotificationFlashOffset.RotatedBy(Projectile.rotation);
+				SparkleParticle s = new();
 				s.Velocity = new Vector2(2, 0).RotatedBy(i * MathHelper.PiOver2);
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(4f, 0.5f);
@@ -144,7 +142,7 @@ namespace Avalon.Common.Templates
 				s.FadeOutEnd = 15;
 				s.AdditiveAmount = 1f;
 				s.ColorTint = NotificationColor;
-				Main.ParticleSystem_World_OverPlayers.Add(s);
+				ParticleSystem.NewParticle(s, Projectile.Center + NotificationFlashOffset.RotatedBy(Projectile.rotation));
 			}
 		}
 		public virtual void Shoot(IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, float Power)

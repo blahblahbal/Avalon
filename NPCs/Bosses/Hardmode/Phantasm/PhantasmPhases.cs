@@ -1,5 +1,6 @@
 using Avalon.Common;
 using Avalon.Dusts;
+using Avalon.Particles;
 using Avalon.Particles.OldParticleSystem;
 using Avalon.Projectiles.Hostile.Phantasm;
 using Avalon.UI;
@@ -135,8 +136,7 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 				}
 				for(int i = 0; i < 10; i++)
 				{
-					PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
-					s.LocalPosition = NPC.Center;
+					SparkleParticle s = new();
 					s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(6f, 12f);
 					s.Rotation = s.Velocity.ToRotation();
 					s.Scale = new Vector2(6f, 2f);
@@ -146,12 +146,11 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 					s.FadeOutEnd = Main.rand.Next(20,40);
 					s.AdditiveAmount = 1f;
 					s.ColorTint = new Color(Main.rand.NextFloat(0.2f,0.7f), 0.9f, 1f);
-					Main.ParticleSystem_World_OverPlayers.Add(s);
+					ParticleSystem.NewParticle(s, NPC.Center);
 				}
 				for (int i = 0; i < 10; i++)
 				{
-					PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
-					s.LocalPosition = NPC.Center;
+					SparkleParticle s = new();
 					s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(12f, 24f);
 					s.Rotation = s.Velocity.ToRotation();
 					s.Scale = new Vector2(3f, 1f);
@@ -161,7 +160,7 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 					s.FadeOutEnd = Main.rand.Next(10, 30);
 					s.AdditiveAmount = 1f;
 					s.ColorTint = Color.White;
-					Main.ParticleSystem_World_OverPlayers.Add(s);
+					ParticleSystem.NewParticle(s, NPC.Center);
 				}
 				for (int i = 0; i < 40; i++)
 				{
@@ -418,8 +417,7 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 				}
 				for (int i = 0; i < 10; i++)
 				{
-					PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
-					s.LocalPosition = NPC.Center;
+					SparkleParticle s = new();
 					s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(6f, 12f);
 					s.Rotation = s.Velocity.ToRotation();
 					s.Scale = new Vector2(6f, 2f);
@@ -429,12 +427,11 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 					s.FadeOutEnd = Main.rand.Next(20, 40);
 					s.AdditiveAmount = 1f;
 					s.ColorTint = new Color(1f, 0f, 0.2f);
-					Main.ParticleSystem_World_OverPlayers.Add(s);
+					ParticleSystem.NewParticle(s, NPC.Center);
 				}
 				for (int i = 0; i < 10; i++)
 				{
-					PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
-					s.LocalPosition = NPC.Center;
+					SparkleParticle s = new();
 					s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(12f, 24f);
 					s.Rotation = s.Velocity.ToRotation();
 					s.Scale = new Vector2(3f, 1f);
@@ -444,7 +441,7 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 					s.FadeOutEnd = Main.rand.Next(10, 30);
 					s.AdditiveAmount = 1f;
 					s.ColorTint = new Color(Main.rand.NextFloat(0.2f, 0.7f), 0.9f, 1f);
-					Main.ParticleSystem_World_OverPlayers.Add(s);
+					ParticleSystem.NewParticle(s, NPC.Center);
 				}
 				for (int i = 0; i < 40; i++)
 				{
@@ -612,8 +609,7 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 						d.noGravity = true;
 						d.scale = 1;
 						vector = Main.rand.NextVector2Circular(1, 1);
-						PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
-						s.LocalPosition = NPC.Center + vector * 230;
+						SparkleParticle s = new();
 						s.Velocity = -vector;
 						s.AccelerationPerFrame = -vector * 0.6f;
 						s.Rotation = s.Velocity.ToRotation();
@@ -625,7 +621,7 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 						s.AdditiveAmount = 1f;
 						float whiteness = Main.rand.NextFloat(0.5f);
 						s.ColorTint = new Color(1f, whiteness, 0.2f + whiteness);
-						Main.ParticleSystem_World_OverPlayers.Add(s);
+						ParticleSystem.NewParticle(s, NPC.Center + vector * 230);
 					}
 				}
 			}

@@ -1,4 +1,5 @@
 ﻿using Avalon.Common.Templates;
+using Avalon.Particles;
 using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,8 +20,7 @@ public class MoonforceHeld : LongbowTemplate
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
-			s.LocalPosition = Projectile.Center + new Vector2(8,0).RotatedBy(Projectile.rotation);
+			SparkleParticle s = new();
 			s.Velocity = new Vector2(4, 0).RotatedBy(i * MathHelper.PiOver2);
 			s.Rotation = s.Velocity.ToRotation();
 			s.Scale = new Vector2(6f, 0.75f);
@@ -30,10 +30,9 @@ public class MoonforceHeld : LongbowTemplate
 			s.FadeOutEnd = 15;
 			s.AdditiveAmount = 1f;
 			s.ColorTint = Color.Lerp(Color.Magenta, Color.Red, Main.masterColor) with { A = 0 };
-			Main.ParticleSystem_World_OverPlayers.Add(s);
+			ParticleSystem.NewParticle(s, Projectile.Center + new Vector2(8, 0).RotatedBy(Projectile.rotation));
 
-			PrettySparkleParticle s2 = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
-			s2.LocalPosition = Projectile.Center + new Vector2(8, 0).RotatedBy(Projectile.rotation);
+			SparkleParticle s2 = new();
 			s2.Velocity = new Vector2(2).RotatedBy(i * MathHelper.PiOver2);
 			s2.Rotation = s2.Velocity.ToRotation();
 			s2.Scale = new Vector2(4f, 0.5f);
@@ -43,7 +42,7 @@ public class MoonforceHeld : LongbowTemplate
 			s2.FadeOutEnd = 15;
 			s2.AdditiveAmount = 1f;
 			s2.ColorTint = Color.Lerp(Color.Blue, Color.Magenta, Main.masterColor) with { A = 0 };
-			Main.ParticleSystem_World_OverPlayers.Add(s2);
+			ParticleSystem.NewParticle(s2, Projectile.Center + new Vector2(8, 0).RotatedBy(Projectile.rotation));
 		}
 		for(int i = 0; i < 15; i++)
 		{

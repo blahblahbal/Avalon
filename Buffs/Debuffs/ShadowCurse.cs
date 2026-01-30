@@ -1,10 +1,9 @@
-using Avalon.Particles.OldParticleSystem;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -25,8 +24,7 @@ public class ShadowCurse : ModBuff
 	{
 		ShadowCursePlayer p = player.GetModPlayer<ShadowCursePlayer>();
 		p.Active = true;
-		PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
-		s.LocalPosition = Main.rand.NextVector2FromRectangle(player.Hitbox);
+		SparkleParticle s = new();
 		s.Velocity = new Vector2(Main.rand.NextFloat(-0.1f, 0.1f),Main.rand.NextFloat(-2f,-1f));
 		s.Rotation = s.Velocity.ToRotation();
 		s.Velocity += player.velocity;
@@ -44,32 +42,37 @@ public class ShadowCurse : ModBuff
 				break;
 			case 1:
 				s.AdditiveAmount = 0.5f;
-				s.ColorTint = new Color(0f, 0.5f, 1f);
+				s.ColorTint = new Color(0.1f, 0.4f, 1f);
+				s.HighlightColor = s.ColorTint = new Color(0.25f, 1f, 1f, 0.5f);
 				break;
 			case 2:
 				s.Scale *= 1.25f;
 				s.ColorTint = new Color(0.2f, 0.3f, 0.5f);
+				s.HighlightColor = s.ColorTint = new Color(0f, 0.5f, 1f, 0.5f);
 				break;
 			case 3:
 				s.Scale *= 1.5f;
 				s.ColorTint = new Color(0.1f, 0.2f, 0.3f);
+				s.HighlightColor = new Color(0.2f, 0.3f, 0.5f, 0.5f);
 				break;
 			case 4:
 				if (Main.rand.NextBool(4))
 				{
 					s.ColorTint = Color.Red;
+					s.HighlightColor = Color.Red with { A = 0 };
 					s.AdditiveAmount = 0f;
 				}
 				else
 				{
+					s.HighlightColor = Color.Red with { A = 0 };
 					s.ColorTint = Color.Black;
 				}
-					s.Scale *= 2;
+				s.Scale *= 2;
 				break;
 		}
 		s.RotationAcceleration = Main.rand.NextFloat(-p.Tier * 0.01f, p.Tier * 0.01f);
 		s.ScaleAcceleration = new Vector2(0.1f, -0.01f);
-		Main.ParticleSystem_World_OverPlayers.Add(s);
+		ParticleSystem.NewParticle(s,Main.rand.NextVector2FromRectangle(player.Hitbox));
 	}
 	public override bool PreDraw(SpriteBatch spriteBatch, int buffIndex, ref BuffDrawParams drawParams)
 	{
@@ -110,5 +113,11 @@ public class ShadowCursePlayer : ModPlayer
 	public override void ModifyHurt(ref Player.HurtModifiers modifiers)
 	{
 		modifiers.FinalDamage *= getMultiplier();
+	}
+	public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+	{
+		r -= Tier * 0.25f;
+		g -= Tier * 0.2f;
+		b -= Tier * 0.15f;
 	}
 }

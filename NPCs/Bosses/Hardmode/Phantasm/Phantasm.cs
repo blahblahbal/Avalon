@@ -4,6 +4,7 @@ using Avalon.Dusts;
 using Avalon.Items.Material;
 using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Weapons.Magic.Hardmode.PhantomKnives;
+using Avalon.Particles;
 using Avalon.Particles.OldParticleSystem;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
@@ -16,7 +17,6 @@ using Terraria.Chat;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.ItemDropRules;
-using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -256,8 +256,7 @@ public partial class Phantasm : ModNPC
 
 			for (int i = 0; i < 20; i++)
 			{
-				PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
-				s.LocalPosition = NPC.Center;
+				SparkleParticle s = new();
 				s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(6f, 12f);
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(6f, 2f);
@@ -267,12 +266,11 @@ public partial class Phantasm : ModNPC
 				s.FadeOutEnd = Main.rand.Next(20, 40);
 				s.AdditiveAmount = 1f;
 				s.ColorTint = new Color(1f, 0f, 0.2f);
-				Main.ParticleSystem_World_OverPlayers.Add(s);
+				ParticleSystem.NewParticle(s, NPC.Center);
 			}
 			for (int i = 0; i < 20; i++)
 			{
-				PrettySparkleParticle s = VanillaParticlePools.PoolPrettySparkle.RequestParticle();
-				s.LocalPosition = NPC.Center;
+				SparkleParticle s = new();
 				s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(12f, 24f);
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(3f, 1f);
@@ -282,7 +280,7 @@ public partial class Phantasm : ModNPC
 				s.FadeOutEnd = Main.rand.Next(10, 30);
 				s.AdditiveAmount = 1f;
 				s.ColorTint = new Color(Main.rand.NextFloat(0.2f, 0.7f), 0.9f, 1f);
-				Main.ParticleSystem_World_OverPlayers.Add(s);
+				ParticleSystem.NewParticle(s, NPC.Center);
 			}
 			for (int i = 0; i < 40; i++)
 			{
