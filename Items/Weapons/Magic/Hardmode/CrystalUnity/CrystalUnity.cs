@@ -1,13 +1,19 @@
 using Avalon;
 using Avalon.Common.Extensions;
 using Avalon.Dusts;
+using Avalon.Particles;
 using Avalon.Particles.OldParticleSystem;
+using Avalon.PlayerDrawLayers;
 using Avalon.Projectiles.Magic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
+using Terraria.Graphics;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -18,6 +24,7 @@ public class CrystalUnity : ModItem
 	public override void SetStaticDefaults()
 	{
 		Item.staff[Item.type] = true;
+		ItemGlowmask.AddGlow(this, 255);
 	}
 	public override void SetDefaults()
 	{
@@ -26,7 +33,7 @@ public class CrystalUnity : ModItem
 		Item.reuseDelay = 14;
 		Item.rare = ModContent.RarityType<Rarities.FractureRarity>();
 		Item.value = Item.sellPrice(0, 10, 10);
-		Item.UseSound = SoundID.Item8;
+		Item.UseSound = SoundID.Item43;
 	}
 	public override void AddRecipes()
 	{
@@ -69,6 +76,8 @@ public class CrystalUnityShard : ModProjectile
 	public override void SetStaticDefaults()
 	{
 		Main.projFrames[Type] = 10;
+		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
+		ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
 	}
 
 	public override Color? GetAlpha(Color lightColor)
@@ -77,6 +86,7 @@ public class CrystalUnityShard : ModProjectile
 	}
 	public override void SetDefaults()
 	{
+		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
 		Projectile.width = 16;
 		Projectile.height = 16;
 		Projectile.scale = 1f;
@@ -87,11 +97,12 @@ public class CrystalUnityShard : ModProjectile
 		Projectile.ignoreWater = true;
 		Projectile.tileCollide = true;
 		Projectile.timeLeft = 60 * 3;
+		Projectile.alpha = 255;
 	}
-	int GemType = 1;
+	private int GemType => (int)Projectile.ai[2];
 
-	int[] DustIds = { DustID.AmberBolt, DustID.GemAmethyst, DustID.GemDiamond, DustID.GemEmerald, ModContent.DustType<PeridotDust>(), DustID.GemRuby, DustID.GemSapphire, DustID.GemTopaz, ModContent.DustType<TourmalineDust>(), ModContent.DustType<ZirconDust>() };
-	Color[] Colors = { Color.OrangeRed, Color.Purple, Color.White, Color.MediumSeaGreen, Color.GreenYellow, Color.Red, Color.Blue, Color.Orange, Color.Cyan, Color.RosyBrown };
+	public static int[] DustIds = { DustID.AmberBolt, DustID.GemAmethyst, DustID.GemDiamond, DustID.GemEmerald, ModContent.DustType<PeridotDust>(), DustID.GemRuby, DustID.GemSapphire, DustID.GemTopaz, ModContent.DustType<TourmalineDust>(), ModContent.DustType<ZirconDust>() };
+	public static Color[] Colors = { Color.OrangeRed, Color.Purple, Color.White, Color.MediumSeaGreen, Color.GreenYellow, Color.Red, Color.Blue, Color.Orange, Color.Cyan, new Color(128, 32, 8) };
 	public override void OnKill(int timeLeft)
 	{
 		for (int i = 0; i < 12; i++)
@@ -100,44 +111,97 @@ public class CrystalUnityShard : ModProjectile
 			d.noGravity = true;
 			//d.velocity += Projectile.velocity;
 		}
+		for(int i = 0; i < Projectile.oldPos.Length; i++)
+		{
+			if (Main.rand.NextBool())
+				continue;
+
+			Dust d = Dust.NewDustPerfect(Projectile.oldPos[i] + Projectile.Size / 2, DustIds[GemType], new Vector2(3, 0).RotatedBy(Projectile.oldRot[i]) + Main.rand.NextVector2Circular(3,3));
+			d.noGravity = true;
+			d.scale *= (1f - (i / (float)Projectile.oldPos.Length)) * 1.5f;
+		}
 		SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
-		OldParticleSystemDeleteSoon.AddParticle(new ColorableSparkle(), Projectile.Center, default, new Color(Colors[GemType].R, Colors[GemType].G, Colors[GemType].B, 0));
+		for(int i = 0; i < 4; i++)
+		{
+			SparkleParticle p = new();
+			p.ColorTint = Colors[GemType] with { A = 0 };
+			p.HighlightColor = Color.White with { A = 0 };
+			p.FadeInEnd = p.FadeOutStart = Main.rand.Next(5, 10);
+			p.FadeOutEnd = Main.rand.NextFloat(15, 20);
+			p.Scale = new Vector2(3, 0.5f);
+			p.Velocity = new Vector2(0, Main.rand.NextFloat(2,4)).RotatedBy(i * MathHelper.PiOver2 + Main.rand.NextFloat(-0.3f, 0.3f));
+			p.Rotation = p.Velocity.ToRotation();
+			p.DrawVerticalAxis = false;
+			ParticleSystem.NewParticle(p, Projectile.Center);
+		}
 	}
 	public override void AI()
 	{
-		Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+		Projectile.rotation = Projectile.velocity.ToRotation();
 		if (Projectile.ai[1] == 0f)
 		{
-			GemType = (int)Projectile.ai[2];
-
 			if (GemType == diamond)
 			{
 				Projectile.penetrate = 4;
+			}
+
+			Vector2 location = Projectile.Center + Vector2.Normalize(Projectile.velocity) * 20;
+			for (int i = 0; i < 3; i++)
+			{
+				SparkleParticle p = new();
+				p.ColorTint = Colors[GemType] with { A = 0 };
+				p.HighlightColor = Color.White with { A = 0 };
+				p.FadeInEnd = p.FadeOutStart = Main.rand.Next(5, 10);
+				p.FadeOutEnd = Main.rand.NextFloat(15, 20);
+				p.Scale = new Vector2(3, 0.5f);
+				p.Velocity = Projectile.velocity.RotateRandom(0.2f) * Main.rand.NextFloat();
+				p.Rotation = p.Velocity.ToRotation();
+				p.DrawVerticalAxis = false;
+				ParticleSystem.NewParticle(p, location);
 			}
 		}
 
 		Projectile.ai[1]++;
 		Projectile.frame = GemType;
-		if (Projectile.ai[1] > 1)
-		{
-			for (var i = 0; i < 3; i++)
-			{
-				var dust = Dust.NewDustPerfect(Vector2.Lerp(Projectile.position, Projectile.oldPosition, i / 2f) + Projectile.Size / 2 + Vector2.Normalize(Projectile.velocity) * 3, DustIds[GemType], Projectile.velocity, 50, default, 1f);
-				dust.frame.Y = 10;
-				if (dust.type == DustID.AmberBolt)
-				{
-					dust.frame.Y += 60;
-				}
-				dust.scale = (float)Math.Sin(Projectile.ai[1] * 0.2f) / 5 + 1;
-
-				dust.scale *= MathHelper.Clamp(Projectile.ai[1] * 0.1f, 0, 1);
-				dust.noGravity = true;
-				dust.velocity *= 0.3f;
-			}
-		}
 		Projectile.velocity = Projectile.velocity.RotatedBy(Projectile.ai[0] * 0.01f);
 		Projectile.ai[0] *= 0.99f;
-		//Lighting.AddLight(new Vector2((int)((Projectile.position.X + Projectile.width / 2) / 16f), (int)((Projectile.position.Y + Projectile.height / 2) / 16f)), new Color(252, 193, 45).ToVector3());
+		if(Projectile.Opacity < 1f)
+		{
+			Projectile.Opacity += 0.05f;
+		}
+		if (Main.rand.NextBool(5))
+		{
+			Dust d = Dust.NewDustPerfect(Projectile.Center, DustIds[GemType], Projectile.velocity.RotatedByRandom(0.1f));
+			d.noGravity = true;
+			d.scale *= 1.3f;
+		}
+		//if (Projectile.ai[1] > 1)
+		//{
+		//	for (var i = 0; i < 3; i++)
+		//	{
+		//		var dust = Dust.NewDustPerfect(Vector2.Lerp(Projectile.position, Projectile.oldPosition, i / 2f) + Projectile.Size / 2 + Vector2.Normalize(Projectile.velocity) * 3, DustIds[GemType], Projectile.velocity, 50, default, 1f);
+		//		dust.frame.Y = 10;
+		//		if (dust.type == DustID.AmberBolt)
+		//		{
+		//			dust.frame.Y += 60;
+		//		}
+		//		dust.scale = (float)Math.Sin(Projectile.ai[1] * 0.2f) / 5 + 1;
+
+		//		dust.scale *= MathHelper.Clamp(Projectile.ai[1] * 0.1f, 0, 1);
+		//		dust.noGravity = true;
+		//		dust.velocity *= 0.3f;
+		//	}
+		//}
+	}
+	public override bool PreDraw(ref Color lightColor)
+	{
+		if (Projectile.ai[1] > 0) 
+		{
+			default(CrystalUnityVertexStrip).Draw(Projectile);
+		}
+		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition, TextureAssets.Projectile[Type].Frame(1, Main.projFrames[Type], 0, Projectile.frame),Color.White * Projectile.Opacity,Projectile.rotation + MathHelper.PiOver2, new Vector2(5,9), Projectile.scale, SpriteEffects.None);
+		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition, TextureAssets.Projectile[Type].Frame(1, Main.projFrames[Type], 0, Projectile.frame), Color.White with { A = 0 } * Projectile.Opacity * 0.5f, Projectile.rotation + MathHelper.PiOver2, new Vector2(5, 9), Projectile.scale * 1.5f, SpriteEffects.None);
+		return false;
 	}
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 	{
@@ -193,5 +257,32 @@ public class CrystalUnityShard : ModProjectile
 				target.AddBuff(BuffID.Ichor, 60 * 4);
 				break;
 		}
+	}
+}
+public struct CrystalUnityVertexStrip
+{
+	private static VertexStrip _vertexStrip = new VertexStrip();
+
+	private Color StripColor;
+	public void Draw(Projectile proj)
+	{
+		StripColor = CrystalUnityShard.Colors[(int)proj.ai[2]];
+		MiscShaderData miscShaderData = GameShaders.Misc["RainbowRod"];
+		miscShaderData.UseSaturation(proj.velocity.Length() * -0.2f);
+		miscShaderData.UseOpacity(proj.Opacity * 2);
+		miscShaderData.UseImage1(TextureAssets.Extra[197]);
+		miscShaderData.UseImage2(TextureAssets.Extra[193]);
+		miscShaderData.Apply();
+		_vertexStrip.PrepareStripWithProceduralPadding(proj.oldPos, proj.oldRot, StripColors, StripWidth, -Main.screenPosition + proj.Size / 2f);
+		_vertexStrip.DrawTrail();
+		Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+	}
+	private Color StripColors(float progressOnStrip)
+	{
+		return Color.Lerp(StripColor, Color.White, 0.15f) with { A = 0 } * (1f - MathF.Pow(progressOnStrip,3));
+	}
+	private float StripWidth(float progressOnStrip)
+	{
+		return MathHelper.Lerp(7,20,progressOnStrip);
 	}
 }
