@@ -1,12 +1,11 @@
-﻿using Avalon.Common.Templates;
+﻿using Avalon.Common.Interfaces;
+using Avalon.Common.Templates;
 using Avalon.Items.Weapons.Melee.Swords;
 using Avalon.Particles;
-using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
-using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
@@ -14,7 +13,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Melee.Swords;
 
-public class SanguineKatanaSlash : EnergySlashTemplate
+public class SanguineKatanaSlash : EnergySlashTemplate, ISyncedOnHitEffect
 {
 	public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.TheHorsemansBlade}";
 	public override LocalizedText DisplayName => ModContent.GetInstance<SanguineKatana>().DisplayName;
@@ -55,15 +54,12 @@ public class SanguineKatanaSlash : EnergySlashTemplate
 				Projectile.penetrate = 100;
 			}
 		}
-		Vector2 vector = Main.rand.NextVector2FromRectangle(target.Hitbox);
-		SoundEngine.PlaySound(SoundID.NPCHit1, target.position);
-		Vector2 pos = vector - new Vector2(0, 24);
+	}
+	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
+	{
+		Vector2 vector = Main.rand.NextVector2FromRectangle(target.Hitbox) - new Vector2(0, 24);
 		Vector2 vel = new Vector2(Main.rand.NextFloat(-0.5f, 0.5f), 1);
-		OldParticleSystemDeleteSoon.AddParticle(new SanguineCuts(), pos, vel, default);
-		if (Main.netMode == NetmodeID.MultiplayerClient)
-		{
-			Network.SyncParticles.SendPacket(ParticleType.SanguineCuts, pos, vel, default, Projectile.owner);
-		}
+		ParticleSystem.NewParticle(new SanguineCuts(vel), vector);
 	}
 	public override void DrawPrettyStarSparkle(float opacity, SpriteEffects dir, Vector2 drawpos, Color drawColor, Color shineColor, float flareCounter, float fadeInStart, float fadeInEnd, float fadeOutStart, float fadeOutEnd, float rotation, Vector2 scale, Vector2 fatness)
 	{

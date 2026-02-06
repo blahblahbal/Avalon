@@ -1,20 +1,10 @@
 using Avalon;
-using Avalon.Buffs.Debuffs;
-using Avalon.Common;
 using Avalon.Dusts;
-using Avalon.Items.Weapons.Magic;
-using Avalon.NPCs.Bosses.Hardmode.Phantasm;
 using Avalon.Particles;
-using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
-using Terraria.GameContent;
-using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.ModLoader;
 

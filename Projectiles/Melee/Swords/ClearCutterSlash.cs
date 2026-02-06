@@ -1,17 +1,17 @@
-﻿using Avalon.Common.Templates;
+﻿using Avalon.Common.Interfaces;
+using Avalon.Common.Templates;
 using Avalon.Items.Weapons.Melee.Swords;
-using Avalon.Particles.OldParticleSystem;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
-using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Melee.Swords;
 
-public class ClearCutterSlash : EnergySlashTemplate
+public class ClearCutterSlash : EnergySlashTemplate, ISyncedOnHitEffect
 {
 	public override LocalizedText DisplayName => ModContent.GetInstance<ClearCutter>().DisplayName;
 	public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.TheHorsemansBlade}";
@@ -47,27 +47,36 @@ public class ClearCutterSlash : EnergySlashTemplate
 
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 	{
-		ParticleOrchestraSettings settings = new ParticleOrchestraSettings();
-		settings.PositionInWorld = target.Hitbox.ClosestPointInRect(Main.player[Projectile.owner].Center);
-		Vector2 positionslansdglag = Main.rand.NextVector2FromRectangle(target.Hitbox);
-		OldParticleSystemDeleteSoon.AddParticle(new CrystalSparkle(), positionslansdglag, Vector2.Zero, default);
-		if (Main.netMode == NetmodeID.MultiplayerClient)
-		{
-			Network.SyncParticles.SendPacket(ParticleType.CrystalSparkle, positionslansdglag, Vector2.Zero, default, Projectile.owner);
-		}
 		for (int i = 0; i < Main.rand.Next(1, 3); i++)
 		{
-			settings.MovementVector = Vector2.Zero;
 			float rand = Main.rand.NextFloat(-0.5f, 0.5f);
 			int Dist = Main.rand.Next(-1000, -600);
-			if (Main.myPlayer == Projectile.owner)
-			{
-				settings.PositionInWorld = Main.MouseWorld + new Vector2(0, Dist).RotatedBy(rand);
-				//ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.Excalibur, settings);
-				OldParticleSystemDeleteSoon.AddParticle(new CrystalSparkle(), settings.PositionInWorld, Vector2.Zero, default, 1);
-				Projectile P = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), settings.PositionInWorld, new Vector2(0, 30).RotatedBy(rand), ProjectileID.StarCloakStar, (int)(Projectile.damage * 0.4f), Projectile.knockBack, Projectile.owner, 0, target.position.Y);
-			}
+			Vector2 pos = Main.MouseWorld + new Vector2(0, Dist).RotatedBy(rand);
+			Projectile P = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, new Vector2(0, 30).RotatedBy(rand), ProjectileID.StarCloakStar, (int)(Projectile.damage * 0.4f), Projectile.knockBack, Projectile.owner, 0, target.position.Y);
 		}
+	}
+	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
+	{
+		Color[] Colors = { Color.LightSkyBlue, Color.Magenta, Color.White, Color.Magenta };
+		SparkleParticle p = new();
+		p.ColorTint = ClassExtensions.CycleThroughColors(Colors, 60);
+		p.FadeInEnd = 10;
+		p.FadeOutStart = 15;
+		p.FadeOutEnd = 30;
+		p.Scale = new Vector2(3, 1);
+		p.Rotation = MathHelper.PiOver2 + Main.rand.NextFloat(-0.1f, 0.1f);
+		ParticleSystem.NewParticle(p, Main.rand.NextVector2FromRectangle(target.Hitbox));
+		int[] Dusts = { DustID.IceTorch, DustID.HallowedTorch, DustID.WhiteTorch };
+		for(int i = 0; i < 5; i++)
+		{
+			Dust d = Dust.NewDustPerfect(p.Position, Dusts[Main.rand.Next(3)], new Vector2(0, Main.rand.NextFloat(-4, 4)).RotatedBy(p.Rotation + Main.rand.NextFloat(-0.3f,0.3f)));
+			d.scale *= Main.rand.NextFloat(1f, 2f);
+			d.noGravity = true;
+			Dust d2 = Dust.NewDustPerfect(p.Position, Dusts[Main.rand.Next(3)], new Vector2(Main.rand.NextFloat(-8, 8), 0).RotatedBy(p.Rotation + Main.rand.NextFloat(-0.3f, 0.3f)));
+			d2.scale *= Main.rand.NextFloat(1f, 2f);
+			d2.noGravity = true;
+		}
+		//ParticleSystem.NewParticle(new CrystalSparkle(1f), Main.rand.NextVector2FromRectangle(target.Hitbox));
 	}
 }
 

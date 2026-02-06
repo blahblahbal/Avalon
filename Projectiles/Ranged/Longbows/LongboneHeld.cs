@@ -1,6 +1,5 @@
 ﻿using Avalon.Common.Templates;
-using Avalon.Network;
-using Avalon.Particles.OldParticleSystem;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -73,12 +72,13 @@ public class LongboneCurseArrow : GlobalProjectile
 		if (Longbone > 0)
 		{
 			SoundEngine.PlaySound(SoundID.Item20, projectile.position);
-			LegacyParticleDeleteSoon p = OldParticleSystemDeleteSoon.AddParticle(new ColorExplosion(), projectile.Center, default, new Color(32, 77, 255, 64), Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.1f, 0.35f) + (Longbone * 0.1f));
-			OldParticleSystemDeleteSoon.AddParticle(new ColorExplosion(), p.Position, default, new Color(64, 128, 255, 64), p.ai1 + MathHelper.PiOver2, p.ai2 * 0.8f);
+			ColorExplosion p = new ColorExplosion(new Color(32, 77, 255, 64), Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.1f, 0.35f) + (Longbone * 0.1f));
+			ParticleSystem.NewParticle(p, projectile.Center);
+			ParticleSystem.NewParticle(new ColorExplosion(new Color(64, 128, 255, 64),p.Rotation + MathHelper.PiOver2, p.Scale * 0.8f), projectile.Center);
 			for (int i = 0; i < Longbone * 7; i++)
 			{
 				float rand = Main.rand.NextFloat(0, MathHelper.TwoPi);
-				Dust d = Dust.NewDustPerfect(projectile.Center + new Vector2(0, p.ai2 * Main.rand.Next(24, 32)).RotatedBy(rand).RotatedByRandom(0.3), DustID.DungeonWater, new Vector2(0, Main.rand.Next(3, 5)).RotatedBy(rand).RotatedByRandom(0.1f));
+				Dust d = Dust.NewDustPerfect(projectile.Center + new Vector2(0, p.Scale * Main.rand.Next(24, 32)).RotatedBy(rand).RotatedByRandom(0.3), DustID.DungeonWater, new Vector2(0, Main.rand.Next(3, 5)).RotatedBy(rand).RotatedByRandom(0.1f));
 				d.noGravity = !Main.rand.NextBool(6);
 				if (d.noGravity)
 				{

@@ -1,5 +1,4 @@
 ﻿using Avalon.Items.Weapons.Ranged.Thrown;
-using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -93,8 +92,7 @@ public class CrystalTomahawkProj : ModProjectile
 				Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2CircularEdge(14, 14) * Main.rand.NextFloat(0.3f, 1f), ProjectileID.CrystalShard, Projectile.damage / 4, 0, Projectile.owner);
 			}
 		}
-		if (Projectile.ai[1] == 0)
-			OldParticleSystemDeleteSoon.AddParticle(new CrystalSparkle(), Projectile.Center + Vector2.Normalize(Projectile.velocity) * 20f, Vector2.Zero, default);
+
 	}
 	public override bool OnTileCollide(Vector2 oldVelocity)
 	{

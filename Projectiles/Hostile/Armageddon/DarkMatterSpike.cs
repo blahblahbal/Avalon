@@ -1,11 +1,6 @@
-using Avalon.Particles.OldParticleSystem;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -97,7 +92,7 @@ namespace Avalon.Projectiles.Hostile.Armageddon
 
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Top, Vector2.Zero, ModContent.ProjectileType<DarkMatterSpike>(), Projectile.damage, 0, Projectile.owner);
                 SoundEngine.PlaySound(Spawn, Projectile.position);
-                OldParticleSystemDeleteSoon.AddParticle(new ColorExplosion(), Projectile.Top, default, new Color(64,0,78,128),Main.rand.NextFloatDirection(),0.5f);
+				ParticleSystem.NewParticle(new ColorExplosion( new Color(64, 0, 78, 128),Main.rand.NextFloatDirection(), 0.5f),Projectile.Top);
             }
             if(Projectile.tileCollide)
                 Projectile.velocity.Y += 4;

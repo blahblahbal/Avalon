@@ -1,5 +1,4 @@
 using Avalon.Particles;
-using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
@@ -180,13 +179,12 @@ public class Torch : ModProjectile
 			{
 				if (Main.rand.NextBool(15) && Main.hasFocus)
 				{
-					OldParticleSystemDeleteSoon.AddParticle(new StarTorch(),
-						Projectile.Center + new Vector2(Main.rand.Next(4, 13), Main.rand.Next(2, 6)), // position
-						new Vector2(Main.rand.NextFloat(-0.02f, 0.03f), Main.rand.NextFloat(-0.4f, -0.5f)), // velocity
-						Color.White, // color
-						default,
-						Main.rand.NextFromList(Main.rand.NextFloat(-0.25f, -0.15f), Main.rand.NextFloat(0.15f, 0.25f)),
-						scale: Main.rand.NextFloat(0.11f, 0.17f)); // scale
+					ParticleSystem.NewParticle(
+						new StarTorch(
+							Main.rand.NextFromList(Main.rand.NextFloat(-0.25f, -0.15f), Main.rand.NextFloat(0.15f, 0.25f)),
+							Main.rand.NextFloat(0.11f, 0.17f),
+							new Vector2(Main.rand.NextFloat(-0.02f, 0.03f), Main.rand.NextFloat(-0.4f, -0.5f))),
+							Projectile.Center + new Vector2(Main.rand.Next(4, 13), Main.rand.Next(2, 6)));
 				}
 			}
 		}

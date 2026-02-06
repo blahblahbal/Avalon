@@ -29,9 +29,9 @@ public class MessageHandler
 			case MessageID.SyncSkyBlessing:
 				SyncSkyBlessing.HandlePacket(reader, fromWho);
 				break;
-			case MessageID.SyncParticle:
-				SyncParticles.HandlePacket(reader, fromWho);
-				break;
+			//case MessageID.SyncParticle:
+			//	SyncParticles.HandlePacket(reader, fromWho);
+			//	break;
 			case MessageID.SyncOnHit:
 				SyncOnHit.HandlePacket(reader, fromWho);
 				break;

@@ -1,14 +1,14 @@
-using System.Collections.Generic;
-using Avalon.Common.Players;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
-using Terraria.Audio;
 using Avalon.Common;
-using Terraria.Graphics.CameraModifiers;
+using Avalon.Common.Players;
 using Avalon.Particles;
-using Avalon.Particles.OldParticleSystem;
+using Microsoft.Xna.Framework;
+using System.Collections.Generic;
+using Terraria;
+using Terraria.Audio;
+using Terraria.GameContent;
+using Terraria.Graphics.CameraModifiers;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Avalon.Buffs;
 
@@ -132,7 +132,7 @@ public class Shockwave : ModBuff
 			} // END iterate through NPCs
 
 			var Sound = SoundEngine.PlaySound(SoundID.Item14, player.position);
-			OldParticleSystemDeleteSoon.AddParticle(new ShockwaveParticle(), player.Center + new Vector2(0, (player.height * 0.5f * player.gravDir)), Vector2.Zero, default, Radius);
+			ParticleSystem.NewParticle(new ShockwaveParticle(Radius), player.Center + new Vector2(0, (player.height * 0.5f * player.gravDir)));
 			if (SoundEngine.TryGetActiveSound(Sound, out ActiveSound sound) && sound != null && sound.IsPlaying)
 			{
 				sound.Volume = MathHelper.Clamp(fall_dist / 7f, 0.2f, 3);

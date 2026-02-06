@@ -5,7 +5,6 @@ using Avalon.Items.Material;
 using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Weapons.Magic.Hardmode.PhantomKnives;
 using Avalon.Particles;
-using Avalon.Particles.OldParticleSystem;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,7 +19,6 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using static Avalon.Particles.OldParticleSystem.OldParticleSystemDeleteSoon;
 
 namespace Avalon.NPCs.Bosses.Hardmode.Phantasm;
 
@@ -109,11 +107,11 @@ public partial class Phantasm : ModNPC
 		d.scale = Main.rand.NextFloat(1);
 
 		if(phase > 3 && Main.rand.NextBool(3) && phase != 200)
-			AddParticle(new SoulEmbers(), new Vector2(Main.rand.Next(-2000, 2000) + Main.LocalPlayer.position.X, Main.LocalPlayer.position.Y + 600), new Vector2(Main.rand.NextFloat(-5, 5), -1), default);
+			ParticleSystem.NewParticle(new SoulEmbers(new Vector2(Main.rand.NextFloat(-5, 5), -1)), new Vector2(Main.rand.Next(-2000, 2000) + Main.LocalPlayer.position.X, MathHelper.Clamp(Main.LocalPlayer.position.Y + 600, Main.UnderworldLayer * 16, (Main.maxTilesY - 37) * 16)));
 		if (phase > 8 && Main.rand.NextBool(3) && phase != 200)
-			AddParticle(new HellEmbers(), new Vector2(Main.rand.Next(-2000, 2000) + Main.LocalPlayer.position.X, Main.LocalPlayer.position.Y + 600), new Vector2(Main.rand.NextFloat(-5, 5), -1), default);
+			ParticleSystem.NewParticle(new HellEmbers(new Vector2(Main.rand.NextFloat(-5, 5), -1)), new Vector2(Main.rand.Next(-2000, 2000) + Main.LocalPlayer.position.X, MathHelper.Clamp(Main.LocalPlayer.position.Y + 600, Main.UnderworldLayer * 16, (Main.maxTilesY - 37) * 16)));
 
-		foreach(NPC orb in Main.ActiveNPCs)
+		foreach (NPC orb in Main.ActiveNPCs)
 		{
 			if(orb.type == ModContent.NPCType<PhantasmHealthOrbs>())
 			{

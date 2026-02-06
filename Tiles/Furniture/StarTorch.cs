@@ -1,16 +1,15 @@
 using Avalon.Common.Templates;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
-using System;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
-using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using Avalon.Particles.OldParticleSystem;
 
 namespace Avalon.Tiles.Furniture
 {
@@ -101,13 +100,13 @@ namespace Avalon.Tiles.Furniture
 				//pos.MovementVector = new Vector2(Main.rand.Next(-2, 3), Main.rand.Next(1, 4));
 				////pos.IndexOfPlayerWhoInvokedThis = 255;
 				//ParticleOrchestrator.RequestParticleSpawn(false, ParticleOrchestraType.SilverBulletSparkle, pos);
-				OldParticleSystemDeleteSoon.AddParticle(new Particles.OldParticleSystem.StarTorch(),
-					new Vector2(i, j) * 16 + new Vector2(Main.rand.Next(4, 13), Main.rand.Next(2, 6)), // position
-					new Vector2(Main.rand.NextFloat(-0.02f, 0.03f), Main.rand.NextFloat(-0.4f, -0.5f)), // velocity
-					Color.White, // color
-					default,
-					Main.rand.NextFromList(Main.rand.NextFloat(-0.25f, -0.15f), Main.rand.NextFloat(0.15f, 0.25f)),
-					scale: Main.rand.NextFloat(0.11f, 0.17f)); // scale
+
+				ParticleSystem.NewParticle(
+					new Particles.StarTorch(
+						Main.rand.NextFromList(Main.rand.NextFloat(-0.25f, -0.15f), Main.rand.NextFloat(0.15f, 0.25f)),
+						Main.rand.NextFloat(0.11f, 0.17f),
+						new Vector2(Main.rand.NextFloat(-0.02f, 0.03f), Main.rand.NextFloat(-0.4f, -0.5f))),
+						new Vector2(i, j) * 16 + new Vector2(Main.rand.Next(4, 13), Main.rand.Next(2, 6)));
 			}
 			//if (Main.rand.NextBool(40) && Main.tile[i, j].TileFrameX < 66)
 			//{

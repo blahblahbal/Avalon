@@ -1,6 +1,5 @@
 ﻿using Avalon.Common.Templates;
 using Avalon.Particles;
-using Avalon.Particles.OldParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -8,7 +7,6 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
-using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -73,10 +71,7 @@ public class MoonforceHeld : LongbowTemplate
 		if (Power > 0.3f)
 		{
 			SoundEngine.PlaySound(SoundID.Item9, Projectile.Center);
-			projectile.usesLocalNPCImmunity = true;
-			projectile.localNPCHitCooldown = 30;
 			projectile.extraUpdates++;
-
 			float ScaleMod = 1 + (Power * 5);
 			projectile.Resize((int)(projectile.width * ScaleMod), (int)(projectile.height * ScaleMod));
 
@@ -135,20 +130,6 @@ public class MoonlightArrowVisuals : GlobalProjectile
 			d.noGravity = true;
 		}
 	}
-	public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
-	{
-		if (Moonlight)
-		{
-			OldParticleSystemDeleteSoon.AddParticle(new MoonforceParticle(), Main.rand.NextVector2FromRectangle(target.Hitbox), projectile.velocity * 0.2f, default, (projectile.width * 2f) / 128f);
-		}
-	}
-	public override void OnHitPlayer(Projectile projectile, Player target, Player.HurtInfo info)
-	{
-		if (Moonlight)
-		{
-			OldParticleSystemDeleteSoon.AddParticle(new MoonforceParticle(), Main.rand.NextVector2FromRectangle(target.Hitbox), projectile.velocity * 0.2f, default, (projectile.width * 2f) / 128f);
-		}
-	}
 	public override void OnKill(Projectile projectile, int timeLeft)
 	{
 		if (Moonlight)
@@ -163,7 +144,6 @@ public class MoonlightArrowVisuals : GlobalProjectile
 				d.noGravity = true;
 				d.fadeIn = Main.rand.NextFloat(0, 2);
 			}
-			OldParticleSystemDeleteSoon.AddParticle(new MoonforceParticle(), projectile.Center, projectile.velocity * 0.2f, default, 1.4f);
 		}
 	}
 	public override bool PreDraw(Projectile projectile, ref Color lightColor)

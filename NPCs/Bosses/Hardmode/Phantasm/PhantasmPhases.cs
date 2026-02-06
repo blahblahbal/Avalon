@@ -1,16 +1,13 @@
 using Avalon.Common;
 using Avalon.Dusts;
 using Avalon.Particles;
-using Avalon.Particles.OldParticleSystem;
 using Avalon.Projectiles.Hostile.Phantasm;
-using Avalon.UI;
 using Microsoft.Xna.Framework;
 using ReLogic.Utilities;
 using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.Graphics.CameraModifiers;
-using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.ModLoader;
 

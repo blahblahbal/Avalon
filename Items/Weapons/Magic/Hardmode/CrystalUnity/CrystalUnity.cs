@@ -2,9 +2,7 @@ using Avalon;
 using Avalon.Common.Extensions;
 using Avalon.Dusts;
 using Avalon.Particles;
-using Avalon.Particles.OldParticleSystem;
 using Avalon.PlayerDrawLayers;
-using Avalon.Projectiles.Magic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -86,7 +84,6 @@ public class CrystalUnityShard : ModProjectile
 	}
 	public override void SetDefaults()
 	{
-		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
 		Projectile.width = 16;
 		Projectile.height = 16;
 		Projectile.scale = 1f;

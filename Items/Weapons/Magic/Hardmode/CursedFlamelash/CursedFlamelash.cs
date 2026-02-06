@@ -1,5 +1,5 @@
 using Avalon.Common.Extensions;
-using Avalon.Particles.OldParticleSystem;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -96,7 +96,7 @@ public class CursedFlamelashProj : ModProjectile
 
 	public override void OnKill(int timeLeft)
 	{
-		OldParticleSystemDeleteSoon.AddParticle(new CursedExplosionParticle(), Projectile.Center, Vector2.Zero, default, Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.9f, 1.2f));
+		ParticleSystem.NewParticle(new CursedExplosionParticle(Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.9f, 1.2f)), Projectile.Center);
 		SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
 		float decreaseBy = 0.05f;
 		for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type] / 2; i++)
@@ -144,7 +144,7 @@ public class CursedFlamelashProj : ModProjectile
 
 		//Main.EntitySpriteDraw(texture, drawPos, frame, Color.White, Rot, new Vector2(texture.Width, frameHeight) / 2, new Vector2(Projectile.scale,MathHelper.Clamp(Projectile.velocity.Length() * 0.2f,Projectile.scale,Projectile.scale * 2f)), SpriteEffects.None, 0);
 		//The line above stretches the flame with speed
-		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos, frame, new Color(230, 255, 0, 0), Rot, new Vector2(TextureAssets.Projectile[Type].Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos, frame, new Color(230, 255, 0, 128), Rot, new Vector2(TextureAssets.Projectile[Type].Value.Width / 2, frameHeight * 0.6f), Projectile.scale, SpriteEffects.None, 0);
 
 		return false;
 	}
@@ -157,9 +157,11 @@ public struct CursedFlameLashVertexStrip
 	public void Draw(Projectile proj)
 	{
 		this.transitToDark = Utils.GetLerpValue(0f, 6f, proj.localAI[0], clamped: true);
-		MiscShaderData miscShaderData = GameShaders.Misc["FlameLash"];
-		miscShaderData.UseSaturation(-2f);
-		miscShaderData.UseOpacity(MathHelper.Lerp(4f, 8f, this.transitToDark));
+		MiscShaderData miscShaderData = GameShaders.Misc["RainbowRod"];
+		miscShaderData.UseSaturation(-4f);
+		miscShaderData.UseOpacity(proj.Opacity * 8);
+		miscShaderData.UseImage1(TextureAssets.Extra[ExtrasID.FlameLashTrailShape]);
+		miscShaderData.UseImage2(TextureAssets.Extra[ExtrasID.MagicMissileTrailErosion]);
 		miscShaderData.Apply();
 		_vertexStrip.PrepareStripWithProceduralPadding(proj.oldPos, proj.oldRot, StripColors, StripWidth, -Main.screenPosition + proj.Size / 2f);
 		_vertexStrip.DrawTrail();
@@ -169,7 +171,7 @@ public struct CursedFlameLashVertexStrip
 	private Color StripColors(float progressOnStrip)
 	{
 		float lerpValue = Utils.GetLerpValue(0f - 0.1f * this.transitToDark, 0.7f - 0.2f * this.transitToDark, progressOnStrip, clamped: true);
-		Color result = Color.Lerp(Color.Lerp(Color.Lime, Color.DarkGreen, this.transitToDark * 0.5f), Color.Green, lerpValue) * (1f - Utils.GetLerpValue(0f, 0.98f, progressOnStrip));
+		Color result = Color.Lerp(Color.Lerp(new Color(128,255,0), Color.Green, this.transitToDark * 0.5f), Color.DarkGreen, lerpValue) * (1f - Utils.GetLerpValue(0f, 0.98f, progressOnStrip));
 		result.A /= 8;
 		return result;
 	}
@@ -178,7 +180,7 @@ public struct CursedFlameLashVertexStrip
 	{
 		float lerpValue = Utils.GetLerpValue(0f, 0.06f + this.transitToDark * 0.01f, progressOnStrip, clamped: true);
 		lerpValue = 1f - (1f - lerpValue) * (1f - lerpValue);
-		return MathHelper.Lerp(24f + this.transitToDark * 16f, 8f, Utils.GetLerpValue(0f, 1f, progressOnStrip, clamped: true)) * lerpValue;
+		return MathHelper.Lerp(32f + this.transitToDark * 24f, 8f, Utils.GetLerpValue(0f, 1f, progressOnStrip, clamped: true)) * lerpValue;
 	}
 }
 public class CursedFlamelashExplosion : ModProjectile
