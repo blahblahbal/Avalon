@@ -49,23 +49,8 @@ using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Blah.Blahncher;
 using Avalon.Items.Weapons.Blah.EnergyBlade;
 using Avalon.Items.Weapons.Blah.Staff;
-using Avalon.Items.Weapons.Magic.Hardmode.Ancient;
-using Avalon.Items.Weapons.Magic.Hardmode.AquaImpact;
-using Avalon.Items.Weapons.Magic.Hardmode.Boomlash;
-using Avalon.Items.Weapons.Magic.Hardmode.CursedFlamelash;
-using Avalon.Items.Weapons.Magic.Hardmode.DevilsScythe;
-using Avalon.Items.Weapons.Magic.Hardmode.EnergyRevolver;
-using Avalon.Items.Weapons.Magic.Hardmode.FreezeBolt;
-using Avalon.Items.Weapons.Magic.Hardmode.HallowedThorn;
-using Avalon.Items.Weapons.Magic.Hardmode.MagicGrenade;
-using Avalon.Items.Weapons.Magic.Hardmode.PurpleHaze;
-using Avalon.Items.Weapons.Magic.Hardmode.Sunstorm;
-using Avalon.Items.Weapons.Magic.PreHardmode.ChaosTome;
-using Avalon.Items.Weapons.Magic.PreHardmode.FlowerOfTheJungle;
-using Avalon.Items.Weapons.Magic.PreHardmode.GemStaves;
-using Avalon.Items.Weapons.Magic.PreHardmode.Smogscreen;
-using Avalon.Items.Weapons.Magic.PreHardmode.TomeoftheDistantPast;
-using Avalon.Items.Weapons.Magic.Superhardmode;
+using Avalon.Items.Weapons.Magic.Wands;
+using Avalon.Items.Weapons.Magic.Tomes;
 using Avalon.Items.Weapons.Melee.Boomerangs;
 using Avalon.Items.Weapons.Melee.Flails;
 using Avalon.Items.Weapons.Melee.Maces;
@@ -87,6 +72,8 @@ using Avalon.Walls.Contagion.CoughwoodWall;
 using System.Collections.Generic;
 using Terraria.ID;
 using static Terraria.ModLoader.ModContent;
+using Avalon.Items.Weapons.Magic.Guns;
+using Avalon.Items.Weapons.Magic.Other;
 
 namespace Avalon.Data.Sets
 {

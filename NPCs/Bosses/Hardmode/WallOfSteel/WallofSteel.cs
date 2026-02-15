@@ -2,7 +2,7 @@ using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Items.Material;
 using Avalon.Items.Placeable.Trophy;
-using Avalon.Items.Weapons.Magic.Superhardmode.MagicCleaver;
+using Avalon.Items.Weapons.Magic.Other;
 using Avalon.Items.Weapons.Ranged.Misc;
 using Avalon.Projectiles.Hostile.WallofSteel;
 using Microsoft.Xna.Framework;

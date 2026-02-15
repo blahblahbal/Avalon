@@ -15,7 +15,7 @@ using Avalon.Items.Placeable.Furniture.ResistantWood;
 using Avalon.Items.Placeable.Furniture.YellowDungeon;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Tools.PreHardmode;
-using Avalon.Items.Weapons.Magic.PreHardmode.GemStaves;
+using Avalon.Items.Weapons.Magic.Wands;
 using Avalon.ModSupport.Thorium.Items.Placeable.Furniture.Gem;
 using System.Collections.Generic;
 using Terraria;

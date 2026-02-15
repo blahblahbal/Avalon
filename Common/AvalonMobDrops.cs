@@ -15,9 +15,6 @@ using Avalon.Items.Placeable.Trophy;
 using Avalon.Items.Potions.Buff;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Vanity;
-using Avalon.Items.Weapons.Magic.Hardmode.Sunstorm;
-using Avalon.Items.Weapons.Magic.PreHardmode.BloodBarrage;
-using Avalon.Items.Weapons.Magic.PreHardmode.ChaosTome;
 using Avalon.ModSupport;
 using Avalon.ModSupport.Tokens;
 using Avalon.NPCs.Bosses.Hardmode.Mechasting;
@@ -34,6 +31,8 @@ using Avalon.NPCs.Dungeon;
 using Avalon.Items.Weapons.Melee.Swords;
 using Avalon.Items.Weapons.Melee.Maces;
 using Avalon.Items.Weapons.Ranged.Longbows;
+using Avalon.Items.Weapons.Magic.Tomes;
+using Avalon.Items.Weapons.Magic.Wands;
 
 namespace Avalon.Common;
 

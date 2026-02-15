@@ -1,31 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
-using log4net;
-using System.Reflection.Metadata;
-using Terraria.IO;
-using Avalon.Common.Players;
-using static Avalon.Common.Players.AvalonHerbologyPlayer;
-using Avalon.Items.Tools;
-using Avalon.Items.Accessories.Hardmode;
-using Avalon.Items.Potions.Buff;
-using Avalon.Items.Accessories.PreHardmode;
-using Avalon.Items.Armor.Hardmode;
-using Avalon.Items.Tools.Hardmode;
-using Avalon.Items.Material;
-using Avalon.Items.Weapons.Magic.Hardmode;
-using Terraria.ModLoader.Core;
-using Terraria.ModLoader.Exceptions;
-using Terraria.Social;
-using Terraria.Utilities;
-using System.Security.Cryptography;
-using System.Reflection;
 
 namespace Avalon.Common
 {

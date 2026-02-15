@@ -6,7 +6,7 @@ using Avalon.Common.Players;
 using Terraria.GameContent.ItemDropRules;
 using System;
 using Avalon.Items.Accessories.Hardmode;
-using Avalon.Items.Weapons.Magic.Hardmode.Sunstorm;
+using Avalon.Items.Weapons.Magic.Wands;
 
 namespace Avalon.Hooks;
 

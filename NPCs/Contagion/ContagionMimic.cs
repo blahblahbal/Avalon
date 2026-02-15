@@ -3,7 +3,7 @@ using Avalon.Common;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Banners;
 using Avalon.Items.Tools.Hardmode;
-using Avalon.Items.Weapons.Magic.Hardmode.Outbreak;
+using Avalon.Items.Weapons.Magic.Wands;
 using Avalon.Items.Weapons.Melee.Spears;
 using Avalon.Items.Weapons.Ranged.Misc;
 using Avalon.ModSupport;

@@ -3,7 +3,7 @@ using Avalon.Common;
 using Avalon.Dusts;
 using Avalon.Items.Material;
 using Avalon.Items.Placeable.Trophy;
-using Avalon.Items.Weapons.Magic.Hardmode.PhantomKnives;
+using Avalon.Items.Weapons.Magic.Other;
 using Avalon.Particles;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;

@@ -1,5 +1,5 @@
 using Avalon.Items.Accessories.PreHardmode;
-using Avalon.Items.Weapons.Magic.PreHardmode.Smogscreen;
+using Avalon.Items.Weapons.Magic.Wands;
 using Avalon.Items.Weapons.Melee.Boomerangs;
 using Avalon.Items.Weapons.Ranged.Guns;
 using Avalon.Tiles.Furniture;

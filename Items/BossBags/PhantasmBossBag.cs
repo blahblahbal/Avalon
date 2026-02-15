@@ -2,7 +2,7 @@ using Avalon.Common.Extensions;
 using Avalon.Items.Accessories.Expert;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Material;
-using Avalon.Items.Weapons.Magic.Hardmode.PhantomKnives;
+using Avalon.Items.Weapons.Magic.Other;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;

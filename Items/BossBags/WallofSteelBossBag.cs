@@ -1,7 +1,7 @@
 using Avalon.Common.Extensions;
 using Avalon.Items.Accessories.Superhardmode;
 using Avalon.Items.Material;
-using Avalon.Items.Weapons.Magic.Superhardmode.MagicCleaver;
+using Avalon.Items.Weapons.Magic.Other;
 using Avalon.Items.Weapons.Ranged.Misc;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;

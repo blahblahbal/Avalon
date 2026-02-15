@@ -13,6 +13,10 @@
 	<ItemGroup>
 		<Folder Remove=".vs\ExxoAvalonOrigins\v17\" />
 		<AdditionalFiles Remove=".vs\ExxoAvalonOrigins\v17\**" />
+		<Folder Include="Buffs\Equipment\" />
+		<Folder Include="Buffs\Potions\" />
+		<Folder Include="Buffs\Stations\" />
+		<Folder Include="Buffs\Summons\" />
 		<Folder Include="NPCs\Bosses\Hardmode\Mechasting\Projectiles\" />
 		<Folder Include="Tiles\DarkMatter\" />
 	</ItemGroup>

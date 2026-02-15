@@ -5,7 +5,7 @@ using Avalon.Items.Material.Shards;
 using Avalon.Items.Placeable.Statue;
 using Avalon.Items.Potions.Buff;
 using Avalon.Items.Tools.PreHardmode;
-using Avalon.Items.Weapons.Magic.PreHardmode.FlowerOfTheJungle;
+using Avalon.Items.Weapons.Magic.Wands;
 using Avalon.Items.Weapons.Ranged.Longbows;
 using Avalon.Tiles;
 using Avalon.Tiles.Ancient.AncientOrangeBrick;

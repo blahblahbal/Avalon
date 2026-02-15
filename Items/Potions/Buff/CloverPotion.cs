@@ -1,3 +1,4 @@
+using Avalon.Buffs;
 using Avalon.Common;
 using Avalon.Common.Extensions;
 using Avalon.Items.Material.Herbs;
@@ -21,7 +22,7 @@ public class CloverPotion : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToBuffPotion(ModContent.BuffType<Buffs.Clover>(), TimeUtils.MinutesToTicks(30), PotionCorkType.Obsidian);
+		Item.DefaultToBuffPotion(ModContent.BuffType<Clover>(), TimeUtils.MinutesToTicks(30), PotionCorkType.Obsidian);
 	}
 
 	public override void AddRecipes()

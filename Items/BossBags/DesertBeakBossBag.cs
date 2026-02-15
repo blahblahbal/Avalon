@@ -2,7 +2,7 @@ using Avalon.Common.Extensions;
 using Avalon.Items.Accessories.Expert;
 using Avalon.Items.Material;
 using Avalon.Items.Vanity;
-using Avalon.Items.Weapons.Magic.PreHardmode.TomeoftheDistantPast;
+using Avalon.Items.Weapons.Magic.Tomes;
 using Avalon.Items.Weapons.Ranged.Misc;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
