@@ -10130,6 +10130,11 @@ Mods: {
 					<right> a Storage Unit to use
 					'''
 			}
+
+			EnemyGauntletStarter: {
+				DisplayName: Enemy Gauntlet Starter
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -10853,6 +10858,7 @@ Mods: {
 			SnakeHead.DisplayName: Snake Head
 			SnakeTail.DisplayName: Snake Tail
 			BacteriumTendril.DisplayName: Bacterium Tendril
+			EnemyGauntletPortal.DisplayName: Enemy Gauntlet Portal
 		}
 
 		Buffs: {
