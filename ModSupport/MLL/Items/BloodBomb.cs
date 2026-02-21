@@ -40,6 +40,7 @@ public class BloodBomb : ModItem
 		Recipe recipe = Recipe.Create(ItemID.DryBomb);
 		recipe.AddIngredient(Type);
 		recipe.SortAfterFirstRecipesOf(ItemID.DryBomb);
+		recipe.DisableDecraft();
 		recipe.Register();
 
 		Recipe recipe2 = Recipe.Create(Type);
