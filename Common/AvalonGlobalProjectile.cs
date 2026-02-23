@@ -1,8 +1,5 @@
 using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
-using Avalon.Items.Weapons.Melee.Flails;
-using Avalon.Items.Weapons.Melee.Maces;
-using Avalon.Items.Weapons.Melee.Maces.WoodenClubs;
 using Avalon.Projectiles.Melee.Flails;
 using Avalon.Projectiles.Melee.Maces;
 using Avalon.Tiles.Contagion;
