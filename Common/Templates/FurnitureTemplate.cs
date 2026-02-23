@@ -535,14 +535,7 @@ namespace Avalon.Common.Templates
 
 			// Other tiles with just one map entry use CreateMapEntryName() to use the default translationkey, "MapEntry"
 			// Since ExampleChest needs multiple, we register our own MapEntry keys
-			if (CanBeUnlockedNormally)
-			{
-				AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
-				if (CanBeLocked)
-				{
-					AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry1"), MapChestName);
-				}
-			}
+			AddMapEntries();
 
 			// Placement
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
@@ -562,7 +555,17 @@ namespace Avalon.Common.Templates
 			TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop | AnchorType.SolidSide, TileObjectData.newTile.Width, 0);
 			TileObjectData.addTile(Type);
 		}
-
+		public virtual void AddMapEntries()
+		{
+			if (CanBeUnlockedNormally)
+			{
+				AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry0"), MapChestName);
+				if (CanBeLocked)
+				{
+					AddMapEntry(new Color(174, 129, 92), this.GetLocalization("MapEntry1"), MapChestName);
+				}
+			}
+		}
 		public override IEnumerable<Item> GetItemDrops(int i, int j)
 		{
 			int type = 0;

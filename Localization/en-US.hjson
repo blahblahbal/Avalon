@@ -10135,6 +10135,11 @@ Mods: {
 				DisplayName: Enemy Gauntlet Starter
 				Tooltip: ""
 			}
+
+			TilePlacer: {
+				DisplayName: Tile Placer
+				Tooltip: Change style with W and S
+			}
 		}
 
 		InfoDisplays: {
@@ -10858,7 +10863,7 @@ Mods: {
 			SnakeHead.DisplayName: Snake Head
 			SnakeTail.DisplayName: Snake Tail
 			BacteriumTendril.DisplayName: Bacterium Tendril
-			EnemyGauntletPortal.DisplayName: Enemy Gauntlet Portal
+			EnemyGauntletPortal.DisplayName: ""
 		}
 
 		Buffs: {
@@ -11896,6 +11901,13 @@ Mods: {
 			UnderworldChest: {
 				MapEntry0: Underworld Chest
 				MapEntry1: Locked Underworld Chest
+			}
+
+			EnemyGauntletChest: {
+				MapEntry0: Snow Shrine Chest
+				MapEntry1: Cursed Snow Shrine Chest
+				MapEntry2: Sand Shrine Chest
+				MapEntry3: Cursed Sand Shrine Chest
 			}
 
 			ContagionPot.MapEntry: Pot

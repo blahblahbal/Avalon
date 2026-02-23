@@ -1,10 +1,15 @@
-﻿using Avalon.Dusts;
+﻿using Avalon.Buffs;
+using Avalon.Dusts;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace Avalon.Common.EnemyGauntletSystem;
 
@@ -56,46 +61,39 @@ public struct EnemyGauntletMonsterType
 	/// </summary>
 	public int MinAmount { get; }
 
-	public bool FindSpawnLocation(Rectangle area, out List<Point> Points)
+	public bool FindSpawnLocations(List<Point> PointsToCheck,out List<Point> Points)
 	{
 		List<Point> validPoints = new();
 
 		NPC n = ContentSamples.NpcsByNetId[Enemy];
-		for(int x = area.Left; x < area.Right; x++)
+		for(int i = 0; i < PointsToCheck.Count; i++)
 		{
-			for (int y = area.Top; y < area.Bottom; y++)
+			int x = PointsToCheck[i].X;	
+			int y = PointsToCheck[i].Y;
+			switch (SpawnRule)
 			{
-				switch (SpawnRule)
-				{
-					case GaunletSpawnRule.EmptySpace:
-						if (!Main.tileSolid[Main.tile[x, y].TileType] || !Main.tile[x, y].HasTile)
-						{
+				case GaunletSpawnRule.EmptySpace:
+					if (!Main.tileSolid[Main.tile[x, y].TileType] || !Main.tile[x, y].HasTile)
+					{
+						validPoints.Add(new Point(x, y));
+					}
+					break;
+				case GaunletSpawnRule.Grounded:
+					y = PointsToCheck[i].Y + 1;
+					if (Main.tileSolid[Main.tile[x, y].TileType] && Main.tile[x, y].HasTile && (!Main.tileSolid[Main.tile[x, y - 1].TileType] || !Main.tile[x, y - 1].HasTile))
+					{
+						if (!Collision.SolidCollision(new Point(x, y).ToWorldCoordinates(-ContentSamples.NpcsByNetId[Enemy].width / 2, -ContentSamples.NpcsByNetId[Enemy].height), ContentSamples.NpcsByNetId[Enemy].width, ContentSamples.NpcsByNetId[Enemy].height))
 							validPoints.Add(new Point(x, y));
-						}
-						break;
-					case GaunletSpawnRule.Grounded:
-						if (Main.tileSolid[Main.tile[x, y].TileType] && Main.tile[x, y].HasTile && (!Main.tileSolid[Main.tile[x, y - 1].TileType] || !Main.tile[x, y - 1].HasTile))
-						{
-							if (!Collision.SolidCollision(new Point(x, y).ToWorldCoordinates(-ContentSamples.NpcsByNetId[Enemy].width / 2, -ContentSamples.NpcsByNetId[Enemy].height), ContentSamples.NpcsByNetId[Enemy].width, ContentSamples.NpcsByNetId[Enemy].height))
-								validPoints.Add(new Point(x, y));
-						}
-						break;
-					case GaunletSpawnRule.InFloor:
-						if (Main.tileSolid[Main.tile[x, y].TileType] && Main.tile[x, y].HasTile)
-						{
-							validPoints.Add(new Point(x, y));
-						}
-						break;
-				}
+					}
+					break;
+				case GaunletSpawnRule.InFloor:
+					if (Main.tileSolid[Main.tile[x, y].TileType] && Main.tile[x, y].HasTile)
+					{
+						validPoints.Add(new Point(x, y));
+					}
+					break;
 			}
 		}
-		//if (!n.noTileCollide)
-		//{
-		//	for (int i = 0; i < validPoints.Count; i++)
-		//	{
-		//		if (Collision.SolidCollision(validPoints[i].ToWorldCoordinates()))
-		//	}
-		//}
 
 		Points = validPoints;
 
@@ -108,14 +106,18 @@ public struct EnemyGauntletMonsterType
 }
 public abstract class EnemyGauntlet : ModType
 {
+	public virtual Vector2 CircleRadius => new Vector2(15 * 16, 10 * 16);
+	public virtual int TotalRounds => 5;
+	public virtual EnemyGauntletMonsterType[] Monsters => [];
+
+
 	public bool ShouldBeDisabled = false;
 	public Rectangle Area;
-	public virtual int TotalRounds => 5;
 	public int Round;
 	public int BetweenRoundCountdown;
 	public bool RoundIsInProgress;
 	public Point PointOfInterest;
-	public virtual EnemyGauntletMonsterType[] Monsters => [];
+	public int WhoAmI;
 	protected sealed override void Register()
 	{
 		ModTypeLookup<EnemyGauntlet>.Register(this);
@@ -126,28 +128,66 @@ public abstract class EnemyGauntlet : ModType
 		Area = area;
 		BetweenRoundCountdown = 60;
 		Round = 0;
-		EnemyGauntletSystem.ActiveGauntlets.Add(this);
-		Main.NewText("Started Event");
+		bool addedSuccessfully = false;
+		for (int i = 0; i < EnemyGauntletSystem.Gauntlets.Length; i++)
+		{
+			if(EnemyGauntletSystem.Gauntlets[i] == null)
+			{
+				addedSuccessfully = true;
+				this.WhoAmI = i;
+				EnemyGauntletSystem.Gauntlets[i] = this;
+				break;
+			}
+		}
+		if (!addedSuccessfully)
+		{
+			Main.NewText("Wait for another enemy gauntlet to end before starting this one.", new Color(200,32,255));
+		}
 	}
-	public void StartRound()
+	private void Search(Rectangle area, Point start, ref List<Point> validPoints)
+	{
+		if (start.X < area.Left || start.X > area.Right || start.Y < area.Top || start.Y > area.Bottom) return;
+		if (validPoints.Contains(start)) return;
+		if ((Main.tileSolid[Main.tile[start].TileType] || TileID.Sets.RoomNeeds.CountsAsDoor.Contains<int>(Main.tile[start].TileType)) && Main.tile[start].HasTile) return;
+		validPoints.Add(start);
+
+		Search(area, start + new Point(1, 0), ref validPoints);
+		Search(area, start + new Point(-1, 0), ref validPoints);
+		Search(area, start + new Point(0, 1), ref validPoints);
+		Search(area, start + new Point(0, -1), ref validPoints);
+	}
+	private List<Point> FloodFillPointsInArea(Rectangle area, Point start)
+	{
+		List<Point> points = new List<Point>();
+		Search(area, start, ref points);
+		return points;
+	}
+	public virtual void Victory()
+	{
+		Main.NewText("Victory!");
+	}
+	private void StartRound()
 	{
 		int portalType = ModContent.NPCType<EnemyGauntletPortal>();
 		Round++;
 		if (Round > TotalRounds)
 		{
-			Main.NewText("Victory!");
+			Victory();
 			ShouldBeDisabled = true;
 			return;
 		}
 		BetweenRoundCountdown = 40;
 		Main.NewText("Started Round " + $"{Round}");
+		List<Point> ValidPoints = FloodFillPointsInArea(Area, PointOfInterest);
 		for (int i = 0; i < Monsters.Length; i++)
 		{
 			if (Round < Monsters[i].MinRound || Round > Monsters[i].MaxRound || Main.rand.NextFloat() > Monsters[i].Weight)
 				continue;
 
-			if(!Monsters[i].FindSpawnLocation(Area, out var Points))
+			if(!Monsters[i].FindSpawnLocations(ValidPoints, out var Points))
 				continue;
+
+
 
 			int rand = Main.rand.Next(Monsters[i].MinAmount, Monsters[i].MaxAmount);
 			for (int x = 0; x < rand; x++)
@@ -155,9 +195,7 @@ public abstract class EnemyGauntlet : ModType
 				int r = Main.rand.Next(Points.Count);
 				NPC n = NPC.NewNPCDirect(NPC.GetSource_None(), Points[r].ToWorldCoordinates(0, 0), portalType, 0, Monsters[i].Enemy);
 				Points.RemoveAt(r);
-				n.GetGlobalNPC<EnemyGauntletNPC>().AssignedGauntlet = this;
-				//NPC n = NPC.NewNPCDirect(NPC.GetSource_None(), Points[Main.rand.Next(Points.Count)].ToWorldCoordinates(0,0), Monsters[i].Enemy);
-				//n.GetGlobalNPC<EnemyGauntletNPC>().AssignedGauntlet = this;
+				n.GetGlobalNPC<EnemyGauntletNPC>().AssignedGauntlet = WhoAmI;
 			}
 		}
 	}
@@ -166,7 +204,7 @@ public abstract class EnemyGauntlet : ModType
 		RoundIsInProgress = false;
 		foreach (NPC n in Main.ActiveNPCs) // Determine if any enemies are alive
 		{
-			if(n.GetGlobalNPC<EnemyGauntletNPC>().AssignedGauntlet == this)
+			if(n.GetGlobalNPC<EnemyGauntletNPC>().AssignedGauntlet == WhoAmI)
 			{
 				RoundIsInProgress = true;
 				break;
@@ -182,24 +220,41 @@ public abstract class EnemyGauntlet : ModType
 			}
 		}
 	}
+	public bool IsPlayerInside(Player player)
+	{
+		Vector2 center = PointOfInterest.ToWorldCoordinates(16, 16);
+		Vector2 diff = player.Hitbox.ClosestPointInRect(center) - center;
+		if ((diff / Vector2.Normalize(CircleRadius)).Length() < MathHelper.Max(CircleRadius.X, CircleRadius.Y))
+		{
+			return true;
+		}
+		return false;
+	}
 }
 public class EnemyGauntletSystem : ModSystem
 {
-	public static List<EnemyGauntlet> ActiveGauntlets = new List<EnemyGauntlet>();
+	public static EnemyGauntlet[] Gauntlets = new EnemyGauntlet[5];
 	public override void PreUpdateInvasions()
 	{
-		for(int i = 0; i < ActiveGauntlets.Count; i++)
+		for(int i = 0; i < Gauntlets.Length; i++)
 		{
-			ActiveGauntlets[i].Update();
-			if (ActiveGauntlets[i].ShouldBeDisabled)
+			if (Gauntlets[i] == null)
+				continue;
+			Gauntlets[i].Update();
+			if (Gauntlets[i].ShouldBeDisabled)
 			{
-				ActiveGauntlets.RemoveAt(i);
+				foreach(Player p in Main.ActivePlayers)
+				{
+					EnemyGauntletPlayer egp = p.GetModPlayer<EnemyGauntletPlayer>();
+					if (egp.AssignedGauntlet == Gauntlets[i].WhoAmI)
+						egp.AssignedGauntlet = -1;
+				}
+				Gauntlets[i] = null;
 				i--;
 			}
 		}
 	}
 }
-
 public class EnemyGauntletPortal : ModNPC
 {
 	public override string Texture => $"Terraria/Images/Extra_50";
@@ -247,7 +302,49 @@ public class EnemyGauntletPortal : ModNPC
 public class EnemyGauntletNPC : GlobalNPC
 {
 	public override bool InstancePerEntity => true;
-	public EnemyGauntlet AssignedGauntlet = null;
+	public int AssignedGauntlet = -1;
+
+	public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+	{
+		binaryWriter.Write((short)AssignedGauntlet);
+	}
+	public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+	{
+		AssignedGauntlet = binaryReader.ReadInt16();
+	}
+}
+public class EnemyGauntletPlayer : ModPlayer
+{
+	public int AssignedGauntlet = -1;
+	public override void ResetEffects()
+	{
+		for(int i = 0; i < EnemyGauntletSystem.Gauntlets.Length; i++)
+		{
+			if (EnemyGauntletSystem.Gauntlets[i] != null && EnemyGauntletSystem.Gauntlets[i].IsPlayerInside(Player))
+			{
+				AssignedGauntlet = i;
+				break;
+			}
+		}
+		if (AssignedGauntlet > -1)
+		{
+			EnemyGauntlet gauntlet = EnemyGauntletSystem.Gauntlets[AssignedGauntlet];
+			if (gauntlet == null)
+			{
+				AssignedGauntlet = -1;
+				return;
+			}
+			if (gauntlet.IsPlayerInside(Player))
+			{
+				Player.AddBuff(BuffID.NoBuilding, 2, true);
+			}
+			else
+			{
+				Player.AddBuff(BuffID.WitheredWeapon, 2, true);
+				Player.lifeRegen -= 50;
+			}
+		}
+	}
 }
 public class TestGauntlet : EnemyGauntlet
 {

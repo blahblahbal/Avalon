@@ -25,6 +25,6 @@ public class EnemyGauntletFlame : Particle
 		{
 			texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/EnemyGauntletFlame");
 		}
-		spriteBatch.Draw(texture.Value, Position - screenpos, texture.Frame(1, 14, 0, TimeInWorld / 4), new Color(1f, 1f, 1f, 0.4f), 0, new Vector2(53, 54), MathHelper.Clamp(TimeInWorld / 10f,0,1f), flip ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+		spriteBatch.Draw(texture.Value, Position - screenpos, texture.Frame(1, 14, 0, TimeInWorld / 4), new Color(1f, 1f, 1f, 0f), 0, new Vector2(53, 54), MathHelper.Clamp(TimeInWorld / 10f,0,1f), flip ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
 	}
 }
