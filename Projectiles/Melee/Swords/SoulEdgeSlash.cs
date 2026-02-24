@@ -1,17 +1,20 @@
-﻿using Avalon.Common.Templates;
+﻿using Avalon.Common.Interfaces;
+using Avalon.Common.Templates;
 using Avalon.Dusts;
 using Avalon.Items.Weapons.Melee.Swords;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using System;
 using System.IO;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Melee.Swords;
 
-public class SoulEdgeSlash : EnergySlashTemplate
+public class SoulEdgeSlash : EnergySlashTemplate, ISyncedOnHitEffect
 {
 	public override LocalizedText DisplayName => ModContent.GetInstance<SoulEdge>().DisplayName;
 	public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.TheHorsemansBlade}";
@@ -23,12 +26,18 @@ public class SoulEdgeSlash : EnergySlashTemplate
 	public override bool PreDraw(ref Color lightColor)
 	{
 		float percent = 1f - Main.player[Projectile.owner].GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage / (float)SoulEdgePlayer.maxSoulEdge;
-		float multiply = 0.8f;
+
+		if (percent == 0)
+		{
+			DrawSlash(new Color(0.5f,0f,0f, 0.5f), new Color(0f, 0f, 0f, 0.25f), new Color(0.2f, 0f, 0f, 0.1f), Color.Black, 255, 0.9f, 0f, -0.1f, -0.04f, true, true);
+		}
+
 		DrawSlash(
-			Color.Lerp(new Color(244, 19, 0, 0), new Color(0, 140, 244, 0), percent) * multiply,
-			Color.Lerp(new Color(255, 140, 163, 0), new Color(88, 219, 255, 0), percent) * multiply,
-			Color.Lerp(new Color(255, 223, 240, 0), new Color(237, 171, 255, 0), percent) * multiply,
-			new Color(1f, 1f, 1f, 0f), 0, 1f, 0f, -0.1f, -0.2f, true, true);
+			Color.Lerp(new Color(244, 19, 0, 0), new Color(0, 140, 244, 0), percent) * 0.8f,
+			Color.Lerp(new Color(255, 140, 163, 0), new Color(88, 219, 255, 0), percent) * 0.6f,
+			Color.Lerp(new Color(255, 223, 240, 0), new Color(237, 171, 255, 0), percent) * 0.3f,
+			Color.Lerp(new Color(255, 100, 128, 0), new Color(200, 220, 255, 0), percent),
+			0, 1f, 0f, -0.1f, -0.04f, true, true);
 		return false;
 	}
 	public override void AI()
@@ -36,12 +45,21 @@ public class SoulEdgeSlash : EnergySlashTemplate
 		Player player = Main.player[Projectile.owner];
 		int DustType = DustID.SpectreStaff;
 		float percent = (player.GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage / (float)SoulEdgePlayer.maxSoulEdge);
+
+		if (Projectile.localAI[2] == 0)
+		{
+			float pow = MathF.Pow(percent, 15);
+			SoundEngine.PlaySound(SoundID.DD2_BookStaffCast with { Volume = pow * 0.9f, PitchVariance = 0.3f, Variants = [1] }, Projectile.Center);
+			SoundEngine.PlaySound(SoundID.Item1 with {Pitch = -0.3f, Volume = 1f - (pow * 0.6f)}, Projectile.Center);
+			Projectile.localAI[2]++;
+		}
+
 		if (Main.rand.NextBool())
 			DustType = (Main.rand.NextFloat() > percent ? DustID.DungeonSpirit : ModContent.DustType<PhantoplasmDust>());
 
 		for (int j = 0; j < 2; j++)
 		{
-			ClassExtensions.GetPointOnSwungItemPath(60f, 120f, 0.2f + 0.8f * Main.rand.NextFloat(), player.HeldItem.scale, out var location2, out var outwardDirection2, player);
+			ClassExtensions.GetPointOnSwungItemPath(60f, 200f, 0.2f + 0.8f * Main.rand.NextFloat(), player.HeldItem.scale, out var location2, out var outwardDirection2, player);
 			Vector2 vector2 = outwardDirection2.RotatedBy((float)Math.PI / 2f * (float)player.direction * player.gravDir);
 			Dust d = Dust.NewDustPerfect(location2, DustType, vector2 * 2f, 100, default(Color), 0.7f + Main.rand.NextFloat() * 1.3f);
 			d.noGravity = true;
@@ -70,15 +88,42 @@ public class SoulEdgeSlash : EnergySlashTemplate
 	{
 		Main.player[Projectile.owner].GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage += damageDone;
 		Projectile.netUpdate = true;
-
-		if (Main.player[Projectile.owner].GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage >= SoulEdgePlayer.maxSoulEdge)
+	}
+	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
+	{
+		Vector2 point = Main.rand.NextVector2FromRectangle(target.Hitbox);
+		float percent = Main.player[Projectile.owner].GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage / (float)SoulEdgePlayer.maxSoulEdge;
+		if (percent >= 1f)
 		{
-			for (int i = 0; i < 35; i++)
+			for (int i = 0; i < 3; i++)
 			{
-				Dust d = Dust.NewDustDirect(target.Hitbox.ClosestPointInRect(Projectile.Center) - Projectile.Size / 2f, Projectile.width, Projectile.height, ModContent.DustType<PhantoplasmDust>());
-				d.noGravity = true;
-				d.velocity *= 2;
-				d.scale *= 2;
+				SparkleParticle p = new();
+				p.ColorTint = new Color(1f, 0.2f, 0.2f);
+				p.FadeInEnd = Main.rand.NextFloat(8, 10);
+				p.FadeOutStart = p.FadeInEnd;
+				p.FadeOutEnd = Main.rand.NextFloat(18, 23);
+				p.Scale = new Vector2(7, 4);
+				p.Rotation = (i * MathHelper.TwoPi / 3f) + Main.rand.NextFloat(-0.3f, 0.3f);
+				//p.Velocity = Vector2.UnitY.RotatedBy(p.Rotation) * Main.rand.NextFloat(2,4);
+				p.DrawHorizontalAxis = false;
+				p.HighlightColor = new Color(1f,1f,1f,0f);
+				ParticleSystem.NewParticle(p, point);
+			}
+		}
+		else
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				SparkleParticle p = new();
+				p.ColorTint = Color.Lerp(new Color(0f, 0.4f, 1f), new Color(1f, 0.2f, 0.2f), percent);
+				p.FadeInEnd = Main.rand.NextFloat(4, 7);
+				p.FadeOutStart = p.FadeInEnd;
+				p.FadeOutEnd = Main.rand.NextFloat(13, 18);
+				p.Scale = new Vector2(4, 2);
+				p.Rotation = (i * MathHelper.TwoPi / 3f) + Main.rand.NextFloat(-0.3f, 0.3f);
+				//p.Velocity = Vector2.UnitY.RotatedBy(p.Rotation) * Main.rand.NextFloat(2,4);
+				p.DrawHorizontalAxis = false;
+				ParticleSystem.NewParticle(p, point);
 			}
 		}
 	}

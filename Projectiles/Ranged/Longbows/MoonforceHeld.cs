@@ -72,7 +72,7 @@ public class MoonforceHeld : LongbowTemplate
 		{
 			SoundEngine.PlaySound(SoundID.Item9, Projectile.Center);
 			projectile.extraUpdates++;
-			float ScaleMod = 1 + (Power * 5);
+			float ScaleMod = 1 + (Power * 7.5f);
 			projectile.Resize((int)(projectile.width * ScaleMod), (int)(projectile.height * ScaleMod));
 
 			if (projectile.penetrate > 0)

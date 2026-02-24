@@ -3,6 +3,7 @@ using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Utilities;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -20,7 +21,7 @@ namespace Avalon.Common.Templates
 			return false;
 		}
 		public virtual SoundStyle shootSound => new SoundStyle("Avalon/Sounds/Item/LongbowShot") { Pitch = 0.2f, Volume = 0.7f };
-		public virtual float HowFarShouldTheBowBeHeldFromPlayer => 25;
+		public virtual float HowFarShouldTheBowBeHeldFromPlayer => 20;
 		public override void SetDefaults()
 		{
 			Projectile.Size = new Vector2(16);
@@ -38,7 +39,7 @@ namespace Avalon.Common.Templates
 		public float FullPowerGlow;
 		public override void SetStaticDefaults()
 		{
-			Main.projFrames[Type] = 4;
+			Main.projFrames[Type] = 6;
 		}
 		SlotId BowPullSound = SlotId.Invalid;
 		/// <summary>
@@ -104,7 +105,7 @@ namespace Avalon.Common.Templates
 					SoundEngine.PlaySound(shootSound, Projectile.Center);
 			}
 			Vector2 vector = Vector2.Normalize(Projectile.velocity) * HowFarShouldTheBowBeHeldFromPlayer;
-			Projectile.Center = player.MountedCenter + new Vector2(vector.X, vector.Y * 0.9f);
+			Projectile.Center = new Vector2((int)player.MountedCenter.X,(int)player.MountedCenter.Y) + new Vector2(vector.X, vector.Y * 0.9f);
 			Projectile.position.X -= player.direction * 6;
 			Projectile.rotation = Projectile.velocity.ToRotation();
 
@@ -167,25 +168,22 @@ namespace Avalon.Common.Templates
 			player.SetCompositeArmBack(true, Player.CompositeArmStretchAmount.Full, new Vector2(player.MountedCenter.X + player.direction * 6, player.MountedCenter.Y).DirectionTo(ProjPosition + player.velocity).ToRotation() + RotationOffset);
 			if (player.channel)
 			{
+				Projectile.frame = (int)Math.Floor(Power * (Main.projFrames[Type] - 1));
 				if (Power < 0.33)
 				{
 					CompositeArm = Player.CompositeArmStretchAmount.Full;
-					Projectile.frame = 0;
 				}
 				else if (Power < 0.66f)
 				{
 					CompositeArm = Player.CompositeArmStretchAmount.ThreeQuarters;
-					Projectile.frame = 1;
 				}
 				else if (Power < 0.99f)
 				{
 					CompositeArm = Player.CompositeArmStretchAmount.Quarter;
-					Projectile.frame = 2;
 				}
 				else
 				{
 					CompositeArm = Player.CompositeArmStretchAmount.None;
-					Projectile.frame = 3;
 				}
 			}
 			else
@@ -216,9 +214,9 @@ namespace Avalon.Common.Templates
 			Vector2 drawPos = Projectile.Center - Main.screenPosition + Offset;
 			drawPos.Y += Main.player[Projectile.owner].gfxOffY;
 			//Stretch 
-			Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos - new Vector2(Projectile.frame, 0).RotatedBy(Projectile.rotation), frame, lightColor, Projectile.rotation, new Vector2(TextureAssets.Projectile[Type].Value.Width, frameHeight) / 2, new Vector2(1 + (Projectile.frame * 0.06f), 1) * Projectile.scale * Scale, Flip, 0);
+			//Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos - new Vector2(Projectile.frame, 0).RotatedBy(Projectile.rotation), frame, lightColor, Projectile.rotation, new Vector2(TextureAssets.Projectile[Type].Value.Width, frameHeight) / 2, new Vector2(1 + (Projectile.frame * 0.06f), 1) * Projectile.scale * Scale, Flip, 0);
 			//No stretch
-			//Main.EntitySpriteDraw(texture, drawPos, frame, lightColor, Projectile.rotation, new Vector2(texture.Width, frameHeight) / 2, Projectile.scale, Flip, 0);
+			Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos, frame, lightColor, Projectile.rotation, new Vector2(TextureAssets.Projectile[Type].Value.Width, frameHeight) / 2, new Vector2(1f, 1f - Projectile.frame * 0.03f) * Projectile.scale * Scale, Flip, 0);
 		}
 		public void DrawArrow(Color lightColor, Vector2 Offset, bool OverwriteGetAlphaOfArrow = false)
 		{
@@ -230,7 +228,7 @@ namespace Avalon.Common.Templates
 
 			int frameHeight = TextureAssets.Projectile[ammo].Value.Height / Main.projFrames[ammo];
 			Rectangle frame = new Rectangle(0, frameHeight * 0, TextureAssets.Projectile[ammo].Value.Width, frameHeight);
-			Vector2 drawPos = Projectile.Center - Main.screenPosition + new Vector2((Projectile.frame * -3) + 8 + Offset.X, Offset.Y).RotatedBy(Projectile.rotation);
+			Vector2 drawPos = Projectile.Center - Main.screenPosition + new Vector2((Projectile.frame * -2) + 8 + Offset.X, Offset.Y).RotatedBy(Projectile.rotation);
 			drawPos.Y += Main.player[Projectile.owner].gfxOffY;
 			if(!OverwriteGetAlphaOfArrow)
 				Main.EntitySpriteDraw(TextureAssets.Projectile[ammo].Value, drawPos, frame, AmmoProj.GetAlpha(lightColor), Projectile.rotation + MathHelper.PiOver2, new Vector2(TextureAssets.Projectile[ammo].Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);

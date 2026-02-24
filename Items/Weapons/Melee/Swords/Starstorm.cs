@@ -20,7 +20,17 @@ public class Starstorm : ModItem
 		Item.rare = ItemRarityID.LightRed;
 		Item.value = Item.sellPrice(0, 7);
 	}
-
+	public override void MeleeEffects(Player player, Rectangle hitbox)
+	{
+		if (Main.rand.NextBool(5))
+		{
+			Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, DustID.Enchanted_Pink, 0f, 0f, 150, default(Color), 1.2f);
+		}
+		if (Main.rand.NextBool(10))
+		{
+			Gore.NewGore(new EntitySource_ItemUse(player,Item),Main.rand.NextVector2FromRectangle(hitbox), default(Vector2), Main.rand.Next(16, 18));
+		}
+	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{
 		int starCount = (int)(5 - MathHelper.Clamp(player.Center.Distance(Main.MouseWorld) * 0.01f, 1, 4));

@@ -73,30 +73,7 @@ public class SoulEdge : ModItem
 		Item.noUseGraphic = true;
 		Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
 		Item.value = Item.sellPrice(0, 30);
-	}
-	public override void MeleeEffects(Player player, Rectangle hitbox)
-	{
-		int DustType = DustID.SpectreStaff;
-		if (Main.rand.NextBool())
-			DustType = Main.rand.NextFloat() > player.GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage / (float)SoulEdgePlayer.maxSoulEdge ? DustID.DungeonSpirit : ModContent.DustType<PhantoplasmDust>();
-
-		for (int j = 0; j < 2; j++)
-		{
-			ClassExtensions.GetPointOnSwungItemPath(60f, 120f, 0.2f + 0.8f * Main.rand.NextFloat(), Item.scale, out var location2, out var outwardDirection2, player);
-			Vector2 vector2 = outwardDirection2.RotatedBy((float)Math.PI / 2f * player.direction * player.gravDir);
-			Dust d = Dust.NewDustPerfect(location2, DustType, vector2 * 2f, 100, default, 0.7f + Main.rand.NextFloat() * 1.3f);
-			d.noGravity = true;
-			d.velocity *= 2f;
-			if (Main.rand.NextBool(20))
-			{
-				int num15 = Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, DustType, player.velocity.X * 0.2f + player.direction * 3, player.velocity.Y * 0.2f, 128, default, 1.3f);
-				Main.dust[num15].position = location2;
-				Main.dust[num15].fadeIn = 1.2f;
-				Main.dust[num15].noGravity = true;
-				Main.dust[num15].velocity *= 2f;
-				Main.dust[num15].velocity += vector2 * 5f;
-			}
-		}
+		Item.UseSound = null;
 	}
 	public override bool AltFunctionUse(Player player)
 	{
@@ -106,7 +83,6 @@ public class SoulEdge : ModItem
 	{
 		if (player.altFunctionUse == 2)
 		{
-			SoundEngine.PlaySound(SoundID.Zombie53, player.position);
 			Projectile.NewProjectile(source, position, velocity * 8, ModContent.ProjectileType<SoulEdgeDash>(), damage * 3, knockback * 2, player.whoAmI);
 			return false;
 		}

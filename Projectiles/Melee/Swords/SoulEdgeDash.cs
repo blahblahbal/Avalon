@@ -1,17 +1,20 @@
-﻿using Avalon.Common.Players;
+﻿using Avalon.Common.Interfaces;
+using Avalon.Common.Players;
 using Avalon.Dusts;
 using Avalon.Items.Weapons.Melee.Swords;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Melee.Swords;
 
-public class SoulEdgeDash : ModProjectile
+public class SoulEdgeDash : ModProjectile, ISyncedOnHitEffect
 {
 	private const int initialTimeLeft = 20;
 	public override void SetDefaults()
@@ -32,6 +35,10 @@ public class SoulEdgeDash : ModProjectile
 		Player player = Main.player[Projectile.owner];
 		if (Projectile.timeLeft == initialTimeLeft)
 		{
+			SoundEngine.PlaySound(SoundID.DD2_GhastlyGlaiveImpactGhost with { MaxInstances = 10}, player.position);
+			SoundEngine.PlaySound(SoundID.DD2_GhastlyGlaiveImpactGhost with { MaxInstances = 10, Pitch = -0.35f}, player.position);
+			SoundEngine.PlaySound(SoundID.DD2_GhastlyGlaiveImpactGhost with { MaxInstances = 10, Pitch = -0.65f }, player.position);
+			SoundEngine.PlaySound(SoundID.Zombie53, player.position);
 			player.immune = true;
 			player.AddImmuneTime(ImmunityCooldownID.General, 60);
 			player.GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage = 0;
@@ -79,5 +86,22 @@ public class SoulEdgeDash : ModProjectile
 			Main.EntitySpriteDraw(TextureAssets.Extra[ExtrasID.SharpTears].Value, Projectile.Center - Main.screenPosition + Vector2.Normalize(Projectile.velocity) * 110, null, new Color(1f, 1f, 1f, 0f) * 0.4f * percent * percent, MathHelper.PiOver2 * i + Projectile.rotation + MathHelper.PiOver4, TextureAssets.Extra[ExtrasID.SharpTears].Size() / 2, new Vector2(Projectile.scale, (Projectile.scale + 1 - i) * (0.5f + percent)), SpriteEffects.None, 0);
 		}
 		return false;
+	}
+	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
+	{
+		Vector2 point = Main.rand.NextVector2FromRectangle(target.Hitbox);
+		for (int i = 0; i < 3; i++)
+		{
+			SparkleParticle p = new();
+			p.ColorTint = new Color(1f, 0.2f, 0.2f);
+			p.FadeInEnd = Main.rand.NextFloat(4, 7);
+			p.FadeOutStart = p.FadeInEnd;
+			p.FadeOutEnd = Main.rand.NextFloat(13, 18);
+			p.Scale = new Vector2(7, 4);
+			p.Rotation = (i * MathHelper.TwoPi / 3f) + Main.rand.NextFloat(-0.3f, 0.3f);
+			//p.Velocity = Vector2.UnitY.RotatedBy(p.Rotation) * Main.rand.NextFloat(2,4);
+			p.DrawHorizontalAxis = false;
+			ParticleSystem.NewParticle(p, point);
+		}
 	}
 }

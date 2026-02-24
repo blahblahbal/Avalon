@@ -5833,8 +5833,8 @@ Mods: {
 			}
 
 			Longbow: {
-				DisplayName: Longbow
-				Tooltip: ""
+				DisplayName: Goblin Warbow
+				Tooltip: Arrows gain extra pierce and velocity when fully drawn
 			}
 
 			BondrewdHelmet: {

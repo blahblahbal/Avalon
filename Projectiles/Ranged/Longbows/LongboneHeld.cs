@@ -62,16 +62,20 @@ public class LongboneCurseArrow : GlobalProjectile
 	{
 		if (Longbone > 0)
 		{
-			Dust d = Dust.NewDustPerfect(projectile.Center, 172, projectile.velocity * 0.5f);
-			d.noGravity = true;
-			d.scale = 0.6f + (Longbone / 4f);
+			for (int i = 0; i < Longbone; i++)
+			{
+				Dust d = Dust.NewDustPerfect(projectile.Center, DustID.DungeonWater);
+				d.noGravity = true;
+				d.velocity += projectile.velocity * 0.5f;
+				d.scale = 0.6f + (Longbone / 8f);
+			}
 		}
 	}
 	public override void OnKill(Projectile projectile, int timeLeft)
 	{
 		if (Longbone > 0)
 		{
-			SoundEngine.PlaySound(SoundID.Item20, projectile.position);
+			SoundEngine.PlaySound(SoundID.Item103, projectile.position);
 			ColorExplosion p = new ColorExplosion(new Color(32, 77, 255, 64), Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.1f, 0.35f) + (Longbone * 0.1f));
 			ParticleSystem.NewParticle(p, projectile.Center);
 			ParticleSystem.NewParticle(new ColorExplosion(new Color(64, 128, 255, 64),p.Rotation + MathHelper.PiOver2, p.Scale * 0.8f), projectile.Center);
@@ -90,7 +94,7 @@ public class LongboneCurseArrow : GlobalProjectile
 			{
 				for (int i = 0; i < Longbone; i++)
 				{
-					Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, Vector2.Normalize((Collision.SolidCollision(projectile.position + projectile.velocity, projectile.width, projectile.height) ? -projectile.oldVelocity : projectile.oldVelocity)).RotatedByRandom(Longbone * 0.03f) * Main.rand.NextFloat(6, 10), ModContent.ProjectileType<LongboneCurse>(), projectile.damage / 3, projectile.knockBack / 2f, projectile.owner);
+					Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, Vector2.Normalize((Collision.SolidCollision(projectile.position + projectile.oldVelocity - (projectile.Size * 1.5f), projectile.width * 3, projectile.height * 3) ? -projectile.oldVelocity : projectile.oldVelocity)).RotatedByRandom(Longbone * 0.03f) * Main.rand.NextFloat(6, 10), ModContent.ProjectileType<LongboneCurse>(), projectile.damage / 3, projectile.knockBack / 2f, projectile.owner);
 				}
 			}
 		}
