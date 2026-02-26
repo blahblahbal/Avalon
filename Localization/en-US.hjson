@@ -2218,7 +2218,7 @@ Mods: {
 
 			OsmiumLongbow: {
 				DisplayName: Osmium Longbow
-				Tooltip: Arrows gain extra pierce and velocity when fully drawn
+				Tooltip: Arrows explode into shrapnel when fully drawn
 			}
 
 			OsmiumBrick: {
@@ -3423,12 +3423,12 @@ Mods: {
 
 			IridiumLongbow: {
 				DisplayName: Iridium Longbow
-				Tooltip: Arrows gain extra pierce and velocity when fully drawn
+				Tooltip: Richochets energy arrows on enemy hit
 			}
 
 			RhodiumLongbow: {
 				DisplayName: Rhodium Longbow
-				Tooltip: Arrows gain extra pierce and velocity when fully drawn
+				Tooltip: Fires a delayed flurry of energy arrows
 			}
 
 			VertexOfExcalibur: {
@@ -10392,6 +10392,9 @@ Mods: {
 			CougherCough.DisplayName: Cougher Cough
 			ShadlopodInk.DisplayName: Shadlopod Ink
 			DesertLongswordTornado.DisplayName: Desert Longsword Tornado
+			IridiumLongbowEnergyArrow.DisplayName: Iridium Longbow Energy Arrow
+			OsmiumShrapnel.DisplayName: Osmium Shrapnel
+			RhodiumLongbowEnergyArrow.DisplayName: Rhodium Longbow Energy Arrow
 		}
 
 		NPCs: {

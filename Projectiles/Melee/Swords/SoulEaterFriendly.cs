@@ -35,7 +35,7 @@ public class SoulEaterFriendly : ModProjectile
 		Projectile.ai[1]++;
 		if (Projectile.ai[1] == 1)
 		{
-			Projectile.ai[0] = Projectile.FindClosestNPC(600, npc => !npc.active || npc.townNPC || npc.dontTakeDamage || npc.lifeMax <= 5 || npc.type == NPCID.TargetDummy || npc.type == NPCID.CultistBossClone || npc.friendly);
+			Projectile.ai[0] = Projectile.FindClosestNPC(600, npc => !npc.CanBeChasedBy());
 		}
 		if (Projectile.ai[1] is > 30 and < 60 && Projectile.ai[0] != -1)
 		{

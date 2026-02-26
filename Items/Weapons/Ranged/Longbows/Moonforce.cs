@@ -16,7 +16,7 @@ public class Moonforce : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Item.DefaultToLongbow(68, 2.3f, 24f, 77);
+		Item.DefaultToLongbow(100, 2.3f, 24f, 77);
 		Item.rare = ItemRarityID.Orange;
 		Item.value = Item.sellPrice(0, 2);
 	}
@@ -31,6 +31,7 @@ public class Moonforce : ModItem
 			.AddIngredient(ModContent.ItemType<RhodiumLongbow>())
 			.AddIngredient(ModContent.ItemType<Longbone>())
 			.AddIngredient(ModContent.ItemType<Longbow>())
+			.AddIngredient(ItemID.SoulofNight, 15)
 			.AddTile(TileID.DemonAltar)
 			.Register();
 
@@ -38,6 +39,7 @@ public class Moonforce : ModItem
 			.AddIngredient(ModContent.ItemType<OsmiumLongbow>())
 			.AddIngredient(ModContent.ItemType<Longbone>())
 			.AddIngredient(ModContent.ItemType<Longbow>())
+			.AddIngredient(ItemID.SoulofNight, 15)
 			.AddTile(TileID.DemonAltar)
 			.Register();
 
@@ -45,6 +47,7 @@ public class Moonforce : ModItem
 			.AddIngredient(ModContent.ItemType<IridiumLongbow>())
 			.AddIngredient(ModContent.ItemType<Longbone>())
 			.AddIngredient(ModContent.ItemType<Longbow>())
+			.AddIngredient(ItemID.SoulofNight, 15)
 			.AddTile(TileID.DemonAltar)
 			.Register();
 	}

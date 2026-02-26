@@ -86,6 +86,8 @@ public class SoulEdgeSlash : EnergySlashTemplate, ISyncedOnHitEffect
 
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 	{
+		if (!target.CanBeChasedBy())
+			return;
 		Main.player[Projectile.owner].GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage += damageDone;
 		Projectile.netUpdate = true;
 	}

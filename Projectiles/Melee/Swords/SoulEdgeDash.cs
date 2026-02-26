@@ -60,7 +60,7 @@ public class SoulEdgeDash : ModProjectile, ISyncedOnHitEffect
 		{
 			for (int i = 0; i < 2; i++)
 			{
-				Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, (Projectile.velocity * 0.3f).RotatedBy(MathHelper.PiOver2 + (MathHelper.Pi * i)), ModContent.ProjectileType<SoulEaterFriendly>(), Projectile.damage / 9, Projectile.knockBack / 9, Projectile.owner);
+				Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, (Projectile.velocity * 0.3f).RotatedBy(MathHelper.PiOver2 + (MathHelper.Pi * i)), ModContent.ProjectileType<SoulEaterFriendly>(), Projectile.damage / 9, Projectile.knockBack / 9, Projectile.owner, -1);
 			}
 		}
 
