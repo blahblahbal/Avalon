@@ -46,7 +46,8 @@ public class WorldgenHelper : ModItem
 
 		if (player.ItemAnimationJustStarted)
 		{
-			WorldGeneration.Structures.IceShrine.Generate(x, y);
+			MakeSkyFortress(x, y);
+			//WorldGeneration.Structures.IceShrine.Generate(x, y);
 			//JonasHellcastle.Generate(x, y);
 			//bool top = WorldGen.genRand.NextBool();
 			//CreateOvalCave(x, y, 20, top ? -5f : 5f, WorldGen.genRand.NextFloat(-.4f, .4f), top);
@@ -206,7 +207,7 @@ public class WorldgenHelper : ModItem
 		initialGapBetweenWalls = Math.Clamp(initialGapBetweenWalls, 1, minGapBetweenWalls); // clamped between 1 and minGapBetweenWalls, as it does not work outside this range
 		finalGapBetweenWalls = Math.Clamp(finalGapBetweenWalls, 1, minGapBetweenWalls); // clamped between 1 and minGapBetweenWalls, as it does not work outside this range
 
-		//WorldGeneration.Structures.ChainedArrayBuilder.NewChainedStructure(x, y, totalSegments, lowerHallsFloorCount, middleHallsFloorCount, upperHallsFloorCount, wallChanceDenominator, maxWallsPerFloor, topFloorMaxWalls, minGapBetweenWalls, initialGapBetweenWalls, finalGapBetweenWalls);
+		ChainedArrayBuilder.NewChainedStructure(x, y, totalSegments, lowerHallsFloorCount, middleHallsFloorCount, upperHallsFloorCount, wallChanceDenominator, maxWallsPerFloor, topFloorMaxWalls, minGapBetweenWalls, initialGapBetweenWalls, finalGapBetweenWalls);
 	}
 
 

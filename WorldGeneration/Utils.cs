@@ -434,6 +434,7 @@ public class Utils
 			for (int j = y - r; j < y + r; j++)
 			{
 				//Main.tile[i, j].LiquidAmount = 0;
+				WorldGen.SquareTileFrame(i, j, true);
 			}
 		}
 	}
@@ -451,6 +452,7 @@ public class Utils
 		{
 			for (int j = y; j < y + yr; j++)
 			{
+				WorldGen.SquareTileFrame(i, j, true);
 			}
 		}
 	}
