@@ -163,17 +163,23 @@ public class BoomlashProj : ModProjectile
 		Projectile.position.X = Projectile.position.X - (float)(Projectile.width / 2);
 		Projectile.position.Y = Projectile.position.Y - (float)(Projectile.height / 2);
 	}
+	public override void Load()
+	{
+		MiscShaderData shader = new MiscShaderData(Main.Assets.Request<Effect>("PixelShader"), "MagicMissile").UseProjectionMatrix(doUse: true);
+		shader.UseImage1(TextureAssets.Extra[ExtrasID.RainbowRodTrailShape]);
+		shader.UseImage2(TextureAssets.Extra[ExtrasID.MagicMissileTrailErosion]);
+		shader.UseImage0(TextureAssets.MagicPixel);
+		GameShaders.Misc.Add("Boomlash", shader);
+	}
 }
 public struct BoomlashVertexStrip
 {
 	private static VertexStrip _vertexStrip = new VertexStrip();
 	public void Draw(Projectile proj)
 	{
-		MiscShaderData miscShaderData = GameShaders.Misc["RainbowRod"];
+		MiscShaderData miscShaderData = GameShaders.Misc["Boomlash"];
 		miscShaderData.UseSaturation(-3f);
 		miscShaderData.UseOpacity(proj.Opacity * 2);
-		miscShaderData.UseImage1(TextureAssets.Extra[ExtrasID.RainbowRodTrailShape]);
-		miscShaderData.UseImage2(TextureAssets.Extra[193]);
 		miscShaderData.Apply();
 		_vertexStrip.PrepareStripWithProceduralPadding(proj.oldPos, proj.oldRot, StripColors, StripWidth, -Main.screenPosition + proj.Size / 2f);
 		_vertexStrip.DrawTrail();

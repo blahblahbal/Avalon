@@ -83,7 +83,6 @@ public class OsmiumLongbowGlobalProjectile : GlobalProjectile
 		for (int i = 0; i < 15; i++)
 		{
 			Dust d = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, type);
-			d.velocity *= 0.3f;
 			d.velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(5, 10);
 			d.color = new Color(0.3f, Main.rand.NextFloat(0.4f, 0.75f), 1f, 0.75f);
 			d.noGravity = true;

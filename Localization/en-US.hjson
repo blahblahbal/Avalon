@@ -2189,7 +2189,12 @@ Mods: {
 
 			OsmiumGreatsword: {
 				DisplayName: Osmium Greatsword
-				Tooltip: ""
+				Tooltip:
+					'''
+					Damage increases while flying
+					Click to send the sword down
+					Click during the flash to guarantee a critical strike
+					'''
 			}
 
 			OsmiumHelmet: {
@@ -3418,7 +3423,11 @@ Mods: {
 
 			RhodiumGreatsword: {
 				DisplayName: Rhodium Greatsword
-				Tooltip: ""
+				Tooltip:
+					'''
+					Builds up power on enemy hit
+					Releases the power when you stop attacking
+					'''
 			}
 
 			IridiumLongbow: {
@@ -10395,6 +10404,9 @@ Mods: {
 			IridiumLongbowEnergyArrow.DisplayName: Iridium Longbow Energy Arrow
 			OsmiumShrapnel.DisplayName: Osmium Shrapnel
 			RhodiumLongbowEnergyArrow.DisplayName: Rhodium Longbow Energy Arrow
+			IridiumGreatswordBubble.DisplayName: Iridium Greatsword Bubble
+			RhodiumGreatswordBeam.DisplayName: Rhodium Greatsword Beam
+			IridiumGreatswordSpike.DisplayName: Iridium Greatsword Spike
 		}
 
 		NPCs: {
@@ -12338,8 +12350,15 @@ Mods: {
 		}
 
 		Liquids: {
-			Blood.RecipeEntry: Near blood
-			Acid.RecipeEntry: Near acid
+			Blood: {
+				RecipeEntry: Near blood
+				MapEntry: Blood
+			}
+
+			Acid: {
+				RecipeEntry: Near acid
+				MapEntry: Acid
+			}
 		}
 	}
 }

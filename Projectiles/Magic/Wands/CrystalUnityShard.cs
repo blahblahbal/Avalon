@@ -211,6 +211,14 @@ public class CrystalUnityShard : ModProjectile
 				break;
 		}
 	}
+	public override void Load()
+	{
+		MiscShaderData shader = new MiscShaderData(Main.Assets.Request<Effect>("PixelShader"), "MagicMissile").UseProjectionMatrix(doUse: true);
+		shader.UseImage1(TextureAssets.Extra[ExtrasID.RainbowRodTrailShape]);
+		shader.UseImage2(TextureAssets.Extra[ExtrasID.MagicMissileTrailErosion]);
+		shader.UseImage0(TextureAssets.MagicPixel);
+		GameShaders.Misc.Add("CrystalUnity", shader);
+	}
 }
 public struct CrystalUnityVertexStrip
 {
@@ -220,11 +228,9 @@ public struct CrystalUnityVertexStrip
 	public void Draw(Projectile proj)
 	{
 		StripColor = CrystalUnityShard.Colors[(int)proj.ai[2]];
-		MiscShaderData miscShaderData = GameShaders.Misc["RainbowRod"];
+		MiscShaderData miscShaderData = GameShaders.Misc["CrystalUnity"];
 		miscShaderData.UseSaturation(proj.velocity.Length() * -0.2f);
-		miscShaderData.UseOpacity(proj.Opacity * 2);
-		miscShaderData.UseImage1(TextureAssets.Extra[ExtrasID.RainbowRodTrailShape]);
-		miscShaderData.UseImage2(TextureAssets.Extra[ExtrasID.MagicMissileTrailErosion]);
+		miscShaderData.UseOpacity(proj.Opacity);
 		miscShaderData.Apply();
 		_vertexStrip.PrepareStripWithProceduralPadding(proj.oldPos, proj.oldRot, StripColors, StripWidth, -Main.screenPosition + proj.Size / 2f);
 		_vertexStrip.DrawTrail();
