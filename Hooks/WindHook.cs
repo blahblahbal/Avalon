@@ -1,5 +1,4 @@
 using Avalon.Common;
-using Avalon.ModSupport.Thorium.Tiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
@@ -54,7 +53,6 @@ namespace Avalon.Hooks
 				DrawMultiTileGrassVariableEditor(self, ref dud2, ref dud2, topLeftX, topLeftY, ref dud, ref dud, ref val2, ref color); //Adds extra content (glowmasks, color, ect)
 			});
 		}
-
 		public static void DrawMultiTileGrassVariableEditor(TileDrawing self, ref Vector2 screenPosition, ref Vector2 offSet, int topLeftX, int topLeftY, ref int sizeX, ref int sizeY, ref Texture2D overlayTexture, ref Color overlayColor)
 		{
 			if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<Tiles.Herbs.LargeHerbsStage1>() ||
@@ -64,18 +62,18 @@ namespace Avalon.Hooks
 			{
 				sizeY = 3;
 			}
-			if (ExxoAvalonOrigins.ThoriumContentEnabled)
-			{
-				if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<LargeMarineKelpStage1>() ||
-					Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<LargeMarineKelpStage2>() ||
-					Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<LargeMarineKelpStage3>() ||
-					Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<LargeMarineKelpStage4>())
-				{
-					sizeY = 3;
-					overlayColor = Color.White;
-					overlayTexture = ModContent.Request<Texture2D>(TileLoader.GetTile(ModContent.TileType<LargeMarineKelpStage4>()).Texture + "_Glow").Value;
-				}
-			}
+			//if (ExxoAvalonOrigins.ThoriumContentEnabled)
+			//{
+			//	if (Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<LargeMarineKelpStage1>() ||
+			//		Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<LargeMarineKelpStage2>() ||
+			//		Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<LargeMarineKelpStage3>() ||
+			//		Main.tile[topLeftX, topLeftY].TileType == ModContent.TileType<LargeMarineKelpStage4>())
+			//	{
+			//		sizeY = 3;
+			//		overlayColor = Color.White;
+			//		overlayTexture = ModContent.Request<Texture2D>(TileLoader.GetTile(ModContent.TileType<LargeMarineKelpStage4>()).Texture + "_Glow").Value;
+			//	}
+			//}
 		}
 	}
 }

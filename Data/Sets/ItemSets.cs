@@ -77,7 +77,7 @@ using Avalon.Items.Weapons.Magic.Other;
 
 namespace Avalon.Data.Sets
 {
-	internal class ItemSets
+	public static class ItemSets
 	{
 		public static bool[] VanillaBarItems = ItemID.Sets.Factory.CreateBoolSet(false,
 			ItemID.CopperBar, ItemID.TinBar, ItemID.IronBar, ItemID.LeadBar, ItemID.SilverBar,
