@@ -19,7 +19,7 @@ namespace Avalon.Hooks
 		private static ushort BrownSG;
 		private static ushort LimeSG;
 		private static ushort CyanSG;
-		private static ushort ChartreuseSG;
+		//private static ushort ChartreuseSG;
 
 		public override void SetStaticDefaults()
 		{
@@ -27,10 +27,10 @@ namespace Avalon.Hooks
 			BrownSG = (ushort)ModContent.WallType<Walls.BrownStainedGlass>();
 			LimeSG = (ushort)ModContent.WallType<Walls.LimeStainedGlass>();
 			CyanSG = (ushort)ModContent.WallType<Walls.CyanStainedGlass>();
-			if (ExxoAvalonOrigins.ThoriumContentEnabled)
-			{
-				ChartreuseSG = (ushort)ModContent.WallType<ModSupport.Thorium.Walls.ChartreuseStainedGlass>();
-			}
+			//if (ExxoAvalonOrigins.ThoriumContentEnabled)
+			//{
+			//	ChartreuseSG = (ushort)ModContent.WallType<ModSupport.Thorium.Walls.ChartreuseStainedGlass>();
+			//}
 		}
 
 		private void On_TileLightScanner_ApplyHellLight(On_TileLightScanner.orig_ApplyHellLight orig, TileLightScanner self, Tile tile, int x, int y, ref Vector3 lightColor)
@@ -84,13 +84,13 @@ namespace Avalon.Hooks
 					finalB *= 1f;
 					return true;
 				}
-				else if (ExxoAvalonOrigins.ThoriumContentEnabled && tile.WallType == ChartreuseSG)
-				{
-					finalR *= 0.745f;
-					finalG *= 0.925f;
-					finalB *= 0.1f;
-					return true;
-				}
+				//else if (ExxoAvalonOrigins.ThoriumContentEnabled && tile.WallType == ChartreuseSG)
+				//{
+				//	finalR *= 0.745f;
+				//	finalG *= 0.925f;
+				//	finalB *= 0.1f;
+				//	return true;
+				//}
 				else
 				{
 					return false;

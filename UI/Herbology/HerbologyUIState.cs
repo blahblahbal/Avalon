@@ -488,11 +488,6 @@ public class HerbologyUIState : ExxoUIState
         {
             return;
         }
-
-        if (ExxoAvalonOrigins.ThoriumContentEnabled)
-        {
-            ModSupport.Thorium.ThoriumHerbologyAdditions.Initialize();
-        }
         RefreshHerbList(herbExchange.Toggle.Toggled);
         RefreshPotionList(potionExchange.Toggle.Toggled);
     }
