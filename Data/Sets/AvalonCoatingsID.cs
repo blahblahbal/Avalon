@@ -1,6 +1,6 @@
 namespace Avalon.Data.Sets;
 
-public class AvalonCoatingsID
+public static class AvalonCoatingsID
 {
 	public const byte ActuatorCoating = 127;
 }

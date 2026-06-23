@@ -16,7 +16,6 @@ using Avalon.Items.Placeable.Furniture.YellowDungeon;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Weapons.Magic.Wands;
-using Avalon.ModSupport.Thorium.Items.Placeable.Furniture.Gem;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -297,11 +296,6 @@ public class RecipeSystem : ModSystem
             ModContent.ItemType<TopazChest>(),
             ModContent.ItemType<TourmalineChest>(),
             ModContent.ItemType<ZirconChest>(),
-            #region thorium
-            ModContent.ItemType<AquamarineChest>(),
-            ModContent.ItemType<ChrysoberylChest>(),
-            ModContent.ItemType<OpalChest>()
-            #endregion thorium
         });
         RecipeGroup.RegisterGroup("MagicStorage:AnyChest", groupChestMS);
 

@@ -4,7 +4,7 @@ using Avalon.Walls.Contagion.ChunkstoneWall;
 
 namespace Avalon.Data.Sets
 {
-    internal class WallSets
+    public static class WallSets
     {
         public static readonly bool[] Chunkstone = WallID.Sets.Factory.CreateBoolSet(
             ModContent.WallType<ChunkstoneWall>()

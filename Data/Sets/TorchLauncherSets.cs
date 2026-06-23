@@ -15,7 +15,7 @@ using static Terraria.ModLoader.ModContent;
 
 namespace Avalon.Data.Sets;
 
-internal class TorchLauncherSets
+public static class TorchLauncherSets
 {
 	public static Dictionary<int, string> Texture = new Dictionary<int, string>()
 	{
