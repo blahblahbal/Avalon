@@ -145,12 +145,19 @@ public class BacteriumPrime : ModNPC
 			Phase2();
 		}
 	}
+	private bool validTendrilForAttack(int x)
+	{
+		NPC n = Main.npc[x];
+		return n.ai[2] == 0 && n.localAI[0] == 1;
+	}
 	private void Phase1()
 	{
 		bool outside = Main.tile[NPC.Center.ToTileCoordinates()].WallType == 0;
 
 		int tendrilType = ModContent.NPCType<BacteriumTendril>();
 		List<int> tendrilWHOAMIs = new();
+		bool hasAnyTendrils = false;
+
 		foreach (NPC n in Main.ActiveNPCs)
 		{
 			if (n.type == tendrilType && n.ai[3] == NPC.whoAmI)
@@ -159,16 +166,14 @@ public class BacteriumPrime : ModNPC
 			}
 		}
 		// shooting
-		NPC.ai[2]+= outside? 1.5f : 1;
-		if (NPC.ai[2] >= 170 + (tendrilWHOAMIs.Count * 20) && tendrilWHOAMIs.Count > 0)
+		NPC.ai[2] += outside ? 1.5f : 1;
+		List<int> tendrilsThatCanAttack = tendrilWHOAMIs.FindAll(validTendrilForAttack);
+		if (NPC.ai[2] >= 170 + (tendrilWHOAMIs.Count * 20) && tendrilsThatCanAttack.Count > 0)
 		{
-			int rand = tendrilWHOAMIs[Main.rand.Next(tendrilWHOAMIs.Count)];
-			if (Main.npc[rand].ai[2] == 0)
-			{
-				Main.npc[rand].ai[2] = 1;
-				Main.npc[rand].netUpdate = true;
-				NPC.ai[2] = 0;
-			}
+			int rand = tendrilsThatCanAttack[Main.rand.Next(tendrilsThatCanAttack.Count)];
+			Main.npc[rand].ai[2] = 1;
+			Main.npc[rand].netUpdate = true;
+			NPC.ai[2] = 0;
 		}
 
 		if (NPC.ai[0] > 0) // Dash attack
@@ -228,7 +233,7 @@ public class BacteriumPrime : ModNPC
 				{
 					accelMultiplier *= 7f;
 				}
-				NPC.SimpleFlyMovement(NPC.Center.DirectionTo(Target.Center) * Utils.Remap(tendrilWHOAMIs.Count, 0, 10, 3f, 1f) * speedMultiplier, Utils.Remap(tendrilWHOAMIs.Count, 0, 10, 0.007f, 0.003f) * accelMultiplier);
+				NPC.SimpleFlyMovement(NPC.Center.DirectionTo(Target.Center) * Utils.Remap(tendrilWHOAMIs.Count, 0, 10, 3f, 1f) * speedMultiplier, Utils.Remap(tendrilWHOAMIs.Count, 0, 10, 0.01f, 0.006f) * accelMultiplier);
 			}
 		}
 		if (AfterimageOpacity > 0 && NPC.ai[1] < 60 && NPC.dontTakeDamage)
