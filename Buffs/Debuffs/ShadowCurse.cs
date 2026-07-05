@@ -2,6 +2,7 @@ using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -23,6 +24,7 @@ public class ShadowCurse : ModBuff
 	public override void Update(Player player, ref int buffIndex)
 	{
 		ShadowCursePlayer p = player.GetModPlayer<ShadowCursePlayer>();
+		p.Active = true;
 	}
 	public override bool PreDraw(SpriteBatch spriteBatch, int buffIndex, ref BuffDrawParams drawParams)
 	{
@@ -69,5 +71,29 @@ public class ShadowCursePlayer : ModPlayer
 		r -= Tier * 0.25f;
 		g -= Tier * 0.2f;
 		b -= Tier * 0.15f;
+	}
+}
+public class ShadowCurseLayer : PlayerDrawLayer
+{
+	private static Asset<Texture2D> Tex;
+	public override Position GetDefaultPosition() => new AfterParent(Terraria.DataStructures.PlayerDrawLayers.LastVanillaLayer);
+	public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
+	{
+		return drawInfo.drawPlayer.HasBuff<ShadowCurse>();
+	}
+	protected override void Draw(ref PlayerDrawSet drawInfo)
+	{
+		ShadowCursePlayer p = drawInfo.drawPlayer.GetModPlayer<ShadowCursePlayer>();
+		var d = new DrawData(Tex.Value, drawInfo.Center.Floor() - Main.screenPosition, Tex.Frame(1, 5, 0, p.Tier), Color.White with { A = 170 }, (float)Math.Sin(Main.timeForVisualEffects * 0.02) * 0.1f, new Vector2(19, 25), 1f + (float)Math.Sin(Main.timeForVisualEffects * (0.1f + p.Tier * 0.075f)) * 0.1f, SpriteEffects.None);
+		float amt = (float)(Main.timeForVisualEffects % 50) / 50f;
+		//drawInfo.DrawDataCache.Add(d with { color = Color.White with { A = 0 } * amt * (1f - amt), scale = d.scale * (1f + (amt + 1 * 0.1f))});
+
+		drawInfo.DrawDataCache.Add(d with { position = d.position + Main.rand.NextVector2Circular(p.Tier, p.Tier) * 3f, color = Color.White * 0.25f });
+		drawInfo.DrawDataCache.Add(d with { position = d.position + Main.rand.NextVector2Circular(p.Tier, p.Tier) * 1.5f, color = Color.White * 0.5f });
+		drawInfo.DrawDataCache.Add(d);
+	}
+	public override void Load()
+	{
+		Tex = Mod.Assets.Request<Texture2D>("Assets/Textures/ShadowCurseMark");
 	}
 }
