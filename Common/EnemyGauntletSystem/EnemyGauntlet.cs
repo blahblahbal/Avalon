@@ -273,7 +273,7 @@ public class EnemyGauntletPortal : ModNPC
 		NPC n = ContentSamples.NpcsByNetId[(int)NPC.ai[0]];
 		if (NPC.ai[2] == 0)
 		{
-			ParticleSystem.NewParticle(new EnemyGauntletFlame(), NPC.Center + new Vector2(0, n.height / -2) + Main.rand.NextVector2Circular(6,6));
+			Main.ParticleSystem_World_OverPlayers.Add(new EnemyGauntletFlame(NPC.Center + new Vector2(0, n.height / -2) + Main.rand.NextVector2Circular(6, 6)));
 		}
 		NPC.ai[2]++;
 		if (NPC.ai[2] > 40)

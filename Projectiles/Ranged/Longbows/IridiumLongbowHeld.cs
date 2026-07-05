@@ -26,7 +26,7 @@ public class IridiumLongbowHeld : LongbowTemplate
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				SparkleParticle p = new();
+				var p = VanillaParticles.RequestPrettySparkleParticle();
 				p.ColorTint = new Color(Main.rand.NextFloat(0.6f, 0.8f), 1f, 0.6f, 0f);
 				p.FadeInEnd = Main.rand.NextFloat(2, 5);
 				p.FadeOutStart = p.FadeInEnd;
@@ -34,7 +34,8 @@ public class IridiumLongbowHeld : LongbowTemplate
 				p.Scale = new Vector2(4, 2);
 				p.Rotation = (i / 3f * MathHelper.TwoPi) + Main.rand.NextFloat(-0.1f, 0.1f) + MathHelper.PiOver2;
 				p.DrawHorizontalAxis = false;
-				ParticleSystem.NewParticle(p, Projectile.Center);
+				p.LocalPosition = Projectile.Center;
+				Main.ParticleSystem_World_OverPlayers.Add(p);
 			}
 			SoundEngine.PlaySound(SoundID.Item94 with { Volume = 0.75f, Pitch = 0.2f}, projectile.position);
 			projectile.GetGlobalProjectile<IridiumLongbowGlobalProj>().Arrows = arrows;

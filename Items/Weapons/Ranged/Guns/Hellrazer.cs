@@ -20,9 +20,6 @@ public class Hellrazer : ModItem
 		Item.rare = ItemRarityID.Yellow;
 		Item.value = Item.sellPrice(0, 30, 0, 0);
 		Item.UseSound = SoundID.Item40;
-
-		Item.GetGlobalItem<ItemGlowmask>().glowOffsetX = -8;
-		Item.GetGlobalItem<ItemGlowmask>().glowOffsetY = -4;
 	}
 	public override Vector2? HoldoutOffset()
 	{

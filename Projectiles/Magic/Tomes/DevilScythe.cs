@@ -81,7 +81,7 @@ public class DevilScythe : ModProjectile, ISyncedOnHitEffect
 		Vector2 pos = Main.rand.NextVector2FromRectangle(target.Hitbox);
 		for(int i = 0; i < 5; i++)
 		{
-			SparkleParticle p = new();
+			var p = VanillaParticles.RequestPrettySparkleParticle();
 
 			p.Velocity = new Vector2(Main.rand.NextFloat(2,3) * (Main.rand.NextBool() ? -1 : 1),Main.rand.NextFloat(-0.3f,0.3f)).RotatedBy(Projectile.velocity.ToRotation()) * Main.rand.NextFloat(1f,1.2f);
 			p.Rotation = p.Velocity.ToRotation() + MathHelper.PiOver2;
@@ -92,7 +92,8 @@ public class DevilScythe : ModProjectile, ISyncedOnHitEffect
 			p.FadeInEnd = 3;
 			p.FadeOutStart = p.FadeInEnd;
 			p.FadeOutEnd = 20;
-			ParticleSystem.NewParticle(p, pos);
+			p.LocalPosition = pos;
+			Main.ParticleSystem_World_OverPlayers.Add(p);
 		}
 	}
 	public override bool OnTileCollide(Vector2 oldVelocity)
@@ -106,7 +107,7 @@ public class DevilScythe : ModProjectile, ISyncedOnHitEffect
 
 		for (int i = 0; i < 5; i++)
 		{
-			SparkleParticle p = new();
+			var p = VanillaParticles.RequestPrettySparkleParticle();
 
 			p.Velocity = new Vector2(Main.rand.NextFloat(2, 3) * (Main.rand.NextBool() ? -1 : 1), Main.rand.NextFloat(-0.3f, 0.3f)).RotatedBy(Projectile.oldVelocity.ToRotation()) * Main.rand.NextFloat(1f, 1.2f);
 			p.Rotation = p.Velocity.ToRotation() + MathHelper.PiOver2;
@@ -117,7 +118,8 @@ public class DevilScythe : ModProjectile, ISyncedOnHitEffect
 			p.FadeInEnd = 3;
 			p.FadeOutStart = p.FadeInEnd;
 			p.FadeOutEnd = 20;
-			ParticleSystem.NewParticle(p, Projectile.Center + Vector2.Normalize(oldVelocity) * 10);
+			p.LocalPosition = Projectile.Center + Vector2.Normalize(oldVelocity) * 10;
+			Main.ParticleSystem_World_OverPlayers.Add(p);
 		}
 
 		//for (int dustAmount = 0; dustAmount < 6; dustAmount++)

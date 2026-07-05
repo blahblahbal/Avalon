@@ -92,7 +92,7 @@ public class SoulEdgeDash : ModProjectile, ISyncedOnHitEffect
 		Vector2 point = Main.rand.NextVector2FromRectangle(target.Hitbox);
 		for (int i = 0; i < 3; i++)
 		{
-			SparkleParticle p = new();
+			var p = VanillaParticles.RequestPrettySparkleParticle();
 			p.ColorTint = new Color(1f, 0.2f, 0.2f);
 			p.FadeInEnd = Main.rand.NextFloat(4, 7);
 			p.FadeOutStart = p.FadeInEnd;
@@ -101,7 +101,8 @@ public class SoulEdgeDash : ModProjectile, ISyncedOnHitEffect
 			p.Rotation = (i * MathHelper.TwoPi / 3f) + Main.rand.NextFloat(-0.3f, 0.3f);
 			//p.Velocity = Vector2.UnitY.RotatedBy(p.Rotation) * Main.rand.NextFloat(2,4);
 			p.DrawHorizontalAxis = false;
-			ParticleSystem.NewParticle(p, point);
+			p.LocalPosition = point;
+			Main.ParticleSystem_World_OverPlayers.Add(p);
 		}
 	}
 }

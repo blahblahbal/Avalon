@@ -133,7 +133,7 @@ namespace Avalon.Common.Templates
 		{
 			for (int i = 0; i < 4; i++)
 			{
-				SparkleParticle s = new();
+				var s = VanillaParticles.RequestPrettySparkleParticle();
 				s.Velocity = new Vector2(2, 0).RotatedBy(i * MathHelper.PiOver2);
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(4f, 0.5f);
@@ -143,7 +143,8 @@ namespace Avalon.Common.Templates
 				s.FadeOutEnd = 15;
 				s.AdditiveAmount = 1f;
 				s.ColorTint = NotificationColor;
-				ParticleSystem.NewParticle(s, Projectile.Center + NotificationFlashOffset.RotatedBy(Projectile.rotation));
+				s.LocalPosition = Projectile.Center + NotificationFlashOffset.RotatedBy(Projectile.rotation);
+				Main.ParticleSystem_World_OverPlayers.Add(s);
 			}
 		}
 		public virtual void Shoot(IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, float Power)

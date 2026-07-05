@@ -2,36 +2,39 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
+using Terraria.Graphics.Renderers;
 using Terraria.ModLoader;
 
 namespace Avalon.Particles
 {
-    public class ColorExplosion : Particle
+    public class ColorExplosion : BaseParticle
     {
 		private static Asset<Texture2D> texture;
 		public Color Color;
 		public float Scale;
 		public float Rotation;
         int Frame;
-		public ColorExplosion(Color color, float rotation, float scale)
+		public ColorExplosion(Color color, float rotation, float scale, Vector2 position)
 		{
 			Color = color;
 			Scale = scale;
 			Rotation = rotation;
+			Position = position;
 		}
-		public override void Update()
-        {
-            if(TimeInWorld % 4 == 0)
-            {
-                Frame++;
-            }
-            if (Frame > 7)
-            {
-                Active = false;
-            }
-            Scale += 0.01f;
-        }
-		public override void Draw(SpriteBatch spriteBatch, Vector2 ScreenPos)
+		public override void Update(ref ParticleRendererSettings settings)
+		{
+			base.Update(ref settings);
+			if (TimeInWorld % 4 == 0)
+			{
+				Frame++;
+			}
+			if (Frame > 7)
+			{
+				Active = false;
+			}
+			Scale += 0.01f;
+		}
+		public override void Draw(ref ParticleRendererSettings settings, SpriteBatch spriteBatch)
 		{
 			if (texture == null)
 			{
@@ -40,7 +43,7 @@ namespace Avalon.Particles
 			int frameHeight = texture.Height() / 7;
 			Rectangle frame = new Rectangle(0, frameHeight * Frame, texture.Width(), frameHeight);
 			Vector2 frameOrigin = new Vector2(texture.Width()) / 2;
-			Vector2 DrawPos = Position - Main.screenPosition;
+			Vector2 DrawPos = Position + settings.AnchorPosition;
 
 			float muliply = ((32 - TimeInWorld) / 28);
 

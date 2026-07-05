@@ -52,7 +52,7 @@ public class OsmiumGreatswordThrown : ModProjectile
 
 				for (int i = 0; i < 4; i++)
 				{
-					SparkleParticle s = new();
+					var s = VanillaParticles.RequestPrettySparkleParticle();
 					s.Velocity = new Vector2(2, 0).RotatedBy(i * MathHelper.PiOver2);
 					s.Rotation = MathHelper.PiOver2 * i;
 					s.Scale = new Vector2(4f, 0.5f);
@@ -62,7 +62,8 @@ public class OsmiumGreatswordThrown : ModProjectile
 					s.FadeOutEnd = 8;
 					s.AdditiveAmount = 1f;
 					s.ColorTint = new Color(0.3f, Main.rand.NextFloat(0.4f, 0.75f), 1f, 0.75f);
-					ParticleSystem.NewParticle(s, Projectile.Center);
+					s.LocalPosition = Projectile.Center;
+					Main.ParticleSystem_World_OverPlayers.Add(s);
 				}
 			}
 
@@ -125,7 +126,7 @@ public class OsmiumGreatswordThrown : ModProjectile
 
 			if (PerfectTiming)
 			{
-				SparkleParticle s = new();
+				var s = VanillaParticles.RequestPrettySparkleParticle();
 				s.Rotation = MathHelper.PiOver2;
 				s.Scale = new Vector2(4f, 0.5f);
 				s.DrawVerticalAxis = false;
@@ -134,8 +135,8 @@ public class OsmiumGreatswordThrown : ModProjectile
 				s.FadeOutEnd = 15;
 				s.AdditiveAmount = 1f;
 				s.ColorTint = new Color(0.3f, Main.rand.NextFloat(0.4f, 0.75f), 1f, 0.75f) * 0.45f;
-				s.HighlightColor *= 0.45f;
-				ParticleSystem.NewParticle(s, Projectile.Center);
+				s.LocalPosition = Projectile.Center;
+				Main.ParticleSystem_World_OverPlayers.Add(s);
 			}
 		}
 		else
@@ -184,7 +185,7 @@ public class OsmiumGreatswordThrown : ModProjectile
 				Gore g = Gore.NewGoreDirect(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(1, 1), Main.rand.Next(GoreID.Smoke1, GoreID.Smoke3 + 1), Main.rand.NextFloat(0.25f, 0.75f));
 				g.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
 
-				SparkleParticle p = new();
+				var p = VanillaParticles.RequestPrettySparkleParticle();
 				p.ColorTint = new Color(0.3f, Main.rand.NextFloat(0.4f, 0.75f), 1f, 0.75f);
 				p.FadeInEnd = Main.rand.NextFloat(2, 5);
 				p.FadeOutStart = p.FadeInEnd;
@@ -194,7 +195,8 @@ public class OsmiumGreatswordThrown : ModProjectile
 				p.Velocity.Y -= 4;
 				p.Rotation = p.Velocity.ToRotation() + MathHelper.PiOver2;
 				p.DrawHorizontalAxis = false;
-				ParticleSystem.NewParticle(p, Projectile.Center);
+				p.LocalPosition = Projectile.Center;
+				Main.ParticleSystem_World_OverPlayers.Add(p);
 			}
 			Projectile.ai[1] = 3;
 			SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact, Projectile.position);

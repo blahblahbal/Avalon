@@ -62,7 +62,7 @@ public class QuantumBeam : ModProjectile
 		if (Projectile.ai[1] < -1 && Projectile.ai[2] == 0)
 		{
 			Projectile.ai[2]++;
-			ParticleSystem.NewParticle(new QuantumPortal(), Projectile.Center);
+			Main.ParticleSystem_World_OverPlayers.Add(new QuantumPortal(Projectile.Center));
 		}
 		if (Projectile.ai[1] == -1)
 		{

@@ -7710,7 +7710,7 @@ Mods: {
 
 			EnergyRevolver: {
 				DisplayName: Energy Revolver
-				Tooltip: ""
+				Tooltip: <right> to shoot a slow energizing ball that enhances the primary fire
 			}
 
 			IckyArrow: {
@@ -10338,6 +10338,7 @@ Mods: {
 			IridiumGreatswordBubble.DisplayName: Iridium Greatsword Bubble
 			RhodiumGreatswordBeam.DisplayName: Rhodium Greatsword Beam
 			IridiumGreatswordSpike.DisplayName: Iridium Greatsword Spike
+			EnergyBall.DisplayName: Energy Ball
 		}
 
 		NPCs: {
@@ -10920,7 +10921,7 @@ Mods: {
 
 			Shockwave: {
 				DisplayName: Shockwave
-				Description: On-screen enemies take damage when you land
+				Description: Enemies take damage when you land
 			}
 
 			Starbright: {
@@ -11615,6 +11616,11 @@ Mods: {
 			Dissolving: {
 				DisplayName: Dissolving
 				Description: You are dissolving in the acid
+			}
+
+			EnergyRevolver: {
+				DisplayName: Energy Revolver
+				Description: Mods.Avalon.Buffs.EnergyRevolver.Description
 			}
 		}
 

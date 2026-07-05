@@ -3,10 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.Graphics.Renderers;
 
 namespace Avalon.Particles
 {
-    public class TrueAeonSlash : Particle
+    public class TrueAeonSlash : BaseParticle
     {
 		public Vector2 Offset = Vector2.Zero;
 		public Player Owner = null;
@@ -26,31 +27,32 @@ namespace Avalon.Particles
 			MaxTime = maxTime;
 			Color = color;
 		}
-		public override void Update()
-        {
+		public override void Update(ref ParticleRendererSettings settings)
+		{
+			base.Update(ref settings);
 			Position = Owner.Center + AccumulatedDistance;
 
 			AccumulatedDistance -= Owner.velocity * TimeInWorld / MaxTime;
 
-            if (TimeInWorld > MaxTime)
-                Active = false;
-        }
-        public override void Draw(SpriteBatch spriteBatch, Vector2 screenpos)
-        {
-            Texture2D tex = TextureAssets.Extra[98].Value;
+			if (TimeInWorld > MaxTime)
+				Active = false;
+		}
+		public override void Draw(ref ParticleRendererSettings settings, SpriteBatch spritebatch)
+		{
+			Texture2D tex = TextureAssets.Extra[98].Value;
 			float percent = TimeInWorld / MaxTime;
 			float sin = MathF.Sin(percent * MathHelper.Pi);
 			int trailLength = Math.Min(TimeInWorld, 10);
-			for(int i = 1; i < trailLength; i++)
+			for (int i = 1; i < trailLength; i++)
 			{
 				Vector2 pos = Position + Offset.RotatedBy(RotationAmount * ((TimeInWorld - i) / MaxTime) * Direction);
-				spriteBatch.Draw(tex, pos - screenpos, null, Color * sin * 0.1f * (1f - i / trailLength), pos.DirectionTo(Position).ToRotation(), tex.Size() / 2, new Vector2(sin,1f) * Scale, SpriteEffects.None, 0);
+				spritebatch.Draw(tex, pos + settings.AnchorPosition, null, Color * sin * 0.1f * (1f - i / trailLength), pos.DirectionTo(Position).ToRotation(), tex.Size() / 2, new Vector2(sin, 1f) * Scale, SpriteEffects.None, 0);
 			}
-			for(int i = 0; i < 2; i++)
+			for (int i = 0; i < 2; i++)
 			{
-				spriteBatch.Draw(tex, Position + Offset.RotatedBy(RotationAmount * percent * Direction) - screenpos, null, Color * sin, i * MathHelper.PiOver2, tex.Size() / 2, Scale * sin, SpriteEffects.None, 0);
-				spriteBatch.Draw(tex, Position + Offset.RotatedBy(RotationAmount * percent * Direction) - screenpos, null, new Color(1f,1f,1f,0f) * sin, i * MathHelper.PiOver2, tex.Size() / 2, new Vector2(0.5f,0.8f) * Scale * sin, SpriteEffects.None, 0);
+				spritebatch.Draw(tex, Position + Offset.RotatedBy(RotationAmount * percent * Direction) + settings.AnchorPosition, null, Color * sin, i * MathHelper.PiOver2, tex.Size() / 2, Scale * sin, SpriteEffects.None, 0);
+				spritebatch.Draw(tex, Position + Offset.RotatedBy(RotationAmount * percent * Direction) + settings.AnchorPosition, null, new Color(1f, 1f, 1f, 0f) * sin, i * MathHelper.PiOver2, tex.Size() / 2, new Vector2(0.5f, 0.8f) * Scale * sin, SpriteEffects.None, 0);
 			}
-        }
+		}
     }
 }

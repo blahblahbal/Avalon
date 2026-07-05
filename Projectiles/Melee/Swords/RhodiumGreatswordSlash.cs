@@ -83,16 +83,16 @@ public class RhodiumGreatswordSlash : EnergySlashTemplate, ISyncedOnHitEffect
 		Vector2 point = Main.rand.NextVector2FromRectangle(target.Hitbox);
 		for (int i = 0; i < 3; i++)
 		{
-			SparkleParticle p = new();
+			var p = VanillaParticles.RequestPrettySparkleParticle();
 			p.ColorTint = new Color(1f, 0.3f, Main.rand.NextFloat(0.3f, 0.6f), 0f);
-			p.HighlightColor = new Color(1f, 0.7f, 0.4f, 0f);
 			p.FadeInEnd = Main.rand.NextFloat(4, 7);
 			p.FadeOutStart = p.FadeInEnd + 5;
 			p.FadeOutEnd = Main.rand.NextFloat(17, 21);
 			p.Scale = new Vector2(4, 2);
 			p.Rotation = Main.rand.NextFloat(-0.1f, 0.1f) + (i * MathHelper.TwoPi / 3f);
 			p.DrawHorizontalAxis = false;
-			ParticleSystem.NewParticle(p, point);
+			p.LocalPosition = point;
+			Main.ParticleSystem_World_OverPlayers.Add(p);
 		}
 	}
 }

@@ -23,56 +23,6 @@ public class ShadowCurse : ModBuff
 	public override void Update(Player player, ref int buffIndex)
 	{
 		ShadowCursePlayer p = player.GetModPlayer<ShadowCursePlayer>();
-		p.Active = true;
-		SparkleParticle s = new();
-		s.Velocity = new Vector2(Main.rand.NextFloat(-0.1f, 0.1f),Main.rand.NextFloat(-2f,-1f));
-		s.Rotation = s.Velocity.ToRotation();
-		s.Velocity += player.velocity;
-		s.Scale = new Vector2(2f, 0.3f);
-		s.DrawVerticalAxis = false;
-		s.FadeInEnd = 2;
-		s.FadeOutStart = 2;
-		s.FadeOutEnd = 10;
-		s.AdditiveAmount = 0f;
-		switch (p.Tier)
-		{
-			case 0:
-				s.AdditiveAmount = 1f;
-				s.ColorTint = new Color(0.25f, 1f, 1f);
-				break;
-			case 1:
-				s.AdditiveAmount = 0.5f;
-				s.ColorTint = new Color(0.1f, 0.4f, 1f);
-				s.HighlightColor = s.ColorTint = new Color(0.25f, 1f, 1f, 0.5f);
-				break;
-			case 2:
-				s.Scale *= 1.25f;
-				s.ColorTint = new Color(0.2f, 0.3f, 0.5f);
-				s.HighlightColor = s.ColorTint = new Color(0f, 0.5f, 1f, 0.5f);
-				break;
-			case 3:
-				s.Scale *= 1.5f;
-				s.ColorTint = new Color(0.1f, 0.2f, 0.3f);
-				s.HighlightColor = new Color(0.2f, 0.3f, 0.5f, 0.5f);
-				break;
-			case 4:
-				if (Main.rand.NextBool(4))
-				{
-					s.ColorTint = Color.Red;
-					s.HighlightColor = Color.Red with { A = 0 };
-					s.AdditiveAmount = 0f;
-				}
-				else
-				{
-					s.HighlightColor = Color.Red with { A = 0 };
-					s.ColorTint = Color.Black;
-				}
-				s.Scale *= 2;
-				break;
-		}
-		s.RotationAcceleration = Main.rand.NextFloat(-p.Tier * 0.01f, p.Tier * 0.01f);
-		s.ScaleAcceleration = new Vector2(0.1f, -0.01f);
-		ParticleSystem.NewParticle(s,Main.rand.NextVector2FromRectangle(player.Hitbox));
 	}
 	public override bool PreDraw(SpriteBatch spriteBatch, int buffIndex, ref BuffDrawParams drawParams)
 	{

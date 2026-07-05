@@ -92,7 +92,7 @@ namespace Avalon.Projectiles.Hostile.Armageddon
 
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Top, Vector2.Zero, ModContent.ProjectileType<DarkMatterSpike>(), Projectile.damage, 0, Projectile.owner);
                 SoundEngine.PlaySound(Spawn, Projectile.position);
-				ParticleSystem.NewParticle(new ColorExplosion( new Color(64, 0, 78, 128),Main.rand.NextFloatDirection(), 0.5f),Projectile.Top);
+				//ParticleSystem.NewParticle(new ColorExplosion( new Color(64, 0, 78, 128),Main.rand.NextFloatDirection(), 0.5f),Projectile.Top);
             }
             if(Projectile.tileCollide)
                 Projectile.velocity.Y += 4;

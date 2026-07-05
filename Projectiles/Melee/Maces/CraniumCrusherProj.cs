@@ -42,7 +42,7 @@ public class CraniumCrusherProj : MaceTemplate, ISyncedOnHitEffect
 			SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact with { Pitch = -0.3f});
 			for (int i = 0; i < 10; i++)
 			{
-				SparkleParticle s = new();
+				var s = VanillaParticles.RequestPrettySparkleParticle();
 				s.Velocity = Vector2.One.RotatedBy(VelocityDirection + Main.rand.NextFloat(-1.5f, 1.5f)) * Main.rand.NextFloat(4, 7);
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(4f, 0.7f);
@@ -52,7 +52,8 @@ public class CraniumCrusherProj : MaceTemplate, ISyncedOnHitEffect
 				s.FadeOutEnd = Main.rand.Next(15, 20);
 				s.AdditiveAmount = 1f;
 				s.ColorTint = new Color(0.3f, 0.5f, 0.85f);
-				ParticleSystem.NewParticle(s, closestPoint + s.Velocity * 3);
+				s.LocalPosition = closestPoint + s.Velocity * 3;
+				Main.ParticleSystem_World_OverPlayers.Add(s);
 				Dust d = Dust.NewDustPerfect(closestPoint, ModContent.DustType<SimpleColorableGlowyDust>(), Main.rand.NextVector2Circular(16,16));
 				d.noGravity = true;
 				d.color = s.ColorTint;
@@ -63,7 +64,7 @@ public class CraniumCrusherProj : MaceTemplate, ISyncedOnHitEffect
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				SparkleParticle s = new();
+				var s = VanillaParticles.RequestPrettySparkleParticle();
 				s.Velocity = Vector2.One.RotatedBy(VelocityDirection + Main.rand.NextFloat(-0.5f, 0.5f)) * Main.rand.NextFloat(1, 7);
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(3f, 0.3f);
@@ -73,7 +74,8 @@ public class CraniumCrusherProj : MaceTemplate, ISyncedOnHitEffect
 				s.FadeOutEnd = Main.rand.Next(10, 15);
 				s.AdditiveAmount = 0.75f;
 				s.ColorTint = new Color(0.3f, 0.5f, 0.85f);
-				ParticleSystem.NewParticle(s, closestPoint);
+				s.LocalPosition = closestPoint;
+				Main.ParticleSystem_World_OverPlayers.Add(s);
 				Dust d = Dust.NewDustPerfect(closestPoint, ModContent.DustType<SimpleColorableGlowyDust>(), Main.rand.NextVector2Circular(3, 3));
 				d.noGravity = true;
 				d.color = s.ColorTint;

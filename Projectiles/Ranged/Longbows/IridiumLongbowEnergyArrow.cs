@@ -29,7 +29,7 @@ public class IridiumLongbowEnergyArrow : ModProjectile
 	}
 	public override void OnKill(int timeLeft)
 	{
-		SparkleParticle p = new();
+		var p = VanillaParticles.RequestPrettySparkleParticle();
 		p.ColorTint = new Color(Main.rand.NextFloat(0.6f, 0.8f), 1f, 0.6f, 0f);
 		p.FadeInEnd = Main.rand.NextFloat(4, 7);
 		p.FadeOutStart = p.FadeInEnd;
@@ -37,7 +37,8 @@ public class IridiumLongbowEnergyArrow : ModProjectile
 		p.Scale = new Vector2(4, 2);
 		p.Rotation = Projectile.oldVelocity.ToRotation() + Main.rand.NextFloat(-0.3f, 0.3f) + MathHelper.PiOver2;
 		p.DrawHorizontalAxis = false;
-		ParticleSystem.NewParticle(p, Projectile.Center);
+		p.LocalPosition = Projectile.Center;
+		Main.ParticleSystem_World_OverPlayers.Add(p);
 		int type = ModContent.DustType<SimpleColorableGlowyDust>();
 		for (int i = 0; i < 8; i++)
 		{

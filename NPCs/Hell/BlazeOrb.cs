@@ -91,7 +91,7 @@ public class BlazeOrb : ModNPC
         }
         if (Collision.SolidCollision(NPC.position, NPC.width, NPC.height) && Main.netMode != NetmodeID.MultiplayerClient)
         {
-            ParticleSystem.NewParticle(new ExplosionParticle(Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.9f, 1.2f)), NPC.Center);
+            Main.ParticleSystem_World_OverPlayers.Add(new ExplosionParticle(NPC.Center, Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.9f, 1.2f)));
 
             for(int i = 0; i < 20; i++)
             {

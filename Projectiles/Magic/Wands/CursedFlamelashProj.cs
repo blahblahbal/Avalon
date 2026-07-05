@@ -2,11 +2,6 @@
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -82,7 +77,8 @@ public class CursedFlamelashProj : ModProjectile
 
 	public override void OnKill(int timeLeft)
 	{
-		ParticleSystem.NewParticle(new CursedExplosionParticle(Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.9f, 1.2f)), Projectile.Center);
+		var p = new CursedExplosionParticle(Main.rand.NextFloat(0.9f, 1.2f), Main.rand.NextFloat(MathHelper.TwoPi),Projectile.Center);
+		Main.ParticleSystem_World_OverPlayers.Add(p);
 		SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
 		float decreaseBy = 0.05f;
 		for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type] / 2; i++)

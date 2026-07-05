@@ -64,7 +64,7 @@ public class IridiumGreatswordBubble : ModProjectile
 				int iterations = 13;
 				for (int i = 0; i < iterations; i++)
 				{
-					SparkleParticle p = new();
+					var p = VanillaParticles.RequestPrettySparkleParticle();
 					p.ColorTint = new Color(Main.rand.NextFloat(0.6f, 0.8f), 1f, 0.6f, 0f);
 					p.FadeInEnd = Main.rand.NextFloat(4, 7);
 					p.FadeOutStart = p.FadeInEnd;
@@ -74,7 +74,8 @@ public class IridiumGreatswordBubble : ModProjectile
 					p.AccelerationPerFrame = -p.Velocity / p.FadeOutEnd;
 					p.Rotation = p.Velocity.ToRotation() + MathHelper.PiOver2;
 					p.DrawHorizontalAxis = false;
-					ParticleSystem.NewParticle(p, Projectile.Center);
+					p.LocalPosition = Projectile.Center;
+					Main.ParticleSystem_World_OverPlayers.Add(p);
 				}
 				Projectile.Kill();
 			}

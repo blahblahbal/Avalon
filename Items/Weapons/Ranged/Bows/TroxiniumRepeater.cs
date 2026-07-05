@@ -18,9 +18,6 @@ public class TroxiniumRepeater : ModItem
 		Item.DefaultToRepeater(44, 1.5f, 10.5f, 21, 21);
 		Item.rare = ItemRarityID.Pink;
 		Item.value = Item.sellPrice(0, 2, 60);
-
-		Item.GetGlobalItem<ItemGlowmask>().glowOffsetX = -5;
-		Item.GetGlobalItem<ItemGlowmask>().glowOffsetY = 0;
 	}
 	public override Color? GetAlpha(Color lightColor)
 	{

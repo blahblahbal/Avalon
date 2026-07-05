@@ -100,7 +100,7 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 			int iterations = (int)(NPC.Center.Distance(target.Center) / 16);
 			for (int i = 0; i < iterations; i++)
 			{
-				SparkleParticle s = new();
+				var s = VanillaParticles.RequestPrettySparkleParticle();
 				s.Rotation = target.Center.DirectionTo(NPC.Center).ToRotation();
 				s.Velocity = target.velocity * (i / (float)iterations);
 				s.Scale = new Vector2(3f, 1f) * Main.rand.NextFloat(0.5f,1f);
@@ -110,12 +110,13 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 				s.FadeOutEnd = Main.rand.Next(15, 35);
 				s.AdditiveAmount = 1f;
 				s.ColorTint = Color.Lerp(new Color(0.6f, 0f, 1f, 0f), new Color(0.3f, 0.7f, 1f, 0f), NPC.localAI[0]);
-				ParticleSystem.NewParticle(s, Vector2.Lerp(NPC.Center, target.Center, i / (float)iterations) + Main.rand.NextVector2Circular(8, 8));
+				s.LocalPosition = Vector2.Lerp(NPC.Center, target.Center, i / (float)iterations) + Main.rand.NextVector2Circular(8, 8);
+				Main.ParticleSystem_World_OverPlayers.Add(s);
 			}
 
 			for (int i = 0; i < 20; i++)
 			{
-				SparkleParticle s = new();
+				var s = VanillaParticles.RequestPrettySparkleParticle();
 				s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(6f, 12f);
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(6f, 2f);
@@ -125,11 +126,12 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 				s.FadeOutEnd = Main.rand.Next(20, 40);
 				s.AdditiveAmount = 1f;
 				s.ColorTint = new Color(Main.rand.NextFloat(0.2f, 0.7f), 0.9f, 1f);
-				ParticleSystem.NewParticle(s, NPC.Center);
+				s.LocalPosition = NPC.Center;
+				Main.ParticleSystem_World_OverPlayers.Add(s);
 			}
 			for (int i = 0; i < 20; i++)
 			{
-				SparkleParticle s = new();
+				var s = VanillaParticles.RequestPrettySparkleParticle();
 				s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(12f, 24f);
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(3f, 1f);
@@ -139,7 +141,8 @@ namespace Avalon.NPCs.Bosses.Hardmode.Phantasm
 				s.FadeOutEnd = Main.rand.Next(10, 30);
 				s.AdditiveAmount = 1f;
 				s.ColorTint = Color.White;
-				ParticleSystem.NewParticle(s, NPC.Center);
+				s.LocalPosition = NPC.Center;
+				Main.ParticleSystem_World_OverPlayers.Add(s);
 			}
 			for (int i = 0; i < 40; i++)
 			{

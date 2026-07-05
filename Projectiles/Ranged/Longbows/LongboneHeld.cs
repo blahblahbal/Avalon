@@ -76,9 +76,9 @@ public class LongboneCurseArrow : GlobalProjectile
 		if (Longbone > 0)
 		{
 			SoundEngine.PlaySound(SoundID.Item103, projectile.position);
-			ColorExplosion p = new ColorExplosion(new Color(32, 77, 255, 64), Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.1f, 0.35f) + (Longbone * 0.1f));
-			ParticleSystem.NewParticle(p, projectile.Center);
-			ParticleSystem.NewParticle(new ColorExplosion(new Color(64, 128, 255, 64),p.Rotation + MathHelper.PiOver2, p.Scale * 0.8f), projectile.Center);
+			var p = new ColorExplosion(new Color(32, 77, 255, 64), Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.1f, 0.35f) + (Longbone * 0.1f), projectile.Center);
+			Main.ParticleSystem_World_OverPlayers.Add(p);
+			Main.ParticleSystem_World_OverPlayers.Add(new ColorExplosion(new Color(64, 128, 255, 64), p.Rotation + MathHelper.PiOver2, p.Scale * 0.8f, projectile.Center));
 			for (int i = 0; i < Longbone * 7; i++)
 			{
 				float rand = Main.rand.NextFloat(0, MathHelper.TwoPi);

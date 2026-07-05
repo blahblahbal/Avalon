@@ -106,10 +106,10 @@ public partial class Phantasm : ModNPC
 		d.noGravity = true;
 		d.scale = Main.rand.NextFloat(1);
 
-		if(phase > 3 && Main.rand.NextBool(3) && phase != 200)
-			ParticleSystem.NewParticle(new SoulEmbers(new Vector2(Main.rand.NextFloat(-5, 5), -1)), new Vector2(Main.rand.Next(-2000, 2000) + Main.LocalPlayer.position.X, MathHelper.Clamp(Main.LocalPlayer.position.Y + 600, Main.UnderworldLayer * 16, (Main.maxTilesY - 37) * 16)));
-		if (phase > 8 && Main.rand.NextBool(3) && phase != 200)
-			ParticleSystem.NewParticle(new HellEmbers(new Vector2(Main.rand.NextFloat(-5, 5), -1)), new Vector2(Main.rand.Next(-2000, 2000) + Main.LocalPlayer.position.X, MathHelper.Clamp(Main.LocalPlayer.position.Y + 600, Main.UnderworldLayer * 16, (Main.maxTilesY - 37) * 16)));
+		//if(phase > 3 && Main.rand.NextBool(3) && phase != 200)
+		//	ParticleSystem.NewParticle(new SoulEmbers(new Vector2(Main.rand.NextFloat(-5, 5), -1)), new Vector2(Main.rand.Next(-2000, 2000) + Main.LocalPlayer.position.X, MathHelper.Clamp(Main.LocalPlayer.position.Y + 600, Main.UnderworldLayer * 16, (Main.maxTilesY - 37) * 16)));
+		//if (phase > 8 && Main.rand.NextBool(3) && phase != 200)
+		//	ParticleSystem.NewParticle(new HellEmbers(new Vector2(Main.rand.NextFloat(-5, 5), -1)), new Vector2(Main.rand.Next(-2000, 2000) + Main.LocalPlayer.position.X, MathHelper.Clamp(Main.LocalPlayer.position.Y + 600, Main.UnderworldLayer * 16, (Main.maxTilesY - 37) * 16)));
 
 		foreach (NPC orb in Main.ActiveNPCs)
 		{
@@ -254,7 +254,7 @@ public partial class Phantasm : ModNPC
 
 			for (int i = 0; i < 20; i++)
 			{
-				SparkleParticle s = new();
+				var s = VanillaParticles.RequestPrettySparkleParticle();
 				s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(6f, 12f);
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(6f, 2f);
@@ -264,11 +264,12 @@ public partial class Phantasm : ModNPC
 				s.FadeOutEnd = Main.rand.Next(20, 40);
 				s.AdditiveAmount = 1f;
 				s.ColorTint = new Color(1f, 0f, 0.2f);
-				ParticleSystem.NewParticle(s, NPC.Center);
+				s.LocalPosition = NPC.Center;
+				Main.ParticleSystem_World_OverPlayers.Add(s);
 			}
 			for (int i = 0; i < 20; i++)
 			{
-				SparkleParticle s = new();
+				var s = VanillaParticles.RequestPrettySparkleParticle();
 				s.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(12f, 24f);
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(3f, 1f);
@@ -278,7 +279,8 @@ public partial class Phantasm : ModNPC
 				s.FadeOutEnd = Main.rand.Next(10, 30);
 				s.AdditiveAmount = 1f;
 				s.ColorTint = new Color(Main.rand.NextFloat(0.2f, 0.7f), 0.9f, 1f);
-				ParticleSystem.NewParticle(s, NPC.Center);
+				s.LocalPosition = NPC.Center;
+				Main.ParticleSystem_World_OverPlayers.Add(s);
 			}
 			for (int i = 0; i < 40; i++)
 			{

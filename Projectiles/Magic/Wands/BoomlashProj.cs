@@ -102,7 +102,7 @@ public class BoomlashProj : ModProjectile
 	}
 	public override void OnKill(int timeLeft)
 	{
-		ParticleSystem.NewParticle(new ExplosionParticle(Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.9f, 1.2f)), Projectile.Center);
+		Main.ParticleSystem_World_OverPlayers.Add(new ExplosionParticle(Projectile.Center, Main.rand.NextFloat(MathHelper.TwoPi), Main.rand.NextFloat(0.9f, 1.2f)));
 		if (Main.myPlayer == Projectile.owner)
 		{
 			int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AeonExplosion>(), Projectile.damage, Projectile.knockBack, Projectile.owner);

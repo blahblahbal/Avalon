@@ -58,21 +58,22 @@ public class ClearCutterSlash : EnergySlashTemplate, ISyncedOnHitEffect
 	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
 	{
 		Color[] Colors = { Color.LightSkyBlue, Color.Magenta, Color.White, Color.Magenta };
-		SparkleParticle p = new();
+		var p = VanillaParticles.RequestPrettySparkleParticle();
 		p.ColorTint = ClassExtensions.CycleThroughColors(Colors, 60);
 		p.FadeInEnd = 10;
 		p.FadeOutStart = 15;
 		p.FadeOutEnd = 30;
 		p.Scale = new Vector2(3, 1);
 		p.Rotation = MathHelper.PiOver2 + Main.rand.NextFloat(-0.1f, 0.1f);
-		ParticleSystem.NewParticle(p, Main.rand.NextVector2FromRectangle(target.Hitbox));
+		p.LocalPosition = Main.rand.NextVector2FromRectangle(target.Hitbox);
+		Main.ParticleSystem_World_OverPlayers.Add(p);
 		int[] Dusts = { DustID.IceTorch, DustID.HallowedTorch, DustID.WhiteTorch };
 		for(int i = 0; i < 5; i++)
 		{
-			Dust d = Dust.NewDustPerfect(p.Position, Dusts[Main.rand.Next(3)], new Vector2(0, Main.rand.NextFloat(-4, 4)).RotatedBy(p.Rotation + Main.rand.NextFloat(-0.3f,0.3f)));
+			Dust d = Dust.NewDustPerfect(p.LocalPosition, Dusts[Main.rand.Next(3)], new Vector2(0, Main.rand.NextFloat(-4, 4)).RotatedBy(p.Rotation + Main.rand.NextFloat(-0.3f,0.3f)));
 			d.scale *= Main.rand.NextFloat(1f, 2f);
 			d.noGravity = true;
-			Dust d2 = Dust.NewDustPerfect(p.Position, Dusts[Main.rand.Next(3)], new Vector2(Main.rand.NextFloat(-8, 8), 0).RotatedBy(p.Rotation + Main.rand.NextFloat(-0.3f, 0.3f)));
+			Dust d2 = Dust.NewDustPerfect(p.LocalPosition, Dusts[Main.rand.Next(3)], new Vector2(Main.rand.NextFloat(-8, 8), 0).RotatedBy(p.Rotation + Main.rand.NextFloat(-0.3f, 0.3f)));
 			d2.scale *= Main.rand.NextFloat(1f, 2f);
 			d2.noGravity = true;
 		}

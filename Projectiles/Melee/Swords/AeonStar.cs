@@ -119,10 +119,10 @@ public class AeonStar : ModProjectile
 		{
 			lastStar = Projectile;
 		}
-		ParticleSystem.NewParticle(new AeonStarburst(Vector2.Zero, Color.Yellow, Projectile.rotation, 2), Projectile.Center);
+		Main.ParticleSystem_World_OverPlayers.Add(new AeonStarburst(Projectile.Center, Vector2.Zero, Color.Yellow, Projectile.rotation, 2));
 		if (lastStar == Projectile)
 		{
-			ParticleSystem.NewParticle(new AeonStarburst(Vector2.Zero, Color.Red, Projectile.rotation + MathHelper.Pi, 3), Projectile.Center);
+			Main.ParticleSystem_World_OverPlayers.Add(new AeonStarburst(Projectile.Center, Vector2.Zero, Color.Red, Projectile.rotation + MathHelper.Pi, 3));
 		}
 	}
 }

@@ -59,7 +59,7 @@ public class PhantomDagger : SoulDagger
 			d.scale = 1;
 			if (Main.rand.NextBool(3))
 			{
-				SparkleParticle s = new();
+				var s = VanillaParticles.RequestPrettySparkleParticle();
 				s.Velocity = new Vector2(0, Main.rand.NextFloat(7.5f)).RotatedBy(Projectile.rotation + Main.rand.NextFloat(-0.3f, 0.3f));
 				s.Rotation = s.Velocity.ToRotation();
 				s.Scale = new Vector2(5f, 0.7f);
@@ -69,7 +69,8 @@ public class PhantomDagger : SoulDagger
 				s.FadeOutEnd = Main.rand.Next(20, 40);
 				s.AdditiveAmount = 1f;
 				s.ColorTint = new Color(1f, 0f, 0.2f);
-				ParticleSystem.NewParticle(s, Projectile.Center);
+				s.LocalPosition = Projectile.Center;
+				Main.ParticleSystem_World_OverPlayers.Add(s);
 			}
 
 			if (Projectile.timeLeft == 1)

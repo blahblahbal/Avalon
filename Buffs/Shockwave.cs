@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.Graphics.CameraModifiers;
 using Terraria.ID;
@@ -16,6 +17,33 @@ public class Shockwave : ModBuff
 {
 	private int fall_time = 0;
 
+	public static void ShockwaveEffect(Vector2 position, float radius)
+	{
+		var p = VanillaParticles.RequestFadingParticle();
+		int time = 25;
+		p.SetTypeInfo(time);
+		p.SetBasicInfo(TextureAssets.Extra[ExtrasID.KeybrandRing], null, new Vector2(0, -radius * 0.01f), position);
+		p.Scale = Vector2.Zero;
+		p.ScaleVelocity = new Vector2(1, 0.15f) / TextureAssets.Extra[ExtrasID.KeybrandRing].Width() * radius / time * 2;
+		p.ColorTint = Color.Brown with { A = 0};
+		p.FadeInNormalizedTime = 0.05f;
+		p.FadeOutNormalizedTime = 0.5f;
+		p.AccelerationPerFrame = -p.Velocity / time * 2;
+		Main.ParticleSystem_World_BehindPlayers.Add(p);
+
+		for (int i = 0; i < radius * radius * 0.00075f; i++)
+		{
+			Dust d = Dust.NewDustPerfect(position + Vector2.UnitX * Main.rand.NextFloat(-radius / 2,radius / 2), DustID.Iron);
+			d.velocity.Y -= 3;
+			d.velocity *= radius * 0.01f;
+			d.velocity.Y *= Main.rand.NextFloat(0.5f);
+		}
+		for (int i = 0; i < radius * 0.025; i++)
+		{
+			Gore g = Gore.NewGoreDirect(new EntitySource_Misc("Shockwave"), position + Vector2.UnitX * Main.rand.NextFloat(-radius / 2, radius / 2), Main.rand.NextVector2Circular(1, 1), Main.rand.Next(GoreID.Smoke1, GoreID.Smoke3 + 1), Main.rand.NextFloat(0.25f, 0.75f));
+			g.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
+		}
+	}
 	public override void Update(Player player, ref int buffIndex)
 	{
 
@@ -132,7 +160,7 @@ public class Shockwave : ModBuff
 			} // END iterate through NPCs
 
 			var Sound = SoundEngine.PlaySound(SoundID.Item14, player.position);
-			ParticleSystem.NewParticle(new ShockwaveParticle(Radius), player.Center + new Vector2(0, (player.height * 0.5f * player.gravDir)));
+			ShockwaveEffect(player.Center + new Vector2(0, (player.height * 0.5f * player.gravDir)), Radius);
 			if (SoundEngine.TryGetActiveSound(Sound, out ActiveSound sound) && sound != null && sound.IsPlaying)
 			{
 				sound.Volume = MathHelper.Clamp(fall_dist / 7f, 0.2f, 3);

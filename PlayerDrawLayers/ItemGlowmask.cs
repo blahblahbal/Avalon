@@ -30,9 +30,6 @@ public class ItemGlowmask : GlobalItem
 		}
 	}
 	public override bool InstancePerEntity => true;
-
-	public int glowOffsetX = 10; // defaults to 10 for vanilla holdout offset
-	public int glowOffsetY;
 	public bool CustomPostDrawInWorld = false;
 
 	public override void PostDrawInWorld(Item item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
@@ -50,6 +47,10 @@ public class ItemGlowmask : GlobalItem
 
 public class PlayerUseItemGlowmask : PlayerDrawLayer
 {
+	public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
+	{
+		return ItemGlowmask.GlowTextures.ContainsKey(drawInfo.drawPlayer.HeldItem.type);
+	}
 	public override Position GetDefaultPosition() => new AfterParent(Terraria.DataStructures.PlayerDrawLayers.HeldItem);
 	protected override void Draw(ref PlayerDrawSet drawInfo)
 	{
@@ -91,8 +92,10 @@ public class PlayerUseItemGlowmask : PlayerDrawLayer
 					}
 					else
 					{
-						Vector2 offsetFix = new(0, texture.Value.Height / 2 + (heldItem.GetGlobalItem<ItemGlowmask>().glowOffsetY * drawPlayer.gravDir));
-						int glowOffsetXInvert = -heldItem.GetGlobalItem<ItemGlowmask>().glowOffsetX;
+						Vector2 offset = Vector2.Zero;
+						ItemLoader.HoldoutOffset(drawPlayer.gravDir, heldItem.type, ref offset);
+						Vector2 offsetFix = new(0, texture.Value.Height / 2 + (offset.Y * drawPlayer.gravDir));
+						int glowOffsetXInvert = (int)-offset.X;
 						Vector2 positionFix = new(drawPlayer.direction == -1 ? texture.Value.Width - glowOffsetXInvert : glowOffsetXInvert, texture.Value.Height / 2);
 
 						DrawData horizontalStaffDraw = new(

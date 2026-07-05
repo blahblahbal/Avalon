@@ -24,13 +24,14 @@ public class RhodiumLongbowEnergyArrow : ModProjectile
 		if (Projectile.ai[0] == 0)
 		{
 			SoundEngine.PlaySound(SoundID.Item114 with { Volume = 0.5f, PitchVariance = 1f, MaxInstances = 10}, Projectile.position);
-			SparkleParticle p = new();
+			var p = VanillaParticles.RequestPrettySparkleParticle();
 			p.ColorTint = new Color(1f, 0.3f, Main.rand.NextFloat(0.3f, 0.6f), 0f);
 			p.FadeInEnd = p.FadeOutStart = Main.rand.NextFloat(3, 6);
 			p.FadeOutEnd = Main.rand.NextFloat(15, 20);
 			p.Scale = new Vector2(2, 0.5f);
 			p.Rotation = Main.rand.NextFloat(-0.3f, 0.3f) + MathHelper.PiOver2;
-			ParticleSystem.NewParticle(p, Projectile.Center);
+			p.LocalPosition = Projectile.Center;
+			Main.ParticleSystem_World_OverPlayers.Add(p);
 		}
 		if (Projectile.ai[0] <= 0)
 			return;
@@ -42,7 +43,7 @@ public class RhodiumLongbowEnergyArrow : ModProjectile
 	}
 	public override void OnKill(int timeLeft)
 	{
-		SparkleParticle p = new();
+		var p = VanillaParticles.RequestPrettySparkleParticle();
 		p.ColorTint = new Color(1f, 0.3f, Main.rand.NextFloat(0.3f, 0.6f), 0f);
 		p.FadeInEnd = Main.rand.NextFloat(4, 7);
 		p.FadeOutStart = p.FadeInEnd;
@@ -50,7 +51,8 @@ public class RhodiumLongbowEnergyArrow : ModProjectile
 		p.Scale = new Vector2(4, 2);
 		p.Rotation = Projectile.oldVelocity.ToRotation() + Main.rand.NextFloat(-0.3f, 0.3f) + MathHelper.PiOver2;
 		p.DrawHorizontalAxis = false;
-		ParticleSystem.NewParticle(p, Projectile.Center);
+		p.LocalPosition = Projectile.Center;
+		Main.ParticleSystem_World_OverPlayers.Add(p);
 		int type = ModContent.DustType<SimpleColorableGlowyDust>();
 		for (int i = 0; i < 8; i++)
 		{

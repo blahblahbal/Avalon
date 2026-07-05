@@ -103,7 +103,7 @@ public class OsmiumLongbowGlobalProjectile : GlobalProjectile
 			Gore g = Gore.NewGoreDirect(projectile.GetSource_FromThis(), projectile.Center, Main.rand.NextVector2Circular(1, 1), Main.rand.Next(GoreID.Smoke1, GoreID.Smoke3 + 1), Main.rand.NextFloat(0.25f,0.75f));
 			g.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
 
-			SparkleParticle p = new();
+			var p = VanillaParticles.RequestPrettySparkleParticle();
 			p.ColorTint = new Color(0.3f, Main.rand.NextFloat(0.4f, 0.75f), 1f, 0.75f);
 			p.FadeInEnd = Main.rand.NextFloat(2, 5);
 			p.FadeOutStart = p.FadeInEnd;
@@ -112,7 +112,8 @@ public class OsmiumLongbowGlobalProjectile : GlobalProjectile
 			p.Velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(7, 9);
 			p.Rotation = p.Velocity.ToRotation() + MathHelper.PiOver2;
 			p.DrawHorizontalAxis = false;
-			ParticleSystem.NewParticle(p, projectile.Center);
+			p.LocalPosition = projectile.Center;
+			Main.ParticleSystem_World_OverPlayers.Add(p);
 		}
 		int proj = ModContent.ProjectileType<OsmiumShrapnel>();
 		int shrapnelCount = 7 + (projectile.penetrate == -1? 10 : 4 * projectile.penetrate / 2);

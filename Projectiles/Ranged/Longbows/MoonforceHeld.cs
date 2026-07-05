@@ -18,7 +18,7 @@ public class MoonforceHeld : LongbowTemplate
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			SparkleParticle s = new();
+			var s = VanillaParticles.RequestPrettySparkleParticle();
 			s.Velocity = new Vector2(4, 0).RotatedBy(i * MathHelper.PiOver2);
 			s.Rotation = s.Velocity.ToRotation();
 			s.Scale = new Vector2(6f, 0.75f);
@@ -28,9 +28,10 @@ public class MoonforceHeld : LongbowTemplate
 			s.FadeOutEnd = 15;
 			s.AdditiveAmount = 1f;
 			s.ColorTint = Color.Lerp(Color.Magenta, Color.Red, Main.masterColor) with { A = 0 };
-			ParticleSystem.NewParticle(s, Projectile.Center + new Vector2(8, 0).RotatedBy(Projectile.rotation));
+			s.LocalPosition = Projectile.Center + new Vector2(8, 0).RotatedBy(Projectile.rotation);
+			Main.ParticleSystem_World_OverPlayers.Add(s);
 
-			SparkleParticle s2 = new();
+			var s2 = VanillaParticles.RequestPrettySparkleParticle();
 			s2.Velocity = new Vector2(2).RotatedBy(i * MathHelper.PiOver2);
 			s2.Rotation = s2.Velocity.ToRotation();
 			s2.Scale = new Vector2(4f, 0.5f);
@@ -40,9 +41,11 @@ public class MoonforceHeld : LongbowTemplate
 			s2.FadeOutEnd = 15;
 			s2.AdditiveAmount = 1f;
 			s2.ColorTint = Color.Lerp(Color.Blue, Color.Magenta, Main.masterColor) with { A = 0 };
-			ParticleSystem.NewParticle(s2, Projectile.Center + new Vector2(8, 0).RotatedBy(Projectile.rotation));
+			s2.LocalPosition = Projectile.Center + new Vector2(8, 0).RotatedBy(Projectile.rotation);
+			Main.ParticleSystem_World_OverPlayers.Add(s2);
+
 		}
-		for(int i = 0; i < 15; i++)
+		for (int i = 0; i < 15; i++)
 		{
 			Dust d = Dust.NewDustPerfect(Projectile.Center + new Vector2(8, 0).RotatedBy(Projectile.rotation), Main.rand.Next(DustID.CorruptTorch, DustID.JungleTorch));
 			d.velocity = Main.rand.NextVector2Circular(8, 8);
@@ -63,7 +66,7 @@ public class MoonforceHeld : LongbowTemplate
 	}
 	public override void Shoot(IEntitySource source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, float Power)
 	{
-		base.Shoot(source,position,velocity,type,damage,knockback,Power);
+		base.Shoot(source, position, velocity, type, damage, knockback, Power);
 		SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
 	}
 	public override bool ArrowEffect(Projectile projectile, float Power, byte variant = 0)
@@ -126,7 +129,7 @@ public class MoonlightArrowVisuals : GlobalProjectile
 		{
 			SoundEngine.PlaySound(SoundID.Item118);
 			projectile.penetrate--;
-			if(projectile.velocity.Y != oldVelocity.Y) projectile.velocity.Y = -oldVelocity.Y;
+			if (projectile.velocity.Y != oldVelocity.Y) projectile.velocity.Y = -oldVelocity.Y;
 			if (projectile.velocity.X != oldVelocity.X) projectile.velocity.X = -oldVelocity.X;
 			return false;
 		}
@@ -152,18 +155,18 @@ public class MoonlightArrowVisuals : GlobalProjectile
 			int iterations = projectile.width / 4;
 			for (int i = 0; i < iterations; i++)
 			{
-					SparkleParticle p = new();
-					p.ColorTint = Color.Lerp(Color.Blue, Color.Red, Main.rand.NextFloat());
-					p.HighlightColor = Color.Lerp(p.ColorTint, Color.White, 0.6f) with { A = 0 };
-					p.FadeInEnd = Main.rand.NextFloat(2, 7);
-					p.FadeOutStart = p.FadeInEnd + Main.rand.NextFloat(7);
-					p.FadeOutEnd = Main.rand.NextFloat(25, 47);
-					p.Scale = new Vector2(3, 1) * (projectile.width / 64f);
-					p.Velocity = new Vector2(projectile.width * Main.rand.NextFloat(0.04f, 0.08f)).RotatedBy((i * MathHelper.TwoPi / iterations) + Main.rand.NextFloat(-0.3f,0.3f));
-					p.AccelerationPerFrame = -p.Velocity / p.FadeOutEnd;
-					p.Rotation = p.Velocity.ToRotation();
-					p.DrawHorizontalAxis = true;
-					ParticleSystem.NewParticle(p, projectile.Center);
+				var p = VanillaParticles.RequestPrettySparkleParticle();
+				p.ColorTint = Color.Lerp(Color.Blue, Color.Red, Main.rand.NextFloat());
+				p.FadeInEnd = Main.rand.NextFloat(2, 7);
+				p.FadeOutStart = p.FadeInEnd + Main.rand.NextFloat(7);
+				p.FadeOutEnd = Main.rand.NextFloat(25, 47);
+				p.Scale = new Vector2(3, 1) * (projectile.width / 64f);
+				p.Velocity = new Vector2(projectile.width * Main.rand.NextFloat(0.04f, 0.08f)).RotatedBy((i * MathHelper.TwoPi / iterations) + Main.rand.NextFloat(-0.3f, 0.3f));
+				p.AccelerationPerFrame = -p.Velocity / p.FadeOutEnd;
+				p.Rotation = p.Velocity.ToRotation();
+				p.DrawHorizontalAxis = true;
+				p.LocalPosition = projectile.Center;
+				Main.ParticleSystem_World_OverPlayers.Add(p);
 			}
 		}
 	}
@@ -217,7 +220,7 @@ public class MoonlightArrowVisuals : GlobalProjectile
 			int frameHeightArrow = TextureAssets.Projectile[projectile.type].Value.Height;
 			Rectangle frameArrow = new Rectangle(0, frameHeightArrow * 0, TextureAssets.Projectile[projectile.type].Value.Width, frameHeightArrow);
 
-			Main.EntitySpriteDraw(TextureAssets.Projectile[projectile.type].Value, drawPos, frameArrow, projectile.GetAlpha(Color.Lerp((lightColor * 0.75f) with { A = 255}, Color.Lerp(Color.Red, Color.Blue, Main.masterColor),0.3f)), projectile.velocity.ToRotation() + MathHelper.PiOver2, new Vector2(TextureAssets.Projectile[projectile.type].Value.Width, frameHeightArrow / 2f) / 2, projectile.scale, Flip, 0);
+			Main.EntitySpriteDraw(TextureAssets.Projectile[projectile.type].Value, drawPos, frameArrow, projectile.GetAlpha(Color.Lerp((lightColor * 0.75f) with { A = 255 }, Color.Lerp(Color.Red, Color.Blue, Main.masterColor), 0.3f)), projectile.velocity.ToRotation() + MathHelper.PiOver2, new Vector2(TextureAssets.Projectile[projectile.type].Value.Width, frameHeightArrow / 2f) / 2, projectile.scale, Flip, 0);
 			return false;
 		}
 		return base.PreDraw(projectile, ref lightColor);

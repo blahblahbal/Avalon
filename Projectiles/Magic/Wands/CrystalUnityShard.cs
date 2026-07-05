@@ -76,16 +76,16 @@ public class CrystalUnityShard : ModProjectile
 		SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
 		for (int i = 0; i < 4; i++)
 		{
-			SparkleParticle p = new();
+			var p = VanillaParticles.RequestPrettySparkleParticle();
 			p.ColorTint = Colors[GemType] with { A = 0 };
-			p.HighlightColor = Color.White with { A = 0 };
 			p.FadeInEnd = p.FadeOutStart = Main.rand.Next(5, 10);
 			p.FadeOutEnd = Main.rand.NextFloat(15, 20);
 			p.Scale = new Vector2(3, 0.5f);
 			p.Velocity = new Vector2(0, Main.rand.NextFloat(2, 4)).RotatedBy(i * MathHelper.PiOver2 + Main.rand.NextFloat(-0.3f, 0.3f));
 			p.Rotation = p.Velocity.ToRotation();
 			p.DrawVerticalAxis = false;
-			ParticleSystem.NewParticle(p, Projectile.Center);
+			p.LocalPosition = Projectile.Center;
+			Main.ParticleSystem_World_OverPlayers.Add(p);
 		}
 	}
 	public override void AI()
@@ -101,16 +101,16 @@ public class CrystalUnityShard : ModProjectile
 			Vector2 location = Projectile.Center + Vector2.Normalize(Projectile.velocity) * 20;
 			for (int i = 0; i < 3; i++)
 			{
-				SparkleParticle p = new();
+				var p = VanillaParticles.RequestPrettySparkleParticle();
 				p.ColorTint = Colors[GemType] with { A = 0 };
-				p.HighlightColor = Color.White with { A = 0 };
 				p.FadeInEnd = p.FadeOutStart = Main.rand.Next(5, 10);
 				p.FadeOutEnd = Main.rand.NextFloat(15, 20);
 				p.Scale = new Vector2(3, 0.5f);
 				p.Velocity = Projectile.velocity.RotateRandom(0.2f) * Main.rand.NextFloat();
 				p.Rotation = p.Velocity.ToRotation();
 				p.DrawVerticalAxis = false;
-				ParticleSystem.NewParticle(p, location);
+				p.LocalPosition = location;
+				Main.ParticleSystem_World_OverPlayers.Add(p);
 			}
 		}
 
