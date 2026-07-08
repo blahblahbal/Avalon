@@ -102,7 +102,7 @@ public static class TorchLauncherSets
 		{ ItemID.CursedTorch,           BuffID.CursedInferno },
 		{ ItemID.IceTorch,              BuffID.Frostburn },
 		{ ItemID.OrangeTorch,           -1 },
-		{ ItemID.IchorTorch,            -1 },
+		{ ItemID.IchorTorch,            BuffID.Ichor },
 		{ ItemID.UltrabrightTorch,      -1 },
 		{ ItemID.BoneTorch,             -1 },
 		{ ItemID.RainbowTorch,          -1 },
@@ -119,7 +119,7 @@ public static class TorchLauncherSets
 		{ ItemType<Items.Placeable.Furniture.ContagionTorch>(),   -1 },
 		{ ItemType<Items.Placeable.Furniture.CyanTorch>(),        -1 },
 		{ ItemType<Items.Placeable.Furniture.LimeTorch>(),        -1 },
-		{ ItemType<Items.Placeable.Furniture.PathogenTorch>(),    -1 },
+		{ ItemType<Items.Placeable.Furniture.PathogenTorch>(),    ModContent.BuffType<Buffs.Debuffs.Pathogen>() },
 		{ ItemType<SavannaTorch>(),     -1 },
 		{ ItemType<SlimeTorch>(),       -1 },
 		{ ItemType<StarTorch>(),        -1 }

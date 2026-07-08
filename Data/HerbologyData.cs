@@ -33,6 +33,22 @@ public static class HerbologyData
     public const int PotionSellPrice = 1;
     public const int RestorationPotionCost = 2;
 
+	public static int AddHerbologyPotionData(int potionID, int elixirID)
+	{
+		PotionIds.Add(potionID);
+		ElixirIds.Add(elixirID);
+		return 0;
+	}
+
+	public static int AddHerbologyHerbData(int seedID, int herbID, int largeSeedID, int largeHerbID)
+	{
+		HerbIdByLargeHerbId.Add(largeHerbID, herbID);
+		LargeHerbIdByLargeHerbSeedId.Add(largeSeedID, largeHerbID);
+		LargeHerbSeedIdByHerbId.Add(herbID, largeSeedID);
+		LargeHerbSeedIdByHerbSeedId.Add(seedID, largeSeedID);
+		return 0;
+	}
+
     public static List<int> ElixirIds = new()
     {
         ModContent.ItemType<AdvAmmoReservationPotion>(), ModContent.ItemType<AdvArcheryPotion>(), ModContent.ItemType<AdvAuraPotion>(),

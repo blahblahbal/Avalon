@@ -120,6 +120,23 @@ public class Torch : ModProjectile
 			Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 			Projectile.ai[0]++;
 		}
+
+		Rectangle hitbox = Projectile.Hitbox;
+		foreach (NPC target in Main.ActiveNPCs)
+		{
+			if (target.Hitbox.Intersects(hitbox))
+			{
+				if (Data.Sets.TorchLauncherSets.DebuffType.TryGetValue(ItemType, out int buffType))
+				{
+					if (buffType == -1)
+					{
+						buffType = BuffID.OnFire;
+					}
+					target.AddBuff(buffType, 60 * 3);
+				}
+			}
+		}
+
 		if (ItemType == ModContent.ItemType<Items.Placeable.Furniture.StarTorch>())
 		{
 			Projectile.velocity = Vector2.Normalize(starTorchPos - Projectile.Center) * Projectile.velocity.Length();

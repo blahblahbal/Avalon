@@ -7045,12 +7045,12 @@ Mods: {
 			}
 
 			ReflexCharm: {
-				DisplayName: Reflex Charm
+				DisplayName: Reflector Charm
 				Tooltip: Grants the holder a 25% chance to reflect projectiles
 			}
 
 			ReflexShield: {
-				DisplayName: Reflex Shield
+				DisplayName: Reflector Shield
 				Tooltip:
 					'''
 					Grants the holder a 50% chance to reflect projectiles

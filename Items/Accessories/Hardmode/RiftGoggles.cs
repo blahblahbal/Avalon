@@ -1,5 +1,6 @@
 using Avalon.Common;
 using Avalon.Common.Players;
+using Avalon.Tiles.Ores;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -138,155 +139,74 @@ class RiftGogglesPlayer : ModPlayer
 				if (Data.Sets.TileSets.RiftOres[Main.tile[pt.X, pt.Y].TileType])
 				{
 					#region copper
-					if (Main.tile[pt.X, pt.Y].TileType == TileID.Copper)
+					if (RiftGogglesData.CopperTier.Contains(Main.tile[pt.X, pt.Y].TileType))
 					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Copper, TileID.Tin, new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Tin)
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Tin, ModContent.TileType<Tiles.Ores.BronzeOre>(), new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.BronzeOre>())
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.BronzeOre>(), TileID.Copper, new Vector3(pt.X, pt.Y, 54));
+						int index = RiftGogglesData.CopperTier.FindIndex(0, f => f == Main.tile[pt.X, pt.Y].TileType);
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), RiftGogglesData.CopperTier[index], RiftGogglesData.CopperTier.NextInListWrapped(index), new Vector3(pt.X, pt.Y, 54));
 						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
 					}
 					#endregion
 					#region iron
-					if (Main.tile[pt.X, pt.Y].TileType == TileID.Iron)
+					if (RiftGogglesData.IronTier.Contains(Main.tile[pt.X, pt.Y].TileType))
 					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Iron, TileID.Lead, new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Lead)
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Lead, ModContent.TileType<Tiles.Ores.NickelOre>(), new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.NickelOre>())
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.NickelOre>(), TileID.Iron, new Vector3(pt.X, pt.Y, 54));
+						int index = RiftGogglesData.IronTier.FindIndex(0, f => f == Main.tile[pt.X, pt.Y].TileType);
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), RiftGogglesData.IronTier[index], RiftGogglesData.IronTier.NextInListWrapped(index), new Vector3(pt.X, pt.Y, 54));
 						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
 					}
 					#endregion
 					#region silver
-					if (Main.tile[pt.X, pt.Y].TileType == TileID.Silver)
+					if (RiftGogglesData.SilverTier.Contains(Main.tile[pt.X, pt.Y].TileType))
 					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Silver, TileID.Tungsten, new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Tungsten)
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Tungsten, ModContent.TileType<Tiles.Ores.ZincOre>(), new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.ZincOre>())
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.ZincOre>(), TileID.Silver, new Vector3(pt.X, pt.Y, 54));
+						int index = RiftGogglesData.SilverTier.FindIndex(0, f => f == Main.tile[pt.X, pt.Y].TileType);
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), RiftGogglesData.SilverTier[index], RiftGogglesData.SilverTier.NextInListWrapped(index), new Vector3(pt.X, pt.Y, 54));
 						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
 					}
 					#endregion
 					#region gold
-					if (Main.tile[pt.X, pt.Y].TileType == TileID.Gold)
+					if (RiftGogglesData.GoldTier.Contains(Main.tile[pt.X, pt.Y].TileType))
 					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Gold, TileID.Platinum, new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Platinum)
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Platinum, ModContent.TileType<Tiles.Ores.BismuthOre>(), new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.BismuthOre>())
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.BismuthOre>(), TileID.Gold, new Vector3(pt.X, pt.Y, 54));
+						int index = RiftGogglesData.GoldTier.FindIndex(0, f => f == Main.tile[pt.X, pt.Y].TileType);
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), RiftGogglesData.GoldTier[index], RiftGogglesData.GoldTier.NextInListWrapped(index), new Vector3(pt.X, pt.Y, 54));
 						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
 					}
 					#endregion
 					#region rhodium
-					if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.RhodiumOre>())
+					if (RiftGogglesData.RhodiumTier.Contains(Main.tile[pt.X, pt.Y].TileType))
 					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.RhodiumOre>(), ModContent.TileType<Tiles.Ores.OsmiumOre>(), new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.OsmiumOre>())
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.OsmiumOre>(), ModContent.TileType<Tiles.Ores.IridiumOre>(), new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.IridiumOre>())
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.IridiumOre>(), ModContent.TileType<Tiles.Ores.RhodiumOre>(), new Vector3(pt.X, pt.Y, 54));
+						int index = RiftGogglesData.RhodiumTier.FindIndex(0, f => f == Main.tile[pt.X, pt.Y].TileType);
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), RiftGogglesData.RhodiumTier[index], RiftGogglesData.RhodiumTier.NextInListWrapped(index), new Vector3(pt.X, pt.Y, 54));
 						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
 					}
 					#endregion
 					#region evil
-					if (Main.tile[pt.X, pt.Y].TileType == TileID.Demonite)
+					if (RiftGogglesData.EvilTier.Contains(Main.tile[pt.X, pt.Y].TileType))
 					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Demonite, TileID.Crimtane, new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Crimtane)
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Crimtane, ModContent.TileType<Tiles.Ores.BacciliteOre>(), new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.BacciliteOre>())
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.BacciliteOre>(), TileID.Demonite, new Vector3(pt.X, pt.Y, 54));
+						int index = RiftGogglesData.EvilTier.FindIndex(0, f => f == Main.tile[pt.X, pt.Y].TileType);
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), RiftGogglesData.EvilTier[index], RiftGogglesData.EvilTier.NextInListWrapped(index), new Vector3(pt.X, pt.Y, 54));
 						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
 					}
 					#endregion
 					#region cobalt
-					if (Main.tile[pt.X, pt.Y].TileType == TileID.Cobalt)
+					if (RiftGogglesData.CobaltTier.Contains(Main.tile[pt.X, pt.Y].TileType))
 					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Cobalt, TileID.Palladium, new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Palladium)
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Palladium, ModContent.TileType<Tiles.Ores.DurataniumOre>(), new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.DurataniumOre>())
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.DurataniumOre>(), TileID.Cobalt, new Vector3(pt.X, pt.Y, 54));
+						int index = RiftGogglesData.CobaltTier.FindIndex(0, f => f == Main.tile[pt.X, pt.Y].TileType);
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), RiftGogglesData.CobaltTier[index], RiftGogglesData.CobaltTier.NextInListWrapped(index), new Vector3(pt.X, pt.Y, 54));
 						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
 					}
 					#endregion
 					#region mythril
-					if (Main.tile[pt.X, pt.Y].TileType == TileID.Mythril)
+					if (RiftGogglesData.MythrilTier.Contains(Main.tile[pt.X, pt.Y].TileType))
 					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Mythril, TileID.Orichalcum, new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Orichalcum)
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Orichalcum, ModContent.TileType<Tiles.Ores.NaquadahOre>(), new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.NaquadahOre>())
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.NaquadahOre>(), TileID.Mythril, new Vector3(pt.X, pt.Y, 54));
+						int index = RiftGogglesData.MythrilTier.FindIndex(0, f => f == Main.tile[pt.X, pt.Y].TileType);
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), RiftGogglesData.MythrilTier[index], RiftGogglesData.MythrilTier.NextInListWrapped(index), new Vector3(pt.X, pt.Y, 54));
 						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
 					}
 					#endregion
 					#region adamantite
-					if (Main.tile[pt.X, pt.Y].TileType == TileID.Adamantite)
+					if (RiftGogglesData.AdamantiteTier.Contains(Main.tile[pt.X, pt.Y].TileType))
 					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Adamantite, TileID.Titanium, new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == TileID.Titanium)
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), TileID.Titanium, ModContent.TileType<Tiles.Ores.TroxiniumOre>(), new Vector3(pt.X, pt.Y, 54));
-						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
-					}
-					else if (Main.tile[pt.X, pt.Y].TileType == ModContent.TileType<Tiles.Ores.TroxiniumOre>())
-					{
-						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), ModContent.TileType<Tiles.Ores.TroxiniumOre>(), TileID.Adamantite, new Vector3(pt.X, pt.Y, 54));
+						int index = RiftGogglesData.AdamantiteTier.FindIndex(0, f => f == Main.tile[pt.X, pt.Y].TileType);
+						ModContent.GetInstance<RiftGogglesSystem>().Positions2 = GetAllTiles(new Point(pt.X, pt.Y), RiftGogglesData.AdamantiteTier[index], RiftGogglesData.AdamantiteTier.NextInListWrapped(index), new Vector3(pt.X, pt.Y, 54));
 						ModContent.GetInstance<RiftGogglesSystem>().ChangeTile = true;
 					}
 					#endregion
@@ -465,257 +385,6 @@ class RiftGogglesGlobalTile : GlobalTile
 		}
 	}
 }
-public class OreRift : ModItem
-{
-	public override void SetStaticDefaults()
-	{
-		ItemID.Sets.ItemNoGravity[Type] = true;
-	}
-	public override void SetDefaults()
-	{
-		Item.width = 28;
-		Item.height = 28;
-		Item.alpha = 120;
-	}
-	public override bool CanPickup(Player player)
-	{
-		return false;
-	}
-	public override void PostUpdate()
-	{
-		Point tile = Item.Center.ToTileCoordinates();
-		for (int q = 0; q < Item.GetGlobalItem<AvalonGlobalItemInstance>().RiftLocations.Count; q++)
-		{
-			Vector3 pos = Item.GetGlobalItem<AvalonGlobalItemInstance>().RiftLocations[q];
-			if (pos.Z > 260)
-			{
-				Item.alpha -= 3;
-			}
-			if (pos.Z < 150)
-			{
-				Item.alpha += 5;
-			}
-			if (pos.Z == 150)
-			{
-				#region copper
-				if (Main.tile[tile.X, tile.Y].TileType == TileID.Copper)
-				{
-					RiftReplace(tile, TileID.Copper, TileID.Tin, pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == TileID.Tin)
-				{
-					RiftReplace(tile, TileID.Tin, ModContent.TileType<Tiles.Ores.BronzeOre>(), pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.BronzeOre>())
-				{
-					RiftReplace(tile, ModContent.TileType<Tiles.Ores.BronzeOre>(), TileID.Copper, pos);
-				}
-				#endregion
-				#region iron
-				if (Main.tile[tile.X, tile.Y].TileType == TileID.Iron)
-				{
-					RiftReplace(tile, TileID.Iron, TileID.Lead, pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == TileID.Lead)
-				{
-					RiftReplace(tile, TileID.Lead, ModContent.TileType<Tiles.Ores.NickelOre>(), pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.NickelOre>())
-				{
-					RiftReplace(tile, ModContent.TileType<Tiles.Ores.NickelOre>(), TileID.Iron, pos);
-				}
-				#endregion
-				#region silver
-				if (Main.tile[tile.X, tile.Y].TileType == TileID.Silver)
-				{
-					RiftReplace(tile, TileID.Silver, TileID.Tungsten, pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == TileID.Tungsten)
-				{
-					RiftReplace(tile, TileID.Tungsten, ModContent.TileType<Tiles.Ores.ZincOre>(), pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.ZincOre>())
-				{
-					RiftReplace(tile, ModContent.TileType<Tiles.Ores.ZincOre>(), TileID.Silver, pos);
-				}
-				#endregion
-				#region gold
-				if (Main.tile[tile.X, tile.Y].TileType == TileID.Gold)
-				{
-					RiftReplace(tile, TileID.Gold, TileID.Platinum, pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == TileID.Platinum)
-				{
-					RiftReplace(tile, TileID.Platinum, ModContent.TileType<Tiles.Ores.BismuthOre>(), pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.BismuthOre>())
-				{
-					RiftReplace(tile, ModContent.TileType<Tiles.Ores.BismuthOre>(), TileID.Gold, pos);
-				}
-				#endregion
-				#region rhodium
-				if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.RhodiumOre>())
-				{
-					RiftReplace(tile, ModContent.TileType<Tiles.Ores.RhodiumOre>(), ModContent.TileType<Tiles.Ores.OsmiumOre>(), pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.OsmiumOre>())
-				{
-					RiftReplace(tile, ModContent.TileType<Tiles.Ores.OsmiumOre>(), ModContent.TileType<Tiles.Ores.IridiumOre>(), pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.IridiumOre>())
-				{
-					RiftReplace(tile, ModContent.TileType<Tiles.Ores.IridiumOre>(), ModContent.TileType<Tiles.Ores.RhodiumOre>(), pos);
-				}
-				#endregion
-				#region evil
-				if (Main.tile[tile.X, tile.Y].TileType == TileID.Demonite)
-				{
-					RiftReplace(tile, TileID.Demonite, TileID.Crimtane, pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == TileID.Crimtane)
-				{
-					RiftReplace(tile, TileID.Crimtane, ModContent.TileType<Tiles.Ores.BacciliteOre>(), pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.BacciliteOre>())
-				{
-					RiftReplace(tile, ModContent.TileType<Tiles.Ores.BacciliteOre>(), TileID.Demonite, pos);
-				}
-				#endregion
-				#region cobalt
-				if (Main.tile[tile.X, tile.Y].TileType == TileID.Cobalt)
-				{
-					RiftReplace(tile, TileID.Cobalt, TileID.Palladium, pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == TileID.Palladium)
-				{
-					RiftReplace(tile, TileID.Palladium, ModContent.TileType<Tiles.Ores.DurataniumOre>(), pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.DurataniumOre>())
-				{
-					RiftReplace(tile, ModContent.TileType<Tiles.Ores.DurataniumOre>(), TileID.Cobalt, pos);
-				}
-				#endregion
-				#region mythril
-				if (Main.tile[tile.X, tile.Y].TileType == TileID.Mythril)
-				{
-					RiftReplace(tile, TileID.Mythril, TileID.Orichalcum, pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == TileID.Orichalcum)
-				{
-					RiftReplace(tile, TileID.Orichalcum, ModContent.TileType<Tiles.Ores.NaquadahOre>(), pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.NaquadahOre>())
-				{
-					RiftReplace(tile, ModContent.TileType<Tiles.Ores.NaquadahOre>(), TileID.Mythril, pos);
-				}
-				#endregion
-				#region adamantite
-				if (Main.tile[tile.X, tile.Y].TileType == TileID.Adamantite)
-				{
-					RiftReplace(tile, TileID.Adamantite, TileID.Titanium, pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == TileID.Titanium)
-				{
-					RiftReplace(tile, TileID.Titanium, ModContent.TileType<Tiles.Ores.TroxiniumOre>(), pos);
-				}
-				else if (Main.tile[tile.X, tile.Y].TileType == ModContent.TileType<Tiles.Ores.TroxiniumOre>())
-				{
-					RiftReplace(tile, ModContent.TileType<Tiles.Ores.TroxiniumOre>(), TileID.Adamantite, pos);
-				}
-				#endregion
-			}
-			pos.Z--;
-			if (pos.Z == 0)
-			{
-				Item.active = false;
-			}
-		}
-	}
-	public static List<List<Point>> AddValidNeighbors(List<List<Point>> p, Point start)
-	{
-		p.Add(new List<Point>()
-		{
-			start + new Point(0, -1), start + new Point(0, 1), start + new Point(-1, 0), start + new Point(1, 0)
-		});
-
-		return p;
-	}
-
-	public static void Honeyify(Point p, int type, int maxTiles = 600)
-	{
-		int tiles = 0;
-
-		Tile tile = Framing.GetTileSafely(p);
-		if (!tile.HasTile || tile.TileType != type)
-		{
-			return;
-		}
-
-		List<List<Point>> points = new List<List<Point>>();
-		points = AddValidNeighbors(points, p);
-
-		int index = 0;
-
-		while (points.Count > 0 && tiles < maxTiles && index < points.Count)
-		{
-			List<Point> tilePos = points[index];
-			foreach (Point a in tilePos)
-			{
-				Tile t = Framing.GetTileSafely(a.X, a.Y);
-				if (t.HasTile && t.TileType == type && t.LiquidAmount == 0)
-				{
-					t.LiquidAmount = 54;
-					t.LiquidType = LiquidID.Honey;
-					tiles++;
-					AddValidNeighbors(points, a);
-				}
-			}
-			index++;
-		}
-	}
-
-	public static void RiftReplace(Point p, int type, int replace, Vector3 position, int maxTiles = 600)
-	{
-		List<Vector4> positions = new List<Vector4>();
-		int tiles = 0;
-
-		Tile tile = Framing.GetTileSafely(p);
-		if (!tile.HasTile || tile.TileType != type)
-		{
-			return;
-		}
-
-		List<List<Point>> points = new List<List<Point>>();
-		points = AddValidNeighbors(points, p);
-
-		int index = 0;
-		while (points.Count > 0 && tiles < maxTiles && index < points.Count)
-		{
-			List<Point> tilePos = points[index];
-
-			foreach (Point a in tilePos)
-			{
-				Tile t = Framing.GetTileSafely(a.X, a.Y);
-				if (t.HasTile && t.TileType == type && t.LiquidType == LiquidID.Honey)
-				{
-					Tile q = Framing.GetTileSafely(a.X, a.Y);
-					positions.Add(new Vector4(a.X, a.Y, // position
-												position.Z, // timer
-												replace)); // tile to draw
-														   //q.TileType = (ushort)replace;
-														   //WorldGen.SquareTileFrame(a.X, a.Y);
-														   //if (Main.netMode != NetmodeID.SinglePlayer)
-														   //{
-														   //    NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 21, a.X, a.Y, replace);
-														   //}
-					tiles++;
-					AddValidNeighbors(points, a);
-				}
-			}
-			index++;
-		}
-	}
-}
 public class RiftGogglesSystem : ModSystem
 {
 	public List<Vector4> Positions2 = new List<Vector4>();
@@ -742,4 +411,28 @@ public class RiftGogglesSystem : ModSystem
 			}
 		}
 	}
+}
+public static class RiftGogglesData
+{
+	public static int AddValueToList(List<int> list, int tileID)
+	{
+		list.Add(tileID);
+		return 0;
+	}
+
+	public static int NextInListWrapped(this List<int> list, int index)
+	{
+		index++;
+		if (index >= list.Count) index = 0;
+		return list[index];
+	}
+	public static List<int> CopperTier = new List<int>() { TileID.Copper, TileID.Tin, ModContent.TileType<BronzeOre>() };
+	public static List<int> IronTier = new List<int>() { TileID.Iron, TileID.Lead, ModContent.TileType<NickelOre>() };
+	public static List<int> SilverTier = new List<int>() { TileID.Silver, TileID.Tungsten, ModContent.TileType<ZincOre>() };
+	public static List<int> GoldTier = new List<int>() { TileID.Gold, TileID.Platinum, ModContent.TileType<BismuthOre>() };
+	public static List<int> RhodiumTier = new List<int>() { ModContent.TileType<RhodiumOre>(), ModContent.TileType<OsmiumOre>(), ModContent.TileType<IridiumOre>() };
+	public static List<int> EvilTier = new List<int>() { TileID.Demonite, TileID.Crimtane, ModContent.TileType<BacciliteOre>() };
+	public static List<int> CobaltTier = new List<int>() { TileID.Cobalt, TileID.Palladium, ModContent.TileType<DurataniumOre>() };
+	public static List<int> MythrilTier = new List<int>() { TileID.Mythril, TileID.Orichalcum, ModContent.TileType<NaquadahOre>() };
+	public static List<int> AdamantiteTier = new List<int>() { TileID.Adamantite, TileID.Titanium, ModContent.TileType<TroxiniumOre>() };
 }

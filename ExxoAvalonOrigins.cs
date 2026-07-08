@@ -1,6 +1,7 @@
 using Avalon.Assets;
 using Avalon.Common;
 using Avalon.Effects;
+using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.Info;
 using Avalon.Items.Weapons.Melee.Swords;
 using Avalon.Network;
@@ -36,8 +37,6 @@ public class ExxoAvalonOrigins : Mod
 	///     Gets reference to the main instance of the mod.
 	/// </summary>
 	public static ExxoAvalonOrigins Mod { get; private set; } = ModContent.GetInstance<ExxoAvalonOrigins>();
-
-	public static readonly Mod? DragonLens = ModLoader.TryGetMod("DragonLens", out Mod obtainedMod) ? obtainedMod : null;
 
 	/// <summary>
 	///     Gets the instance of the Confection mod.
@@ -224,6 +223,21 @@ public class ExxoAvalonOrigins : Mod
 		{
 			["Contagion"] => ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Contagion,
 			["SetWorldEvil", int value] => ModContent.GetInstance<AvalonWorld>().WorldEvil = (WorldEvil)value,
+
+			// Herbology calls
+			["AddHerbologyHerbData", int seedID, int herbID, int largeSeedID, int largeHerbID] => Data.HerbologyData.AddHerbologyHerbData(seedID, herbID, largeSeedID, largeHerbID),
+			["AddHerbologyPotionData", int potionID, int elixirID] => Data.HerbologyData.AddHerbologyPotionData(potionID, elixirID),
+
+			// Rift goggles
+			["AddRiftGogglesCopperTierOre", int tileID] => RiftGogglesData.AddValueToList(RiftGogglesData.CopperTier, tileID),
+			["AddRiftGogglesIronTierOre", int tileID] => RiftGogglesData.AddValueToList(RiftGogglesData.IronTier, tileID),
+			["AddRiftGogglesSilverTierOre", int tileID] => RiftGogglesData.AddValueToList(RiftGogglesData.SilverTier, tileID),
+			["AddRiftGogglesGoldTierOre", int tileID] => RiftGogglesData.AddValueToList(RiftGogglesData.GoldTier, tileID),
+			["AddRiftGogglesRhodiumTierOre", int tileID] => RiftGogglesData.AddValueToList(RiftGogglesData.RhodiumTier, tileID),
+			["AddRiftGogglesEvilTierOre", int tileID] => RiftGogglesData.AddValueToList(RiftGogglesData.EvilTier, tileID),
+			["AddRiftGogglesCobaltTierOre", int tileID] => RiftGogglesData.AddValueToList(RiftGogglesData.CobaltTier, tileID),
+			["AddRiftGogglesMythrilTierOre", int tileID] => RiftGogglesData.AddValueToList(RiftGogglesData.MythrilTier, tileID),
+			["AddRiftGogglesAdamantiteTierOre", int tileID] => RiftGogglesData.AddValueToList(RiftGogglesData.AdamantiteTier, tileID),
 
 			// biome chest loot for the biome lockbox
 			["AddBiomeChest", List<int> value] => Data.Sets.ItemSets.BiomeLockboxCollection.AddToListAndReturnIt(value),
