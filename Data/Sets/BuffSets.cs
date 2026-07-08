@@ -4,9 +4,19 @@ using Terraria.ModLoader;
 
 namespace Avalon.Data.Sets;
 
+[ReinitializeDuringResizeArrays]
 public static class BuffSets
 {
-    public static bool[] Elixir = BuffID.Sets.Factory.CreateBoolSet(
+	public static bool[] ImmunityCannotBeRemovedFromEnemies = BuffID.Sets.Factory.CreateNamedSet("ImmunityCannotBeRemovedFromEnemies")
+		.Description("Buffs in this set won't have enemies's immunities cleared from them while afflicted by Infernal Judgement")
+		.RegisterBoolSet(
+		BuffID.Confused
+		);
+	public static bool[] ImmunityCannotBeRemovedFromPlayers = BuffID.Sets.Factory.CreateNamedSet("ImmunityCannotBeRemovedFromPlayers")
+	.Description("Buffs in this set won't have players's immunities cleared from them while afflicted by Infernal Judgement")
+	.RegisterBoolSet();
+
+	public static bool[] Elixir = BuffID.Sets.Factory.CreateNamedSet("Elixir").RegisterBoolSet(
         ModContent.BuffType<AdvAmmoReservation>(),
         ModContent.BuffType<AdvArchery>(),
         ModContent.BuffType<AdvBattle>(),
