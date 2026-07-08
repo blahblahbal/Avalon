@@ -1,3 +1,4 @@
+using AltLibrary.Common.AltOres;
 using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Tiles.Ores;
@@ -425,6 +426,44 @@ public static class RiftGogglesData
 		index++;
 		if (index >= list.Count) index = 0;
 		return list[index];
+	}
+	public static void AddAltLibAlternates()
+	{
+		foreach (AltOre ore in OreSlotLoader.GetOres<CopperOreSlot>())
+		{
+			if (ore.ore != ModContent.TileType<BronzeOre>())
+				CopperTier.Add(ore.ore);
+		}
+		foreach (AltOre ore in OreSlotLoader.GetOres<IronOreSlot>())
+		{
+			if (ore.ore != ModContent.TileType<NickelOre>())
+				IronTier.Add(ore.ore);
+		}
+		foreach (AltOre ore in OreSlotLoader.GetOres<SilverOreSlot>())
+		{
+			if (ore.ore != ModContent.TileType<ZincOre>())
+				SilverTier.Add(ore.ore);
+		}
+		foreach (AltOre ore in OreSlotLoader.GetOres<GoldOreSlot>())
+		{
+			if (ore.ore != ModContent.TileType<BismuthOre>())
+				GoldTier.Add(ore.ore);
+		}
+		foreach (AltOre ore in OreSlotLoader.GetOres<CobaltOreSlot>())
+		{
+			if (ore.ore != ModContent.TileType<DurataniumOre>())
+				CobaltTier.Add(ore.ore);
+		}
+		foreach (AltOre ore in OreSlotLoader.GetOres<MythrilOreSlot>())
+		{
+			if (ore.ore != ModContent.TileType<NaquadahOre>())
+				MythrilTier.Add(ore.ore);
+		}
+		foreach (AltOre ore in OreSlotLoader.GetOres<AdamantiteOreSlot>())
+		{
+			if (ore.ore != ModContent.TileType<TroxiniumOre>())
+				AdamantiteTier.Add(ore.ore);
+		}
 	}
 	public static List<int> CopperTier = new List<int>() { TileID.Copper, TileID.Tin, ModContent.TileType<BronzeOre>() };
 	public static List<int> IronTier = new List<int>() { TileID.Iron, TileID.Lead, ModContent.TileType<NickelOre>() };
