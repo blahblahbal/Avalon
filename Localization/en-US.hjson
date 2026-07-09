@@ -11627,14 +11627,9 @@ Mods: {
 				Description: Mods.Avalon.Buffs.EnergyRevolver.Description
 			}
 
-			SinsearingFlames: {
-				DisplayName: Infernal Judgement
-				Description: quickly losing life and vulnerable to debuffs
-			}
-
 			InfernalJudgement: {
-				DisplayName: Infernal Judgement
-				Description: Mods.Avalon.Buffs.InfernalJudgement.Description
+				DisplayName: Infernal Judgment
+				Description: Quickly losing life and vulnerable to debuffs
 			}
 		}
 

@@ -16,7 +16,7 @@ public class XanthophyteBar : ModItem
 	{
 		Item.DefaultToBar(23);
 		Item.rare = ItemRarityID.Yellow;
-		Item.value = Item.sellPrice(0, 0, 15);
+		Item.value = Item.sellPrice(0, 0, 75);
 	}
 
 	public override void AddRecipes()
