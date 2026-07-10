@@ -184,6 +184,7 @@ public class InfernalJudgementNPC : GlobalNPC
 				}
 			}
 		}
+		npc.buffImmune[ModContent.BuffType<InfernalJudgement>()] = false;
 	}
 	public override void ResetEffects(NPC npc)
 	{

@@ -1,46 +1,41 @@
+using Microsoft.Xna.Framework;
 using System;
 using System.IO;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.WorldBuilding;
 
 namespace Avalon.NPCs.Template;
 
 public abstract class CustomFighterAI : ModNPC
 {
-	public virtual float MaxMoveSpeed { get; set; } = 2.5f;
-	public virtual float MaxAirSpeed{ get; set; } = 3.5f;
-	public virtual float Acceleration { get; set; } = 0.1f;
-	public virtual float AirAcceleration { get; set; } = 0.1f;
-	public virtual float MaxJumpHeight{ get; set; } = 8f;
-	public virtual float JumpRadius { get; set; } = 150;
-	public virtual bool JumpOverDrop { get; set; } = true;
-	public virtual int NumberOfJumpsAgainstWall { get; set; } = 4;
-	public virtual int TimeBeforeTurningAround { get; set; } = 180;
+	public virtual float MaxMoveSpeed => 2.5f;
+	public virtual float MaxAirSpeed => 3.5f;
+	public virtual float Acceleration => 0.1f;
+	public virtual float AirAcceleration => 0.1f;
+	public virtual float MaxJumpHeight => 8f;
+	public virtual float JumpRadius => 150;
+	public virtual bool JumpOverDrop => true;
+	public virtual bool CanOpenDoors => false;
+	public virtual bool CanBreakDoors => false;
+	/// <summary>
+	/// set to -1 to allow knocking but no opening.
+	/// </summary>
+	public virtual int MaxKnockCount => 1;
+	public virtual int MaxNumberOfJumpsAgainstWall => 4;
+	public virtual int KnockInterval => 60;
+	public virtual int TimeBeforeTurningAround => 180;
 
 	public float PreviousDirection;
-
-	public float NumJumps
-	{
-		get => NPC.ai[0];
-		set => NPC.ai[0] = value;
-	}
+	public float TimeSpentAtDoor = 0;
+	public ref float NumJumps => ref NPC.ai[0];
 	/// <summary>
 	/// RunningMode 0 is Targeting player
 	/// RunningMode 1 is Running away
 	/// </summary>
-	public float RunningMode
-	{
-		get => NPC.ai[1];
-		set => NPC.ai[1] = value;
-	}
-	public float RunningModeTimer
-	{
-		get => NPC.ai[2];
-		set => NPC.ai[2] = value;
-	}
-
+	public ref float RunningMode => ref NPC.ai[1];
+	public ref float RunningModeTimer => ref NPC.ai[2];
 	public ref float SavePrevDir => ref NPC.ai[3];
 
 	public override bool? CanFallThroughPlatforms()
@@ -53,22 +48,10 @@ public abstract class CustomFighterAI : ModNPC
 	}
 	public override void SendExtraAI(BinaryWriter writer)
 	{
-		writer.Write(MaxMoveSpeed);
-		writer.Write(MaxAirSpeed);
-		writer.Write(MaxJumpHeight);
-		writer.Write(JumpRadius);
-		writer.Write(Acceleration);
-		writer.Write(AirAcceleration);
 		writer.Write(PreviousDirection);
 	}
 	public override void ReceiveExtraAI(BinaryReader reader)
 	{
-		MaxMoveSpeed = reader.ReadSingle();
-		MaxAirSpeed = reader.ReadSingle();
-		MaxJumpHeight = reader.ReadSingle();
-		JumpRadius = reader.ReadSingle();
-		Acceleration = reader.ReadSingle();
-		AirAcceleration = reader.ReadSingle();
 		PreviousDirection = reader.ReadSingle();
 	}
 	public virtual void CustomBehavior()
@@ -195,31 +178,68 @@ public abstract class CustomFighterAI : ModNPC
 		}
 		Point a = NPC.Bottom.ToTileCoordinates();
 		float height = 0;
-		
 		// if its on the ground and touching a wall
-		if ((NPC.collideY || Main.tileSolid[Main.tile[a.X, a.Y].TileType] && Main.tile[a.X, a.Y].HasTile && !Main.tileSolidTop[Main.tile[a.X, a.Y].TileType]) && NPC.collideX && NumJumps <= NumberOfJumpsAgainstWall)
+		if ((NPC.collideY || Main.tileSolid[Main.tile[a.X, a.Y].TileType] && Main.tile[a.X, a.Y].HasTile && !Main.tileSolidTop[Main.tile[a.X, a.Y].TileType]) && NPC.collideX && NumJumps <= MaxNumberOfJumpsAgainstWall)
 		{
-			//check for the height of the wall infront
+			bool door = false;
+			bool tallGate = false;
+			int modifier = 1;
+			if (RunningMode == 1) modifier = -1;
+			//check for the height of the wall infront and if it's a door
 			for (int i = 0; i < 10; i++)
 			{
-				int modifier = 1;
-				if (RunningMode == 1) modifier = -1;
-				if (Main.tile[a.X + 1 * -(int)dir * modifier, a.Y - i].HasTile && Main.tileSolid[Main.tile[a.X + 1 * -(int)dir * modifier, a.Y - i].TileType])
+				Tile t = Main.tile[a.X + 1 * -(int)dir * modifier, a.Y - i];
+				if ((CanOpenDoors || CanBreakDoors) && i == 1 && (t.TileType == TileID.TallGateClosed || i < 3 && TileLoader.IsClosedDoor(t.TileType)))
+				{
+					if (t.TileType == TileID.TallGateClosed)
+						tallGate = true;
+					door = true;
+					break;
+				}
+				if (t.HasTile && Main.tileSolid[t.TileType])
 				{
 					height = i + 1;
 				}
 			}
-			//jumps with the right height
-			if (NumJumps < NumberOfJumpsAgainstWall)
-				Jump(height);
+			if (!door)
+			{
+				//jumps with the right height
+				if (NumJumps < MaxNumberOfJumpsAgainstWall)
+					Jump(height);
+				else
+				{
+					// swap the running mode and set num jumps to 0
+					if (RunningMode == 0) RunningMode = 1;
+					else if (RunningMode == 1) RunningMode = 0;
+					NumJumps = 0;
+				}
+			}
 			else
 			{
-				// swap the running mode and set num jumps to 0
-				if (RunningMode == 0) RunningMode = 1;
-				else if (RunningMode == 1) RunningMode = 0;
-				NumJumps = 0;
+				TimeSpentAtDoor++;
+				if (MaxKnockCount != -1 && TimeSpentAtDoor > KnockInterval * MaxKnockCount)
+				{
+					if (CanOpenDoors)
+					{
+						if ((!tallGate && WorldGen.OpenDoor(a.X + 1 * -(int)dir * modifier, a.Y - 1, NPC.direction) || (tallGate && WorldGen.ShiftTallGate(a.X + 1 * -(int)dir * modifier, a.Y - 1, false))) && Main.netMode == NetmodeID.Server)
+						{
+							NetMessage.SendData(MessageID.ToggleDoorState, -1, -1, null, tallGate ? 4 : 0, a.X + 1 * -(int)dir * modifier, a.Y - 1, NPC.direction);
+						}
+					}
+					else
+					{
+						WorldGen.KillTile(a.X + 1 * -(int)dir * modifier, a.Y - 1);
+						NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, a.X + 1 * -(int)dir * modifier, a.Y - 1);
+					}
+				}
+				if(TimeSpentAtDoor % KnockInterval == 0)
+				{
+					WorldGen.KillTile(a.X + 1 * -(int)dir * modifier, a.Y - 1, true);
+				}
 			}
 		}
+		else
+			TimeSpentAtDoor = 0;
 
 		//if its on the ground
 		if (NPC.collideY || Main.tileSolid[Main.tile[a.X, a.Y].TileType] && Main.tile[a.X, a.Y].HasTile)

@@ -24,6 +24,9 @@
 		<Reference Include="AltLibrary">
 			<HintPath>dllReferences\AltLibrary_v2.1.1.3.dll</HintPath>
 		</Reference>
+		<Reference Include="AltLibrary">
+		  <HintPath>dllReferences\AltLibrary_v2.1.2.8.dll</HintPath>
+		</Reference>
 		<Reference Include="MagicStorage">
 		  <HintPath>dllReferences\MagicStorage.dll</HintPath>
 		</Reference>

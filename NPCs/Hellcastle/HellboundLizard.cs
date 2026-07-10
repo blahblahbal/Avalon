@@ -29,12 +29,12 @@ public class HellboundLizard : CustomFighterAI
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.ShadowFlame] = true;
 		Data.Sets.NPCSets.Fiery[NPC.type] = true;
 	}
-	public override float MaxMoveSpeed { get; set; } = 3f;
-	public override float Acceleration { get; set; } = 0.25f;
-	public override float AirAcceleration { get; set; } = 0.15f;
-	public override float MaxAirSpeed { get; set; } = 3.5f;
-	public override float JumpRadius { get; set; } = 225;
-	public override float MaxJumpHeight { get; set; } = 9f;
+	public override float MaxMoveSpeed => 3f;
+	public override float Acceleration => 0.25f;
+	public override float AirAcceleration => 0.15f;
+	public override float MaxAirSpeed => 3.5f;
+	public override float JumpRadius => 225;
+	public override float MaxJumpHeight => 9f;
 	public override void SetDefaults()
 	{
 		NPC.damage = 128;
