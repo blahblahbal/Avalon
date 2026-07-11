@@ -1,16 +1,13 @@
+using Avalon.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using Terraria;
 using Terraria.Graphics.Renderers;
-using Terraria.ModLoader;
 
 namespace Avalon.Particles
 {
     public class ExplosionParticle : BaseParticle
     {
-		private static Asset<Texture2D> texture;
-		private static Asset<Texture2D> texture2;
 		public float Scale;
 		public float Rotation;
 		int Frame;
@@ -35,14 +32,8 @@ namespace Avalon.Particles
 		}
 		public override void Draw(ref ParticleRendererSettings settings, SpriteBatch spritebatch)
 		{
-			if (texture == null)
-			{
-				texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/FlameExplosion");
-			}
-			if (texture2 == null)
-			{
-				texture2 = ModContent.Request<Texture2D>("Avalon/Assets/Textures/WhiteExplosion");
-			}
+			var texture = AssetReferences.Assets.Textures.FlameExplosion.Asset;
+			var texture2 = AssetReferences.Assets.Textures.WhiteExplosion.Asset;
 			int frameHeight = texture.Height() / 7;
 			Rectangle frame = new Rectangle(0, frameHeight * Frame, texture.Width(), frameHeight);
 			Vector2 frameOrigin = new Vector2(texture.Width()) / 2;

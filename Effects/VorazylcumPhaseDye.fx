@@ -58,6 +58,6 @@ technique Technique1
 {
     pass VorazylcumPhaseDye
     {
-        PixelShader = compile ps_2_0 ArmorBasic();
+        PixelShader = compile ps_3_0 ArmorBasic();
     }
 }

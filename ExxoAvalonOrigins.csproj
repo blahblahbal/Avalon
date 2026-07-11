@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Tomat.Terraria.ModLoader.Sdk/2.1.1">
 	<Import Project="..\tModLoader.targets" />
 	<PropertyGroup>
 		<AssemblyName>Avalon</AssemblyName>
-		<TargetFramework>net8.0</TargetFramework>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>

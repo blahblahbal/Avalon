@@ -1,3 +1,4 @@
+using Avalon.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -37,14 +38,8 @@ namespace Avalon.Particles
 		}
 		public override void Draw(ref ParticleRendererSettings settings, SpriteBatch spritebatch)
 		{
-			if (texture == null)
-			{
-				texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/CursedExplosion");
-			}
-			if (texture2 == null)
-			{
-				texture2 = ModContent.Request<Texture2D>("Avalon/Assets/Textures/WhiteExplosion");
-			}
+			var texture = AssetReferences.Assets.Textures.CursedExplosion.Asset;
+			var texture2 = AssetReferences.Assets.Textures.WhiteExplosion.Asset;
 			int frameHeight = texture.Height() / 7;
 			Rectangle frame = new Rectangle(0, frameHeight * Frame, texture.Width(), frameHeight);
 			Vector2 frameOrigin = new Vector2(texture.Width()) / 2;

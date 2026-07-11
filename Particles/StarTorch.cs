@@ -1,19 +1,15 @@
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using System;
-using Terraria.GameContent;
-using Terraria.ID;
-using Terraria;
-using Terraria.ModLoader;
 using Avalon;
-using ReLogic.Content;
+using Avalon.Core;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using Terraria;
 using Terraria.Graphics.Renderers;
 
 namespace Avalon.Particles
 {
 	public class StarTorch : BaseParticle
 	{
-		private static Asset<Texture2D> texture;
 		float ai2;
 		float Scale;
 		Vector2 Velocity;
@@ -35,8 +31,7 @@ namespace Avalon.Particles
 		}
 		public override void Draw(ref ParticleRendererSettings settings, SpriteBatch spritebatch)
 		{
-			if (texture == null)
-				texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/StarTorch");
+			var texture = AssetReferences.Assets.Textures.StarTorch.Asset;
 			Vector2 DrawPos = Position + settings.AnchorPosition;
 			//spriteBatch.Draw(texture, DrawPos, frame, Color, 0f, frameOrigin, new Vector2(1.4f, (float)Math.Sin((float)(TimeInWorld + 3) * 0.10f) * 1.5f) * Scale, SpriteEffects.None, 0);
 			//spriteBatch.Draw(texture, DrawPos, frame, new Color(255, 255, 255, 0) * 0.3f, 0f, frameOrigin, new Vector2(1.4f, (float)Math.Sin((float)(TimeInWorld + 1) * 0.20f) * 1f) * 0.7f * Scale, SpriteEffects.None, 0);

@@ -99,10 +99,10 @@ technique Technique1
 {
     pass CrimstoneDye
     {
-        PixelShader = compile ps_2_0 ArmorBasic();
+        PixelShader = compile ps_3_0 ArmorBasic();
     }
     pass CrimstoneDyeNoise
     {
-        PixelShader = compile ps_2_0 ArmorNoise();
+        PixelShader = compile ps_3_0 ArmorNoise();
     }
 }

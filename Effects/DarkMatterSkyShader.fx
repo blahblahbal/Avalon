@@ -33,6 +33,6 @@ technique Technique1
 {
     pass DarkMatterSky
     {
-        PixelShader = compile ps_2_0 FilterMyShader();
+        PixelShader = compile ps_3_0 FilterMyShader();
     }
 }

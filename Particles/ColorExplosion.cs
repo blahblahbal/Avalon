@@ -1,3 +1,4 @@
+using Avalon.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -9,7 +10,6 @@ namespace Avalon.Particles
 {
     public class ColorExplosion : BaseParticle
     {
-		private static Asset<Texture2D> texture;
 		public Color Color;
 		public float Scale;
 		public float Rotation;
@@ -36,10 +36,7 @@ namespace Avalon.Particles
 		}
 		public override void Draw(ref ParticleRendererSettings settings, SpriteBatch spriteBatch)
 		{
-			if (texture == null)
-			{
-				texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/WhiteExplosion");
-			}
+			var texture = AssetReferences.Assets.Textures.WhiteExplosion.Asset;
 			int frameHeight = texture.Height() / 7;
 			Rectangle frame = new Rectangle(0, frameHeight * Frame, texture.Width(), frameHeight);
 			Vector2 frameOrigin = new Vector2(texture.Width()) / 2;

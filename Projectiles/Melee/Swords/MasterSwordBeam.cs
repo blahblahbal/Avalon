@@ -1,4 +1,5 @@
-﻿using Avalon.Particles;
+﻿using Avalon.Core;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -87,7 +88,9 @@ public class MasterSwordBeam : ModProjectile
 	{
 		SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
 		var ring = VanillaParticles.RequestFadingParticle();
-		ring.SetBasicInfo(TextureAssets.Extra[ExtrasID.KeybrandRing], null, Vector2.Zero, Projectile.Center);
+		var t = AssetReferences.Assets.Textures.InverseGlowRing.Asset;
+		t.Wait();
+		ring.SetBasicInfo(t, null, Vector2.Zero, Projectile.Center);
 		int time = 25;
 		ring.SetTypeInfo(time);
 		ring.Scale = Vector2.One * 0.15f;
