@@ -35,6 +35,7 @@ public class HellboundLizard : CustomFighterAI
 	public override float MaxAirSpeed => 3.5f;
 	public override float JumpRadius => 225;
 	public override float MaxJumpHeight => 9f;
+	public override bool CanOpenDoors => true;
 	public override void SetDefaults()
 	{
 		NPC.damage = 128;

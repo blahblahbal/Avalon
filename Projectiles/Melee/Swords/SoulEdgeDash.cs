@@ -27,6 +27,7 @@ public class SoulEdgeDash : ModProjectile, ISyncedOnHitEffect
 		Projectile.timeLeft = initialTimeLeft;
 		Projectile.penetrate = -1;
 		Projectile.netImportant = true;
+		Projectile.hide = true;
 	}
 	public override void AI()
 	{
@@ -38,7 +39,7 @@ public class SoulEdgeDash : ModProjectile, ISyncedOnHitEffect
 			SoundEngine.PlaySound(SoundID.DD2_GhastlyGlaiveImpactGhost with { MaxInstances = 10}, player.position);
 			SoundEngine.PlaySound(SoundID.DD2_GhastlyGlaiveImpactGhost with { MaxInstances = 10, Pitch = -0.35f}, player.position);
 			SoundEngine.PlaySound(SoundID.DD2_GhastlyGlaiveImpactGhost with { MaxInstances = 10, Pitch = -0.65f }, player.position);
-			SoundEngine.PlaySound(SoundID.Zombie53, player.position);
+			SoundEngine.PlaySound(SoundID.Zombie53 with { SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest, MaxInstances = 5}, player.position);
 			player.immune = true;
 			player.AddImmuneTime(ImmunityCooldownID.General, 60);
 			player.GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage = 0;
@@ -67,8 +68,15 @@ public class SoulEdgeDash : ModProjectile, ISyncedOnHitEffect
 		for (int i = 0; i < Projectile.timeLeft / 5; i++)
 		{
 			Dust d = Dust.NewDustDirect(Projectile.position + Projectile.velocity, Projectile.width, Projectile.height, ModContent.DustType<PhantoplasmDust>());
-			d.velocity += Projectile.velocity;
-			d.noGravity = Main.rand.NextBool();
+			d.velocity += Projectile.velocity * 1.5f;
+			d.noGravity = !Main.rand.NextBool(3);
+			if (d.noGravity)
+			{
+				d.fadeIn = Main.rand.NextFloat(3);
+				d.velocity *= d.fadeIn;
+			}
+			else
+				d.scale *= 1.25f;
 		}
 
 		Projectile.Center = player.Center + new Vector2(0, player.gfxOffY) + Vector2.Normalize(Projectile.velocity) * 15 * MathF.Sin(Projectile.timeLeft / (float)initialTimeLeft * MathHelper.Pi) - Vector2.Normalize(Projectile.velocity) * 10;
@@ -77,13 +85,26 @@ public class SoulEdgeDash : ModProjectile, ISyncedOnHitEffect
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
-		float percent = Projectile.timeLeft / (float)initialTimeLeft;
+		//float percent = Projectile.timeLeft / (float)initialTimeLeft;
+		float percent = Utils.Remap(Projectile.timeLeft, 0, initialTimeLeft * 0.75f, 0, 1) * (1f - MathF.Pow(Projectile.timeLeft / (float)initialTimeLeft,5));
+		for(int i = 0; i < 15; i++)
+		{
+			float percent2 = i / 15f;
+			Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition - Projectile.velocity * i, null, Color.Gray * (1f - percent2) * percent, Projectile.rotation, new Vector2(0, TextureAssets.Projectile[Type].Height()), Projectile.scale, SpriteEffects.None, 0);
+		}
 		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation, new Vector2(0, TextureAssets.Projectile[Type].Height()), Projectile.scale, SpriteEffects.None, 0);
-		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition - Projectile.velocity * 3 * percent, null, Color.Red * 0.2f * percent, Projectile.rotation, new Vector2(0, TextureAssets.Projectile[Type].Height()), Projectile.scale + percent, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition, null, Color.Cyan with { A = 0 } * percent, Projectile.rotation, new Vector2(0, TextureAssets.Projectile[Type].Height()), Projectile.scale + percent * percent, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition - Projectile.velocity * 3 * percent, null, Color.Red with { A = 128 } * 0.35f * percent, Projectile.rotation, new Vector2(0, TextureAssets.Projectile[Type].Height()), Projectile.scale + percent, SpriteEffects.None, 0);
+		Vector2 flashPos = Projectile.Center - Main.screenPosition + Vector2.Normalize(Projectile.velocity) * 120;
 		for (int i = 0; i < 2; i++)
 		{
-			Main.EntitySpriteDraw(TextureAssets.Extra[ExtrasID.SharpTears].Value, Projectile.Center - Main.screenPosition + Vector2.Normalize(Projectile.velocity) * 110, null, new Color(1f, 0.25f, 0.25f, 0f) * 0.8f * percent, MathHelper.PiOver2 * i + Projectile.rotation + MathHelper.PiOver4, TextureAssets.Extra[ExtrasID.SharpTears].Size() / 2, new Vector2(Projectile.scale, (Projectile.scale + 1 - i) * (0.7f + percent)) * 1.2f, SpriteEffects.None, 0);
-			Main.EntitySpriteDraw(TextureAssets.Extra[ExtrasID.SharpTears].Value, Projectile.Center - Main.screenPosition + Vector2.Normalize(Projectile.velocity) * 110, null, new Color(1f, 1f, 1f, 0f) * 0.4f * percent * percent, MathHelper.PiOver2 * i + Projectile.rotation + MathHelper.PiOver4, TextureAssets.Extra[ExtrasID.SharpTears].Size() / 2, new Vector2(Projectile.scale, (Projectile.scale + 1 - i) * (0.5f + percent)), SpriteEffects.None, 0);
+			Main.EntitySpriteDraw(TextureAssets.Extra[ExtrasID.SharpTears].Value, flashPos, null, new Color(1f, 0.25f, 0.25f, 0f) * 0.8f * percent, MathHelper.PiOver2 * i + Projectile.rotation + MathHelper.PiOver4, TextureAssets.Extra[ExtrasID.SharpTears].Size() / 2, new Vector2(Projectile.scale * percent * 3 * percent, (Projectile.scale + 2 - i * 2) * (1 + percent) * percent) * 1.2f, SpriteEffects.None, 0);
+			Main.EntitySpriteDraw(TextureAssets.Extra[ExtrasID.SharpTears].Value, flashPos, null, new Color(1f, 1f, 1f, 0f) * 0.4f * percent * percent, MathHelper.PiOver2 * i + Projectile.rotation + MathHelper.PiOver4, TextureAssets.Extra[ExtrasID.SharpTears].Size() / 2, new Vector2(Projectile.scale * percent * 3 * percent, (Projectile.scale + 2 - i * 2) * (0.75f + percent) * percent), SpriteEffects.None, 0);
+		}
+		for (int i = 0; i < 2; i++)
+		{
+			Main.EntitySpriteDraw(TextureAssets.Extra[ExtrasID.SharpTears].Value, flashPos, null, new Color(0f, 0.75f, 1f, 0f) * 0.8f * percent, MathHelper.PiOver2 * i + Projectile.rotation, TextureAssets.Extra[ExtrasID.SharpTears].Size() / 2, new Vector2(Projectile.scale * percent * 3 * percent, (Projectile.scale + 1) * (1 + percent) * percent) * 1.2f * percent, SpriteEffects.None, 0);
+			Main.EntitySpriteDraw(TextureAssets.Extra[ExtrasID.SharpTears].Value, flashPos, null, new Color(1f, 1f, 1f, 0f) * 0.4f * percent * percent, MathHelper.PiOver2 * i + Projectile.rotation, TextureAssets.Extra[ExtrasID.SharpTears].Size() / 2, new Vector2(Projectile.scale * percent * 3 * percent, (Projectile.scale + 1) * (0.75f + percent) * percent) * percent, SpriteEffects.None, 0);
 		}
 		return false;
 	}
