@@ -2,7 +2,6 @@ using Avalon.Common.Extensions;
 using Avalon.Projectiles.Melee.Swords;
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -21,7 +20,6 @@ public class MasterSword : ModItem
 	{
 		if (player.statLife >= player.statLifeMax2 * 0.80f)
 		{
-			SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/Item/MasterSword"), player.position);
 			Projectile.NewProjectile(source, position, velocity, type, (int)(damage * 1.3f), knockback, player.whoAmI);
 			return false;
 		}

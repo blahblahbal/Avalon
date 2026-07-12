@@ -518,7 +518,7 @@ Mods: {
 			Fly: Truly-annoying insects that love festering meat and rotten produce. They are as disgusting as they sound.
 			AmberSlime: A simple gelatinous creature that somehow also has the properties of amber. It takes a long time to digest anything.
 			InfestedAmberSlime: Consistent consumption of the bugs in the Savanna caused these slimes to burst into a multitude of them when killed.
-			OreSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
+			OreSlime: A dazzling slime that has taken up a hobby in cosmetics
 			MineralSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
 			PoisonDartFrog: Highly toxic frogs that have made their home in the Savanna. Those that touch their skin are often poisoned to death.
 			Mosquito: These nasty insects are known for carrying diseases. They will abscond with your blood, leaving infections where they landed.
@@ -10815,6 +10815,7 @@ Mods: {
 			SnakeTail.DisplayName: Snake Tail
 			BacteriumTendril.DisplayName: Bacterium Tendril
 			EnemyGauntletPortal.DisplayName: ""
+			DyeSlime.DisplayName: Dye Slime
 		}
 
 		Buffs: {

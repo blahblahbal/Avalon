@@ -7,6 +7,7 @@ using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ModLoader.BackupIO;
 
 namespace Avalon.Projectiles.Melee.Swords;
 
@@ -19,59 +20,25 @@ public class MasterSwordBeam : ModProjectile
 	}
 	public override void SetDefaults()
 	{
-		//Rectangle dims = this.GetDims();
 		Projectile.width = 20;
 		Projectile.height = 20;
 		Projectile.aiStyle = -1;
 		Projectile.DamageType = DamageClass.Melee;
 		Projectile.penetrate = 1;
-		Projectile.alpha = 0;
+		Projectile.alpha = 255;
 		Projectile.friendly = true;
-		//DrawOffsetX = -(int)((dims.Width / 2) - (Projectile.Size.X / 2));
-		//DrawOriginOffsetY = -(int)((dims.Width / 2) - (Projectile.Size.Y / 2));
 	}
 	public override Color? GetAlpha(Color lightColor)
 	{
-		if (Projectile.localAI[1] >= 15f)
-		{
-			return new Color(255, 255, 255, Projectile.alpha);
-		}
-		if (Projectile.localAI[1] < 5f)
-		{
-			return Color.Transparent;
-		}
-		int num7 = (int)((Projectile.localAI[1] - 5f) / 10f * 255f);
-		return new Color(num7, num7, num7, num7);
+		return Color.White * Projectile.Opacity;
 	}
 	public override void AI()
 	{
-		if (Projectile.localAI[1] < 15f)
+		if(Projectile.Opacity == 0)
 		{
-			Projectile.localAI[1] += 1f;
+			SoundEngine.PlaySound(new SoundStyle($"{nameof(Avalon)}/Sounds/Item/MasterSword") { pitchVariance = 0.12f}, Projectile.position);
 		}
-		else
-		{
-			if (Projectile.localAI[0] == 0f)
-			{
-				Projectile.scale -= 0.02f;
-				Projectile.alpha += 30;
-				if (Projectile.alpha >= 250)
-				{
-					Projectile.alpha = 255;
-					Projectile.localAI[0] = 1f;
-				}
-			}
-			else if (Projectile.localAI[0] == 1f)
-			{
-				Projectile.scale += 0.02f;
-				Projectile.alpha -= 30;
-				if (Projectile.alpha <= 0)
-				{
-					Projectile.alpha = 0;
-					Projectile.localAI[0] = 0f;
-				}
-			}
-		}
+		Projectile.Opacity += 0.1f;
 
 		Projectile.rotation += Projectile.direction * 0.4f;
 		if (Projectile.direction == 1)
@@ -98,7 +65,7 @@ public class MasterSwordBeam : ModProjectile
 		ring.ScaleAcceleration = ring.ScaleVelocity / -time;
 		ring.FadeInNormalizedTime = 0.1f;
 		ring.FadeOutNormalizedTime = 0.1f;
-		ring.ColorTint = new Color(31,107,255,0);
+		ring.ColorTint = new Color(31,107,255,64);
 		ring.Rotation = Main.rand.NextFloatDirection();
 		Main.ParticleSystem_World_OverPlayers.Add(ring);
 
@@ -140,9 +107,9 @@ public class MasterSwordBeam : ModProjectile
 		for (int i = Projectile.oldPos.Length - 1; i >= 0; i--)
 		{
 			float percent = i / (float)Projectile.oldPos.Length;
-			Main.EntitySpriteDraw(t, Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2, null, Color.Lerp(c,c.MultiplyRGB(Color.Blue),percent) * 0.4f * (1f - percent), Projectile.oldRot[i], t.Size() / 2, Projectile.scale - percent * 0.2f, effect);
+			Main.EntitySpriteDraw(t, Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2, null, Color.Lerp(c, c.MultiplyRGB(Color.Blue), percent) with { A = 64 } * 0.4f * (1f - percent), Projectile.oldRot[i], t.Size() / 2, Projectile.scale - percent * 0.2f, effect);
 		}
-		Main.EntitySpriteDraw(t, Projectile.Center - Main.screenPosition, null, c with { A = c.R}, Projectile.rotation, t.Size() / 2, Projectile.scale, effect);
+		Main.EntitySpriteDraw(t, Projectile.Center - Main.screenPosition, null, c, Projectile.rotation, t.Size() / 2, Projectile.scale, effect);
 		return false;
 	}
 }
