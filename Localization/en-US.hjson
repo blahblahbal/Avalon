@@ -10084,6 +10084,11 @@ Mods: {
 				DisplayName: Tile Placer
 				Tooltip: Change style with W and S
 			}
+
+			DyeSlimeBanner: {
+				DisplayName: Dye Slime Banner
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {

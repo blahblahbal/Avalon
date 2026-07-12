@@ -1,11 +1,11 @@
-using Avalon.Common.Players;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.GameContent.Bestiary;
-using Terraria.Localization;
+using Avalon.Items.Banners;
 using Microsoft.Xna.Framework;
+using Terraria;
+using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Crimson;
 
@@ -47,7 +47,7 @@ public class BloodyVulture : ModNPC
         NPC.HitSound = SoundID.NPCHit28;
         NPC.DeathSound = SoundID.NPCDeath31;
         Banner = NPC.type;
-        BannerItem = ModContent.ItemType<Items.Banners.BloodyVultureBanner>();
+        BannerItem = ModContent.ItemType<BloodyVultureBanner>();
 		if (NPC.IsABestiaryIconDummy)
 		{
 			NPC.noGravity = true;

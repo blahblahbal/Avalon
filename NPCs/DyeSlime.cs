@@ -1,4 +1,5 @@
 using Avalon;
+using Avalon.Items.Banners;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -60,6 +61,8 @@ public class DyeSlime : ModNPC
 		NPC.HitSound = SoundID.NPCHit1;
 		NPC.DeathSound = SoundID.NPCDeath1;
 		NPC.alpha = 128;
+		BannerItem = ModContent.ItemType<DyeSlimeBanner>();
+		Banner = Type;
 	}
 
 	public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>
@@ -111,7 +114,9 @@ public class DyeSlime : ModNPC
 			return false;
 		float rotate = MathHelper.SmoothStep(0.1f, -0.1f, Main.masterColor);
 		var tex = TextureAssets.Npc[Type].Value;
-		Main.instance.LoadItem(WhichDye);
+
+		if (!TextureAssets.Item[WhichDye].IsLoaded)
+			Main.instance.LoadItem(WhichDye);
 		Asset<Texture2D> dyeTex = TextureAssets.Item[WhichDye];
 
 		Main.GetItemDrawFrame(WhichDye, out var itemTexture, out var rectangle);
