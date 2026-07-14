@@ -8119,15 +8119,15 @@ Mods: {
 
 			ForsakenRelic: {
 				DisplayName: Forsaken Relic
-				Tooltip: Increases damage and critical strike chance by 7% while invincible
+				Tooltip: Increases damage by 25% and critical strike chance by 7% while invincible
 			}
 
 			ForsakenCross: {
 				DisplayName: Forsaken Cross
 				Tooltip:
 					'''
-					Increases damage and critical strike chance by 7% while invincible
-					Increases length of invincibility after taking damage
+					{$Mods.Avalon.Items.ForsakenRelic.Tooltip}
+					{$ItemTooltip.CrossNecklace}
 					'''
 			}
 
@@ -10087,6 +10087,29 @@ Mods: {
 
 			DyeSlimeBanner: {
 				DisplayName: Dye Slime Banner
+				Tooltip: ""
+			}
+
+			ForsakenCuffs: {
+				DisplayName: Forsaken Cuffs
+				Tooltip:
+					'''
+					{$Mods.Avalon.Items.ForsakenRelic.Tooltip}
+					{$ItemTooltip.MagicCuffs}
+					'''
+			}
+
+			ForsakenHeartNecklace: {
+				DisplayName: Forsaken Heart Necklace
+				Tooltip:
+					'''
+					{$Mods.Avalon.Items.ForsakenRelic.Tooltip}
+					{$ItemTooltip.SweetheartNecklace}
+					'''
+			}
+
+			ShadlopodBanner: {
+				DisplayName: Shadlopod Banner
 				Tooltip: ""
 			}
 		}

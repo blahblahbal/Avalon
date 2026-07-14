@@ -1,4 +1,5 @@
 using Avalon;
+using Avalon.Items.Banners;
 using Avalon.Projectiles.Hostile;
 using Microsoft.Xna.Framework;
 using System;
@@ -19,7 +20,6 @@ public class Shadlopod : ModNPC
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
 		Main.npcFrameCount[NPC.type] = 4;
     }
-
     public override void SetDefaults()
     {
         NPC.damage = 35;
@@ -36,8 +36,9 @@ public class Shadlopod : ModNPC
         NPC.gfxOffY = 10;
         NPC.noGravity = true;
         NPC.hide = true;
+		BannerItem = ModContent.ItemType<ShadlopodBanner>();
+		Banner = NPC.type;
     }
-    float collisionPoint = 0f;
     bool Grounded = false;
 	public override bool PreAI()
 	{
