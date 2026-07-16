@@ -576,18 +576,7 @@ public class AvalonGlobalNPC : GlobalNPC
 	{
 		//if (spawnInfo.Player.InModBiome<Tropics>() && !spawnInfo.Player.InPillarZone())
 		//{
-		//    pool.Clear();
-		//    //pool.Add(ModContent.NPCType<Rafflesia>(), 0.6f);
-		//    pool.Add(ModContent.NPCType<AmberSlime>(), 0.6f);
-		//    if (!Main.dayTime)
-		//    {
-
-		//    }
-		//    /*pool.Add(ModContent.NPCType<TropicalSlime>(), 0.9f);
-		//    if (Main.hardMode)
-		//    {
-		//        pool.Add(ModContent.NPCType<PoisonDartFrog>(), 0.9f);
-		//    }*/
+		//	pool[0] = 0;
 		//}
 		if (spawnInfo.Player.InModBiome<UndergroundTropics>())
 		{
