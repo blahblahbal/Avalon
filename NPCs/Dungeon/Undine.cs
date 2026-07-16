@@ -111,6 +111,12 @@ public class Undine : ModNPC
 
     public override void HitEffect(NPC.HitInfo hit)
     {
+		for (int i = 0; i < hit.Damage / 3; i++)
+		{
+			Dust d = Dust.NewDustDirect(NPC.position, NPC.width, NPC.height, DustID.Water);
+			d.noGravity = Main.rand.NextBool();
+			d.velocity = new Vector2(Main.rand.NextFloat(-1f, 8) * hit.HitDirection, Main.rand.NextFloat(-1, -4));
+		}
 	}
 	public override void ModifyNPCLoot(NPCLoot npcLoot)
 	{
