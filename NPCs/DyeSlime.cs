@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Terraria;
@@ -20,17 +21,17 @@ namespace Avalon.NPCs;
 
 public class DyeSlime : ModNPC
 {
-	public static int[] PreHardmodeDyes = {ItemID.BrownDye,ItemID.BlackDye,ItemID.SilverDye, ItemID.BrightBrownDye, ItemID.BrightSilverDye, ItemID.BrownAndBlackDye, ItemID.BrownAndSilverDye, ItemID.SilverAndBlackDye, ItemID.BlackAndWhiteDye, 
+	public static int[] PreHardmodeDyes = {ItemID.BrownDye,ItemID.BlackDye,ItemID.SilverDye, ItemID.BrightBrownDye, ItemID.BrightSilverDye, ItemID.BrownAndBlackDye, ItemID.BrownAndSilverDye, ItemID.SilverAndBlackDye, ItemID.BlackAndWhiteDye,
 		ItemID.FlameDye, ItemID.FlameAndBlackDye, ItemID.FlameAndSilverDye, ItemID.GreenFlameDye, ItemID.GreenFlameAndBlackDye, ItemID.GreenFlameAndSilverDye, ItemID.BlueFlameDye, ItemID.BlueFlameAndBlackDye, ItemID.BlueFlameAndSilverDye, ItemID.IntenseFlameDye, ItemID.IntenseBlueFlameDye, ItemID.IntenseGreenFlameDye,
 		ItemID.CyanGradientDye, ItemID.VioletGradientDye, ItemID.YellowGradientDye, ItemID.RainbowDye, ItemID.IntenseRainbowDye };
-	public static int[] HardmodeDyes = { ItemID.AcidDye,ItemID.BlueAcidDye,ItemID.RedAcidDye,ItemID.GelDye,ItemID.MushroomDye,ItemID.GrimDye,ItemID.HadesDye,ItemID.BurningHadesDye,ItemID.ShadowflameHadesDye,ItemID.MirageDye,ItemID.NegativeDye,ItemID.PhaseDye,ItemID.PurpleOozeDye,ItemID.ReflectiveDye,ItemID.ReflectiveCopperDye,ItemID.ReflectiveCopperDye,ItemID.ReflectiveGoldDye,ItemID.ReflectiveMetalDye,ItemID.ReflectiveObsidianDye,ItemID.ReflectiveSilverDye,ItemID.ShadowDye,ItemID.TwilightDye,ItemID.ShiftingSandsDye };
-	public static int[] LaterHardmodeDyes = {ItemID.ChlorophyteDye, ItemID.LivingOceanDye, ItemID.LivingFlameDye, ItemID.LivingRainbowDye, ItemID.PixieDye, ItemID.WispDye, ItemID.InfernalWispDye, ItemID.UnicornWispDye };
+	//public static int[] HardmodeDyes = { ItemID.AcidDye,ItemID.BlueAcidDye,ItemID.RedAcidDye,ItemID.GelDye,ItemID.MushroomDye,ItemID.GrimDye,ItemID.HadesDye,ItemID.BurningHadesDye,ItemID.ShadowflameHadesDye,ItemID.MirageDye,ItemID.NegativeDye,ItemID.PhaseDye,ItemID.PurpleOozeDye,ItemID.ReflectiveDye,ItemID.ReflectiveCopperDye,ItemID.ReflectiveCopperDye,ItemID.ReflectiveGoldDye,ItemID.ReflectiveMetalDye,ItemID.ReflectiveObsidianDye,ItemID.ReflectiveSilverDye,ItemID.ShadowDye,ItemID.TwilightDye,ItemID.ShiftingSandsDye };
+	//public static int[] LaterHardmodeDyes = {ItemID.ChlorophyteDye, ItemID.LivingOceanDye, ItemID.LivingFlameDye, ItemID.LivingRainbowDye, ItemID.PixieDye, ItemID.WispDye, ItemID.InfernalWispDye, ItemID.UnicornWispDye };
 	int WhichDye;
 	public override void SetStaticDefaults()
 	{
 		Main.npcFrameCount[NPC.type] = 2;
 		Data.Sets.NPCSets.Earthen[NPC.type] = true;
-		for(int i = 1007; i <= 1018; i++) // add basic dyes
+		for (int i = 1007; i <= 1018; i++) // add basic dyes
 		{
 			PreHardmodeDyes = PreHardmodeDyes.Append(i).ToArray();
 		}
@@ -73,17 +74,64 @@ public class DyeSlime : ModNPC
 		});
 	public override void OnSpawn(IEntitySource source)
 	{
-		if(!Main.rand.NextBool(3) && Main.hardMode)
+		var p = NPC.FindClosestPlayer();
+		if (p != -1 && Main.player[p].ZoneGraveyard && Main.rand.NextBool(2))
 		{
-			if(!Main.rand.NextBool() && NPC.downedPlantBoss)
-				WhichDye = LaterHardmodeDyes[Main.rand.Next(LaterHardmodeDyes.Length)];
-			else
-				WhichDye = HardmodeDyes[Main.rand.Next(HardmodeDyes.Length)];
+			WhichDye = ItemID.FogboundDye;
+			return;
 		}
-		else
+		if (Main.bloodMoon && Main.rand.NextBool(2))
 		{
-			WhichDye = PreHardmodeDyes[Main.rand.Next(PreHardmodeDyes.Length)];
+			WhichDye = ItemID.FogboundDye;
 		}
+		if (p != -1 && !Main.rand.NextBool(3) && Main.hardMode)
+				{
+					List<int> list = new List<int>
+					{
+						3560, 3028, 3041, 3040, 3025, 3190, 3027, 3026, 3554, 3553,
+						3555, 2872, 3534, 2871
+						};
+					if (Main.hardMode)
+					{
+						list.Add(3039);
+						list.Add(3038);
+						list.Add(3598);
+						list.Add(3597);
+						list.Add(3600);
+						list.Add(3042);
+						list.Add(3533);
+						list.Add(3561);
+						if (NPC.downedMechBossAny)
+						{
+							list.Add(2883);
+							list.Add(2869);
+							list.Add(2873);
+							list.Add(2870);
+						}
+						if (NPC.downedPlantBoss)
+						{
+							list.Add(2878);
+							list.Add(2879);
+							list.Add(2884);
+							list.Add(2885);
+						}
+						if (NPC.downedMartians)
+						{
+							list.Add(2864);
+							list.Add(3556);
+						}
+						if (NPC.downedMoonlord)
+						{
+							list.Add(3024);
+						}
+					}
+					PlayerLoader.GetDyeTraderReward(Main.player[p], list);
+					WhichDye = list[Main.rand.Next(list.Count)];
+				}
+				else
+				{
+					WhichDye = PreHardmodeDyes[Main.rand.Next(PreHardmodeDyes.Length)];
+				}
 		NPC.netUpdate = true;
 	}
 	public override void SendExtraAI(BinaryWriter writer)
@@ -121,7 +169,7 @@ public class DyeSlime : ModNPC
 
 		Main.GetItemDrawFrame(WhichDye, out var itemTexture, out var rectangle);
 		float itemScale = 0.8f;
-		Main.EntitySpriteDraw(itemTexture, NPC.Center - screenPos - new Vector2(0,2), rectangle, drawColor, NPC.rotation + (float)Math.Sin(Main.timeForVisualEffects * 0.1f) * (float)Math.Cos(Main.timeForVisualEffects * 0.03f) * 0.1f, rectangle.Size() / 2, itemScale, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(itemTexture, NPC.Center - screenPos - new Vector2(0, 2), rectangle, drawColor, NPC.rotation + (float)Math.Sin(Main.timeForVisualEffects * 0.1f) * (float)Math.Cos(Main.timeForVisualEffects * 0.03f) * 0.1f, rectangle.Size() / 2, itemScale, SpriteEffects.None, 0);
 
 		Rectangle capFrame = new Rectangle(0, 0, itemTexture.Width, 10);
 		Main.EntitySpriteDraw(itemTexture, NPC.Center - screenPos - new Vector2(0, 19 + (NPC.frame.Y / 50) * 2), capFrame, NPC.GetNPCColorTintedByBuffs(drawColor), NPC.rotation, capFrame.Size() / 2, 1, SpriteEffects.None);
@@ -145,17 +193,17 @@ public class DyeSlime : ModNPC
 	}
 	public override void OnKill()
 	{
-		Item.NewItem(NPC.GetSource_FromThis(), NPC.Hitbox, WhichDye, Main.rand.Next(1, 3));
+		Item.NewItem(NPC.GetSource_FromThis(), NPC.Hitbox, WhichDye, Main.rand.Next(3, 5));
 	}
 	public override void ModifyNPCLoot(NPCLoot npcLoot)
 	{
-		npcLoot.Add(new CommonDrop(ItemID.Gel,1,2,4));
+		npcLoot.Add(new CommonDrop(ItemID.Gel, 1, 2, 4));
 	}
 	public override void HitEffect(NPC.HitInfo hit)
 	{
-		for(int i = 0; i < hit.Damage / 3; i++)
+		for (int i = 0; i < hit.Damage / 3; i++)
 		{
-			Dust d = Dust.NewDustDirect(NPC.position, NPC.width, NPC.height, Main.rand.Next(DustID.CopperCoin,DustID.PlatinumCoin + 1));
+			Dust d = Dust.NewDustDirect(NPC.position, NPC.width, NPC.height, Main.rand.Next(DustID.CopperCoin, DustID.PlatinumCoin + 1));
 			d.noGravity = true;
 			d.velocity = new Vector2(Main.rand.NextFloat(-1f, 8) * hit.HitDirection, Main.rand.NextFloat(-1, -4));
 		}

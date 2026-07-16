@@ -30,11 +30,11 @@ public class IrateBones : CustomFighterAI
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, value);
 		Data.Sets.NPCSets.Undead[NPC.type] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Bleeding] = true;
 	}
 
     public override void SetDefaults()
     {
-		Main.npcFrameCount[NPC.type] = 17;
 		NPC.damage = 35;
         NPC.lifeMax = 350;
         NPC.defense = 15;
@@ -73,7 +73,7 @@ public class IrateBones : CustomFighterAI
 			if (NPC.localAI[0] <= 0)
 			{
 				NPC.localAI[0] = 6;
-				SoundEngine.PlaySound(SoundID.Run with { Volume = Utils.Remap(Math.Abs(NPC.velocity.X),0,2,0,0.5f), Pitch = 0.5f, MaxInstances = 10}, NPC.position);
+				SoundEngine.PlaySound(SoundID.Run with { Volume = Utils.Remap(Math.Abs(NPC.velocity.X),0,2,0,0.5f), Pitch = Utils.Remap(Math.Abs(NPC.velocity.X), 0, 2, 0.1f, 0.5f), MaxInstances = 10}, NPC.position);
 			}
 		}
 		NPC.localAI[0]--;

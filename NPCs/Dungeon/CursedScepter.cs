@@ -17,6 +17,10 @@ public class CursedScepter : ModNPC
     {
         Main.npcFrameCount[NPC.type] = 6;
         NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Bleeding] = true;
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire3] = true;
 		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
 		{
 			Position = new Vector2(-10f, 10f),

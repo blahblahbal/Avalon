@@ -530,6 +530,7 @@ Mods: {
 			EvilVulture: A vulture tainted by the Corruption, its nature becoming twisted and foul.
 			BloodyVulture: A vulture consumed by the Crimson, it similarly seeks to consume its prey.
 			SicklyVulture: A vulture afflicted by the Contagion, its cells have been mutated by the rampaging virus.
+			Undine: IDK I'm not feeling that kind of creative rn, FIX LATER !!!
 		}
 
 		Keybinds: {
@@ -10112,6 +10113,11 @@ Mods: {
 				DisplayName: Shadlopod Banner
 				Tooltip: ""
 			}
+
+			UndineBanner: {
+				DisplayName: Undine Banner
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -10371,6 +10377,7 @@ Mods: {
 			RhodiumGreatswordBeam.DisplayName: Rhodium Greatsword Beam
 			IridiumGreatswordSpike.DisplayName: Iridium Greatsword Spike
 			EnergyBall.DisplayName: Energy Ball
+			UndineTear.DisplayName: Undine Tear
 		}
 
 		NPCs: {
@@ -10844,6 +10851,7 @@ Mods: {
 			BacteriumTendril.DisplayName: Bacterium Tendril
 			EnemyGauntletPortal.DisplayName: ""
 			DyeSlime.DisplayName: Dye Slime
+			Undine.DisplayName: Wailing Undine
 		}
 
 		Buffs: {
