@@ -1123,7 +1123,7 @@ Mods: {
 
 			AeonsEternity: {
 				DisplayName: Aeon's Eternity
-				Tooltip: Occasionally fires an exploding constellation
+				Tooltip: fires an exploding constellation
 			}
 
 			TomeoftheDistantPast: {
@@ -7764,7 +7764,7 @@ Mods: {
 
 			TrueAeonsEternity: {
 				DisplayName: True Aeon's Eternity
-				Tooltip: ""
+				Tooltip: fires an exploding constellation
 			}
 
 			SoulEdge: {

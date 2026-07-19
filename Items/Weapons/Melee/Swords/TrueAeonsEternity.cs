@@ -26,15 +26,7 @@ public class TrueAeonsEternity : ModItem
 	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{
-		int lastStar = -255;
-		SoundEngine.PlaySound(SoundID.Item9, player.Center);
-		for (int i = 0; i < 6; i++)
-		{
-			int P = Projectile.NewProjectile(Item.GetSource_FromThis(), position, velocity.RotatedByRandom(Math.PI / 4) * Main.rand.NextFloat(0.6f, 2.8f), ModContent.ProjectileType<TrueAeonStar>(), damage / 4, knockback, player.whoAmI, lastStar, 160 + (i * 10), (float)Main.time);
-			Main.projectile[P].scale = Main.rand.NextFloat(0.9f, 1.1f);
-			Main.projectile[P].rotation = Main.rand.NextFloat(0, MathHelper.TwoPi);
-			lastStar = P;
-		}
+		Projectile.NewProjectile(source, position, velocity, type, damage / 4, knockback, player.whoAmI, Utils.RandomNextSeed((ulong)Main.timeForVisualEffects));
 		return false;
 	}
 	public override void MeleeEffects(Player player, Rectangle hitbox)
