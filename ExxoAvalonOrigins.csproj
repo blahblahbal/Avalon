@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Tomat.Terraria.ModLoader.Sdk/2.1.1">
 	<Import Project="..\tModLoader.targets" />
 	<PropertyGroup>
 		<AssemblyName>Avalon</AssemblyName>
-		<TargetFramework>net8.0</TargetFramework>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
@@ -23,6 +22,9 @@
 	<ItemGroup>
 		<Reference Include="AltLibrary">
 			<HintPath>dllReferences\AltLibrary_v2.1.1.3.dll</HintPath>
+		</Reference>
+		<Reference Include="AltLibrary">
+		  <HintPath>dllReferences\AltLibrary_v2.1.2.8.dll</HintPath>
 		</Reference>
 		<Reference Include="MagicStorage">
 		  <HintPath>dllReferences\MagicStorage.dll</HintPath>

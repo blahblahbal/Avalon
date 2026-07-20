@@ -17,11 +17,8 @@ public class ForsakenCross : ModItem
 	public override void UpdateAccessory(Player player, bool hideVisual)
 	{
 		player.longInvince = true;
-		if (player.immune)
-		{
-			player.GetCritChance(DamageClass.Generic) += 7;
-			player.GetDamage(DamageClass.Generic) += 0.07f;
-		}
+		ContentSamples.ItemsByType[ModContent.ItemType<ForsakenRelic>()].ModItem.UpdateAccessory(player, hideVisual);
+		//ModContent.GetInstance<ForsakenCross>().UpdateAccessory(player, hideVisual);
 	}
 	public override void AddRecipes()
 	{

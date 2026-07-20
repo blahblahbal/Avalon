@@ -29,6 +29,6 @@ technique Technique1
 {
 	pass AdditiveColor
 	{
-		PixelShader = compile ps_2_0 AddColor();
+		PixelShader = compile ps_3_0 AddColor();
 	}
 }

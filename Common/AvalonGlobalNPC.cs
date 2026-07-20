@@ -576,43 +576,15 @@ public class AvalonGlobalNPC : GlobalNPC
 	{
 		//if (spawnInfo.Player.InModBiome<Tropics>() && !spawnInfo.Player.InPillarZone())
 		//{
-		//    pool.Clear();
-		//    //pool.Add(ModContent.NPCType<Rafflesia>(), 0.6f);
-		//    pool.Add(ModContent.NPCType<AmberSlime>(), 0.6f);
-		//    if (!Main.dayTime)
-		//    {
-
-		//    }
-		//    /*pool.Add(ModContent.NPCType<TropicalSlime>(), 0.9f);
-		//    if (Main.hardMode)
-		//    {
-		//        pool.Add(ModContent.NPCType<PoisonDartFrog>(), 0.9f);
-		//    }*/
+		//	pool[0] = 0;
 		//}
 		if (spawnInfo.Player.InModBiome<UndergroundTropics>())
 		{
-			pool.Clear();
-			pool.Add(ModContent.NPCType<Rafflesia>(), 0.6f);
-			pool.Add(ModContent.NPCType<InfestedAmberSlime>(), 0.6f);
-			pool.Add(ModContent.NPCType<AmberSlime>(), 0.6f);
-			pool.Add(ModContent.NPCType<TropicalSlimeGrassy>(), 0.6f);
-			pool.Add(ModContent.NPCType<TropicalSlimeShroomy>(), 0.6f);
-			pool.Add(ModContent.NPCType<Mosquito>(), 0.6f);
-			pool.Add(ModContent.NPCType<MosquitoDroopy>(), 0.6f);
-			pool.Add(ModContent.NPCType<MosquitoSmall>(), 0.6f);
-			pool.Add(ModContent.NPCType<MosquitoPainted>(), 0.6f);
-
-			if (Main.hardMode)
-			{
-				pool.Add(ModContent.NPCType<PoisonDartFrog>(), 0.4f);
-				pool.Add(ModContent.NPCType<RedArowana>(), 0.5f);
-				pool.Add(ModContent.NPCType<RedArowana2>(), 0.5f);
-				pool.Add(ModContent.NPCType<VenusFlytrap>(), 0.3f);
-			}
+			pool[0] = 0;
 		}
 		if (spawnInfo.Player.InModBiome<ContagionCaveDesert>())
 		{
-			pool.Clear();
+			pool[0] = 0;
 			//pool.Add(NPCID.DesertScorpionWalk, 0.35f);
 			pool.Add(NPCID.Antlion, 0.55f);
 			pool.Add(NPCID.WalkingAntlion, 0.35f);
@@ -625,45 +597,20 @@ public class AvalonGlobalNPC : GlobalNPC
 				pool.Add(NPCID.DesertLamiaDark, 0.45f);
 				pool.Add(NPCID.DesertDjinn, 0.45f);
 				pool.Add(NPCID.DuneSplicerHead, 0.2f);
-				pool.Add(ModContent.NPCType<ContaminatedGhoul>(), 0.33f);
-				pool.Add(ModContent.NPCType<MineralSlime>(), 0.2f);
 			}
 		}
 		if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneHellcastle)
 		{
-			pool.Clear();
+			pool[0] = 0;
 			pool.Add(NPCID.Demon, 0.2f);
 			pool.Add(NPCID.RedDevil, 0.2f);
 			pool.Add(ModContent.NPCType<EctoHand>(), 0.3f);
 			pool.Add(ModContent.NPCType<HellboundLizard>(), 1f);
 			pool.Add(ModContent.NPCType<Gargoyle>(), 1f);
-			//if (ModContent.GetInstance<AvalonWorld>().SuperHardmode && Main.hardMode)
-			//{
-			//    pool.Add(ModContent.NPCType<ArmoredHellTortoise>(), 1f);
-			//}
 		}
 		if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion && !spawnInfo.Player.InPillarZone())// && !spawnInfo.Player.HasBuff(ModContent.BuffType<SilenceCandleBuff>()))
 		{
-			pool.Clear();
-			pool.Add(ModContent.NPCType<Bactus>(), 1f);
-			pool.Add(ModContent.NPCType<PyrasiteHead>(), 0.1f);
-			if (Main.hardMode)
-			{
-				pool.Add(ModContent.NPCType<Cougher>(), 0.8f);
-				pool.Add(ModContent.NPCType<Ickslime>(), 0.7f);
-				if (spawnInfo.Player.ZoneRockLayerHeight)
-				{
-					pool.Add(ModContent.NPCType<Viris>(), 1f);
-					//pool.Add(ModContent.NPCType<GrossyFloat>(), 0.6f);
-				}
-
-				if (spawnInfo.Player.ZoneDesert)
-				{
-					pool.Add(ModContent.NPCType<ViralMummy>(), 0.3f);
-					pool.Add(ModContent.NPCType<SicklyVulture>(), 1f);
-					//pool.Add(ModContent.NPCType<EvilVulture>(), 0.4f);
-				}
-			}
+			pool[0] = 0;
 		}
 	}
 	public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
@@ -673,7 +620,7 @@ public class AvalonGlobalNPC : GlobalNPC
 			spawnRate = (int)(spawnRate * 0.65f);
 			maxSpawns = (int)(maxSpawns * 1.3f);
 		}
-		if (player.InModBiome<Biomes.Savanna>() || player.InModBiome<UndergroundTropics>())
+		if (player.InModBiome<Savanna>() || player.InModBiome<UndergroundTropics>())
 		{
 			spawnRate = (int)(spawnRate * 0.4f);
 			maxSpawns = (int)(maxSpawns * 1.5f);

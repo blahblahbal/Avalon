@@ -91,7 +91,8 @@ public class InfernalJudgementPlayer : ModPlayer
 	{
 		if (Active)
 		{
-			float multi = 0.5f;
+			fullBright = true;
+			float multi = 0.35f;
 			r *= multi;
 			g *= multi;
 			b *= multi;
@@ -113,8 +114,8 @@ public class InfernalJudgementNPC : GlobalNPC
 	{
 		if (Active)
 		{
-			float multi = 0.5f;
-			drawColor = drawColor.MultiplyRGBByFloat(multi);
+			float multi = 0.35f;
+			drawColor = new Color(multi,multi,multi,drawColor.A);
 		}
 	}
 	private void RestoreBuffImmunities(NPC npc)
@@ -184,6 +185,7 @@ public class InfernalJudgementNPC : GlobalNPC
 				}
 			}
 		}
+		npc.buffImmune[ModContent.BuffType<InfernalJudgement>()] = false;
 	}
 	public override void ResetEffects(NPC npc)
 	{

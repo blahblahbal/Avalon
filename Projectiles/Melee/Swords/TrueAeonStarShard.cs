@@ -1,4 +1,6 @@
-﻿using Avalon.Dusts;
+﻿using Avalon.Core;
+using Avalon.Dusts;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -6,6 +8,7 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using ThoriumMod.Items.ThrownItems;
 
 namespace Avalon.Projectiles.Melee.Swords;
 
@@ -33,6 +36,7 @@ public class TrueAeonStarShard : ModProjectile
 			Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.oldPos[i] - Main.screenPosition + new Vector2(7), null, new Color(Math.Abs(MathF.Sin(Projectile.whoAmI)), fade, 1f, 0.5f) * Projectile.Opacity * fade, Projectile.oldRot[i], new Vector2(7, 9), Projectile.scale, SpriteEffects.None);
 		}
 		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition, null, new Color(1f, 1f, 1f, 0.5f) * Projectile.Opacity, Projectile.rotation, new Vector2(7, 9), Projectile.scale, SpriteEffects.None);
+		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition, null, Color.Black * Projectile.Opacity, Projectile.rotation, new Vector2(7, 9), Projectile.scale * 0.7f, SpriteEffects.None);
 		return false;
 	}
 	public override void AI()
@@ -59,11 +63,35 @@ public class TrueAeonStarShard : ModProjectile
 			Projectile.alpha += 5;
 			Projectile.velocity *= 0.98f;
 			if (Projectile.alpha > 255)
+			{
+				Projectile.Opacity = 0;
 				Projectile.Kill();
+			}
 		}
 	}
 	public override void OnKill(int timeLeft)
 	{
+		if (Projectile.Opacity == 0)
+			return;
+		var t = AssetReferences.Assets.Textures.InverseGlowRing.Asset;
+		t.Wait();
+		for (int i2 = 0; i2 < 2; i2++)
+		{
+			var ring = VanillaParticles.RequestFadingParticle();
+			ring.SetBasicInfo(t, null, Vector2.Zero, Projectile.Center);
+			int time = Main.rand.Next(15,30);
+			ring.SetTypeInfo(time);
+			ring.Scale = Vector2.Zero;
+			ring.ScaleVelocity = Vector2.One.RotatedByRandom(1f) * 0.1f;
+			ring.ScaleAcceleration = ring.ScaleVelocity / -time * 2;
+			ring.FadeInNormalizedTime = 0.1f;
+			ring.FadeOutNormalizedTime = 0.1f;
+			ring.ColorTint = i2 == 0 ? new Color(Main.rand.Next(200), 100, 255, 0) : Color.Black * 0.5f;
+			ring.Rotation = Main.rand.NextFloatDirection();
+			ring.RotationVelocity = Main.rand.NextFloat(-0.1f, 0.1f);
+			Main.ParticleSystem_World_OverPlayers.Add(ring);
+		}
+		Main.ParticleSystem_World_OverPlayers.Add(new AeonStarburst(Projectile.Center, Vector2.Zero, new Color(Main.rand.Next(200), 100, 255, 64), Color.Black, Main.rand.NextFloatDirection(), Main.rand.NextFloat(1,2), 24));
 		int type = ModContent.DustType<SimpleColorableGlowyDust>();
 		for (int i = 0; i < 10; i++)
 		{

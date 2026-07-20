@@ -11,6 +11,6 @@ technique PixelChange
 {
 	pass Pass0
 	{
-		PixelShader = compile ps_2_0 ChangePixel();
+		PixelShader = compile ps_3_0 ChangePixel();
 	}
 }

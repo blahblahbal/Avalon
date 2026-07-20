@@ -14,8 +14,12 @@ public class InfectedPickaxe : ModNPC
     public override void SetStaticDefaults()
     {
         Main.npcFrameCount[NPC.type] = 6;
-        NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
-        Data.Sets.NPCSets.Wicked[NPC.type] = true;
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Bleeding] = true;
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire3] = true;
+		Data.Sets.NPCSets.Wicked[NPC.type] = true;
 		NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
 		{
 			Position = new Vector2(-3f, 5f),

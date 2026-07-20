@@ -7,7 +7,6 @@ using Avalon.Projectiles.Melee.Swords;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
-using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -32,20 +31,7 @@ public class AeonsEternity : ModItem, ISyncedOnHitEffect
 	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{
-		int lastStar = -255;
-		SoundEngine.PlaySound(SoundID.Item9, player.Center);
-		for (int i = 0; i < Main.rand.Next(4, 8); i++)
-		{
-			Vector2 velRand = velocity.RotatedByRandom(Math.PI / 6) * Main.rand.NextFloat(0.3f, 2.4f);
-
-			Vector2 dirToMouse = player.SafeDirectionTo(Main.MouseWorld);
-			Vector2 velMult = player.velocity * new Vector2(MathF.Abs(dirToMouse.X), MathF.Abs(dirToMouse.Y)); // The player's current velocity, multiplied by the unsigned cosine & sine of the angle to the mouse
-
-			Projectile p = Projectile.NewProjectileDirect(Item.GetSource_FromThis(), position, velRand + velMult * 0.8f + player.velocity * 0.2f, ModContent.ProjectileType<AeonStar>(), damage / 5, knockback, player.whoAmI, lastStar, 160 + i * 10, (float)Main.timeForVisualEffects);
-			p.scale = Main.rand.NextFloat(0.9f, 1.1f);
-			p.rotation = Main.rand.NextFloat(0, MathHelper.TwoPi);
-			lastStar = p.whoAmI;
-		}
+		Projectile.NewProjectile(source,position,velocity,type,damage / 5,knockback,player.whoAmI,Utils.RandomNextSeed((ulong)Main.timeForVisualEffects));
 		return false;
 	}
 	public override void MeleeEffects(Player player, Rectangle hitbox)
@@ -53,11 +39,11 @@ public class AeonsEternity : ModItem, ISyncedOnHitEffect
 
 		ClassExtensions.GetPointOnSwungItemPath(60f, 60f, 0.2f + 0.8f * Main.rand.NextFloat(), Item.scale, out var location2, out var outwardDirection2, player);
 		Vector2 vector2 = outwardDirection2.RotatedBy((float)Math.PI / 2f * player.direction * player.gravDir);
-		int num15 = Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, ModContent.DustType<SimpleColorableGlowyDust>(), player.velocity.X * 0.2f + player.direction * 3, player.velocity.Y * 0.2f, 140, Color.Lerp(new Color(1f,1f,0.8f,0f), new Color(1f,0.7f,0.6f,0f),player.itemAnimation / (float)player.itemAnimationMax), 1.2f);
-		Main.dust[num15].position = location2;
-		Main.dust[num15].noGravity = true;
-		Main.dust[num15].velocity *= 0.25f;
-		Main.dust[num15].velocity += vector2 * 5f;
+		Dust d = Dust.NewDustDirect(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, ModContent.DustType<SimpleColorableGlowyDust>(), player.velocity.X * 0.2f + player.direction * 3, player.velocity.Y * 0.2f, 140, Color.Lerp(new Color(1f,1f,0.8f,0f), new Color(1f,0.7f,0.6f,0f),player.itemAnimation / (float)player.itemAnimationMax), 1.2f);
+		d.position = location2;
+		d.noGravity = true;
+		d.velocity *= 0.25f;
+		d.velocity += vector2 * 5f;
 	}
 	public override void AddRecipes()
 	{

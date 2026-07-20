@@ -518,7 +518,7 @@ Mods: {
 			Fly: Truly-annoying insects that love festering meat and rotten produce. They are as disgusting as they sound.
 			AmberSlime: A simple gelatinous creature that somehow also has the properties of amber. It takes a long time to digest anything.
 			InfestedAmberSlime: Consistent consumption of the bugs in the Savanna caused these slimes to burst into a multitude of them when killed.
-			OreSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
+			OreSlime: A dazzling slime that has taken up a hobby in cosmetics
 			MineralSlime: An ore-filled gelatinous creature that drops whatever ore is contained inside.
 			PoisonDartFrog: Highly toxic frogs that have made their home in the Savanna. Those that touch their skin are often poisoned to death.
 			Mosquito: These nasty insects are known for carrying diseases. They will abscond with your blood, leaving infections where they landed.
@@ -530,6 +530,7 @@ Mods: {
 			EvilVulture: A vulture tainted by the Corruption, its nature becoming twisted and foul.
 			BloodyVulture: A vulture consumed by the Crimson, it similarly seeks to consume its prey.
 			SicklyVulture: A vulture afflicted by the Contagion, its cells have been mutated by the rampaging virus.
+			Undine: IDK I'm not feeling that kind of creative rn, FIX LATER !!!
 		}
 
 		Keybinds: {
@@ -1122,7 +1123,7 @@ Mods: {
 
 			AeonsEternity: {
 				DisplayName: Aeon's Eternity
-				Tooltip: Occasionally fires an exploding constellation
+				Tooltip: fires an exploding constellation
 			}
 
 			TomeoftheDistantPast: {
@@ -7763,7 +7764,7 @@ Mods: {
 
 			TrueAeonsEternity: {
 				DisplayName: True Aeon's Eternity
-				Tooltip: ""
+				Tooltip: fires an exploding constellation
 			}
 
 			SoulEdge: {
@@ -8119,15 +8120,15 @@ Mods: {
 
 			ForsakenRelic: {
 				DisplayName: Forsaken Relic
-				Tooltip: Increases damage and critical strike chance by 7% while invincible
+				Tooltip: Increases damage by 25% and critical strike chance by 7% while invincible
 			}
 
 			ForsakenCross: {
 				DisplayName: Forsaken Cross
 				Tooltip:
 					'''
-					Increases damage and critical strike chance by 7% while invincible
-					Increases length of invincibility after taking damage
+					{$Mods.Avalon.Items.ForsakenRelic.Tooltip}
+					{$ItemTooltip.CrossNecklace}
 					'''
 			}
 
@@ -10084,6 +10085,39 @@ Mods: {
 				DisplayName: Tile Placer
 				Tooltip: Change style with W and S
 			}
+
+			DyeSlimeBanner: {
+				DisplayName: Dye Slime Banner
+				Tooltip: ""
+			}
+
+			ForsakenCuffs: {
+				DisplayName: Forsaken Cuffs
+				Tooltip:
+					'''
+					{$Mods.Avalon.Items.ForsakenRelic.Tooltip}
+					{$ItemTooltip.MagicCuffs}
+					'''
+			}
+
+			ForsakenHeartNecklace: {
+				DisplayName: Forsaken Heart Necklace
+				Tooltip:
+					'''
+					{$Mods.Avalon.Items.ForsakenRelic.Tooltip}
+					{$ItemTooltip.SweetheartNecklace}
+					'''
+			}
+
+			ShadlopodBanner: {
+				DisplayName: Shadlopod Banner
+				Tooltip: ""
+			}
+
+			UndineBanner: {
+				DisplayName: Undine Banner
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -10343,6 +10377,7 @@ Mods: {
 			RhodiumGreatswordBeam.DisplayName: Rhodium Greatsword Beam
 			IridiumGreatswordSpike.DisplayName: Iridium Greatsword Spike
 			EnergyBall.DisplayName: Energy Ball
+			UndineTear.DisplayName: Undine Tear
 		}
 
 		NPCs: {
@@ -10815,6 +10850,8 @@ Mods: {
 			SnakeTail.DisplayName: Snake Tail
 			BacteriumTendril.DisplayName: Bacterium Tendril
 			EnemyGauntletPortal.DisplayName: ""
+			DyeSlime.DisplayName: Dye Slime
+			Undine.DisplayName: Wailing Undine
 		}
 
 		Buffs: {
