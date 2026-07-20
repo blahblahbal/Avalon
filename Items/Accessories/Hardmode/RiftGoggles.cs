@@ -428,40 +428,40 @@ public class RiftGogglesALData : ModSystem
 	}
 	public static void AddAltLibAlternates()
 	{
+		RiftGogglesData.CopperTier.Clear();
+		RiftGogglesData.IronTier.Clear();
+		RiftGogglesData.SilverTier.Clear();
+		RiftGogglesData.GoldTier.Clear();
+		RiftGogglesData.CobaltTier.Clear();
+		RiftGogglesData.MythrilTier.Clear();
+		RiftGogglesData.AdamantiteTier.Clear();
 		foreach (AltOre ore in OreSlotLoader.GetOres<CopperOreSlot>())
 		{
-			if (ore.ore != ModContent.TileType<BronzeOre>())
-				RiftGogglesData.CopperTier.Add(ore.ore);
+			RiftGogglesData.CopperTier.Add(ore.ore);
 		}
 		foreach (AltOre ore in OreSlotLoader.GetOres<IronOreSlot>())
 		{
-			if (ore.ore != ModContent.TileType<NickelOre>())
-				RiftGogglesData.IronTier.Add(ore.ore);
+			RiftGogglesData.IronTier.Add(ore.ore);
 		}
 		foreach (AltOre ore in OreSlotLoader.GetOres<SilverOreSlot>())
 		{
-			if (ore.ore != ModContent.TileType<ZincOre>())
-				RiftGogglesData.SilverTier.Add(ore.ore);
+			RiftGogglesData.SilverTier.Add(ore.ore);
 		}
 		foreach (AltOre ore in OreSlotLoader.GetOres<GoldOreSlot>())
 		{
-			if (ore.ore != ModContent.TileType<BismuthOre>())
-				RiftGogglesData.GoldTier.Add(ore.ore);
+			RiftGogglesData.GoldTier.Add(ore.ore);
 		}
 		foreach (AltOre ore in OreSlotLoader.GetOres<CobaltOreSlot>())
 		{
-			if (ore.ore != ModContent.TileType<DurataniumOre>())
-				RiftGogglesData.CobaltTier.Add(ore.ore);
+			RiftGogglesData.CobaltTier.Add(ore.ore);
 		}
 		foreach (AltOre ore in OreSlotLoader.GetOres<MythrilOreSlot>())
 		{
-			if (ore.ore != ModContent.TileType<NaquadahOre>())
-				RiftGogglesData.MythrilTier.Add(ore.ore);
+			RiftGogglesData.MythrilTier.Add(ore.ore);
 		}
 		foreach (AltOre ore in OreSlotLoader.GetOres<AdamantiteOreSlot>())
 		{
-			if (ore.ore != ModContent.TileType<TroxiniumOre>())
-				RiftGogglesData.AdamantiteTier.Add(ore.ore);
+			RiftGogglesData.AdamantiteTier.Add(ore.ore);
 		}
 	}
 }

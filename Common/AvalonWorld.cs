@@ -1,3 +1,4 @@
+using Avalon.Common.Players;
 using Avalon.Hooks;
 using Avalon.Logic;
 using Avalon.ModSupport;

@@ -2431,19 +2431,19 @@ public class AvalonGlobalItem : GlobalItem
 					});
 				}
 			}
-			if (item.prefix == ModContent.PrefixType<Languid>())
-			{
-				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
-						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
-				if (index != -1)
-				{
-					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccMoveSpeed", "-2% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.MovementSpeed"))
-					{
-						IsModifier = true,
-						IsModifierBad = true
-					});
-				}
-			}
+			//if (item.prefix == ModContent.PrefixType<Languid>())
+			//{
+			//	int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+			//			&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
+			//	if (index != -1)
+			//	{
+			//		tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccMoveSpeed", "-2% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.MovementSpeed"))
+			//		{
+			//			IsModifier = true,
+			//			IsModifierBad = true
+			//		});
+			//	}
+			//}
 			if (item.prefix == ModContent.PrefixType<Magical>())
 			{
 				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
@@ -2468,19 +2468,19 @@ public class AvalonGlobalItem : GlobalItem
 					});
 				}
 			}
-			if (item.prefix == ModContent.PrefixType<Timid>())
-			{
-				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
-						&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
-				if (index != -1)
-				{
-					tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccMeleeSpeed", "-2% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.MeleeSpeed"))
-					{
-						IsModifier = true,
-						IsModifierBad = true
-					});
-				}
-			}
+			//if (item.prefix == ModContent.PrefixType<Timid>())
+			//{
+			//	int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))
+			//			&& (tt.Name.Equals("Material") || tt.Name.StartsWith("Tooltip") || tt.Name.Equals("Defense") || tt.Name.Equals("Equipable") || tt.Name.Equals("Expert")));
+			//	if (index != -1)
+			//	{
+			//		tooltips.Insert(index + 1, new TooltipLine(Mod, "PrefixAccMeleeSpeed", "-2% " + Language.GetTextValue("Mods.Avalon.PrefixTooltips.MeleeSpeed"))
+			//		{
+			//			IsModifier = true,
+			//			IsModifierBad = true
+			//		});
+			//	}
+			//}
 			if (item.prefix == ModContent.PrefixType<Vigorous>())
 			{
 				int index = tooltips.FindLastIndex(tt => (tt.Mod.Equals("Terraria") || tt.Mod.Equals(Mod.Name))

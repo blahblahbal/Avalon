@@ -357,21 +357,23 @@ public class RecipeChanger : ModSystem
         #endregion
 
 
-        Dictionary<int, int> MusicLoader_ItemToMusic = (Dictionary<int, int>)typeof(MusicLoader).GetField("itemToMusic", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+        //Dictionary<int, int> MusicLoader_ItemToMusic = (Dictionary<int, int>)typeof(MusicLoader).GetField("itemToMusic", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
 
-        for (int musicID = 0; musicID < MusicLoader.MusicCount; musicID++)
-        {
-            for (int itemID = 0; itemID < ItemLoader.ItemCount; itemID++)
-            {
-                if (MusicLoader_ItemToMusic.ContainsKey(itemID))
-                {
-                    if (MusicLoader_ItemToMusic[itemID] == musicID)
-                    {
-                        AvalonJukeboxPlayer.TracksByItemID.Add(itemID, musicID);
-                        AvalonJukeboxPlayer.TracksByMusicID.Add(musicID, itemID);
-                    }
-                }
-            }
-        }
-    }
+		AvalonJukeboxPlayer.MusicLoader_ItemToMusic = (Dictionary<int, int>)typeof(MusicLoader).GetField("itemToMusic", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+		AvalonJukeboxPlayer.MusicLoader_MusicToItem = (Dictionary<int, int>)typeof(MusicLoader).GetField("musicToItem", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
+		//for (int musicID = 0; musicID < MusicLoader.MusicCount; musicID++)
+		//{
+		//    for (int itemID = 0; itemID < ItemLoader.ItemCount; itemID++)
+		//    {
+		//        if (MusicLoader_ItemToMusic.ContainsKey(itemID))
+		//        {
+		//            if (MusicLoader_ItemToMusic[itemID] == musicID)
+		//            {
+		//                AvalonJukeboxPlayer.TracksByItemID.Add(itemID, musicID);
+		//                AvalonJukeboxPlayer.TracksByMusicID.Add(musicID, itemID);
+		//            }
+		//        }
+		//    }
+		//}
+	}
 }

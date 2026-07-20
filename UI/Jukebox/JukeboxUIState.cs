@@ -105,42 +105,42 @@ internal class JukeboxUIState : ExxoUIState
     private void RefreshTrackList()
     {
         interFace?.Grid.Clear();
-        // vanilla tracks
-        foreach (int i in AvalonJukeboxPlayer.JukeboxTracks)
-        {
-            var jukeboxTrack = new ExxoUIItemSlot(TextureAssets.InventoryBack7, i);
-            jukeboxTrack.OnLeftClick += (_, listeningElement) =>
-            {
-                Main.SceneMetrics.ActiveMusicBox = AvalonJukeboxPlayer.JukeboxTracks.FindIndex(j => j == i);
-                Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
-                Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = AvalonJukeboxPlayer.JukeboxTracks.FindIndex(j => j == i);
+		// vanilla tracks
+		//foreach (int i in AvalonJukeboxPlayer.JukeboxTracks)
+		//{
+		//	var jukeboxTrack = new ExxoUIItemSlot(TextureAssets.InventoryBack7, i);
+		//	jukeboxTrack.OnLeftClick += (_, listeningElement) =>
+		//	{
+		//		Main.SceneMetrics.ActiveMusicBox = AvalonJukeboxPlayer.JukeboxTracks.FindIndex(j => j == i);
+		//		Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
+		//		Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = AvalonJukeboxPlayer.JukeboxTracks.FindIndex(j => j == i);
 
-                JukeboxUIInterface.TrackText = Language.GetTextValue("Mods.Avalon.Jukebox.NowPlaying") +
-                    Lang.GetItemName(AvalonJukeboxPlayer.JukeboxTracks[AvalonJukeboxPlayer.JukeboxTracks.FindIndex(j => j == i)])
-                    .ToString().Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", "");
+		//		JukeboxUIInterface.TrackText = Language.GetTextValue("Mods.Avalon.Jukebox.NowPlaying") +
+		//			Lang.GetItemName(AvalonJukeboxPlayer.JukeboxTracks[AvalonJukeboxPlayer.JukeboxTracks.FindIndex(j => j == i)])
+		//			.ToString().Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", "");
 
-                Main.NewText(Language.GetTextValue("Mods.Avalon.Jukebox.NowPlaying") +
-                    Lang.GetItemName(AvalonJukeboxPlayer.JukeboxTracks[AvalonJukeboxPlayer.JukeboxTracks.FindIndex(j => j == i)])
-                    .ToString().Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", ""));
-            };
-            interFace?.Grid.Append(jukeboxTrack);
-        }
-
+		//		Main.NewText(Language.GetTextValue("Mods.Avalon.Jukebox.NowPlaying") +
+		//			Lang.GetItemName(AvalonJukeboxPlayer.JukeboxTracks[AvalonJukeboxPlayer.JukeboxTracks.FindIndex(j => j == i)])
+		//			.ToString().Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", ""));
+		//	};
+		//	interFace?.Grid.Append(jukeboxTrack);
+		//}
+		Main.NewText("hi");
         // modded tracks
-        foreach (int i in AvalonJukeboxPlayer.TracksByItemID.Keys)
+        foreach (int i in AvalonJukeboxPlayer.MusicLoader_ItemToMusic.Keys)
         {
             var jukeboxTrack = new ExxoUIItemSlot(TextureAssets.InventoryBack7, i);
             jukeboxTrack.OnLeftClick += (_, listeningElement) =>
             {
                 Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrack = true;
-                Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = AvalonJukeboxPlayer.TracksByItemID[i];
+                Main.LocalPlayer.GetModPlayer<AvalonJukeboxPlayer>().PlayingATrackID = AvalonJukeboxPlayer.MusicLoader_ItemToMusic[i];
 
                 JukeboxUIInterface.TrackText = Language.GetTextValue("Mods.Avalon.Jukebox.NowPlaying") +
-                    Lang.GetItemName(AvalonJukeboxPlayer.TracksByMusicID[AvalonJukeboxPlayer.TracksByItemID[i]])
+                    Lang.GetItemName(AvalonJukeboxPlayer.MusicLoader_MusicToItem[AvalonJukeboxPlayer.MusicLoader_ItemToMusic[i]])
                     .ToString().Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", "");
 
                 Main.NewText(Language.GetTextValue("Mods.Avalon.Jukebox.NowPlaying") +
-                    Lang.GetItemName(AvalonJukeboxPlayer.TracksByMusicID[AvalonJukeboxPlayer.TracksByItemID[i]])
+                    Lang.GetItemName(AvalonJukeboxPlayer.MusicLoader_MusicToItem[AvalonJukeboxPlayer.MusicLoader_ItemToMusic[i]])
                     .ToString().Replace(Language.GetTextValue("ItemName.MusicBox") + " (", "").Replace(")", ""));
             };
             interFace?.Grid.Append(jukeboxTrack);
