@@ -121,7 +121,7 @@ public class ContagionTree : ModTree
         }
         else if (Main.rand.NextBool(30))
         {
-            NPC.NewNPC(new EntitySource_ShakeTree(x, y), x * 16 + 8, (y - 1) * 16, ModContent.NPCType<Bactus>());
+            NPC.NewNPC(new EntitySource_ShakeTree(x, y), x * 16 + 8, (y - 1) * 16, ModContent.Find<ModNPC>("Avalon/BactusVariantSmall").Type);
         }
         else if (Main.rand.NextBool(12))
         {

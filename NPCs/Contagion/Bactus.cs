@@ -1,21 +1,65 @@
-using System;
+using Avalon;
+using Avalon.Common.Players;
 using Avalon.Items.Material;
+using Avalon.Items.Placeable.Statue;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
+using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.GameContent.Bestiary;
-using Terraria.DataStructures;
-using Avalon.Common.Players;
 using Terraria.Localization;
-using System.IO;
-using Avalon.Common;
-using Avalon.Items.Placeable.Statue;
-using Avalon;
+using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Contagion;
 
+public class BactusVariant : Bactus, ICustomAutoload
+{
+	public static void Autoload(Mod mod)
+	{
+		mod.AddContent(new BactusVariant(5,45,0.9f,0.4f,88, "Small"));
+		mod.AddContent(new BactusVariant(5,60,1.15f,0.55f,132, "Big"));
+	}
+	protected override bool CloneNewInstances => true;
+	public override string Texture => ModContent.GetInstance<Bactus>().Texture;
+	public override LocalizedText DisplayName => ModContent.GetInstance<Bactus>().DisplayName;
+
+	public int Defense;
+	public int LifeMax;
+	public float Scale;
+	public float KnockbackResist;
+	public float Value;
+	public string Variant;
+	public override string Name => base.Name + Variant;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, new NPCID.Sets.NPCBestiaryDrawModifiers() { Hide = true });
+	}
+	public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+	{
+		ContentSamples.NpcBestiaryCreditIdsByNpcNetIds[Type] = ContentSamples.NpcPersistentIdsByNetIds[ModContent.NPCType<Bactus>()];
+		bestiaryEntry.UIInfoProvider = new CommonEnemyUICollectionInfoProvider(ContentSamples.NpcPersistentIdsByNetIds[ModContent.NPCType<Bactus>()], quickUnlock: false);
+	}
+	public BactusVariant(int defense, int lifeMax, float scale, float knockbackResist, float value, string variant)
+	{
+		Defense = defense;
+		LifeMax = lifeMax;
+		Scale = scale;
+		KnockbackResist = knockbackResist;
+		Value = value;
+		Variant = variant;
+	}
+	public override void SetDefaults()
+	{
+		base.SetDefaults();
+		NPC.defense = Defense;
+		NPC.lifeMax = LifeMax;
+		NPC.scale = Scale;
+		NPC.knockBackResist = KnockbackResist;
+		NPC.value = Value;
+	}
+}
 public class Bactus : ModNPC
 {
     public override void SetStaticDefaults()
@@ -39,14 +83,6 @@ public class Bactus : ModNPC
         NPC.HitSound = SoundID.NPCHit1;
         NPC.DeathSound = SoundID.NPCDeath1;
         NPC.knockBackResist = 0.5f;
-		if (NPC.IsABestiaryIconDummy)
-		{
-			NPC.alpha = 0;
-		}
-		else
-		{
-			NPC.alpha = 255;
-		}
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<Items.Banners.BactusBanner>();
         SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.Contagion>().Type, ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
@@ -75,65 +111,12 @@ public class Bactus : ModNPC
         if ((spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion ||
             spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) &&
             !spawnInfo.Player.InPillarZone())
-            return 0.7f;
+            return 0.7f / 3;
         return 0;
-    }
-
-    public bool treeSpawn;
-    int J;
-    public override void OnSpawn(IEntitySource source)
-    {
-        if (source is EntitySource_ShakeTree)
-        {
-            treeSpawn = true;
-        }
-    }
-    public override void ReceiveExtraAI(BinaryReader reader)
-    {
-        J = reader.ReadInt32();
-        treeSpawn = reader.ReadBoolean();
-        NPC.alpha = reader.ReadInt32();
-    }
-    public override void SendExtraAI(BinaryWriter writer)
-    {
-        writer.Write(J);
-        writer.Write(treeSpawn);
-        writer.Write(NPC.alpha);
     }
     public override void AI()
     {
         NPC.ai[1]++;
-        if (NPC.ai[1] == 1)
-		{
-			J = Main.rand.Next(3);
-        }
-        if (NPC.ai[1] == 2)
-        {
-            NPC.alpha = 0;
-            if (treeSpawn && !Main.remixWorld) J = 1;
-            if (Main.remixWorld && !Main.getGoodWorld) J = 2;
-            if (J == 1)
-            {
-                NPC.lifeMax = (int)(NPC.lifeMax * 0.9f);
-                NPC.defense = (int)(NPC.defense * 0.8f);
-                NPC.damage = (int)(NPC.damage * 0.8f);
-                NPC.scale *= 0.9f;
-                NPC.knockBackResist *= 1.2f;
-                NPC.value *= 0.8f;
-            }
-            if (J == 2)
-            {
-                NPC.lifeMax = (int)(NPC.lifeMax * 1.2f);
-                NPC.defense = (int)(NPC.defense * 1.2f);
-                NPC.damage = (int)(NPC.damage * 1.2f);
-                NPC.scale *= 1.15f;
-                NPC.knockBackResist *= 0.9f;
-                NPC.value *= 1.2f;
-            }
-            NPC.life = NPC.lifeMax;
-            NPC.Size *= NPC.scale;
-            NPC.netUpdate = true;
-        }
 
         #region AI
         if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead)

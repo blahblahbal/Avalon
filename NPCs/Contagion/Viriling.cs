@@ -11,6 +11,53 @@ using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Contagion;
 
+public class VirilingVariant : Viriling, ICustomAutoload
+{
+	public static void Autoload(Mod mod)
+	{
+		mod.AddContent(new VirilingVariant((int)(9 * 0.8f), (int)(122 * 0.9f), 0.9f, 0.4f, 320, "Small"));
+		mod.AddContent(new VirilingVariant((int)(9 * 1.1f), (int)(122 * 1.2f), 1.15f, 0.2f, 480, "Big"));
+	}
+	protected override bool CloneNewInstances => true;
+	public override string Texture => ModContent.GetInstance<Viriling>().Texture;
+	public override LocalizedText DisplayName => ModContent.GetInstance<Viriling>().DisplayName;
+
+	public int Defense;
+	public int LifeMax;
+	public float Scale;
+	public float KnockbackResist;
+	public float Value;
+	public string Variant;
+	public override string Name => base.Name + Variant;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, new NPCID.Sets.NPCBestiaryDrawModifiers() { Hide = true });
+	}
+	public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+	{
+		ContentSamples.NpcBestiaryCreditIdsByNpcNetIds[Type] = ContentSamples.NpcPersistentIdsByNetIds[ModContent.NPCType<Viriling>()];
+		bestiaryEntry.UIInfoProvider = new CommonEnemyUICollectionInfoProvider(ContentSamples.NpcPersistentIdsByNetIds[ModContent.NPCType<Viriling>()], quickUnlock: false);
+	}
+	public VirilingVariant(int defense, int lifeMax, float scale, float knockbackResist, float value, string variant)
+	{
+		Defense = defense;
+		LifeMax = lifeMax;
+		Scale = scale;
+		KnockbackResist = knockbackResist;
+		Value = value;
+		Variant = variant;
+	}
+	public override void SetDefaults()
+	{
+		base.SetDefaults();
+		NPC.defense = Defense;
+		NPC.lifeMax = LifeMax;
+		NPC.scale = Scale;
+		NPC.knockBackResist = KnockbackResist;
+		NPC.value = Value;
+	}
+}
 public class Viriling : ModNPC
 {
     public override void SetStaticDefaults()
@@ -44,7 +91,9 @@ public class Viriling : ModNPC
 			NPC.alpha = 128;
 		}
         NPC.noTileCollide = true;
-        SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
+		Banner = Item.NPCtoBanner(ModContent.NPCType<Viris>());
+		NPC.dontCountMe = true;
+		SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
@@ -55,38 +104,10 @@ public class Viriling : ModNPC
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
-        //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Booger>(), 2));
-        //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BacciliteOre>(), 2));
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Pathogen>(), 2, 1, 1 + (!Main.rand.NextBool(3) ? 1 : 0)));
     }
-
-    bool spawned;
     public override void AI()
     {
-        if (!spawned)
-        {
-            spawned = true;
-            int J = Main.rand.Next(0, 3);
-            if (J == 1)
-            {
-                NPC.lifeMax = (int)(NPC.lifeMax * 0.9f);
-                NPC.defense = (int)(NPC.defense * 0.8f);
-                NPC.scale *= 0.9f;
-                NPC.knockBackResist *= 1.2f;
-                NPC.value *= 0.8f;
-            }
-            if (J == 2)
-            {
-                NPC.lifeMax = (int)(NPC.lifeMax * 1.2f);
-                NPC.defense = (int)(NPC.defense * 1.1f);
-                NPC.scale *= 1.15f;
-                NPC.knockBackResist *= 0.9f;
-                NPC.value *= 1.2f;
-            }
-            NPC.life = NPC.lifeMax;
-            NPC.Size *= NPC.scale;
-            NPC.netUpdate = true;
-        }
         #region AI
         if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead)
         {

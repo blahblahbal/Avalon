@@ -167,7 +167,8 @@ public class Viris : ModNPC
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    NPC N = NPC.NewNPCDirect(NPC.GetSource_Death(), NPC.Center, ModContent.NPCType<Viriling>(), 0);
+					// there are 2 variants, so a random number between 0 and 2 is added because they're guaranteed to have that as their type.
+                    NPC N = NPC.NewNPCDirect(NPC.GetSource_Death(), NPC.Center, ModContent.NPCType<Viriling>() + Main.rand.Next(3), 0);
                     N.velocity = Main.rand.NextVector2Circular(5, 5);
                     if (Main.netMode == 2 && NPC.whoAmI < 200)
                         NetMessage.SendData(MessageID.SyncNPC, number: N.whoAmI);
