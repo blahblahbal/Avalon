@@ -1,3 +1,4 @@
+using Avalon.Data.Sets;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -18,6 +19,7 @@ public class DesertBeakWingNPC : ModNPC
 		};
 		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, bestiaryData);
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+		NPCSets.StunOrSlowResistant[Type] = true;
 	}
 	public override void SetDefaults()
 	{

@@ -9,9 +9,35 @@ using Terraria.ModLoader;
 
 namespace Avalon.Data.Sets;
 
+[ReinitializeDuringResizeArrays]
 public static class NPCSets
 {
 	//public static bool[] DontDropPotions = NPCID.Sets.Factory.CreateBoolSet(false, ModContent.NPCType<HomingRocket>());
+	public static bool[] StunOrSlowResistant = NPCID.Sets.Factory.CreateNamedSet("StunOrSlowResistant").Description("Set for multi-part npcs primarily, or anything that really needs to be immune to any slows or CC. Doesn't include bosses (except EOW) because the only things that use this don't go on them either.").RegisterBoolSet(
+		[
+		NPCID.SolarCrawltipedeBody,NPCID.SolarCrawltipedeHead,NPCID.SolarCrawltipedeTail,
+		//NPCID.TheDestroyer,NPCID.TheDestroyerBody,NPCID.TheDestroyerTail,
+		NPCID.DevourerHead,NPCID.DevourerBody,NPCID.DevourerTail,
+		NPCID.DiggerHead,NPCID.DiggerBody,NPCID.DiggerTail,
+		NPCID.DuneSplicerHead,NPCID.DuneSplicerBody,NPCID.DuneSplicerTail,
+		NPCID.EaterofWorldsHead,NPCID.EaterofWorldsBody,NPCID.EaterofWorldsTail,
+		NPCID.GiantWormHead,NPCID.GiantWormBody,NPCID.GiantWormTail,
+		NPCID.LeechHead,NPCID.LeechBody,NPCID.LeechTail,
+		NPCID.StardustWormHead,NPCID.StardustWormBody,NPCID.StardustWormTail,
+		NPCID.TombCrawlerHead,NPCID.TombCrawlerBody,NPCID.TombCrawlerTail,
+		NPCID.SeekerHead,NPCID.SeekerBody,NPCID.SeekerTail,
+		NPCID.BoneSerpentHead,NPCID.BoneSerpentBody,NPCID.BoneSerpentTail,
+		NPCID.WyvernHead,NPCID.WyvernBody,NPCID.WyvernTail,NPCID.WyvernBody2,NPCID.WyvernBody3,NPCID.WyvernLegs,
+		NPCID.BloodEelHead,NPCID.BloodEelBody,NPCID.BloodEelTail,
+		NPCID.CultistDragonHead,NPCID.CultistDragonTail,NPCID.CultistDragonBody1,NPCID.CultistDragonBody2,NPCID.CultistDragonBody3,NPCID.CultistDragonBody4,
+
+		NPCID.Pumpking, NPCID.PumpkingBlade,
+		NPCID.PirateShip, NPCID.PirateShipCannon
+		//NPCID.Skeleton, NPCID.SkeletronHand,
+		//NPCID.SkeletronPrime,NPCID.PrimeCannon,NPCID.PrimeLaser,NPCID.PrimeSaw,NPCID.PrimeVice,
+		//NPCID.Golem, NPCID.GolemFistLeft,NPCID.GolemFistRight,NPCID.GolemHead,NPCID.GolemHeadFree,
+
+		]);
 
 	public static int[] NPCToStatue = NPCID.Sets.Factory.CreateIntSet(
 		[

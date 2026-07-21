@@ -31,7 +31,7 @@ public class AeonsEternity : ModItem, ISyncedOnHitEffect
 	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{
-		Projectile.NewProjectile(source,position,velocity,type,damage / 5,knockback,player.whoAmI,Utils.RandomNextSeed((ulong)Main.timeForVisualEffects));
+		Projectile.NewProjectile(source,position,velocity, type,damage / 5,knockback,player.whoAmI,Utils.RandomNextSeed((ulong)Main.timeForVisualEffects));
 		return false;
 	}
 	public override void MeleeEffects(Player player, Rectangle hitbox)

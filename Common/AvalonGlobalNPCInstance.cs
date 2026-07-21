@@ -1,14 +1,20 @@
+using MagicStorage;
 using Microsoft.Xna.Framework;
+using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace Avalon.Common;
 
 public class AvalonGlobalNPCInstance : GlobalNPC
 {
     public override bool InstancePerEntity => true;
-    public bool AstigSpawned { get; set; }
+
+	public float Speed;
+	public float[] SpeedUpdateCount = new float[2];
+	public bool AstigSpawned { get; set; }
     public int LacerateStacks { get; set; } = 1;
     public bool Lacerated { get; set; }
     public bool IsLaceratedHM { get; set; }
@@ -38,8 +44,75 @@ public class AvalonGlobalNPCInstance : GlobalNPC
 	public bool SkellyBanana {  get; set; }
 	public bool Dissolving {  get; set; }
 
-    public override void ResetEffects(NPC npc)
+	public override void Load()
+	{
+		On_NPC.AI += On_NPC_AI;
+		On_NPC.FindFrame += On_NPC_FindFrame;
+		On_NPC.UpdateCollision += On_NPC_UpdateCollision;
+	}
+
+	private void On_NPC_UpdateCollision(On_NPC.orig_UpdateCollision orig, NPC self)
+	{
+		var gNPC = self.GetGlobalNPC<AvalonGlobalNPCInstance>();
+		self.velocity *= gNPC.Speed;
+		orig(self);
+		self.velocity /= gNPC.Speed;
+		return;
+	}
+
+	private void On_NPC_FindFrame(On_NPC.orig_FindFrame orig, NPC self)
+	{
+		if (self.IsABestiaryIconDummy)
+		{
+			orig(self);
+			return;
+		}
+		var gNPC = self.GetGlobalNPC<AvalonGlobalNPCInstance>();
+		gNPC.SpeedUpdateCount[1] += gNPC.Speed;
+		while (gNPC.SpeedUpdateCount[1] >= 1)
+		{
+			gNPC.SpeedUpdateCount[1]--;
+			orig(self);
+		}
+	}
+
+	private void On_NPC_AI(On_NPC.orig_AI orig, NPC self)
+	{
+		var gNPC = self.GetGlobalNPC<AvalonGlobalNPCInstance>();
+		self.GravityMultiplier *= gNPC.Speed;
+		self.MaxFallSpeedMultiplier *= gNPC.Speed;
+		//if (self.noTileCollide)
+			//self.velocity *= gNPC.Speed;
+		gNPC.SpeedUpdateCount[0] += gNPC.Speed;
+		while (gNPC.SpeedUpdateCount[0] >= 1)
+		{
+			gNPC.SpeedUpdateCount[0]--;
+			orig(self);
+		}
+		if (self.noTileCollide)
+		{
+			//self.velocity /= gNPC.Speed;
+			self.position += self.velocity * (gNPC.Speed - 1f);
+		}
+	}
+	public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+	{
+		for (int i = 0; i < SpeedUpdateCount.Length; i++)
+		{
+			binaryWriter.Write(SpeedUpdateCount[i]);
+		}
+	}
+	public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+	{
+		for (int i = 0; i < SpeedUpdateCount.Length; i++)
+		{
+			SpeedUpdateCount[i] = binaryReader.ReadSingle();
+		}
+	}
+	public override void ResetEffects(NPC npc)
     {
+
+		Speed = 1;
         NecroticDrain = false;
         Malaria = false;
         Electrified = false;
@@ -52,7 +125,6 @@ public class AvalonGlobalNPCInstance : GlobalNPC
         BacterialInfection = false;
         //BleedStacks = 1;
     }
-
     public override void DrawEffects(NPC npc, ref Color drawColor)
     {
         if (Pathogen)

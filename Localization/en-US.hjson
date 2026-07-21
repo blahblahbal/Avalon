@@ -10118,6 +10118,15 @@ Mods: {
 				DisplayName: Undine Banner
 				Tooltip: ""
 			}
+
+			StasisRifle: {
+				DisplayName: Stasis Rifle
+				Tooltip:
+					'''
+					Freeze those unworthy
+					[c/C39FDD:[10th Anniversary Contest Winner - Maykal (I think, we're 4 years late and they left)][c/C39FDD:]]
+					'''
+			}
 		}
 
 		InfoDisplays: {
@@ -11667,6 +11676,11 @@ Mods: {
 			InfernalJudgement: {
 				DisplayName: Infernal Judgment
 				Description: Quickly losing life and vulnerable to debuffs
+			}
+
+			CryoStasis: {
+				DisplayName: Cryo Stasis
+				Description: Mods.Avalon.Buffs.CryoStasis.Description
 			}
 		}
 

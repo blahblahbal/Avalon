@@ -58,7 +58,7 @@ public class IrateBones : CustomFighterAI
 	public override float MaxMoveSpeed => Utils.Remap(NPC.life,0,NPC.lifeMax / 3 * 2,9,3);
 	public override float MaxAirSpeed => Utils.Remap(NPC.life, 0, NPC.lifeMax / 3 * 2, 20, 5);
 	public override float Acceleration => Utils.Remap(NPC.life, 0, NPC.lifeMax / 3 * 2, 0.2f, 0.1f);
-	public override float AirAcceleration => Utils.Remap(NPC.life, 0, NPC.lifeMax / 3 * 2, 0.5f, 0.1f);
+	public override float AirAcceleration => NPC.direction != Math.Sign(NPC.velocity.X)? Utils.Remap(NPC.life, 0, NPC.lifeMax / 3 * 2, 0.5f, 0.1f) : 0;
 	public override bool CanOpenDoors => true;
 	public override int KnockInterval => (int)Utils.Remap(NPC.life, 0, NPC.lifeMax, 5, 20);
 	public override int MaxKnockCount => (int)Utils.Remap(NPC.life, 0, NPC.lifeMax, 10, 4);

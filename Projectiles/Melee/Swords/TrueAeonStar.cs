@@ -17,6 +17,12 @@ namespace Avalon.Projectiles.Melee.Swords;
 public class TrueAeonStar : ModProjectile
 {
 	SoundStyle _chime = new SoundStyle("Avalon/Sounds/Item/ReverseWindChime", 5) { pitchVariance = 0.15f, pitch = 0.2f, MaxInstances = 16, volume = 0.75f };
+
+	private const int _deathDelayAfterLasers = 20;
+	private const int _spawnLaserTimeStart = 40;
+	private const int _deathInterval = 4;
+	private SlotId[] SoundSlots = new SlotId[6];
+	private Vector2[] StarPositions = new Vector2[6];
 	public override void SetDefaults()
 	{
 		Projectile.width = 24;
@@ -108,10 +114,6 @@ public class TrueAeonStar : ModProjectile
 		}
 		return false;
 	}
-	private static int _deathDelayAfterLasers = 20;
-	private static int _spawnLaserTimeStart = 40;
-	private static int _deathInterval = 4;
-
 	public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
 	{
 		for (int i = 0; i < StarPositions.Length; i++)
@@ -123,8 +125,6 @@ public class TrueAeonStar : ModProjectile
 		}
 		return false;
 	}
-	SlotId[] SoundSlots = new SlotId[6];
-	
 	public override void AI()
 	{
 		int dustType = ModContent.DustType<SimpleColorableGlowyDust>();
@@ -145,6 +145,7 @@ public class TrueAeonStar : ModProjectile
 		float speed = MathHelper.SmoothStep(4, 0, Projectile.ai[1] / 50f); //Utils.Remap(Projectile.ai[1], 0, 50, 4, 0f);
 		Projectile.ai[2]++;
 		Projectile.ai[1] += speed;
+		Projectile.position += Main.player[Projectile.owner].velocity * speed / 4;
 		var seed = (ulong)Projectile.ai[0];
 		for (int i = 0; i < StarPositions.Length; i++)
 		{
@@ -247,5 +248,4 @@ public class TrueAeonStar : ModProjectile
 		if (Projectile.ai[2] > _spawnLaserTimeStart + _deathDelayAfterLasers + _deathInterval * StarPositions.Length)
 			Projectile.Kill();
 	}
-	public Vector2[] StarPositions = new Vector2[6];
 }

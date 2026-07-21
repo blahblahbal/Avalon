@@ -212,7 +212,7 @@ public class InfernalJudgementNPC : GlobalNPC
 			NeedsToClear = false;
 			for(int i = 0; i < npc.buffImmune.Length; i++)
 			{
-				if (!BuffSets.ImmunityCannotBeRemovedFromEnemies[i])
+				if (!BuffSets.ImmunityCannotBeRemovedFromEnemies[i] && !BuffSets.CCOrSlowDebuffThatCannotGoOnBossesOrNPCsThatWouldCauseSignificantJank[i])
 					npc.buffImmune[i] = false;
 			}
 		}

@@ -1,5 +1,6 @@
 using Avalon;
 using Avalon.Common.Players;
+using Avalon.Data.Sets;
 using Avalon.Items.Material;
 using Avalon.NPCs.Template;
 using Microsoft.Xna.Framework;
@@ -29,6 +30,7 @@ public class PyrasiteHead : WormHead
 		};
 		NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+		NPCSets.StunOrSlowResistant[Type] = true;
 		Data.Sets.NPCSets.Wicked[NPC.type] = true;
 	}
 	public override void SetDefaults()
@@ -107,6 +109,8 @@ public class PyrasiteHead : WormHead
 				Hide = true
 			};
 			NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
+			NPCSets.StunOrSlowResistant[Type] = true;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
 		}
 		public override void Init()
 		{
@@ -164,6 +168,8 @@ public class PyrasiteTail : WormTail
 		{
 			Hide = true
 		};
+		NPCSets.StunOrSlowResistant[Type] = true;
+		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
 		NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, drawModifier);
 	}
 	public override void SetDefaults()
