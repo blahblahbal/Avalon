@@ -15,21 +15,17 @@ namespace Avalon.Hooks
 			On_TileLightScanner.ApplySurfaceLight += On_TileLightScanner_ApplySurfaceLight;
 			On_TileLightScanner.ApplyHellLight += On_TileLightScanner_ApplyHellLight;
 		}
-
-		private static ushort BrownSG;
-		private static ushort LimeSG;
-		private static ushort CyanSG;
-		//private static ushort ChartreuseSG;
+		private static readonly float[]?[] StainedGlassRGBMults = WallID.Sets.Factory.CreateCustomSet<float[]?>(null);
 
 		public override void SetStaticDefaults()
 		{
 			// Reduces lag, trust me bro
-			BrownSG = (ushort)ModContent.WallType<Walls.BrownStainedGlass>();
-			LimeSG = (ushort)ModContent.WallType<Walls.LimeStainedGlass>();
-			CyanSG = (ushort)ModContent.WallType<Walls.CyanStainedGlass>();
+			StainedGlassRGBMults[ModContent.WallType<Walls.BrownStainedGlass>()] = [1.1f, 0.75f, 0.5f];
+			StainedGlassRGBMults[ModContent.WallType<Walls.LimeStainedGlass>()] = [0.714f, 1f, 0f];
+			StainedGlassRGBMults[ModContent.WallType<Walls.CyanStainedGlass>()] = [0f, 1f, 1f];
 			//if (ExxoAvalonOrigins.ThoriumContentEnabled)
 			//{
-			//	ChartreuseSG = (ushort)ModContent.WallType<ModSupport.Thorium.Walls.ChartreuseStainedGlass>();
+			//	StainedGlassRGBMults[ModContent.WallType<ModSupport.Thorium.Walls.ChartreuseStainedGlass>()] = [0.745f, 0.925f, 0.1f];
 			//}
 		}
 
@@ -37,92 +33,55 @@ namespace Avalon.Hooks
 		{
 			orig.Invoke(self, tile, x, y, ref lightColor);
 
-			float num4 = 0.55f + (float)Math.Sin(Main.GlobalTimeWrappedHourly * 2f) * 0.08f;
-			float finalR = num4;
-			float finalG = num4 * 0.6f;
-			float finalB = num4 * 0.2f;
-
-			if (CombinedGlassHooks(tile, ref finalR, ref finalG, ref finalB))
-			{
-				if (lightColor.X < finalR)
-				{
-					lightColor.X = finalR;
-				}
-				if (lightColor.Y < finalG)
-				{
-					lightColor.Y = finalG;
-				}
-				if (lightColor.Z < finalB)
-				{
-					lightColor.Z = finalB;
-				}
-			}
-		}
-
-		private static bool CombinedGlassHooks(Tile tile, ref float finalR, ref float finalG, ref float finalB)
-		{
 			if (tile.WallType != WallID.None && (!tile.HasTile || tile.IsHalfBlock || !Main.tileNoSunLight[tile.TileType]) && tile.LiquidAmount < 255)
 			{
-				if (tile.WallType == BrownSG)
+				if (StainedGlassRGBMults[tile.WallType] != null)
 				{
-					finalR *= 1.1f;
-					finalG *= 0.75f;
-					finalB *= 0.5f;
-					return true;
-				}
-				else if (tile.WallType == LimeSG)
-				{
-					finalR *= 0.714f;
-					finalG *= 1f;
-					finalB *= 0f;
-					return true;
-				}
-				else if (tile.WallType == CyanSG)
-				{
-					finalR *= 0f;
-					finalG *= 1f;
-					finalB *= 1f;
-					return true;
-				}
-				//else if (ExxoAvalonOrigins.ThoriumContentEnabled && tile.WallType == ChartreuseSG)
-				//{
-				//	finalR *= 0.745f;
-				//	finalG *= 0.925f;
-				//	finalB *= 0.1f;
-				//	return true;
-				//}
-				else
-				{
-					return false;
+					float num4 = 0.55f + MathF.Sin(Main.GlobalTimeWrappedHourly * 2f) * 0.08f;
+					float finalR = num4 * StainedGlassRGBMults[tile.WallType]![0];
+					float finalG = num4 * 0.6f * StainedGlassRGBMults[tile.WallType]![1];
+					float finalB = num4 * 0.2f * StainedGlassRGBMults[tile.WallType]![2];
+
+					if (lightColor.X < finalR)
+					{
+						lightColor.X = finalR;
+					}
+					if (lightColor.Y < finalG)
+					{
+						lightColor.Y = finalG;
+					}
+					if (lightColor.Z < finalB)
+					{
+						lightColor.Z = finalB;
+					}
 				}
 			}
-			return false;
 		}
 
 		private void On_TileLightScanner_ApplySurfaceLight(On_TileLightScanner.orig_ApplySurfaceLight orig, TileLightScanner self, Tile tile, int x, int y, ref Vector3 lightColor)
 		{
 			orig.Invoke(self, tile, x, y, ref lightColor);
-			float finalR = Main.tileColor.R / 255f;
-			float finalG = Main.tileColor.G / 255f;
-			float finalB = Main.tileColor.B / 255f;
 
-			if (CombinedGlassHooks(tile, ref finalR, ref finalG, ref finalB))
+			if (tile.WallType != WallID.None && (!tile.HasTile || tile.IsHalfBlock || !Main.tileNoSunLight[tile.TileType]) && tile.LiquidAmount < 255)
 			{
-				float num3 = 1f - Main.shimmerDarken;
-				finalR *= num3;
-				finalG *= num3;
-				finalB *= num3;
-				if (lightColor.X < finalR)
+				if (StainedGlassRGBMults[tile.WallType] != null)
 				{
-					lightColor.X = finalR;
-				}
-				if (lightColor.Y < finalG)
-				{
-					lightColor.Y = finalG;
-				}
-				if (lightColor.Z < finalB)
-				{
-					lightColor.Z = finalB;
+					float finalR = Main.tileColor.R / 255f * StainedGlassRGBMults[tile.WallType]![0];
+					float finalG = Main.tileColor.G / 255f * StainedGlassRGBMults[tile.WallType]![1];
+					float finalB = Main.tileColor.B / 255f * StainedGlassRGBMults[tile.WallType]![2];
+
+					if (lightColor.X < finalR)
+					{
+						lightColor.X = finalR;
+					}
+					if (lightColor.Y < finalG)
+					{
+						lightColor.Y = finalG;
+					}
+					if (lightColor.Z < finalB)
+					{
+						lightColor.Z = finalB;
+					}
 				}
 			}
 		}
