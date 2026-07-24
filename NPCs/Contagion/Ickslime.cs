@@ -1,4 +1,5 @@
 using Avalon;
+using Avalon.Buffs.Debuffs;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using System;
@@ -81,13 +82,30 @@ public class Ickslime : ModNPC
 
 	public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
 	{
-		if (Main.rand.NextBool(3))
+		int applyTime = (int)(60 * Main.rand.NextFloat(12, 24));
+		switch (Main.rand.Next(7))
 		{
-			target.AddBuff(BuffID.Weak, 360);
-		}
-		else
-		{
-			target.AddBuff(BuffID.Weak, 120);
+			case 0:
+				target.AddBuff(BuffID.Poisoned, applyTime);
+				break;
+			case 1:
+				target.AddBuff(BuffID.Confused, applyTime / 2);
+				break;
+			case 2:
+				target.AddBuff(BuffID.BrokenArmor, applyTime * 3);
+				break;
+			case 3:
+				target.AddBuff(BuffID.Slow, applyTime);
+				break;
+			case 4:
+				target.AddBuff(BuffID.Blackout, applyTime * 3 / 2);
+				break;
+			case 5:
+				target.AddBuff(BuffID.Dazed, applyTime / 2);
+				break;
+			case 6:
+				target.AddBuff(ModContent.BuffType<AttackSpeedDown>(), applyTime);
+				break;
 		}
 	}
 	public override void SetDefaults()

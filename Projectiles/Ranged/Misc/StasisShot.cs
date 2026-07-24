@@ -102,7 +102,7 @@ public class StasisShot : ModProjectile
 		Projectile.tileCollide = false;
 		Projectile.ai[2] = 1;
 		Projectile.knockBack = 0;
-		Projectile.damage /= 8;
+		Projectile.damage /= 16;
 
 		for (int i = 0; i < 35; i++)
 		{

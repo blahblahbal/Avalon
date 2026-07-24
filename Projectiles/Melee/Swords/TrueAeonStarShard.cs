@@ -43,24 +43,17 @@ public class TrueAeonStarShard : ModProjectile
 	{
 		Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 		Projectile.ai[0]++;
-		if (Projectile.ai[0] == 1)
+		int target = Projectile.FindTargetWithLineOfSight(300);
+		if (target != -1 && Projectile.ai[0] < 60)
 		{
-			Projectile.ai[1] = Projectile.FindTargetWithLineOfSight();
-		}
-		if (Projectile.ai[0] > 120)
-			Projectile.ai[1] = -1;
-		if (Projectile.ai[1] != -1)
-		{
-			if (Projectile.ai[0] > 30)
+			if (Projectile.ai[0] > 20)
 			{
-				Projectile.velocity = Vector2.Lerp(Projectile.Center.DirectionTo(Main.npc[(int)Projectile.ai[1]].Center) * Projectile.ai[2], Projectile.velocity, 0.98f);
-				if (!Main.npc[(int)Projectile.ai[1]].active)
-					Projectile.ai[0] = 0;
+				Projectile.velocity = Vector2.Lerp(Projectile.Center.DirectionTo(Main.npc[target].Center) * Projectile.ai[2], Projectile.velocity, 0.95f);
 			}
 		}
 		else
 		{
-			Projectile.alpha += 5;
+			Projectile.alpha += 10;
 			Projectile.velocity *= 0.98f;
 			if (Projectile.alpha > 255)
 			{

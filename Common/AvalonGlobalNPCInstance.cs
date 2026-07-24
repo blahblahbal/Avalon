@@ -54,10 +54,18 @@ public class AvalonGlobalNPCInstance : GlobalNPC
 	private void On_NPC_UpdateCollision(On_NPC.orig_UpdateCollision orig, NPC self)
 	{
 		var gNPC = self.GetGlobalNPC<AvalonGlobalNPCInstance>();
-		self.velocity *= gNPC.Speed;
-		orig(self);
-		self.velocity /= gNPC.Speed;
-		return;
+		if (self.noGravity)
+		{
+			self.velocity *= gNPC.Speed;
+			orig(self);
+			self.velocity /= gNPC.Speed;
+		}
+		else
+		{
+			self.velocity.X *= gNPC.Speed;
+			orig(self);
+			self.velocity.X /= gNPC.Speed;
+		}
 	}
 
 	private void On_NPC_FindFrame(On_NPC.orig_FindFrame orig, NPC self)
@@ -79,10 +87,8 @@ public class AvalonGlobalNPCInstance : GlobalNPC
 	private void On_NPC_AI(On_NPC.orig_AI orig, NPC self)
 	{
 		var gNPC = self.GetGlobalNPC<AvalonGlobalNPCInstance>();
-		self.GravityMultiplier *= gNPC.Speed;
-		self.MaxFallSpeedMultiplier *= gNPC.Speed;
-		//if (self.noTileCollide)
-			//self.velocity *= gNPC.Speed;
+		//self.GravityMultiplier *= gNPC.Speed;
+		//self.MaxFallSpeedMultiplier *= gNPC.Speed;
 		gNPC.SpeedUpdateCount[0] += gNPC.Speed;
 		while (gNPC.SpeedUpdateCount[0] >= 1)
 		{

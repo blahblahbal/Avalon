@@ -8527,7 +8527,7 @@ Mods: {
 			}
 
 			BrokenVigilanteTome: {
-				DisplayName: Broken Vigilante Tome
+				DisplayName: Tattered Vigilante Tome
 				Tooltip: ""
 			}
 
@@ -11681,6 +11681,11 @@ Mods: {
 			CryoStasis: {
 				DisplayName: Cryo Stasis
 				Description: Mods.Avalon.Buffs.CryoStasis.Description
+			}
+
+			AttackSpeedDown: {
+				DisplayName: Attack Speed Down
+				Description: Attack speed is decreased
 			}
 		}
 

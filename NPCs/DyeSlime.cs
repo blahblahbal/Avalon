@@ -214,6 +214,6 @@ public class DyeSlime : ModNPC
 	}
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
-		return 0.06f;
+		return Main.hardMode? 0.04f : 0.02f;
 	}
 }

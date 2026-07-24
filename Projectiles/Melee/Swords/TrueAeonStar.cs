@@ -40,7 +40,7 @@ public class TrueAeonStar : ModProjectile
 	public override bool PreDraw(ref Color lightColor)
 	{
 		var tex = TextureAssets.Projectile[Type].Value;
-		DrawData d = new DrawData(tex, Vector2.Zero, new Rectangle(0, 0, tex.Width, tex.Height / 2), Color.White with { A = 64 }, 0, tex.Size() / new Vector2(2, 4), Projectile.scale, SpriteEffects.None);
+		DrawData d = new DrawData(tex, Vector2.Zero, new Rectangle(0, 0, tex.Width, tex.Height / 2), Color.White with { A = 128 }, 0, tex.Size() / new Vector2(2, 4), Projectile.scale, SpriteEffects.None);
 		var seed = (ulong)Projectile.ai[0];
 		Rectangle glowFrame = new Rectangle(0, tex.Height / 2, tex.Width, tex.Height / 2);
 		for (int i = 0; i < StarPositions.Length; i++)
@@ -237,11 +237,6 @@ public class TrueAeonStar : ModProjectile
 						d.noLightEmittence = true;
 						d.velocity = Main.rand.NextVector2Circular(3, 3) + StarPositions[i].DirectionTo(StarPositions[i - 1]) * -3;
 					}
-				}
-
-				if (Main.myPlayer == Projectile.owner)
-				{
-					Projectile.NewProjectile(Projectile.GetSource_FromThis(), starCenter, Vector2.Zero, ModContent.ProjectileType<AeonExplosion>(), Projectile.damage * 5, Projectile.knockBack * 2, Projectile.owner);
 				}
 			}
 		}

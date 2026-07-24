@@ -1,4 +1,5 @@
 using Avalon;
+using Avalon.Buffs.Debuffs;
 using Avalon.Items.Material;
 using Microsoft.Xna.Framework;
 using System;
@@ -104,8 +105,16 @@ public class Viriling : ModNPC
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
-        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Pathogen>(), 2, 1, 1 + (!Main.rand.NextBool(3) ? 1 : 0)));
+        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Material.Pathogen>(), 2, 1, 1 + (!Main.rand.NextBool(3) ? 1 : 0)));
     }
+
+	public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
+	{
+		if(!Main.rand.NextBool(3))
+			target.AddBuff(ModContent.BuffType<AttackSpeedDown>(), 60 * 5);
+		else
+			target.AddBuff(BuffID.Slow, 60 * 25);
+	}
     public override void AI()
     {
         #region AI

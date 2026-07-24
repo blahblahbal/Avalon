@@ -1,7 +1,6 @@
 using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Dusts;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -13,6 +12,7 @@ public class Pathogen : ModBuff
     public override void SetStaticDefaults()
     {
         Main.debuff[Type] = true;
+		BuffID.Sets.LongerExpertDebuff[Type] = true;
     }
     public override void Update(NPC npc, ref int buffIndex)
     {
