@@ -32,9 +32,12 @@ public class BiomeTileCounts : ModSystem
 	public int DarkMonolithTiles { get; private set; }
 	public int ContagionDesertTiles { get; set; }
 	public int AshenOvergrowthTiles { get; private set; }
+	public int Trees { get; private set; }
 
 	public override void TileCountsAvailable(ReadOnlySpan<int> tileCounts)
 	{
+		Trees = tileCounts[TileID.Trees] + tileCounts[TileID.Saplings] + tileCounts[TileID.VanityTreeSakura] + tileCounts[TileID.VanityTreeYellowWillow] + tileCounts[TileID.VanityTreeWillowSaplings] + tileCounts[TileID.VanityTreeSakuraSaplings];
+
 		HellCastleTiles = tileCounts[ModContent.TileType<ImperviousBrick>()];
 
 		ContagionTiles = tileCounts[ModContent.TileType<Chunkstone>()] +

@@ -214,6 +214,8 @@ public class DyeSlime : ModNPC
 	}
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
+		if (!NPC.downedBoss1 && !NPC.downedBoss2 && !NPC.downedBoss3)
+			return 0;
 		return Main.hardMode? 0.04f : 0.02f;
 	}
 }
