@@ -17,7 +17,7 @@ public class Undine : ModNPC
 {
     public override void SetStaticDefaults()
     {
-        Main.npcFrameCount[NPC.type] = 6;
+        Main.npcFrameCount[NPC.type] = 9;
 		Data.Sets.NPCSets.Watery[NPC.type] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
 		NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
@@ -28,6 +28,7 @@ public class Undine : ModNPC
 
     public override void SetDefaults()
     {
+		Main.npcFrameCount[NPC.type] = 9;
 		NPC.damage = 25;
         NPC.lifeMax = 225;
         NPC.width = 24;
@@ -38,6 +39,7 @@ public class Undine : ModNPC
         NPC.HitSound = SoundID.NPCHit1;
         NPC.DeathSound = SoundID.NPCDeath1;
 		NPC.noGravity = true;
+		NPC.noTileCollide = true;
         Banner = NPC.type;
         BannerItem = ModContent.ItemType<UndineBanner>();
     }
@@ -56,20 +58,25 @@ public class Undine : ModNPC
 		//if (NPC.collideY)
 		//	NPC.velocity.Y = Math.Sign(NPC.velocity.Y) * -1;
 
-		NPC.ai[3]++;
+		if(NPC.ai[3] > 240 || !Collision.SolidCollision(NPC.position,NPC.width,NPC.height))
+			NPC.ai[3]++;
 		if (NPC.ai[3] > 240)
 		{
 			NPC.localAI[3] = 1;
 			//NPC.SimpleFlyMovement(new Vector2(0, NPC.directionY), 0.03f);
-			if (Main.netMode != NetmodeID.MultiplayerClient && NPC.ai[3] % 6 == 0)
+			if (NPC.ai[3] < 440)
 			{
-				Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Top + Main.rand.NextVector2Square(-2,2) + new Vector2(4 * NPC.spriteDirection,-8), Vector2.UnitY.RotatedByRandom(0.6f) * Main.rand.NextFloat(-1, -5), ModContent.ProjectileType<UndineTear>(), 15, 2, -1);
+				if (Main.netMode != NetmodeID.MultiplayerClient && NPC.ai[3] % 6 == 0)
+				{
+					Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Top + Main.rand.NextVector2Square(-2, 2) + new Vector2(4 * NPC.spriteDirection, -8), Vector2.UnitY.RotatedByRandom(0.6f) * Main.rand.NextFloat(-1, -5), ModContent.ProjectileType<UndineTear>(), 15, 2, -1);
+				}
 			}
 			NPC.velocity.X *= 0.8f;
-			if (NPC.ai[3] > 440)
+			if (NPC.ai[3] > 530)
 			{
 				NPC.ai[3] = Main.rand.Next(-60, 60);
 				NPC.netUpdate = true;
+				NPC.localAI[3] = 0;
 			}
 		}
 		else
@@ -94,10 +101,17 @@ public class Undine : ModNPC
 	public override void FindFrame(int frameHeight)
 	{
 		NPC.frameCounter++;
-		NPC.frame.Y = (int)((NPC.frameCounter / 6) % 3) * frameHeight;
-		if (NPC.localAI[3] == 1)
+		if (NPC.ai[3] > 440)
 		{
-			NPC.frame.Y += frameHeight * 3;
+			NPC.frame.Y = (int)(((NPC.ai[3] - 440) / 10) % 3) * frameHeight + frameHeight * 6;
+		}
+		else
+		{
+			NPC.frame.Y = (int)((NPC.frameCounter / 6) % 3) * frameHeight;
+			if (NPC.localAI[3] == 1)
+			{
+				NPC.frame.Y += frameHeight * 3;
+			}
 		}
 	}
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>

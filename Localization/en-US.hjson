@@ -505,7 +505,7 @@ Mods: {
 			FallenHero: A hero, fallen into blood. It roams aimlessly on nights of a Blood Moon.
 			Pyrasite: Giant flat worms created by the Contagion, these creatures enjoy feeding on pre-eaten food from the stomach of titans and other large lifeforms.
 			BacteriumPrime: This giant eye of Contagion never ceases, never truly closes. Those who fall to its gaze will be just as felled by its plague.
-			DesertBeak: The guardian of the desert, this large vulture summons its smaller brethren to assist it in battle. It lifts prey up with its talons, then drops them to fall to their doom.
+			DesertBeak: The guardian of the desert, this large vulture summons its smaller brethren to assist it in battle.
 			IrateBones: These Angry Bones have donned a set of armor to further fuel their wrath.
 			CursedScepter: Enchanted through the malevolence of the Dungeon, weapons like this cut intruders down to size.
 			CursedFlamer: Cousins of the Corruptor, these malevolent creatures shoot cursed flames at anyone who dares to intrude into the Corruption.
@@ -530,7 +530,8 @@ Mods: {
 			EvilVulture: A vulture tainted by the Corruption, its nature becoming twisted and foul.
 			BloodyVulture: A vulture consumed by the Crimson, it similarly seeks to consume its prey.
 			SicklyVulture: A vulture afflicted by the Contagion, its cells have been mutated by the rampaging virus.
-			Undine: IDK I'm not feeling that kind of creative rn, FIX LATER !!!
+			Undine: Previous inhabitants of the dungeon that lost their bodies before their reanimation, their souls latched to and animated water. Their minds were kept more intact that their skeleton friends and family.
+			AngryFairy: These stronger fairies have been tasked with protecting the forest. They do not appreciate your deforestation.
 		}
 
 		Keybinds: {
@@ -10127,6 +10128,11 @@ Mods: {
 					[c/C39FDD:[10th Anniversary Contest Winner - Maykal (I think, we're 4 years late and they left)][c/C39FDD:]]
 					'''
 			}
+
+			AngryFairyBanner: {
+				DisplayName: Angry Fairy Banner
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -10861,6 +10867,7 @@ Mods: {
 			EnemyGauntletPortal.DisplayName: ""
 			DyeSlime.DisplayName: Dye Slime
 			Undine.DisplayName: Wailing Undine
+			AngryFairy.DisplayName: Angry Fairy
 		}
 
 		Buffs: {
