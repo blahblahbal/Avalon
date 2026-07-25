@@ -181,7 +181,7 @@ public class AvalonGlobalItem : GlobalItem
 		ItemID.Sets.ShimmerTransformToItem[ItemID.Ruby] = ModContent.ItemType<Peridot>();
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Peridot>()] = ItemID.Emerald;
 		ItemID.Sets.ShimmerTransformToItem[ItemID.Emerald] = ItemID.Sapphire;
-		ItemID.Sets.ShimmerTransformToItem[ItemID.Diamond] = ModContent.ItemType<Tourmaline>();
+		ItemID.Sets.ShimmerTransformToItem[ItemID.Sapphire] = ModContent.ItemType<Tourmaline>();
 		ItemID.Sets.ShimmerTransformToItem[ModContent.ItemType<Tourmaline>()] = ItemID.Topaz;
 		ItemID.Sets.ShimmerTransformToItem[ItemID.Topaz] = ItemID.Amethyst;
 
