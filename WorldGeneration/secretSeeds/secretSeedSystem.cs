@@ -28,8 +28,8 @@ namespace Avalon.WorldGeneration.SecretSeeds
 
 		public override void Load()
 		{
-			On_WorldGen.GenerateWorld += CheckSeedNumber;
-			On_UIWorldCreation.ProcessSpecialWorldSeeds += SetGetSecretSeed;
+			//On_WorldGen.GenerateWorld += CheckSeedNumber;
+			//On_UIWorldCreation.ProcessSpecialWorldSeeds += SetGetSecretSeed;
 		}
 
 		internal void SetGetSecretSeed(On_UIWorldCreation.orig_ProcessSpecialWorldSeeds orig, string processedSeed)

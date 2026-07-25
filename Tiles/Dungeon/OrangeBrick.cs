@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent.Biomes.CaveHouse;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -18,8 +19,7 @@ public class OrangeBrick : ModTile
         Main.tileMerge[TileID.WoodBlock][Type] = true;
         Main.tileBlockLight[Type] = true;
         Main.tileDungeon[Type] = true;
-        //ItemDrop = ModContent.ItemType<Items.Placeable.Tile.OrangeBrick>();
-        HitSound = SoundID.Tink;
+		HitSound = SoundID.Tink;
         DustType = ModContent.DustType<Dusts.OrangeDungeonDust>();
         TileID.Sets.GeneralPlacementTiles[Type] = false;
     }
