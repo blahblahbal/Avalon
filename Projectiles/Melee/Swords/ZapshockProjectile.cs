@@ -48,6 +48,10 @@ public class ZapshockProjectile : ModProjectile
 		}
 		return base.Colliding(projHitbox, targetHitbox);
 	}
+	public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+	{
+		modifiers.HitDirectionOverride = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
+	}
 	public override void AI()
 	{
 		if (Projectile.ai[1] == 0 && Projectile.ai[2] == 0)
@@ -194,7 +198,7 @@ public class ZapshockProjectile : ModProjectile
 	}
 	private static Color StripColors(float progressOnStrip)
 	{
-		return Color.White with { A = 128 };
+		return Color.White with { A = 0 };
 	}
 	private float StripWidth(float progressOnStrip)
 	{
