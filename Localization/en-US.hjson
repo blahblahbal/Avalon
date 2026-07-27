@@ -10133,6 +10133,11 @@ Mods: {
 				DisplayName: Angry Fairy Banner
 				Tooltip: ""
 			}
+
+			Zapshock: {
+				DisplayName: Zapshock
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -10393,6 +10398,7 @@ Mods: {
 			IridiumGreatswordSpike.DisplayName: Iridium Greatsword Spike
 			EnergyBall.DisplayName: Energy Ball
 			UndineTear.DisplayName: Undine Tear
+			ZapshockProjectile.DisplayName: Zapshock Projectile
 		}
 
 		NPCs: {

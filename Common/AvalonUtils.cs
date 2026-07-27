@@ -6,6 +6,43 @@ using Terraria.ID;
 namespace Avalon.Common;
 public static class AvalonUtils
 {
+	public static Vector2 FindVelocityForGravityAffectedThing(Vector2 StartPosition, Vector2 TargetPosition, float gravity, int TimeUntilHit)
+	{
+		return new Vector2(
+			(TargetPosition.X - StartPosition.X) / TimeUntilHit,
+			((TargetPosition.Y - StartPosition.Y) / TimeUntilHit) - (gravity / 2f * TimeUntilHit)
+			);
+	}
+	/// <summary>
+	/// Finds the closest floor below a point in the world. If it can't find anything it'll return the lowest spot it could check.
+	/// </summary>
+	public static Vector2 FindFloorBelowIgnoringSolidTops(Vector2 pointPoisition, int maxCheckTileDistance)
+	{
+		int num = (int)pointPoisition.X / 16;
+		int num2 = (int)pointPoisition.Y / 16;
+		for (int i = 0; i < maxCheckTileDistance; i++)
+		{
+			if ((Main.tileSolid[Main.tile[num, num2 + i].TileType] && !Main.tileSolidTop[Main.tile[num, num2 + i].TileType] && Main.tile[num, num2 + i].HasTile && !Main.tile[num, num2 + i].IsActuated) || !WorldGen.InWorld(num, num2 + i, 5))
+			{
+				return new Vector2(num * 16 + 8, (num2 + i) * 16);
+			}
+		}
+		return new Vector2(num * 16 + 8, (num2 + maxCheckTileDistance) * 16);
+	}
+	public static Vector2 FindFloorBelow(Vector2 pointPoisition, int maxCheckTileDistance)
+	{
+		int num = (int)pointPoisition.X / 16;
+		int num2 = (int)pointPoisition.Y / 16;
+		for (int i = 0; i < maxCheckTileDistance; i++)
+		{
+			if ((Main.tileSolid[Main.tile[num, num2 + i].TileType] && Main.tile[num, num2 + i].HasTile && !Main.tile[num, num2 + i].IsActuated) || !WorldGen.InWorld(num, num2 + i, 5))
+			{
+				return new Vector2(num * 16 + 8, (num2 + i) * 16);
+			}
+		}
+		return new Vector2(num * 16 + 8, (num2 + maxCheckTileDistance) * 16);
+	}
+
 	/// <param name="velocity"></param>
 	/// <param name="position"></param>
 	/// <param name="baseSpeed"></param>
