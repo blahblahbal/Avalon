@@ -85,7 +85,7 @@ public class RhodiumGreatswordBeam : ModProjectile, ISyncedOnHitEffect
 		width = height = 8;
 		return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
 	}
-	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
+	public bool SyncedOnHitNPC(Player player, NPC target, Rectangle attackHitbox, int damage, float knockback, bool crit, int hitDirection, Projectile? projectile)
 	{
 		Vector2 point = Main.rand.NextVector2FromRectangle(target.Hitbox);
 		for (int i = 0; i < 3; i++)
@@ -101,6 +101,7 @@ public class RhodiumGreatswordBeam : ModProjectile, ISyncedOnHitEffect
 			p.LocalPosition = point;
 			Main.ParticleSystem_World_OverPlayers.Add(p);
 		}
+		return true;
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{

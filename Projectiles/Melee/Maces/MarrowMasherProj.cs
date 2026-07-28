@@ -32,12 +32,12 @@ public class MarrowMasherProj : MaceTemplate, ISyncedOnHitEffect
 			hit.Knockback *= 1.5f;
 		}
 	}
-	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
+	public bool SyncedOnHitNPC(Player player, NPC target, Rectangle attackHitbox, int damage, float knockback, bool crit, int hitDirection, Projectile? projectile)
 	{
 		//Main.NewText("Name: " + player.name + " Target:" + target.TypeName + $" ({target.whoAmI})");
 		//Main.NewText("Target pos: " + target.Center.ToString() + "Player Pos: " + player.Center.ToString());
 		//Main.NewText($"Crit: {crit} dir: {hitDirection}");
-		Vector2 closestPoint = target.Hitbox.ClosestPointInRect(Projectile.Center);
+		Vector2 closestPoint = target.Hitbox.ClosestPointInRect(attackHitbox.Center.ToVector2());
 		float VelocityDirection = (Projectile.rotation + MathHelper.PiOver4) * Owner.direction * SwingDirection * Owner.gravDir;
 		if (crit)
 		{
@@ -80,5 +80,6 @@ public class MarrowMasherProj : MaceTemplate, ISyncedOnHitEffect
 				Main.ParticleSystem_World_OverPlayers.Add(s);
 			}
 		}
+		return true;
 	}
 }

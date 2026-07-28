@@ -23,10 +23,6 @@ public class GoblinDaggerProj : ModProjectile, ISyncedOnHitEffect
 		SetVisualOffsets();
 		Projectile.position += Vector2.Normalize(Projectile.velocity) * 16;
 	}
-
-	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-	{
-	}
 	private void SetVisualOffsets()
 	{
 		int HalfSpriteWidth = TextureAssets.Projectile[Type].Value.Width / 2;
@@ -48,7 +44,7 @@ public class GoblinDaggerProj : ModProjectile, ISyncedOnHitEffect
 		DrawOffsetX -= Projectile.spriteDirection * 4;
 	}
 
-	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
+	public bool SyncedOnHitNPC(Player player, NPC target, Rectangle attackHitbox, int damage, float knockback, bool crit, int hitDirection, Projectile? projectile)
 	{
 		if (crit)
 		{
@@ -73,6 +69,7 @@ public class GoblinDaggerProj : ModProjectile, ISyncedOnHitEffect
 				d.fadeIn = Main.rand.NextFloat(1, 1.5f);
 			}
 		}
+		return true;
 	}
 }
 

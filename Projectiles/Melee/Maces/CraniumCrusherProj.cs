@@ -33,9 +33,9 @@ public class CraniumCrusherProj : MaceTemplate, ISyncedOnHitEffect
 		}
 	}
 
-	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
+	public bool SyncedOnHitNPC(Player player, NPC target, Rectangle attackHitbox, int damage, float knockback, bool crit, int hitDirection, Projectile? projectile)
 	{
-		Vector2 closestPoint = target.Hitbox.ClosestPointInRect(Projectile.Center);
+		Vector2 closestPoint = target.Hitbox.ClosestPointInRect(attackHitbox.Center.ToVector2());
 		float VelocityDirection = (Projectile.rotation + MathHelper.PiOver4) * Owner.direction * SwingDirection * Owner.gravDir;
 		if (crit)
 		{
@@ -82,5 +82,6 @@ public class CraniumCrusherProj : MaceTemplate, ISyncedOnHitEffect
 				d.color.A = 0;
 			}
 		}
+		return true;
 	}
 }

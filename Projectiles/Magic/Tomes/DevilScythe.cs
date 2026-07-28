@@ -75,7 +75,7 @@ public class DevilScythe : ModProjectile, ISyncedOnHitEffect
 	{
 		target.AddBuff(ModContent.BuffType<InfernalJudgement>(), 60 * Main.rand.Next(3,15));
 	}
-	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
+	public bool SyncedOnHitNPC(Player player, NPC target, Rectangle attackHitbox, int damage, float knockback, bool crit, int hitDirection, Projectile? projectile)
 	{
 		Vector2 pos = Main.rand.NextVector2FromRectangle(target.Hitbox);
 		for(int i = 0; i < 5; i++)
@@ -94,6 +94,7 @@ public class DevilScythe : ModProjectile, ISyncedOnHitEffect
 			p.LocalPosition = pos;
 			Main.ParticleSystem_World_OverPlayers.Add(p);
 		}
+		return true;
 	}
 	public override bool OnTileCollide(Vector2 oldVelocity)
 	{

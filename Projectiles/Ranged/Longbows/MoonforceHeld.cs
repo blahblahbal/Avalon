@@ -1,4 +1,5 @@
-﻿using Avalon.Common.Templates;
+﻿using Avalon.Common.Interfaces;
+using Avalon.Common.Templates;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -109,7 +110,7 @@ public class MoonforceHeld : LongbowTemplate
 		return false;
 	}
 }
-public class MoonlightArrowVisuals : GlobalProjectile
+public class MoonlightArrowVisuals : GlobalProjectile, ISyncedOnHitEffect
 {
 	public override bool InstancePerEntity => true;
 	public bool Moonlight;
@@ -224,5 +225,25 @@ public class MoonlightArrowVisuals : GlobalProjectile
 			return false;
 		}
 		return base.PreDraw(projectile, ref lightColor);
+	}
+
+	public bool SyncedOnHitNPC(Player player, NPC target, Rectangle attackHitbox, int damage, float knockback, bool crit, int hitDirection, Projectile? projectile)
+	{
+		if (Moonlight)
+		{
+			Vector2 pos = target.Hitbox.ClosestPointInRect(attackHitbox.Center.ToVector2());
+			for (int i = 0; i < 3; i++)
+			{
+				var p = VanillaParticles.RequestPrettySparkleParticle();
+				p.ColorTint = Color.Lerp(Color.Blue, Color.Red, Main.rand.NextFloat());
+				p.Scale = new Vector2(3, 1) * (projectile.width / 64f);
+				p.Rotation = Main.rand.NextFloatDirection();
+				p.DrawHorizontalAxis = true;
+				p.LocalPosition = pos;
+				p.TimeToLive = Main.rand.Next(10, 40);
+				Main.ParticleSystem_World_OverPlayers.Add(p);
+			}
+		}
+		return Moonlight;
 	}
 }

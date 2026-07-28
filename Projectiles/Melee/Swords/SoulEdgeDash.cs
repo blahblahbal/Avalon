@@ -108,7 +108,7 @@ public class SoulEdgeDash : ModProjectile, ISyncedOnHitEffect
 		}
 		return false;
 	}
-	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
+	public bool SyncedOnHitNPC(Player player, NPC target, Rectangle attackHitbox, int damage, float knockback, bool crit, int hitDirection, Projectile? projectile)
 	{
 		Vector2 point = Main.rand.NextVector2FromRectangle(target.Hitbox);
 		for (int i = 0; i < 3; i++)
@@ -125,5 +125,6 @@ public class SoulEdgeDash : ModProjectile, ISyncedOnHitEffect
 			p.LocalPosition = point;
 			Main.ParticleSystem_World_OverPlayers.Add(p);
 		}
+		return true;
 	}
 }

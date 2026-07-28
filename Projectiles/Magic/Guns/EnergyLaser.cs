@@ -145,14 +145,15 @@ public class EnergyLaser : ModProjectile, ISyncedOnHitEffect
 		return false;
 	}
 
-	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
+	public bool SyncedOnHitNPC(Player player, NPC target, Rectangle attackHitbox, int damage, float knockback, bool crit, int hitDirection, Projectile? projectile)
 	{
+		Vector2 pos = attackHitbox.Center.ToVector2();
 		var p = VanillaParticles.RequestPrettySparkleParticle();
 		p.ColorTint = new Color(0f,Main.rand.NextFloat(),1,0);
 		p.Scale = new Vector2(6f, 1.2f);
 		p.Rotation = Projectile.velocity.ToRotation() + Main.rand.NextFloat(-0.2f,0.2f);
 		p.DrawVerticalAxis = false;
-		p.LocalPosition = Projectile.Center;
+		p.LocalPosition = pos;
 		p.TimeToLive = 35;
 		p.FadeInEnd = 2;
 		p.FadeOutStart = 4;
@@ -160,9 +161,10 @@ public class EnergyLaser : ModProjectile, ISyncedOnHitEffect
 
 		for (int i = 0; i < 10; i++)
 		{
-			Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.Torch, Main.rand.NextVector2Circular(3, 3), 24);
+			Dust d = Dust.NewDustPerfect(pos, DustID.Torch, Main.rand.NextVector2Circular(3, 3), 24);
 			d.scale *= 2;
 			d.noGravity = true;
 		}
+		return true;
 	}
 }

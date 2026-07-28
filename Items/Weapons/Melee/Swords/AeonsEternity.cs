@@ -25,9 +25,10 @@ public class AeonsEternity : ModItem, ISyncedOnHitEffect
 		Item.rare = ItemRarityID.Pink;
 		Item.value = Item.sellPrice(0, 5);
 	}
-	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
+	public bool SyncedOnHitNPC(Player player, NPC target, Rectangle attackHitbox, int damage, float knockback, bool crit, int hitDirection, Projectile? projectile)
 	{
 		Main.ParticleSystem_World_OverPlayers.Add(new AeonStarburst(Main.rand.NextVector2FromRectangle(target.Hitbox), Vector2.Zero, Color.Cyan, Main.rand.NextFloat(MathHelper.TwoPi), 1.5f));
+		return true;
 	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{

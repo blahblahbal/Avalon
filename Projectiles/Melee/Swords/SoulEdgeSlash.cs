@@ -91,7 +91,7 @@ public class SoulEdgeSlash : EnergySlashTemplate, ISyncedOnHitEffect
 		Main.player[Projectile.owner].GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage += damageDone;
 		Projectile.netUpdate = true;
 	}
-	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
+	public bool SyncedOnHitNPC(Player player, NPC target, Rectangle attackHitbox, int damage, float knockback, bool crit, int hitDirection, Projectile? projectile)
 	{
 		Vector2 point = Main.rand.NextVector2FromRectangle(target.Hitbox);
 		float percent = Main.player[Projectile.owner].GetModPlayer<SoulEdgePlayer>().SoulEdgeDamage / (float)SoulEdgePlayer.maxSoulEdge;
@@ -129,5 +129,6 @@ public class SoulEdgeSlash : EnergySlashTemplate, ISyncedOnHitEffect
 				Main.ParticleSystem_World_OverPlayers.Add(p);
 			}
 		}
+		return true;
 	}
 }

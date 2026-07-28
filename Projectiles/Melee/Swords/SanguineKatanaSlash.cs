@@ -55,11 +55,12 @@ public class SanguineKatanaSlash : EnergySlashTemplate, ISyncedOnHitEffect
 			}
 		}
 	}
-	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
+	public bool SyncedOnHitNPC(Player player, NPC target, Rectangle attackHitbox, int damage, float knockback, bool crit, int hitDirection, Projectile? projectile)
 	{
 		Vector2 vector = Main.rand.NextVector2FromRectangle(target.Hitbox) - new Vector2(0, 24);
 		Vector2 vel = new Vector2(Main.rand.NextFloat(-0.5f, 0.5f), 1);
 		Main.ParticleSystem_World_OverPlayers.Add(new SanguineCuts(vector, vel));
+		return true;
 	}
 	public override void DrawPrettyStarSparkle(float opacity, SpriteEffects dir, Vector2 drawpos, Color drawColor, Color shineColor, float flareCounter, float fadeInStart, float fadeInEnd, float fadeOutStart, float fadeOutEnd, float rotation, Vector2 scale, Vector2 fatness)
 	{

@@ -8,7 +8,6 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using ThoriumMod.Items.ThrownItems;
 
 namespace Avalon.Projectiles.Melee.Swords;
 
@@ -64,8 +63,6 @@ public class TrueAeonStarShard : ModProjectile
 	}
 	public override void OnKill(int timeLeft)
 	{
-		if (Projectile.Opacity == 0)
-			return;
 		var t = AssetReferences.Assets.Textures.InverseGlowRing.Asset;
 		t.Wait();
 		for (int i2 = 0; i2 < 2; i2++)
@@ -80,11 +77,12 @@ public class TrueAeonStarShard : ModProjectile
 			ring.FadeInNormalizedTime = 0.1f;
 			ring.FadeOutNormalizedTime = 0.1f;
 			ring.ColorTint = i2 == 0 ? new Color(Main.rand.Next(200), 100, 255, 0) : Color.Black * 0.5f;
+			ring.ColorTint *= Projectile.Opacity;
 			ring.Rotation = Main.rand.NextFloatDirection();
 			ring.RotationVelocity = Main.rand.NextFloat(-0.1f, 0.1f);
 			Main.ParticleSystem_World_OverPlayers.Add(ring);
 		}
-		Main.ParticleSystem_World_OverPlayers.Add(new AeonStarburst(Projectile.Center, Vector2.Zero, new Color(Main.rand.Next(200), 100, 255, 64), Color.Black, Main.rand.NextFloatDirection(), Main.rand.NextFloat(1,2), 24));
+		Main.ParticleSystem_World_OverPlayers.Add(new AeonStarburst(Projectile.Center, Vector2.Zero, new Color(Main.rand.Next(200), 100, 255, 64) * Projectile.Opacity, Color.Black * Projectile.Opacity, Main.rand.NextFloatDirection(), Main.rand.NextFloat(1,2), 24));
 		int type = ModContent.DustType<SimpleColorableGlowyDust>();
 		for (int i = 0; i < 10; i++)
 		{

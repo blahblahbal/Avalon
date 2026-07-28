@@ -55,7 +55,7 @@ public class ClearCutterSlash : EnergySlashTemplate, ISyncedOnHitEffect
 			Projectile P = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, new Vector2(0, 30).RotatedBy(rand), ProjectileID.StarCloakStar, (int)(Projectile.damage * 0.4f), Projectile.knockBack, Projectile.owner, 0, target.position.Y);
 		}
 	}
-	public void SyncedOnHitNPC(Player player, NPC target, bool crit, int hitDirection)
+	public bool SyncedOnHitNPC(Player player, NPC target, Rectangle attackHitbox, int damage, float knockback, bool crit, int hitDirection, Projectile? projectile)
 	{
 		Color[] Colors = { Color.LightSkyBlue, Color.Magenta, Color.White, Color.Magenta };
 		var p = VanillaParticles.RequestPrettySparkleParticle();
@@ -77,7 +77,7 @@ public class ClearCutterSlash : EnergySlashTemplate, ISyncedOnHitEffect
 			d2.scale *= Main.rand.NextFloat(1f, 2f);
 			d2.noGravity = true;
 		}
-		//ParticleSystem.NewParticle(new CrystalSparkle(1f), Main.rand.NextVector2FromRectangle(target.Hitbox));
+		return true;
 	}
 }
 
