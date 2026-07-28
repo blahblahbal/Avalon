@@ -1,5 +1,6 @@
-﻿using Avalon.Core;
-using Avalon.Items.Weapons.Melee.Swords;
+﻿using Avalon;
+using Avalon.Core;
+using Avalon.Items.Weapons.Magic.Other;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,7 +14,7 @@ using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Melee.Swords;
+namespace Avalon.Projectiles.Magic.Other;
 
 public class ZapshockProjectile : ModProjectile
 {
@@ -116,7 +117,7 @@ public class ZapshockProjectile : ModProjectile
 
 			if (i != 0)
 			{
-				float warpAmount = Utils.Remap(Projectile.timeLeft, 10, 20, MathHelper.PiOver2, 0.1f);
+				float warpAmount = Utils.Remap(Projectile.timeLeft, 10, 20, 2, 0f);
 				mainPoint = mainPoint.RotatedBy((Utils.RandomFloat(ref seed) - 0.5f) * warpAmount * sin, _points[i - 1]);
 
 			}
@@ -192,8 +193,8 @@ public class ZapshockProjectile : ModProjectile
 	{
 		MiscShaderData shader = new MiscShaderData(Main.Assets.Request<Effect>("PixelShader"), "MagicMissile").UseProjectionMatrix(doUse: true);
 		shader.UseImage2(TextureAssets.MagicPixel);
-		shader.UseImage1(AssetReferences.Projectiles.Melee.Swords.ZapshockProjectileShape.Asset);
-		shader.UseImage0(AssetReferences.Projectiles.Melee.Swords.ZapshockProjectileGradient.Asset);
+		shader.UseImage1(AssetReferences.Projectiles.Magic.Other.ZapshockProjectileShape.Asset);
+		shader.UseImage0(AssetReferences.Projectiles.Magic.Other.ZapshockProjectileGradient.Asset);
 		GameShaders.Misc.Add("Zapshock", shader);
 	}
 	private static Color StripColors(float progressOnStrip)

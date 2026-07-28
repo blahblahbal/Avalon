@@ -1,5 +1,6 @@
 ﻿using Avalon.Common.Interfaces;
 using Avalon.Common.Templates;
+using Avalon.Core;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -92,6 +93,20 @@ public class MoonforceHeld : LongbowTemplate
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
+		if (Main.player[Projectile.owner].channel)
+		{
+			var sparkle = AssetReferences.Assets.Textures.SparklySingleEnd.Asset;
+			float glowOpacity = Power * Power;
+			float interval = 40;
+			Vector2 glowScale = new Vector2(0.7f, Power);
+			float amount = (float)(Main.timeForVisualEffects % interval) / interval;
+			Main.EntitySpriteDraw(sparkle.Value, Projectile.Center - Main.screenPosition + Projectile.velocity * 14, null, new Color(1f, 0.1f, 0.7f, 0.3f) * (1f - amount) * amount * glowOpacity, Projectile.rotation + MathHelper.PiOver2, sparkle.Size() / 2, glowScale * (0.5f + amount) * 2, SpriteEffects.None);
+			Main.EntitySpriteDraw(sparkle.Value, Projectile.Center - Main.screenPosition + Projectile.velocity * 14, null, new Color(1f, 1, 1, 0) * (1f - amount) * amount * glowOpacity, Projectile.rotation + MathHelper.PiOver2, sparkle.Size() / 2, glowScale * (0.25f + amount) * 1.5f, SpriteEffects.None);
+
+			amount = (float)((Main.timeForVisualEffects + interval / 2) % interval) / interval;
+			Main.EntitySpriteDraw(sparkle.Value, Projectile.Center - Main.screenPosition + Projectile.velocity * 14, null, new Color(0.3f, 0.1f, 1, 0.3f) * (1f - amount) * amount * glowOpacity, Projectile.rotation + MathHelper.PiOver2, sparkle.Size() / 2, glowScale * (0.5f + amount) * 2, SpriteEffects.None);
+			Main.EntitySpriteDraw(sparkle.Value, Projectile.Center - Main.screenPosition + Projectile.velocity * 14, null, new Color(1f, 1, 1, 0) * (1f - amount) * amount * glowOpacity, Projectile.rotation + MathHelper.PiOver2, sparkle.Size() / 2, glowScale * (0.25f + amount) * 1.5f, SpriteEffects.None);
+		}
 		DefaultBowDraw(new Color(200, 200, 200, 128), Vector2.Zero);
 		if (FullPowerGlow > 0 && Main.myPlayer == Projectile.owner)
 		{
@@ -114,6 +129,7 @@ public class MoonlightArrowVisuals : GlobalProjectile, ISyncedOnHitEffect
 {
 	public override bool InstancePerEntity => true;
 	public bool Moonlight;
+	private float _glowAmount = 0;
 	public override bool TileCollideStyle(Projectile projectile, ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
 	{
 		if (Moonlight)
@@ -128,7 +144,7 @@ public class MoonlightArrowVisuals : GlobalProjectile, ISyncedOnHitEffect
 	{
 		if (Moonlight && projectile.penetrate != 0)
 		{
-			SoundEngine.PlaySound(SoundID.Item118);
+			SoundEngine.PlaySound(SoundID.Item118, projectile.position);
 			projectile.penetrate--;
 			if (projectile.velocity.Y != oldVelocity.Y) projectile.velocity.Y = -oldVelocity.Y;
 			if (projectile.velocity.X != oldVelocity.X) projectile.velocity.X = -oldVelocity.X;
@@ -141,6 +157,10 @@ public class MoonlightArrowVisuals : GlobalProjectile, ISyncedOnHitEffect
 	{
 		if (Moonlight)
 		{
+			if(_glowAmount < 1)
+			{
+				_glowAmount += 0.04f;
+			}
 			Dust d = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, Main.rand.Next(DustID.CorruptTorch, DustID.JungleTorch));
 			d.velocity = projectile.velocity.RotatedByRandom(0.1f) * 0.5f * (projectile.extraUpdates + 1);
 			d.scale = MathHelper.Clamp(projectile.width / 30, 0.2f, 100);
@@ -195,12 +215,12 @@ public class MoonlightArrowVisuals : GlobalProjectile, ISyncedOnHitEffect
 			Color color44 = Color.Lerp(Color.Purple, Color.Red, Main.masterColor) * 0.3f;
 			Color color45 = Color.White * 0.5f;
 			color45.A = 0;
-			float FlameScale = projectile.width / 34f * 1.2f;
-			Color color46 = color44;
+			float FlameScale = projectile.width / 34f * 1.2f * _glowAmount;
+			Color color46 = color44 * _glowAmount;
 			color46.A = 0;
-			Color color47 = color44;
+			Color color47 = color44 * _glowAmount;
 			color47.A = 0;
-			Color color48 = color44;
+			Color color48 = color44 * _glowAmount;
 			color48.A = 0;
 			Main.EntitySpriteDraw(TextureAssets.Extra[91].Value, vector35 - Main.screenPosition + vector34 + spinningpoint.RotatedBy((float)Math.PI * 2f * num189), TextureAssets.Extra[91].Value.Frame(), color46, projectile.velocity.ToRotation() + (float)Math.PI / 2f, origin10, 1.1f * FlameScale, SpriteEffects.None);
 			Main.EntitySpriteDraw(TextureAssets.Extra[91].Value, vector35 - Main.screenPosition + vector34 + spinningpoint.RotatedBy((float)Math.PI * 2f * num189 + (float)Math.PI * 2f / 3f), TextureAssets.Extra[91].Value.Frame(), color47, projectile.velocity.ToRotation() + (float)Math.PI / 2f, origin10, 0.8f * FlameScale, SpriteEffects.None);
