@@ -100,12 +100,13 @@ public class MoonforceHeld : LongbowTemplate
 			float interval = 40;
 			Vector2 glowScale = new Vector2(0.7f, Power);
 			float amount = (float)(Main.timeForVisualEffects % interval) / interval;
-			Main.EntitySpriteDraw(sparkle.Value, Projectile.Center - Main.screenPosition + Projectile.velocity * 14, null, new Color(1f, 0.1f, 0.7f, 0.3f) * (1f - amount) * amount * glowOpacity, Projectile.rotation + MathHelper.PiOver2, sparkle.Size() / 2, glowScale * (0.5f + amount) * 2, SpriteEffects.None);
-			Main.EntitySpriteDraw(sparkle.Value, Projectile.Center - Main.screenPosition + Projectile.velocity * 14, null, new Color(1f, 1, 1, 0) * (1f - amount) * amount * glowOpacity, Projectile.rotation + MathHelper.PiOver2, sparkle.Size() / 2, glowScale * (0.25f + amount) * 1.5f, SpriteEffects.None);
+			Vector2 glowPos = Projectile.Center + new Vector2(0, Main.player[Projectile.owner].gfxOffY) - Main.screenPosition + Projectile.velocity * 14;
+			Main.EntitySpriteDraw(sparkle.Value, glowPos, null, new Color(1f, 0.1f, 0.7f, 0.3f) * (1f - amount) * amount * glowOpacity, Projectile.rotation + MathHelper.PiOver2, sparkle.Size() / 2, glowScale * (0.5f + amount) * 2, SpriteEffects.None);
+			Main.EntitySpriteDraw(sparkle.Value, glowPos, null, new Color(1f, 1, 1, 0) * (1f - amount) * amount * glowOpacity, Projectile.rotation + MathHelper.PiOver2, sparkle.Size() / 2, glowScale * (0.25f + amount) * 1.5f, SpriteEffects.None);
 
 			amount = (float)((Main.timeForVisualEffects + interval / 2) % interval) / interval;
-			Main.EntitySpriteDraw(sparkle.Value, Projectile.Center - Main.screenPosition + Projectile.velocity * 14, null, new Color(0.3f, 0.1f, 1, 0.3f) * (1f - amount) * amount * glowOpacity, Projectile.rotation + MathHelper.PiOver2, sparkle.Size() / 2, glowScale * (0.5f + amount) * 2, SpriteEffects.None);
-			Main.EntitySpriteDraw(sparkle.Value, Projectile.Center - Main.screenPosition + Projectile.velocity * 14, null, new Color(1f, 1, 1, 0) * (1f - amount) * amount * glowOpacity, Projectile.rotation + MathHelper.PiOver2, sparkle.Size() / 2, glowScale * (0.25f + amount) * 1.5f, SpriteEffects.None);
+			Main.EntitySpriteDraw(sparkle.Value, glowPos, null, new Color(0.3f, 0.1f, 1, 0.3f) * (1f - amount) * amount * glowOpacity, Projectile.rotation + MathHelper.PiOver2, sparkle.Size() / 2, glowScale * (0.5f + amount) * 2, SpriteEffects.None);
+			Main.EntitySpriteDraw(sparkle.Value, glowPos, null, new Color(1f, 1, 1, 0) * (1f - amount) * amount * glowOpacity, Projectile.rotation + MathHelper.PiOver2, sparkle.Size() / 2, glowScale * (0.25f + amount) * 1.5f, SpriteEffects.None);
 		}
 		DefaultBowDraw(new Color(200, 200, 200, 128), Vector2.Zero);
 		if (FullPowerGlow > 0 && Main.myPlayer == Projectile.owner)
