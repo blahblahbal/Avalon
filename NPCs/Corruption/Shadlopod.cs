@@ -1,6 +1,5 @@
 using Avalon;
 using Avalon.Items.Banners;
-using Avalon.Common.Players;
 using Avalon.Projectiles.Hostile;
 using Microsoft.Xna.Framework;
 using System;
@@ -11,7 +10,6 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Avalon.Common;
 
 namespace Avalon.NPCs.Corruption;
 
@@ -105,11 +103,16 @@ public class Shadlopod : ModNPC
 
 		return angle;
 	}
-	public bool CanHit(Vector2 pos, float speed, out float time)
+	public bool CanHit(Player player, float speed, ref float angle)
 	{
+		Vector2 pos = player.Center;
+		if (pos.Y < NPC.Center.Y || !NPC.WithinRange(pos, 800))
+		{
+			return false;
+		}
 		bool retVal = false;
 		Vector2 projections = QuadraticFormula(0.5f * gravPx, 0, NPC.Center.Y - pos.Y);
-		time = MathF.Max(projections.X, projections.Y);
+		float time = MathF.Max(projections.X, projections.Y);
 		if (MathF.Abs(NPC.Center.X - pos.X) <= speed * time)
 		{
 			retVal = true;
@@ -123,6 +126,43 @@ public class Shadlopod : ModNPC
 		//	Dust.QuickDust(NPC.Center + new Vector2(speed * time2, j), retVal ? Color.Green : Color.Red);
 		//	Dust.QuickDust(NPC.Center + new Vector2(-speed * time2, j), retVal ? Color.Green : Color.Red);
 		//}
+
+		if (retVal)
+		{
+			Vector2 pos2 = player.Center;
+			if (MathF.Abs(NPC.Center.X - pos2.X) <= speed * time)
+			{
+				pos = pos2;
+			}
+			else
+			{
+				pos.X = NPC.Center.X + speed * time * MathF.Sign(player.Center.X - NPC.Center.X);
+			}
+			angle = FinalAngle(pos, speed);
+			int iterations = (int)(time / 2);
+			for (int i = 0; i < iterations; i++)
+			{
+				float j = Utils.Remap(i * 32, 0, (iterations - 1) * 32, 0, pos.Y - NPC.Center.Y);
+				Vector2 projections2 = QuadraticFormula(0.5f * gravPx, MathF.Sin(angle) * speed, -j);
+				float time2 = MathF.Max(projections2.X, projections2.Y);
+				Vector2 nextPos = NPC.Center + new Vector2(MathF.Cos(angle) * speed * time2, j);
+				Tile t1 = Main.tile[(nextPos + new Vector2(-4.5f, -4.5f)).ToTileCoordinates()];
+				Tile t2 = Main.tile[(nextPos + new Vector2(4.5f, -4.5f)).ToTileCoordinates()];
+				Tile t3 = Main.tile[(nextPos + new Vector2(4.5f, 4.5f)).ToTileCoordinates()];
+				Tile t4 = Main.tile[(nextPos + new Vector2(-4.5f, 4.5f)).ToTileCoordinates()];
+				// checks only work for 4 corners idc works for this proj size
+				if (i > 3 &&
+					(!(t1.IsActuated || !t1.HasTile || !Main.tileSolid[t1.type] || Main.tileSolidTop[t1.type]) ||
+					!(t2.IsActuated || !t2.HasTile || !Main.tileSolid[t2.type] || Main.tileSolidTop[t2.type]) ||
+					!(t3.IsActuated || !t3.HasTile || !Main.tileSolid[t3.type] || Main.tileSolidTop[t3.type]) ||
+					!(t4.IsActuated || !t4.HasTile || !Main.tileSolid[t4.type] || Main.tileSolidTop[t4.type])))
+				{
+					retVal = false;
+					angle = MathHelper.PiOver2;
+					break;
+				}
+			}
+		}
 		return retVal;
 	}
 	public override void AI()
@@ -151,78 +191,13 @@ public class Shadlopod : ModNPC
 		if (NPC.ai[0] == 1 && !Grounded)
 		{
 			// todo: I could probably get a bit of extra range if I bring back the offset from the centre, and make the npcs rotation not based on shooting direction
-			NPC.TargetClosest();
 			NPC.behindTiles = true;
-			Player player = Main.player[NPC.target];
 			float speed = 2f;
-			Vector2 pos = player.Center;
-			bool canHit = CanHit(pos, speed, out float time);
 			float angle = MathHelper.PiOver2;
 			float rotSpeed = 0.9f;
-			Vector2 projSpawnPos = Vector2.Zero;
-			if (canHit)
-			{
-				// blah blah blah, use the newtext stuff above to combine the old and new velocities
-				// need to also fix the player's Y velocity being able to exceed the max shooting angle
-				Vector2 pos2 = player.Center + player.velocity * (time / 4f); // fudging some motion prediction here
-				pos2 = player.Center;
-				if (MathF.Abs(NPC.Center.X - pos2.X) <= speed * time)
-				{
-					pos = pos2;
-				}
-				else
-				{
-					pos.X = NPC.Center.X + speed * time * MathF.Sign(player.Center.X - NPC.Center.X);
-				}
-				angle = FinalAngle(pos, speed);
-				int iterations = (int)(time / 2);
-				//Vector2 canHitLoopPos = NPC.Center;
-				//Point projSize = ContentSamples.ProjectilesByType[ModContent.ProjectileType<ShadlopodInk>()].Size.ToPoint();
-				//Dust.QuickDust(NPC.Center.ToPoint().ToVector2(), Color.Green);
-				for (int i = 0; i < iterations; i++)
-				{
-					float j = Utils.Remap(i * 32, 0, (iterations - 1) * 32, 0, pos.Y - NPC.Center.Y);
-					Vector2 projections2 = QuadraticFormula(0.5f * gravPx, MathF.Sin(angle) * speed, -j);
-					float time2 = MathF.Max(projections2.X, projections2.Y);
-					//if (i == 0)
-					//{
-					//	AvalonUtils.NewTextRainbow(new Vector2(MathF.Cos(angle) * speed * time2, j));
-					//}
-					//int mult = 1;
-					//if (!Collision.CanHit(canHitLoopPos - new Vector2(4) * mult, 8 * mult, 8 * mult, NPC.Center - new Vector2(4) * mult + new Vector2(MathF.Cos(angle) * speed * time2, j), 8 * mult, 8 * mult))
-					Vector2 nextPos = NPC.Center + new Vector2(MathF.Cos(angle) * speed * time2, j);
-					Tile t1 = Main.tile[(nextPos + new Vector2(-4.5f, -4.5f)).ToTileCoordinates()];
-					Tile t2 = Main.tile[(nextPos + new Vector2(4.5f, -4.5f)).ToTileCoordinates()];
-					Tile t3 = Main.tile[(nextPos + new Vector2(4.5f, 4.5f)).ToTileCoordinates()];
-					Tile t4 = Main.tile[(nextPos + new Vector2(-4.5f, 4.5f)).ToTileCoordinates()];
-					// checks only work for 4 corners idc works for this proj size
-					if (i > 3 &&
-						(!(t1.IsActuated || !t1.HasTile || !Main.tileSolid[t1.type] || Main.tileSolidTop[t1.type]) ||
-						!(t2.IsActuated || !t2.HasTile || !Main.tileSolid[t2.type] || Main.tileSolidTop[t2.type]) ||
-						!(t3.IsActuated || !t3.HasTile || !Main.tileSolid[t3.type] || Main.tileSolidTop[t3.type]) ||
-						!(t4.IsActuated || !t4.HasTile || !Main.tileSolid[t4.type] || Main.tileSolidTop[t4.type])))
-					{
-						//Main.NewText(i);
-						canHit = false;
-						//Dust.QuickDust(NPC.Center + new Vector2(MathF.Cos(angle) * speed * time2, j), Color.Green);
-						//Dust.QuickDust(nextPos.ToTileCoordinates(), Color.Green);
-						angle = MathHelper.PiOver2;
-						break;
-					}
-					if (i == 1)
-					{
-						projSpawnPos = nextPos;
-					}
-					//canHitLoopPos = nextPos;
-					//Dust.QuickDust((nextPos + new Vector2(-4.5f, -4.5f)).ToTileCoordinates(), Color.Green);
-					//Dust.QuickDust((nextPos + new Vector2(4.5f, -4.5f)).ToTileCoordinates(), Color.Green);
-					//Dust.QuickDust((nextPos + new Vector2(4.5f, 4.5f)).ToTileCoordinates(), Color.Green);
-					//Dust.QuickDust((nextPos + new Vector2(-4.5f, 4.5f)).ToTileCoordinates(), Color.Green);
-					//Dust.QuickDust(nextPos.ToTileCoordinates(), Color.Green);
-				}
-				rotSpeed = 0.9f;
-			}
-			bool TargetValidForShootingAt = canHit;
+			//bool canHit = CanHit(pos, speed, out float time);
+			bool TargetValidForShootingAt = false;
+			NPC.TargetClosest(player => TargetValidForShootingAt = CanHit(player, speed, ref angle));
 			NPC.rotation = Utils.AngleLerp(MathHelper.SmoothStep(angle - MathHelper.PiOver2, NPC.rotation, rotSpeed), 0, 0.01f);
 
 			NPC.ai[1]++;
