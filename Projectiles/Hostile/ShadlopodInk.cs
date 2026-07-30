@@ -15,14 +15,10 @@ public class ShadlopodInk : ModProjectile
 		Projectile.Size = new Microsoft.Xna.Framework.Vector2(8);
 		Projectile.extraUpdates = 2;
 		Projectile.light = 0;
+		Projectile.tileCollide = false;
 	}
 	public override void AI()
 	{
-		Dust D = Dust.NewDustDirect(Projectile.Center - Projectile.Size / 2, 0, 0, DustID.Wraith, Projectile.velocity.X, Projectile.velocity.Y);
-		D.noGravity = true;
-		D.velocity *= 0.1f;
-		D.scale *= 1.5f;
-
 		//if (!Main.player[(int)Projectile.ai[0]].dead)
 		//{
 		//    float MaxVelocity = 0.05f;
@@ -35,6 +31,26 @@ public class ShadlopodInk : ModProjectile
 		//    //}
 		//}
 		Projectile.velocity.Y += Shadlopod.gravPx;
+
+		if (Projectile.ai[1] > 15)
+		{
+			Projectile.tileCollide = true;
+		}
+		else
+		{
+			Projectile.ai[1]++;
+		}
+		if (Projectile.ai[1] > 5)
+		{
+			// todo: offset the dust's spawn position by time so it looks like a sine wave (easier than doing it with projectile)
+			Dust D = Dust.NewDustDirect(Projectile.Center - Projectile.Size / 2, 0, 0, DustID.Wraith, Projectile.velocity.X, Projectile.velocity.Y);
+			D.noGravity = true;
+			D.velocity *= 0.1f;
+			D.scale *= 1.5f;
+		}
+	}
+	public override void OnKill(int timeLeft)
+	{
 	}
 	public override void OnHitPlayer(Player target, Player.HurtInfo info)
 	{
