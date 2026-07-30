@@ -1,8 +1,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -18,13 +19,14 @@ namespace Avalon.Common
 		{
 			if (!NPC.downedPlantBoss)
 			{
-				int offset = -1;
-				if (item.netID == ItemID.CrimsonKey) offset = 0;
-				if (item.netID == ItemID.DungeonDesertKey) offset = 0;
-				for (int i = 0; i < 8; i++)
+				var texture = TextureAssets.Item[item.type];
+				float interval = 60;
+				float amount = (float)(Main.timeForVisualEffects % interval) / interval;
+				float amount2 = (float)((Main.timeForVisualEffects + interval / 2) % interval) / interval;
+				for (int i = 0; i < 4; i++)
 				{
-					Vector2 vec = new Vector2(0, 2).RotatedBy(Main.timeForVisualEffects * 0.05f + (MathHelper.PiOver4 * i)) * 1.1f;
-					spriteBatch.Draw(TextureAssets.Item[item.type].Value, position + new Vector2(0, offset + -Math.Abs(vec.Y * 0.5f)) + new Vector2(vec.X, vec.Y * 1.5f), frame, Color.Lerp(new Color(255, 0, 0, 0), new Color(255, 0, 255, 0), (float)Math.Sin(Main.timeForVisualEffects * 0.04f) * 0.5f + 0.5f) * 0.3f, 0, origin, scale, SpriteEffects.None, 0);
+					spriteBatch.Draw(texture.Value, position + new Vector2(0, 2 + 4 * amount2).RotatedBy(i * MathHelper.PiOver2 + MathHelper.PiOver4 + Main.timeForVisualEffects * 0.01f) + Vector2.UnitY * amount2 * -4, new Rectangle(0, 0, texture.Width(), texture.Height()), Color.Orange with { A = 0 } * (1f - amount2) * amount2, 0, origin, scale, SpriteEffects.None, 0f);
+					spriteBatch.Draw(texture.Value, position + new Vector2(0, 2 + 4 * amount).RotatedBy(i * MathHelper.PiOver2 + Main.timeForVisualEffects * 0.01f) + Vector2.UnitY * amount * -4, new Rectangle(0, 0, texture.Width(), texture.Height()), Color.Magenta with { A = 0 } * (1f - amount) * amount, 0, origin, scale, SpriteEffects.None, 0f);
 				}
 			}
 			return base.PreDrawInInventory(item, spriteBatch, position, frame, drawColor, itemColor, origin, scale);
@@ -33,14 +35,17 @@ namespace Avalon.Common
 		{
 			if (!NPC.downedPlantBoss)
 			{
-				Texture2D tex = TextureAssets.Item[item.type].Value;
-				int offset = -4;
-				if (item.netID == ItemID.CrimsonKey) offset = -5;
-				if (item.netID == ItemID.DungeonDesertKey) offset = -6;
-				for (int i = 0; i < 8; i++)
+				var texture = TextureAssets.Item[item.type];
+				Vector2 vector = texture.Size() / 2f;
+				Vector2 value = new((float)(item.width / 2) - vector.X, item.height - texture.Height());
+				Vector2 vector2 = item.position - Main.screenPosition + vector + value;
+				float interval = 60;
+				float amount = (float)(Main.timeForVisualEffects % interval) / interval;
+				float amount2 = (float)((Main.timeForVisualEffects + interval / 2) % interval) / interval;
+				for (int i = 0; i < 4; i++)
 				{
-					Vector2 vec = new Vector2(0, 2).RotatedBy(Main.timeForVisualEffects * 0.05f + (MathHelper.PiOver4 * i)) * 1.1f;
-					spriteBatch.Draw(tex, item.Center - Main.screenPosition + new Vector2(0, offset + -Math.Abs(vec.Y * 0.5f)) + new Vector2(vec.X, vec.Y * 1.5f), tex.Bounds, Color.Lerp(new Color(255, 0, 0, 0), new Color(255, 0, 255, 0), (float)Math.Sin(Main.timeForVisualEffects * 0.04f) * 0.5f + 0.5f) * 0.3f, rotation, tex.Size() / 2, 1, SpriteEffects.None, 0);
+					spriteBatch.Draw(texture.Value, vector2 + new Vector2(0, 2 + 4 * amount2).RotatedBy(i * MathHelper.PiOver2 + MathHelper.PiOver4 + Main.timeForVisualEffects * 0.01f) + Vector2.UnitY * amount2 * -4, new Rectangle(0, 0, texture.Width(), texture.Height()), Color.Orange with { A = 0 } * (1f - amount2) * amount2, rotation, vector, scale, SpriteEffects.None, 0f);
+					spriteBatch.Draw(texture.Value, vector2 + new Vector2(0,2 + 4 * amount).RotatedBy(i * MathHelper.PiOver2 + Main.timeForVisualEffects * 0.01f) + Vector2.UnitY * amount * -4, new Rectangle(0, 0, texture.Width(), texture.Height()), Color.Magenta with { A = 0 } * (1f - amount) * amount, rotation, vector, scale, SpriteEffects.None, 0f);
 				}
 			}
 			return base.PreDrawInWorld(item, spriteBatch, lightColor, alphaColor, ref rotation, ref scale, whoAmI);
