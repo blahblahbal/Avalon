@@ -1340,7 +1340,11 @@ Mods: {
 
 			MinersSword: {
 				DisplayName: Miner's Sword
-				Tooltip: ""
+				Tooltip: 
+				'''
+				Charges up damage when not being swung
+				Guaranteed critical strikes when falling
+				'''
 			}
 
 			PointingLaser: {

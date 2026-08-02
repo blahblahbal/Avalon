@@ -15,6 +15,7 @@ internal class TorchLauncher : ModItem
 		Item.DefaultToRangedWeapon(24, 14, ModContent.ProjectileType<Torch>(), ItemID.Torch, 1, 0f, 8f, 16, 16);
 		Item.rare = ItemRarityID.Green;
 		Item.value = Item.sellPrice(silver: 78);
+		Item.UseSound = SoundID.Item5 with { pitch = -0.3f};
 	}
 	private int ammoItem;
 	public override void OnConsumeAmmo(Item ammo, Player player)
