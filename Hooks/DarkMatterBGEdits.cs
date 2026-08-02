@@ -7,7 +7,6 @@ using MonoMod.Cil;
 using Terraria;
 using Terraria.Graphics.Effects;
 using Terraria.ModLoader;
-using ThoriumMod.NPCs;
 using static Terraria.Main;
 
 namespace Avalon.Hooks;

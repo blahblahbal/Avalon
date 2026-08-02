@@ -11,8 +11,6 @@ using Terraria.IO;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using ThoriumMod.Items.Depths;
-using ThoriumMod.NPCs;
 
 namespace Avalon.WorldGeneration.Passes;
 
