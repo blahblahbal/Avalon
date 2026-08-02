@@ -9,7 +9,6 @@ using System;
 using System.Runtime.CompilerServices;
 using Terraria.WorldBuilding;
 using Avalon.Systems;
-using ThoriumMod.Projectiles;
 
 namespace Avalon.Tiles.CrystalMines;
 

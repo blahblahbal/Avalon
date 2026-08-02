@@ -25,7 +25,6 @@ using Avalon.Dusts;
 using Avalon.Items.Material.Ores;
 using Avalon.Items.Placeable.Tile;
 using Avalon.Systems;
-using ThoriumMod.Projectiles;
 
 namespace Avalon.Tiles.GemTrees
 {
