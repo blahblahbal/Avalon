@@ -56,7 +56,7 @@ public class Robot : ModNPC
 	private ref float ProjectileTimer => ref NPC.localAI[0];
 	public override void PostAI()
 	{
-		//AvalonUtils.NewTextRainbow(ProjectileTimer);
+		NPC.TargetClosest();
 		ProjectileTimer++;
 		int ProjSpawnStartTime = TimeUtils.SecondsToTicks(8);
 		if (ProjectileTimer < ProjSpawnStartTime)

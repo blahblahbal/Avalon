@@ -10410,6 +10410,7 @@ Mods: {
 			UndineTear.DisplayName: Undine Tear
 			ZapshockProjectile.DisplayName: Zapshock Projectile
 			BloodgusherBlood.DisplayName: Bloodgusher Blood
+			RobotEnergyBall.DisplayName: Robot Energy Ball
 		}
 
 		NPCs: {
@@ -10886,6 +10887,7 @@ Mods: {
 			Undine.DisplayName: Wailing Undine
 			AngryFairy.DisplayName: Angry Fairy
 			BloodGusher.DisplayName: Blood Gusher
+			Robot.DisplayName: Robot
 		}
 
 		Buffs: {
