@@ -47,4 +47,8 @@ public class HallowedClaymoreProj : MaceTemplate
 			}
 		}
 	}
+	public override bool PreDraw(ref Color lightColor)
+	{
+		return base.PreDraw(ref lightColor);
+	}
 }

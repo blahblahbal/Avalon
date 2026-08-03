@@ -1,5 +1,6 @@
 using Avalon.Assets;
 using Avalon.Common;
+using Avalon.Core;
 using Avalon.Effects;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.Info;
@@ -120,7 +121,7 @@ public class ExxoAvalonOrigins : Mod
 		JungleGenMessage = Lang.gen[11].Value;
 		//Additional swords to the zenith's projectiles with both their texture, size and trail color
 		var fractalProfiles = getFinalFractalHelperFractalProfiles();
-
+		Mod.SmallModIcon = icon_small.Asset; // ???
 		fractalProfiles.Add(ItemID.GoldBroadsword, new FinalFractalProfile(50f, new Color(203, 179, 73))); //Add the Gold Broadsword with a gold trail at 50f the size, would reccomend to look at the dictionary that we are reflecting before adding any swords to know what size and trail color to do
 		fractalProfiles.Add(ItemID.PlatinumBroadsword, new FinalFractalProfile(50f, new Color(181, 194, 217)));
 		fractalProfiles.Add(ModContent.ItemType<BismuthBroadsword>(), new FinalFractalProfile(50f, new Color(199, 157, 216)));

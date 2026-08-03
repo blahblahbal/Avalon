@@ -1340,11 +1340,11 @@ Mods: {
 
 			MinersSword: {
 				DisplayName: Miner's Sword
-				Tooltip: 
-				'''
-				Charges up damage when not being swung
-				Guaranteed critical strikes when falling
-				'''
+				Tooltip:
+					'''
+					Charges up damage when not being swung
+					Guaranteed critical strikes when falling
+					'''
 			}
 
 			PointingLaser: {
@@ -3980,7 +3980,7 @@ Mods: {
 				DisplayName: Devil's Scythe
 				Tooltip:
 					'''
-					Casts an Infernal Judegement Scythe
+					Casts an Infernal Judgment Scythe
 					Enemies become vulnerable to debuffs
 					'''
 			}

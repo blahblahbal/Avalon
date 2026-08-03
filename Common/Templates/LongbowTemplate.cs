@@ -223,8 +223,8 @@ namespace Avalon.Common.Templates
 		{
 			Offset.Y *= Projectile.spriteDirection;
 			int ammo = (int)Projectile.ai[0];
-			Projectile AmmoProj = new Projectile();
-			AmmoProj.type = ammo;
+			if (!TextureAssets.Projectile[ammo].IsLoaded)
+				Main.instance.LoadProjectile(ammo);
 			SpriteEffects Flip = Projectile.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
 			int frameHeight = TextureAssets.Projectile[ammo].Value.Height / Main.projFrames[ammo];
@@ -232,7 +232,7 @@ namespace Avalon.Common.Templates
 			Vector2 drawPos = Projectile.Center - Main.screenPosition + new Vector2((Projectile.frame * -2) + 8 + Offset.X, Offset.Y).RotatedBy(Projectile.rotation);
 			drawPos.Y += Main.player[Projectile.owner].gfxOffY;
 			if(!OverwriteGetAlphaOfArrow)
-				Main.EntitySpriteDraw(TextureAssets.Projectile[ammo].Value, drawPos, frame, AmmoProj.GetAlpha(lightColor), Projectile.rotation + MathHelper.PiOver2, new Vector2(TextureAssets.Projectile[ammo].Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+				Main.EntitySpriteDraw(TextureAssets.Projectile[ammo].Value, drawPos, frame, ContentSamples.ProjectilesByType[ammo].GetAlpha(lightColor), Projectile.rotation + MathHelper.PiOver2, new Vector2(TextureAssets.Projectile[ammo].Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
 			else
 				Main.EntitySpriteDraw(TextureAssets.Projectile[ammo].Value, drawPos, frame,lightColor, Projectile.rotation + MathHelper.PiOver2, new Vector2(TextureAssets.Projectile[ammo].Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
 		}
