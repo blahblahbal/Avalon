@@ -36,11 +36,11 @@ public class Mime : ModNPC
     }
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
     {
-        bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
-        {
-            BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Underground,
+        bestiaryEntry.Info.AddRange(
+		[
+			BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Underground,
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Mime"))
-        });
+        ]);
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
@@ -60,25 +60,17 @@ public class Mime : ModNPC
 				NPC.velocity.X += NPC.velocity.X * 0.3f;
 			}
 		}
-		if (NPC.position.Distance(Main.player[NPC.target].position) < 180f && NPC.velocity.Y == 0f && IsOnGround(NPC) && NPC.position.Y + NPC.height > Main.player[NPC.target].position.Y + Main.player[NPC.target].height)
+		if (NPC.WithinRange(Main.player[NPC.target].Center, 180f) && IsOnGround() && NPC.BottomLeft.Y > Main.player[NPC.target].BottomLeft.Y)
 		{
-			Vector2 jump = new Vector2((MathF.Sqrt(Math.Abs(NPC.DirectionTo(Main.player[NPC.target].position).X) + 1f) - 1f) * NPC.direction * 2f, NPC.DirectionTo(Main.player[NPC.target].position).Y * 7.75f);
-			jump *= MathHelper.Clamp(NPC.position.Distance(Main.player[NPC.target].position) / 60f, 0.6f, 1.1f);
+			Vector2 jump = new((MathF.Sqrt(Math.Abs(NPC.DirectionTo(Main.player[NPC.target].Center).X) + 1f) - 1f) * NPC.direction * 2f, NPC.DirectionTo(Main.player[NPC.target].Center).Y * 7.75f);
+			jump *= MathHelper.Clamp(NPC.Distance(Main.player[NPC.target].Center) / 60f, 0.6f, 1.1f);
 			if (NPC.velocity.X > 0 && jump.X > 0 || NPC.velocity.X < 0 && jump.X < 0)
 			{
 				NPC.velocity += jump;
 			}
 		}
 	}
-	// Copied from the IsOnGround method in ClassExtensions.cs
-	public static bool IsOnGround(NPC npc)
-	{
-		var tileX_1 = Main.tile[(int)(npc.position.X / 16f), (int)(npc.position.Y / 16f) + 3];
-		var tileX_2 = Main.tile[(int)(npc.position.X / 16f) + 1, (int)(npc.position.Y / 16f) + 3];
-
-		return tileX_1.HasTile && (Main.tileSolid[tileX_1.TileType] || Main.tileSolidTop[tileX_1.TileType]) && npc.velocity.Y == 0f ||
-				tileX_2.HasTile && (Main.tileSolid[tileX_2.TileType] || Main.tileSolidTop[tileX_2.TileType]) && npc.velocity.Y == 0f;
-	}
+	public bool IsOnGround() => NPC.velocity.Y == 0f && NPC.collideY;
 	public override void FindFrame(int frameHeight)
 	{
 		if (NPC.velocity.Y == 0f)

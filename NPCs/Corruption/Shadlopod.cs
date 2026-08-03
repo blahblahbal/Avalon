@@ -77,7 +77,7 @@ public class Shadlopod : ModNPC
 	public const float gravityInPixelsPerTick = 4.28987314f;
 	public const float oneMetreToFoot = 3.2808399f;
 
-	public static float gravPx = 0.0714978857f * 0.5f;
+	public const float gravPx = 0.0714978857f * 0.5f;
 	public static float MetresToFeet(float m)
 	{
 		return m * oneMetreToFoot;
