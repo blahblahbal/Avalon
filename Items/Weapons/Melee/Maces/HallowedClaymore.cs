@@ -11,10 +11,6 @@ namespace Avalon.Items.Weapons.Melee.Maces;
 
 public class HallowedClaymore : ModItem
 {
-	public override bool IsLoadingEnabled(Mod mod)
-	{
-		return true;
-	}
 	public const float scaleMult = 1.35f;
 	public override void SetDefaults()
 	{

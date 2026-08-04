@@ -21,7 +21,8 @@ public class Zapshock : ModItem
 	{
 		Item.DefaultToMagicWeaponSwing(ModContent.ProjectileType<ZapshockProjectile>(), 55, 6f, 14, 10, 10, true, width: 20, height: 20);
 		//Item.DefaultToProjectileSword(ModContent.ProjectileType<ZapshockProjectile>(),55, 6f, 8,10,10,true,true, width: 20, height : 20);
-		Item.value = Item.sellPrice(silver: 11);
+		Item.value = Item.sellPrice(gold: 6);
+		Item.rare = ItemRarityID.LightRed;
 	}
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{

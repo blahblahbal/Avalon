@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -637,6 +638,16 @@ public static class ClassExtensions
 		{
 			n.Transform(ModContent.NPCType<NPCs.Critters.ContaminatedPenguin>());
 		}
+	}
+	/// <summary>
+	/// Has not been tested on all npc types yet. Just update this method if it doesn't work in your case ig.
+	/// </summary>
+	/// <param name="npc"></param>
+	/// <param name="screenPos"></param>
+	/// <returns></returns>
+	public static Vector2 GetNPCDrawPos(this NPC npc, Vector2 screenPos)
+	{
+		return new Vector2(npc.Center.X, npc.BottomLeft.Y - npc.frame.Height / 2 * npc.scale + Main.NPCAddHeight(npc) + npc.gfxOffY + 4 /* this 4 is VERY important. maybe. lol. */) - screenPos;
 	}
 
 	public static Item? HasItemInArmorFindIt(this Player p, int type)

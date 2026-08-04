@@ -22,7 +22,7 @@ public class StasisRifle : ModItem
 		Item.knockBack = 2.3f;
 		Item.shoot = ModContent.ProjectileType<StasisRifleHeld>();
 		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.rare = ItemRarityID.Orange;
+		Item.rare = ItemRarityID.Pink;
 		Item.value = Item.sellPrice(0, 7, 0);
 		Item.damage = 200;
 		Item.useAnimation = 84;

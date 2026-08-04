@@ -1340,11 +1340,11 @@ Mods: {
 
 			MinersSword: {
 				DisplayName: Miner's Sword
-				Tooltip: 
-				'''
-				Charges up damage when not being swung
-				Guaranteed critical strikes when falling
-				'''
+				Tooltip:
+					'''
+					Charges up damage when not being swung
+					Guaranteed critical strikes when falling
+					'''
 			}
 
 			PointingLaser: {
@@ -3980,7 +3980,7 @@ Mods: {
 				DisplayName: Devil's Scythe
 				Tooltip:
 					'''
-					Casts an Infernal Judegement Scythe
+					Casts an Infernal Judgment Scythe
 					Enemies become vulnerable to debuffs
 					'''
 			}
@@ -10410,6 +10410,7 @@ Mods: {
 			UndineTear.DisplayName: Undine Tear
 			ZapshockProjectile.DisplayName: Zapshock Projectile
 			BloodgusherBlood.DisplayName: Bloodgusher Blood
+			RobotEnergyBall.DisplayName: Robot Energy Ball
 		}
 
 		NPCs: {
@@ -10886,6 +10887,7 @@ Mods: {
 			Undine.DisplayName: Wailing Undine
 			AngryFairy.DisplayName: Angry Fairy
 			BloodGusher.DisplayName: Blood Gusher
+			Robot.DisplayName: Robot
 		}
 
 		Buffs: {
