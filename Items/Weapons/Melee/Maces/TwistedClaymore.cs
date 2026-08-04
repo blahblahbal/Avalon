@@ -1,6 +1,8 @@
 using Avalon.Common.Extensions;
 using Avalon.Data.Sets;
+using Avalon.Items.Material.Shards;
 using Avalon.Projectiles.Melee.Maces;
+using Avalon.WorldGeneration.Structures;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -9,16 +11,15 @@ using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Melee.Maces;
 
-public class HallowedClaymore : ModItem
+[LegacyName("HallowedClaymore")]
+public class TwistedClaymore : ModItem
 {
-	public const float scaleMult = 1.35f;
 	public override void SetDefaults()
 	{
-		Item.DefaultToMace(ModContent.ProjectileType<HallowedClaymoreProj>(), 160, 12f, scaleMult, 42, width: 56, height: 62);
-		Item.ArmorPenetration = 15;
+		Item.DefaultToMace(ModContent.ProjectileType<TwistedClaymoreProj>(), 90, 12f, 1, 32, width: 32, height: 32);
 		Item.rare = ItemRarityID.Pink;
 		Item.value = Item.sellPrice(0, 5);
-		Item.UseSound = null;
+		Item.UseSound = SoundID.Item71;
 	}
 	public override void SetStaticDefaults()
 	{
@@ -49,5 +50,14 @@ public class HallowedClaymore : ModItem
 	public override bool CanUseItem(Player player)
 	{
 		return player.ownedProjectileCounts[Item.shoot] < 1;
+	}
+	public override void AddRecipes()
+	{
+		CreateRecipe().AddIngredient(ItemID.HallowedBar, 15)
+			.AddIngredient(ItemID.SoulofFright, 7)
+			.AddRecipeGroup("DemoniteBar", 10)
+			.AddIngredient(ModContent.ItemType<WickedShard>(),7)
+			.AddTile(TileID.DemonAltar)
+			.Register();
 	}
 }

@@ -7904,9 +7904,13 @@ Mods: {
 				Tooltip: A magical explosion that will not destroy tiles
 			}
 
-			HallowedGreatsword: {
-				DisplayName: Hallowed Claymore
-				Tooltip: Ignores 15 points of enemy defense
+			TwistedClaymore: {
+				DisplayName: Twisted Claymore
+				Tooltip:
+				'''
+				Applies a stacking slow
+				Explodes at max stacks
+				'''
 			}
 
 			GiantGravestone: {
@@ -11713,6 +11717,11 @@ Mods: {
 			AttackSpeedDown: {
 				DisplayName: Attack Speed Down
 				Description: Attack speed is decreased
+			}
+
+			TwistedClaymoreDebuff: {
+				DisplayName: Twisted Claymore Debuff
+				Description: Mods.Avalon.Buffs.TwistedClaymoreDebuff.Description
 			}
 		}
 

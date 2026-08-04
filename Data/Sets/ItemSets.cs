@@ -481,7 +481,7 @@ namespace Avalon.Data.Sets
 			{ 2849, ItemType<BagofFire>() },
 			{ 2850, ItemType<BagofShadows>() },
 			{ 2851, ItemType<TeamMirror>() },
-			{ 2852, ItemType<HallowedClaymore>() },
+			{ 2852, ItemType<TwistedClaymore>() },
             //{ 2853, ItemType<TheBanhammer>() },
             { 2854, ItemType<Heartstone>() },
 			{ 2855, ItemType<HeartstoneBrick>() },

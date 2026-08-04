@@ -20,7 +20,7 @@ public class UrchinMaceProj : MaceTemplate
 	public override float EndScaleTime => 0.5f;
 	public override Func<float, float> EasingFunc => rot => Easings.PowOut(rot, 2f);
 	public override int TrailLength => 4;
-	public override Color? TrailColor => Color.Black;
+	public override Color? TrailColor => Color.Black * 0.25f;
 	public override void EmitDust(Vector2 handPosition, float swingRadius, float rotationProgress, float easedRotationProgress)
 	{
 		Vector2 offsetFromHand = Projectile.Center - handPosition;
