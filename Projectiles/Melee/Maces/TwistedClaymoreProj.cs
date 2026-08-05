@@ -20,7 +20,8 @@ public class TwistedClaymoreProj : MaceTemplate, ISyncedOnHitEffect
 {
 	public override LocalizedText DisplayName => ModContent.GetInstance<TwistedClaymore>().DisplayName;
 	public override float MaxRotation => 4.5f;
-	public override float SwingRadius => 120;
+	public override float SwingRadius => 140;
+	public override Vector2 VisualOffset => new(-14, 14);
 	public override float StartScaleTime => 0.5f;
 	public override float StartScaleMult => 1f;
 	public override float EndScaleTime => 1f / 3f;

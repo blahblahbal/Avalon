@@ -7907,10 +7907,10 @@ Mods: {
 			TwistedClaymore: {
 				DisplayName: Twisted Claymore
 				Tooltip:
-				'''
-				Applies a stacking slow
-				Explodes at max stacks
-				'''
+					'''
+					Applies a stacking slow
+					Explodes at max stacks
+					'''
 			}
 
 			GiantGravestone: {

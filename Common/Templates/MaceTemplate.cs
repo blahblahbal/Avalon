@@ -182,7 +182,7 @@ public abstract class MaceTemplate : ModProjectile
 	}
 	public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
 	{
-		if (targetHitbox.Intersects(projHitbox) || targetHitbox.IntersectsConeSlowMoreAccurate(Owner.MountedCenter, Projectile.Center.Distance(Owner.Center) * 1.25f, Projectile.rotation - (45 * (MathHelper.Pi / 180)), MathHelper.Pi / 16))
+		if (targetHitbox.Intersects(projHitbox) || targetHitbox.IntersectsConeSlowMoreAccurate(Owner.MountedCenter, Projectile.Center.Distance(Owner.Center), Projectile.rotation - (45 * (MathHelper.Pi / 180)), MathHelper.Pi / 16))
 		{
 			return true;
 		}
@@ -206,16 +206,17 @@ public abstract class MaceTemplate : ModProjectile
 		Vector2 drawPos = Projectile.Center - Main.screenPosition;
 		Vector2 offset = new((float)(TextureAssets.Projectile[Type].Width() * ScaleMult * 0.25f) - VisualOffset.X, -(float)(TextureAssets.Projectile[Type].Height() * ScaleMult * 0.25f) - VisualOffset.Y);
 
-		(SpriteEffects spriteDirection, float rotationFlip, Vector2 offset) spriteEffectsTuple;
-		if (Owner.direction == Math.Sign(Projectile.ai[0]))
-		{
-			spriteEffectsTuple = SpriteEffectsFunc.Invoke((SpriteEffects.None, 0f, offset));
-		}
-		else
-		{
-			offset = new Vector2(-offset.X, offset.Y);
-			spriteEffectsTuple = SpriteEffectsFunc.Invoke((SpriteEffects.FlipHorizontally, MathHelper.PiOver2, offset));
-		}
+		//(SpriteEffects spriteDirection, float rotationFlip, Vector2 offset) spriteEffectsTuple;
+		//if (Owner.direction == Math.Sign(Projectile.ai[0]))
+		//{
+		//	spriteEffectsTuple = SpriteEffectsFunc.Invoke((SpriteEffects.None, 0f, offset));
+		//}
+		//else
+		//{
+		//	offset = new Vector2(-offset.X, offset.Y);
+		//	spriteEffectsTuple = SpriteEffectsFunc.Invoke((SpriteEffects.FlipHorizontally, MathHelper.PiOver2, offset));
+		//}
+		(SpriteEffects spriteDirection, float rotationFlip, Vector2 offset) spriteEffectsTuple = SpriteEffectsFunc.Invoke((SpriteEffects.None, 0f, offset));
 
 		if (TrailLength > 0)
 		{
