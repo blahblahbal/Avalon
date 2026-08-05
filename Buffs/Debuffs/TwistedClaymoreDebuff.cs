@@ -1,5 +1,6 @@
 using Avalon.Common;
 using Avalon.Core;
+using Avalon.Data.Sets;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,7 +17,8 @@ public class TwistedClaymoreDebuff : ModBuff
     public override void SetStaticDefaults()
     {
 		Main.debuff[Type] = true;
-    }
+		BuffSets.CCOrSlowDebuffThatCannotGoOnBossesOrNPCsThatWouldCauseSignificantJank[Type] = true;
+	}
 	public override void Update(NPC npc, ref int buffIndex)
 	{
 		var tcdn = npc.GetGlobalNPC<TwistedClaymoreDebuffNPC>();
