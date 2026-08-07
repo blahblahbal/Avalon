@@ -234,6 +234,11 @@ public class RecipeChanger : ModSystem
 					}
 					break;
 				}
+				case ItemID.CoolWhip:
+				{
+					recipe.AddIngredient(ModContent.ItemType<FrigidShard>());
+					break;
+				}
 				case ItemID.ClayPot:
                 {
                     if (recipe.TryGetIngredient(ItemID.ClayBlock, out Item ing))

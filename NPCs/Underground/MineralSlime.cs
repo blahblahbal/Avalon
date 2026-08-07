@@ -1,6 +1,6 @@
 using Avalon.Items.Banners;
-using Avalon.Tiles.Furniture.Functional;
 using Microsoft.Xna.Framework;
+using System.Linq;
 using Terraria;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
@@ -11,25 +11,25 @@ namespace Avalon.NPCs.Underground;
 
 public class MineralSlime : OreSlime
 {
-	public override int[] Ores =>
-	[
-		ItemID.CobaltOre, ItemID.PalladiumOre, ModContent.ItemType<Items.Material.Ores.DurataniumOre>(),
-		ItemID.MythrilOre, ItemID.OrichalcumOre, ModContent.ItemType<Items.Material.Ores.NaquadahOre>(),
-		ItemID.AdamantiteOre, ItemID.TitaniumOre, ModContent.ItemType<Items.Material.Ores.TroxiniumOre>()
-	];
-	public override Color[] OreColor =>
-	[
-		new Color(61, 164, 196), new Color(240, 91, 51), new Color(147, 83, 119),
-		new Color(157, 210, 144), new Color(248, 113, 227), new Color(80, 86, 160),
-		new Color(221, 85, 152), new Color(190, 187, 220), new Color(214, 191, 43)
-	];
-	public override int[] OreDusts =>
-	[
-		DustID.Cobalt, DustID.Palladium, ModContent.DustType<Dusts.DurataniumDust>(),
-		DustID.Mythril, DustID.Orichalcum, ModContent.DustType<Dusts.NaquadahDust>(),
-		DustID.Adamantite, DustID.Titanium, ModContent.DustType<Dusts.TroxiniumDust>()
-	];
+	public new static bool AddExtraOre(int ore, int oreDust, Color oreColor)
+	{
+		Ores = Ores.Append(new OreSlimeData(ore, oreDust, oreColor)).ToArray();
+		return true;
+	}
+	public new static OreSlimeData[] Ores = [
+		new OreSlimeData(ItemID.CobaltOre, DustID.Cobalt, new Color(61, 164, 196)),
+		new OreSlimeData(ItemID.PalladiumOre, DustID.Palladium, new Color(240, 91, 51)),
+		new OreSlimeData(ModContent.ItemType<Items.Material.Ores.DurataniumOre>(), ModContent.DustType<Dusts.DurataniumDust>(), new Color(147, 83, 119)),
+		new OreSlimeData(ItemID.MythrilOre, DustID.Mythril, new Color(157, 210, 144)),
+		new OreSlimeData(ItemID.OrichalcumOre, DustID.Orichalcum, new Color(248, 113, 227)),
+		new OreSlimeData(ModContent.ItemType<Items.Material.Ores.NaquadahOre>(), ModContent.DustType<Dusts.NaquadahDust>(), new Color(80, 86, 160)),
+		new OreSlimeData(ItemID.AdamantiteOre, DustID.Adamantite, new Color(221, 85, 152)),
+		new OreSlimeData(ItemID.TitaniumOre, DustID.Titanium, new Color(190, 187, 220)),
+		new OreSlimeData(ModContent.ItemType<Items.Material.Ores.TroxiniumOre>(), ModContent.DustType<Dusts.TroxiniumDust>(), new Color(214, 191, 43)),
+		];
 	public override int BestiaryOre => 6;
+
+	public override OreSlimeData[] ListOfOres => Ores;
 	public override void AI()
 	{
 		base.AI();
@@ -37,7 +37,7 @@ public class MineralSlime : OreSlime
 	}
 	public override void OnKill()
 	{
-		Item.NewItem(NPC.GetSource_FromThis(), NPC.Hitbox, Ores[WhichOre], Main.rand.Next(10, 30));
+		Item.NewItem(NPC.GetSource_FromThis(), NPC.Hitbox, Ores[WhichOre].OreItemID, Main.rand.Next(10, 30));
 	}
 	public override void ModifyNPCLoot(NPCLoot npcLoot)
 	{

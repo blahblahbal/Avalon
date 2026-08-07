@@ -1,12 +1,11 @@
 using Avalon;
 using Avalon.Items.Banners;
-using Avalon.Particles;
-using Avalon.Tiles.Furniture.Functional;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.IO;
+using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -18,37 +17,48 @@ using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Underground;
 
+public record struct OreSlimeData
+{
+	public OreSlimeData(int oreItemID, int dustID, Color oreColor)
+	{
+		OreItemID = oreItemID;
+		DustID = dustID;
+		OreColor = oreColor;
+	}
+	public int OreItemID { get; set; }
+	public int DustID { get; set; }
+	public Color OreColor { get; set; }
+}
 public class OreSlime : ModNPC
 {
+	public static bool AddExtraOre(int ore, int oreDust, Color oreColor)
+	{
+		Ores = Ores.Append(new OreSlimeData(ore,oreDust,oreColor)).ToArray();
+		return true;
+	}
 	public virtual int BestiaryOre => 9;
-	public virtual int[] Ores =>
-	[
-		ItemID.CopperOre, ItemID.TinOre, ModContent.ItemType<Items.Material.Ores.BronzeOre>(),
-		ItemID.IronOre, ItemID.LeadOre, ModContent.ItemType<Items.Material.Ores.NickelOre>(),
-		ItemID.SilverOre, ItemID.TungstenOre, ModContent.ItemType<Items.Material.Ores.ZincOre>(),
-		ItemID.GoldOre, ItemID.PlatinumOre, ModContent.ItemType<Items.Material.Ores.BismuthOre>(),
-		ItemID.Obsidian
-	];
-	public virtual Color[] OreColor =>
-	[
-		new Color(183, 88, 25), new Color(187, 165, 124), new Color(193, 133, 127),
-		new Color(181, 164, 149), new Color(62, 82, 114), new Color(107, 158, 149),
-		new Color(179, 179, 179), new Color(154, 190, 155), new Color(182, 169, 182),
-		new Color(231, 213, 65), new Color(181, 194, 217), new Color(173, 58, 191),
-		Color.DarkSlateBlue
-	];
-	public virtual int[] OreDusts =>
-	[
-		DustID.Copper, DustID.Tin, ModContent.DustType<Dusts.BronzeDust>(),
-		DustID.Iron, DustID.Lead, ModContent.DustType<Dusts.NickelDust>(),
-		DustID.Silver, DustID.Tungsten, ModContent.DustType<Dusts.ZincDust>(),
-		DustID.Gold, DustID.Platinum, ModContent.DustType<Dusts.BismuthDust>(),
-		DustID.Obsidian
-	];
+
+	public static OreSlimeData[] Ores = [
+		new OreSlimeData(ItemID.CopperOre, DustID.Copper, new Color(183, 88, 25)),
+		new OreSlimeData(ItemID.TinOre, DustID.Tin, new Color(187, 165, 124)),
+		new OreSlimeData(ModContent.ItemType<Items.Material.Ores.BronzeOre>(), ModContent.DustType<Dusts.BronzeDust>(), new Color(193, 133, 127)),
+		new OreSlimeData(ItemID.IronOre, DustID.Iron, new Color(181, 164, 149)),
+		new OreSlimeData(ItemID.LeadOre, DustID.Lead, new Color(62, 82, 114)),
+		new OreSlimeData(ModContent.ItemType<Items.Material.Ores.NickelOre>(), ModContent.DustType<Dusts.NickelDust>(), new Color(107, 158, 149)),
+		new OreSlimeData(ItemID.SilverOre, DustID.Silver, new Color(179, 179, 179)),
+		new OreSlimeData(ItemID.TungstenOre, DustID.Tungsten, new Color(154, 190, 155)),
+		new OreSlimeData(ModContent.ItemType<Items.Material.Ores.ZincOre>(), ModContent.DustType<Dusts.ZincDust>(), new Color(182, 169, 182)),
+		new OreSlimeData(ItemID.GoldOre, DustID.Gold, new Color(231, 213, 65)),
+		new OreSlimeData(ItemID.PlatinumOre, DustID.Platinum, new Color(181, 194, 217)),
+		new OreSlimeData(ModContent.ItemType<Items.Material.Ores.BismuthOre>(), ModContent.DustType<Dusts.BismuthDust>(), new Color(173, 58, 191)),
+		new OreSlimeData(ItemID.Obsidian, DustID.Obsidian, Color.DarkSlateBlue)
+		];
 	public int WhichOre;
+
+	public virtual OreSlimeData[] ListOfOres => Ores;
 	public override void OnSpawn(IEntitySource source)
 	{
-		WhichOre = Main.rand.Next(0, Ores.Length);
+		WhichOre = Main.rand.Next(0, ListOfOres.Length);
 	}
 	public override void SendExtraAI(BinaryWriter writer)
 	{
@@ -69,38 +79,30 @@ public class OreSlime : ModNPC
 			d.velocity *= 0.1f;
 			d.noGravity = true;
 		}
-		//if (Main.rand.NextBool(30) && Main.rand.NextFloat() < brightness)
-		//{
-		//	var p = VanillaParticles.RequestPrettySparkleParticle();
-		//	p.LocalPosition = Main.rand.NextVector2FromRectangle(NPC.Hitbox);
-		//	p.ColorTint = OreColor[WhichOre];
-		//}
 	}
 	public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 	{
 		if (NPC.IsABestiaryIconDummy)
 			WhichOre = BestiaryOre;
-		Color slimeColor = NPC.GetNPCColorTintedByBuffs(drawColor.MultiplyRGB(OreColor[WhichOre])) * NPC.Opacity;
+		Color slimeColor = NPC.GetNPCColorTintedByBuffs(drawColor.MultiplyRGB(ListOfOres[WhichOre].OreColor)) * NPC.Opacity;
 
 		if (!TextureAssets.Item[WhichOre].IsLoaded)
-			Main.instance.LoadItem(WhichOre);
-		Asset<Texture2D> dyeTex = TextureAssets.Item[WhichOre];
+			Main.instance.LoadItem(ListOfOres[WhichOre].OreItemID);
 		var tex = TextureAssets.Npc[Type].Value;
 
 		DrawData d = new DrawData(tex, NPC.Bottom - screenPos, NPC.frame, slimeColor, NPC.rotation, new Vector2(NPC.frame.Width / 2, NPC.frame.Height - 4), NPC.scale, SpriteEffects.None);
 
 		Main.EntitySpriteDraw(d with { color = NPC.GetNPCColorTintedByBuffs(drawColor) * NPC.Opacity });
 		float rotate = MathHelper.SmoothStep(0.1f, -0.1f, Main.masterColor);
-		Asset<Texture2D> oreTexture = TextureAssets.Item[Ores[WhichOre]];
-		Rectangle frame = oreTexture.Frame();
-		Vector2 frameOrigin = frame.Size() / 2f;
-		Main.EntitySpriteDraw(oreTexture.Value, NPC.Center - screenPos + new Vector2(0, NPC.frame.Y * -0.05f), frame, drawColor, NPC.rotation + rotate, frameOrigin, NPC.scale, SpriteEffects.None);
+		Main.GetItemDrawFrame(ListOfOres[WhichOre].OreItemID, out var oreTexture, out var oreFrame);
+		Vector2 frameOrigin = oreFrame.Size() / 2f;
+		Main.EntitySpriteDraw(oreTexture, NPC.Center - screenPos + new Vector2(0, NPC.frame.Y * -0.05f), oreFrame, ContentSamples.ItemsByType[ListOfOres[WhichOre].OreItemID].GetAlpha(drawColor), NPC.rotation + rotate, frameOrigin, NPC.scale, SpriteEffects.None);
 		Main.EntitySpriteDraw(d);
 		return false;
 	}
 	public override void OnKill()
 	{
-		Item.NewItem(NPC.GetSource_FromThis(), NPC.Hitbox, Ores[WhichOre], Main.rand.Next(15, 35));
+		Item.NewItem(NPC.GetSource_FromThis(), NPC.Hitbox, ListOfOres[WhichOre].OreItemID, Main.rand.Next(15, 35));
 	}
 	public override void ModifyNPCLoot(NPCLoot npcLoot)
 	{
@@ -113,12 +115,12 @@ public class OreSlime : ModNPC
 			for (int i = 0; i < 7; i++)
 			{
 				int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.TintableDust, 0, 0, Main.rand.Next(100, 200), default, Main.rand.NextFloat(1, 1.5f));
-				Main.dust[d].color = OreColor[WhichOre] * 0.3f;
+				Main.dust[d].color = ListOfOres[WhichOre].OreColor * 0.3f;
 				Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-1f, 4) * hit.HitDirection, Main.rand.NextFloat(-1, -4));
 			}
 			for (int i = 0; i < 5; i++)
 			{
-				int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, OreDusts[WhichOre], 0, 0, 0, default, Main.rand.NextFloat(0.75f, 1.5f));
+				int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, ListOfOres[WhichOre].DustID, 0, 0, 0, default, Main.rand.NextFloat(0.75f, 1.5f));
 				Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-0.5f, 3) * hit.HitDirection, Main.rand.NextFloat(-1, -3));
 			}
 		}
@@ -127,12 +129,12 @@ public class OreSlime : ModNPC
 			for (int i = 0; i < 30; i++)
 			{
 				int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.TintableDust, 0, 0, Main.rand.Next(100, 200), default, Main.rand.NextFloat(1, 1.5f));
-				Main.dust[d].color = OreColor[WhichOre] * 0.3f;
+				Main.dust[d].color = ListOfOres[WhichOre].OreColor * 0.3f;
 				Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-1.5f, 5) * hit.HitDirection, Main.rand.NextFloat(-1, -5));
 			}
 			for (int i = 0; i < 1; i++)
 			{
-				int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, OreDusts[WhichOre], 0, 0, 0, default, Main.rand.NextFloat(0.75f, 1.5f));
+				int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, ListOfOres[WhichOre].OreItemID, 0, 0, 0, default, Main.rand.NextFloat(0.75f, 1.5f));
 				Main.dust[d].velocity = new Vector2(Main.rand.NextFloat(-1f, 4) * hit.HitDirection, Main.rand.NextFloat(-1, -4));
 			}
 		}
