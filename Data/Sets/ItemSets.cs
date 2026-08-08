@@ -64,9 +64,6 @@ using Avalon.Items.Weapons.Ranged.Guns;
 using Avalon.Items.Weapons.Ranged.Longbows;
 using Avalon.Items.Weapons.Ranged.Misc;
 using Avalon.Items.Weapons.Ranged.Thrown;
-using Avalon.Items.Weapons.Summon.Hardmode.Gastropod;
-using Avalon.Items.Weapons.Summon.Hardmode.Hungry;
-using Avalon.Items.Weapons.Summon.Hardmode.PrimeArms;
 using Avalon.ModSupport.MLL.Items;
 using Avalon.Walls.Contagion.CoughwoodWall;
 using System.Collections.Generic;
@@ -74,6 +71,7 @@ using Terraria.ID;
 using static Terraria.ModLoader.ModContent;
 using Avalon.Items.Weapons.Magic.Guns;
 using Avalon.Items.Weapons.Magic.Other;
+using Avalon.Items.Weapons.Summon.Minions;
 
 namespace Avalon.Data.Sets
 {

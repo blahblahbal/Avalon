@@ -1,26 +1,17 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Weapons.Summon.Hardmode.AnchorWhipworm;
+namespace Avalon.Projectiles.Summon.Whips;
 
-public class AnchorWhipworm : ModItem
-{
-	public override void SetDefaults()
-	{
-		Item.DefaultToWhip(ModContent.ProjectileType<AnchorWhipwormProjectile>(), 32, 2f, 8f, 42);
-		Item.rare = ItemRarityID.Pink;
-		Item.value = Item.sellPrice(gold: 4);
-	}
-	public override bool MeleePrefix()
-	{
-		return true;
-	}
-}
 public class AnchorWhipwormProjectile : ModProjectile
 {
 	public override void SetStaticDefaults()
@@ -183,39 +174,5 @@ public class AnchorWhipwormProjectile : ModProjectile
 			pos += diff;
 		}
 		return false;
-	}
-}
-public class AnchorWorm : ModProjectile
-{
-	public override void SetDefaults()
-	{
-		Projectile.Size = new Vector2(16);
-		Projectile.aiStyle = -1;
-		Projectile.friendly = true;
-		Projectile.penetrate = -1;
-		Projectile.DamageType = DamageClass.Summon;
-		Projectile.usesLocalNPCImmunity = true;
-		Projectile.localNPCHitCooldown = 20;
-		Projectile.timeLeft = 60 * 7;
-	}
-	public override bool? CanHitNPC(NPC target)
-	{
-		if (target.whoAmI == Projectile.ai[0])
-			return base.CanHitNPC(target);
-		else
-			return false;
-	}
-	public override bool CanHitPvp(Player target)
-	{
-		return false;
-	}
-	public override void AI()
-	{
-		NPC target = Main.npc[(int)Projectile.ai[0]];
-
-		if (!target.active)
-			Projectile.Kill();
-		Projectile.Center = target.Hitbox.ClosestPointInRect((Vector2.Normalize(Projectile.velocity) * MathHelper.Max(target.width, target.height)) + target.Center);
-		Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 	}
 }

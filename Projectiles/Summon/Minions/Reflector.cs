@@ -1,5 +1,5 @@
+﻿using Avalon.Buffs.Summons;
 using Avalon.Common;
-using Avalon.Common.Extensions;
 using Avalon.Common.Players;
 using Avalon.Network;
 using Avalon.Network.Handlers;
@@ -8,54 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Weapons.Summon.Hardmode.ReflectorStaff;
+namespace Avalon.Projectiles.Summon.Minions;
 
-public class ReflectorStaff : ModItem
-{
-	public override void SetDefaults()
-	{
-		Item.DefaultToMinionWeapon(ModContent.ProjectileType<Reflector>(), ModContent.BuffType<ReflectorBuff>(), 0, 8.5f, 30);
-		Item.rare = ItemRarityID.Cyan;
-		Item.value = Item.sellPrice(0, 30);
-		Item.UseSound = SoundID.Item44;
-	}
-	public override bool CanUseItem(Player player)
-	{
-		if (player.maxMinions > 6)
-			return player.ownedProjectileCounts[Item.shoot] < 6;
-		return player.ownedProjectileCounts[Item.shoot] < player.maxMinions;
-	}
-	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-	{
-		player.AddBuff(Item.buffType, 2);
-		player.SpawnMinionOnCursor(source, player.whoAmI, type, damage, knockback);
-		return false;
-	}
-}
-public class ReflectorBuff : ModBuff
-{
-	public override void SetStaticDefaults()
-	{
-		Main.buffNoTimeDisplay[Type] = true;
-		Main.buffNoSave[Type] = true;
-	}
-	public override void Update(Player player, ref int buffIndex)
-	{
-		if (player.ownedProjectileCounts[ModContent.ProjectileType<Reflector>()] > 0)
-		{
-			player.buffTime[buffIndex] = 18000;
-		}
-		else
-		{
-			player.DelBuff(buffIndex);
-			buffIndex--;
-		}
-	}
-}
 public class Reflector : ModProjectile
 {
 	private int hostPosition = -1;

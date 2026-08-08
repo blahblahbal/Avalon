@@ -1,9 +1,9 @@
 using Avalon.Common.Players;
-using Avalon.Projectiles.Summon;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 using Avalon.Items.Accessories.Expert;
+using Avalon.Projectiles.Summon.Minions;
 
 namespace Avalon.Buffs;
 

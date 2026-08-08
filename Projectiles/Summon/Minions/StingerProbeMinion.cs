@@ -11,7 +11,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Summon;
+namespace Avalon.Projectiles.Summon.Minions;
 
 public class StingerProbeMinion : ModProjectile
 {

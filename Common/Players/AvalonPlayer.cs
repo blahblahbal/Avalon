@@ -10,7 +10,7 @@ using Avalon.Items.Other;
 using Avalon.Items.Tools.Hardmode;
 using Avalon.Items.Tools.PreHardmode;
 using Avalon.Items.Tools.Superhardmode;
-using Avalon.Items.Weapons.Summon.Hardmode.AnchorWhipworm;
+using Avalon.Items.Weapons.Summon.Whips;
 using Avalon.ModSupport.MLL.Liquids;
 using Avalon.NPCs.Bosses.Hardmode.WallOfSteel;
 using Avalon.NPCs.Bosses.PreHardmode.DesertBeak;
