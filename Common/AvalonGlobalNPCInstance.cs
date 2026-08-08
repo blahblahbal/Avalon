@@ -54,12 +54,7 @@ public class AvalonGlobalNPCInstance : GlobalNPC
 	}
 	private void On_NPC_UpdateCollision(On_NPC.orig_UpdateCollision orig, NPC self)
 	{
-		//if (self.velocity.X == float.NaN)
-		//	self.velocity.X = 0;
-		//if (self.velocity.Y == float.NaN)
-		//	self.velocity.Y = 0;
 		var gNPC = self.GetGlobalNPC<AvalonGlobalNPCInstance>();
-		Main.NewText(gNPC.Speed);
 		if (self.noGravity)
 		{
 			self.velocity *= gNPC.Speed;
@@ -103,7 +98,6 @@ public class AvalonGlobalNPCInstance : GlobalNPC
 		}
 		if (self.noTileCollide)
 		{
-			//self.velocity /= gNPC.Speed;
 			self.position += self.velocity * (gNPC.Speed - 1f);
 		}
 	}
