@@ -533,6 +533,7 @@ Mods: {
 			Undine: Previous inhabitants of the dungeon that lost their bodies before their reanimation, their souls latched to and animated water. Their minds were kept more intact that their skeleton friends and family.
 			AngryFairy: These stronger fairies have been tasked with protecting the forest. They do not appreciate your deforestation.
 			BloodGusher: A fully grown crimera, its hunger is so unrelenting that it can't finish its meal before trying to dine on the next.
+			Snotslime: A slime filled with various diseases that works to spread the contagion. It has gained a very sticky composition.
 		}
 
 		Keybinds: {
@@ -10152,6 +10153,11 @@ Mods: {
 				DisplayName: Blood Gusher Banner
 				Tooltip: ""
 			}
+
+			SnotslimeBanner: {
+				DisplayName: Snotslime Banner
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -10892,6 +10898,7 @@ Mods: {
 			AngryFairy.DisplayName: Angry Fairy
 			BloodGusher.DisplayName: Blood Gusher
 			Robot.DisplayName: Robot
+			Snotslime.DisplayName: Snotslime
 		}
 
 		Buffs: {
