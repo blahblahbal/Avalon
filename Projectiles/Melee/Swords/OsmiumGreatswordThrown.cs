@@ -211,10 +211,11 @@ public class OsmiumGreatswordThrown : ModProjectile
 		{
 			modifiers.SetCrit();
 			modifiers.CritDamage += (Main.player[Projectile.owner].GetCritChance(Projectile.DamageType) + Projectile.CritChance) / 100f;
+			modifiers.SourceDamage += 2;
 		}
 		if (Projectile.ai[1] > 0)
 		{
-			modifiers.SourceDamage += 4;
+			modifiers.SourceDamage += 8;
 		}
 	}
 	private bool PerfectTiming => (Projectile.ai[2] >= TimeForMaxDamage && Projectile.ai[2] < TimeForMaxDamage + 8);

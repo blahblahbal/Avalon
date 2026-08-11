@@ -3357,7 +3357,7 @@ Mods: {
 
 			IridiumGreatsword: {
 				DisplayName: Iridium Greatsword
-				Tooltip: ""
+				Tooltip: Charges up a series of explosions
 			}
 
 			RhodiumGreatsword: {
@@ -10421,6 +10421,10 @@ Mods: {
 			ZapshockProjectile.DisplayName: Zapshock Projectile
 			BloodgusherBlood.DisplayName: Bloodgusher Blood
 			RobotEnergyBall.DisplayName: Robot Energy Ball
+			IridiumGreatswordSwing.DisplayName: Iridium Greatsword Swing
+			IridiumGreatswordBoomLarge.DisplayName: Iridium Greatsword Boom Large
+			IridiumGreatswordBoomMedium.DisplayName: Iridium Greatsword Boom Medium
+			IridiumGreatswordBoomSmall.DisplayName: Iridium Greatsword Boom Small
 		}
 
 		NPCs: {

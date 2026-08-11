@@ -14,7 +14,7 @@ public class OsmiumGreatsword : ModItem, IItemWithReleaseButtonMidSwingEffect
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToSword(48, 5f, 15, crit: 6, scale: 1.2f, useTurn: false);
+		Item.DefaultToSword(25, 5f, 18, crit: 6, scale: 1.2f, useTurn: false);
 		Item.rare = ItemRarityID.Orange;
 		Item.value = Item.sellPrice(0, 1);
 		Item.shootSpeed = 15;
