@@ -13,7 +13,7 @@ public class OsmiumLongbow : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToLongbow(64, 2.3f, 24f, 84);
+		Item.DefaultToLongbow(112, 2.3f, 24f, 84);
 		Item.rare = ItemRarityID.Orange;
 		Item.value = Item.sellPrice(0, 1);
 	}

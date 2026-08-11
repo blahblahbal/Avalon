@@ -15,7 +15,7 @@ public class Longbone : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToLongbow(33, 2.3f, 30f, 83);
+		Item.DefaultToLongbow(57, 2.3f, 30f, 83);
 		Item.rare = ItemRarityID.Green;
 		Item.value = Item.sellPrice(silver: 50);
 	}
