@@ -1,9 +1,11 @@
 ﻿using Avalon.Dusts;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -32,7 +34,12 @@ public class IridiumGreatswordBoomLarge : ModProjectile
 	{
 		var tex = TextureAssets.Projectile[Type];
 		var frame = tex.Frame(1, Main.projFrames[Type], 0, Projectile.frame);
-		Main.EntitySpriteDraw(tex.Value, Projectile.Bottom - Main.screenPosition, frame, Color.White with { A = 128}, 0, new Vector2(frame.Width / 2, frame.Height), 1, SpriteEffects.None);
+		DrawData d = new(tex.Value, Projectile.Bottom - Main.screenPosition, frame, Color.White with { A = 128}, 0, new Vector2(frame.Width / 2, frame.Height), 1, SpriteEffects.None);
+		for(int i = 0; i < 4; i++)
+		{
+			Main.EntitySpriteDraw(d with { position = d.position + new Vector2(0,2).RotatedBy(i * MathHelper.PiOver2), color = Color.SlateBlue with { A = 64} * 1 });
+		}
+		Main.EntitySpriteDraw(d);
 		return false;
 	}
 	public override void AI()
@@ -53,6 +60,23 @@ public class IridiumGreatswordBoomLarge : ModProjectile
 				d2.noGravity = true;
 				d2.scale += Main.rand.NextFloat(0.5f);
 			}
+			//int rand = Main.rand.Next(5, 17);
+			//for(int i = 0; i < rand; i++)
+			//{
+			//	var p = VanillaParticles.RequestFadingParticle();
+			//	var tex = TextureAssets.Gore[Main.rand.Next(GoreID.Smoke1, GoreID.Smoke3 + 1)];
+			//	int time = Main.rand.Next(100, 300);
+			//	p.SetBasicInfo(tex, null, new Vector2(Main.rand.NextFloat(-Projectile.width, Projectile.width) * 0.02f, Main.rand.NextFloat(-Projectile.width, 0) * 0.03f), Projectile.Bottom);
+			//	p.SetTypeInfo(time);
+			//	p.ColorTint = new Color(0.2f, 0.3f, 0.25f) * Main.rand.NextFloat(0.25f,0.5f);
+			//	p.FadeInNormalizedTime = 0.1f;
+			//	p.FadeOutNormalizedTime = 0.1f;
+			//	p.Scale = Vector2.One * Main.rand.NextFloat(0.3f, 1.25f);
+			//	p.Rotation = Main.rand.NextFloatDirection();
+			//	p.RotationVelocity = Main.rand.NextFloat(-0.05f, 0.05f);
+			//	p.AccelerationPerFrame.Y = p.Velocity.Y / time * -2;
+			//	Main.ParticleSystem_World_OverPlayers.Add(p);
+			//}
 		}
 		Projectile.frame = (int)MathF.Round((1f - (Projectile.timeLeft / 10f)) * Main.projFrames[Type]);
 	}

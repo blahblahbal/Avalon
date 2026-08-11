@@ -159,9 +159,9 @@ public class IridiumGreatswordSwing : ModProjectile
 		float glowPercent = MathF.Sin(Utils.Remap(Projectile.localAI[2], 0, 30, MathHelper.PiOver2, MathHelper.Pi));
 		if (Projectile.localAI[2] > 0 && glowPercent > 0)
 		{
-			Main.EntitySpriteDraw(d with { color = Color.White with { A = 0} * glowPercent });
+			Main.EntitySpriteDraw(d with { color = Color.SlateBlue with { A = 0} * glowPercent });
 			glowPercent = MathF.Sin(Utils.Remap(Projectile.localAI[2], 0, 15, MathHelper.PiOver2, MathHelper.Pi));
-			Main.EntitySpriteDraw(d with { color = Color.White with { A = 0 } * glowPercent * 0.5f, scale = d.scale * (1f + Projectile.localAI[2] * 0.03f)});
+			Main.EntitySpriteDraw(d with { color = Color.SlateBlue with { A = 0 } * glowPercent, scale = d.scale * (1f + Projectile.localAI[2] * 0.03f)});
 		}
 		return false;
 	}
