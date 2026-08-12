@@ -9275,7 +9275,11 @@ Mods: {
 
 			Hellrazer: {
 				DisplayName: Hellrazer
-				Tooltip: Musket Balls turn into Explosive rounds
+				Tooltip:
+				'''
+				Uses stakes as ammo
+				Shoots molten stakes that cause a chain of explosions
+				'''
 			}
 
 			UnderworldChest: {
