@@ -1,5 +1,4 @@
 ﻿using Avalon.Dusts;
-using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -128,7 +127,7 @@ public class IridiumGreatswordBoomMedium : IridiumGreatswordBoomLarge
 		{
 			int type = ModContent.ProjectileType<IridiumGreatswordBoomSmall>();
 			pos.Y -= ContentSamples.ProjectilesByType[type].height / 2;
-			Projectile.NewProjectile(Projectile.GetSource_FromThis(), pos, Vector2.Zero, type, (int)(Projectile.damage * 0.75f), Projectile.knockBack * 0.75f, Projectile.owner, Projectile.ai[0]);
+			Projectile.NewProjectile(Projectile.GetSource_FromThis(), pos, Vector2.Zero, type, (int)(Projectile.damage * 0.5f), Projectile.knockBack * 0.75f, Projectile.owner, Projectile.ai[0]);
 		}
 	}
 }

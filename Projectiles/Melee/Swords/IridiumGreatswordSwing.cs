@@ -109,7 +109,7 @@ public class IridiumGreatswordSwing : ModProjectile
 									break;
 							}
 							pos.Y -= ContentSamples.ProjectilesByType[type].height / 2;
-							Projectile.NewProjectile(Projectile.GetSource_FromThis(), pos, Vector2.Zero, type, (int)(Projectile.damage * 0.5f * Utils.Remap(Projectile.ai[0], 0, 1, 0.05f, 3)), Projectile.knockBack * 0.75f, Projectile.owner, Projectile.spriteDirection);
+							Projectile.NewProjectile(Projectile.GetSource_FromThis(), pos, Vector2.Zero, type, (int)(Projectile.damage * Utils.Remap(Projectile.ai[0], 0, 1, 0.05f, 3)), Projectile.knockBack * 0.75f, Projectile.owner, Projectile.spriteDirection);
 						}
 						Projectile.damage = 0;
 					}

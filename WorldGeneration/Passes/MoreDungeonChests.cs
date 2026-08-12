@@ -6,7 +6,7 @@ using Terraria.WorldBuilding;
 using Microsoft.Xna.Framework;
 using Avalon.Tiles;
 using Avalon.Tiles.Furniture.Functional;
-using Avalon.Items.Weapons.Ranged.Guns;
+using Avalon.Items.Weapons.Ranged.Bows;
 
 namespace Avalon.WorldGeneration.Passes;
 
