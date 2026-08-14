@@ -17,11 +17,12 @@ public class ApplyImmunitiesToStunAndCCDebuffs : ModSystem
 		}
 		for (int i = 0; i < NPCSets.StunOrSlowResistant.Length; i++)
 		{
-			if (NPCSets.StunOrSlowResistant[i] || ContentSamples.NpcsByNetId[i].boss)
+			if (ImmuneToCC(i))
 			{
 				foreach (var i2 in debuffs)
 					NPCID.Sets.SpecificDebuffImmunity[i][i2] = true;
 			}
 		}
 	}
+	public static bool ImmuneToCC(int npcType) => NPCSets.StunOrSlowResistant[npcType] || ContentSamples.NpcsByNetId[npcType].boss;
 }

@@ -17,13 +17,13 @@ public class TwistedClaymoreDebuff : ModBuff
     public override void SetStaticDefaults()
     {
 		Main.debuff[Type] = true;
-		BuffSets.CCOrSlowDebuffThatCannotGoOnBossesOrNPCsThatWouldCauseSignificantJank[Type] = true;
 	}
 	public override void Update(NPC npc, ref int buffIndex)
 	{
 		var tcdn = npc.GetGlobalNPC<TwistedClaymoreDebuffNPC>();
 		tcdn.Active = true;
-		npc.GetGlobalNPC<AvalonGlobalNPCInstance>().Speed *= 1f - (Utils.Remap(tcdn.Tier, 0, 4, 0.2f, 0.8f) * Utils.Remap(npc.buffTime[buffIndex], 0, 60, 0, 1));
+		if(!ApplyImmunitiesToStunAndCCDebuffs.ImmuneToCC(npc.type))
+			npc.GetGlobalNPC<AvalonGlobalNPCInstance>().Speed *= 1f - (Utils.Remap(tcdn.Tier, 0, 4, 0.2f, 0.8f) * Utils.Remap(npc.buffTime[buffIndex], 0, 60, 0, 1));
 	}
 	public override bool ReApply(NPC npc, int time, int buffIndex)
 	{
