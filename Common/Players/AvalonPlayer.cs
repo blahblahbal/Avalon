@@ -170,6 +170,8 @@ public partial class AvalonPlayer : ModPlayer
 	public float MeleeCritDamage = 1f;
 	public float RangedCritDamage = 1f;
 	public float CritDamageMult = 1f;
+	public float MeleeScale = 1f;
+	public float BonusTagDamage = 0;
 
 	public bool AdjShimmer;
 	public bool oldAdjShimmer;
@@ -430,7 +432,8 @@ public partial class AvalonPlayer : ModPlayer
 		MagicCritDamage = 0f;
 		MeleeCritDamage = 0f;
 		RangedCritDamage = 0f;
-
+		MeleeScale = 1f;
+		BonusTagDamage = 0;
 		// genies
 		Paramount = false;
 		Zeal = false;
@@ -577,6 +580,11 @@ public partial class AvalonPlayer : ModPlayer
 			}
 			else { InBossFight = false; }
 		}
+	}
+	public override void ModifyItemScale(Item item, ref float scale)
+	{
+		if (item.DamageType.CountsAsClass(DamageClass.Melee))
+			scale *= MeleeScale;
 	}
 	public override void ResetInfoAccessories()
 	{
@@ -2717,6 +2725,19 @@ public partial class AvalonPlayer : ModPlayer
 	}
 	public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
 	{
+		if (!proj.npcProj || !proj.trap && proj.IsMinionOrSentryRelated)
+		{
+			float tagDamage = 0;
+			for (int i = 0; i < target.buffType.Length; i++)
+			{
+				if (BuffID.Sets.IsATagBuff[target.buffType[i]])
+				{
+					tagDamage += BonusTagDamage;
+				}
+			}
+			modifiers.FlatBonusDamage += tagDamage * ProjectileID.Sets.SummonTagDamageMultiplier[proj.type];
+		}
+
 		if (EarthInsig)
 		{
 			if (Data.Sets.ProjectileSets.EarthRelatedItems[proj.type])

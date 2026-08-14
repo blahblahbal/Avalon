@@ -17,7 +17,8 @@ public class OsmiumTreads : ModItem
 	}
 	public override void UpdateEquip(Player player)
 	{
-		player.GetDamage(DamageClass.Magic) += 0.12f;
+		player.jumpSpeedBoost += 2.4f;
+		player.extraFall += 15;
 	}
 	public override void AddRecipes()
 	{

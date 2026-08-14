@@ -1,4 +1,5 @@
 using Avalon.Common.Extensions;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -15,21 +16,19 @@ public class IridiumHat : ModItem
 		Item.rare = ItemRarityID.Orange;
 		Item.value = Item.sellPrice(0, 1, 20);
 	}
-
 	public override bool IsArmorSet(Item head, Item body, Item legs)
 	{
 		return body.type == ModContent.ItemType<IridiumPlateMail>() && legs.type == ModContent.ItemType<IridiumPants>();
 	}
-
 	public override void UpdateArmorSet(Player player)
 	{
 		player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Iridium");
-		player.GetCritChance<GenericDamageClass>() += 9;
+		player.GetModPlayer<IridiumSetBonusPlayer>().Active = true;
 	}
-
 	public override void UpdateEquip(Player player)
 	{
-		player.GetDamage(DamageClass.Ranged) += 0.11f;
+		player.GetCritChance(DamageClass.Generic) += 10;
+		player.manaCost -= 0.2f;
 	}
 	public override void AddRecipes()
 	{
@@ -38,5 +37,34 @@ public class IridiumHat : ModItem
 			.AddIngredient(ModContent.ItemType<Material.DesertFeather>(), 4)
 			.AddTile(TileID.Anvils)
 			.Register();
+	}
+}
+public class IridiumSetBonusPlayer : ModPlayer
+{
+	public bool Active = false;
+	public int ManaStealCooldown = 0;
+	public override void ResetEffects()
+	{
+		ManaStealCooldown--;
+		Active = false;
+	}
+	public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
+	{
+		if (!Active || !item.DamageType.CountsAsClass(DamageClass.Magic) || ContentSamples.ProjectilesByType[item.shoot].IsMinionOrSentryRelated)
+			return;
+		float ManaPercent = Player.statMana / (float)Player.statManaMax2;
+		damage += Utils.Remap(ManaPercent, 0, 1f, 0.2f, 0);
+	}
+	public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+	{
+		if (!proj.IsMinionOrSentryRelated && !proj.DamageType.CountsAsClass(DamageClass.Magic) && ManaStealCooldown <= 0)
+		{
+			ManaStealCooldown = 30;
+			int manaRestore = Math.Min(10, Player.statManaMax2 - Player.statMana);
+			if (manaRestore == 0)
+				return;
+			Player.statMana += manaRestore;
+			Player.ManaEffect(manaRestore);
+		}
 	}
 }

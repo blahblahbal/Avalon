@@ -459,6 +459,7 @@ Mods: {
 			Acid_2: "{0}'s meat fell off the bone."
 			Acid_3: "{0} did the wrong acid."
 			Acid_4: "{0} dipped the wrong thing in acid."
+			OsmiumSetBonus: "{0} buckled under their own weight."
 		}
 
 		GameTips: {
@@ -634,13 +635,22 @@ Mods: {
 				Double tap {0} to activate Caesium Boosting stance
 				This stance reduces movement speed and increases damage and damage reduction
 				'''
-			Rhodium: 9% increased damage
+			Rhodium:
+				'''
+				{$CommonItemTooltip.Whips}
+				All non-summon attacks apply 4 summon tag damage
+				Tagged enemies have a chance to drop mana stars when hit by summons
+				'''
 			Bismuth: 4 defense
 			OneDef: 1 defense
 			TwoDef: 2 defense
 			ThreeDef: 3 defense
-			Iridium: 9% increased critical strike chance
-			Osmium: 5 defense
+			Iridium:
+				'''
+				Damage increases as mana lowers
+				Non-magic and Non-summon damage steal mana
+				'''
+			Osmium: A portion of damage taken is converted to damage over time
 			Robe1: 10% increased magic critical strike chance
 			Robe2: Increases maximum mana by 60
 			ResistantWood: 10 armor penetration and reduces damage taken by 10%
@@ -2140,19 +2150,24 @@ Mods: {
 				DisplayName: Osmium Helmet
 				Tooltip:
 					'''
-					12% increased ranged damage
-					Increases maximum mana by 40
+					12% increased damage
+					Increased life regeneration
+					Increases maximum mana by 60
 					'''
 			}
 
 			OsmiumJerkin: {
 				DisplayName: Osmium Jerkin
-				Tooltip: 12% increased melee damage and speed
+				Tooltip:
+					'''
+					15% increased knockback
+					30% increased melee weapon scale and whip range
+					'''
 			}
 
 			OsmiumTreads: {
 				DisplayName: Osmium Treads
-				Tooltip: 12% increased magic damage
+				Tooltip: "{$ItemTooltip.FrogLeg}"
 			}
 
 			OsmiumHamaxe: {
@@ -2179,57 +2194,57 @@ Mods: {
 				DisplayName: Rhodium Headgear
 				Tooltip:
 					'''
-					14% increased ranged damage
-					Increases maximum mana by 40
+					10% increased critical strike chance
+					10% reduced mana cost
 					'''
 			}
 
 			RhodiumPlateMail: {
 				DisplayName: Rhodium Plate Mail
-				Tooltip: 14% increased melee damage and speed
+				Tooltip: 14% increased melee speed
 			}
 
 			RhodiumGreaves: {
 				DisplayName: Rhodium Greaves
-				Tooltip: 14% increased magic damage
+				Tooltip: 30% increased move speed
 			}
 
 			AncientTitaniumHeadgear: {
 				DisplayName: Ancient Titanium Headgear
-				Tooltip:
-					'''
-					14% increased ranged damage
-					Increases maximum mana by 40
-					'''
+				Tooltip: "{$Mods.Avalon.Items.RhodiumHeadgear.Tooltip}"
 			}
 
 			AncientTitaniumPlateMail: {
 				DisplayName: Ancient Titanium Plate Mail
-				Tooltip: 14% increased melee damage and speed
+				Tooltip: "{$Mods.Avalon.Items.RhodiumPlateMail.Tooltip}"
 			}
 
 			AncientTitaniumGreaves: {
 				DisplayName: Ancient Titanium Greaves
-				Tooltip: 14% increased magic damage
+				Tooltip: "{$Mods.Avalon.Items.RhodiumGreaves.Tooltip}"
 			}
 
 			IridiumHat: {
 				DisplayName: Iridium Hat
-				Tooltip: 11% increased ranged damage
+				Tooltip:
+					'''
+					10% increased critical strike chance
+					20% reduced mana cost
+					'''
 			}
 
 			IridiumPlateMail: {
 				DisplayName: Iridium Plate Mail
-				Tooltip: 11% increased melee damage and speed
+				Tooltip:
+					'''
+					15% increased melee speed
+					+2 summon tag damage 
+					'''
 			}
 
 			IridiumPants: {
 				DisplayName: Iridium Pants
-				Tooltip:
-					'''
-					11% increased magic damage
-					Increases maximum mana by 40
-					'''
+				Tooltip: 30% increased move speed
 			}
 
 			BloodshotLens: {
@@ -9276,10 +9291,10 @@ Mods: {
 			Hellrazer: {
 				DisplayName: Hellrazer
 				Tooltip:
-				'''
-				Uses stakes as ammo
-				Shoots molten stakes that cause a chain of explosions
-				'''
+					'''
+					Uses stakes as ammo
+					Shoots molten stakes that cause a chain of explosions
+					'''
 			}
 
 			UnderworldChest: {
@@ -11739,6 +11754,11 @@ Mods: {
 			TwistedClaymoreDebuff: {
 				DisplayName: Twisted Claymore Debuff
 				Description: Mods.Avalon.Buffs.TwistedClaymoreDebuff.Description
+			}
+
+			RhodiumTag: {
+				DisplayName: Rhodium Tag
+				Description: Mods.Avalon.Buffs.RhodiumTag.Description
 			}
 		}
 

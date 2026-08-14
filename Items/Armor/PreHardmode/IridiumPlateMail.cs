@@ -1,4 +1,5 @@
 using Avalon.Common.Extensions;
+using Avalon.Common.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -16,8 +17,8 @@ public class IridiumPlateMail : ModItem
 	}
 	public override void UpdateEquip(Player player)
 	{
-		player.GetDamage(DamageClass.Melee) += 0.11f;
-		player.GetAttackSpeed(DamageClass.Melee) += 0.11f;
+		player.GetAttackSpeed(DamageClass.Melee) += 0.15f;
+		player.GetModPlayer<AvalonPlayer>().BonusTagDamage += 2;
 	}
 	public override void AddRecipes()
 	{

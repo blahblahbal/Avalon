@@ -20,6 +20,6 @@ public class RhodiumGreaves : ModItem
 	}
 	public override void UpdateEquip(Player player)
 	{
-		player.GetDamage(DamageClass.Magic) += 0.14f;
+		player.moveSpeed += 0.3f;
 	}
 }
