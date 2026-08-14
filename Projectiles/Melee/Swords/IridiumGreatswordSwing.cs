@@ -1,4 +1,5 @@
-﻿using Avalon.Core;
+﻿using Avalon.Common;
+using Avalon.Core;
 using Avalon.Dusts;
 using Avalon.Items.Weapons.Melee.Swords;
 using Avalon.Particles;
@@ -87,7 +88,7 @@ public class IridiumGreatswordSwing : ModProjectile
 				if (Projectile.ai[1] < 0.1f * Projectile.ai[0])
 				{
 					Vector2 vect = new Vector2(1, -1).RotatedBy(Projectile.rotation);
-					if (Collision.SolidCollision(Projectile.Center + vect * 64, 16, 16, true) || Collision.SolidCollision(Projectile.Center + vect * 32, 16, 16,true))
+					if (AvalonUtils.SolidCollisionWithFunctionalTopSurfaceDetection(Projectile.Center + vect * 64, 16, 16) || AvalonUtils.SolidCollisionWithFunctionalTopSurfaceDetection(Projectile.Center + vect * 32, 16, 16))
 					{
 						SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact, Projectile.position);
 						Projectile.ai[2] = 1;

@@ -6,6 +6,51 @@ using Terraria.ID;
 namespace Avalon.Common;
 public static class AvalonUtils
 {
+
+	public static bool SolidCollisionWithFunctionalTopSurfaceDetection(Vector2 Position, int Width, int Height)
+	{
+		int value = (int)(Position.X / 16f) - 1;
+		int value2 = (int)((Position.X + (float)Width) / 16f) + 2;
+		int value3 = (int)(Position.Y / 16f) - 1;
+		int value4 = (int)((Position.Y + (float)Height) / 16f) + 2;
+		int num = Utils.Clamp(value, 0, Main.maxTilesX - 1);
+		value2 = Utils.Clamp(value2, 0, Main.maxTilesX - 1);
+		value3 = Utils.Clamp(value3, 0, Main.maxTilesY - 1);
+		value4 = Utils.Clamp(value4, 0, Main.maxTilesY - 1);
+		Vector2 vector = default(Vector2);
+		for (int i = num; i < value2; i++)
+		{
+			for (int j = value3; j < value4; j++)
+			{
+				Tile tile = Main.tile[i, j];
+				if (tile == null || !tile.active() || tile.inActive())
+				{
+					continue;
+				}
+
+				bool flag = Main.tileSolid[tile.type] || Main.tileSolidTop[tile.type];
+
+				if (flag)
+				{
+					vector.X = i * 16;
+					vector.Y = j * 16;
+					int num2 = 16;
+					if (tile.halfBrick())
+					{
+						vector.Y += 8f;
+						num2 -= 8;
+					}
+
+					if (Position.X + (float)Width > vector.X && Position.X < vector.X + 16f && Position.Y + (float)Height > vector.Y && Position.Y < vector.Y + (float)num2)
+					{
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
+	}
 	public static Vector2 FindVelocityForGravityAffectedThing(Vector2 StartPosition, Vector2 TargetPosition, float gravity, int TimeUntilHit)
 	{
 		return new Vector2(
