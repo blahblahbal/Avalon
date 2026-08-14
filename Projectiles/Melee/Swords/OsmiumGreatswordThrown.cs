@@ -49,7 +49,9 @@ public class OsmiumGreatswordThrown : ModProjectile
 			{
 				if (Main.myPlayer == Projectile.owner)
 					SoundEngine.PlaySound(SoundID.MaxMana);
-
+			}
+			if (Projectile.ai[2] == TimeForMaxDamage - 2) // the sparkle particle takes 2 frames before it's even visible
+			{
 				for (int i = 0; i < 4; i++)
 				{
 					var s = VanillaParticles.RequestPrettySparkleParticle();
@@ -62,7 +64,7 @@ public class OsmiumGreatswordThrown : ModProjectile
 					s.FadeOutEnd = 8;
 					s.AdditiveAmount = 1f;
 					s.ColorTint = new Color(0.3f, Main.rand.NextFloat(0.4f, 0.75f), 1f, 0.75f);
-					s.LocalPosition = Projectile.Center;
+					s.LocalPosition = Projectile.Center + new Vector2(Projectile.velocity.X * 2, Gravity * 2);
 					Main.ParticleSystem_World_OverPlayers.Add(s);
 				}
 			}
@@ -71,6 +73,7 @@ public class OsmiumGreatswordThrown : ModProjectile
 			Projectile.velocity.Y += Gravity;
 			if (player.controlUseItem)
 			{
+				Projectile.ResetLocalNPCHitImmunity();
 				Projectile.ai[1] = 1;
 				Projectile.netUpdate = true;
 			}
@@ -156,6 +159,27 @@ public class OsmiumGreatswordThrown : ModProjectile
 		{
 			if (Collision.SolidCollision(Projectile.Center, 1, 32))
 			{
+				Collision.HitTiles(Projectile.Center, Projectile.velocity, 1, 32);
+				//List<Point> list = Collision.GetTilesIn(Projectile.Center, Projectile.Center + new Vector2(1, 32));
+				//int tileID = TileID.Count;
+				//foreach (Point p in list)
+				//{
+				//	Tile t = Main.tile[p];
+				//	if (t.HasTile && !t.IsActuated && (Main.tileSolid[t.TileType] || Main.tileSolidTop[t.TileType]))
+				//	{
+				//		if (t.type == tileID) continue;
+				//		tileID = t.type;
+				//		Point projPoint = Projectile.Center.ToTileCoordinates();
+				//		WorldGen.KillTile_PlaySounds(projPoint.X, projPoint.Y, true, t);
+				//	}
+				//}
+				SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact, Projectile.position);
+				for (int i = 0; i < 15; i++)
+				{
+					Dust d = Dust.NewDustDirect(Projectile.Center - new Vector2(16), 32, 32, ModContent.DustType<OsmiumDust>());
+					d.velocity.Y -= Main.rand.NextFloat(2.5f);
+					d.velocity.X *= 2f;
+				}
 				return true;
 			}
 			Projectile.ai[1] = 1;
@@ -168,13 +192,13 @@ public class OsmiumGreatswordThrown : ModProjectile
 			{
 				for (int y = center.Y - 2; y < center.Y + 2; y++)
 				{
-					if (Main.tile[x, y].HasTile && (Main.tileSolid[Main.tile[x, y].TileType] || Main.tileSolidTop[Main.tile[x, y].TileType]))
+					if (Main.tile[x, y].HasTile && !Main.tile[x, y].IsActuated && (Main.tileSolid[Main.tile[x, y].TileType] || Main.tileSolidTop[Main.tile[x, y].TileType]))
 					{
 						for (int i = 0; i < 5; i++)
 						{
 							Dust d = Main.dust[WorldGen.KillTile_MakeTileDust(x, y, Main.tile[x, y])];
 							d.velocity.Y -= Main.rand.NextFloat(4);
-							d.noGravity = Main.rand.NextBool();
+							//d.noGravity = Main.rand.NextBool();
 							d.velocity.X *= 3;
 						}
 					}
@@ -225,7 +249,7 @@ public class OsmiumGreatswordThrown : ModProjectile
 	}
 	public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
 	{
-		width = 8;
+		width = 6;
 		height = Projectile.ai[1] == 0 ? width : 24;
 		return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
 	}

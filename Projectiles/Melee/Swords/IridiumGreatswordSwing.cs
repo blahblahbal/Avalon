@@ -34,7 +34,7 @@ public class IridiumGreatswordSwing : ModProjectile
 	{
 		if (Main.player[Projectile.owner].channel || Projectile.ai[2] > 0)
 			return false;
-		return Collision.CheckAABBvLineCollision2(targetHitbox.TopLeft(), targetHitbox.Size(), Main.player[Projectile.owner].MountedCenter, Main.player[Projectile.owner].MountedCenter + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * 90 * Projectile.scale);
+		return Collision.CheckAABBvLineCollision2(targetHitbox.TopLeft(), targetHitbox.Size(), Main.player[Projectile.owner].MountedCenter, Main.player[Projectile.owner].MountedCenter + (Projectile.rotation - MathHelper.PiOver4).ToRotationVector2() * 96 * Projectile.scale);
 	}
 	public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
 	{

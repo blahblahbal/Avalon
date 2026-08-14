@@ -19,7 +19,9 @@ public class IridiumGreatswordBoomLarge : ModProjectile
 	}
 	public override void SetDefaults()
 	{
-		Projectile.Size = new Vector2(128);
+		//Projectile.Size = new Vector2(128);
+		Projectile.width = 160;
+		Projectile.height = 140;
 		Projectile.aiStyle = -1;
 		Projectile.penetrate = -1;
 		Projectile.DamageType = DamageClass.Melee;
@@ -118,7 +120,7 @@ public class IridiumGreatswordBoomMedium : IridiumGreatswordBoomLarge
 	public override void SetDefaults()
 	{
 		base.SetDefaults();
-		Projectile.Size = new Vector2(80);
+		Projectile.Size = new Vector2(100);
 	}
 	public override void OnKill(int timeLeft)
 	{
@@ -140,7 +142,7 @@ public class IridiumGreatswordBoomSmall : IridiumGreatswordBoomLarge
 	public override void SetDefaults()
 	{
 		base.SetDefaults();
-		Projectile.Size = new Vector2(64);
+		Projectile.Size = new Vector2(72);
 	}
 	public override void OnKill(int timeLeft)
 	{

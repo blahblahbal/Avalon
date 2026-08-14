@@ -45,7 +45,7 @@ public class RhodiumGreatsword : ModItem, IItemWithReleaseButtonMidSwingEffect
 	}
 	public override float UseSpeedMultiplier(Player player)
 	{
-		return Utils.Remap(MathF.Pow(player.GetModPlayer<RhodiumGreatswordPlayer>().Power / (float)RhodiumGreatswordPlayer.maxPower,1.4f),0,1,1f,2.3f);
+		return Utils.Remap(MathF.Pow(player.GetModPlayer<RhodiumGreatswordPlayer>().Power / (float)RhodiumGreatswordPlayer.maxPower,1.4f),0,1,1f,1.975f);
 	}
 	public override void ModifyWeaponDamage(Player player, ref StatModifier damage)
 	{

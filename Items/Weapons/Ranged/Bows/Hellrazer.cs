@@ -14,7 +14,7 @@ public class Hellrazer : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToGun(70, 12f, 8f, 30, 30, true, crit: 10);
+		Item.DefaultToGun(70, 12f, 10.5f, 30, 30, true, crit: 10);
 		Item.useAmmo = AmmoID.Stake;
 		Item.rare = ItemRarityID.Yellow;
 		Item.value = Item.sellPrice(0, 30, 0, 0);
