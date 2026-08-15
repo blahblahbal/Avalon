@@ -30,23 +30,27 @@ public class IridiumGreatswordBoomLarge : ModProjectile
 		Projectile.localNPCHitCooldown = -1;
 		Projectile.tileCollide = false;
 		Projectile.timeLeft = 10;
+		DrawOriginOffsetY = 12;
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
 		var tex = TextureAssets.Projectile[Type];
 		var frame = tex.Frame(1, Main.projFrames[Type], 0, Projectile.frame);
-		DrawData d = new(tex.Value, Projectile.Bottom - Main.screenPosition, frame, Color.White with { A = 128}, 0, new Vector2(frame.Width / 2, frame.Height), 1, SpriteEffects.None);
+		DrawData d = new(tex.Value, Projectile.Bottom - Main.screenPosition + new Vector2(DrawOriginOffsetY * Projectile.scale), frame, Color.White with { A = 128}, 0, new Vector2(frame.Width / 2, frame.Height), Projectile.scale, SpriteEffects.None);
 		for(int i = 0; i < 4; i++)
 		{
-			Main.EntitySpriteDraw(d with { position = d.position + new Vector2(0,2).RotatedBy(i * MathHelper.PiOver2), color = Color.SlateBlue with { A = 64} * 1 });
+			Main.EntitySpriteDraw(d with { position = d.position + new Vector2(0,2 * Projectile.scale).RotatedBy(i * MathHelper.PiOver2), color = Color.SlateBlue with { A = 64} * 1 });
 		}
 		Main.EntitySpriteDraw(d);
 		return false;
 	}
 	public override void AI()
 	{
+		Player player = Main.player[Projectile.owner];
 		if (Projectile.timeLeft == 9)
 		{
+			Projectile.scale = player.GetAdjustedItemScale(player.HeldItem);
+			Projectile.Resize((int)(Projectile.width * Projectile.scale), (int)(Projectile.height * Projectile.scale));
 			SoundEngine.PlaySound(SoundID.DD2_ExplosiveTrapExplode with { MaxInstances = 10 }, Projectile.position);
 			int dustType = ModContent.DustType<SimpleColorableGlowyDust>();
 			for (int i = 0; i < 15; i++)
@@ -102,11 +106,11 @@ public class IridiumGreatswordBoomLarge : ModProjectile
 	}
 	public override void OnKill(int timeLeft)
 	{
-		Vector2 pos = FindSpotForSpike(Projectile.Bottom + new Vector2(Projectile.ai[0] * 100, 0));
+		Vector2 pos = FindSpotForSpike(Projectile.Bottom + new Vector2(Projectile.ai[0] * 100 * Projectile.scale, 0));
 		if(pos != Vector2.Zero && Main.myPlayer == Projectile.owner)
 		{
 			int type = ModContent.ProjectileType<IridiumGreatswordBoomMedium>();
-			pos.Y -= ContentSamples.ProjectilesByType[type].height / 2;
+			pos.Y -= ContentSamples.ProjectilesByType[type].height / 2 * Projectile.scale;
 			Projectile.NewProjectile(Projectile.GetSource_FromThis(), pos, Vector2.Zero, type, (int)(Projectile.damage * 0.75f),Projectile.knockBack * 0.75f, Projectile.owner, Projectile.ai[0]);
 		}
 	}
@@ -121,14 +125,15 @@ public class IridiumGreatswordBoomMedium : IridiumGreatswordBoomLarge
 	{
 		base.SetDefaults();
 		Projectile.Size = new Vector2(100);
+		DrawOriginOffsetY = 8;
 	}
 	public override void OnKill(int timeLeft)
 	{
-		Vector2 pos = FindSpotForSpike(Projectile.Bottom + new Vector2(Projectile.ai[0] * 80, 0));
+		Vector2 pos = FindSpotForSpike(Projectile.Bottom + new Vector2(Projectile.ai[0] * 80 * Projectile.scale, 0));
 		if (pos != Vector2.Zero && Main.myPlayer == Projectile.owner)
 		{
 			int type = ModContent.ProjectileType<IridiumGreatswordBoomSmall>();
-			pos.Y -= ContentSamples.ProjectilesByType[type].height / 2;
+			pos.Y -= ContentSamples.ProjectilesByType[type].height / 2 * Projectile.scale;
 			Projectile.NewProjectile(Projectile.GetSource_FromThis(), pos, Vector2.Zero, type, (int)(Projectile.damage * 0.5f), Projectile.knockBack * 0.75f, Projectile.owner, Projectile.ai[0]);
 		}
 	}
@@ -143,6 +148,7 @@ public class IridiumGreatswordBoomSmall : IridiumGreatswordBoomLarge
 	{
 		base.SetDefaults();
 		Projectile.Size = new Vector2(72);
+		DrawOriginOffsetY = 6;
 	}
 	public override void OnKill(int timeLeft)
 	{

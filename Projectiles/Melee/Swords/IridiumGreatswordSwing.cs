@@ -51,6 +51,7 @@ public class IridiumGreatswordSwing : ModProjectile
 			Projectile.Kill();
 			return;
 		}
+		Projectile.scale = player.GetAdjustedItemScale(player.HeldItem);
 		player.heldProj = Projectile.whoAmI;
 		player.SetDummyItemTime(2);
 		if (player.channel || Projectile.ai[0] < 0.3f)
@@ -93,7 +94,7 @@ public class IridiumGreatswordSwing : ModProjectile
 						SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact, Projectile.position);
 						Projectile.ai[2] = 1;
 
-						Vector2 pos = IridiumGreatswordBoomLarge.FindSpotForSpike(Projectile.Bottom + new Vector2(Projectile.spriteDirection * 80, 0));
+						Vector2 pos = IridiumGreatswordBoomLarge.FindSpotForSpike(Projectile.Bottom + new Vector2(Projectile.spriteDirection * 80 * Projectile.scale, 0));
 						if (pos != Vector2.Zero && Main.myPlayer == Projectile.owner)
 						{
 							int type = 0;
@@ -109,7 +110,7 @@ public class IridiumGreatswordSwing : ModProjectile
 									type = ModContent.ProjectileType<IridiumGreatswordBoomLarge>();
 									break;
 							}
-							pos.Y -= ContentSamples.ProjectilesByType[type].height / 2;
+							pos.Y -= ContentSamples.ProjectilesByType[type].height / 2 * Projectile.scale;
 							Projectile.NewProjectile(Projectile.GetSource_FromThis(), pos, Vector2.Zero, type, (int)(Projectile.damage * Utils.Remap(Projectile.ai[0], 0, 1, 0.05f, 3)), Projectile.knockBack * 0.75f, Projectile.owner, Projectile.spriteDirection);
 						}
 						Projectile.damage = 0;

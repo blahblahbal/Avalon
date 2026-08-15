@@ -13,7 +13,7 @@ public class FeroziumIceSword : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToShortsword(ModContent.ProjectileType<FeroziumIceswordProj>(),32, 5, 10, 4, true);
+		Item.DefaultToShortsword(ModContent.ProjectileType<FeroziumIceswordProj>(),40, 5, 10, 4, true);
 		Item.rare = ItemRarityID.Pink;
 		Item.value = Item.sellPrice(0, 7);
 	}

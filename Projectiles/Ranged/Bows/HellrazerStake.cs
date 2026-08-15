@@ -22,6 +22,17 @@ public class HellrazerStake : ModProjectile
 	}
 	public override void AI()
 	{
+		if (Projectile.ai[0] == -4)
+		{
+			for(int i = 0; i < 45; i++)
+			{
+				Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.DesertTorch);
+				d.velocity += Projectile.velocity.RotatedByRandom(0.5f) * Main.rand.NextFloat(2);
+				d.scale += Main.rand.NextFloat();
+				d.fadeIn = Main.rand.NextFloat(2);
+				d.noGravity = true;
+			}
+		}
 		if (Main.rand.NextBool())
 		{
 			Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.DesertTorch);
@@ -30,7 +41,7 @@ public class HellrazerStake : ModProjectile
 			d.noGravity = true;
 		}
 
-		Projectile.ai[0]--;
+		Projectile.ai[0]-= 2;
 		Projectile.localAI[2]++;
 		Projectile.rotation -= MathHelper.PiOver2;
 	}

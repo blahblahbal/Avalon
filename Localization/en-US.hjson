@@ -10924,6 +10924,7 @@ Mods: {
 			BloodGusher.DisplayName: Blood Gusher
 			Robot.DisplayName: Robot
 			Snotslime.DisplayName: Snotslime
+			Target.DisplayName: Target
 		}
 
 		Buffs: {

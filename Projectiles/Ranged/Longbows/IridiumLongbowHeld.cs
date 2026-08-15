@@ -84,7 +84,7 @@ public class IridiumLongbowGlobalProj : GlobalProjectile
 		int type = ModContent.ProjectileType<IridiumLongbowEnergyArrow>();
 		for (int i = 0; i < Math.Min(npcs.Count,Arrows); i++)
 		{
-			Projectile.NewProjectile(projectile.GetSource_FromThis(),projectile.Center, projectile.Center.DirectionTo(npcs[i].Center) * 8, type, projectile.damage / 3, projectile.knockBack / 2, projectile.owner, -100, ai2: target.whoAmI);
+			Projectile.NewProjectile(projectile.GetSource_FromThis(),projectile.Center, projectile.Center.DirectionTo(npcs[i].Center) * 8, type, (int)(projectile.damage * 0.75f), projectile.knockBack / 2, projectile.owner, -100, ai2: target.whoAmI);
 		}
 	}
 }
