@@ -49,8 +49,10 @@ using Avalon.Items.Vanity;
 using Avalon.Items.Weapons.Blah.Blahncher;
 using Avalon.Items.Weapons.Blah.EnergyBlade;
 using Avalon.Items.Weapons.Blah.Staff;
-using Avalon.Items.Weapons.Magic.Wands;
+using Avalon.Items.Weapons.Magic.Guns;
+using Avalon.Items.Weapons.Magic.Other;
 using Avalon.Items.Weapons.Magic.Tomes;
+using Avalon.Items.Weapons.Magic.Wands;
 using Avalon.Items.Weapons.Melee.Boomerangs;
 using Avalon.Items.Weapons.Melee.Flails;
 using Avalon.Items.Weapons.Melee.Maces;
@@ -64,19 +66,49 @@ using Avalon.Items.Weapons.Ranged.Guns;
 using Avalon.Items.Weapons.Ranged.Longbows;
 using Avalon.Items.Weapons.Ranged.Misc;
 using Avalon.Items.Weapons.Ranged.Thrown;
+using Avalon.Items.Weapons.Summon.Minions;
 using Avalon.ModSupport.MLL.Items;
 using Avalon.Walls.Contagion.CoughwoodWall;
 using System.Collections.Generic;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
+using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
-using Avalon.Items.Weapons.Magic.Guns;
-using Avalon.Items.Weapons.Magic.Other;
-using Avalon.Items.Weapons.Summon.Minions;
 
 namespace Avalon.Data.Sets
 {
 	public static class ItemSets
 	{
+		public static bool[] ItemDropsAffectedByCloverPotion = ItemID.Sets.Factory.CreateBoolSet(
+			ItemType<Quack>(),
+			ItemID.AdhesiveBandage,
+			ItemID.ArmorPolish,
+			ItemID.Bezoar,
+			ItemID.Blindfold,
+			ItemID.FastClock,
+			ItemID.Megaphone,
+			ItemID.Nazar,
+			ItemID.TrifoldMap,
+			ItemID.Vitamins,
+			ItemType<AmmoMagazine>(),
+			ItemType<Antivenom>(),
+			ItemType<GoldenShield>(),
+			ItemType<GreekExtinguisher>(),
+			ItemType<RubberBoot>(),
+			ItemType<SixHundredWattLightbulb>(),
+			ItemType<SurgicalMask>(),
+			ItemType<Vortex>(),
+			ItemID.JungleKey,
+			ItemID.CorruptionKey,
+			ItemID.CrimsonKey,
+			ItemID.HallowedKey,
+			ItemID.FrozenKey,
+			ItemID.DungeonDesertKey,
+			ItemType<ContagionKey>(),
+			ItemType<UnderworldKey>()
+		);
+		//public static IItemDropRule[] IItemDropRulesAffectedByCloverPotion = 
+
 		public static bool[] VanillaBarItems = ItemID.Sets.Factory.CreateBoolSet(false,
 			ItemID.CopperBar, ItemID.TinBar, ItemID.IronBar, ItemID.LeadBar, ItemID.SilverBar,
 			ItemID.TungstenBar, ItemID.GoldBar, ItemID.PlatinumBar, ItemID.MeteoriteBar,
@@ -280,7 +312,8 @@ namespace Avalon.Data.Sets
 			ItemType<BloodberrySeeds>(),
 			ItemType<SweetstemSeeds>(),
 			ItemType<HolybirdSeeds>(),
-			ItemType<TwilightPlumeSeeds>());
+			ItemType<TwilightPlumeSeeds>()
+		);
 
 		public static List<int> CraftingStationsItemID = new List<int>();
 

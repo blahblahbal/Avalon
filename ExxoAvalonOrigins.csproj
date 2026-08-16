@@ -32,9 +32,6 @@
 		<Reference Include="ModLiquidLib">
 			<HintPath>dllReferences\ModLiquidLib_v2025.11.1.dll</HintPath>
 		</Reference>
-		<Reference Include="ThoriumMod">
-			<HintPath>dllReferences\ThoriumMod_v1.7.2.4.dll</HintPath>
-		</Reference>
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Krafs.Publicizer" Version="2.3.0">
