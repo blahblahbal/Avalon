@@ -1,10 +1,10 @@
 using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Data.Sets;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.DropConditions;
@@ -30,9 +30,23 @@ public class CloverPotionActive : IItemDropRuleCondition, IProvideItemConditionD
 		return "Clover Potion active";
 	}
 }
-
-file class CloverPotionGlobalNPC : GlobalNPC
+file class CloverPotionModHook : ModHook
 {
+	protected override void Apply()
+	{
+		MonoModHooks.Add(((Action<NPC, NPCLoot>)NPCLoader.ModifyNPCLoot).Method, ModifyNPCLoot_Detour);
+		MonoModHooks.Add(((Action<GlobalLoot>)NPCLoader.ModifyGlobalLoot).Method, ModifyGlobalLoot_Detour);
+	}
+	private static void ModifyNPCLoot_Detour(Action<NPC, NPCLoot> orig, NPC npc, NPCLoot npcLoot)
+	{
+		orig.Invoke(npc, npcLoot);
+		ModifyDrops(npcLoot);
+	}
+	private static void ModifyGlobalLoot_Detour(Action<GlobalLoot> orig, GlobalLoot globalLoot)
+	{
+		orig.Invoke(globalLoot);
+		ModifyDrops(globalLoot);
+	}
 	private static readonly HashSet<IItemDropRule> PreventDuplicates = [];
 	public static void ModifyDrops(ILoot loot)
 	{
@@ -49,13 +63,5 @@ file class CloverPotionGlobalNPC : GlobalNPC
 				}
 			}
 		}
-	}
-	public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
-	{
-		ModifyDrops(npcLoot);
-	}
-	public override void ModifyGlobalLoot(GlobalLoot globalLoot)
-	{
-		ModifyDrops(globalLoot);
 	}
 }
