@@ -140,4 +140,8 @@ public static class AvalonUtils
 	{
 		return GetShootSpread(velocity, position, ContentSamples.ItemsByType[baseSpeedItemID].shootSpeed, rotation, addMagnitude, ammoExtraShootSpeedItemID > 0 ? ContentSamples.ItemsByType[ammoExtraShootSpeedItemID].shootSpeed : 0, random, maxRotUnsigned);
 	}
+	public static void NewTextRainbow(object o)
+	{
+		Main.NewText(o, Main.DiscoColor);
+	}
 }

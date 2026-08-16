@@ -97,7 +97,6 @@ public class CursedFlamer : ModNPC
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.Common(ItemID.CursedFlame, 3));
-        //npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<GreekExtinguisher>(), 40));
     }
     public override void AI()
     {

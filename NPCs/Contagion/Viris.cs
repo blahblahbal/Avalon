@@ -54,8 +54,9 @@ public class Viris : ModNPC
         spawnInfo.Player.GetModPlayer<Common.Players.AvalonBiomePlayer>().ZoneUndergroundContagion && !spawnInfo.Player.ZoneDungeon && Main.hardMode
             ? 0.6f : 0f;
     public override void ModifyNPCLoot(NPCLoot npcLoot)
-    {
-        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YuckyBit>(), 2,2,4));
+	{
+		npcLoot.Add(ItemDropRule.Common(ItemID.MeatGrinder, 200));
+		npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YuckyBit>(), 2,2,4));
 
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsNotUp(), 5091, 1500));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.DontStarveIsUp(), 5091, 500));

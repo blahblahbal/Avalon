@@ -107,7 +107,6 @@ public class ViralMummy : ModNPC
         npcLoot.Add(ItemDropRule.Common(ItemID.DarkShard, 10));
         npcLoot.Add(ItemDropRule.StatusImmunityItem(ItemID.Megaphone, 100));
         npcLoot.Add(ItemDropRule.StatusImmunityItem(ItemID.Blindfold, 100));
-        npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<HiddenBlade>(), 100));
         npcLoot.Add(ItemDropRule.Common(ItemID.MummyMask, 75));
         npcLoot.Add(ItemDropRule.Common(ItemID.MummyShirt, 75));
         npcLoot.Add(ItemDropRule.Common(ItemID.MummyPants, 75));
