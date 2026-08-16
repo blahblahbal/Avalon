@@ -283,6 +283,8 @@ public class AvalonMobDrops : GlobalNPC
 			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RingofDisgust>(), RareChance));
 		}
 
+		AddStatusImmunityDrops(npc, npcLoot);
+
 		if (npc.type == NPCID.EyeofCthulhu)
 		{
 			if (!AltLibrarySupport.Enabled)
@@ -491,6 +493,60 @@ public class AvalonMobDrops : GlobalNPC
 			globalLoot.Add(ItemDropRule.ByCondition(new ZoneTropics(), ModContent.ItemType<TropicsToken>(), 15));
 			globalLoot.Add(ItemDropRule.ByCondition(new ContagionTokenDropRule(), ModContent.ItemType<ContagionToken>(), 15));
 
+		}
+	}
+
+	public static void AddStatusImmunityDrops(NPC npc, NPCLoot npcLoot)
+	{
+		if (npc.type == NPCID.RaggedCaster || npc.type == NPCID.RaggedCasterOpenCoat) // || npc.type == ModContent.NPCType<DarkMatterSlime>())
+		{
+			// 600 watt lightbulb
+			npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<SixHundredWattLightbulb>(), 50));
+		}
+		if (npc.type == NPCID.Mummy || npc.type == NPCID.FungoFish || npc.type == NPCID.Clinger)
+		{
+			// ammo magazine
+			npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<AmmoMagazine>(), 100));
+		}
+		if (npc.type == NPCID.BlackRecluse || npc.type == NPCID.JungleCreeper || npc.type == NPCID.JungleCreeperWall || npc.type == NPCID.BlackRecluseWall || npc.type == NPCID.DesertScorpionWalk || npc.type == NPCID.DesertScorpionWall)
+		{
+			// antivenom
+			npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<Antivenom>(), 100));
+		}
+		if (npc.type is NPCID.IchorSticker or NPCID.DesertGhoulCrimson)
+		{
+			// golden shield
+			npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<GoldenShield>(), 100));
+		}
+		if (npc.type == NPCID.Clinger || npc.type == NPCID.Spazmatism || npc.type == NPCID.DesertGhoulCorruption || npc.type == ModContent.NPCType<CursedFlamer>())
+		{
+			// greek extinguisher
+			npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<GreekExtinguisher>(), 100));
+		}
+		if (npc.type is NPCID.BloodJelly or NPCID.Unicorn or NPCID.DarkMummy or NPCID.LightMummy or NPCID.BloodMummy || npc.type == ModContent.NPCType<ViralMummy>())
+		{
+			// hidden blade
+			npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<HiddenBlade>(), 100));
+		}
+		if (npc.type == NPCID.MartianTurret || npc.type == NPCID.GigaZapper || npc.type == ModContent.NPCType<Mechasting>())
+		{
+			// rubber boot
+			npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<RubberBoot>(), 100));	
+		}
+		if (npc.type == ModContent.NPCType<Cougher>() || npc.type == ModContent.NPCType<ContaminatedGhoul>())
+		{
+			// surgical mask
+			npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<SurgicalMask>(), 100));
+		}
+		if (npc.type is NPCID.SkeletonArcher or NPCID.LavaSlime or NPCID.MeteorHead or NPCID.FireImp or NPCID.Hellbat or NPCID.Lavabat or NPCID.Demon or NPCID.HellArmoredBones or NPCID.HellArmoredBonesMace or NPCID.HellArmoredBonesSpikeShield or NPCID.HellArmoredBonesSword)
+		{
+			// vortex
+			npcLoot.Add(ItemDropRule.StatusImmunityItem(ModContent.ItemType<Vortex>(), 100));
+		}
+		if (npc.type is NPCID.DuneSplicerHead or NPCID.Tumbleweed or NPCID.WalkingAntlion or NPCID.FlyingAntlion or NPCID.SandElemental or NPCID.SandShark or NPCID.SandsharkCorrupt or NPCID.SandsharkCrimson or NPCID.SandsharkHallow || npc.type == ModContent.NPCType<BaskingSpewer>())
+		{
+			// windshield
+			npcLoot.Add(ItemDropRule.ByCondition(new SandstormCondition(), ModContent.ItemType<Windshield>(), 75));
 		}
 	}
 }
