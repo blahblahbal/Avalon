@@ -1,31 +1,26 @@
 ﻿using Avalon.Core;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Projectiles.Ranged.Bows;
+namespace Avalon.Projectiles.Magic.Wands;
 
-public class HellrazerStakeExplosion : ModProjectile
+public class BoomlashSeed : ModProjectile
 {
-	public override string Texture => ModContent.GetInstance<HellrazerStake>().Texture;
 	public override void SetDefaults()
 	{
-		Projectile.Size = new Vector2(64);
+		Projectile.Size = new Vector2(14);
 		Projectile.aiStyle = -1;
 		Projectile.penetrate = -1;
-		Projectile.DamageType = DamageClass.Ranged;
+		Projectile.DamageType = DamageClass.Magic;
 		Projectile.friendly = true;
 		Projectile.usesLocalNPCImmunity = true;
 		Projectile.localNPCHitCooldown = -1;
 		Projectile.tileCollide = false;
-		Projectile.hide = true;
 	}
 	public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
 	{
@@ -33,19 +28,22 @@ public class HellrazerStakeExplosion : ModProjectile
 	}
 	public override void AI()
 	{
+		Projectile.rotation += Projectile.velocity.X * 0.1f;
+		Projectile.velocity *= 0.95f;
 		Projectile.ai[0]--;
 		if (Projectile.ai[0] == -1)
 		{
 			SoundEngine.PlaySound(new SoundStyle("Terraria/Sounds/Custom/meteor_shower_", [0, 1, 2, 3]) with { MaxInstances = 15, volume = 0.8f, pitch = 0.5f }, Projectile.Center);
 			//SoundEngine.PlaySound(SoundID.DD2_ExplosiveTrapExplode with { pitchVariance = 1, MaxInstances = 10 }, Projectile.position);
-
+			Projectile.velocity = Vector2.Zero;
+			Projectile.Opacity = 0;
+			int rand = Main.rand.Next(2, 5);
 			if (!TextureAssets.Gore[GoreID.Smoke1].IsLoaded)
-			Main.instance.LoadGore(GoreID.Smoke1);
+				Main.instance.LoadGore(GoreID.Smoke1);
 			if (!TextureAssets.Gore[GoreID.Smoke2].IsLoaded)
 				Main.instance.LoadGore(GoreID.Smoke2);
 			if (!TextureAssets.Gore[GoreID.Smoke3].IsLoaded)
 				Main.instance.LoadGore(GoreID.Smoke3);
-			int rand = Main.rand.Next(2, 5);
 			for (int i = 0; i < rand; i++)
 			{
 				var p2 = VanillaParticles.RequestFadingParticle();
@@ -53,7 +51,7 @@ public class HellrazerStakeExplosion : ModProjectile
 				int time = Main.rand.Next(60, 120);
 				p2.SetBasicInfo(tex2, null, Main.rand.NextVector2Circular(1, 1), Projectile.Center);
 				p2.SetTypeInfo(time);
-				p2.ColorTint = new Color(0.3f, 0.2f, Main.rand.NextFloat(0.1f,0.2f)) * Main.rand.NextFloat(0.5f, 1);
+				p2.ColorTint = new Color(0.3f, 0.2f, Main.rand.NextFloat(0.1f, 0.2f)) * Main.rand.NextFloat(0.5f, 1);
 				p2.FadeInNormalizedTime = 0.1f;
 				p2.FadeOutNormalizedTime = 0.1f;
 				p2.Scale = Vector2.One * Main.rand.NextFloat(0.5f, 1);
@@ -76,7 +74,7 @@ public class HellrazerStakeExplosion : ModProjectile
 			tex.Wait();
 			var p = AnimatedParticle.Request();
 			p.SetBasicInfo(tex, 5, Vector2.Zero, Projectile.Center);
-			p.SetTypeInfo(Main.rand.Next(10,20));
+			p.SetTypeInfo(Main.rand.Next(10, 20));
 			p.ColorTint = Color.White with { A = 128 };
 			p.Scale = Vector2.One;
 			p.Rotation = Main.rand.NextFloatDirection();
@@ -86,17 +84,11 @@ public class HellrazerStakeExplosion : ModProjectile
 
 			for (int i = 0; i < 30; i++)
 			{
-				Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.DesertTorch);
+				Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.DesertTorch);
 				d.velocity += Main.rand.NextVector2Circular(2, 2) * Projectile.ai[1];
-				d.noGravity = Main.rand.NextBool();
-				d.scale += Main.rand.NextFloat(0.5f);
-				if (d.noGravity)
-				{
-					d.scale += Main.rand.NextFloat();
-					d.fadeIn = Main.rand.NextFloat(1.5f);
-				}
-				else
-					d.velocity.Y -= 1;
+				d.noGravity = true;
+				d.scale += Main.rand.NextFloat(1.5f);
+				d.fadeIn = Main.rand.NextFloat(1.5f);
 			}
 			for (int i = 0; i < 10; i++)
 			{

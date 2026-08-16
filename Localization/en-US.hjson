@@ -10446,6 +10446,7 @@ Mods: {
 			IridiumGreatswordBoomSmall.DisplayName: Iridium Greatsword Boom Small
 			HellrazerStake.DisplayName: Hellrazer Stake
 			HellrazerStakeExplosion.DisplayName: Hellrazer Stake Explosion
+			BoomlashSeed.DisplayName: Boomlash Seed
 		}
 
 		NPCs: {

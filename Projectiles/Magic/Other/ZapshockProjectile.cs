@@ -1,4 +1,5 @@
 ﻿using Avalon;
+using Avalon.Common;
 using Avalon.Core;
 using Avalon.Items.Weapons.Magic.Other;
 using Avalon.Particles;
@@ -109,6 +110,7 @@ public class ZapshockProjectile : ModProjectile
 		_points.Clear();
 		_rotations.Clear();
 		float iterations = Math.Abs(Projectile.Center.X - Projectile.velocity.X) / 30 + 5;
+		float warpAmount = Utils.Remap(Projectile.timeLeft, 5, 20, 4, 0f);
 		for (int i = 0; i < iterations; i++)
 		{
 			float percent = i / iterations;
@@ -117,7 +119,6 @@ public class ZapshockProjectile : ModProjectile
 
 			if (i != 0)
 			{
-				float warpAmount = Utils.Remap(Projectile.timeLeft, 10, 20, 2, 0f);
 				mainPoint = mainPoint.RotatedBy((Utils.RandomFloat(ref seed) - 0.5f) * warpAmount * sin, _points[i - 1]);
 
 			}
@@ -141,22 +142,18 @@ public class ZapshockProjectile : ModProjectile
 			}
 		}
 		_rotations.Add(_rotations[_rotations.Count - 1]);
-
-		if (Projectile.ai[1] == 0)
-			for (int i = 0; i < 4; i++) // this is done multiple times to jankily fix the opacity at the end
-			{
-				_points.Add(Projectile.velocity);
-				_rotations.Add(_rotations[_rotations.Count - 1]);
-			}
-		else
-		{
-			_points.Add(Projectile.velocity);
-			_rotations.Add(_rotations[_rotations.Count - 1]);
-		}
-		//for (int i = 0; i < Points.Count; i++)
+		_points.Add(Projectile.velocity);
+		_rotations.Add(_rotations[_rotations.Count - 1]);
+		//if (Projectile.ai[1] == 0)
+		//	for (int i = 0; i < 4; i++) // this is done multiple times to jankily fix the opacity at the end
+		//	{
+		//		_points.Add(Projectile.velocity);
+		//		_rotations.Add(_rotations[_rotations.Count - 1]);
+		//	}
+		//else
 		//{
-		//	Dust d = Dust.NewDustPerfect(Points[i], DustID.ShadowbeamStaff);
-		//	d.noGravity = true;
+		//	_points.Add(Projectile.velocity);
+		//	_rotations.Add(_rotations[_rotations.Count - 1]);
 		//}
 	}
 	public override bool PreDraw(ref Color lightColor)
@@ -180,22 +177,13 @@ public class ZapshockProjectile : ModProjectile
 		//	Main.EntitySpriteDraw(tex.Value, drawPos, cap, color, rotation, capOrigin, width, SpriteEffects.None);
 		//	Main.EntitySpriteDraw(tex.Value, drawPos, middle, color, rotation, middleOrigin, new Vector2(width, distance), SpriteEffects.None);
 		//}
-
-		MiscShaderData miscShaderData = GameShaders.Misc["Zapshock"];
-		miscShaderData.UseOpacity(Projectile.Opacity * 4 * MathF.Pow(Projectile.timeLeft / 20f, 5));
-		miscShaderData.Apply();
-		_vertexStrip.PrepareStripWithProceduralPadding(_points.ToArray(), _rotations.ToArray(), StripColors, StripWidth, -Main.screenPosition);
-		_vertexStrip.DrawTrail();
-		Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+		Main.spriteBatch.End();
+		StripRenderer.SetTexturesForTrail(AssetReferences.Projectiles.Magic.Other.ZapshockProjectileGradient.Asset, AssetReferences.Projectiles.Magic.Other.ZapshockProjectileShape.Asset, TextureAssets.MagicPixel);
+		StripRenderer.BeginSpriteBatchForBasicTrail(0f, 0, Projectile.Opacity * 4 * MathF.Pow(Projectile.timeLeft / 20f, 5));
+		StripRenderer.DrawStripPadded(_points.ToArray(), _rotations.ToArray(), StripColors, StripWidth, -Main.screenPosition + Projectile.Size / 2f);
+		Main.spriteBatch.End();
+		Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
 		return false;
-	}
-	public override void Load()
-	{
-		MiscShaderData shader = new MiscShaderData(Main.Assets.Request<Effect>("PixelShader"), "MagicMissile").UseProjectionMatrix(doUse: true);
-		shader.UseImage2(TextureAssets.MagicPixel);
-		shader.UseImage1(AssetReferences.Projectiles.Magic.Other.ZapshockProjectileShape.Asset);
-		shader.UseImage0(AssetReferences.Projectiles.Magic.Other.ZapshockProjectileGradient.Asset);
-		GameShaders.Misc.Add("Zapshock", shader);
 	}
 	private static Color StripColors(float progressOnStrip)
 	{
@@ -203,6 +191,7 @@ public class ZapshockProjectile : ModProjectile
 	}
 	private float StripWidth(float progressOnStrip)
 	{
-		return ((40f - progressOnStrip) * MathF.Pow(Projectile.timeLeft / 20f, 2 + progressOnStrip * 4)) * MathHelper.Clamp(progressOnStrip * 10,0.5f,1) * (Projectile.ai[1] == 0? 1.3f : 0.7f);
+		float width = 40 * MathF.Pow(Projectile.timeLeft / 20f, 2 + progressOnStrip * 4) * MathHelper.Clamp(progressOnStrip * 10, 0.5f, 1) * (Projectile.ai[1] == 0 ? 1.3f : 0.7f);
+		return width * MathHelper.Clamp((1f - progressOnStrip) * 9,0,1);
 	}
 }

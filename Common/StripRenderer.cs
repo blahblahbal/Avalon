@@ -1,8 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Avalon.Core;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent;
+using Terraria.ID;
 
 namespace Avalon.Common;
 public static class StripRenderer
@@ -29,10 +33,30 @@ public static class StripRenderer
 		);
 	}
 
+	public static void BeginSpriteBatchForBasicTrail(float fatness = 0.75f, float scrollSpeed = -1, float opacity = 1)
+	{
+		var shader = AssetReferences.Effects.TrailShader.CreateTrail();
+		shader.Parameters.uTransformMatrix = Main.GameViewMatrix.NormalizedTransformationmatrix;
+		shader.Parameters.uFatness = fatness;
+		shader.Parameters.uTime = Main.GlobalTimeWrappedHourly;
+		shader.Parameters.uScrollSpeed = scrollSpeed;
+		shader.Parameters.uOpacity = opacity;
+		shader.Apply();
+		Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, shader.Shader, Main.Transform);
+	}
+	public static void SetTexturesForTrail(Asset<Texture2D> gradient, Asset<Texture2D> shape, Asset<Texture2D> erosion)
+	{
+		shape.Wait();
+		gradient.Wait();
+		erosion.Wait();
+		Main.graphics.GraphicsDevice.Textures[0] = gradient.Value;
+		Main.graphics.GraphicsDevice.Textures[1] = shape.Value;
+		Main.graphics.GraphicsDevice.Textures[2] = erosion.Value;
+	}
+
 	public delegate Color StripColorFunction(float progressAlongStrip);
 
 	public delegate float StripWidthFunction(float progressAlongStrip);
-
 	public static void DrawStrip(Vector2[] positions, float[] rotations, StripColorFunction color, StripWidthFunction width, Vector2 offset = default)
 	{
 		if (positions.Length < 2 | positions.Length != rotations.Length)
