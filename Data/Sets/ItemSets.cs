@@ -70,7 +70,6 @@ using Avalon.Items.Weapons.Summon.Minions;
 using Avalon.ModSupport.MLL.Items;
 using Avalon.Walls.Contagion.CoughwoodWall;
 using System.Collections.Generic;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
@@ -80,37 +79,10 @@ namespace Avalon.Data.Sets;
 [ReinitializeDuringResizeArrays]
 public static class ItemSets
 {
-	public static bool[] ItemDropsAffectedByCloverPotion = ItemID.Sets.Factory.CreateNamedSet("ItemDropsAffectedByCloverPotion").RegisterBoolSet(
-		ItemType<Quack>(),
-		ItemID.AdhesiveBandage,
-		ItemID.ArmorPolish,
-		ItemID.Bezoar,
-		ItemID.Blindfold,
-		ItemID.FastClock,
-		ItemID.Megaphone,
-		ItemID.Nazar,
-		ItemID.TrifoldMap,
-		ItemID.Vitamins,
-		ItemType<AmmoMagazine>(),
-		ItemType<Antivenom>(),
-		ItemType<GoldenShield>(),
-		ItemType<GreekExtinguisher>(),
-		ItemType<HiddenBlade>(),
-		ItemType<RubberBoot>(),
+	public static bool[] ItemIDsAffectedByCloverPotion = ItemID.Sets.Factory.CreateNamedSet("ItemIDsAffectedByCloverPotion").RegisterBoolSet(
 		ItemType<SixHundredWattLightbulb>(),
-		ItemType<SurgicalMask>(),
-		ItemType<Vortex>(),
-		ItemType<Windshield>(),
-		ItemID.JungleKey,
-		ItemID.CorruptionKey,
-		ItemID.CrimsonKey,
-		ItemID.HallowedKey,
-		ItemID.FrozenKey,
-		ItemID.DungeonDesertKey,
-		ItemType<ContagionKey>(),
-		ItemType<UnderworldKey>()
+		ItemType<Windshield>()
 	);
-	//public static IItemDropRule[] IItemDropRulesAffectedByCloverPotion = 
 
 	public static bool[] VanillaBarItems = ItemID.Sets.Factory.CreateBoolSet(false,
 		ItemID.CopperBar, ItemID.TinBar, ItemID.IronBar, ItemID.LeadBar, ItemID.SilverBar,
