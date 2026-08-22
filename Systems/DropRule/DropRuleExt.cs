@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria.GameContent.ItemDropRules;
 
-namespace Avalon.Common;
+namespace Avalon.Systems.DropRule;
 //MIT License
 
 //Copyright(c) 2024

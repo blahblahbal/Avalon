@@ -1,6 +1,7 @@
 using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Data.Sets;
+using Avalon.Systems.DropRule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,52 +62,20 @@ file class CloverPotionModHook : ModHook
 	}
 	private static void ModifyDrops(ILoot loot)
 	{
-		foreach (IItemDropRule rule in loot.Get().FindDropRules<IItemDropRule>())
+		foreach (IItemDropRule rule in loot.Get(false).FindDropRules<IItemDropRule>(static rule => !Excluded_ItemDropRulesAffectedByCloverPotion.Contains(rule) && DropRuleDefinition.ImportForCheck(rule) != null))
 		{
-			switch (rule)
+			DropRuleDefinition drd = DropRuleDefinition.Import(rule);
+			if (drd.kind is IChanceDenominatorKind data)
 			{
-				case CommonDrop x:
-					if (CheckEligible(rule, x.chanceNumerator, x.chanceDenominator, [x.itemId]))
-					{
-						AddChainedCloverRule(rule, new CommonDrop(x.itemId, x.chanceDenominator, x.amountDroppedMinimum, x.amountDroppedMaximum, x.chanceNumerator));
-					}
-					break;
-				case OneFromOptionsDropRule x:
-					if (CheckEligible(rule, x.chanceNumerator, x.chanceDenominator, x.dropIds))
-					{
-						AddChainedCloverRule(rule, new OneFromOptionsDropRule(x.chanceDenominator, x.chanceNumerator, x.dropIds));
-					}
-					break;
-				case OneFromOptionsNotScaledWithLuckDropRule x:
-					if (CheckEligible(rule, x.chanceNumerator, x.chanceDenominator, x.dropIds))
-					{
-						AddChainedCloverRule(rule, new OneFromOptionsNotScaledWithLuckDropRule(x.chanceDenominator, x.chanceNumerator, x.dropIds));
-					}
-					break;
-				case FewFromOptionsDropRule x:
-					if (CheckEligible(rule, x.chanceNumerator, x.chanceDenominator, x.dropIds))
-					{
-						AddChainedCloverRule(rule, new FewFromOptionsDropRule(x.amount, x.chanceDenominator, x.chanceNumerator, x.dropIds));
-					}
-					break;
-				case FewFromOptionsNotScaledWithLuckDropRule x:
-					if (CheckEligible(rule, x.chanceNumerator, x.chanceDenominator, x.dropIds))
-					{
-						AddChainedCloverRule(rule, new FewFromOptionsNotScaledWithLuckDropRule(x.amount, x.chanceDenominator, x.chanceNumerator, x.dropIds));
-					}
-					break;
+				if ((float)data.ChanceNumerator / data.ChanceDenominator <= 0.01f || (drd.ItemIDs?.Any(x => ItemSets.ItemIDsAffectedByCloverPotion[x]) ?? false))
+				{
+					data.ChanceDenominator -= data.ChanceNumerator * (1 + (drd.kind is CommonDropWithRerollsKind x ? x.Rerolls : 0));
+					IItemDropRule newRule = drd.Export();
+					rule.OnFailedRoll(new LeadingConditionRule(new CloverPotionActive())).OnSuccess(newRule);
+					Excluded_ItemDropRulesAffectedByCloverPotion.Add(newRule);
+					Excluded_ItemDropRulesAffectedByCloverPotion.Add(rule);
+				}
 			}
 		}
-	}
-	private static bool CheckEligible(IItemDropRule rule, float numerator, int denominator, int[]? items = null)
-	{
-		return (numerator / denominator <= 0.01f || (items != null && items.Any(x => ItemSets.ItemIDsAffectedByCloverPotion[x]))) && Excluded_ItemDropRulesAffectedByCloverPotion.Add(rule);
-	}
-	private static void AddChainedCloverRule(IItemDropRule rule, IItemDropRule newRule)
-	{
-		LeadingConditionRule clover = new(new CloverPotionActive());
-		clover.OnSuccess(newRule);
-		rule.OnFailedRoll(clover);
-		Excluded_ItemDropRulesAffectedByCloverPotion.Add(newRule);
 	}
 }
