@@ -1,23 +1,19 @@
 using Avalon.Common;
 using Avalon.Core;
-using Avalon.Items.Accessories.Hardmode;
+using Avalon.NPCs.Template;
 using Avalon.Projectiles.Hostile;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using System;
 using System.IO;
 using Terraria;
 using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 
 namespace Avalon.NPCs.Underground;
-
-public class Robot : ModNPC
+public class Robot : CustomFighterAI
 {
 	public override void SetStaticDefaults()
 	{
@@ -33,7 +29,7 @@ public class Robot : ModNPC
 		NPC.knockBackResist = 0;
 		NPC.noTileCollide = false;
 		NPC.noGravity = false;
-		NPC.aiStyle = NPCAIStyleID.Fighter;
+		NPC.aiStyle = -1;
 		NPC.value = Item.buyPrice(silver: 50);
 		NPC.HitSound = SoundID.NPCHit4;
 		NPC.DeathSound = SoundID.NPCDeath14;
@@ -53,50 +49,77 @@ public class Robot : ModNPC
 		//npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ConfusionTalisman>(), 8));
 		//npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ManaCompromise>(), 100));
 	}
-	private ref float ProjectileTimer => ref NPC.localAI[0];
-	public override void PostAI()
+	public override float MaxMoveSpeed
 	{
-		NPC.TargetClosest();
-		ProjectileTimer++;
-		int ProjSpawnStartTime = TimeUtils.SecondsToTicks(8);
-		if (ProjectileTimer < ProjSpawnStartTime)
+		get
 		{
-			if (MathF.Abs(NPC.velocity.X) < 1.75f)
+			float defaultSpeed = 2f;
+			if (DefaultMovement)
 			{
-				if (NPC.velocity.X > 0 && NPC.direction == 1)
-				{
-					NPC.velocity.X += NPC.velocity.X * 0.3f;
-				}
-				if (NPC.velocity.X < 0 && NPC.direction == -1)
-				{
-					NPC.velocity.X += NPC.velocity.X * 0.3f;
-				}
+				return defaultSpeed;
 			}
+			else if (Stationary)
+			{
+				float amount = Utils.Remap(ProjectileTimer - ProjSpawnStartTime, 0, TimeUtils.SecondsToTicks(1) * 1.25f, 0, 1);
+				amount = Easings.PowIn(amount, 1.75f);
+				return Math.Abs(MathHelper.SmoothStep(NPC.velocity.X, 0, amount));
+			}
+			else if (SpawnEnergyBall || HoldingEnergyBall)
+			{
+				return 0.5f;
+			}
+			return defaultSpeed;
 		}
-		else if (ProjectileTimer < TimeUtils.SecondsToTicks(10))
+	}
+	public override float Acceleration => 0.3f;
+	public override bool CanOpenDoors => DefaultMovement;
+
+
+	public int ProjSpawnStartTime = TimeUtils.SecondsToTicks(8);
+	public int ProjSpawnTime = TimeUtils.SecondsToTicks(10);
+	public bool DefaultMovement => ProjectileTimer < ProjSpawnStartTime;
+	public bool Stationary => !DefaultMovement && ProjectileTimer < ProjSpawnTime;
+	public bool SpawnEnergyBall => ProjectileTimer == ProjSpawnTime;
+	public bool HoldingEnergyBall => ProjectileTimer > ProjSpawnTime && ProjectileTimer < TimeUtils.SecondsToTicks(14);
+	public bool ResetToDefault => ProjectileTimer >= TimeUtils.SecondsToTicks(14);
+	private float ProjectileTimer;
+	public override void SendExtraAI(BinaryWriter writer)
+	{
+		base.SendExtraAI(writer);
+		writer.Write(ProjectileTimer);
+	}
+	public override void ReceiveExtraAI(BinaryReader reader)
+	{
+		base.ReceiveExtraAI(reader);
+		ProjectileTimer = reader.ReadSingle();
+	}
+	public override void CustomBehavior()
+	{
+		ProjectileTimer++;
+		if (Stationary)
 		{
 			NPC.direction = NPC.oldDirection;
-			float amount = Utils.Remap(ProjectileTimer - ProjSpawnStartTime, 0, TimeUtils.SecondsToTicks(1) * 1.25f, 0, 1);
-			amount = Easings.PowIn(amount, 1.75f);
-			NPC.velocity.X = MathF.Abs(MathHelper.SmoothStep(NPC.velocity.X, 0, amount)) * NPC.direction;
-			NPC.ai[3] = 1;
+			RunningModeTimer = 0;
 		}
-		else if (ProjectileTimer == TimeUtils.SecondsToTicks(10))
+		else if (SpawnEnergyBall)
 		{
+			RunningMode = 0;
 			Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Bottom - new Vector2(0, 20 * NPC.scale + NPC.height * NPC.scale - Main.NPCAddHeight(NPC) - NPC.gfxOffY), Vector2.Zero, ModContent.ProjectileType<RobotEnergyBall>(), 220, 0, ai1: NPC.whoAmI);
 		}
-		else if (ProjectileTimer < TimeUtils.SecondsToTicks(14))
-		{
-			NPC.velocity.X = MathF.Min(0.5f, MathF.Abs(NPC.velocity.X)) * MathF.Sign(NPC.velocity.X);
-		}
-		else if (ProjectileTimer >= TimeUtils.SecondsToTicks(14))
+		else if (ResetToDefault)
 		{
 			ProjectileTimer = 0;
 		}
 
 		Lighting.AddLight(NPC.Center, 0.12f, 0.105f, 0);
 	}
-	public bool IsOnGround() => NPC.velocity.Y == 0f && NPC.collideY;
+	public override void Jump(float height)
+	{
+		if (DefaultMovement)
+		{
+			base.Jump(height);
+		}
+	}
 	public override void FindFrame(int frameHeight)
 	{
 		if (NPC.velocity.Y == 0f)

@@ -61,7 +61,8 @@ public abstract class CustomFighterAI : ModNPC
 	private float jumpdelay = 3;
 	public override void AI()
 	{
-		Player player = Main.player[NPC.FindClosestPlayer()];
+		NPC.TargetClosest(false);
+		Player player = Main.player[NPC.target];
 		float distanceBetweenPlayer = Vector2.Distance(player.Center, NPC.Center);
 		float dir;
 
@@ -272,7 +273,7 @@ public abstract class CustomFighterAI : ModNPC
 		}
 		CustomBehavior();
 	}
-	public void Jump(float height)
+	public virtual void Jump(float height)
 	{
 		
 		//do the jump, if the height is higher than the maxjump then just set it to maxjumpheight
