@@ -66,27 +66,8 @@ public abstract class CustomFighterAI : ModNPC
 		float distanceBetweenPlayer = Vector2.Distance(player.Center, NPC.Center);
 		float dir;
 
-		// if confused and the buff has more than 1 tick left on it, set RunningMode to 1 (running away)
-		// if confused and buff has exactly 1 tick left, set RunningMode to 0 (targeting the closest player)
-		if (NPC.confused)
-		{
-			int bindex = NPC.FindBuffIndex(BuffID.Confused);
-			if (bindex > -1)
-			{
-				if (NPC.buffTime[bindex] > 1)
-				{
-					RunningMode = 1;
-					NumJumps = 0;
-				}
-				else if (NPC.buffTime[bindex] == 1)
-				{
-					RunningMode = 0;
-					NumJumps = 0;
-				}
-			}
-		}
 		// set running mode to 0 if just hit
-		if (!NPC.confused && NPC.justHit)
+		if (NPC.justHit)
 		{
 			RunningMode = 0;
 			NumJumps = 0;
@@ -113,6 +94,19 @@ public abstract class CustomFighterAI : ModNPC
 		float upOrDown = NPC.Center.Y - player.Center.Y;
 
 		dir = Math.Sign(dir);
+
+		// if confused and the buff has more than 1 tick left on it, invert movement direction
+		if (NPC.confused)
+		{
+			int bindex = NPC.FindBuffIndex(BuffID.Confused);
+			if (bindex > -1)
+			{
+				if (NPC.buffTime[bindex] > 1)
+				{
+					dir = -dir;
+				}
+			}
+		}
 
 		//movement stuff you don't need to worry about... unless you do then just figure it out lol
 		float moveSpeedMulti;
@@ -158,7 +152,7 @@ public abstract class CustomFighterAI : ModNPC
 			}
 		}
 		// increment running mode timer
-		if (RunningMode == 1 && !NPC.confused)
+		if (RunningMode == 1)
 		{
 			RunningModeTimer++;
 			if (RunningModeTimer > TimeBeforeTurningAround && NPC.collideY)
@@ -210,7 +204,7 @@ public abstract class CustomFighterAI : ModNPC
 				{
 					// swap the running mode and set num jumps to 0
 					if (RunningMode == 0) RunningMode = 1;
-					else if (RunningMode == 1) RunningMode = 0;
+					else if (RunningMode == 1) PreviousDirection = -PreviousDirection;
 					NumJumps = 0;
 				}
 			}

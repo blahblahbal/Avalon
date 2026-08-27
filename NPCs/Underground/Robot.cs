@@ -73,6 +73,7 @@ public class Robot : CustomFighterAI
 	}
 	public override float Acceleration => 0.3f;
 	public override bool CanOpenDoors => DefaultMovement;
+	public override int TimeBeforeTurningAround => TimeUtils.SecondsToTicks(5);
 
 
 	public int ProjSpawnStartTime = TimeUtils.SecondsToTicks(8);
