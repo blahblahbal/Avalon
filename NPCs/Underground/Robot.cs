@@ -94,18 +94,31 @@ public class Robot : CustomFighterAI
 		base.ReceiveExtraAI(reader);
 		ProjectileTimer = reader.ReadSingle();
 	}
+	public Vector2 GetProjectileSpawnPos()
+	{
+		return NPC.Bottom - new Vector2(0, 20 * NPC.scale + NPC.height * NPC.scale - Main.NPCAddHeight(NPC) - NPC.gfxOffY);
+	}
 	public override void CustomBehavior()
 	{
 		ProjectileTimer++;
 		if (Stationary)
 		{
+			float chargeUp = Utils.Remap(ProjectileTimer - ProjSpawnStartTime, 0, ProjSpawnTime - ProjSpawnStartTime, 0, 1);
+			chargeUp = Easings.PowIn(chargeUp, 0.75f);
+			if (Main.rand.NextBool((int)(chargeUp * 10), 40))
+			{
+				Vector2 size = ContentSamples.ProjectilesByType[ModContent.ProjectileType<RobotEnergyBall>()].Size * NPC.scale;
+				Dust d = Dust.NewDustDirect(GetProjectileSpawnPos() - size / 2f + NPC.velocity, (int)size.X, (int)size.Y / 2, DustID.Electric);
+				d.noGravity = !Main.rand.NextBool(4);
+				d.scale = 0.75f;
+			}
 			NPC.direction = NPC.oldDirection;
 			RunningModeTimer = 0;
 		}
 		else if (SpawnEnergyBall)
 		{
 			RunningMode = 0;
-			Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Bottom - new Vector2(0, 20 * NPC.scale + NPC.height * NPC.scale - Main.NPCAddHeight(NPC) - NPC.gfxOffY), Vector2.Zero, ModContent.ProjectileType<RobotEnergyBall>(), 220, 0, ai1: NPC.whoAmI);
+			Projectile.NewProjectile(NPC.GetSource_FromAI(), GetProjectileSpawnPos(), Vector2.Zero, ModContent.ProjectileType<RobotEnergyBall>(), 220, 0, ai1: NPC.whoAmI);
 		}
 		else if (ResetToDefault)
 		{
