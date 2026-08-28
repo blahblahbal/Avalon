@@ -27,7 +27,7 @@ public class IridiumLongbowHeld : LongbowTemplate
 			for (int i = 0; i < 3; i++)
 			{
 				var p = VanillaParticles.RequestPrettySparkleParticle();
-				p.ColorTint = new Color(Main.rand.NextFloat(0.6f, 0.8f), 1f, 0.6f, 0f);
+				p.ColorTint = Color.SandyBrown;
 				p.FadeInEnd = Main.rand.NextFloat(2, 5);
 				p.FadeOutStart = p.FadeInEnd;
 				p.FadeOutEnd = Main.rand.NextFloat(13, 18);
