@@ -1,8 +1,7 @@
 ﻿using Avalon.Common;
-using Avalon.Core;
+using Avalon.Data.Sets;
 using Avalon.Dusts;
 using Avalon.Items.Weapons.Melee.Swords;
-using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -17,6 +16,10 @@ namespace Avalon.Projectiles.Melee.Swords;
 
 public class IridiumGreatswordSwing : ModProjectile
 {
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.TrueMeleeProjectiles[Type] = true;
+	}
 	public override string Texture => ModContent.GetInstance<IridiumGreatsword>().Texture;
 	public override void SetDefaults()
 	{

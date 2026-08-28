@@ -1,4 +1,5 @@
 ﻿using Avalon.Common.Interfaces;
+using Avalon.Data.Sets;
 using Avalon.Items.Weapons.Melee.Shortswords;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
@@ -18,6 +19,11 @@ public class FeroziumIceswordProj : ModProjectile, ISyncedOnHitEffect
 {
 	public override string Texture => ModContent.GetInstance<FeroziumIceSword>().Texture;
 	public override LocalizedText DisplayName => ModContent.GetInstance<FeroziumIceSword>().DisplayName;
+
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.TrueMeleeProjectiles[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Projectile.CloneDefaults(ProjectileID.GoldShortswordStab);
