@@ -165,7 +165,7 @@ public abstract class MaceTemplate : ModProjectile
 		float curRotProgress = 1f - Projectile.timeLeft / InitialTimeLeft;
 		float easedRotProgress = EasingFunc.Invoke(curRotProgress);
 
-		Vector2 HandPosition = Owner.RotatedRelativePoint(Owner.MountedCenter) + new Vector2(Owner.direction * -4f, 0);
+		Vector2 HandPosition = Owner.RotatedRelativePoint(Owner.MountedCenter.Floor()) + new Vector2(Owner.direction * -4f, 0);
 		float initialRotOffset = StartRotationLimit.HasValue ? Math.Clamp(MaxRotation * 0.5f, 0, StartRotationLimit.Value) : MaxRotation * 0.5f;
 		Projectile.Center = HandPosition + (AngleToMouse.ToRotationVector2() * swingRadius * Projectile.scale).RotatedBy((MaxRotation * easedRotProgress - initialRotOffset) * Owner.direction * SwingDirection * Owner.gravDir);
 
@@ -206,6 +206,16 @@ public abstract class MaceTemplate : ModProjectile
 		Vector2 drawPos = Projectile.Center - Main.screenPosition;
 		Vector2 offset = new((float)(TextureAssets.Projectile[Type].Width() * ScaleMult * 0.25f) - VisualOffset.X, -(float)(TextureAssets.Projectile[Type].Height() * ScaleMult * 0.25f) - VisualOffset.Y);
 
+		//(SpriteEffects spriteDirection, float rotationFlip, Vector2 offset) spriteEffectsTuple;
+		//if (Owner.direction == Math.Sign(Projectile.ai[0]))
+		//{
+		//	spriteEffectsTuple = SpriteEffectsFunc.Invoke((SpriteEffects.None, 0f, offset));
+		//}
+		//else
+		//{
+		//	offset = new Vector2(-offset.X, offset.Y);
+		//	spriteEffectsTuple = SpriteEffectsFunc.Invoke((SpriteEffects.FlipHorizontally, MathHelper.PiOver2, offset));
+		//}
 		(SpriteEffects spriteDirection, float rotationFlip, Vector2 offset) spriteEffectsTuple = SpriteEffectsFunc.Invoke((SpriteEffects.None, 0f, offset));
 
 		if (TrailLength > 0)
@@ -222,7 +232,7 @@ public abstract class MaceTemplate : ModProjectile
 				{
 					drawPosOld = (HandPosition - Main.screenPosition) + ((Projectile.oldRot[i] - MathHelper.PiOver4).ToRotationVector2() * (Projectile.Center - HandPosition).Length());
 				}
-				Main.EntitySpriteDraw(TrailTextures[Type].Value, drawPosOld, frame, (TrailColor ?? lightColor) * (1 - ((float)i / (Projectile.oldPos.Length - 1))) * 0.25f, Projectile.oldRot[i] + spriteEffectsTuple.rotationFlip, frame.Size() / 2f + spriteEffectsTuple.offset, Projectile.scale, spriteEffectsTuple.spriteDirection);
+				Main.EntitySpriteDraw(TrailTextures[Type].Value, drawPosOld, frame, (TrailColor ?? lightColor * 0.25f) * (1 - ((float)i / (Projectile.oldPos.Length - 1))), Projectile.oldRot[i] + spriteEffectsTuple.rotationFlip, frame.Size() / 2f + spriteEffectsTuple.offset, Projectile.scale, spriteEffectsTuple.spriteDirection);
 			}
 		}
 		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos, frame, lightColor, Projectile.rotation + spriteEffectsTuple.rotationFlip, frame.Size() / 2f + spriteEffectsTuple.offset, Projectile.scale, spriteEffectsTuple.spriteDirection);

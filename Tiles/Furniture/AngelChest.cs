@@ -8,7 +8,6 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Avalon.Buffs.AdvancedBuffs;
-using ThoriumMod.Projectiles;
 using Terraria.GameContent;
 using Avalon.Systems;
 

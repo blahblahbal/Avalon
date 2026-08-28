@@ -1,5 +1,6 @@
 ﻿using Avalon.Common.Interfaces;
 using Avalon.Common.Players;
+using Avalon.Data.Sets;
 using Avalon.Dusts;
 using Avalon.Items.Weapons.Melee.Swords;
 using Avalon.Particles;
@@ -16,6 +17,11 @@ namespace Avalon.Projectiles.Melee.Swords;
 
 public class SoulEdgeDash : ModProjectile, ISyncedOnHitEffect
 {
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.TrueMeleeProjectiles[Type] = true;
+	}
+
 	private const int initialTimeLeft = 20;
 	public override void SetDefaults()
 	{

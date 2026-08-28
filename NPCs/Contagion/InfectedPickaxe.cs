@@ -1,3 +1,4 @@
+using Avalon.Items.Banners;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -42,10 +43,10 @@ public class InfectedPickaxe : ModNPC
         NPC.knockBackResist = 0.5f;
         NPC.HitSound = SoundID.NPCHit4;
         NPC.DeathSound = SoundID.NPCDeath6;
-		//Banner = NPC.type;
-		//BannerItem = ModContent.ItemType<IrateBonesBanner>();
+		Banner = NPC.type;
+		BannerItem = ModContent.ItemType<InfectedPickaxeBanner>();
 		DrawOffsetY = 16;
-		SpawnModBiomes = new int[] { ModContent.GetInstance<Biomes.UndergroundContagion>().Type };
+		SpawnModBiomes = [ModContent.GetInstance<Biomes.UndergroundContagion>().Type];
 	}
 
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry) =>
@@ -81,7 +82,11 @@ public class InfectedPickaxe : ModNPC
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo) => Main.hardMode && spawnInfo.Player.InModBiome<Biomes.UndergroundContagion>()
         ? 0.2f : 0f;
-    public override void ModifyNPCLoot(NPCLoot npcLoot) => npcLoot.Add(ItemDropRule.Common(ItemID.Nazar, 75));
+	public override void ModifyNPCLoot(NPCLoot npcLoot)
+	{
+		npcLoot.Add(ItemDropRule.Common(ItemID.MeatGrinder, 200));
+		npcLoot.Add(ItemDropRule.StatusImmunityItem(ItemID.Nazar, 100));
+	}
     public override void HitEffect(NPC.HitInfo hit)
     {
         if (NPC.life > 0)

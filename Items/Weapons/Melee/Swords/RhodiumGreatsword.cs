@@ -21,7 +21,7 @@ public class RhodiumGreatsword : ModItem, IItemWithReleaseButtonMidSwingEffect
 	}
 	public override void SetDefaults()
 	{
-		Item.DefaultToSword(40, 5f, 35, crit: 6, useTurn: false);
+		Item.DefaultToSword(30, 5f, 35, crit: 6, useTurn: false);
 		Item.rare = ItemRarityID.Orange;
 		Item.value = Item.sellPrice(0, 1);
 		Item.scale = 1.2f;
@@ -45,7 +45,7 @@ public class RhodiumGreatsword : ModItem, IItemWithReleaseButtonMidSwingEffect
 	}
 	public override float UseSpeedMultiplier(Player player)
 	{
-		return Utils.Remap(MathF.Pow(player.GetModPlayer<RhodiumGreatswordPlayer>().Power / (float)RhodiumGreatswordPlayer.maxPower,1.4f),0,1,0.7f,2.3f);
+		return Utils.Remap(MathF.Pow(player.GetModPlayer<RhodiumGreatswordPlayer>().Power / (float)RhodiumGreatswordPlayer.maxPower,1.4f),0,1,1f,1.975f);
 	}
 	public override void ModifyWeaponDamage(Player player, ref StatModifier damage)
 	{

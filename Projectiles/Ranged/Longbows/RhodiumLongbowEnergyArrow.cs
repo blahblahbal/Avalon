@@ -66,7 +66,9 @@ public class RhodiumLongbowEnergyArrow : ModProjectile
 	}
 	public override bool? CanHitNPC(NPC target)
 	{
-		return Projectile.ai[0] > 0;
+		if (Projectile.ai[0] < 0)
+			return false;
+		return null;
 	}
 	public override bool ShouldUpdatePosition()
 	{

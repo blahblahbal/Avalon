@@ -10,7 +10,7 @@ public class Boomlash : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToMagicWeaponChanneled(ModContent.ProjectileType<BoomlashProj>(), 80, 12f, 40, 4f, 30);
+		Item.DefaultToMagicWeaponChanneled(ModContent.ProjectileType<BoomlashProj>(), 120, 12f, 40, 4f, 30);
 		Item.rare = ModContent.RarityType<Rarities.BlueRarity>();
 		Item.value = Item.sellPrice(0, 15);
 		Item.UseSound = SoundID.Item20;

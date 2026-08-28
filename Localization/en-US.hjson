@@ -459,6 +459,7 @@ Mods: {
 			Acid_2: "{0}'s meat fell off the bone."
 			Acid_3: "{0} did the wrong acid."
 			Acid_4: "{0} dipped the wrong thing in acid."
+			OsmiumSetBonus: "{0} buckled under their own weight."
 		}
 
 		GameTips: {
@@ -532,6 +533,8 @@ Mods: {
 			SicklyVulture: A vulture afflicted by the Contagion, its cells have been mutated by the rampaging virus.
 			Undine: Previous inhabitants of the dungeon that lost their bodies before their reanimation, their souls latched to and animated water. Their minds were kept more intact that their skeleton friends and family.
 			AngryFairy: These stronger fairies have been tasked with protecting the forest. They do not appreciate your deforestation.
+			BloodGusher: A fully grown crimera, its hunger is so unrelenting that it can't finish its meal before trying to dine on the next.
+			Snotslime: A slime filled with various diseases that works to spread the contagion. It has gained a very sticky composition.
 		}
 
 		Keybinds: {
@@ -632,13 +635,22 @@ Mods: {
 				Double tap {0} to activate Caesium Boosting stance
 				This stance reduces movement speed and increases damage and damage reduction
 				'''
-			Rhodium: 9% increased damage
+			Rhodium:
+				'''
+				{$CommonItemTooltip.Whips}
+				All non-summon attacks apply 4 summon tag damage
+				Tagged enemies have a chance to drop mana stars when hit by summons
+				'''
 			Bismuth: 4 defense
 			OneDef: 1 defense
 			TwoDef: 2 defense
 			ThreeDef: 3 defense
-			Iridium: 9% increased critical strike chance
-			Osmium: 5 defense
+			Iridium:
+				'''
+				Damage increases as mana lowers
+				Non-magic and Non-summon damage steal mana
+				'''
+			Osmium: A portion of damage taken is converted to damage over time
 			Robe1: 10% increased magic critical strike chance
 			Robe2: Increases maximum mana by 60
 			ResistantWood: 10 armor penetration and reduces damage taken by 10%
@@ -1339,7 +1351,11 @@ Mods: {
 
 			MinersSword: {
 				DisplayName: Miner's Sword
-				Tooltip: ""
+				Tooltip:
+					'''
+					Charges up damage when not being swung
+					Guaranteed critical strikes when falling
+					'''
 			}
 
 			PointingLaser: {
@@ -2134,19 +2150,24 @@ Mods: {
 				DisplayName: Osmium Helmet
 				Tooltip:
 					'''
-					12% increased ranged damage
-					Increases maximum mana by 40
+					12% increased damage
+					Increased life regeneration
+					Increases maximum mana by 60
 					'''
 			}
 
 			OsmiumJerkin: {
 				DisplayName: Osmium Jerkin
-				Tooltip: 12% increased melee damage and speed
+				Tooltip:
+					'''
+					15% increased knockback
+					30% increased melee weapon scale and whip range
+					'''
 			}
 
 			OsmiumTreads: {
 				DisplayName: Osmium Treads
-				Tooltip: 12% increased magic damage
+				Tooltip: "{$ItemTooltip.FrogLeg}"
 			}
 
 			OsmiumHamaxe: {
@@ -2173,57 +2194,57 @@ Mods: {
 				DisplayName: Rhodium Headgear
 				Tooltip:
 					'''
-					14% increased ranged damage
-					Increases maximum mana by 40
+					10% increased critical strike chance
+					10% reduced mana cost
 					'''
 			}
 
 			RhodiumPlateMail: {
 				DisplayName: Rhodium Plate Mail
-				Tooltip: 14% increased melee damage and speed
+				Tooltip: 14% increased melee speed
 			}
 
 			RhodiumGreaves: {
 				DisplayName: Rhodium Greaves
-				Tooltip: 14% increased magic damage
+				Tooltip: 30% increased move speed
 			}
 
 			AncientTitaniumHeadgear: {
 				DisplayName: Ancient Titanium Headgear
-				Tooltip:
-					'''
-					14% increased ranged damage
-					Increases maximum mana by 40
-					'''
+				Tooltip: "{$Mods.Avalon.Items.RhodiumHeadgear.Tooltip}"
 			}
 
 			AncientTitaniumPlateMail: {
 				DisplayName: Ancient Titanium Plate Mail
-				Tooltip: 14% increased melee damage and speed
+				Tooltip: "{$Mods.Avalon.Items.RhodiumPlateMail.Tooltip}"
 			}
 
 			AncientTitaniumGreaves: {
 				DisplayName: Ancient Titanium Greaves
-				Tooltip: 14% increased magic damage
+				Tooltip: "{$Mods.Avalon.Items.RhodiumGreaves.Tooltip}"
 			}
 
 			IridiumHat: {
 				DisplayName: Iridium Hat
-				Tooltip: 11% increased ranged damage
+				Tooltip:
+					'''
+					10% increased critical strike chance
+					20% reduced mana cost
+					'''
 			}
 
 			IridiumPlateMail: {
 				DisplayName: Iridium Plate Mail
-				Tooltip: 11% increased melee damage and speed
+				Tooltip:
+					'''
+					15% increased melee speed
+					+2 summon tag damage 
+					'''
 			}
 
 			IridiumPants: {
 				DisplayName: Iridium Pants
-				Tooltip:
-					'''
-					11% increased magic damage
-					Increases maximum mana by 40
-					'''
+				Tooltip: 30% increased move speed
 			}
 
 			BloodshotLens: {
@@ -3351,7 +3372,7 @@ Mods: {
 
 			IridiumGreatsword: {
 				DisplayName: Iridium Greatsword
-				Tooltip: ""
+				Tooltip: Charges up a series of explosions
 			}
 
 			RhodiumGreatsword: {
@@ -3975,7 +3996,7 @@ Mods: {
 				DisplayName: Devil's Scythe
 				Tooltip:
 					'''
-					Casts an Infernal Judegement Scythe
+					Casts an Infernal Judgment Scythe
 					Enemies become vulnerable to debuffs
 					'''
 			}
@@ -7899,9 +7920,13 @@ Mods: {
 				Tooltip: A magical explosion that will not destroy tiles
 			}
 
-			HallowedGreatsword: {
-				DisplayName: Hallowed Claymore
-				Tooltip: Ignores 15 points of enemy defense
+			TwistedClaymore: {
+				DisplayName: Twisted Claymore
+				Tooltip:
+					'''
+					Applies a stacking slow
+					Explodes at max stacks
+					'''
 			}
 
 			GiantGravestone: {
@@ -8964,7 +8989,7 @@ Mods: {
 
 			FeroziumIceSword: {
 				DisplayName: Ferozium Icesword
-				Tooltip: ""
+				Tooltip: Refreshes extra jumps on enemy hit
 			}
 
 			SpiritPoppy: {
@@ -9265,7 +9290,11 @@ Mods: {
 
 			Hellrazer: {
 				DisplayName: Hellrazer
-				Tooltip: Musket Balls turn into Explosive rounds
+				Tooltip:
+					'''
+					Uses stakes as ammo
+					Shoots molten stakes that cause a chain of explosions
+					'''
 			}
 
 			UnderworldChest: {
@@ -10138,6 +10167,21 @@ Mods: {
 				DisplayName: Zapshock
 				Tooltip: ""
 			}
+
+			BloodGusherBanner: {
+				DisplayName: Blood Gusher Banner
+				Tooltip: ""
+			}
+
+			SnotslimeBanner: {
+				DisplayName: Snotslime Banner
+				Tooltip: ""
+			}
+
+			InfectedPickaxeBanner: {
+				DisplayName: Infected Pickaxe Banner
+				Tooltip: ""
+			}
 		}
 
 		InfoDisplays: {
@@ -10399,6 +10443,15 @@ Mods: {
 			EnergyBall.DisplayName: Energy Ball
 			UndineTear.DisplayName: Undine Tear
 			ZapshockProjectile.DisplayName: Zapshock Projectile
+			BloodgusherBlood.DisplayName: Bloodgusher Blood
+			RobotEnergyBall.DisplayName: Robot Energy Ball
+			IridiumGreatswordSwing.DisplayName: Iridium Greatsword Swing
+			IridiumGreatswordBoomLarge.DisplayName: Iridium Greatsword Boom Large
+			IridiumGreatswordBoomMedium.DisplayName: Iridium Greatsword Boom Medium
+			IridiumGreatswordBoomSmall.DisplayName: Iridium Greatsword Boom Small
+			HellrazerStake.DisplayName: Hellrazer Stake
+			HellrazerStakeExplosion.DisplayName: Hellrazer Stake Explosion
+			BoomlashSeed.DisplayName: Boomlash Seed
 		}
 
 		NPCs: {
@@ -10874,6 +10927,10 @@ Mods: {
 			DyeSlime.DisplayName: Dye Slime
 			Undine.DisplayName: Wailing Undine
 			AngryFairy.DisplayName: Angry Fairy
+			BloodGusher.DisplayName: Blood Gusher
+			Robot.DisplayName: Robot
+			Snotslime.DisplayName: Snotslime
+			Target.DisplayName: Target
 		}
 
 		Buffs: {
@@ -11699,6 +11756,16 @@ Mods: {
 			AttackSpeedDown: {
 				DisplayName: Attack Speed Down
 				Description: Attack speed is decreased
+			}
+
+			TwistedClaymoreDebuff: {
+				DisplayName: Twisted Claymore Debuff
+				Description: Mods.Avalon.Buffs.TwistedClaymoreDebuff.Description
+			}
+
+			RhodiumTag: {
+				DisplayName: Rhodium Tag
+				Description: Mods.Avalon.Buffs.RhodiumTag.Description
 			}
 		}
 

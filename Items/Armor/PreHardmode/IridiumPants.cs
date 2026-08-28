@@ -1,5 +1,6 @@
 using Avalon.Common.Extensions;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -16,8 +17,11 @@ public class IridiumPants : ModItem
 	}
 	public override void UpdateEquip(Player player)
 	{
-		player.GetDamage(DamageClass.Magic) += 0.11f;
-		player.statManaMax2 += 40;
+		player.moveSpeed += 0.3f;
+	}
+	public override bool ModifyEquipTextureDraw(ref PlayerDrawSet drawInfo, ref DrawData drawData, EquipTexture equipTexture, string methodName)
+	{
+		return ModContent.GetInstance<IridiumHat>().ModifyEquipTextureDraw(ref drawInfo, ref drawData, equipTexture, methodName);
 	}
 	public override void AddRecipes()
 	{

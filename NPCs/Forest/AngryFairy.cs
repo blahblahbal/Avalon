@@ -36,6 +36,7 @@ public class AngryFairy : ModNPC
 	{
 		bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 		{
+			BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 			new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.AngryFairy"))
 		});
 	}
@@ -62,7 +63,7 @@ public class AngryFairy : ModNPC
 	}
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
-		return spawnInfo.Player.ZoneForest ? ModContent.GetInstance<BiomeTileCounts>().Trees > 170 ? 0.05f : 0.2f : 0f;
+		return spawnInfo.Player.ZoneForest ? ModContent.GetInstance<BiomeTileCounts>().Trees > 170 ? 0.025f : 0.1f : 0f;
 	}
 	public override void FindFrame(int frameHeight)
 	{

@@ -1,3 +1,4 @@
+using Avalon.Buffs.Debuffs;
 using Avalon.Common.Extensions;
 using Terraria;
 using Terraria.ID;
@@ -28,12 +29,56 @@ public class RhodiumHeadgear : ModItem
 	public override void UpdateArmorSet(Player player)
 	{
 		player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Rhodium");
-		player.GetDamage(DamageClass.Generic) += 0.09f;
+		player.GetModPlayer<RhodiumSetBonusPlayer>().Active = true;
 	}
 
 	public override void UpdateEquip(Player player)
 	{
-		player.statManaMax2 += 40;
-		player.GetDamage(DamageClass.Ranged) += 0.14f;
+		player.GetCritChance(DamageClass.Generic) += 10;
+		player.manaCost -= 0.1f;
+	}
+}
+public class RhodiumSetBonusPlayer : ModPlayer
+{
+	public bool Active = false;
+	public override void ResetEffects()
+	{
+		Active = false;
+	}
+	private void ApplyTag(NPC target)
+	{
+		target.AddBuff(ModContent.BuffType<RhodiumTag>(), 240);
+		Player.MinionAttackTargetNPC = target.whoAmI;
+	}
+	private void ApplyDamage(NPC target, float multiplier, ref NPC.HitModifiers modifiers)
+	{
+		if (target.HasBuff<RhodiumTag>())
+		{
+			modifiers.FlatBonusDamage += 4 * multiplier;
+			if (Main.rand.NextBool(8))
+			{
+				int i = Item.NewItem(target.GetSource_OnHit(target), target.Hitbox, ItemID.Star, 1, true, 0, false);
+				Main.item[i].velocity += Main.rand.NextVector2Circular(5, 2);
+				if (Main.netMode == NetmodeID.MultiplayerClient)
+					NetMessage.SendData(MessageID.SyncItem, -1, -1, null, i, 1f);
+			}
+			target.RequestBuffRemoval(ModContent.BuffType<RhodiumTag>());
+		}
+	}
+	public override void ModifyHitNPCWithProj(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
+	{
+		if (projectile.npcProj || projectile.trap)
+			return;
+		if (!projectile.IsMinionOrSentryRelated && Active)
+		{
+			ApplyTag(target);
+			return;
+		}
+		ApplyDamage(target, ProjectileID.Sets.SummonTagDamageMultiplier[projectile.type], ref modifiers);
+	}
+	public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
+	{
+		if(Active)
+			ApplyTag(target);
 	}
 }

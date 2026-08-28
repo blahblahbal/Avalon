@@ -1,4 +1,3 @@
-using MagicStorage;
 using Microsoft.Xna.Framework;
 using System.IO;
 using Terraria;
@@ -12,7 +11,10 @@ public class AvalonGlobalNPCInstance : GlobalNPC
 {
     public override bool InstancePerEntity => true;
 
-	public float Speed;
+	/// <summary>
+	/// Multiply this by how much you want to multiply the speed by, do not subtract for the sake of consistency (and it also breaks if it goes <= 0)
+	/// </summary>
+	public float Speed = 1;
 	public float[] SpeedUpdateCount = new float[2];
 	public bool AstigSpawned { get; set; }
     public int LacerateStacks { get; set; } = 1;
@@ -50,7 +52,6 @@ public class AvalonGlobalNPCInstance : GlobalNPC
 		On_NPC.FindFrame += On_NPC_FindFrame;
 		On_NPC.UpdateCollision += On_NPC_UpdateCollision;
 	}
-
 	private void On_NPC_UpdateCollision(On_NPC.orig_UpdateCollision orig, NPC self)
 	{
 		var gNPC = self.GetGlobalNPC<AvalonGlobalNPCInstance>();
@@ -97,7 +98,6 @@ public class AvalonGlobalNPCInstance : GlobalNPC
 		}
 		if (self.noTileCollide)
 		{
-			//self.velocity /= gNPC.Speed;
 			self.position += self.velocity * (gNPC.Speed - 1f);
 		}
 	}

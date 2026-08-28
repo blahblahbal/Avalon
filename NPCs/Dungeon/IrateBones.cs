@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Items.Banners;
 using Avalon.NPCs.Template;
 using Microsoft.Xna.Framework;
@@ -133,6 +134,8 @@ public class IrateBones : CustomFighterAI
 
 		Rectangle angryFrame = (int)(Main.timeForVisualEffects / 15) % 2 == 0 ? new Rectangle(66, 4, 10, 10) : new Rectangle(78, 2, 14, 14);
 		spriteBatch.Draw(Extra.Value, NPC.Bottom - screenPos + offset + new Vector2(NPC.spriteDirection * -8, -42), angryFrame, actualDrawColor with { A = 64}, (float)Math.Sin(Main.timeForVisualEffects * 0.1f) * 0.1f, angryFrame.Size() / 2, NPC.scale, effect, 0);
+
+		NPC.DrawConfusionIcon(screenPos);
 		return false;
 	}
     public override float SpawnChance(NPCSpawnInfo spawnInfo) => Main.hardMode && spawnInfo.Player.ZoneDungeon

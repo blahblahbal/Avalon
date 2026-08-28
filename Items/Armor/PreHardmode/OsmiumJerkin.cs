@@ -1,4 +1,5 @@
 using Avalon.Common.Extensions;
+using Avalon.Common.Players;
 using Avalon.Items.Material.Bars;
 using Terraria;
 using Terraria.ID;
@@ -17,8 +18,9 @@ public class OsmiumJerkin : ModItem
 	}
 	public override void UpdateEquip(Player player)
 	{
-		player.GetDamage(DamageClass.Melee) += 0.12f;
-		player.GetAttackSpeed(DamageClass.Melee) += 0.12f;
+		player.GetKnockback(DamageClass.Generic) += 0.15f;
+		player.GetModPlayer<AvalonPlayer>().MeleeScale += 0.3f;
+		player.whipRangeMultiplier += 0.3f;
 	}
 	public override void AddRecipes()
 	{

@@ -44,3 +44,6 @@ public class BoneFishBanner() : BannerItem(30);
 public class ShadlopodBanner() : BannerItem(31);
 public class UndineBanner() : BannerItem(32);
 public class AngryFairyBanner() : BannerItem(33);
+public class BloodGusherBanner() : BannerItem(34);
+public class SnotslimeBanner() : BannerItem(35);
+public class InfectedPickaxeBanner() : BannerItem(36);

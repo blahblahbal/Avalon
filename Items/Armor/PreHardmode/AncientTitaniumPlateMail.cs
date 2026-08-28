@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Armor.PreHardmode;
 
 [AutoloadEquip(EquipType.Body)]
-public class AncientTitaniumPlateMail : ModItem
+public class AncientTitaniumPlateMail : RhodiumPlateMail
 {
 	public override void SetDefaults()
 	{
@@ -14,10 +14,8 @@ public class AncientTitaniumPlateMail : ModItem
 		Item.rare = ItemRarityID.Orange;
 		Item.value = Item.sellPrice(0, 2);
 	}
-
-	public override void UpdateEquip(Player player)
+	public override void AddRecipes()
 	{
-		player.GetDamage(DamageClass.Melee) += 0.14f;
-		player.GetAttackSpeed(DamageClass.Melee) += 0.14f;
+		base.AddRecipes();
 	}
 }

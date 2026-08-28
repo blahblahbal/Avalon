@@ -11,11 +11,6 @@ namespace Avalon.Common.Templates;
 
 public abstract class SpearTemplate : ModProjectile // Thanks example mod ! ! ! 
 {
-	private static Asset<Texture2D> texture;
-	public override void Load()
-	{
-		texture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/Sparkly");
-	}
 	public override void SetDefaults()
     {
         Projectile.CloneDefaults(ProjectileID.Spear);
@@ -76,6 +71,7 @@ public abstract class SpearTemplate : ModProjectile // Thanks example mod ! ! !
     }
     public void DrawPointyStabbyLight(int Intensity, Color color, Vector2 Scale, Vector2 Offset)
     {
+		var texture = TextureAssets.Extra[ExtrasID.ThePerfectGlow];
         Offset = Offset.RotatedBy(Projectile.rotation);
         Offset.X *= -Projectile.direction;
         Player player = Main.player[Projectile.owner];

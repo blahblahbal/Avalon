@@ -1,5 +1,8 @@
 using Avalon.Common.Extensions;
+using Avalon.Common.Players;
+using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -16,8 +19,12 @@ public class IridiumPlateMail : ModItem
 	}
 	public override void UpdateEquip(Player player)
 	{
-		player.GetDamage(DamageClass.Melee) += 0.11f;
-		player.GetAttackSpeed(DamageClass.Melee) += 0.11f;
+		player.GetAttackSpeed(DamageClass.Melee) += 0.15f;
+		player.GetModPlayer<AvalonPlayer>().BonusTagDamage += 2;
+	}
+	public override bool ModifyEquipTextureDraw(ref PlayerDrawSet drawInfo, ref DrawData drawData, EquipTexture equipTexture, string methodName)
+	{
+		return ModContent.GetInstance<IridiumHat>().ModifyEquipTextureDraw(ref drawInfo, ref drawData, equipTexture, methodName);
 	}
 	public override void AddRecipes()
 	{

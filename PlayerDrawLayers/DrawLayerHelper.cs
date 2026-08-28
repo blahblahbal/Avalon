@@ -10,7 +10,7 @@ namespace Avalon.PlayerDrawLayers
 {
 	public class DrawLayerHelper : ModSystem
 	{
-		public delegate void DrawSittingLegsDelegate(ref PlayerDrawSet drawinfo, Texture2D textureToDraw, Color matchingColor, int shaderIndex = 0, bool glowmask = false);
+		public delegate void DrawSittingLegsDelegate(ref PlayerDrawSet drawinfo, Texture2D textureToDraw, Color matchingColor, int shaderIndex = 0, bool glowmask = false, EquipType? equipType = null);
 
 		public static DrawSittingLegsDelegate DrawSittingLegsMethod { private set; get; } //Method is too big to bother copying, so use reflection instead. Monitor tml developments
 

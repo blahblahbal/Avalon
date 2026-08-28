@@ -1,4 +1,5 @@
-﻿using Avalon.Data.Sets;
+﻿using Avalon.Core;
+using Avalon.Data.Sets;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,31 +16,43 @@ namespace Avalon.Buffs.Debuffs;
 
 public class InfernalJudgement : ModBuff
 {
-	private static Asset<Texture2D> _flame;
-	private static Asset<Texture2D> _flameWhite;
 	public override void SetStaticDefaults()
 	{
-		_flame = Mod.Assets.Request<Texture2D>("Assets/Textures/Flame");
-		_flameWhite = Mod.Assets.Request<Texture2D>("Assets/Textures/FlameWhite");
 		Main.debuff[Type] = true;
 	}
 	private void Visuals(Entity e)
 	{
-		for (int i = 0; i < 2; i++)
+		//for (int i = 0; i < 2; i++)
+		//{
+		//	var p = VanillaParticles.RequestRandomizedFrameParticle();
+		//	int time = Main.rand.Next(5, 25);
+		//	bool colorFlame = !Main.rand.NextBool(3);
+		//	p.SetBasicInfo(colorFlame ? _flameWhite : _flame, null, e.velocity + new Vector2(Main.rand.NextFloat(-0.3f, 0.3f), Main.rand.NextFloat(-2f, -0.5f)), Main.rand.NextVector2FromRectangle(e.Hitbox) + e.velocity);
+		//	p.SetTypeInfo(3, Main.rand.Next(15), time);
+		//	p.Scale = Vector2.One * Main.rand.NextFloat(2);
+		//	p.ColorTint = colorFlame ? Color.Lerp(Color.Lerp(Color.Red, Color.Purple, Main.rand.NextFloat()), Color.White, 0.2f) with { A = 0 } : Color.White with { A = 0 };
+		//	p.ColorTint *= Main.rand.NextFloat();
+		//	p.FadeInNormalizedTime = 0.1f;
+		//	p.FadeOutNormalizedTime = 0.1f;
+		//	p.AccelerationPerFrame = -p.Velocity / time;
+		//	p.Rotation = p.Velocity.X * -0.2f;
+		//	p.RotationVelocity = -p.Rotation / time;
+		//	Main.ParticleSystem_World_OverPlayers.Add(p);
+		//}
+
+		if (Main.rand.NextBool(5))
 		{
-			var p = VanillaParticles.RequestRandomizedFrameParticle();
-			int time = Main.rand.Next(5, 25);
+
+			var p = AnimatedParticle.Request();
+			int time = Main.rand.Next(15, 25);
 			bool colorFlame = !Main.rand.NextBool(3);
-			p.SetBasicInfo(colorFlame ? _flameWhite : _flame, null, e.velocity + new Vector2(Main.rand.NextFloat(-0.3f, 0.3f), Main.rand.NextFloat(-2f, -0.5f)), Main.rand.NextVector2FromRectangle(e.Hitbox) + e.velocity);
-			p.SetTypeInfo(3, Main.rand.Next(15), time);
-			p.Scale = Vector2.One * Main.rand.NextFloat(2);
-			p.ColorTint = colorFlame ? Color.Lerp(Color.Lerp(Color.Red, Color.Purple, Main.rand.NextFloat()), Color.White, 0.2f) with { A = 0 } : Color.White with { A = 0 };
-			p.ColorTint *= Main.rand.NextFloat();
+			p.SetBasicInfo(colorFlame ? AssetReferences.Assets.Textures.SpikeyFlameBurstWhite.Asset : AssetReferences.Assets.Textures.SpikeyFlameBurst.Asset, 7, Vector2.Zero, Main.rand.NextVector2FromRectangle(e.Hitbox) + e.velocity);
+			p.SetTypeInfo(time);
+			p.Scale = Vector2.One * Main.rand.NextFloat(0.5f, 1.3f);
+			p.ColorTint = colorFlame ? Color.Lerp(Color.Lerp(Color.Red, Color.Purple, Main.rand.NextFloat()), Color.White, 0.2f) with { A = 0 } : Color.White with { A = 128 };
 			p.FadeInNormalizedTime = 0.1f;
 			p.FadeOutNormalizedTime = 0.1f;
-			p.AccelerationPerFrame = -p.Velocity / time;
-			p.Rotation = p.Velocity.X * -0.2f;
-			p.RotationVelocity = -p.Rotation / time;
+			p.Rotation = Main.rand.NextFloat(-1,1);
 			Main.ParticleSystem_World_OverPlayers.Add(p);
 		}
 

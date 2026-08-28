@@ -23,7 +23,7 @@ public class RhodiumLongbowHeld : LongbowTemplate
 		for(int i = 0; i < Math.Floor(Power * 7); i++)
 		{
 			Vector2 pos = position + Main.rand.NextVector2CircularEdge(4 + (i * 4), 4 + (i * 2));
-			Projectile.NewProjectile(source, pos, pos.DirectionTo(Main.MouseWorld) * velocity.Length(), t, damage / 3, knockback / 3, Projectile.owner, -20 + (i * -6));
+			Projectile.NewProjectile(source, pos, pos.DirectionTo(Main.MouseWorld) * velocity.Length(), t, damage / 5, knockback / 4, Projectile.owner, -20 + (i * -6));
 		}
 	}
 	public override void PostDraw(Color lightColor)

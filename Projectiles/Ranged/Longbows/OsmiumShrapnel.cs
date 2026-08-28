@@ -26,6 +26,7 @@ public class OsmiumShrapnel : ModProjectile
 		Projectile.penetrate = 3;
 		Projectile.usesLocalNPCImmunity = true;
 		Projectile.localNPCHitCooldown = -1;
+		Projectile.extraUpdates = 2;
 	}
 	public override void AI()
 	{
@@ -58,7 +59,9 @@ public class OsmiumShrapnel : ModProjectile
 
 	public override bool? CanHitNPC(NPC target)
 	{
-		return target.whoAmI != Projectile.ai[0];
+		if (target.whoAmI == Projectile.ai[0])
+			return false;
+		return null;
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{

@@ -1,5 +1,8 @@
 using Avalon.Common.Extensions;
+using Microsoft.Xna.Framework;
+using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -15,21 +18,35 @@ public class IridiumHat : ModItem
 		Item.rare = ItemRarityID.Orange;
 		Item.value = Item.sellPrice(0, 1, 20);
 	}
-
+	public override bool ModifyEquipTextureDraw(ref PlayerDrawSet drawInfo, ref DrawData drawData, EquipTexture equipTexture, string methodName)
+	{
+		drawInfo.DrawDataCache.Add(drawData);
+		if (drawInfo.drawPlayer.GetModPlayer<IridiumSetBonusPlayer>().Active)
+		{
+			Rectangle frame = (Rectangle)drawData.sourceRect;
+			frame.X += drawData.texture.Width / 2;
+			float ManaPercent = 1f - (drawInfo.drawPlayer.statMana / (float)drawInfo.drawPlayer.statManaMax2);
+			ManaPercent *= 0.5f;
+			for (int i = 0; i < 4; i++)
+			{
+				drawInfo.DrawDataCache.Add(drawData with { position = drawData.position + new Vector2(0, 2 + (2f - ManaPercent * 2)).RotatedBy(i * MathHelper.PiOver2 + (Main.timeForVisualEffects * 0.01f)), color = Color.SlateBlue with { A = 0 } * ManaPercent });
+			}
+		}
+		return false;
+	}
 	public override bool IsArmorSet(Item head, Item body, Item legs)
 	{
 		return body.type == ModContent.ItemType<IridiumPlateMail>() && legs.type == ModContent.ItemType<IridiumPants>();
 	}
-
 	public override void UpdateArmorSet(Player player)
 	{
 		player.setBonus = Language.GetTextValue("Mods.Avalon.SetBonuses.Iridium");
-		player.GetCritChance<GenericDamageClass>() += 9;
+		player.GetModPlayer<IridiumSetBonusPlayer>().Active = true;
 	}
-
 	public override void UpdateEquip(Player player)
 	{
-		player.GetDamage(DamageClass.Ranged) += 0.11f;
+		player.GetCritChance(DamageClass.Generic) += 10;
+		player.manaCost -= 0.2f;
 	}
 	public override void AddRecipes()
 	{
@@ -38,5 +55,35 @@ public class IridiumHat : ModItem
 			.AddIngredient(ModContent.ItemType<Material.DesertFeather>(), 4)
 			.AddTile(TileID.Anvils)
 			.Register();
+	}
+}
+public class IridiumSetBonusPlayer : ModPlayer
+{
+	public bool Active = false;
+	public int ManaStealCooldown = 0;
+	public override void ResetEffects()
+	{
+		ManaStealCooldown--;
+		Active = false;
+	}
+	public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
+	{
+		if (!Active || item.DamageType.CountsAsClass(DamageClass.Magic) || ContentSamples.ProjectilesByType[item.shoot].IsMinionOrSentryRelated)
+			return;
+		float ManaPercent = Player.statMana / (float)Player.statManaMax2;
+		damage += Utils.Remap(ManaPercent, 0, 1f, 0.2f, 0);
+	}
+	public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+	{
+		if (ManaStealCooldown > 0)
+			return;
+		if (!proj.IsMinionOrSentryRelated && !proj.DamageType.CountsAsClass(DamageClass.Magic))
+		{
+			int manaRestore = Math.Min(damageDone / 10, Player.statManaMax2 - Player.statMana);
+			if (manaRestore == 0)
+				return;
+			Player.statMana += manaRestore;
+			Player.ManaEffect(manaRestore);
+		}
 	}
 }

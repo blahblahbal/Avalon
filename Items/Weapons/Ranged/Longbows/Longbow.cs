@@ -12,7 +12,7 @@ public class Longbow : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToLongbow(44, 2.3f, 24f, 55);
+		Item.DefaultToLongbow(77, 2.3f, 24f, 55);
 		Item.rare = ItemRarityID.Green;
 		Item.value = Item.sellPrice(silver: 54);
 	}

@@ -1,10 +1,12 @@
 using Avalon.Assets;
 using Avalon.Common;
+using Avalon.Core;
 using Avalon.Effects;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon.Items.Accessories.Info;
 using Avalon.Items.Weapons.Melee.Swords;
 using Avalon.Network;
+using Avalon.NPCs.Underground;
 using Avalon.Reflection;
 using Avalon.UI;
 using Avalon.WorldGeneration.Enums;
@@ -120,12 +122,11 @@ public class ExxoAvalonOrigins : Mod
 		JungleGenMessage = Lang.gen[11].Value;
 		//Additional swords to the zenith's projectiles with both their texture, size and trail color
 		var fractalProfiles = getFinalFractalHelperFractalProfiles();
-
+		Mod.SmallModIcon = icon_small.Asset; // ???
 		fractalProfiles.Add(ItemID.GoldBroadsword, new FinalFractalProfile(50f, new Color(203, 179, 73))); //Add the Gold Broadsword with a gold trail at 50f the size, would reccomend to look at the dictionary that we are reflecting before adding any swords to know what size and trail color to do
 		fractalProfiles.Add(ItemID.PlatinumBroadsword, new FinalFractalProfile(50f, new Color(181, 194, 217)));
 		fractalProfiles.Add(ModContent.ItemType<BismuthBroadsword>(), new FinalFractalProfile(50f, new Color(199, 157, 216)));
 		fractalProfiles.Add(ItemID.IceBlade, new FinalFractalProfile(48f, new Color(54, 232, 252)));
-		fractalProfiles.Add(ItemID.AntlionClaw, new FinalFractalProfile(40f, new Color(233, 174, 78)));
 		fractalProfiles.Add(ModContent.ItemType<DesertLongsword>(), new FinalFractalProfile(48f, new Color(220, 214, 137)));
 		fractalProfiles.Add(ModContent.ItemType<MinersSword>(), new FinalFractalProfile(40f, new Color(51, 235, 203)));
 		fractalProfiles.Add(ModContent.ItemType<IridiumGreatsword>(), new FinalFractalProfile(70f, new Color(165, 209, 148)));
@@ -187,7 +188,6 @@ public class ExxoAvalonOrigins : Mod
 		fractalProfiles.Remove(ItemID.PlatinumBroadsword);
 		fractalProfiles.Remove(ModContent.ItemType<BismuthBroadsword>());
 		fractalProfiles.Remove(ItemID.IceBlade);
-		fractalProfiles.Remove(ItemID.AntlionClaw);
 		fractalProfiles.Remove(ModContent.ItemType<DesertLongsword>());
 		fractalProfiles.Remove(ModContent.ItemType<MinersSword>());
 		fractalProfiles.Remove(ModContent.ItemType<IridiumGreatsword>());
@@ -224,6 +224,9 @@ public class ExxoAvalonOrigins : Mod
 			["Contagion"] => ModContent.GetInstance<AvalonWorld>().WorldEvil == WorldEvil.Contagion,
 			["SetWorldEvil", int value] => ModContent.GetInstance<AvalonWorld>().WorldEvil = (WorldEvil)value,
 
+			// Ore Slimes
+			["AddOreSlimeOre", int oreItemID, int oreDustID, Color color] => OreSlime.AddExtraOre(oreItemID,oreDustID,color),
+			["AddMineralSlimeOre", int oreItemID, int oreDustID, Color color] => MineralSlime.AddExtraOre(oreItemID, oreDustID, color),
 			// Herbology calls
 			["AddHerbologyHerbData", int seedID, int herbID, int largeSeedID, int largeHerbID] => Data.HerbologyData.AddHerbologyHerbData(seedID, herbID, largeSeedID, largeHerbID),
 			["AddHerbologyPotionData", int potionID, int elixirID] => Data.HerbologyData.AddHerbologyPotionData(potionID, elixirID),

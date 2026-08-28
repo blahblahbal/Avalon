@@ -1,4 +1,4 @@
-﻿using Avalon.Dusts;
+﻿using Avalon.Core;
 using Avalon.Items.Material;
 using Avalon.Items.Material.Ores;
 using Avalon.Projectiles.Hostile.BacteriumPrime;
@@ -19,7 +19,6 @@ namespace Avalon.NPCs.Bosses.PreHardmode.BacteriumPrime;
 public class BacteriumTendril : ModNPC
 {
 	private static SoundStyle _chompSound = new SoundStyle("Avalon/Sounds/NPC/Chomp_", 4) { PitchVariance = 0.4f, MaxInstances = 10 };
-	private static Asset<Texture2D> _chain;
 	public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 	{
 		NPCID.Sets.NPCBestiaryDrawModifiers bestiaryData = new NPCID.Sets.NPCBestiaryDrawModifiers()
@@ -30,7 +29,6 @@ public class BacteriumTendril : ModNPC
 	}
 	public override void SetStaticDefaults()
 	{
-		_chain = ModContent.Request<Texture2D>(Texture + "_Chain");
 		Main.npcFrameCount[Type] = 4;
 	}
 
@@ -69,8 +67,9 @@ public class BacteriumTendril : ModNPC
 		var seed = Utils.RandomNextSeed((ulong)NPC.whoAmI);
 		int randDirection = Utils.RandomInt(ref seed, 2) == 0 ? -1 : 1;
 		NPC.rotation = (Utils.RandomFloat(ref seed) * MathHelper.TwoPi) + NPC.localAI[2] * randDirection;
-		_chompSound.Pitch = -0.15f;
-		_chompSound.Volume = 0.5f;
+		_chompSound.Pitch = -0.4f;
+		_chompSound.pitchVariance = 0.3f;
+		_chompSound.Volume = 0.4f;
 		if (NPC.ai[2] != 0)
 		{
 			NPC.ai[2]++;
@@ -131,15 +130,18 @@ public class BacteriumTendril : ModNPC
 			}
 		}
 		NPC.localAI[0] = 0;
-		float sin = MathF.Sin(NPC.ai[1] * 0.05f);
-		float cos = MathF.Cos(NPC.ai[1] * 0.05f);
+
+		float timerForSin = MathF.Pow((NPC.ai[1] % 180) / 180,3) * MathHelper.TwoPi;
+		float sin = MathF.Sin(timerForSin);
+		float cos = MathF.Cos(timerForSin);
+
 		Vector2 whipTargetPos = Vector2.Lerp(Target.Center, ConnectionPoint, 0.5f);
 		float connectionDist = Target.Center.Distance(ConnectionPoint);
-		whipTargetPos += new Vector2(connectionDist / 2 * sin, cos * connectionDist * 0.5f * randDirection).RotatedBy(ConnectionPoint.DirectionTo(Target.Center).ToRotation());
-		//whipTargetPos += new Vector2(0, Target.Center.Distance(ConnectionPoint) / 2).RotatedBy(NPC.ai[0] * MathHelper.TwoPi);
-		NPC.SimpleFlyMovement(NPC.Center.DirectionTo(whipTargetPos) * 6, 0.2f);
-		//NPC.Center = whipTargetPos;
-		//NPC.SimpleFlyMovement(Vector2.Lerp(NPC.Center.DirectionTo(Target.Center), NPC.Center.DirectionTo(ConnectionPoint), Utils.Remap(sin, -1f,1f,0f,0.75f)) * 6, 0.1f);
+		whipTargetPos += new Vector2(connectionDist / 2 * -cos, -sin * connectionDist * 0.5f * randDirection).RotatedBy(ConnectionPoint.DirectionTo(Target.Center).ToRotation());
+
+		NPC.SimpleFlyMovement(NPC.Center.DirectionTo(whipTargetPos) * Utils.Remap(connectionDist, 0, 128, 3f, 8f), Utils.Remap(NPC.Center.Distance(whipTargetPos),0,64,0.1f,1f));
+
+		Dust.QuickDust(whipTargetPos, Color.Red);
 	}
 	public override void OnKill()
 	{
@@ -149,10 +151,11 @@ public class BacteriumTendril : ModNPC
 	}
 	public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 	{
+		var chain = AssetReferences.NPCs.Bosses.PreHardmode.BacteriumPrime.BacteriumTendril_Chain.Asset;
 		Vector2 direction = NPC.Center.DirectionTo(ConnectionPoint);
 		float rotation = direction.ToRotation() + MathHelper.PiOver2;
 		int divisions = 3;
-		int iterations = (int)Math.Ceiling(NPC.Center.Distance(ConnectionPoint) / _chain.Height() * divisions);
+		int iterations = (int)Math.Ceiling(NPC.Center.Distance(ConnectionPoint) / chain.Height() * divisions);
 		//for (int i = 0; i <= iterations; i++)
 		//{
 		//	spriteBatch.Draw(Chain.Value, ConnectionPoint - (direction * i * Chain.Height() / divisions) - screenPos + new Vector2(0, (MathF.Sin(i / (float)iterations * MathHelper.Pi) * (iterations / 1.5f)) + (iterations / 3f)), new Rectangle(0,(i % divisions) * Chain.Height() / divisions,Chain.Width(),Chain.Height() / 2), drawColor * NPC.Opacity, rotation, new Vector2(Chain.Width() / 2, Chain.Height()), NPC.scale, SpriteEffects.None, 0);
@@ -167,10 +170,10 @@ public class BacteriumTendril : ModNPC
 		{
 			if (NPC.ai[2] != 0)
 			{
-				spriteBatch.Draw(_chain.Value, new Vector2(2, 0).RotatedBy(rotation) + ConnectionPoint - (direction * i * _chain.Height() / divisions) - screenPos, new Rectangle(0, (i % divisions) * _chain.Height() / divisions, _chain.Width(), _chain.Height() / 2), glowColor, rotation, new Vector2(_chain.Width() / 2, _chain.Height()), NPC.scale, SpriteEffects.None, 0);
-				spriteBatch.Draw(_chain.Value, new Vector2(-2,0).RotatedBy(rotation) + ConnectionPoint - (direction * i * _chain.Height() / divisions) - screenPos, new Rectangle(0, (i % divisions) * _chain.Height() / divisions, _chain.Width(), _chain.Height() / 2), glowColor, rotation, new Vector2(_chain.Width() / 2, _chain.Height()), NPC.scale, SpriteEffects.None, 0);
+				spriteBatch.Draw(chain.Value, new Vector2(2, 0).RotatedBy(rotation) + ConnectionPoint - (direction * i * chain.Height() / divisions) - screenPos, new Rectangle(0, (i % divisions) * chain.Height() / divisions, chain.Width(), chain.Height() / 2), glowColor, rotation, new Vector2(chain.Width() / 2, chain.Height()), NPC.scale, SpriteEffects.None, 0);
+				spriteBatch.Draw(chain.Value, new Vector2(-2,0).RotatedBy(rotation) + ConnectionPoint - (direction * i * chain.Height() / divisions) - screenPos, new Rectangle(0, (i % divisions) * chain.Height() / divisions, chain.Width(), chain.Height() / 2), glowColor, rotation, new Vector2(chain.Width() / 2, chain.Height()), NPC.scale, SpriteEffects.None, 0);
 			}
-			spriteBatch.Draw(_chain.Value, ConnectionPoint - (direction * i * _chain.Height() / divisions) - screenPos, new Rectangle(0, (i % divisions) * _chain.Height() / divisions, _chain.Width(), _chain.Height() / 2), drawColor * NPC.Opacity, rotation, new Vector2(_chain.Width() / 2, _chain.Height()), NPC.scale, SpriteEffects.None, 0);
+			spriteBatch.Draw(chain.Value, ConnectionPoint - (direction * i * chain.Height() / divisions) - screenPos, new Rectangle(0, (i % divisions) * chain.Height() / divisions, chain.Width(), chain.Height() / 2), drawColor * NPC.Opacity, rotation, new Vector2(chain.Width() / 2, chain.Height()), NPC.scale, SpriteEffects.None, 0);
 		}
 		spriteBatch.Draw(TextureAssets.Npc[Type].Value,NPC.Center - screenPos,NPC.frame,drawColor * NPC.Opacity,NPC.rotation,NPC.frame.Size() / 2, NPC.scale, SpriteEffects.None, 0);
 		if (NPC.ai[2] != 0)

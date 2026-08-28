@@ -9,7 +9,9 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -20,6 +22,25 @@ namespace Avalon;
 
 public static class ClassExtensions
 {
+	public static void TargetClosest(this NPC npc, Func<Player, bool> invalidTargets, bool faceTarget = true)
+	{
+		float distance = 0f;
+		float realDist = 0f;
+		bool t = false;
+		int tankTarget = -1;
+		for (int i = 0; i < 255; i++)
+		{
+			if (Main.player[i].active && !Main.player[i].dead && !Main.player[i].ghost && !invalidTargets.Invoke(Main.player[i]))
+			{
+				var tryTracking = npc.GetType().GetMethod("TryTrackingTarget", BindingFlags.NonPublic | BindingFlags.Instance);
+				tryTracking.Invoke(npc, [distance, realDist, t, tankTarget, i]);
+			}
+			//NPC.TryTrackingTarget(ref distance, ref realDist, ref t, ref tankTarget, i);
+		}
+		var setTarget = npc.GetType().GetMethod("SetTargetTrackingValues", BindingFlags.NonPublic | BindingFlags.Instance);
+		setTarget.Invoke(npc, [faceTarget, realDist, tankTarget]);
+		//npc.SetTargetTrackingValues(faceTarget, realDist, tankTarget);
+	}
 	/// <summary>
 	/// Helper method to efficiently remove tiles.
 	/// </summary>
@@ -617,6 +638,16 @@ public static class ClassExtensions
 		{
 			n.Transform(ModContent.NPCType<NPCs.Critters.ContaminatedPenguin>());
 		}
+	}
+	/// <summary>
+	/// Has not been tested on all npc types yet. Just update this method if it doesn't work in your case ig.
+	/// </summary>
+	/// <param name="npc"></param>
+	/// <param name="screenPos"></param>
+	/// <returns></returns>
+	public static Vector2 GetNPCDrawPos(this NPC npc, Vector2 screenPos)
+	{
+		return new Vector2(npc.Center.X, npc.BottomLeft.Y - npc.frame.Height / 2 * npc.scale + Main.NPCAddHeight(npc) + npc.gfxOffY + 4 /* this 4 is VERY important. maybe. lol. */) - screenPos;
 	}
 
 	public static Item? HasItemInArmorFindIt(this Player p, int type)

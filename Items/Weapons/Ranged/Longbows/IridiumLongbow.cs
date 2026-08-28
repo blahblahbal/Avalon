@@ -12,7 +12,7 @@ public class IridiumLongbow : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToLongbow(67, 2.3f, 24f, 83);
+		Item.DefaultToLongbow(117, 2.3f, 24f, 83);
 		Item.rare = ItemRarityID.Orange;
 		Item.value = Item.sellPrice(0, 1);
 	}

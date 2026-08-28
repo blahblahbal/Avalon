@@ -16,7 +16,7 @@ public class Moonforce : ModItem
 	}
 	public override void SetDefaults()
 	{
-		Item.DefaultToLongbow(100, 2.3f, 24f, 77);
+		Item.DefaultToLongbow(175, 2.3f, 24f, 77);
 		Item.rare = ItemRarityID.Orange;
 		Item.value = Item.sellPrice(0, 2);
 	}

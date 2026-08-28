@@ -15,8 +15,8 @@
 		<Folder Include="Buffs\Equipment\" />
 		<Folder Include="Buffs\Potions\" />
 		<Folder Include="Buffs\Stations\" />
-		<Folder Include="Buffs\Summons\" />
 		<Folder Include="NPCs\Bosses\Hardmode\Mechasting\Projectiles\" />
+		<Folder Include="Projectiles\Ranged\Guns\" />
 		<Folder Include="Tiles\DarkMatter\" />
 	</ItemGroup>
 	<ItemGroup>
@@ -31,9 +31,6 @@
 		</Reference>
 		<Reference Include="ModLiquidLib">
 			<HintPath>dllReferences\ModLiquidLib_v2025.11.1.dll</HintPath>
-		</Reference>
-		<Reference Include="ThoriumMod">
-			<HintPath>dllReferences\ThoriumMod_v1.7.2.4.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
