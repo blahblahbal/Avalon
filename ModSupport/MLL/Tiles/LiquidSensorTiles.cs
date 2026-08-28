@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Avalon.ModSupport.MLL.Items;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
@@ -20,7 +21,13 @@ public class LiquidSensorTiles : ModTile
 		TileObjectData.newTile.LavaDeath = false;
 		TileObjectData.newTile.HookPostPlaceMyPlayer = new PlacementHook(ModContent.GetInstance<TEModLogicSensors>().Hook_AfterPlacement, -1, 0, processedCoordinates: true);
 		TileObjectData.addTile(Type);
+		DustType = -1;
 
-		AddMapEntry(new Color(200, 200, 200));
+		AddMapEntry(new Color(0, 255, 0), ModContent.GetInstance<AcidSensor>().DisplayName);
+		AddMapEntry(new Color(200, 0, 0), ModContent.GetInstance<BloodSensor>().DisplayName);
+	}
+	public override ushort GetMapOption(int i, int j)
+	{
+		return (ushort)(Main.tile[i, j].TileFrameY / 18);
 	}
 }
