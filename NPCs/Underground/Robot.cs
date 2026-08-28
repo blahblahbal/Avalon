@@ -71,7 +71,17 @@ public class Robot : CustomFighterAI
 			return defaultSpeed;
 		}
 	}
-	public override float Acceleration => 0.3f;
+	public override float Acceleration
+	{
+		get
+		{
+			if (SpawnEnergyBall || HoldingEnergyBall)
+			{
+				return 0.03f;
+			}
+			return 0.3f;
+		}
+	}
 	public override bool CanOpenDoors => DefaultMovement;
 	public override int TimeBeforeTurningAround => TimeUtils.SecondsToTicks(5);
 
@@ -100,7 +110,14 @@ public class Robot : CustomFighterAI
 	}
 	public override void CustomBehavior()
 	{
-		ProjectileTimer++;
+		if (!NPC.HasValidTarget && DefaultMovement)
+		{
+			ProjectileTimer = 0;
+		}
+		else
+		{
+			ProjectileTimer++;
+		}
 		if (Stationary)
 		{
 			float chargeUp = Utils.Remap(ProjectileTimer - ProjSpawnStartTime, 0, ProjSpawnTime - ProjSpawnStartTime, 0, 1);
