@@ -57,7 +57,7 @@ public class IridiumGreatswordBoomLarge : ModProjectile
 			{
 				Dust d = Dust.NewDustPerfect(Projectile.Bottom, dustType, new Vector2(Main.rand.NextFloat(-Projectile.width,Projectile.width) * 0.1f, Main.rand.NextFloat(-Projectile.width, 0) * 0.13f));
 				d.noGravity = true;
-				d.color = new Color(Main.rand.NextFloat(0.6f, 0.8f), 1f, 0.6f, 0.5f);
+				d.color = Main.rand.NextBool(3)? Color.SandyBrown with { A = 0} : new Color(Main.rand.NextFloat(0.6f, 0.8f), 1f, 0.6f, 0.5f);
 				d.scale += Main.rand.NextFloat();
 				d.fadeIn = Main.rand.NextFloat(1.5f);
 

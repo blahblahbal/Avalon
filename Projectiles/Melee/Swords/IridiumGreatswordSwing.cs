@@ -211,7 +211,7 @@ public class IridiumGreatswordSwing : ModProjectile, ISyncedOnHitEffect
 		if (swinging)
 		{
 			var sparkleTex = TextureAssets.Extra[ExtrasID.ThePerfectGlow];
-			DrawData sparkle = new(sparkleTex.Value, Projectile.Center - Main.screenPosition + new Vector2(80, -80).RotatedBy(Projectile.rotation), null, Color.SandyBrown with { A = 64 } * Projectile.ai[0], 0, sparkleTex.Size() / 2, new Vector2(1,1.5f * glow) * Projectile.scale, SpriteEffects.None);
+			DrawData sparkle = new(sparkleTex.Value, Projectile.Center - Main.screenPosition + new Vector2(70, -70).RotatedBy(Projectile.rotation) * Projectile.scale, null, Color.SandyBrown with { A = 64 } * Projectile.ai[0], 0, sparkleTex.Size() / 2, new Vector2(1,1.5f * glow) * Projectile.scale, SpriteEffects.None);
 
 			for (int i = 0; i < 2; i++)
 			{
@@ -230,18 +230,26 @@ public class IridiumGreatswordSwing : ModProjectile, ISyncedOnHitEffect
 	public bool SyncedOnHitNPC(Player player, NPC target, Rectangle attackHitbox, int damage, float knockback, bool crit, int hitDirection, Projectile? projectile)
 	{
 		Vector2 pos = target.Hitbox.ClosestPointInRect(player.Center);
+		int type = ModContent.DustType<SimpleColorableGlowyDust>();
 		for (int i = 0; i < 3; i++)
 		{
 			var p = VanillaParticles.RequestPrettySparkleParticle();
 			p.ColorTint = Color.SandyBrown;
 			p.FadeInEnd = Main.rand.NextFloat(2, 5);
 			p.FadeOutStart = p.FadeInEnd;
-			p.FadeOutEnd = Main.rand.NextFloat(13, 18);
-			p.Scale = new Vector2(4, 2);
-			p.Rotation = (i / 3f * MathHelper.TwoPi) + Main.rand.NextFloat(-0.1f, 0.1f) + MathHelper.PiOver2;
+			p.FadeOutEnd = Main.rand.NextFloat(13, 28);
+			p.Scale = new Vector2(4, 2).RotatedByRandom(0.3f);
+			p.Rotation = Projectile.rotation - MathHelper.PiOver4 + Main.rand.NextFloat(-0.2f,0.2f);
+			p.Velocity = (p.Rotation + MathHelper.PiOver2).ToRotationVector2() * Main.rand.NextFloat(2,5) * player.direction;
 			p.DrawHorizontalAxis = false;
-			p.LocalPosition = pos;
+			p.LocalPosition = pos + Main.rand.NextVector2Circular(8,8);
 			Main.ParticleSystem_World_OverPlayers.Add(p);
+			for(int x = 0; x < 5; x++)
+			{
+				Dust d = Dust.NewDustPerfect(p.LocalPosition, type, p.Velocity.RotatedByRandom(0.4f) * Main.rand.NextFloat(2));
+				d.noGravity = true;
+				d.color = p.ColorTint with { A = 0};
+			}
 		}
 
 		return true;
