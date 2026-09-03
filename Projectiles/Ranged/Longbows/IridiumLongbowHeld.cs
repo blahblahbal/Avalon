@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -46,8 +47,7 @@ public class IridiumLongbowHeld : LongbowTemplate
 	{
 		if (Main.player[Projectile.owner].channel)
 		{
-			Color arrowColor = Color.Lerp(Color.Chartreuse, Color.Green, Main.masterColor) with { A = 0 };
-			DrawArrow(arrowColor * Power, Vector2.Zero, true);
+			Main.EntitySpriteDraw(ArrowDrawData(Color.Lerp(Color.LimeGreen, Color.GreenYellow, Main.masterColor) * Power, Vector2.Zero, true));
 		}
 	}
 }

@@ -84,8 +84,9 @@ public class OsmiumGreatswordThrown : ModProjectile
 			if (Projectile.ai[1] == 1)
 			{
 				SoundEngine.PlaySound(SoundID.DD2_DarkMageAttack, Projectile.position);
-				if(PerfectTiming)
-					SoundEngine.PlaySound(SoundID.DD2_KoboldIgnite, Projectile.position);
+				if (PerfectTiming)
+					//SoundEngine.PlaySound(SoundID.DD2_KoboldIgnite, Projectile.position);
+					SoundEngine.PlaySound(Sounds.Item.OsmiumSwordShot.Asset with { pitchVariance = 0.2f, pitch = 0.2f }, Projectile.position);
 				for (int i = 0; i < 15; i++)
 				{
 					Dust d = Dust.NewDustPerfect(Projectile.Center, type);
@@ -204,7 +205,7 @@ public class OsmiumGreatswordThrown : ModProjectile
 			}
 			for (int i = 0; i < 5; i++)
 			{
-				Gore g = Gore.NewGoreDirect(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(1, 1), Main.rand.Next(GoreID.Smoke1, GoreID.Smoke3 + 1), Main.rand.NextFloat(0.25f, 0.75f));
+				Gore g = Gore.NewGoreDirect(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(-20,0), Main.rand.NextVector2Circular(1, 1), Main.rand.Next(GoreID.Smoke1, GoreID.Smoke3 + 1), Main.rand.NextFloat(0.25f, 0.75f));
 				g.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
 
 				var p = VanillaParticles.RequestPrettySparkleParticle();

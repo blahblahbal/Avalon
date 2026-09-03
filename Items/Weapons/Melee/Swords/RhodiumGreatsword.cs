@@ -24,7 +24,6 @@ public class RhodiumGreatsword : ModItem, IItemWithReleaseButtonMidSwingEffect
 		Item.DefaultToSword(30, 5f, 35, crit: 6, useTurn: false);
 		Item.rare = ItemRarityID.Orange;
 		Item.value = Item.sellPrice(0, 1);
-		Item.scale = 1.2f;
 		Item.shootSpeed = 10;
 		Item.noMelee = true;
 		Item.shoot = ModContent.ProjectileType<RhodiumGreatswordSlash>();
@@ -32,7 +31,7 @@ public class RhodiumGreatsword : ModItem, IItemWithReleaseButtonMidSwingEffect
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{
 		float adjustedItemScale5 = player.GetAdjustedItemScale(player.HeldItem); 
-		Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, damage, knockback, player.whoAmI, player.direction * player.gravDir, player.itemAnimationMax + 1, adjustedItemScale5 * 1.2f);
+		Projectile.NewProjectile(source, player.MountedCenter, new Vector2(player.direction, 0f), type, damage, knockback, player.whoAmI, player.direction * player.gravDir, player.itemAnimationMax + 1, adjustedItemScale5 * 1.45f);
 		return false;
 	}
 	public override void AddRecipes()

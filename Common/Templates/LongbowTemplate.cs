@@ -196,30 +196,27 @@ namespace Avalon.Common.Templates
 		}
 		public override bool PreDraw(ref Color lightColor)
 		{
-			DefaultBowDraw(lightColor, Vector2.Zero);
+			var d = BowDrawData(lightColor, Vector2.Zero);
+			Main.EntitySpriteDraw(d);
 			if (FullPowerGlow > 0 && Main.myPlayer == Projectile.owner)
 			{
-				DefaultBowDraw(NotificationColor * FullPowerGlow, Vector2.Zero);
+				Main.EntitySpriteDraw(d with { color = NotificationColor * FullPowerGlow });
 			}
 			if (Main.player[Projectile.owner].channel)
 			{
-				DrawArrow(lightColor, Vector2.Zero);
+				Main.EntitySpriteDraw(ArrowDrawData(lightColor, Vector2.Zero));
 			}
 			return false;
 		}
-		public void DefaultBowDraw(Color lightColor, Vector2 Offset, float Scale = 1)
+		public DrawData BowDrawData(Color lightColor, Vector2 Offset)
 		{
 			SpriteEffects Flip = Projectile.direction == 1 ? SpriteEffects.FlipVertically : SpriteEffects.None;
-			int frameHeight = TextureAssets.Projectile[Type].Value.Height / Main.projFrames[Projectile.type];
-			Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, TextureAssets.Projectile[Type].Value.Width, frameHeight);
+			Rectangle frame = TextureAssets.Projectile[Type].Frame(1, Main.projFrames[Type], 0, Projectile.frame);
 			Vector2 drawPos = Projectile.Center - Main.screenPosition + Offset;
 			drawPos.Y += Main.player[Projectile.owner].gfxOffY;
-			//Stretch 
-			//Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos - new Vector2(Projectile.frame, 0).RotatedBy(Projectile.rotation), frame, lightColor, Projectile.rotation, new Vector2(TextureAssets.Projectile[Type].Value.Width, frameHeight) / 2, new Vector2(1 + (Projectile.frame * 0.06f), 1) * Projectile.scale * Scale, Flip, 0);
-			//No stretch
-			Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, drawPos, frame, lightColor, Projectile.rotation, new Vector2(TextureAssets.Projectile[Type].Value.Width, frameHeight) / 2, new Vector2(1f, 1f - Projectile.frame * 0.03f) * Projectile.scale * Scale, Flip, 0);
+			return new DrawData(TextureAssets.Projectile[Type].Value, drawPos, frame, lightColor, Projectile.rotation, frame.Size() / 2, new Vector2(1f, 1f - Projectile.frame * 0.03f) * Projectile.scale, Flip, 0);
 		}
-		public void DrawArrow(Color lightColor, Vector2 Offset, bool OverwriteGetAlphaOfArrow = false)
+		public DrawData ArrowDrawData(Color lightColor, Vector2 Offset, bool OverwriteGetAlphaOfArrow = false)
 		{
 			Offset.Y *= Projectile.spriteDirection;
 			int ammo = (int)Projectile.ai[0];
@@ -231,10 +228,10 @@ namespace Avalon.Common.Templates
 			Rectangle frame = new Rectangle(0, frameHeight * 0, TextureAssets.Projectile[ammo].Value.Width, frameHeight);
 			Vector2 drawPos = Projectile.Center - Main.screenPosition + new Vector2((Projectile.frame * -2) + 8 + Offset.X, Offset.Y).RotatedBy(Projectile.rotation);
 			drawPos.Y += Main.player[Projectile.owner].gfxOffY;
-			if(!OverwriteGetAlphaOfArrow)
-				Main.EntitySpriteDraw(TextureAssets.Projectile[ammo].Value, drawPos, frame, ContentSamples.ProjectilesByType[ammo].GetAlpha(lightColor), Projectile.rotation + MathHelper.PiOver2, new Vector2(TextureAssets.Projectile[ammo].Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+			if (!OverwriteGetAlphaOfArrow)
+				return new DrawData(TextureAssets.Projectile[ammo].Value, drawPos, frame, ContentSamples.ProjectilesByType[ammo].GetAlpha(lightColor), Projectile.rotation + MathHelper.PiOver2, new Vector2(TextureAssets.Projectile[ammo].Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
 			else
-				Main.EntitySpriteDraw(TextureAssets.Projectile[ammo].Value, drawPos, frame,lightColor, Projectile.rotation + MathHelper.PiOver2, new Vector2(TextureAssets.Projectile[ammo].Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+				return new DrawData(TextureAssets.Projectile[ammo].Value, drawPos, frame, lightColor, Projectile.rotation + MathHelper.PiOver2, new Vector2(TextureAssets.Projectile[ammo].Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
 		}
 		public override bool ShouldUpdatePosition()
 		{

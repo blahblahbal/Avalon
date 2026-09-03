@@ -2,9 +2,7 @@ using Avalon.Common.Templates;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
-using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Ranged.Longbows;
@@ -30,8 +28,7 @@ public class RhodiumLongbowHeld : LongbowTemplate
 	{
 		if (Main.player[Projectile.owner].channel)
 		{
-			Color arrowColor = Color.Lerp(new Color(1f, 0f, 0.2f, 0f), new Color(1f, 0.3f, 0.7f, 0f), Main.masterColor);
-			DrawArrow(arrowColor * Power, Vector2.Zero, true);
+			Main.EntitySpriteDraw(ArrowDrawData(Color.Lerp(new Color(1f, 0f, 0.2f, 0f), new Color(1f, 0.3f, 0.7f, 0f), Main.masterColor) * Power, Vector2.Zero, true));
 		}
 	}
 }
