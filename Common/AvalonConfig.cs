@@ -74,13 +74,13 @@ public class AvalonClientConfig : ModConfig
 	[DefaultValue(1f)]
 	public float DarkMatterVortexSpeed;
 
-	[DefaultValue(false)]
-	[CustomModConfigItem(typeof(NeedsReloadIfNoAltLibBooleanElement))]
-	public bool BetaTropicsGen;
-
 	[DefaultValue(true)]
 	[ReloadRequired]
 	public bool BloodyAmulet;
+
+	[DefaultValue(false)]
+	[CustomModConfigItem(typeof(NeedsReloadIfNoAltLibBooleanElement))]
+	public bool BetaTropicsGen;
 
 	[DefaultValue(false)]
 	[ReloadRequired]

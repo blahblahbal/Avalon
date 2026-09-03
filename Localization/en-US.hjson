@@ -12326,18 +12326,18 @@ Mods: {
 				}
 
 				BetaTropicsGen: {
-					Label: Beta Savanna Gen
+					Label: Savanna Gen [c/FF0000:(UNFINISHED, MAY BREAK)]
 					Tooltip: Allows generating a Savanna world.
 				}
 
 				UnimplementedStructureGen: {
-					Label: Structure Generation for Unimplemented (as of yet) Structures
+					Label: Unimplemented Structure Generation [c/FF0000:(UNFINISHED, MAY BREAK)]
 					Tooltip: Enables Generation of the Hellcastle and Sky Fortress.
 				}
 
 				SuperhardmodeStuff: {
-					Label: Superhardmode Stuff
-					Tooltip: Enables generation of the Caesium Blastplains.
+					Label: Superhardmode Stuff [c/FF0000:(UNFINISHED, MAY BREAK)]
+					Tooltip: Enables generation of the Caesium Blastplains and Crystal Mines.
 				}
 
 				BloodyAmulet: {
