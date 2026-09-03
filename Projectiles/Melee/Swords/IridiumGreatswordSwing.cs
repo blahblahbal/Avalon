@@ -122,7 +122,7 @@ public class IridiumGreatswordSwing : ModProjectile, ISyncedOnHitEffect
 				if (Projectile.ai[1] < 0.1f * Projectile.ai[0])
 				{
 					Vector2 vect = new Vector2(1, -1).RotatedBy(Projectile.rotation);
-					if (AvalonUtils.SolidCollisionWithFunctionalTopSurfaceDetection(Projectile.Center + vect * 64, 16, 16) || AvalonUtils.SolidCollisionWithFunctionalTopSurfaceDetection(Projectile.Center + vect * 32, 16, 16))
+					if (AvalonUtils.SolidCollisionWithFunctionalTopSurfaceDetection(Projectile.Center + vect * 64, 16, 16, true) || AvalonUtils.SolidCollisionWithFunctionalTopSurfaceDetection(Projectile.Center + vect * 32, 16, 16, true))
 					{
 						SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact, Projectile.position);
 						Projectile.ai[2] = 1;
