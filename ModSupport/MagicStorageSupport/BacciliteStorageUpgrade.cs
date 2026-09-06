@@ -174,3 +174,19 @@ public class BacciliteCore : BaseStorageCore
 	// If you want to customize the tooltip, you can override it here
 	public override LocalizedText Tooltip => base.Tooltip;
 }
+
+
+[ExtendsFromMod(nameof(MagicStorage))]
+public class MagicStorageValidityCheckerFixer : ILoadable
+{
+	public void Load(Mod mod)
+	{
+		MonoModHooks.Add(typeof(TEStorageUnit).GetMethod(nameof(TEStorageUnit.ValidTile)), (orig_ValidTile orig, TEStorageUnit self, in Tile tile) => {
+			if (tile.TileFrameX % 36 == 0 && tile.TileFrameY % 36 == 0) return TileLoader.GetTile(tile.TileType) is MagicStorage.Components.StorageUnit || orig(self, tile);
+			return false;
+		});
+	}
+	delegate bool orig_ValidTile(TEStorageUnit self, in Tile tile);
+	delegate bool hook_ValidTile(orig_ValidTile orig, TEStorageUnit self, in Tile tile);
+	public void Unload() { }
+}
