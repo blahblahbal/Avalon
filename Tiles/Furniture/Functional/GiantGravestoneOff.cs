@@ -12,15 +12,15 @@ using Terraria.ObjectData;
 
 namespace Avalon.Tiles.Furniture.Functional;
 
-public class GiantGravestone : ModTile
+public class GiantGravestoneOff : ModTile
 {
     public override void SetStaticDefaults()
     {
         Main.tileFrameImportant[Type] = true;
         Main.tileNoAttach[Type] = true;
 		TileID.Sets.HasOutlines[Type] = true;
-        // Placement
-        TileObjectData.newTile.CopyFrom(TileObjectData.Style3x3);
+		// Placement
+		TileObjectData.newTile.CopyFrom(TileObjectData.Style3x3);
         TileObjectData.newTile.Origin = new Point16(0, 1);
         TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16 };
         TileObjectData.newTile.StyleHorizontal = true;
@@ -28,6 +28,7 @@ public class GiantGravestone : ModTile
         TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop | AnchorType.SolidSide, TileObjectData.newTile.Width, 0);
         TileObjectData.addTile(Type);
         AddMapEntry(new Color(127, 127, 127), Language.GetText("Giant Gravestone"));
+		RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.GiantGravestone>());
     }
 	public override void MouseOver(int i, int j)
 	{
@@ -63,7 +64,7 @@ public class GiantGravestone : ModTile
 			for (int y = topY; y < topY + 3; y++)
 			{
 				Tile t = Main.tile[x, y];
-				t.TileType = (ushort)ModContent.TileType<GiantGravestoneOff>();
+				t.TileType = (ushort)ModContent.TileType<GiantGravestone>();
 				if (Wiring.running)
 				{
 					Wiring.SkipWire(x, y);
