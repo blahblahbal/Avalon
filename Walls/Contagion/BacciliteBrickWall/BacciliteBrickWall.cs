@@ -1,6 +1,9 @@
+using Avalon.Common;
 using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
+using Terraria.Graphics.Light;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -32,5 +35,14 @@ public class BacciliteBrickWall : ModWall
         Main.wallHouse[Type] = true;
         AddMapEntry(new Color(59, 70, 47));
         DustType = ModContent.DustType<Dusts.ChunkstoneBrickDust>();
+    }
+    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+    {
+		if (!Lighting.NewEngine._tileScanner.LightIsBlocked(Main.tile[i, j]))
+		{
+			r = 0.1f;
+			g = 0.15f;
+			b = 0f;
+		}
     }
 }
