@@ -31,13 +31,6 @@ public class BacciliteBrickWall : ModWall
     {
         Main.wallHouse[Type] = true;
         AddMapEntry(new Color(59, 70, 47));
-        Main.wallLight[Type] = true;
         DustType = ModContent.DustType<Dusts.ChunkstoneBrickDust>();
-    }
-    public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
-    {
-        r = 0.1f;
-        g = 0.15f;
-        b = 0f;
     }
 }
