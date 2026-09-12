@@ -12089,6 +12089,15 @@ Mods: {
 			BloodDropletTile.MapEntry: Dripping Blood
 			AlkalineJellyfishJarTile.MapEntry: Alkaline Jellyfish Jar
 			BacciliteStorageUnitTile.MapEntry: Baccilite Storage Unit Tile
+			BloodiedSpike.MapEntry: Bloodied Spike
+			SnotOrb.MapEntry: Sepsis Cell
+			DemonSpikescale.MapEntry: Demon Spikescale
+			NaquadahAnvil.MapEntry: Naquadah Anvil
+			Jukebox.MapEntry: Jukebox
+			VenomSpike.MapEntry: Venom Spike
+			NastySpike.MapEntry: Nasty Spike
+			XanthophyteOre.MapEntry: Xanthophyte
+			SpiritPoppy.MapEntry: Spirit Poppy
 		}
 
 		Prefixes: {
