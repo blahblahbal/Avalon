@@ -12098,6 +12098,8 @@ Mods: {
 			NastySpike.MapEntry: Nasty Spike
 			XanthophyteOre.MapEntry: Xanthophyte
 			SpiritPoppy.MapEntry: Spirit Poppy
+			GiantGravestone.MapEntry: Giant Gravestone
+			BasaltObelisk.MapEntry: Basalt Obelisk
 		}
 
 		Prefixes: {
