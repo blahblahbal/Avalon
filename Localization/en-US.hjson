@@ -361,12 +361,15 @@ Mods: {
 			Drowned_4: "{0} wasn't a fish."
 			Drowned_5: "{0} forgot to inhale an air bubble."
 			Drowned_6: "{0} got a sinking feeling."
+			Drowned_7: "{0} thought they could drink the entire ocean."
+			Drowned_8: "{0} found a great permanent hiding spot."
 			Electrocuted_1: "{0} got zzzzapped."
 			Electrocuted_2: "{0} had an electrifying personality."
 			Electrocuted_3: "{0} tried to build their own computer."
 			Electrocuted_4: "{0} messed up the redstone."
 			Electrocuted_5: "{0} has the power!"
 			Electrocuted_6: "{0} thought they were a toaster."
+			Electrocuted_7: "{0}'s breaker tripped."
 			Escape_1: "{0} accidentally misclicked."
 			Fell_1: "{0} made a satisfying SPLAT when they hit the ground."
 			Fell_2: "{0} took a leap of faith..."
@@ -383,6 +386,7 @@ Mods: {
 			Fell_13: There is now a {0}-shaped hole in the ground.
 			Fell_14: "{0} fell for it again."
 			Fell_15: "{0} slowly watched their kneecaps invert."
+			Fell_16: "{0} had the floor run into them."
 			Gambler_1: "{0} gambled with their life."
 			Generic_1: "{0} was tickled to smithereens"
 			Generic_2: "{0} was reduced to a fine paste"
@@ -431,6 +435,8 @@ Mods: {
 			Malaria_1: "{0} was bitten by a mosquito."
 			Petrified_1: "{0} was stoned."
 			Petrified_2: "{0} was taken for granite."
+			Petrified_3: "{0} got rock hard."
+			Petrified_4: "{0} is now a fancy paperweight."
 			Poisoned_1: "{0} ate too many apple seeds."
 			Poisoned_2: "{0} thought it was a good idea to eat that mushroom."
 			Poisoned_3: "{0} was digested from the inside."
@@ -440,18 +446,20 @@ Mods: {
 			Space_3: "{0}'s body was found by martians."
 			Space_4: "{0} forgot their Environmental Protection Pack."
 			Space_5: "{0}'s planet needed them."
+			Space_6: "{0} went out of render distance."
 			Teleport_1: "{0}'s bones didn't teleport with them."
 			Teleport_2: "{0} thought they were an enderman."
 			Teleport_3: "{0} warped into the third dimension."
 			Teleport_4: "{0}'s magic trick did indeed make them disappear."
+			Teleport_5: "{0} became a jigsaw puzzle."
 			Teleport_2_Male: "{0}'s bones didn't teleport with them."
 			Teleport_3_Male: "{0} thought they were an enderman."
 			Teleport_4_Male: "{0} warped into the third dimension."
-			Teleport_5_Male: "{0}'s magic trick did indeed make them disappear."
+			Teleport_5_Male: "{0} became a jigsaw puzzle."
 			Teleport_2_Female: "{0}'s bones didn't teleport with them."
 			Teleport_3_Female: "{0} thought they were an enderman."
 			Teleport_4_Female: "{0} warped into the third dimension."
-			Teleport_5_Female: "{0}'s magic trick did indeed make them disappear."
+			Teleport_5_Female: "{0} became a jigsaw puzzle."
 			Toxic_1: "{0} was infected."
 			WardCurse_1: "{0} died from extra damage."
 			Acid_0: "{0} was dissolved in acid."
@@ -459,6 +467,8 @@ Mods: {
 			Acid_2: "{0}'s meat fell off the bone."
 			Acid_3: "{0} did the wrong acid."
 			Acid_4: "{0} dipped the wrong thing in acid."
+			Suffocated_1: "{0} invented dry waterboarding."
+			Suffocated_2: "{0} tried to disguise themselves as ore."
 			OsmiumSetBonus: "{0} buckled under their own weight."
 		}
 
@@ -12079,6 +12089,17 @@ Mods: {
 			BloodDropletTile.MapEntry: Dripping Blood
 			AlkalineJellyfishJarTile.MapEntry: Alkaline Jellyfish Jar
 			BacciliteStorageUnitTile.MapEntry: Baccilite Storage Unit Tile
+			BloodiedSpike.MapEntry: Bloodied Spike
+			SnotOrb.MapEntry: Sepsis Cell
+			DemonSpikescale.MapEntry: Demon Spikescale
+			NaquadahAnvil.MapEntry: Naquadah Anvil
+			Jukebox.MapEntry: Jukebox
+			VenomSpike.MapEntry: Venom Spike
+			NastySpike.MapEntry: Nasty Spike
+			XanthophyteOre.MapEntry: Xanthophyte
+			SpiritPoppy.MapEntry: Spirit Poppy
+			GiantGravestone.MapEntry: Giant Gravestone
+			BasaltObelisk.MapEntry: Basalt Obelisk
 		}
 
 		Prefixes: {
@@ -12326,18 +12347,18 @@ Mods: {
 				}
 
 				BetaTropicsGen: {
-					Label: Beta Savanna Gen
+					Label: Savanna Gen [c/FF0000:(UNFINISHED, MAY BREAK)]
 					Tooltip: Allows generating a Savanna world.
 				}
 
 				UnimplementedStructureGen: {
-					Label: Structure Generation for Unimplemented (as of yet) Structures
+					Label: Unimplemented Structure Generation [c/FF0000:(UNFINISHED, MAY BREAK)]
 					Tooltip: Enables Generation of the Hellcastle and Sky Fortress.
 				}
 
 				SuperhardmodeStuff: {
-					Label: Superhardmode Stuff
-					Tooltip: Enables generation of the Caesium Blastplains.
+					Label: Superhardmode Stuff [c/FF0000:(UNFINISHED, MAY BREAK)]
+					Tooltip: Enables generation of the Caesium Blastplains and Crystal Mines.
 				}
 
 				BloodyAmulet: {

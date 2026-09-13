@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -27,7 +28,7 @@ public class IridiumLongbowHeld : LongbowTemplate
 			for (int i = 0; i < 3; i++)
 			{
 				var p = VanillaParticles.RequestPrettySparkleParticle();
-				p.ColorTint = new Color(Main.rand.NextFloat(0.6f, 0.8f), 1f, 0.6f, 0f);
+				p.ColorTint = Color.SandyBrown;
 				p.FadeInEnd = Main.rand.NextFloat(2, 5);
 				p.FadeOutStart = p.FadeInEnd;
 				p.FadeOutEnd = Main.rand.NextFloat(13, 18);
@@ -46,8 +47,7 @@ public class IridiumLongbowHeld : LongbowTemplate
 	{
 		if (Main.player[Projectile.owner].channel)
 		{
-			Color arrowColor = Color.Lerp(Color.Chartreuse, Color.Green, Main.masterColor) with { A = 0 };
-			DrawArrow(arrowColor * Power, Vector2.Zero, true);
+			Main.EntitySpriteDraw(ArrowDrawData(Color.Lerp(Color.LimeGreen, Color.GreenYellow, Main.masterColor) * Power, Vector2.Zero, true));
 		}
 	}
 }

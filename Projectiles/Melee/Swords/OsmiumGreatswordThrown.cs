@@ -38,7 +38,7 @@ public class OsmiumGreatswordThrown : ModProjectile
 		{
 			Projectile.spriteDirection = player.direction;
 			Projectile.scale = Projectile.ai[0];
-			int width = (int)(Projectile.scale * 64);
+			int width = (int)(Projectile.scale * 77);
 			Projectile.Resize(width, width);
 			Projectile.rotation = player.itemRotation;
 		}
@@ -84,8 +84,9 @@ public class OsmiumGreatswordThrown : ModProjectile
 			if (Projectile.ai[1] == 1)
 			{
 				SoundEngine.PlaySound(SoundID.DD2_DarkMageAttack, Projectile.position);
-				if(PerfectTiming)
-					SoundEngine.PlaySound(SoundID.DD2_KoboldIgnite, Projectile.position);
+				if (PerfectTiming)
+					//SoundEngine.PlaySound(SoundID.DD2_KoboldIgnite, Projectile.position);
+					SoundEngine.PlaySound(Sounds.Item.OsmiumSwordShot.Asset with { pitchVariance = 0.2f, pitch = 0.2f }, Projectile.position);
 				for (int i = 0; i < 15; i++)
 				{
 					Dust d = Dust.NewDustPerfect(Projectile.Center, type);
@@ -93,7 +94,6 @@ public class OsmiumGreatswordThrown : ModProjectile
 					d.color = new Color(0.3f, Main.rand.NextFloat(0.4f, 0.75f), 1f, 0.75f);
 					d.noGravity = true;
 					d.scale = Main.rand.NextFloat(1f, 2f);
-					d.noLight = true;
 
 					Dust d2 = Dust.NewDustPerfect(d.position, type);
 					d2.frame = d.frame;
@@ -112,7 +112,6 @@ public class OsmiumGreatswordThrown : ModProjectile
 			d3.color = new Color(0.3f, Main.rand.NextFloat(0.4f, 0.75f), 1f, 0.75f);
 			d3.noGravity = true;
 			d3.scale = Main.rand.NextFloat(0.7f, 1.3f);
-			d3.noLight = true;
 			Dust d4 = Dust.NewDustPerfect(d3.position, type);
 			d4.frame = d3.frame;
 			d4.rotation = d3.rotation;
@@ -206,7 +205,7 @@ public class OsmiumGreatswordThrown : ModProjectile
 			}
 			for (int i = 0; i < 5; i++)
 			{
-				Gore g = Gore.NewGoreDirect(Projectile.GetSource_FromThis(), Projectile.Center, Main.rand.NextVector2Circular(1, 1), Main.rand.Next(GoreID.Smoke1, GoreID.Smoke3 + 1), Main.rand.NextFloat(0.25f, 0.75f));
+				Gore g = Gore.NewGoreDirect(Projectile.GetSource_FromThis(), Projectile.Center + new Vector2(-20,0), Main.rand.NextVector2Circular(1, 1), Main.rand.Next(GoreID.Smoke1, GoreID.Smoke3 + 1), Main.rand.NextFloat(0.25f, 0.75f));
 				g.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
 
 				var p = VanillaParticles.RequestPrettySparkleParticle();

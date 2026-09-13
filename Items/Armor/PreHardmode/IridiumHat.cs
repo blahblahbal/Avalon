@@ -20,16 +20,16 @@ public class IridiumHat : ModItem
 	}
 	public override bool ModifyEquipTextureDraw(ref PlayerDrawSet drawInfo, ref DrawData drawData, EquipTexture equipTexture, string methodName)
 	{
+		float ManaPercent = 1f - (drawInfo.drawPlayer.statMana / (float)drawInfo.drawPlayer.statManaMax2);
+		drawData.color = Color.Lerp(drawData.color, Color.White, ManaPercent);
 		drawInfo.DrawDataCache.Add(drawData);
 		if (drawInfo.drawPlayer.GetModPlayer<IridiumSetBonusPlayer>().Active)
 		{
 			Rectangle frame = (Rectangle)drawData.sourceRect;
 			frame.X += drawData.texture.Width / 2;
-			float ManaPercent = 1f - (drawInfo.drawPlayer.statMana / (float)drawInfo.drawPlayer.statManaMax2);
-			ManaPercent *= 0.5f;
 			for (int i = 0; i < 4; i++)
 			{
-				drawInfo.DrawDataCache.Add(drawData with { position = drawData.position + new Vector2(0, 2 + (2f - ManaPercent * 2)).RotatedBy(i * MathHelper.PiOver2 + (Main.timeForVisualEffects * 0.01f)), color = Color.SlateBlue with { A = 0 } * ManaPercent });
+				drawInfo.DrawDataCache.Add(drawData with { position = drawData.position + new Vector2(0, 2).RotatedBy(i * MathHelper.PiOver2), color = Color.SandyBrown with { A = 0 } * ManaPercent * 0.35f });
 			}
 		}
 		return false;

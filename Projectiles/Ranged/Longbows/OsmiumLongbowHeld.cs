@@ -32,8 +32,7 @@ public class OsmiumLongbowHeld : LongbowTemplate
 	{
 		if (Main.player[Projectile.owner].channel)
 		{
-			Color arrowColor = Color.Lerp(Color.Blue, Color.Cyan, Main.masterColor) with { A = 0 };
-			DrawArrow(arrowColor * Power, Vector2.Zero, true);
+			Main.EntitySpriteDraw(ArrowDrawData(Color.Lerp(Color.Blue, Color.Cyan, Main.masterColor) with { A = 0 } * Power, Vector2.Zero, true));
 		}
 	}
 }

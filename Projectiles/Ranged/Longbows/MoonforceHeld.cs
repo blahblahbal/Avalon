@@ -108,19 +108,19 @@ public class MoonforceHeld : LongbowTemplate
 			Main.EntitySpriteDraw(sparkle.Value, glowPos, null, new Color(0.3f, 0.1f, 1, 0.3f) * (1f - amount) * amount * glowOpacity, Projectile.rotation + MathHelper.PiOver2, sparkle.Size() / 2, glowScale * (0.5f + amount) * 2, SpriteEffects.None);
 			Main.EntitySpriteDraw(sparkle.Value, glowPos, null, new Color(1f, 1, 1, 0) * (1f - amount) * amount * glowOpacity, Projectile.rotation + MathHelper.PiOver2, sparkle.Size() / 2, glowScale * (0.25f + amount) * 1.5f, SpriteEffects.None);
 		}
-		DefaultBowDraw(new Color(200, 200, 200, 128), Vector2.Zero);
+		DrawData bow = BowDrawData(new Color(200, 200, 200, 128), Vector2.Zero);
+		Main.EntitySpriteDraw(bow);
 		if (FullPowerGlow > 0 && Main.myPlayer == Projectile.owner)
 		{
-			DefaultBowDraw(NotificationColor * FullPowerGlow, Vector2.Zero);
+			Main.EntitySpriteDraw(bow with { color = NotificationColor * FullPowerGlow });
 		}
 		if (Main.player[Projectile.owner].channel)
 		{
-			DrawArrow(lightColor, new Vector2(0, -1));
+			var arrow = ArrowDrawData(lightColor, new Vector2(0, -1));
+			Main.EntitySpriteDraw(arrow);
 			for (int i = 0; i < 4; i++)
 			{
-				Color arrowColor = Color.Lerp(Color.Blue, Color.Red, Main.masterColor) * 0.6f;
-				arrowColor.A = 0;
-				DrawArrow(arrowColor * Power, new Vector2(0, -1) + new Vector2(Power * 2, 0).RotatedBy((i * MathHelper.PiOver2) + Main.timeForVisualEffects * 0.1f), true);
+				Main.EntitySpriteDraw(arrow with { color = new Color(Main.masterColor, 0, 1f - Main.masterColor, 0) * 0.6f, position = arrow.position + new Vector2(Power * 2, 0).RotatedBy((i * MathHelper.PiOver2) + Main.timeForVisualEffects * 0.1f) });
 			}
 		}
 		return false;

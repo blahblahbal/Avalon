@@ -39,7 +39,7 @@ public class IridiumGreatswordBoomLarge : ModProjectile
 		DrawData d = new(tex.Value, Projectile.Bottom - Main.screenPosition + new Vector2(DrawOriginOffsetY * Projectile.scale), frame, Color.White with { A = 128}, 0, new Vector2(frame.Width / 2, frame.Height), Projectile.scale, SpriteEffects.None);
 		for(int i = 0; i < 4; i++)
 		{
-			Main.EntitySpriteDraw(d with { position = d.position + new Vector2(0,2 * Projectile.scale).RotatedBy(i * MathHelper.PiOver2), color = Color.SlateBlue with { A = 64} * 1 });
+			Main.EntitySpriteDraw(d with { position = d.position + new Vector2(0,2 * Projectile.scale).RotatedBy(i * MathHelper.PiOver2), color = Color.SandyBrown with { A = 64} * 0.7f });
 		}
 		Main.EntitySpriteDraw(d);
 		return false;
@@ -57,7 +57,7 @@ public class IridiumGreatswordBoomLarge : ModProjectile
 			{
 				Dust d = Dust.NewDustPerfect(Projectile.Bottom, dustType, new Vector2(Main.rand.NextFloat(-Projectile.width,Projectile.width) * 0.1f, Main.rand.NextFloat(-Projectile.width, 0) * 0.13f));
 				d.noGravity = true;
-				d.color = new Color(Main.rand.NextFloat(0.6f, 0.8f), 1f, 0.6f, 0.5f);
+				d.color = Main.rand.NextBool(3)? Color.SandyBrown with { A = 0} : new Color(Main.rand.NextFloat(0.6f, 0.8f), 1f, 0.6f, 0.5f);
 				d.scale += Main.rand.NextFloat();
 				d.fadeIn = Main.rand.NextFloat(1.5f);
 

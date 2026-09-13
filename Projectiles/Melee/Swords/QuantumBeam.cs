@@ -1,4 +1,5 @@
-﻿using Avalon.Particles;
+﻿using Avalon.Core;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -30,6 +31,8 @@ public class QuantumBeam : ModProjectile
 		Projectile.scale = 1f;
 		Projectile.tileCollide = false;
 		Projectile.penetrate = 5;
+		Projectile.usesLocalNPCImmunity = true;
+		Projectile.localNPCHitCooldown = 30;
 	}
 	public override Color? GetAlpha(Color lightColor)
 	{
@@ -61,8 +64,19 @@ public class QuantumBeam : ModProjectile
 		Projectile.ai[1]++;
 		if (Projectile.ai[1] < -1 && Projectile.ai[2] == 0)
 		{
+			Projectile.velocity = Projectile.velocity.LengthClamp(25);
 			Projectile.ai[2]++;
+			SoundEngine.PlaySound(Sounds.Item.ReverseWindChime.Asset with { pitchVariance = 0.2f, pitch = 0.2f, MaxInstances = 10}, Projectile.Center);
 			Main.ParticleSystem_World_OverPlayers.Add(new QuantumPortal(Projectile.Center));
+
+			for (int i = 0; i < 15; i++)
+			{
+				Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.Stone);
+				d.velocity = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(2,6);
+				d.noGravity = true;
+				d.fadeIn += Main.rand.NextFloat(1.5f);
+				d.color = Color.Black;
+			}
 		}
 		if (Projectile.ai[1] == -1)
 		{
@@ -86,6 +100,10 @@ public class QuantumBeam : ModProjectile
 			}
 			//Projectile.extraUpdates++;
 			Projectile.penetrate = 1;
+		}
+		if (Projectile.ai[1] == 1)
+		{
+			SoundEngine.PlaySound(Sounds.Item.QuantumClaymorePortal.Asset with { pitchVariance = 1f, volume = 0.5f, MaxInstances = 10 }, Projectile.Center);
 		}
 		if (Projectile.ai[1] > 40)
 		{
@@ -117,26 +135,27 @@ public class QuantumBeam : ModProjectile
 			}
 		}
 	}
-
-	public SoundStyle StarSoundReal = new SoundStyle("Terraria/Sounds/Item_9")
-	{
-		Volume = 0.6f,
-		Pitch = -1f,
-		PitchVariance = 0.1f,
-		MaxInstances = 10,
-	};
-
-	public SoundStyle Impac = new SoundStyle("Terraria/Sounds/Item_72")
-	{
-		Volume = 0.6f,
-		MaxInstances = 10,
-	};
-	public override void OnSpawn(IEntitySource source)
-	{
-		SoundEngine.PlaySound(StarSoundReal, Projectile.position);
-	}
 	public override void OnKill(int timeLeft)
 	{
+		var t = AssetReferences.Assets.Textures.InverseGlowRing.Asset;
+		t.Wait();
+		for (int i2 = 0; i2 < 2; i2++)
+		{
+			var ring = VanillaParticles.RequestFadingParticle();
+			ring.SetBasicInfo(t, null, Vector2.Zero, Projectile.Center);
+			int time = Main.rand.Next(15, 20);
+			ring.SetTypeInfo(time);
+			ring.Scale = Vector2.One * 0.15f;
+			ring.ScaleVelocity = Vector2.One.RotatedByRandom(0.75f) * Main.rand.NextFloat(0.05f,0.075f);
+			ring.ScaleAcceleration = ring.ScaleVelocity / -time;
+			ring.FadeInNormalizedTime = 0.1f;
+			ring.FadeOutNormalizedTime = 0.1f;
+			ring.ColorTint = i2 == 0 ? new Color(Main.rand.Next(128, 255), 0, 255, 0) : Color.Black;
+			ring.Rotation = Main.rand.NextFloatDirection();
+			ring.RotationVelocity = Main.rand.NextFloat(-0.15f, 0.15f);
+			Main.ParticleSystem_World_OverPlayers.Add(ring);
+		}
+
 		for (int i = 0; i <= 20; i++)
 		{
 			int DustType = DustID.CorruptTorch;
@@ -146,10 +165,10 @@ public class QuantumBeam : ModProjectile
 			Dust D = Dust.NewDustDirect(Projectile.Center, 0, 0, DustType);
 			D.noGravity = !Main.rand.NextBool(3);
 			if (D.noGravity)
-				D.fadeIn = Main.rand.NextFloat(1, 2);
+				D.fadeIn = Main.rand.NextFloat(1, 1.3f);
 			D.velocity = Main.rand.NextVector2Circular(4, 4);
 		}
-		SoundEngine.PlaySound(Impac, Projectile.position);
+		SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
 	}
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 	{
@@ -157,8 +176,11 @@ public class QuantumBeam : ModProjectile
 
 		if (hit.Crit)
 		{
+			int damage = (int)(Projectile.damage * 0.6f);
+			if (damage <= 0)
+				return;
 			Vector2 SwordSpawn = Projectile.Center + Main.rand.NextVector2Circular(300, 300);
-			Projectile P = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), SwordSpawn, SwordSpawn.DirectionTo(target.Center) * (Projectile.velocity.Length() * Main.rand.NextFloat(1.1f, 1.3f)), ModContent.ProjectileType<QuantumBeam>(), (int)(Projectile.damage * 0.6f), Projectile.knockBack, Projectile.owner, 0, Main.rand.Next(-20, -10));
+			Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), SwordSpawn, SwordSpawn.DirectionTo(target.Center) * (Projectile.velocity.Length() * Main.rand.NextFloat(1.1f, 1.3f)), ModContent.ProjectileType<QuantumBeam>(), (int)(Projectile.damage * 0.6f), Projectile.knockBack, Projectile.owner, 0, Main.rand.Next(-20, -10));
 		}
 	}
 	public override void OnHitPlayer(Player target, Player.HurtInfo info)

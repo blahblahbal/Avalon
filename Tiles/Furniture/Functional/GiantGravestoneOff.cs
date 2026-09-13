@@ -5,12 +5,13 @@ using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
 namespace Avalon.Tiles.Furniture.Functional;
 
-public class GiantGravestone : ModTile
+public class GiantGravestoneOff : ModTile
 {
 	public override void SetStaticDefaults()
 	{
@@ -25,7 +26,8 @@ public class GiantGravestone : ModTile
 		TileObjectData.newTile.LavaDeath = false;
 		TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop | AnchorType.SolidSide, TileObjectData.newTile.Width, 0);
 		TileObjectData.addTile(Type);
-		AddMapEntry(new Color(127, 127, 127), this.GetLocalization("MapEntry"));
+		AddMapEntry(new Color(127, 127, 127), Language.GetText("Mods.Avalon.Tiles.GiantGravestone.MapEntry"));
+		RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.GiantGravestone>());
 	}
 	public override void MouseOver(int i, int j)
 	{
@@ -61,7 +63,7 @@ public class GiantGravestone : ModTile
 			for (int y = topY; y < topY + 3; y++)
 			{
 				Tile t = Main.tile[x, y];
-				t.TileType = (ushort)ModContent.TileType<GiantGravestoneOff>();
+				t.TileType = (ushort)ModContent.TileType<GiantGravestone>();
 				if (Wiring.running)
 				{
 					Wiring.SkipWire(x, y);

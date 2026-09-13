@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Linq;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.ObjectData;
 
 namespace Avalon.Common;
 public static class AvalonUtils
@@ -17,7 +19,7 @@ public static class AvalonUtils
 			Main.spriteBatch.Draw(TextureAssets.Confuse.Value, new Vector2(npc.position.X - screenPos.X + (float)(npc.width / 2) - (float)TextureAssets.Npc[npc.type].Width() * npc.scale / 2f + halfSize.X * npc.scale, npc.position.Y - screenPos.Y + (float)npc.height - (float)TextureAssets.Npc[npc.type].Height() * npc.scale / (float)Main.npcFrameCount[npc.type] + 4f + halfSize.Y * npc.scale + num36 + heightOffset - (float)TextureAssets.Confuse.Height() - 20f), new Rectangle(0, 0, TextureAssets.Confuse.Width(), TextureAssets.Confuse.Height()), npc.GetShimmerColor(new Color(250, 250, 250, 70)), npc.velocity.X * -0.05f, new Vector2(TextureAssets.Confuse.Width() / 2, TextureAssets.Confuse.Height() / 2), Main.essScale + 0.2f, SpriteEffects.None, 0f);
 		}
 	}
-	public static bool SolidCollisionWithFunctionalTopSurfaceDetection(Vector2 Position, int Width, int Height)
+	public static bool SolidCollisionWithFunctionalTopSurfaceDetection(Vector2 Position, int Width, int Height, bool acceptTopSurfaces)
 	{
 		int value = (int)(Position.X / 16f) - 1;
 		int value2 = (int)((Position.X + (float)Width) / 16f) + 2;
@@ -38,7 +40,19 @@ public static class AvalonUtils
 					continue;
 				}
 
-				bool flag = Main.tileSolid[tile.type] || Main.tileSolidTop[tile.type];
+				bool flag = Main.tileSolid[tile.type] && !Main.tileSolidTop[tile.type];
+				if (acceptTopSurfaces && Main.tileSolidTop[tile.type])
+				{
+					TileObjectData tileObjectData = TileObjectData.GetTileData(tile);
+					if (tileObjectData != null && tileObjectData.Height != 1)
+					{
+						flag |= tile.TileFrameY == 0;
+					}
+					else
+					{
+						flag = true;
+					}
+				}
 
 				if (flag)
 				{

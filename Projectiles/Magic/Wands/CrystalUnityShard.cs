@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.Graphics;
 using Terraria.Graphics.Shaders;
@@ -30,8 +31,8 @@ public class CrystalUnityShard : ModProjectile
 	public override void SetStaticDefaults()
 	{
 		Main.projFrames[Type] = 10;
-		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
-		ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 25;
+		ProjectileID.Sets.TrailingMode[Projectile.type] = 3;
 	}
 
 	public override Color? GetAlpha(Color lightColor)
@@ -62,6 +63,7 @@ public class CrystalUnityShard : ModProjectile
 		{
 			Dust d = Dust.NewDustPerfect(Projectile.Center, DustIds[GemType], Main.rand.NextVector2Circular(5, 5));
 			d.noGravity = true;
+			d.fadeIn += Main.rand.NextFloat(1.5f);
 			//d.velocity += Projectile.velocity;
 		}
 		for (int i = 0; i < Projectile.oldPos.Length; i++)
@@ -78,10 +80,10 @@ public class CrystalUnityShard : ModProjectile
 		{
 			var p = VanillaParticles.RequestPrettySparkleParticle();
 			p.ColorTint = Colors[GemType] with { A = 0 };
-			p.FadeInEnd = p.FadeOutStart = Main.rand.Next(5, 10);
-			p.FadeOutEnd = Main.rand.NextFloat(15, 20);
+			p.FadeInEnd = p.FadeOutStart = Main.rand.Next(7, 14);
+			p.FadeOutEnd = Main.rand.NextFloat(20, 30);
 			p.Scale = new Vector2(3, 0.5f);
-			p.Velocity = new Vector2(0, Main.rand.NextFloat(2, 4)).RotatedBy(i * MathHelper.PiOver2 + Main.rand.NextFloat(-0.3f, 0.3f));
+			p.Velocity = new Vector2(0, Main.rand.NextFloat(1, 3)).RotatedBy(i * MathHelper.PiOver2 + Main.rand.NextFloat(-0.3f, 0.3f));
 			p.Rotation = p.Velocity.ToRotation();
 			p.DrawVerticalAxis = false;
 			p.LocalPosition = Projectile.Center;
@@ -152,8 +154,23 @@ public class CrystalUnityShard : ModProjectile
 		{
 			default(CrystalUnityVertexStrip).Draw(Projectile);
 		}
-		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition, TextureAssets.Projectile[Type].Frame(1, Main.projFrames[Type], 0, Projectile.frame), Color.White * Projectile.Opacity, Projectile.rotation + MathHelper.PiOver2, new Vector2(5, 9), Projectile.scale, SpriteEffects.None);
-		Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition, TextureAssets.Projectile[Type].Frame(1, Main.projFrames[Type], 0, Projectile.frame), Color.White with { A = 0 } * Projectile.Opacity * 0.5f, Projectile.rotation + MathHelper.PiOver2, new Vector2(5, 9), Projectile.scale * 1.5f, SpriteEffects.None);
+
+		var sparkle = TextureAssets.Extra[ExtrasID.ThePerfectGlow];
+		DrawData sparkleData = new(sparkle.Value, Projectile.Center - Main.screenPosition, null, Colors[(int)Projectile.ai[2]] with { A = 32 } * 0.2f, 0, sparkle.Size() / 2, new Vector2(1.2f + (float)Math.Sin(Main.timeForVisualEffects * 0.4f) * 0.2f, 1.5f + (float)Math.Sin(Main.timeForVisualEffects * 0.4f) * -0.2f), SpriteEffects.None);
+		sparkleData.scale *= Utils.Remap(Projectile.ai[1], 0, 30, 0.2f, 1f);
+		for (int i = 0; i < 2; i++)
+		{
+			Main.EntitySpriteDraw(sparkleData);
+			Main.EntitySpriteDraw(sparkleData with { rotation = MathHelper.PiOver2});
+			Main.EntitySpriteDraw(sparkleData with { rotation = MathHelper.PiOver4, scale = sparkleData.scale * new Vector2(1, 0.7f) });
+			Main.EntitySpriteDraw(sparkleData with { rotation = -MathHelper.PiOver4, scale = sparkleData.scale * new Vector2(1, 0.7f) });
+			sparkleData.scale *= new Vector2(0.5f, 0.75f);
+			sparkleData.color = Color.Lerp(sparkleData.color, Color.White, 0.5f) with { A = 0 } * 0.5f;
+		}
+
+		DrawData d = new(TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition, TextureAssets.Projectile[Type].Frame(1, Main.projFrames[Type], 0, Projectile.frame), Color.White with { A = 128 } * Projectile.Opacity, Projectile.rotation + MathHelper.PiOver2, new Vector2(5, 9), Projectile.scale, SpriteEffects.None);
+		Main.EntitySpriteDraw(d with { color = Color.White with { A = 64 } * 0.5f, scale = d.scale * 1.5f });
+		Main.EntitySpriteDraw(d);
 		return false;
 	}
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -229,7 +246,7 @@ public struct CrystalUnityVertexStrip
 	{
 		StripColor = CrystalUnityShard.Colors[(int)proj.ai[2]];
 		MiscShaderData miscShaderData = GameShaders.Misc["CrystalUnity"];
-		miscShaderData.UseSaturation(proj.velocity.Length() * -0.2f);
+		miscShaderData.UseSaturation(proj.velocity.Length() * -0.3f);
 		miscShaderData.UseOpacity(proj.Opacity);
 		miscShaderData.Apply();
 		_vertexStrip.PrepareStripWithProceduralPadding(proj.oldPos, proj.oldRot, StripColors, StripWidth, -Main.screenPosition + proj.Size / 2f);
@@ -238,11 +255,11 @@ public struct CrystalUnityVertexStrip
 	}
 	private Color StripColors(float progressOnStrip)
 	{
-		return Color.Lerp(StripColor, Color.White, 0.15f) with { A = 0 } * (1f - MathF.Pow(progressOnStrip, 3));
+		return Color.Lerp(StripColor, Color.White, 0.15f) with { A = 64 } * (1f - MathF.Pow(progressOnStrip, 3));
 	}
 	private float StripWidth(float progressOnStrip)
 	{
-		return MathHelper.Lerp(7, 20, progressOnStrip);
+		return 20;
 	}
 }
 

@@ -36,19 +36,19 @@ public class LongboneHeld : LongbowTemplate
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
-		DefaultBowDraw(lightColor, Vector2.Zero);
+		var d = BowDrawData(lightColor, Vector2.Zero);
+		Main.EntitySpriteDraw(d);
 		if (FullPowerGlow > 0 && Main.myPlayer == Projectile.owner)
 		{
-			DefaultBowDraw(NotificationColor * FullPowerGlow, Vector2.Zero);
+			Main.EntitySpriteDraw(d with { color = NotificationColor * FullPowerGlow });
 		}
 		if (Main.player[Projectile.owner].channel)
 		{
-			DrawArrow(lightColor, new Vector2(0, -1));
+			var arrow = ArrowDrawData(lightColor, new Vector2(0, -1));
+			Main.EntitySpriteDraw(arrow);
 			for (int i = 0; i < 4; i++)
 			{
-				Color arrowColor = Color.Lerp(Color.Blue, Color.Transparent, Main.masterColor) * 0.3f;
-				arrowColor.A = 0;
-				DrawArrow(arrowColor * Power, new Vector2(0, -1) + new Vector2(Power * 2, 0).RotatedBy((i * MathHelper.PiOver2) + Main.timeForVisualEffects * 0.1f), true);
+				Main.EntitySpriteDraw(arrow with {color = Color.Blue with { A = 0 } * 0.3f * Main.masterColor, position = arrow.position + new Vector2(Power * 2, 0).RotatedBy((i * MathHelper.PiOver2) + Main.timeForVisualEffects * 0.1f) });
 			}
 		}
 		return false;
