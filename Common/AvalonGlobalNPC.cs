@@ -13,9 +13,7 @@ using Avalon.ModSupport;
 using Avalon.NPCs.Bosses.Hardmode.WallOfSteel;
 using Avalon.NPCs.Contagion;
 using Avalon.NPCs.Hellcastle;
-using Avalon.NPCs.Savanna;
 using Avalon.NPCs.TownNPCs;
-using Avalon.NPCs.Underground;
 using Avalon.Systems;
 using Avalon.Tiles.Savanna;
 using Avalon.Walls.Contagion.ContagionGrassWall;
@@ -366,190 +364,6 @@ public class AvalonGlobalNPC : GlobalNPC
 			}
 		}
 	}
-	/// <summary>
-	///  A method to choose a random Town NPC death messages.
-	/// </summary>
-	/// <param name="type">The Town NPC's type.</param>
-	/// <returns>The string containing the death message.</returns>
-	public static string TownDeathMsg(int type)
-	{
-		string result = string.Empty;
-		if (type == NPCID.Merchant)
-		{
-			int r = Main.rand.Next(7);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.Merchant.DeathText.{r}");
-		}
-		else if (type == NPCID.Nurse)
-		{
-			int r = Main.rand.Next(5);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.Nurse.DeathText.{r}");
-		}
-		else if (type == NPCID.OldMan)
-		{
-			int r = Main.rand.Next(2);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.OldMan.DeathText.{r}");
-		}
-		else if (type == NPCID.ArmsDealer)
-		{
-			int r = Main.rand.Next(7);
-			if (r == 5)
-			{
-				if (!Main.dayTime) result += Language.GetTextValue($"Mods.Avalon.NPCs.ArmsDealer.DeathText.{r}");
-				else result += Language.GetTextValue($"Mods.Avalon.NPCs.ArmsDealer.DeathText.{r - 1}");
-			}
-			else result += Language.GetTextValue($"Mods.Avalon.NPCs.ArmsDealer.DeathText.{r}");
-		}
-		else if (type == NPCID.Dryad)
-		{
-			int r = Main.rand.Next(7);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.Dryad.DeathText.{r}");
-		}
-		else if (type == NPCID.Guide)
-		{
-			int r = Main.rand.Next(8);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.Guide.DeathText.{r}");
-		}
-		else if (type == NPCID.Demolitionist)
-		{
-			int r = Main.rand.Next(7);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.Demolitionist.DeathText.{r}");
-		}
-		else if (type == NPCID.Clothier)
-		{
-			int r = Main.rand.Next(6);
-		}
-		else if (type == NPCID.GoblinTinkerer)
-		{
-			int r = Main.rand.Next(6);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.GoblinTinkerer.DeathText.{r}");
-		}
-		else if (type == NPCID.Wizard)
-		{
-			int r = Main.rand.Next(7);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.Wizard.DeathText.{r}");
-		}
-		else if (type == NPCID.SantaClaus)
-		{
-			int r = Main.rand.Next(2);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.SantaClaus.DeathText.{r}");
-		}
-		else if (type == NPCID.Mechanic)
-		{
-			int r = Main.rand.Next(6);
-			if (r == 5)
-			{
-				result += Language.GetTextValue($"Mods.Avalon.NPCs.Mechanic.DeathText.{r}", Main.worldName);
-			}
-			else result += Language.GetTextValue($"Mods.Avalon.NPCs.Mechanic.DeathText.{r}");
-		}
-		else if (type == NPCID.Truffle)
-		{
-			int r = Main.rand.Next(7);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.Truffle.DeathText.{r}");
-		}
-		else if (type == NPCID.Steampunker)
-		{
-			int r = Main.rand.Next(5);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.Steampunker.DeathText.{r}");
-		}
-		else if (type == NPCID.DyeTrader)
-		{
-			int r = Main.rand.Next(6);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.DyeTrader.DeathText.{r}");
-		}
-		else if (type == NPCID.PartyGirl)
-		{
-			int r = Main.rand.Next(6);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.PartyGirl.DeathText.{r}");
-		}
-		else if (type == NPCID.Cyborg)
-		{
-			int r = Main.rand.Next(9);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.Cyborg.DeathText.{r}");
-		}
-		else if (type == NPCID.Painter)
-		{
-			int r = Main.rand.Next(6);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.Painter.DeathText.{r}");
-		}
-		else if (type == NPCID.WitchDoctor)
-		{
-			int r = Main.rand.Next(6);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.WitchDoctor.DeathText.{r}");
-		}
-		else if (type == NPCID.Pirate)
-		{
-			int r = Main.rand.Next(5);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.Pirate.DeathText.{r}");
-		}
-		else if (type == NPCID.Stylist)
-		{
-			int r = Main.rand.Next(6);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.Stylist.DeathText.{r}");
-		}
-		else if (type == NPCID.TravellingMerchant)
-		{
-			int r = Main.rand.Next(7);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.TravellingMerchant.DeathText.{r}");
-		}
-		else if (type == NPCID.Angler)
-		{
-			int r = Main.rand.Next(9);
-			if (r == 8)
-			{
-				if (NPC.AnyNPCs(NPCID.Pirate)) result += Language.GetTextValue($"Mods.Avalon.NPCs.Angler.DeathText.{r}", Main.npc[FindATypeOfNPC(NPCID.Pirate)].GivenName);
-				else result += Language.GetTextValue($"Mods.Avalon.NPCs.Angler.DeathText.{r - 2}");
-			}
-			else result += Language.GetTextValue($"Mods.Avalon.NPCs.Angler.DeathText.{r}");
-		}
-		else if (type == NPCID.TaxCollector)
-		{
-			int r = Main.rand.Next(6);
-			if (r == 3)
-			{
-				result += Language.GetTextValue($"Mods.Avalon.NPCs.TaxCollector.DeathText.{r}", Main.worldName);
-			}
-			else result += Language.GetTextValue($"Mods.Avalon.NPCs.Angler.DeathText.{r}");
-		}
-		else if (type == NPCID.DD2Bartender)
-		{
-			int r = Main.rand.Next(5);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.DD2Bartender.DeathText.{r}");
-		}
-		else if (type == NPCID.Princess)
-		{
-			int r = Main.rand.Next(5);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.Princess.DeathText.{r}");
-		}
-		else if (type == NPCID.Golfer)
-		{
-			int r = Main.rand.Next(6);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.Golfer.DeathText.{r}");
-		}
-		else if (type == NPCID.BestiaryGirl)
-		{
-			int r = Main.rand.Next(3);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.BestiaryGirl.DeathText.{r}");
-		}
-		//else if (type == ModContent.NPCType<Iceman>())
-		//{
-		//	int r = Main.rand.Next(7);
-		//	if (r == 4)
-		//	{
-		//		if (NPC.AnyNPCs(NPCID.ArmsDealer)) result += Language.GetTextValue($"Mods.Avalon.NPCs.Iceman.DeathText.{r}", Main.npc[FindATypeOfNPC(NPCID.ArmsDealer)].GivenName);
-		//		else result += Language.GetTextValue($"Mods.Avalon.NPCs.Iceman.DeathText.{r + 1}");
-		//	}
-		//	else result += Language.GetTextValue($"Mods.Avalon.NPCs.Iceman.DeathText.{r}");
-		//}
-		else if (type == ModContent.NPCType<Librarian>())
-		{
-			int r = Main.rand.Next(7);
-			result += Language.GetTextValue($"Mods.Avalon.NPCs.Librarian.DeathText.{r}");
-		}
-		else result += Language.GetTextValue("Mods.Avalon.NPCs.DeathTextGeneric");
-
-		return result;
-	}
 	public override void OnSpawn(NPC npc, IEntitySource source)
 	{
 		if (source is EntitySource_Parent parent && parent.Entity is NPC npc2 && npc2.HasBuff(BuffID.Cursed))
@@ -704,10 +518,12 @@ public class AvalonGlobalNPC : GlobalNPC
 		{
 			if (!npc.townNPC && npc.lifeMax > 5 && !npc.dontTakeDamage && !npc.noTileCollide && SpikeCollision2(npc.position, npc.width, npc.height))
 			{
-				NPC.HitInfo hit = new NPC.HitInfo();
-				hit.Damage = 30 + (int)(npc.defense / 2);
-				hit.HitDirection = 0;
-				hit.Knockback = 0;
+				NPC.HitInfo hit = new NPC.HitInfo
+				{
+					Damage = 30 + (int)(npc.defense / 2),
+					HitDirection = 0,
+					Knockback = 0
+				};
 				npc.StrikeNPC(hit);
 				npc.GetGlobalNPC<AvalonGlobalNPCInstance>().SpikeTimer = 0;
 			}
@@ -748,10 +564,124 @@ public class AvalonGlobalNPC : GlobalNPC
 	{
 		if (npc.townNPC)
 		{
-			customText = NetworkText.FromLiteral(npc.GetFullNetName() + TownDeathMsg(npc.type));
+			customText = TownDeathMsg(npc) ?? customText;
 			color = new Color(178, 0, 90);
 		}
 		return true;
+	}
+	/// <summary>
+	///  A method to choose a random Town NPC death message.
+	/// </summary>
+	/// <param name="npc">The Town NPC.</param>
+	/// <returns>The NetworkText containing the death message.</returns>
+	public static NetworkText? TownDeathMsg(NPC npc)
+	{
+		List<object> subs = [npc.GetFullNetName()];
+		string ArmsDealerMessage(int x)
+		{
+			int r = Main.rand.Next(x);
+			if (r == 5)
+			{
+				if (!Main.dayTime) return $"ArmsDealer.DeathText.{r}";
+				else return $"ArmsDealer.DeathText.{r - 1}";
+			}
+			return $"ArmsDealer.DeathText.{r}";
+		}
+		string MechanicMessage(int x)
+		{
+			int r = Main.rand.Next(x);
+			if (r == 5)
+			{
+				subs.Add(Main.worldName);
+				return $"Mechanic.DeathText.{r}";
+			}
+			return $"Mechanic.DeathText.{r}";
+		}
+		string AnglerMessage(int x)
+		{
+			int r = Main.rand.Next(x);
+			if (r == 8)
+			{
+				if (NPC.AnyNPCs(NPCID.Pirate))
+				{
+					subs.Add(Main.npc[FindATypeOfNPC(NPCID.Pirate)].GetGivenNetName());
+					return $"Angler.DeathText.{r}";
+				}
+				return $"Angler.DeathText.{r - 2}";
+			}
+			return $"Angler.DeathText.{r}";
+		}
+		string TaxCollectorMessage(int x)
+		{
+			int r = Main.rand.Next(x);
+			if (r == 3)
+			{
+				subs.Add(Main.worldName);
+				return $"TaxCollector.DeathText.{r}";
+			}
+			return $"TaxCollector.DeathText.{r}";
+		}
+		string key = npc.type switch
+		{
+			NPCID.Merchant => $"Merchant.DeathText.{Main.rand.Next(7)}",
+			NPCID.Nurse => $"Nurse.DeathText.{Main.rand.Next(5)}",
+			NPCID.OldMan => $"OldMan.DeathText.{Main.rand.Next(2)}",
+			NPCID.ArmsDealer => ArmsDealerMessage(6),
+			NPCID.Dryad => $"Dryad.DeathText.{Main.rand.Next(7)}",
+			NPCID.Guide => $"Guide.DeathText.{Main.rand.Next(8)}",
+			NPCID.Demolitionist => $"Demolitionist.DeathText.{Main.rand.Next(7)}",
+			NPCID.Clothier => $"Clothier.DeathText.{Main.rand.Next(6)}",
+			NPCID.GoblinTinkerer => $"GoblinTinkerer.DeathText.{Main.rand.Next(6)}",
+			NPCID.Wizard => $"Wizard.DeathText.{Main.rand.Next(7)}",
+			NPCID.SantaClaus => $"SantaClaus.DeathText.{Main.rand.Next(2)}",
+			NPCID.Mechanic => MechanicMessage(6),
+			NPCID.Truffle => $"Truffle.DeathText.{Main.rand.Next(7)}",
+			NPCID.Steampunker => $"Steampunker.DeathText.{Main.rand.Next(5)}",
+			NPCID.DyeTrader => $"DyeTrader.DeathText.{Main.rand.Next(6)}",
+			NPCID.PartyGirl => $"PartyGirl.DeathText.{Main.rand.Next(6)}",
+			NPCID.Cyborg => $"Cyborg.DeathText.{Main.rand.Next(9)}",
+			NPCID.Painter => $"Painter.DeathText.{Main.rand.Next(6)}",
+			NPCID.WitchDoctor => $"WitchDoctor.DeathText.{Main.rand.Next(6)}",
+			NPCID.Pirate => $"Pirate.DeathText.{Main.rand.Next(5)}",
+			NPCID.Stylist => $"Stylist.DeathText.{Main.rand.Next(6)}",
+			NPCID.TravellingMerchant => $"TravellingMerchant.DeathText.{Main.rand.Next(7)}",
+			NPCID.Angler => AnglerMessage(9),
+			NPCID.TaxCollector => TaxCollectorMessage(6),
+			NPCID.DD2Bartender => $"DD2Bartender.DeathText.{Main.rand.Next(5)}",
+			NPCID.Princess => $"Princess.DeathText.{Main.rand.Next(5)}",
+			NPCID.Golfer => $"Golfer.DeathText.{Main.rand.Next(6)}",
+			NPCID.BestiaryGirl => $"BestiaryGirl.DeathText.{Main.rand.Next(3)}",
+			_ => string.Empty
+		};
+		if (npc.type == ModContent.NPCType<Librarian>())
+		{
+			key = $"Librarian.DeathText.{Main.rand.Next(7)}";
+		}
+		//else if (npc.type == ModContent.NPCType<Iceman>())
+		//{
+		//	int r = Main.rand.Next(7);
+		//	if (r == 4)
+		//	{
+		//		if (NPC.AnyNPCs(NPCID.ArmsDealer))
+		//		{
+		//			subs.Add(Main.npc[FindATypeOfNPC(NPCID.ArmsDealer)].GetGivenNetName());
+		//			key = $"Iceman.DeathText.{r}";
+		//		}
+		//		else
+		//		{
+		//			key = $"Iceman.DeathText.{r + 1}";
+		//		}
+		//	}
+		//	else
+		//	{
+		//		key = $"Iceman.DeathText.{r}";
+		//	}
+		//}
+		if (key == string.Empty)
+		{
+			return null;
+		}
+		return NetworkText.FromKey("Mods.Avalon.NPCs." + key, [.. subs]);
 	}
 	public override void SetBestiary(NPC npc, BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 	{
