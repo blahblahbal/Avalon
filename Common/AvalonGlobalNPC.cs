@@ -744,93 +744,14 @@ public class AvalonGlobalNPC : GlobalNPC
 		}
 		#endregion
 	}
-	public override bool CheckDead(NPC npc)
+	public override bool ModifyDeathMessage(NPC npc, ref NetworkText customText, ref Color color)
 	{
-		if (npc.townNPC && npc.life <= 0)
+		if (npc.townNPC)
 		{
-			if (Main.netMode == NetmodeID.SinglePlayer)
-			{
-				Main.NewText(npc.FullName + TownDeathMsg(npc.type), new Color(178, 0, 90));
-				npc.life = 0;
-				npc.active = false;
-				npc.NPCLoot();
-				SoundEngine.PlaySound(SoundID.NPCDeath1, npc.position);
-			}
-			else
-			{
-				ChatHelper.BroadcastChatMessage(
-					NetworkText.FromLiteral(npc.FullName + TownDeathMsg(npc.type)),
-					new Color(178, 0, 90));
-				NetMessage.SendData(MessageID.DamageNPC, -1, -1, null, npc.whoAmI, -1);
-				int t = 0;
-				int s = 1;
-				switch (npc.type)
-				{
-					case NPCID.Guide:
-						if (npc.GivenName == "Andrew")
-						{
-							t = ItemID.GreenCap;
-						}
-						break;
-					case NPCID.DyeTrader:
-						if (Main.rand.NextBool(8))
-						{
-							t = ItemID.DyeTradersScimitar;
-						}
-						break;
-					case NPCID.Painter:
-						if (Main.rand.NextBool(10))
-						{
-							t = ItemID.PainterPaintballGun;
-						}
-						break;
-					case NPCID.DD2Bartender:
-						if (Main.rand.NextBool(8))
-						{
-							t = ItemID.AleThrowingGlove;
-						}
-						break;
-					case NPCID.Stylist:
-						if (Main.rand.NextBool(8))
-						{
-							t = ItemID.StylistKilLaKillScissorsIWish;
-						}
-						break;
-					case NPCID.Clothier:
-						t = ItemID.RedHat;
-						break;
-					case NPCID.PartyGirl:
-						if (Main.rand.NextBool(4))
-						{
-							t = ItemID.PartyGirlGrenade;
-							s = Main.rand.Next(30, 61);
-						}
-						break;
-					case NPCID.TaxCollector:
-						if (Main.rand.NextBool(8))
-						{
-							t = 3351;
-						}
-						break;
-					case NPCID.TravellingMerchant:
-						t = ItemID.PeddlersHat;
-						break;
-					case NPCID.Princess:
-						t = ItemID.PrincessWeapon;
-						break;
-				}
-				if (t > 0)
-				{
-					int a = Item.NewItem(npc.GetSource_Loot(), npc.position, 16, 16, t, s);
-					NetMessage.SendData(MessageID.SyncItem, -1, -1, NetworkText.Empty, a);
-				}
-				// Main.npc[npc.whoAmI].NPCLoot();
-				SoundEngine.PlaySound(SoundID.NPCDeath1, npc.position);
-			}
-			return false;
+			customText = NetworkText.FromLiteral(npc.GetFullNetName() + TownDeathMsg(npc.type));
+			color = new Color(178, 0, 90);
 		}
-
-		return base.CheckDead(npc);
+		return true;
 	}
 	public override void SetBestiary(NPC npc, BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 	{
