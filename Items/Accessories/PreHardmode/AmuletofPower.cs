@@ -23,6 +23,8 @@ public class AmuletofPower : ModItem
 		player.statManaMax2 += 40;
 		player.statLifeMax2 += 40;
 		player.GetModPlayer<AvalonPlayer>().AllCritDamage(0.05f);
+		player.pickSpeed += 0.1f;
+		player.moveSpeed += 0.1f;
 	}
 
 	public override void AddRecipes()

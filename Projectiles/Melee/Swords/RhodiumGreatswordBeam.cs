@@ -105,7 +105,7 @@ public class RhodiumGreatswordBeam : ModProjectile, ISyncedOnHitEffect
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
-		float percent = Main.player[Projectile.owner].GetModPlayer<RhodiumGreatswordPlayer>().Power / (float)RhodiumGreatswordPlayer.maxPower;
+		float percent = Projectile.ai[2] / (float)RhodiumGreatswordPlayer.maxPower;
 		DrawSlash(new Color(0.5f, 0.05f, 0.3f, 1f) * (0.2f + percent * 0.8f), new Color(0.9f, 0.2f, 0.3f, 0.6f) * (0.2f + percent * 0.8f), new Color(1f, 0.2f, 0.2f, 0.8f) * (0.2f + percent * 0.8f), new Color(0.7f, 0.5f, 0.5f, 0f) * (0.4f + percent * 0.6f), 0, 1f, 0f, 0.1f, -0.3f, true, true);
 		return false;
 	}

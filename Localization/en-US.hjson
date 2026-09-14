@@ -1725,7 +1725,13 @@ Mods: {
 
 			AmuletofPower: {
 				DisplayName: Amulet of Power
-				Tooltip: Increases all stats
+				Tooltip:
+				'''
+				7% increased damage
+				5% increased critical strike chance and damage
+				Increases maximum life and mana by 40
+				10% increased mining and move speed
+				'''
 			}
 
 			BronzeWatch: {
@@ -10191,6 +10197,11 @@ Mods: {
 			InfectedPickaxeBanner: {
 				DisplayName: Infected Pickaxe Banner
 				Tooltip: ""
+			}
+
+			AmberAmulet: {
+				DisplayName: Amber Amulet
+				Tooltip: 10% increased mining and move speed
 			}
 		}
 
