@@ -8,16 +8,20 @@ namespace Avalon.Walls;
 
 public class ImperviousBrickWallUnsafe : ModWall
 {
-    public override void SetStaticDefaults()
-    {
-        Main.wallHouse[Type] = false;
-        AddMapEntry(new Color(51, 44, 48));
-        RegisterItemDrop(ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>());
-        DustType = DustID.Wraith;
-        Data.Sets.WallSets.Hellcastle[Type] = true;
-    }
-    public override void KillWall(int i, int j, ref bool fail)
-    {
-        if (!ModContent.GetInstance<DownedBossSystem>().DownedPhantasm) fail = true;
-    }
+	public override void SetStaticDefaults()
+	{
+		Main.wallHouse[Type] = false;
+		AddMapEntry(new Color(51, 44, 48));
+		RegisterItemDrop(ModContent.ItemType<Items.Placeable.Wall.ImperviousBrickWallItem>());
+		DustType = DustID.Wraith;
+		Data.Sets.WallSets.Hellcastle[Type] = true;
+	}
+	public override void KillWall(int i, int j, ref bool fail)
+	{
+		if (!ModContent.GetInstance<DownedBossSystem>().DownedPhantasm) fail = true;
+	}
+	public override bool CanBeTeleportedTo(int i, int j, Player player, string context)
+	{
+		return j <= Main.worldSurface || ModContent.GetInstance<DownedBossSystem>().DownedPhantasm;
+	}
 }

@@ -1,9 +1,6 @@
-using Avalon.Common;
 using Avalon.Items.Placeable.Tile;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
-using Terraria.Graphics.Light;
 using Terraria.ID;
 using Terraria.ModLoader;
 

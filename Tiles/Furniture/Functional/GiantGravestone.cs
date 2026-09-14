@@ -1,4 +1,3 @@
-using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -6,7 +5,6 @@ using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -14,21 +12,21 @@ namespace Avalon.Tiles.Furniture.Functional;
 
 public class GiantGravestone : ModTile
 {
-    public override void SetStaticDefaults()
-    {
-        Main.tileFrameImportant[Type] = true;
-        Main.tileNoAttach[Type] = true;
+	public override void SetStaticDefaults()
+	{
+		Main.tileFrameImportant[Type] = true;
+		Main.tileNoAttach[Type] = true;
 		TileID.Sets.HasOutlines[Type] = true;
-        // Placement
-        TileObjectData.newTile.CopyFrom(TileObjectData.Style3x3);
-        TileObjectData.newTile.Origin = new Point16(0, 1);
-        TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16 };
-        TileObjectData.newTile.StyleHorizontal = true;
-        TileObjectData.newTile.LavaDeath = false;
-        TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop | AnchorType.SolidSide, TileObjectData.newTile.Width, 0);
-        TileObjectData.addTile(Type);
-        AddMapEntry(new Color(127, 127, 127), Language.GetText("Giant Gravestone"));
-    }
+		// Placement
+		TileObjectData.newTile.CopyFrom(TileObjectData.Style3x3);
+		TileObjectData.newTile.Origin = new Point16(0, 1);
+		TileObjectData.newTile.CoordinateHeights = [16, 16, 16];
+		TileObjectData.newTile.StyleHorizontal = true;
+		TileObjectData.newTile.LavaDeath = false;
+		TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop | AnchorType.SolidSide, TileObjectData.newTile.Width, 0);
+		TileObjectData.addTile(Type);
+		AddMapEntry(new Color(127, 127, 127), this.GetLocalization("MapEntry"));
+	}
 	public override void MouseOver(int i, int j)
 	{
 		Player player = Main.LocalPlayer;
