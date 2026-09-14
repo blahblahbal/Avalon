@@ -38,7 +38,7 @@ public class RhodiumGreatswordSlash : EnergySlashTemplate, ISyncedOnHitEffect
 
 		float percent = Main.player[Projectile.owner].GetModPlayer<RhodiumGreatswordPlayer>().Power / (float)RhodiumGreatswordPlayer.maxPower;
 
-		ClassExtensions.GetPointOnSwungItemPath(60f, 110f, 0.8f + 0.2f * Main.rand.NextFloat(), player.HeldItem.scale, out var location2, out var outwardDirection2, player);
+		ClassExtensions.GetPointOnSwungItemPath(60f, 150f, 0.8f + 0.2f * Main.rand.NextFloat(), player.HeldItem.scale, out var location2, out var outwardDirection2, player);
 		Vector2 vector2 = outwardDirection2.RotatedBy((float)Math.PI / 2f * (float)player.direction * player.gravDir);
 		Dust d = Dust.NewDustPerfect(location2, dType, vector2 * 2f, 100);
 		d.noGravity = true;

@@ -10,7 +10,7 @@ public class DemonSpikescale : ModTile
 {
     public override void SetStaticDefaults()
     {
-        AddMapEntry((Color.Indigo), LanguageManager.Instance.GetText("Demon Spikescale"));
+        AddMapEntry((Color.Indigo), this.GetLocalization("MapEntry"));
         Main.tileSolid[Type] = true;
         DustType = DustID.CorruptionThorns;
         HitSound = SoundID.Tink;

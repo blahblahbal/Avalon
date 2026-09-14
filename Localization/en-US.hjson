@@ -1725,7 +1725,13 @@ Mods: {
 
 			AmuletofPower: {
 				DisplayName: Amulet of Power
-				Tooltip: Increases all stats
+				Tooltip:
+				'''
+				7% increased damage
+				5% increased critical strike chance and damage
+				Increases maximum life and mana by 40
+				10% increased mining and move speed
+				'''
 			}
 
 			BronzeWatch: {
@@ -10192,6 +10198,11 @@ Mods: {
 				DisplayName: Infected Pickaxe Banner
 				Tooltip: ""
 			}
+
+			AmberAmulet: {
+				DisplayName: Amber Amulet
+				Tooltip: 10% increased mining and move speed
+			}
 		}
 
 		InfoDisplays: {
@@ -12089,6 +12100,17 @@ Mods: {
 			BloodDropletTile.MapEntry: Dripping Blood
 			AlkalineJellyfishJarTile.MapEntry: Alkaline Jellyfish Jar
 			BacciliteStorageUnitTile.MapEntry: Baccilite Storage Unit Tile
+			BloodiedSpike.MapEntry: Bloodied Spike
+			SnotOrb.MapEntry: Sepsis Cell
+			DemonSpikescale.MapEntry: Demon Spikescale
+			NaquadahAnvil.MapEntry: Naquadah Anvil
+			Jukebox.MapEntry: Jukebox
+			VenomSpike.MapEntry: Venom Spike
+			NastySpike.MapEntry: Nasty Spike
+			XanthophyteOre.MapEntry: Xanthophyte
+			SpiritPoppy.MapEntry: Spirit Poppy
+			GiantGravestone.MapEntry: Giant Gravestone
+			BasaltObelisk.MapEntry: Basalt Obelisk
 		}
 
 		Prefixes: {

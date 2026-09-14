@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -32,7 +31,7 @@ namespace Avalon.Tiles.Furniture.Functional
 			TileObjectData.addTile(Type);
 
 			// Register map name and color
-			AddMapEntry(new Color(59, 62, 66), Language.GetText("MapObject.BasaltObelisk"));
+			AddMapEntry(new Color(59, 62, 66), this.GetLocalization("MapEntry"));
 		}
 		public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
 		{

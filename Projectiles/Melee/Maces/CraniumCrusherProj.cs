@@ -39,7 +39,7 @@ public class CraniumCrusherProj : MaceTemplate, ISyncedOnHitEffect
 		float VelocityDirection = (Projectile.rotation + MathHelper.PiOver4) * Owner.direction * SwingDirection * Owner.gravDir;
 		if (crit)
 		{
-			SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact with { Pitch = -0.3f});
+			SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact with { Pitch = -0.3f}, player.Center);
 			for (int i = 0; i < 10; i++)
 			{
 				var s = VanillaParticles.RequestPrettySparkleParticle();

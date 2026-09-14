@@ -41,7 +41,7 @@ public class MarrowMasherProj : MaceTemplate, ISyncedOnHitEffect
 		float VelocityDirection = (Projectile.rotation + MathHelper.PiOver4) * Owner.direction * SwingDirection * Owner.gravDir;
 		if (crit)
 		{
-			SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundMiss);
+			SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundMiss, player.Center);
 			for (int i = 0; i < 5; i++)
 			{
 				var s = VanillaParticles.RequestPrettySparkleParticle();

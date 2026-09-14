@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Tomat.Terraria.ModLoader.Sdk/2.1.1">
-	<Import Project="..\tModLoader.targets" />
 	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<TmlBuildBootstrapFeatures>tomat.environmentmodlist;tomat.enablemod;lolxd87.splashskip;tomat.assethotreloading</TmlBuildBootstrapFeatures>
 		<AssemblyName>Avalon</AssemblyName>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<LangVersion>latest</LangVersion>
