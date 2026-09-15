@@ -592,7 +592,7 @@ public class AvalonGlobalNPC : GlobalNPC
 		string ArmsDealerMessage(int x)
 		{
 			if (!GetMsgIndex(x, out int r)) return string.Empty;
-			if (r == 5 && Main.dayTime) return $"ArmsDealer.DeathText.{r - 1}"; // Don't use illegal gun parts message if it's daytime
+			if (r == 4 && Main.dayTime) return $"ArmsDealer.DeathText.{r - 1}"; // Don't use illegal gun parts message if it's daytime
 			return $"ArmsDealer.DeathText.{r}";
 		}
 		string MechanicMessage(int x)
@@ -604,7 +604,7 @@ public class AvalonGlobalNPC : GlobalNPC
 		string AnglerMessage(int x)
 		{
 			if (!GetMsgIndex(x, out int r)) return string.Empty;
-			if (r == 8)
+			if (r == 7)
 			{
 				if (NPC.AnyNPCs(NPCID.Pirate)) subs.Add(Main.npc[FindATypeOfNPC(NPCID.Pirate)].GetGivenNetName());
 				else return $"Angler.DeathText.{r - 2}"; // Don't use pirate message if there's no pirate
