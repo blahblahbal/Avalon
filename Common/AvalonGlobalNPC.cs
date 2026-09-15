@@ -18,6 +18,7 @@ using Avalon.Systems;
 using Avalon.Tiles.Savanna;
 using Avalon.Walls.Contagion.ContagionGrassWall;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -577,104 +578,103 @@ public class AvalonGlobalNPC : GlobalNPC
 	public static NetworkText? TownDeathMsg(NPC npc)
 	{
 		List<object> subs = [npc.GetFullNetName()];
+		bool GetMsgIndex(int x, out int r)
+		{
+			r = Main.rand.Next(x + 1);
+			if (r == x) return false;
+			return true;
+		}
+		string GetMsg(int x, string name)
+		{
+			if (!GetMsgIndex(x, out int r)) return string.Empty; // Chance for default vanilla death message
+			return $"{name}.DeathText.{r}";
+		}
 		string ArmsDealerMessage(int x)
 		{
-			int r = Main.rand.Next(x);
-			if (r == 5)
-			{
-				if (!Main.dayTime) return $"ArmsDealer.DeathText.{r}";
-				else return $"ArmsDealer.DeathText.{r - 1}";
-			}
+			if (!GetMsgIndex(x, out int r)) return string.Empty;
+			if (r == 5 && Main.dayTime) return $"ArmsDealer.DeathText.{r - 1}"; // Don't use illegal gun parts message if it's daytime
 			return $"ArmsDealer.DeathText.{r}";
 		}
 		string MechanicMessage(int x)
 		{
-			int r = Main.rand.Next(x);
-			if (r == 5)
-			{
-				subs.Add(Main.worldName);
-				return $"Mechanic.DeathText.{r}";
-			}
+			if (!GetMsgIndex(x, out int r)) return string.Empty;
+			if (r == 5) subs.Add(Main.worldName);
 			return $"Mechanic.DeathText.{r}";
 		}
 		string AnglerMessage(int x)
 		{
-			int r = Main.rand.Next(x);
+			if (!GetMsgIndex(x, out int r)) return string.Empty;
 			if (r == 8)
 			{
-				if (NPC.AnyNPCs(NPCID.Pirate))
-				{
-					subs.Add(Main.npc[FindATypeOfNPC(NPCID.Pirate)].GetGivenNetName());
-					return $"Angler.DeathText.{r}";
-				}
-				return $"Angler.DeathText.{r - 2}";
+				if (NPC.AnyNPCs(NPCID.Pirate)) subs.Add(Main.npc[FindATypeOfNPC(NPCID.Pirate)].GetGivenNetName());
+				else return $"Angler.DeathText.{r - 2}"; // Don't use pirate message if there's no pirate
 			}
 			return $"Angler.DeathText.{r}";
 		}
 		string TaxCollectorMessage(int x)
 		{
-			int r = Main.rand.Next(x);
-			if (r == 3)
-			{
-				subs.Add(Main.worldName);
-				return $"TaxCollector.DeathText.{r}";
-			}
+			if (!GetMsgIndex(x, out int r)) return string.Empty;
+			if (r == 3) subs.Add(Main.worldName);
 			return $"TaxCollector.DeathText.{r}";
 		}
+		// The numbers correlate to the total amount of custom death messages each npc has, so it's the number of the final index in the localisation file plus one
 		string key = npc.type switch
 		{
-			NPCID.Merchant => $"Merchant.DeathText.{Main.rand.Next(7)}",
-			NPCID.Nurse => $"Nurse.DeathText.{Main.rand.Next(5)}",
-			NPCID.OldMan => $"OldMan.DeathText.{Main.rand.Next(2)}",
-			NPCID.ArmsDealer => ArmsDealerMessage(6),
-			NPCID.Dryad => $"Dryad.DeathText.{Main.rand.Next(7)}",
-			NPCID.Guide => $"Guide.DeathText.{Main.rand.Next(8)}",
-			NPCID.Demolitionist => $"Demolitionist.DeathText.{Main.rand.Next(7)}",
-			NPCID.Clothier => $"Clothier.DeathText.{Main.rand.Next(6)}",
-			NPCID.GoblinTinkerer => $"GoblinTinkerer.DeathText.{Main.rand.Next(6)}",
-			NPCID.Wizard => $"Wizard.DeathText.{Main.rand.Next(7)}",
-			NPCID.SantaClaus => $"SantaClaus.DeathText.{Main.rand.Next(2)}",
-			NPCID.Mechanic => MechanicMessage(6),
-			NPCID.Truffle => $"Truffle.DeathText.{Main.rand.Next(7)}",
-			NPCID.Steampunker => $"Steampunker.DeathText.{Main.rand.Next(5)}",
-			NPCID.DyeTrader => $"DyeTrader.DeathText.{Main.rand.Next(6)}",
-			NPCID.PartyGirl => $"PartyGirl.DeathText.{Main.rand.Next(6)}",
-			NPCID.Cyborg => $"Cyborg.DeathText.{Main.rand.Next(9)}",
-			NPCID.Painter => $"Painter.DeathText.{Main.rand.Next(6)}",
-			NPCID.WitchDoctor => $"WitchDoctor.DeathText.{Main.rand.Next(6)}",
-			NPCID.Pirate => $"Pirate.DeathText.{Main.rand.Next(5)}",
-			NPCID.Stylist => $"Stylist.DeathText.{Main.rand.Next(6)}",
-			NPCID.TravellingMerchant => $"TravellingMerchant.DeathText.{Main.rand.Next(7)}",
-			NPCID.Angler => AnglerMessage(9),
-			NPCID.TaxCollector => TaxCollectorMessage(6),
-			NPCID.DD2Bartender => $"DD2Bartender.DeathText.{Main.rand.Next(5)}",
-			NPCID.Princess => $"Princess.DeathText.{Main.rand.Next(5)}",
-			NPCID.Golfer => $"Golfer.DeathText.{Main.rand.Next(6)}",
-			NPCID.BestiaryGirl => $"BestiaryGirl.DeathText.{Main.rand.Next(3)}",
+			NPCID.Merchant =>			GetMsg(6, "Merchant"),
+			NPCID.Nurse =>				GetMsg(5, "Nurse"),
+			NPCID.OldMan =>				GetMsg(1, "OldMan"),
+			NPCID.ArmsDealer =>			ArmsDealerMessage(6),
+			NPCID.Dryad =>				GetMsg(7, "Dryad"),
+			NPCID.Guide =>				GetMsg(7, "Guide"),
+			NPCID.Demolitionist =>		GetMsg(7, "Demolitionist"),
+			NPCID.Clothier =>			GetMsg(6, "Clothier"),
+			NPCID.GoblinTinkerer =>		GetMsg(6, "GoblinTinkerer"),
+			NPCID.Wizard =>				GetMsg(7, "Wizard"),
+			NPCID.SantaClaus =>			GetMsg(2, "SantaClaus"),
+			NPCID.Mechanic =>			MechanicMessage(6),
+			NPCID.Truffle =>			GetMsg(6, "Truffle"),
+			NPCID.Steampunker =>		GetMsg(5, "Steampunker"),
+			NPCID.DyeTrader =>			GetMsg(6, "DyeTrader"),
+			NPCID.PartyGirl =>			GetMsg(6, "PartyGirl"),
+			NPCID.Cyborg =>				GetMsg(9, "Cyborg"),
+			NPCID.Painter =>			GetMsg(6, "Painter"),
+			NPCID.WitchDoctor =>		GetMsg(6, "WitchDoctor"),
+			NPCID.Pirate =>				GetMsg(5, "Pirate"),
+			NPCID.Stylist =>			GetMsg(6, "Stylist"),
+			NPCID.TravellingMerchant =>	GetMsg(7, "TravellingMerchant"),
+			NPCID.Angler =>				AnglerMessage(8),
+			NPCID.TaxCollector =>		TaxCollectorMessage(6),
+			NPCID.DD2Bartender =>		GetMsg(5, "DD2Bartender"),
+			NPCID.Princess =>			GetMsg(5, "Princess"),
+			NPCID.Golfer =>				GetMsg(6, "Golfer"),
+			NPCID.BestiaryGirl =>		GetMsg(3, "BestiaryGirl"),
 			_ => string.Empty
 		};
 		if (npc.type == ModContent.NPCType<Librarian>())
 		{
-			key = $"Librarian.DeathText.{Main.rand.Next(7)}";
+			key =						GetMsg(7, "Librarian");
 		}
 		//else if (npc.type == ModContent.NPCType<Iceman>())
 		//{
-		//	int r = Main.rand.Next(7);
-		//	if (r == 4)
+		//	if (!GetMsgIndex(7, out int r)) key = string.Empty;
+		//	else
 		//	{
-		//		if (NPC.AnyNPCs(NPCID.ArmsDealer))
+		//		if (r == 4)
 		//		{
-		//			subs.Add(Main.npc[FindATypeOfNPC(NPCID.ArmsDealer)].GetGivenNetName());
-		//			key = $"Iceman.DeathText.{r}";
+		//			if (NPC.AnyNPCs(NPCID.ArmsDealer))
+		//			{
+		//				subs.Add(Main.npc[FindATypeOfNPC(NPCID.ArmsDealer)].GetGivenNetName());
+		//				key = $"Iceman.DeathText.{r}";
+		//			}
+		//			else
+		//			{
+		//				key = $"Iceman.DeathText.{r + 1}";
+		//			}
 		//		}
 		//		else
 		//		{
-		//			key = $"Iceman.DeathText.{r + 1}";
+		//			key = $"Iceman.DeathText.{r}";
 		//		}
-		//	}
-		//	else
-		//	{
-		//		key = $"Iceman.DeathText.{r}";
 		//	}
 		//}
 		if (key == string.Empty)

@@ -10491,11 +10491,10 @@ Mods: {
 				DeathText: {
 					0: "{0} tried to sell torches to a zombie."
 					1: "{0} made a grave error..."
-					2: "{0} was slain..."
-					3: "{0} was hanged with a bug net."
-					4: "{0} tried gold dust for the first time."
-					5: "{0} made a deal that cost his life."
-					6: "{0} tried to sell his soul for a dirt block."
+					2: "{0} was hanged with a bug net."
+					3: "{0} tried gold dust for the first time."
+					4: "{0} made a deal that cost his life."
+					5: "{0} tried to sell his soul for a dirt block."
 				}
 			}
 
@@ -10509,22 +10508,16 @@ Mods: {
 				}
 			}
 
-			OldMan: {
-				DeathText: {
-					0: "{0} died of old age."
-					1: "{0} was slain..."
-				}
-			}
+			OldMan.DeathText.0: "{0} died of old age."
 
 			ArmsDealer: {
 				DeathText: {
 					0: "{0}'s gun jammed."
 					1: "{0} fired a meteor bullet..."
 					2: "{0} ran out of ammo."
-					3: "{0} was slain..."
-					4: "{0} shot himself."
-					5: "{0} was caught."
-					6: "{0}'s hand wasn't the fastest in the west."
+					3: "{0} shot himself."
+					4: "{0} was caught."
+					5: "{0}'s hand wasn't the fastest in the west."
 				}
 			}
 
@@ -10544,12 +10537,11 @@ Mods: {
 				DeathText: {
 					0: "{0} let too many zombies in."
 					1: "{0} was reading a history book..."
-					2: "{0} was slain..."
-					3: "{0} got impaled..."
-					4: "{0} was the victim of dark magic."
-					5: "{0} was voodoo'd."
-					6: "{0} opened a door."
-					7: "{0} read the wrong wiki."
+					2: "{0} got impaled..."
+					3: "{0} was the victim of dark magic."
+					4: "{0} was voodoo'd."
+					5: "{0} opened a door."
+					6: "{0} read the wrong wiki."
 				}
 			}
 
@@ -10621,11 +10613,10 @@ Mods: {
 				DeathText: {
 					0: "{0} bit himself."
 					1: "{0} was eaten."
-					2: "{0} was slain..."
-					3: "{0} is no longer a fun guy."
-					4: "{0} went on a trip."
-					5: "{0} was found partially eaten."
-					6: "{0} was sautéed"
+					2: "{0} is no longer a fun guy."
+					3: "{0} went on a trip."
+					4: "{0} was found partially eaten."
+					5: "{0} was sautéed"
 				}
 			}
 
@@ -10732,15 +10723,14 @@ Mods: {
 
 			Angler: {
 				DeathText: {
-					0: "{0} has left!"
-					1: "{0} caught a fish!"
-					2: "{0} fell into a ditch!"
-					3: "{0} failed a test!"
-					4: "{0} lost the game!"
-					5: "{0} took off!"
-					6: "{0} died."
-					7: "{0} found someone better to harass."
-					8: "{0} was thrown overboard by {1}."
+					0: "{0} caught a fish!"
+					1: "{0} fell into a ditch!"
+					2: "{0} failed a test!"
+					3: "{0} lost the game!"
+					4: "{0} took off!"
+					5: "{0} died."
+					6: "{0} found someone better to harass."
+					7: "{0} was thrown overboard by {1}."
 				}
 			}
 
@@ -10777,7 +10767,7 @@ Mods: {
 
 			Golfer: {
 				DeathText: {
-					0: didn't yell "fore!"
+					0: '''{0} didn't yell "fore!"'''
 					1: "{0} was hit in the head by a golf ball."
 					2: "{0} got a triple bogey."
 					3: "{0} went over par."
@@ -10850,13 +10840,13 @@ Mods: {
 				Census.SpawnCondition: Defeat any pre-Hardmode boss
 
 				DeathText: {
-					0: " was nuked by a full squad."
-					1: " fell victim to toxic world chat."
-					2: " couldn't afford grade eighteen."
-					3: " was slain by a boss cone attack."
-					4: " was no match for Kun Kun."
-					5: "'s Visa card was declined."
-					6: " was changed to past tense in a history book."
+					0: "{0} was nuked by a full squad."
+					1: "{0} fell victim to toxic world chat."
+					2: "{0} couldn't afford grade eighteen."
+					3: "{0} was slain by a boss cone attack."
+					4: "{0} was no match for Kun Kun."
+					5: "{0}'s Visa card was declined."
+					6: "{0} was changed to past tense in a history book."
 				}
 			}
 
