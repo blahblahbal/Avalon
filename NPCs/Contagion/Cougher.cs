@@ -1,4 +1,5 @@
 using Avalon;
+using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Dusts;
 using Avalon.Items.Material;
@@ -99,9 +100,8 @@ public class Cougher : ModNPC
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-        return (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) &&
-            !spawnInfo.Player.InPillarZone() && Main.hardMode ? 0.7f : 0f;
-    }
+		return SpawnHelper.Contagion(ref spawnInfo) && Main.hardMode ? 0.7f : 0;
+	}
     int Frame;
     public override void AI()
     {

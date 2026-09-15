@@ -1,4 +1,5 @@
 using Avalon;
+using Avalon.Common;
 using Avalon.Items.Banners;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -174,10 +175,6 @@ public class OreSlime : ModNPC
 	}
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
-		if (spawnInfo.Player.ZoneUndergroundDesert)
-		{
-			return 0.02f;
-		}
-		return spawnInfo.Player.ZoneRockLayerHeight && !spawnInfo.Player.ZoneDungeon ? 0.06f : 0f;
+		return SpawnHelper.RockLayer(ref spawnInfo) ? (spawnInfo.Player.ZoneUndergroundDesert? 0.02f : 0.06f) * (Main.hardMode? 0.5f : 1) : 0f;
 	}
 }

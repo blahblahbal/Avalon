@@ -1,4 +1,5 @@
 using Avalon;
+using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Items.Material;
 using Avalon.Items.Placeable.Statue;
@@ -108,11 +109,7 @@ public class Bactus : ModNPC
     }
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-        if ((spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion ||
-            spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) &&
-            !spawnInfo.Player.InPillarZone())
-            return 0.7f / 3;
-        return 0;
+		return SpawnHelper.Contagion(ref spawnInfo) ? 0.7f / 3 : 0;
     }
     public override void AI()
     {
@@ -282,7 +279,6 @@ public class Bactus : ModNPC
 
     public override void FindFrame(int frameHeight)
     {
-        //Player TargetPlayer = Main.player[NPC.target];
         NPC.frameCounter += 1.0;
         if (NPC.frameCounter >= 8.0)
         {
@@ -293,25 +289,6 @@ public class Bactus : ModNPC
         {
             NPC.frame.Y = 0;
         }
-
-        //int NPCFrame = 0;
-        //float BacPos = NPC.Center.X;
-        //float playerDist = Vector2.Distance(new Vector2(NPC.Center.X, 0), new Vector2(TargetPlayer.Center.X, 0));
-
-        //int D = 120;
-
-        //if (playerDist < D)
-        //    NPCFrame = 0;
-        //if (playerDist > D)
-        //    NPCFrame = 1;
-        //if (playerDist > D * 2)
-        //    NPCFrame = 2;
-
-        //if (TargetPlayer.Center.X < BacPos)
-        //    NPCFrame += 4;
-
-        //NPC.frame.Y = NPCFrame * frameHeight;
-        //NPC.frameCounter--;
     }
 
     public override void HitEffect(NPC.HitInfo hit)

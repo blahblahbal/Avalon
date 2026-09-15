@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Items.Banners;
 using Avalon.Projectiles.Hostile;
 using Microsoft.Xna.Framework;
@@ -166,7 +167,7 @@ public class BloodGusher : ModNPC
 
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
-		return spawnInfo.Player.ZoneCrimson && Main.hardMode ? 0.2f : 0;
+		return SpawnHelper.Crimson(ref spawnInfo) && Main.hardMode ? 0.2f : 0;
 	}
 
 	public override void HitEffect(NPC.HitInfo hit)

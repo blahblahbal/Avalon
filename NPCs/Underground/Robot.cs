@@ -212,10 +212,10 @@ public class Robot : CustomFighterAI
 			Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, GoreID.Smoke3);
 		}
 	}
-	public override float SpawnChance(NPCSpawnInfo spawnInfo)
-	{
-		return spawnInfo.Player.ZoneRockLayerHeight && /*ModContent.GetInstance<AvalonWorld>().SuperHardmode*/ false ? 0.14f : 0;
-	}
+	//public override float SpawnChance(NPCSpawnInfo spawnInfo)
+	//{
+	//	return SpawnHelper.RockLayer(ref spawnInfo) && ModContent.GetInstance<AvalonWorld>().SuperHardmode ? 0.14f : 0;
+	//}
 
 	public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 	{

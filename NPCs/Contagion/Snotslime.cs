@@ -1,4 +1,5 @@
 using Avalon;
+using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Items.Material;
 using Microsoft.Xna.Framework;
@@ -78,8 +79,7 @@ public class Snotslime : ModNPC
 	}
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
-		return (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) &&
-			!spawnInfo.Player.InPillarZone() ? 0.4f / 2f : 0f;
+		return SpawnHelper.Contagion(ref spawnInfo) ? 0.4f : 0;
 	}
 	public override void HitEffect(NPC.HitInfo hit)
 	{

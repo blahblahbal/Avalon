@@ -7,6 +7,7 @@ using Terraria.ModLoader;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.Localization;
 using Microsoft.Xna.Framework;
+using Avalon.Common;
 
 namespace Avalon.NPCs.Underground;
 
@@ -133,6 +134,6 @@ public class Mime : ModNPC
 	}
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-        return spawnInfo.Player.ZoneRockLayerHeight && spawnInfo.Player.ZoneMarble && Main.hardMode ? 0.14f : 0f;
+        return Main.hardMode && SpawnHelper.RockLayer(ref spawnInfo) && (SpawnHelper.Hallow(ref spawnInfo) || SpawnHelper.Evil(ref spawnInfo)) ? 0.14f : 0f;
     }
 }

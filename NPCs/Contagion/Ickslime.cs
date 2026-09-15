@@ -1,5 +1,6 @@
 using Avalon;
 using Avalon.Buffs.Debuffs;
+using Avalon.Common;
 using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using System;
@@ -135,8 +136,7 @@ public class Ickslime : ModNPC
 	}
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
-		return (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) &&
-			!spawnInfo.Player.InPillarZone() && Main.hardMode ? 0.7f / 3f : 0f;
+		return SpawnHelper.Contagion(ref spawnInfo) && Main.hardMode ? 0.7f / 3f : 0;
 	}
 	public override void FindFrame(int frameHeight)
 	{

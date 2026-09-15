@@ -59,20 +59,10 @@ public class EvilVulture : ModNPC
         loot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Material.Beak>(), 2));
     }
 
-    public override float SpawnChance(NPCSpawnInfo spawnInfo)
-    {
-        if (spawnInfo.Player.ZoneCorrupt)
-        {
-            if (Main.hardMode)
-            {
-                if (Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY + 1].TileType == TileID.Ebonsand)
-                {
-                    return 1f;
-                }
-            }
-        }
-        return 0f;
-    }
+	public override float SpawnChance(NPCSpawnInfo spawnInfo)
+	{
+		return !spawnInfo.Player.InPillarZone() && Main.hardMode && spawnInfo.SpawnTileType == TileID.Ebonsand ? 1 : 0;
+	}
 
 	public override void HitEffect(NPC.HitInfo hit)
 	{
