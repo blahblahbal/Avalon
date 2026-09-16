@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Items.Banners;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -61,7 +62,7 @@ public class BloodyVulture : ModNPC
 
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
-		return !spawnInfo.Player.InPillarZone() && Main.hardMode && spawnInfo.SpawnTileType == TileID.Crimsand ? 1 : 0;
+		return SpawnHelper.Surface(ref spawnInfo) && Main.hardMode && spawnInfo.SpawnTileType == TileID.Crimsand ? 1 : 0;
 	}
 
 	public override void HitEffect(NPC.HitInfo hit)

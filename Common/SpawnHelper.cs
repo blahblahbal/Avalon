@@ -48,6 +48,10 @@ public class SpawnHelper
 			|| spawnInfo.SpawnTileType == TileID.Pearlstone
 			|| spawnInfo.SpawnTileType == TileID.Pearlsand);
 	}
+	public static bool Surface(ref NPCSpawnInfo spawnInfo)
+	{
+		return spawnInfo.SpawnTileY < Main.worldSurface && !spawnInfo.Player.ZoneDungeon && !spawnInfo.Player.InPillarZone();
+	}
 	public static bool Underground(ref NPCSpawnInfo spawnInfo)
 	{
 		return spawnInfo.SpawnTileY > Main.worldSurface && !spawnInfo.Player.ZoneDungeon && !spawnInfo.Player.InPillarZone();

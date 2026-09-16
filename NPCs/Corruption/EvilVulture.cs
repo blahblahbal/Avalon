@@ -1,11 +1,12 @@
+using Avalon.Common;
 using Avalon.Common.Players;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.GameContent.Bestiary;
-using Terraria.Localization;
 using Microsoft.Xna.Framework;
+using Terraria;
+using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Corruption;
 
@@ -61,7 +62,7 @@ public class EvilVulture : ModNPC
 
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
-		return !spawnInfo.Player.InPillarZone() && Main.hardMode && spawnInfo.SpawnTileType == TileID.Ebonsand ? 1 : 0;
+		return SpawnHelper.Surface(ref spawnInfo) && Main.hardMode && spawnInfo.SpawnTileType == TileID.Ebonsand ? 1 : 0;
 	}
 
 	public override void HitEffect(NPC.HitInfo hit)
