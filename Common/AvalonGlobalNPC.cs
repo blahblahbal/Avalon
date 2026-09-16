@@ -417,13 +417,9 @@ public class AvalonGlobalNPC : GlobalNPC
 		if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneHellcastle)
 		{
 			pool[0] = 0;
-			pool.Add(NPCID.Demon, 0.2f);
 			pool.Add(NPCID.RedDevil, 0.2f);
-			pool.Add(ModContent.NPCType<EctoHand>(), 0.3f);
-			pool.Add(ModContent.NPCType<HellboundLizard>(), 1f);
-			pool.Add(ModContent.NPCType<Gargoyle>(), 1f);
 		}
-		if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion && !spawnInfo.Player.InPillarZone())// && !spawnInfo.Player.HasBuff(ModContent.BuffType<SilenceCandleBuff>()))
+		if (spawnInfo.Player.ZoneOverworldHeight && spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion && !spawnInfo.Player.InPillarZone())// && !spawnInfo.Player.HasBuff(ModContent.BuffType<SilenceCandleBuff>()))
 		{
 			pool[0] = 0;
 		}

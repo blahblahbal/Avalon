@@ -58,7 +58,7 @@ public class CrystalUnityShard : ModProjectile
 	private int GemType => (int)Projectile.ai[2];
 
 	public static int[] DustIds = { DustID.AmberBolt, DustID.GemAmethyst, DustID.GemDiamond, DustID.GemEmerald, ModContent.DustType<PeridotDust>(), DustID.GemRuby, DustID.GemSapphire, DustID.GemTopaz, ModContent.DustType<TourmalineDust>(), ModContent.DustType<ZirconDust>() };
-	public static Color[] Colors = { Color.OrangeRed, Color.MediumOrchid, Color.White, Color.MediumSeaGreen, Color.GreenYellow, Color.Salmon, Color.RoyalBlue, Color.Orange, Color.Aquamarine, new Color(128, 32, 8) };
+	public static Color[] Colors = { Color.OrangeRed, Color.MediumOrchid, Color.White, Color.MediumSeaGreen, Color.GreenYellow, Color.Firebrick, Color.RoyalBlue, Color.Orange, Color.Aquamarine, new Color(128, 32, 8) };
 	public override void OnKill(int timeLeft)
 	{
 		for (int i = 0; i < 12; i++)

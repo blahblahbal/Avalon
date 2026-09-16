@@ -1,12 +1,13 @@
-using Terraria.GameContent.Bestiary;
-using System;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.Audio;
+using Avalon.Common;
 using Avalon.Common.Players;
+using Microsoft.Xna.Framework;
+using System;
+using Terraria;
+using Terraria.Audio;
+using Terraria.GameContent.Bestiary;
+using Terraria.ID;
 using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Hellcastle;
 
@@ -187,15 +188,11 @@ public class Gargoyle : ModNPC
             return;
         }
     }
-    public override float SpawnChance(NPCSpawnInfo spawnInfo)
-    {
-        if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneHellcastle && Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY].WallType == (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>())
-        {
-            return 2f;
-        }
-        return 0f;
-    }
-    public override void FindFrame(int frameHeight)
+	public override float SpawnChance(NPCSpawnInfo spawnInfo)
+	{
+		return SpawnHelper.Hellcastle(ref spawnInfo) ? 2 : 0;
+	}
+	public override void FindFrame(int frameHeight)
     {
         NPC.spriteDirection = NPC.direction;
         NPC.rotation = NPC.velocity.X * 0.1f;

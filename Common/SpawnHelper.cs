@@ -1,6 +1,8 @@
 ﻿using Avalon.Biomes;
 using Avalon.Tiles.Contagion;
+using Avalon.Tiles.Hellcastle;
 using Avalon.Tiles.Ores;
+using Avalon.Walls;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -48,17 +50,26 @@ public class SpawnHelper
 			|| spawnInfo.SpawnTileType == TileID.Pearlstone
 			|| spawnInfo.SpawnTileType == TileID.Pearlsand);
 	}
+
+	public static bool NotInDungeonsOrPillar(ref NPCSpawnInfo spawnInfo)
+	{
+		return !spawnInfo.Player.ZoneDungeon && !spawnInfo.Player.InPillarZone() && !spawnInfo.Player.InModBiome<Hellcastle>();
+	}
+	public static bool Hellcastle(ref NPCSpawnInfo spawnInfo)
+	{
+		return NPC.downedMoonlord && spawnInfo.Player.InModBiome<Hellcastle>() && Main.tile[spawnInfo.SpawnTileX,spawnInfo.SpawnTileY].WallType == ModContent.WallType<ImperviousBrickWallUnsafe>();
+	}
 	public static bool Surface(ref NPCSpawnInfo spawnInfo)
 	{
-		return spawnInfo.SpawnTileY < Main.worldSurface && !spawnInfo.Player.ZoneDungeon && !spawnInfo.Player.InPillarZone();
+		return spawnInfo.SpawnTileY < Main.worldSurface && NotInDungeonsOrPillar(ref spawnInfo);
 	}
 	public static bool Underground(ref NPCSpawnInfo spawnInfo)
 	{
-		return spawnInfo.SpawnTileY > Main.worldSurface && !spawnInfo.Player.ZoneDungeon && !spawnInfo.Player.InPillarZone();
+		return spawnInfo.SpawnTileY > Main.worldSurface && NotInDungeonsOrPillar(ref spawnInfo);
 	}
 	public static bool RockLayer(ref NPCSpawnInfo spawnInfo)
 	{
-		return spawnInfo.SpawnTileY > Main.rockLayer && !spawnInfo.Player.ZoneDungeon && !spawnInfo.Player.InPillarZone();
+		return spawnInfo.SpawnTileY > Main.rockLayer && NotInDungeonsOrPillar(ref spawnInfo);
 	}
 	public static bool NoWorms(ref NPCSpawnInfo spawnInfo)
 	{

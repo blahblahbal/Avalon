@@ -79,7 +79,7 @@ public class Snotslime : ModNPC
 	}
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
-		return SpawnHelper.Contagion(ref spawnInfo) ? 0.4f : 0;
+		return SpawnHelper.Surface(ref spawnInfo) && SpawnHelper.Contagion(ref spawnInfo) ? 0.4f : 0;
 	}
 	public override void HitEffect(NPC.HitInfo hit)
 	{

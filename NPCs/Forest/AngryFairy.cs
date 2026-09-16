@@ -63,7 +63,7 @@ public class AngryFairy : ModNPC
 	}
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
-		return spawnInfo.Player.ZoneForest ? ModContent.GetInstance<BiomeTileCounts>().Trees > 170 ? 0.025f : 0.1f : 0f;
+		return !spawnInfo.Player.InPillarZone() && spawnInfo.Player.ZoneForest ? ModContent.GetInstance<BiomeTileCounts>().Trees > 170 ? 0.025f : 0.1f : 0f;
 	}
 	public override void FindFrame(int frameHeight)
 	{
