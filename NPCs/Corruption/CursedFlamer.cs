@@ -1,4 +1,5 @@
 using Avalon;
+using Avalon.Common;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -60,40 +61,8 @@ public class CursedFlamer : ModNPC
 	}
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-        return Main.hardMode && spawnInfo.Player.ZoneCorrupt && !spawnInfo.Player.InPillarZone() && spawnInfo.SpawnTileY < Main.maxTilesY - 200 ? 0.3f : 0f;
+        return Main.hardMode && SpawnHelper.Corruption(ref spawnInfo) && SpawnHelper.Underground(ref spawnInfo) ? 0.3f : 0f;
     }
-    //public override void FindFrame(int frameHeight)
-    //{
-        //NPC.frameCounter++;
-        //if (NPC.frameCounter < 6)
-        //{
-        //    NPC.frame.Y = 0;
-        //}
-        //if (NPC.frameCounter < 12)
-        //{
-        //    NPC.frame.Y = frameHeight;
-        //}
-        //if (NPC.frameCounter < 18)
-        //{
-        //    NPC.frame.Y = frameHeight * 2;
-        //}
-        //if (NPC.frameCounter < 24)
-        //{
-        //    NPC.frame.Y = frameHeight;
-        //}
-        
-
-        //NPC.frameCounter++;
-        //if (NPC.frameCounter >= 8.0)
-        //{
-        //    NPC.frame.Y = NPC.frame.Y + frameHeight;
-        //    NPC.frameCounter = 0.0;
-        //}
-        //if (NPC.frame.Y >= frameHeight * Main.npcFrameCount[NPC.type])
-        //{
-        //    NPC.frame.Y = 0;
-        //}
-    //}
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.Common(ItemID.CursedFlame, 3));

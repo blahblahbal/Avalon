@@ -20,7 +20,6 @@ namespace Avalon.Projectiles.Magic.Other;
 public class ZapshockProjectile : ModProjectile
 {
 	public override string Texture => ModContent.GetInstance<Zapshock>().Texture;
-	private static VertexStrip _vertexStrip = new VertexStrip();
 	private List<Vector2> _points = [];
 	private List<float> _rotations = [];
 	public override bool ShouldUpdatePosition()

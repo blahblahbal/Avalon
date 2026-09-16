@@ -1,4 +1,4 @@
-using Avalon.Common;
+using Avalon.Tiles.Contagion;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
@@ -6,16 +6,16 @@ using System.Reflection;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.Events;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Contagion;
-
-public class SandSharkHook : ModHook
+public class BaskingSpewer : ModNPC
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		IL_NPC.UpdateCollision += preventModdedSandsharkCollision;
 		On_NPC.ApplyTileCollision += SandsharkCollision;
@@ -43,9 +43,6 @@ public class SandSharkHook : ModHook
 			orig.Invoke(self, fall, cPosition, cWidth, cHeight);
 		}
 	}
-}
-public class BaskingSpewer : ModNPC
-{
 	public override void SetStaticDefaults()
 	{
 		Main.npcFrameCount[Type] = 4;
@@ -84,7 +81,7 @@ public class BaskingSpewer : ModNPC
 	}
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
-		return Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY].HasTile && spawnInfo.Player.InModBiome<Biomes.ContagionDesert>() && Main.hardMode ? 0.2f : 0f;
+		return Main.hardMode && spawnInfo.Player.ZoneSandstorm && Sandstorm.Happening && spawnInfo.SpawnTileType == ModContent.TileType<Snotsand>() ? 0.2f : 0f;
 	}
 	public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 	{

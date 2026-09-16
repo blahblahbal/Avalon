@@ -7,6 +7,7 @@ using Terraria.GameContent.Bestiary;
 using Terraria.Localization;
 using Microsoft.Xna.Framework;
 using Avalon.Tiles.Contagion;
+using Avalon.Common;
 
 namespace Avalon.NPCs.Contagion;
 
@@ -62,18 +63,8 @@ public class SicklyVulture : ModNPC
 
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-        if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion)
-        {
-            if (Main.hardMode)
-            {
-                if (Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY + 1].TileType == ModContent.TileType<Snotsand>())
-                {
-                    return 1f;
-                }
-            }
-        }
-        return 0f;
-    }
+		return SpawnHelper.Surface(ref spawnInfo) && Main.hardMode && spawnInfo.SpawnTileType == ModContent.TileType<Snotsand>() ? 1 : 0;
+	}
 
 	public override void HitEffect(NPC.HitInfo hit)
 	{

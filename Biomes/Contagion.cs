@@ -75,7 +75,7 @@ public class Contagion : ModBiome
 
     public override bool IsBiomeActive(Player player)
     {
-        return ModContent.GetInstance<BiomeTileCounts>().ContagionTiles >= 300 && player.ZoneOverworldHeight;
+        return ModContent.GetInstance<BiomeTileCounts>().ContagionTiles >= 300;
         //return player.GetModPlayer<ExxoBiomePlayer>().ZoneContagion && !player.ZoneDirtLayerHeight && !player.ZoneRockLayerHeight;
     }
 }

@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Items.Banners;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -59,20 +60,10 @@ public class BloodyVulture : ModNPC
         loot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Material.Beak>(), 2));
     }
 
-    public override float SpawnChance(NPCSpawnInfo spawnInfo)
-    {
-        if (spawnInfo.Player.ZoneCrimson)
-        {
-            if (Main.hardMode)
-            {
-                if (Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY + 1].TileType == TileID.Crimsand)
-                {
-                    return 1f;
-                }
-            }
-        }
-        return 0f;
-    }
+	public override float SpawnChance(NPCSpawnInfo spawnInfo)
+	{
+		return SpawnHelper.Surface(ref spawnInfo) && Main.hardMode && spawnInfo.SpawnTileType == TileID.Crimsand ? 1 : 0;
+	}
 
 	public override void HitEffect(NPC.HitInfo hit)
 	{

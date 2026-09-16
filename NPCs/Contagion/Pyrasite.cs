@@ -1,4 +1,5 @@
 using Avalon;
+using Avalon.Common;
 using Avalon.Common.Players;
 using Avalon.Data.Sets;
 using Avalon.Items.Material;
@@ -62,9 +63,7 @@ public class PyrasiteHead : WormHead
 	}
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
-		if ((spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneContagion || spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneUndergroundContagion) && !spawnInfo.Player.InPillarZone())
-			return 0.1f;
-		return 0;
+		return SpawnHelper.Contagion(ref spawnInfo) && SpawnHelper.NoWorms(ref spawnInfo)? 0.1f : 0;
 	}
 	public override void HitEffect(NPC.HitInfo hit)
 	{

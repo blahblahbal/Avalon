@@ -1,15 +1,16 @@
-using Terraria.GameContent.Bestiary;
-using System;
+using Avalon;
+using Avalon.Common;
+using Avalon.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Avalon.Common.Players;
-using Terraria.GameContent;
-using Terraria.Localization;
 using ReLogic.Content;
-using Avalon;
+using System;
+using Terraria;
+using Terraria.GameContent;
+using Terraria.GameContent.Bestiary;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace Avalon.NPCs.Hellcastle;
 
@@ -95,15 +96,11 @@ public class EctoHand : ModNPC
 		}
 		return true;
     }
-    public override float SpawnChance(NPCSpawnInfo spawnInfo)
-    {
-        if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneHellcastle && Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY].WallType == (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>())
-        {
-            return 2f;
-        }
-        return 0f;
-    }
-    public override void HitEffect(NPC.HitInfo hit)
+	public override float SpawnChance(NPCSpawnInfo spawnInfo)
+	{
+		return SpawnHelper.Hellcastle(ref spawnInfo) ? 2 : 0;
+	}
+	public override void HitEffect(NPC.HitInfo hit)
     {
         if (NPC.life <= 0)
         {

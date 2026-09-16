@@ -8,6 +8,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.DataStructures;
 using Terraria.Localization;
 using Avalon;
+using Avalon.Common;
 
 namespace Avalon.NPCs.Hallow;
 
@@ -60,10 +61,9 @@ public class Hallowor : ModNPC
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Hallowor"))
         });
     }
-    // uncomment when time to add
     public override float SpawnChance(NPCSpawnInfo spawnInfo)
     {
-        return 0; // Main.hardMode && !spawnInfo.Player.InPillarZone() && spawnInfo.Player.ZoneHallow && spawnInfo.SpawnTileY < (Main.maxTilesY - 200) ? 0.3f : 0f;
+        return SpawnHelper.Hallow(ref spawnInfo) && SpawnHelper.Underground(ref spawnInfo)? 0.3f : 0f;
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {

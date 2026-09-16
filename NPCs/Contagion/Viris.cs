@@ -1,4 +1,5 @@
 using Avalon;
+using Avalon.Common;
 using Avalon.Items.Material;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -50,9 +51,10 @@ public class Viris : ModNPC
             new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.Viris"))
         });
     }
-    public override float SpawnChance(NPCSpawnInfo spawnInfo) =>
-        spawnInfo.Player.GetModPlayer<Common.Players.AvalonBiomePlayer>().ZoneUndergroundContagion && !spawnInfo.Player.ZoneDungeon && Main.hardMode
-            ? 0.6f : 0f;
+    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+	{
+		return SpawnHelper.Contagion(ref spawnInfo) && SpawnHelper.Underground(ref spawnInfo) && Main.hardMode ? 0.6f : 0;
+	}
     public override void ModifyNPCLoot(NPCLoot npcLoot)
 	{
 		npcLoot.Add(ItemDropRule.Common(ItemID.MeatGrinder, 200));

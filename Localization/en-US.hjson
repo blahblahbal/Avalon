@@ -1725,7 +1725,13 @@ Mods: {
 
 			AmuletofPower: {
 				DisplayName: Amulet of Power
-				Tooltip: Increases all stats
+				Tooltip:
+					'''
+					7% increased damage
+					5% increased critical strike chance and damage
+					Increases maximum life and mana by 40
+					10% increased mining and move speed
+					'''
 			}
 
 			BronzeWatch: {
@@ -10192,6 +10198,11 @@ Mods: {
 				DisplayName: Infected Pickaxe Banner
 				Tooltip: ""
 			}
+
+			AmberAmulet: {
+				DisplayName: Amber Amulet
+				Tooltip: 10% increased mining and move speed
+			}
 		}
 
 		InfoDisplays: {
@@ -10478,320 +10489,310 @@ Mods: {
 
 			Merchant: {
 				DeathText: {
-					0: " tried to sell torches to a zombie."
-					1: " made a grave error..."
-					2: " was slain..."
-					3: " was hanged with a bug net."
-					4: " tried gold dust for the first time."
-					5: " made a deal that cost his life."
-					6: " tried to sell his soul for a dirt block."
+					0: "{0} tried to sell torches to a zombie."
+					1: "{0} made a grave error..."
+					2: "{0} was hanged with a bug net."
+					3: "{0} tried gold dust for the first time."
+					4: "{0} made a deal that cost his life."
+					5: "{0} tried to sell his soul for a dirt block."
 				}
 			}
 
 			Nurse: {
 				DeathText: {
-					0: " couldn't heal herself in a timely manner."
-					1: " was expected to make a full recovery."
-					2: "'s face wasn't sewn on well enough."
-					3: " encountered a complication."
-					4: "'s surgical strike was in error."
+					0: "{0} couldn't heal herself in a timely manner."
+					1: "{0} was expected to make a full recovery."
+					2: "{0}'s face wasn't sewn on well enough."
+					3: "{0} encountered a complication."
+					4: "{0}'s surgical strike was in error."
 				}
 			}
 
-			OldMan: {
-				DeathText: {
-					0: " died of old age."
-					1: " was slain..."
-				}
-			}
+			OldMan.DeathText.0: "{0} died of old age."
 
 			ArmsDealer: {
 				DeathText: {
-					0: "'s gun jammed."
-					1: " fired a meteor bullet..."
-					2: " ran out of ammo."
-					3: " was slain..."
-					4: " shot himself."
-					5: " was caught."
-					6: "'s hand wasn't the fastest in the west."
+					0: "{0}'s gun jammed."
+					1: "{0} fired a meteor bullet..."
+					2: "{0} ran out of ammo."
+					3: "{0} shot himself."
+					4: "{0} was caught."
+					5: "{0}'s hand wasn't the fastest in the west."
 				}
 			}
 
 			Dryad: {
 				DeathText: {
-					0: "'s time was up..."
-					1: " choked on an herb."
-					2: " turned into grass."
-					3: " died."
-					4: " was reduced to a fine paste..."
-					5: " was mauled by an unknown creature."
-					6: " tripped on a corrupt vine."
+					0: "{0}'s time was up..."
+					1: "{0} choked on an herb."
+					2: "{0} turned into grass."
+					3: "{0} died."
+					4: "{0} was reduced to a fine paste..."
+					5: "{0} was mauled by an unknown creature."
+					6: "{0} tripped on a corrupt vine."
 				}
 			}
 
 			Guide: {
 				DeathText: {
-					0: " let too many zombies in."
-					1: " was reading a history book..."
-					2: " was slain..."
-					3: " got impaled..."
-					4: " was the victim of dark magic."
-					5: " was voodoo'd."
-					6: " opened a door."
-					7: " read the wrong wiki."
+					0: "{0} let too many zombies in."
+					1: "{0} was reading a history book..."
+					2: "{0} got impaled..."
+					3: "{0} was the victim of dark magic."
+					4: "{0} was voodoo'd."
+					5: "{0} opened a door."
+					6: "{0} read the wrong wiki."
 				}
 			}
 
 			Demolitionist: {
 				DeathText: {
-					0: " blew up."
-					1: " threw a bomb at a mob, but it bounced back."
-					2: "'s explosives were a little too sensitive..."
-					3: " made a dirty bomb."
-					4: " was bombed."
-					5: " went out with a bang."
-					6: " became a true martyr."
+					0: "{0} blew up."
+					1: "{0} threw a bomb at a mob, but it bounced back."
+					2: "{0}'s explosives were a little too sensitive..."
+					3: "{0} made a dirty bomb."
+					4: "{0} was bombed."
+					5: "{0} went out with a bang."
+					6: "{0} became a true martyr."
 				}
 			}
 
 			Clothier: {
 				DeathText: {
-					0: " was unknowingly cursed..."
-					1: " died from unknown causes."
-					2: " was unravelled..."
-					3: " was eviscerated..."
-					4: " went back to the dungeon."
-					5: " stitched himself up."
+					0: "{0} was unknowingly cursed..."
+					1: "{0} died from unknown causes."
+					2: "{0} was unravelled..."
+					3: "{0} was eviscerated..."
+					4: "{0} went back to the dungeon."
+					5: "{0} stitched himself up."
 				}
 			}
 
 			GoblinTinkerer: {
 				DeathText: {
-					0: "'s contraption exploded."
-					1: " tinkered with his life."
-					2: " was crushed..."
-					3: " rocketed into the ceiling."
-					4: " died from platinum poisoning."
-					5: " was approached from the north."
+					0: "{0}'s contraption exploded."
+					1: "{0} tinkered with his life."
+					2: "{0} was crushed..."
+					3: "{0} rocketed into the ceiling."
+					4: "{0} died from platinum poisoning."
+					5: "{0} was approached from the north."
 				}
 			}
 
 			Wizard: {
 				DeathText: {
-					0: " forgot how to live."
-					1: " cast too many spells..."
-					2: " was crushed..."
-					3: " watched his innards become outards..."
-					4: " made himself 'disappear.'"
-					5: " became a frog."
-					6: "'s low armor class failed him."
+					0: "{0} forgot how to live."
+					1: "{0} cast too many spells..."
+					2: "{0} was crushed..."
+					3: "{0} watched his innards become outards..."
+					4: "{0} made himself 'disappear.'"
+					5: "{0} became a frog."
+					6: "{0}'s low armor class failed him."
 				}
 			}
 
 			SantaClaus: {
 				DeathText: {
-					0: " had too much milk and cookies."
-					1: " wasn't believed in."
+					0: "{0} had too much milk and cookies."
+					1: "{0} wasn't believed in."
 				}
 			}
 
 			Mechanic: {
 				DeathText: {
-					0: "'s spine cracked..."
-					1: "'s engine broke down."
-					2: " ran out of wire..."
-					3: " died."
-					4: " dropped her contacts..."
-					5: " was removed from {0}."
+					0: "{0}'s spine cracked..."
+					1: "{0}'s engine broke down."
+					2: "{0} ran out of wire..."
+					3: "{0} died."
+					4: "{0} dropped her contacts..."
+					5: "{0} was removed from {1}."
 				}
 			}
 
 			Truffle: {
 				DeathText: {
-					0: " bit himself."
-					1: " was eaten."
-					2: " was slain..."
-					3: " is no longer a fun guy."
-					4: " went on a trip."
-					5: " was found partially eaten."
-					6: " was sautéed"
+					0: "{0} bit himself."
+					1: "{0} was eaten."
+					2: "{0} is no longer a fun guy."
+					3: "{0} went on a trip."
+					4: "{0} was found partially eaten."
+					5: "{0} was sautéed"
 				}
 			}
 
 			Steampunker: {
 				DeathText: {
-					0: "'s time machine created a paradox..."
-					1: " slipped a cog."
-					2: " died from unknown causes."
-					3: " fell off an airship."
-					4: " used her teleporter too fast."
+					0: "{0}'s time machine created a paradox..."
+					1: "{0} slipped a cog."
+					2: "{0} died from unknown causes."
+					3: "{0} fell off an airship."
+					4: "{0} used her teleporter too fast."
 				}
 			}
 
 			DyeTrader: {
 				DeathText: {
-					0: " fell into his dye."
-					1: " was killed."
-					2: " died from unknown causes."
-					3: " was decapitated."
-					4: " has dyed."
-					5: " was dyed a deep chartreuse."
+					0: "{0} fell into his dye."
+					1: "{0} was killed."
+					2: "{0} died from unknown causes."
+					3: "{0} was decapitated."
+					4: "{0} has dyed."
+					5: "{0} was dyed a deep chartreuse."
 				}
 			}
 
 			PartyGirl: {
 				DeathText: {
-					0: " partied too hard."
-					1: " inhaled too much confetti..."
-					2: " was crushed."
-					3: " left the party."
-					4: " was eaten."
-					5: " was dissolved into the punch."
+					0: "{0} partied too hard."
+					1: "{0} inhaled too much confetti..."
+					2: "{0} was crushed."
+					3: "{0} left the party."
+					4: "{0} was eaten."
+					5: "{0} was dissolved into the punch."
 				}
 			}
 
 			Cyborg: {
 				DeathText: {
-					0: " was assimilated."
-					1: "'s mechanisms were damaged beyond repair."
-					2: " was crushed."
-					3: " is '404 not found.'"
-					4: "'s implants were ripped out."
-					5: " short-circuited."
-					6: " malfunctioned."
-					7: " encountered a glitch in his systems."
-					8: " tried to divide by zero."
+					0: "{0} was assimilated."
+					1: "{0}'s mechanisms were damaged beyond repair."
+					2: "{0} was crushed."
+					3: "{0} is '404 not found.'"
+					4: "{0}'s implants were ripped out."
+					5: "{0} short-circuited."
+					6: "{0} malfunctioned."
+					7: "{0} encountered a glitch in his systems."
+					8: "{0} tried to divide by zero."
 				}
 			}
 
 			Painter: {
 				DeathText: {
-					0: " inhaled paint fumes."
-					1: " tried to paint himself."
-					2: "'s body was mangled."
-					3: "'s paint was ripped off the canvas..."
-					4: "'s paint cracked."
-					5: " inhaled asbestos."
+					0: "{0} inhaled paint fumes."
+					1: "{0} tried to paint himself."
+					2: "{0}'s body was mangled."
+					3: "{0}'s paint was ripped off the canvas..."
+					4: "{0}'s paint cracked."
+					5: "{0} inhaled asbestos."
 				}
 			}
 
 			WitchDoctor: {
 				DeathText: {
-					0: "'s practice lead to his demise."
-					1: " tried to embody life."
-					2: "'s body was mangled."
-					3: " was chopped up."
-					4: " was eaten by an exotic insect."
-					5: " forgot which doctor he was."
+					0: "{0}'s practice lead to his demise."
+					1: "{0} tried to embody life."
+					2: "{0}'s body was mangled."
+					3: "{0} was chopped up."
+					4: "{0} was eaten by an exotic insect."
+					5: "{0} forgot which doctor he was."
 				}
 			}
 
 			Pirate: {
 				DeathText: {
-					0: " choked on his gold tooth."
-					1: " was hit by a cannonball."
-					2: " was eviscerated."
-					3: "'s other eye was removed."
-					4: " lost his peg leg."
+					0: "{0} choked on his gold tooth."
+					1: "{0} was hit by a cannonball."
+					2: "{0} was eviscerated."
+					3: "{0}'s other eye was removed."
+					4: "{0} lost his peg leg."
 				}
 			}
 
 			Stylist: {
 				DeathText: {
-					0: " attempted to give a spider a trim."
-					1: " was tied up."
-					2: " was eviscerated."
-					3: " got a little too snippy."
-					4: " tried to give Cousin It a trim."
-					5: " couldn't take the sight of spiders anymore."
+					0: "{0} attempted to give a spider a trim."
+					1: "{0} was tied up."
+					2: "{0} was eviscerated."
+					3: "{0} got a little too snippy."
+					4: "{0} tried to give Cousin It a trim."
+					5: "{0} couldn't take the sight of spiders anymore."
 				}
 			}
 
 			TravellingMerchant: {
 				DeathText: {
-					0: " has departed..."
-					1: " had INTERPOL problems."
-					2: " was vaporized."
-					3: " did not need a monster there."
-					4: " tried to sell an exotic pitcher plant..."
-					5: " failed to make any sales."
-					6: " is now travelling the afterlife"
+					0: "{0} has departed..."
+					1: "{0} had INTERPOL problems."
+					2: "{0} was vaporized."
+					3: "{0} did not need a monster there."
+					4: "{0} tried to sell an exotic pitcher plant..."
+					5: "{0} failed to make any sales."
+					6: "{0} is now travelling the afterlife"
 				}
 			}
 
 			Angler: {
 				DeathText: {
-					0: " has left!"
-					1: " caught a fish!"
-					2: " fell into a ditch!"
-					3: " failed a test!"
-					4: " lost the game!"
-					5: " took off!"
-					6: " died."
-					7: " found someone better to harass."
-					8: " was thrown overboard by {0}."
+					0: "{0} caught a fish!"
+					1: "{0} fell into a ditch!"
+					2: "{0} failed a test!"
+					3: "{0} lost the game!"
+					4: "{0} took off!"
+					5: "{0} died."
+					6: "{0} found someone better to harass."
+					7: "{0} was thrown overboard by {1}."
 				}
 			}
 
 			TaxCollector: {
 				DeathText: {
-					0: " went to the wrong house."
-					1: " collected counterfeit money."
-					2: " had a hole in his pocket."
-					3: " saw the ghost of {0}'s past."
-					4: " overtaxed himself."
-					5: " was finally caught by the IRS."
+					0: "{0} went to the wrong house."
+					1: "{0} collected counterfeit money."
+					2: "{0} had a hole in his pocket."
+					3: "{0} saw the ghost of {1}'s past."
+					4: "{0} overtaxed himself."
+					5: "{0} was finally caught by the IRS."
 				}
 			}
 
 			DD2Bartender: {
 				DeathText: {
-					0: " found himself on the wrong side of the bar."
-					1: "'s sentries stopped working."
-					2: " spontaneously combusted."
-					3: " went through the wrong portal."
-					4: " drank his feelings away."
+					0: "{0} found himself on the wrong side of the bar."
+					1: "{0}'s sentries stopped working."
+					2: "{0} spontaneously combusted."
+					3: "{0} went through the wrong portal."
+					4: "{0} drank his feelings away."
 				}
 			}
 
 			Princess: {
 				DeathText: {
-					0: " was taken away by a dragon."
-					1: " was chained up in a tower."
-					2: " swallowed her scepter."
-					3: " tripped on her dress."
-					4: " failed to consider the durability of glass heels."
+					0: "{0} was taken away by a dragon."
+					1: "{0} was chained up in a tower."
+					2: "{0} swallowed her scepter."
+					3: "{0} tripped on her dress."
+					4: "{0} failed to consider the durability of glass heels."
 				}
 			}
 
 			Golfer: {
 				DeathText: {
-					0: didn't yell "fore!"
-					1: " was hit in the head by a golf ball."
-					2: " got a triple bogey."
-					3: " went over par."
-					4: " fell in a hole."
-					5: "'s club hit back."
+					0: '''{0} didn't yell "fore!"'''
+					1: "{0} was hit in the head by a golf ball."
+					2: "{0} got a triple bogey."
+					3: "{0} went over par."
+					4: "{0} fell in a hole."
+					5: "{0}'s club hit back."
 				}
 			}
 
 			BestiaryGirl: {
 				DeathText: {
-					0: " got rabies."
-					1: " was put down."
-					2: " got too comfortable with an exotic beast."
+					0: "{0} got rabies."
+					1: "{0} was put down."
+					2: "{0} got too comfortable with an exotic beast."
 				}
 			}
 
 			Iceman: {
 				DeathText: {
-					0: " froze."
-					1: " melted."
-					2: " has died."
-					3: "'s ice was cracked."
-					4: " was used to cool {0}'s drink."
-					5: " fell into a crevasse."
-					6: " slipped."
+					0: "{0} froze."
+					1: "{0} melted."
+					2: "{0} has died."
+					3: "{0}'s ice was cracked."
+					4: "{0} was used to cool {1}'s drink."
+					5: "{0} fell into a crevasse."
+					6: "{0} slipped."
 				}
 			}
 
@@ -10839,17 +10840,16 @@ Mods: {
 				Census.SpawnCondition: Defeat any pre-Hardmode boss
 
 				DeathText: {
-					0: " was nuked by a full squad."
-					1: " fell victim to toxic world chat."
-					2: " couldn't afford grade eighteen."
-					3: " was slain by a boss cone attack."
-					4: " was no match for Kun Kun."
-					5: "'s Visa card was declined."
-					6: " was changed to past tense in a history book."
+					0: "{0} was nuked by a full squad."
+					1: "{0} fell victim to toxic world chat."
+					2: "{0} couldn't afford grade eighteen."
+					3: "{0} was slain by a boss cone attack."
+					4: "{0} was no match for Kun Kun."
+					5: "{0}'s Visa card was declined."
+					6: "{0} was changed to past tense in a history book."
 				}
 			}
 
-			DeathTextGeneric: " was slain..."
 			MineralSlime.DisplayName: Mineral Slime
 			PyrasiteHead.DisplayName: Pyrasite
 			PyrasiteBody.DisplayName: Pyrasite

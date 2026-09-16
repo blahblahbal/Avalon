@@ -9,6 +9,7 @@ using Terraria.Localization;
 using Avalon.Buffs.Debuffs;
 using Avalon.Items.Accessories.Hardmode;
 using Avalon;
+using Avalon.Tiles.Contagion;
 
 namespace Avalon.NPCs.Contagion;
 
@@ -27,6 +28,11 @@ public class ViralMummy : ModNPC
         Data.Sets.NPCSets.Undead[NPC.type] = true;
         Data.Sets.NPCSets.Wicked[NPC.type] = true;
     }
+
+	public override float SpawnChance(NPCSpawnInfo spawnInfo)
+	{
+		return !spawnInfo.Player.InPillarZone() && Main.hardMode && spawnInfo.SpawnTileType == ModContent.TileType<Snotsand>() ? 0.5f : 0;
+	}
     public override void SetDefaults()
     {
         NPC.CloneDefaults(NPCID.DarkMummy);

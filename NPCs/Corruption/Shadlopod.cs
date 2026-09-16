@@ -1,4 +1,5 @@
 using Avalon;
+using Avalon.Common;
 using Avalon.Items.Banners;
 using Avalon.Projectiles.Hostile;
 using Microsoft.Xna.Framework;
@@ -45,7 +46,6 @@ public class Shadlopod : ModNPC
 		BannerItem = ModContent.ItemType<ShadlopodBanner>();
 		Banner = NPC.type;
 	}
-	float collisionPoint = 0f;
 	bool Grounded = false;
 	public override bool PreAI()
 	{
@@ -279,6 +279,6 @@ public class Shadlopod : ModNPC
 		}
 	}
 
-	public override float SpawnChance(NPCSpawnInfo spawnInfo) => spawnInfo.Player.ZoneCorrupt && !spawnInfo.Player.InPillarZone()
+	public override float SpawnChance(NPCSpawnInfo spawnInfo) => SpawnHelper.Corruption(ref spawnInfo)
 		? 0.2f : 0f;
 }

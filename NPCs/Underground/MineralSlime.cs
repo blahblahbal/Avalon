@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Items.Banners;
 using Microsoft.Xna.Framework;
 using System.Linq;
@@ -76,7 +77,8 @@ public class MineralSlime : OreSlime
 	{
 		NPC.lifeMax = (int)(NPC.lifeMax * 0.65f);
 	}
-	public override float SpawnChance(NPCSpawnInfo spawnInfo) =>
-		spawnInfo.Player.ZoneRockLayerHeight && !spawnInfo.Player.ZoneDungeon && Main.hardMode
-			? 0.05f : 0f;
+	public override float SpawnChance(NPCSpawnInfo spawnInfo)
+	{
+		return Main.hardMode && SpawnHelper.RockLayer(ref spawnInfo) ? (spawnInfo.Player.ZoneUndergroundDesert ? 0.02f : 0.05f) : 0f;
+	}
 }

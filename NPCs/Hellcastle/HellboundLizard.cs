@@ -8,6 +8,7 @@ using Terraria.DataStructures;
 using Avalon.NPCs.Template;
 using Avalon.Common.Players;
 using Terraria.Localization;
+using Avalon.Common;
 
 namespace Avalon.NPCs.Hellcastle;
 
@@ -106,17 +107,9 @@ public class HellboundLizard : CustomFighterAI
 			NPC.frame.Y = frameHeight;
 		}
 	}
-	public override void CustomBehavior()
-	{
-
-	}
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
-		if (spawnInfo.Player.GetModPlayer<AvalonBiomePlayer>().ZoneHellcastle && Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY].WallType == (ushort)ModContent.WallType<Walls.ImperviousBrickWallUnsafe>())
-		{
-			return 3f;
-		}
-		return 0f;
+		return SpawnHelper.Hellcastle(ref spawnInfo) ? 3 : 0;
 	}
 	public override void HitEffect(NPC.HitInfo hit)
 	{

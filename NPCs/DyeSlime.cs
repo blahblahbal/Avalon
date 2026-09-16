@@ -1,4 +1,5 @@
 using Avalon;
+using Avalon.Common;
 using Avalon.Items.Banners;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -214,8 +215,8 @@ public class DyeSlime : ModNPC
 	}
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
-		if (!NPC.downedBoss1 && !NPC.downedBoss2 && !NPC.downedBoss3)
+		if ((!NPC.downedBoss1 && !NPC.downedBoss2 && !NPC.downedBoss3) || spawnInfo.Player.InPillarZone())
 			return 0;
-		return Main.hardMode? 0.04f : 0.02f;
+		return Main.hardMode? 0.01f : 0.005f;
 	}
 }

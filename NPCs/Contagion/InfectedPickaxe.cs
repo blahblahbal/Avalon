@@ -1,3 +1,4 @@
+using Avalon.Common;
 using Avalon.Items.Banners;
 using Microsoft.Xna.Framework;
 using System;
@@ -80,8 +81,10 @@ public class InfectedPickaxe : ModNPC
             }
         }
     }
-    public override float SpawnChance(NPCSpawnInfo spawnInfo) => Main.hardMode && spawnInfo.Player.InModBiome<Biomes.UndergroundContagion>()
-        ? 0.2f : 0f;
+	public override float SpawnChance(NPCSpawnInfo spawnInfo)
+	{
+		return SpawnHelper.Contagion(ref spawnInfo) && SpawnHelper.Underground(ref spawnInfo) && Main.hardMode ? 0.2f : 0;
+	}
 	public override void ModifyNPCLoot(NPCLoot npcLoot)
 	{
 		npcLoot.Add(ItemDropRule.Common(ItemID.MeatGrinder, 200));
