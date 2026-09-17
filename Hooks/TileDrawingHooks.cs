@@ -1,7 +1,6 @@
 using Avalon.Common;
 using Avalon.Systems;
 using Avalon.Tiles;
-using Avalon.Tiles.Contagion;
 using Avalon.Tiles.Furniture;
 using Avalon.Tiles.Ores;
 using Microsoft.Xna.Framework;
@@ -16,6 +15,25 @@ namespace Avalon.Hooks
 {
 	public class TileDrawingHooks : ModHook
 	{
+		private static int ShroomiteOre;
+		private static int XanthophyteOre;
+		private static int CoolGemspark;
+		private static int PeridotGemspark;
+		private static int TourmalineGemspark;
+		private static int WarmGemspark;
+		private static int ZirconGemspark;
+		private static int PlacedGems;
+		public override void SetStaticDefaults()
+		{
+			ShroomiteOre = ModContent.TileType<ShroomiteOre>();
+			XanthophyteOre = ModContent.TileType<XanthophyteOre>();
+			CoolGemspark = ModContent.TileType<CoolGemsparkBlock>();
+			PeridotGemspark = ModContent.TileType<PeridotGemspark>();
+			TourmalineGemspark = ModContent.TileType<TourmalineGemspark>();
+			WarmGemspark = ModContent.TileType<WarmGemsparkBlock>();
+			ZirconGemspark = ModContent.TileType<ZirconGemspark>();
+			PlacedGems = ModContent.TileType<PlacedGems>();
+		}
 		protected override void Apply()
 		{
 			On_Main.shine_Color_int += On_Main_shine_Color_int;
@@ -37,52 +55,46 @@ namespace Avalon.Hooks
 		}
 
 		/// <summary>
-		/// Add tiles here to modify the light color<br></br>
-		/// Seems to only work if they set <see cref="Main.tileShine2"/> to <see cref="true"/>, though several vanilla tiles have colors set here and do not set it, so I might've missed smth
+		/// Add tiles here to modify the color of light that shines onto them (not the light they emit)
 		/// </summary>
 		/// <param name="color"></param>
 		/// <param name="type"></param>
 		/// <returns></returns>
 		private static Vector3 GetShineColor(Vector3 color, int type)
 		{
-			Vector3 temp = color;
-			//if (type == ModContent.TileType<Chunkstone>())
-			//{
-			//	color.X *= 0.84f;
-			//	color.Y *= 0.91f;
-			//	color.Z *= 0.74f;
-			//}
-			if (type == ModContent.TileType<ShroomiteOre>())
+			Vector3 tempColor = color;
+
+			if (type == ShroomiteOre)
 			{
 				float num = 0.3f + Utils.Remap(Main.mouseTextColor, 190, 255, 185, 260) / 300f;
 				color.Y *= 1.5f * num;
 				color.Z *= 1.1f * num;
 			}
-			else if (type == ModContent.TileType<XanthophyteOre>())
+			else if (type == XanthophyteOre)
 			{
 				float num = 0.3f + Main.mouseTextColor / 300f;
 				color.X *= 1.1f * num;
 				color.Y *= 1.5f * num;
 			}
 			else if (
-				type == ModContent.TileType<CoolGemsparkBlock>() ||
-				type == ModContent.TileType<PeridotGemspark>() ||
-				type == ModContent.TileType<TourmalineGemspark>() ||
-				type == ModContent.TileType<WarmGemsparkBlock>() ||
-				type == ModContent.TileType<ZirconGemspark>()
+				type == CoolGemspark ||
+				type == PeridotGemspark ||
+				type == TourmalineGemspark ||
+				type == WarmGemspark ||
+				type == ZirconGemspark
 				)
 			{
 				color.X += 0.39f;
 				color.Y += 0.39f;
 				color.Z += 0.39f;
 			}
-			else if (type == ModContent.TileType<PlacedGems>())
+			else if (type == PlacedGems)
 			{
 				color.X *= 1.5f;
 				color.Y *= 1.5f;
 				color.Z *= 1.5f;
 			}
-			if (Main.tileShine2[type] && color != temp) // vanilla multiplies tileShine2 tiles by 1.6 by default UNLESS they receive a custom colour, so negate that by dividing
+			if (Main.tileShine2[type] && color != tempColor) // vanilla multiplies tileShine2 tiles by 1.6 by default UNLESS they receive a custom colour, so negate that by dividing
 			{
 				color.X /= 1.6f;
 				color.Y /= 1.6f;
