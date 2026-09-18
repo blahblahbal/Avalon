@@ -90,15 +90,11 @@ namespace Avalon.Hooks
 			}
 			else if (type == PlacedGems)
 			{
-				color.X *= 1.5f;
-				color.Y *= 1.5f;
-				color.Z *= 1.5f;
+				color *= 1.5f;
 			}
-			if (Main.tileShine2[type] && color != tempColor) // vanilla multiplies tileShine2 tiles by 1.6 by default UNLESS they receive a custom colour, so negate that by dividing
+			if (Main.tileShine2[type] && color != tempColor) // vanilla multiplies tileShine2 tiles by 1.6 by default UNLESS they receive a custom colour, so negate that by dividing (except we actually multiply by 1/1.6 which is the same thing and avoid division like a boss (the vector3/float division operator also does this))
 			{
-				color.X /= 1.6f;
-				color.Y /= 1.6f;
-				color.Z /= 1.6f;
+				color *= 0.625f;
 			}
 			return color;
 		}
