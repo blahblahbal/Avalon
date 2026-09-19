@@ -1,4 +1,5 @@
 using Avalon.Buffs.Debuffs;
+using Avalon.Data.Sets;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -10,6 +11,11 @@ namespace Avalon.Projectiles.Hostile.TuhrtlOutpost;
 
 public class FireballTrapStarter : ModProjectile
 {
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.DontReflect[Type] = true;
+		ProjectileSets.TrapProjectiles[Type] = true;
+	}
     public override void SetDefaults()
     {
         Projectile.width = 36;

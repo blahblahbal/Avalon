@@ -1,3 +1,4 @@
+using Avalon.Data.Sets;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -7,6 +8,10 @@ namespace Avalon.Projectiles.Hostile.WallofSteel;
 
 public class WoSLaserSmall : ModProjectile
 {
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.DontReflect[Type] = true;
+	}
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();
