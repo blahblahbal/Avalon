@@ -10941,6 +10941,7 @@ Mods: {
 			Robot.DisplayName: Robot
 			Snotslime.DisplayName: Snotslime
 			Target.DisplayName: Target
+			BacteriumTendrilMelee.DisplayName: Bacterium Tendril Melee
 		}
 
 		Buffs: {

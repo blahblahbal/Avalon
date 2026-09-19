@@ -27,19 +27,7 @@ namespace Avalon.NPCs.Bosses.PreHardmode.BacteriumPrime;
 [AutoloadBossHead]
 public class BacteriumPrime : ModNPC
 {
-	public static int secondStageHeadSlot = -1;
-	private float _spinModifierTimer = 0;
-	public override void Load()
-	{
-		secondStageHeadSlot = Mod.AddBossHeadTexture(BossHeadTexture + "_2", -1);
-	}
-	public override void BossHeadSlot(ref int index)
-	{
-		if (!NPC.dontTakeDamage)
-		{
-			index = secondStageHeadSlot;
-		}
-	}
+	public float SpinModifierTimer = 0;
 	public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 	{
 		bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
@@ -112,17 +100,17 @@ public class BacteriumPrime : ModNPC
 		npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<BacteriumPrimeRelic>()));
 		npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<PetriDish>(), 4));
 	}
-	private Player Target { get => Main.player[NPC.target]; }
-	private float AfterimageOpacity = 0f;
+	public Player Target { get => Main.player[NPC.target]; }
+	public float AfterimageOpacity = 0f;
 	public override void AI()
 	{
 		Lighting.AddLight(NPC.Center, new Vector3(0.8f, 1.4f, 0) * NPC.Opacity * (0.3f + MathF.Sin((float)Main.timeForVisualEffects * 0.04f) * 0.15f));
 		// this is for the afterimage's spacing
 		NPC.localAI[3] = (int)Main.timeForVisualEffects % 6;
 
-		if(_spinModifierTimer > 0 && _spinModifierTimer < 120)
+		if(SpinModifierTimer > 0 && SpinModifierTimer < 120)
 		{
-			_spinModifierTimer++;
+			SpinModifierTimer++;
 		}
 
 		// despawning and targetting
@@ -140,24 +128,16 @@ public class BacteriumPrime : ModNPC
 			NPC.alpha += 10;
 			return;
 		}
-
-		if (NPC.dontTakeDamage)
-		{
+		if(NPC.dontTakeDamage)
 			NPC.ReflectProjectiles(NPC.Hitbox);
-			Phase1();
-		}
-		else
-		{
-			Phase2();
-		}
-		NPC.velocity = Vector2.Zero;
+		Behavior();
 	}
-	private bool validTendrilForAttack(int x)
+	public bool validTendrilForAttack(int x)
 	{
 		NPC n = Main.npc[x];
 		return n.ai[2] == 0 && n.localAI[0] == 1;
 	}
-	private void Phase1()
+	public virtual void Behavior()
 	{
 		bool outside = Main.tile[NPC.Center.ToTileCoordinates()].WallType == 0;
 
@@ -220,8 +200,9 @@ public class BacteriumPrime : ModNPC
 		{
 			if (tendrilWHOAMIs.Count == 0)
 			{
-				if (_spinModifierTimer == 0)
-					_spinModifierTimer = 1;
+				NPC.dontTakeDamage = false;
+				if (SpinModifierTimer == 0)
+					SpinModifierTimer = 1;
 				NPC.ai[3]++;
 				NPC.velocity *= 0.96f;
 				if (NPC.ai[3] == 60)
@@ -249,52 +230,58 @@ public class BacteriumPrime : ModNPC
 	}
 	private void Transition()
 	{
-		NPC.dontTakeDamage = false;
-		int tendril = ModContent.NPCType<BacteriumTendril>();
-		for (int i = 0; i < 8; i++)
+		if (Main.netMode != NetmodeID.MultiplayerClient)
 		{
-			Vector2 spawnLocation = NPC.Center + new Vector2(60, 0).RotatedBy(i / 8f * MathHelper.TwoPi);
-			NPC.NewNPC(NPC.GetSource_FromThis(), (int)spawnLocation.X, (int)spawnLocation.Y, tendril, NPC.whoAmI, i / 8f * MathHelper.TwoPi, Main.rand.Next(100), 0, NPC.whoAmI);
+			// OnSpawn isn't called when transforming so the tendrils have be spawned here.
+			int tendril = ModContent.NPCType<BacteriumTendrilMelee>();
+
+			float iterations = 6;
+			for (int i = 0; i < iterations; i++)
+			{
+				Vector2 spawnLocation = NPC.Center + new Vector2(60, 0).RotatedBy(i / iterations * MathHelper.TwoPi);
+				NPC n = Main.npc[NPC.NewNPC(NPC.GetSource_FromThis(), (int)spawnLocation.X, (int)spawnLocation.Y, tendril, NPC.whoAmI, i / iterations * MathHelper.TwoPi, Main.rand.Next(100), 0, NPC.whoAmI)];
+				NetMessage.SendData(MessageID.SyncNPC, number: n.whoAmI);
+			}
+
+			NPC.Transform(ModContent.NPCType<BacteriumPrimeSmallMelee>());
+			NPC n2 = Main.npc[NPC.NewNPC(NPC.GetSource_FromThis(),(int)NPC.Center.X,(int)NPC.Center.Y, ModContent.NPCType<BacteriumPrimeSmallRanged>())];
+			n2.velocity = Main.rand.NextVector2Circular(8, 8);
+			NetMessage.SendData(MessageID.SyncNPC, number: n2.whoAmI);
+			NPC.velocity = Main.rand.NextVector2Circular(8, 8);
 		}
 		SoundEngine.PlaySound(SoundID.Roar, NPC.position);
-	}
-	private void Phase2()
-	{
-
 	}
 	public override void OnSpawn(IEntitySource source)
 	{
 		int tendril = ModContent.NPCType<BacteriumTendril>();
-		for(int i = 0; i < 12; i++)
+		float iterations = 8;
+		for (int i = 0; i < iterations; i++)
 		{
-			Vector2 spawnLocation = NPC.Center + new Vector2(60, 0).RotatedBy(i / 12f * MathHelper.TwoPi);
-			NPC.NewNPC(NPC.GetSource_FromThis(), (int)spawnLocation.X, (int)spawnLocation.Y,tendril,NPC.whoAmI,i / 12f * MathHelper.TwoPi, Main.rand.Next(100), 0, NPC.whoAmI);
+			Vector2 spawnLocation = NPC.Center + new Vector2(60, 0).RotatedBy(i / iterations * MathHelper.TwoPi);
+			NPC n = Main.npc[NPC.NewNPC(NPC.GetSource_FromThis(), (int)spawnLocation.X, (int)spawnLocation.Y, tendril, NPC.whoAmI, i / iterations * MathHelper.TwoPi, Main.rand.Next(100), 0, NPC.whoAmI)];
+			NetMessage.SendData(MessageID.SyncNPC, number: n.whoAmI);
 		}
 	}
 	public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 	{
-		float addedSpin = MathHelper.SmoothStep(0, MathHelper.TwoPi * 4, _spinModifierTimer / 120f);
+		float addedSpin = MathHelper.SmoothStep(0, MathHelper.TwoPi * 4, SpinModifierTimer / 120f);
 		for (int i = NPCID.Sets.TrailCacheLength[Type] - 1; i >= 0; i--)
 		{
 			float percent = i / (float)NPCID.Sets.TrailCacheLength[Type];
 			percent += (1f / NPCID.Sets.TrailCacheLength[Type]) * (NPC.localAI[3] / 6f);
-			spriteBatch.Draw(TextureAssets.Npc[Type].Value, NPC.oldPos[i] - screenPos + NPC.Size / 2, NPC.frame, Color.Lerp(NPC.GetNPCColorTintedByBuffs(new Color(Lighting.GetSubLight(NPC.oldPos[i] + NPC.Size / 2))), Color.Black, 0.2f + (percent * 0.2f)) * (1f - percent) * 0.3f * NPC.Opacity * AfterimageOpacity, NPC.oldRot[i] + addedSpin, new Vector2(66), NPC.scale, SpriteEffects.None, 0);
+			spriteBatch.Draw(TextureAssets.Npc[Type].Value, NPC.oldPos[i] - screenPos + NPC.Size / 2, NPC.frame, Color.Lerp(NPC.GetNPCColorTintedByBuffs(new Color(Lighting.GetSubLight(NPC.oldPos[i] + NPC.Size / 2))), Color.Black, 0.2f + (percent * 0.2f)) * (1f - percent) * 0.3f * NPC.Opacity * AfterimageOpacity, NPC.oldRot[i] + addedSpin, NPC.frame.Size() / new Vector2(2,2.4f), NPC.scale, SpriteEffects.None, 0);
 		}
-		spriteBatch.Draw(TextureAssets.Npc[Type].Value, NPC.Center - screenPos, NPC.frame, drawColor * NPC.Opacity, NPC.rotation + addedSpin, new Vector2(66), NPC.scale, SpriteEffects.None, 0);
+		spriteBatch.Draw(TextureAssets.Npc[Type].Value, NPC.Center - screenPos, NPC.frame, drawColor * NPC.Opacity, NPC.rotation + addedSpin, NPC.frame.Size() / new Vector2(2, 2.4f), NPC.scale, SpriteEffects.None, 0);
 		return false;
-	}
-
-	public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
-	{
 	}
 	public override void FindFrame(int frameHeight)
 	{
-		NPC.frameCounter ++;
+		NPC.frameCounter++;
 		if (NPC.frameCounter > 6)
 		{
 			NPC.frameCounter = 0;
 			NPC.frame.Y += frameHeight;
-			if (NPC.dontTakeDamage)
+			if (SpinModifierTimer == 0 || Main.npcFrameCount[Type] == 4)
 			{
 				if (NPC.frame.Y > frameHeight * 3)
 					NPC.frame.Y = 0;

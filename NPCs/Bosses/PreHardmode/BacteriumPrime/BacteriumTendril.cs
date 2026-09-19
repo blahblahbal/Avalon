@@ -18,7 +18,7 @@ namespace Avalon.NPCs.Bosses.PreHardmode.BacteriumPrime;
 
 public class BacteriumTendril : ModNPC
 {
-	private static SoundStyle _chompSound = new SoundStyle("Avalon/Sounds/NPC/Chomp_", 4) { PitchVariance = 0.4f, MaxInstances = 10 };
+	public static SoundStyle _chompSound = Sounds.NPC.Chomp.Asset with { Pitch = - 0.4f, PitchVariance = 0.3f, volume = 0.4f, MaxInstances = 10 };
 	public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 	{
 		NPCID.Sets.NPCBestiaryDrawModifiers bestiaryData = new NPCID.Sets.NPCBestiaryDrawModifiers()
@@ -58,18 +58,16 @@ public class BacteriumTendril : ModNPC
 	{
 		NPC.lifeMax = (int)(NPC.lifeMax * balance * bossAdjustment * 0.5f);
 	}
-	private NPC Owner { get => Main.npc[(int)NPC.ai[3]]; }
-	private Player Target { get => Main.player[NPC.target]; }
-	private Vector2 ConnectionPoint { get => Owner.Center + new Vector2(60, 0).RotatedBy(NPC.ai[0]); }
+	public NPC Owner { get => Main.npc[(int)NPC.ai[3]]; }
+	public Player Target { get => Main.player[NPC.target]; }
+	public Vector2 ConnectionPoint { get => Owner.Center + new Vector2(Owner.width * 0.6f, 0).RotatedBy(NPC.ai[0]); }
 	public override void AI()
 	{
+		bool secondPhase = Owner.ModNPC is BacteriumPrimeSmallRanged;
 		NPC.localAI[2] += 0.04f;
 		var seed = Utils.RandomNextSeed((ulong)NPC.whoAmI);
 		int randDirection = Utils.RandomInt(ref seed, 2) == 0 ? -1 : 1;
 		NPC.rotation = (Utils.RandomFloat(ref seed) * MathHelper.TwoPi) + NPC.localAI[2] * randDirection;
-		_chompSound.Pitch = -0.4f;
-		_chompSound.pitchVariance = 0.3f;
-		_chompSound.Volume = 0.4f;
 		if (NPC.ai[2] != 0)
 		{
 			NPC.ai[2]++;
@@ -92,19 +90,19 @@ public class BacteriumTendril : ModNPC
 		NPC.alpha = Owner.alpha;
 		NPC.ai[0] += 0.002f;
 		NPC.ai[1]++;
-		if (!Owner.active || Owner.type != ModContent.NPCType<BacteriumPrime>())
+		if (!Owner.active && Main.netMode != NetmodeID.MultiplayerClient)
 		{
-			NPC.active = false;
+			NPC.StrikeInstantKill();
 		}
 		float ownerDist = NPC.Center.Distance(Owner.Center);
-		if (ownerDist < 70)
+		if (ownerDist < Owner.width * 0.8f)
 		{
-			NPC.position -= NPC.Center.DirectionTo(Owner.Center) * (70 - ownerDist);
+			NPC.position -= NPC.Center.DirectionTo(Owner.Center) * ((Owner.width * 0.8f) - ownerDist);
 		}
 
 		NPC.position += Owner.velocity;
 		NPC.TargetClosest();
-		if (!NPC.HasValidTarget || !Target.Hitbox.IntersectsConeFastInaccurate(Owner.Center, 400, NPC.ai[0],1f))
+		if (secondPhase || !NPC.HasValidTarget || !Target.Hitbox.IntersectsConeFastInaccurate(Owner.Center, 400, NPC.ai[0],1f))
 		{
 			NPC.frame.Y = (int)((Math.Abs(NPC.ai[2]) / 60f) * 4) * 32;
 			Vector2 targetPos = ConnectionPoint + new Vector2(15, 0).RotatedBy(NPC.ai[0]) + new Vector2(5).RotatedBy(NPC.ai[1] * 0.05f);
@@ -141,7 +139,7 @@ public class BacteriumTendril : ModNPC
 
 		NPC.SimpleFlyMovement(NPC.Center.DirectionTo(whipTargetPos) * Utils.Remap(connectionDist, 0, 128, 3f, 8f), Utils.Remap(NPC.Center.Distance(whipTargetPos),0,64,0.1f,1f));
 
-		Dust.QuickDust(whipTargetPos, Color.Red);
+		//Dust.QuickDust(whipTargetPos, Color.Red);
 	}
 	public override void OnKill()
 	{
