@@ -21,14 +21,15 @@ internal class KillTileHooks : ModHook
 	{
 		ILCursor c = new(il);
 		ILLabel IL_030f = c.DefineLabel();
+		int stloc = -1;
 
 		c.GotoNext(MoveType.AfterLabel,
 		x => x.MatchLdsflda<Main>("tile"),
 		x => x.MatchLdarg(1),
 		x => x.MatchLdarg(2),
 		x => x.MatchCall<Tilemap>("get_Item"),
-		x => x.MatchStloc(3),
-		x => x.MatchLdloca(3),
+		x => x.MatchStloc(out stloc),
+		x => x.MatchLdloca(stloc),
 		x => x.MatchCall<Tile>("active")
 		);
 		c.EmitLdarg0(); // self
