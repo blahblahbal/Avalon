@@ -25,6 +25,9 @@ public class PotTorch : ModProjectile
 	public override void AI()
 	{
 		Projectile.rotation = Projectile.velocity.Y == 0 ? Utils.AngleLerp(Projectile.rotation, MathHelper.PiOver2 * Projectile.direction, 0.4f) : Projectile.rotation + Projectile.direction * 0.2f;
+
+		Projectile.localAI[0] = Projectile.velocity.Y == 0 ? Utils.AngleLerp(Projectile.localAI[0], 0, 0.4f) : Projectile.velocity.ToRotation() - MathHelper.PiOver2;
+
 		Projectile.velocity.Y += 0.2f;
 
 		Projectile.frameCounter++;
@@ -65,7 +68,7 @@ public class PotTorch : ModProjectile
 		Vector2 offset = new Vector2(0, 6);
 
 		ulong seed = Main.TileFrameSeed;
-		DrawData flame = new(tex, Projectile.Center - Main.screenPosition + offset + new Vector2(0,2) + new Vector2(0,-2).RotatedBy(Projectile.rotation), tex.Frame(1, 7, 0, 1 + Projectile.frame), Color.White, Projectile.localAI[0], new Vector2(7,14), 1, SpriteEffects.None, 0);
+		DrawData flame = new(tex, Projectile.Center - Main.screenPosition + offset + new Vector2(0,2) + new Vector2(0,-2).RotatedBy(Projectile.rotation), tex.Frame(1, 7, 0, 1 + Projectile.frame), Color.White, Projectile.localAI[0], new Vector2(7,14), new Vector2(1,Utils.Remap(Projectile.velocity.Length(),2,6,1,3)), SpriteEffects.None, 0);
 		Main.EntitySpriteDraw(flame);
 		Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition + offset, tex.Frame(1, 7, 0, 0), lightColor, Projectile.rotation, tex.Size() / new Vector2(2, 14), 1, SpriteEffects.None, 0);
 		Main.EntitySpriteDraw(flame with { color = new Color(128, 128, 128, 0)});
