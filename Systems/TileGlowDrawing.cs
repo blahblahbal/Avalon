@@ -60,7 +60,7 @@ public class TileGlowDrawing : ModSystem
 		Vector2 pos = new Vector2(i * 16 + xOffset, j * 16 + yOffset) + zero - Main.screenPosition;
 		var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
 		var halfFrame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 8);
-		color = ActuatedColor(color, tile);
+		color = tile.actColor(color);
 		if (tile.Slope == SlopeType.Solid && !tile.IsHalfBlock)
 		{
 			Main.spriteBatch.Draw(glow.Value, pos, frame, color);

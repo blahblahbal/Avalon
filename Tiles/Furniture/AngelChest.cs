@@ -67,7 +67,7 @@ namespace Avalon.Tiles.Furniture
 			Texture2D texture2 = TextureAssets.Tile[TileID.Containers].Value;
 			Vector2 pos = new Vector2(i * 16 - Main.screenPosition.X, j * 16 - Main.screenPosition.Y) + zero;
 			Color tileLight = Lighting.GetColor(i, j);
-			tileLight = TileGlowDrawing.ActuatedColor(tileLight, tile);
+			tileLight = tile.actColor(tileLight);
 			Color color = tileLight;
 			tileLight *= 1 - visability;
 			color *= visability;
