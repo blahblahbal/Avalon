@@ -15,6 +15,7 @@ public class RhotukaLauncher : ModItem
 	}
 	public override void SetStaticDefaults()
 	{
+		ItemID.Sets.IsRangedSpecialistWeapon[Type] = true;
 		Item.staff[Type] = true;
 	}
 	public override void SetDefaults()

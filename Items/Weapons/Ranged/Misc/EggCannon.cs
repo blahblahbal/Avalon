@@ -12,6 +12,10 @@ namespace Avalon.Items.Weapons.Ranged.Misc
 {
 	public class EggCannon : ModItem
 	{
+		public override void SetStaticDefaults()
+		{
+			ItemID.Sets.IsRangedSpecialistWeapon[Type] = true;
+		}
 		public override void SetDefaults()
 		{
 			Item.DefaultToRangedWeapon(50, 20, ModContent.ProjectileType<ExplosiveEgg>(), AmmoID.None, 35, 8f, 16f, 35, 35, true);

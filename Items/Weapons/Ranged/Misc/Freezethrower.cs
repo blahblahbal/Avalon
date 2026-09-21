@@ -3,12 +3,17 @@ using Avalon.Projectiles.Ranged.Misc;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.Misc;
 
 public class Freezethrower : ModItem
 {
+	public override void SetStaticDefaults()
+	{
+		ItemID.Sets.IsRangedSpecialistWeapon[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Item.DefaultToFlamethrower(ModContent.ProjectileType<FreezethrowerProj>(), 70, 0.625f, 10.5f, 5, 30);

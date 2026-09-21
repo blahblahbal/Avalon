@@ -10203,6 +10203,11 @@ Mods: {
 				DisplayName: Amber Amulet
 				Tooltip: 10% increased mining and move speed
 			}
+
+			PotteryGloves: {
+				DisplayName: Pottery Gloves
+				Tooltip: Throws a pot containing various "goodies"
+			}
 		}
 
 		InfoDisplays: {
@@ -10473,6 +10478,9 @@ Mods: {
 			HellrazerStake.DisplayName: Hellrazer Stake
 			HellrazerStakeExplosion.DisplayName: Hellrazer Stake Explosion
 			BoomlashSeed.DisplayName: Boomlash Seed
+			Pot.DisplayName: Pot
+			PotCoin.DisplayName: Pot Coin
+			PotTorch.DisplayName: Pot Torch
 		}
 
 		NPCs: {

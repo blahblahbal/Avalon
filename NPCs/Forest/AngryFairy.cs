@@ -32,19 +32,25 @@ public class AngryFairy : ModNPC
 		Banner = NPC.type;
 		BannerItem = ModContent.ItemType<Items.Banners.AngryFairyBanner>();
 	}
+	public override Color? GetAlpha(Color drawColor)
+	{
+		return NPC.GetNPCColorTintedByBuffs(Color.White with { A = 200});
+	}
 	public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 	{
-		bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
-		{
+		bestiaryEntry.Info.AddRange(
+		[
 			BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 			new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.Avalon.Bestiary.AngryFairy"))
-		});
+		]);
 	}
 	public override void AI()
 	{
 		NPC.spriteDirection = -NPC.direction;
 		NPC.rotation = NPC.velocity.X * 0.1f;
 		NPC.velocity.X *= 0.93f;
+
+		Lighting.AddLight(NPC.Center, new Vector3(1, 0.25f, 0.25f) * 0.5f);
 
 		if (Main.rand.NextBool(20))
 		{

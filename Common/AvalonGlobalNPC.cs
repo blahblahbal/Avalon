@@ -389,6 +389,13 @@ public class AvalonGlobalNPC : GlobalNPC
 	}
 	public override void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo)
 	{
+		if (spawnInfo.Player.InPillarZone())
+			return;
+		if(SpawnHelper.Contagion(ref spawnInfo) || SpawnHelper.Hellcastle(ref spawnInfo))
+		{
+			pool[0] = 0;
+		}
+		/*
 		//if (spawnInfo.Player.InModBiome<Tropics>() && !spawnInfo.Player.InPillarZone())
 		//{
 		//	pool[0] = 0;
@@ -423,6 +430,7 @@ public class AvalonGlobalNPC : GlobalNPC
 		{
 			pool[0] = 0;
 		}
+		*/
 	}
 	public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
 	{

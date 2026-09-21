@@ -16,6 +16,10 @@ namespace Avalon.Items.Weapons.Ranged.Misc;
 
 public class Boompipe : ModItem
 {
+	public override void SetStaticDefaults()
+	{
+		ItemID.Sets.IsRangedSpecialistWeapon[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Item.DefaultToBlowpipe(11, 3.5f, 14.5f, 40, 40);

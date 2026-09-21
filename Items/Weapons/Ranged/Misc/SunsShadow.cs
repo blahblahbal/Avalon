@@ -10,6 +10,10 @@ namespace Avalon.Items.Weapons.Ranged.Misc;
 
 public class SunsShadow : ModItem
 {
+	public override void SetStaticDefaults()
+	{
+		ItemID.Sets.IsRangedSpecialistWeapon[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Item.DefaultToBlowpipe(27, 3.5f, 4.5f, 40, 40);
