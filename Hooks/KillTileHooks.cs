@@ -38,9 +38,8 @@ internal class KillTileHooks : ModHook
 		c.EmitDelegate((Player self, int x, int y) =>
 		{
 			Tile t = Main.tile[x, y];
-			if (TileID.Sets.Ore[t.TileType] && self.GetModPlayer<AvalonPlayer>().OreDupe && Data.Sets.TileSets.OresToChunks.ContainsKey(t.TileType))
+			if (TileID.Sets.Ore[t.TileType] && self.GetModPlayer<AvalonPlayer>().OreDupe && Data.Sets.TileSets.OresToChunks.TryGetValue(t.TileType, out int drop))
 			{
-				int drop = Data.Sets.TileSets.OresToChunks[t.TileType];
 				int stack = 1;
 				if (Main.rand.NextBool(3))
 				{
