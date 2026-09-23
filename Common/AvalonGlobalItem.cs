@@ -434,54 +434,6 @@ public class AvalonGlobalItem : GlobalItem
 				item.ChangeItemType(ModContent.ItemType<ManipulatorTime>());
 				return false;
 			}
-			if (item.type == ModContent.ItemType<ShadowPhone>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneSurface>());
-				return false;
-			}
-			if (item.type == ModContent.ItemType<ShadowPhoneSurface>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneHome>());
-				return false;
-			}
-			if (item.type == ModContent.ItemType<ShadowPhoneHome>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneDungeon>());
-				return false;
-			}
-			if (item.type == ModContent.ItemType<ShadowPhoneDungeon>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneJungleTropics>());
-				return false;
-			}
-			if (item.type == ModContent.ItemType<ShadowPhoneJungleTropics>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneOcean>());
-				return false;
-			}
-			if (item.type == ModContent.ItemType<ShadowPhoneOcean>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneHell>());
-				return false;
-			}
-			if (item.type == ModContent.ItemType<ShadowPhoneHell>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneRandom>());
-				return false;
-			}
-			if (item.type == ModContent.ItemType<ShadowPhoneRandom>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhone>());
-				return false;
-			}
 		}
 		return base.CanRightClick(item);
 	}

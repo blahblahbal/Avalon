@@ -1058,13 +1058,22 @@ Mods: {
 					'''
 			}
 
-			ShadowPhone: {
+			ShadowPhoneDummy: {
+				DisplayName: Shadow Phone
+				Tooltip:
+					'''
+					Displays everything
+					<right> to toggle destination
+					'''
+			}
+
+			ShadowPhoneSpawn: {
 				DisplayName: Shadow Phone (Spawn)
 				Tooltip:
 					'''
 					Displays everything
 					Allows you to return to spawn at will
-					<right> to change destination
+					<right> to toggle destination
 					'''
 			}
 
@@ -1075,17 +1084,17 @@ Mods: {
 					Displays everything
 					Allows you to teleport to the surface
 					Horizontal position will remain the same
-					<right> to change destination
+					<right> to toggle destination
 					'''
 			}
 
 			ShadowPhoneOcean: {
-				DisplayName: Shadow Phone (Oceans)
+				DisplayName: Shadow Phone (Ocean)
 				Tooltip:
 					'''
 					Displays everything
 					Allows you to teleport to the oceans
-					<right> to change destination
+					<right> to toggle destination
 					'''
 			}
 
@@ -1095,7 +1104,7 @@ Mods: {
 					'''
 					Displays everything
 					Allows you to teleport to the Underworld
-					<right> to change destination
+					<right> to toggle destination
 					'''
 			}
 
@@ -1105,7 +1114,7 @@ Mods: {
 					'''
 					Displays everything
 					Allows you to teleport to the Jungle or Savanna
-					<right> to change destination
+					<right> to toggle destination
 					'''
 			}
 
@@ -1115,7 +1124,7 @@ Mods: {
 					'''
 					Displays everything
 					Allows you to teleport to random locations
-					<right> to change destination
+					<right> to toggle destination
 					'''
 			}
 
@@ -1125,7 +1134,7 @@ Mods: {
 					'''
 					Displays everything
 					Allows you to return home at will
-					<right> to change destination
+					<right> to toggle destination
 					'''
 			}
 
@@ -1135,7 +1144,7 @@ Mods: {
 					'''
 					Displays everything
 					Allows you to teleport to the Dungeon
-					<right> to change destination
+					<right> to toggle destination
 					'''
 			}
 
