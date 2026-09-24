@@ -1,5 +1,6 @@
 using Avalon.Common;
 using Avalon.Common.Extensions;
+using Avalon.Data.Sets;
 using Avalon.Items.Accessories.Info;
 using Microsoft.Xna.Framework;
 using System;
@@ -12,7 +13,6 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Tools.Hardmode;
 public abstract class ShadowPhoneBase : ModItem
 {
-	public virtual int PhoneToTurnInto => -1;
 	public override void SetStaticDefaults()
 	{
 		ItemID.Sets.SortingPriorityBossSpawns[Type] = 31;
@@ -33,7 +33,7 @@ public abstract class ShadowPhoneBase : ModItem
 			player.releaseUseTile = false;
 			Main.mouseRightRelease = false;
 			SoundEngine.PlaySound(SoundID.Unlock, player.position);
-			Item.ChangeItemType(PhoneToTurnInto);
+			Item.ChangeItemType(GetNextShadowPhoneMode(Item));
 			Recipe.FindRecipes();
 		}
 		return true;
@@ -62,6 +62,20 @@ public abstract class ShadowPhoneBase : ModItem
 		player.accWatch = 3;
 		player.accDepthMeter = 1;
 		player.accCompass = 1;
+	}
+	/// <summary>
+	/// Returns -1 if the given item is not a Shadow Phone (defined within ItemSets.ShadowPhoneModeCycleOrder)
+	/// </summary>
+	/// <param name="item"></param>
+	/// <returns></returns>
+	public static int GetNextShadowPhoneMode(Item item)
+	{
+		int index = Array.IndexOf(ItemSets.ShadowPhoneModeCycleOrder, item.type);
+		if (index != -1)
+		{
+			return index + 1 >= ItemSets.ShadowPhoneModeCycleOrder.Length ? ItemSets.ShadowPhoneModeCycleOrder[1] : ItemSets.ShadowPhoneModeCycleOrder[index + 1];
+		}
+		return -1;
 	}
 	#region Teleport methods
 	public static void TeleportToSurface(Player p)
@@ -213,8 +227,11 @@ public class ShadowPhoneHook : ModHook
 		orig.Invoke(self);
 		if (ItemLoader.GetItem(self.inventory[self.selectedItem].type) is ShadowPhoneBase)
 		{
-			self.altFunctionUse = 0;
-			self.controlUseItem = false;
+			if (self.altFunctionUse == 1)
+			{
+				self.altFunctionUse = 0;
+				self.controlUseItem = false;
+			}
 		}
 	}
 }
@@ -232,62 +249,16 @@ public class ShadowPhoneGlobalItem : GlobalItem
 	}
 
 	// Allow right clicking the item slot in the inventory to change it
+	// This COULD be done in the ModItem, but it plays an extra sound automatically
 	public override bool CanRightClick(Item item)
 	{
 		if (Main.mouseRightRelease && Main.mouseRight)
 		{
-			if (item.type == ModContent.ItemType<ShadowPhoneDummy>())
+			int nextShadowPhoneType = ShadowPhoneBase.GetNextShadowPhoneMode(item);
+			if (nextShadowPhoneType != -1)
 			{
 				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneHome>());
-				return false;
-			}
-			if (item.type == ModContent.ItemType<ShadowPhoneHome>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneOcean>());
-				return false;
-			}
-			if (item.type == ModContent.ItemType<ShadowPhoneOcean>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneHell>());
-				return false;
-			}
-			if (item.type == ModContent.ItemType<ShadowPhoneHell>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneSpawn>());
-				return false;
-			}
-			if (item.type == ModContent.ItemType<ShadowPhoneSpawn>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneSurface>());
-				return false;
-			}
-			if (item.type == ModContent.ItemType<ShadowPhoneSurface>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneJungleTropics>());
-				return false;
-			}
-			if (item.type == ModContent.ItemType<ShadowPhoneJungleTropics>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneDungeon>());
-				return false;
-			}
-			if (item.type == ModContent.ItemType<ShadowPhoneDungeon>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneRandom>());
-				return false;
-			}
-			if (item.type == ModContent.ItemType<ShadowPhoneRandom>())
-			{
-				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
-				item.ChangeItemType(ModContent.ItemType<ShadowPhoneHome>());
+				item.ChangeItemType(nextShadowPhoneType);
 				return false;
 			}
 		}
@@ -297,7 +268,6 @@ public class ShadowPhoneGlobalItem : GlobalItem
 
 public class ShadowPhoneDummy : ShadowPhoneBase
 {
-	public override int PhoneToTurnInto => ModContent.ItemType<ShadowPhoneHome>();
 	public override void AddRecipes()
 	{
 		Recipe.Create(Type)
@@ -315,49 +285,41 @@ public class ShadowPhoneDummy : ShadowPhoneBase
 
 public class ShadowPhoneHome : ShadowPhoneBase
 {
-	public override int PhoneToTurnInto => ModContent.ItemType<ShadowPhoneOcean>();
 	public override Action<Player> TeleportAction => player => player.Spawn(PlayerSpawnContext.RecallFromItem);
 }
 
 public class ShadowPhoneOcean : ShadowPhoneBase
 {
-	public override int PhoneToTurnInto => ModContent.ItemType<ShadowPhoneHell>();
 	public override Action<Player> TeleportAction => player => player.MagicConch();
 }
 
 public class ShadowPhoneHell : ShadowPhoneBase
 {
-	public override int PhoneToTurnInto => ModContent.ItemType<ShadowPhoneSpawn>();
 	public override Action<Player> TeleportAction => player => player.DemonConch();
 }
 
 [LegacyName("ShadowPhone")]
 public class ShadowPhoneSpawn : ShadowPhoneBase
 {
-	public override int PhoneToTurnInto => ModContent.ItemType<ShadowPhoneSurface>();
 	public override Action<Player> TeleportAction => player => player.Shellphone_Spawn();
 }
 
 public class ShadowPhoneSurface : ShadowPhoneBase
 {
-	public override int PhoneToTurnInto => ModContent.ItemType<ShadowPhoneJungleTropics>();
 	public override Action<Player> TeleportAction => TeleportToSurface;
 }
 
 public class ShadowPhoneJungleTropics : ShadowPhoneBase
 {
-	public override int PhoneToTurnInto => ModContent.ItemType<ShadowPhoneDungeon>();
 	public override Action<Player> TeleportAction => JungleTropicsPort;
 }
 
 public class ShadowPhoneDungeon : ShadowPhoneBase
 {
-	public override int PhoneToTurnInto => ModContent.ItemType<ShadowPhoneRandom>();
 	public override Action<Player> TeleportAction => DungeonPort;
 }
 
 public class ShadowPhoneRandom : ShadowPhoneBase
 {
-	public override int PhoneToTurnInto => ModContent.ItemType<ShadowPhoneHome>();
 	public override Action<Player> TeleportAction => player => player.TeleportationPotion();
 }

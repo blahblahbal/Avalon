@@ -84,6 +84,18 @@ public static class ItemSets
 		ItemType<Windshield>()
 	);
 
+	public static int[] ShadowPhoneModeCycleOrder = [
+		ItemType<ShadowPhoneDummy>(),
+		ItemType<ShadowPhoneHome>(),
+		ItemType<ShadowPhoneOcean>(),
+		ItemType<ShadowPhoneHell>(),
+		ItemType<ShadowPhoneSpawn>(),
+		ItemType<ShadowPhoneSurface>(),
+		ItemType<ShadowPhoneJungleTropics>(),
+		ItemType<ShadowPhoneDungeon>(),
+		ItemType<ShadowPhoneRandom>()
+	];
+
 	public static bool[] VanillaBarItems = ItemID.Sets.Factory.CreateBoolSet(false,
 		ItemID.CopperBar, ItemID.TinBar, ItemID.IronBar, ItemID.LeadBar, ItemID.SilverBar,
 		ItemID.TungstenBar, ItemID.GoldBar, ItemID.PlatinumBar, ItemID.MeteoriteBar,
