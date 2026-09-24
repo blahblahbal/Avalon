@@ -44,7 +44,7 @@ public abstract class ShadowPhoneBase : ModItem
 		SoundEngine.PlaySound(SoundID.Item6, player.position);
 		return true;
 	}
-	public virtual Action<Player> TeleportAction => player => { };
+	public abstract Action<Player> TeleportAction { get; }
 	public override void UpdateInfoAccessory(Player player)
 	{
 		player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
@@ -268,6 +268,7 @@ public class ShadowPhoneGlobalItem : GlobalItem
 
 public class ShadowPhoneDummy : ShadowPhoneBase
 {
+	public override Action<Player> TeleportAction => player => { };
 	public override void AddRecipes()
 	{
 		Recipe.Create(Type)
