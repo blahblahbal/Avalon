@@ -544,8 +544,18 @@ public class RecipeSystem : ModSystem
         });
         RecipeGroup.RegisterGroup("SilverBar", groupSilverBar);
 
-        #region thorium stuff
-        var groupThoriumCobalt = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.CobaltBar)}", new int[]
+		var groupShellphone = new RecipeGroup(() => $"{Lang.GetItemNameValue(ItemID.ShellphoneDummy)}",
+		[
+			ItemID.ShellphoneDummy,
+			ItemID.Shellphone,
+			ItemID.ShellphoneHell,
+			ItemID.ShellphoneOcean,
+			ItemID.ShellphoneSpawn
+		]);
+		RecipeGroup.RegisterGroup("Shellphone", groupShellphone);
+
+		#region thorium stuff
+		var groupThoriumCobalt = new RecipeGroup(() => $"{any} {Lang.GetItemNameValue(ItemID.CobaltBar)}", new int[]
         {
             ItemID.CobaltBar,
             ItemID.PalladiumBar,

@@ -4,12 +4,17 @@ using Avalon.Projectiles.Ranged.Ammo;
 using Avalon.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Weapons.Ranged.Misc;
 
 public class FleshBoiler : ModItem
 {
+	public override void SetStaticDefaults()
+	{
+		ItemID.Sets.IsRangedSpecialistWeapon[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Item.DefaultToFlamethrower(ModContent.ProjectileType<CanisterFire>(), 55, 0.6f, 10f, 4, 20, false);

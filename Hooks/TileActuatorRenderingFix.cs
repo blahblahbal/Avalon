@@ -1,13 +1,10 @@
 using Avalon.Common;
 using Avalon.Systems;
 using Microsoft.Xna.Framework;
-using Mono.Cecil.Cil;
 using MonoMod.Cil;
-using Steamworks;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.Graphics;
-using Terraria.ModLoader;
 
 namespace Avalon.Hooks
 {
@@ -35,7 +32,7 @@ namespace Avalon.Hooks
 			c.EmitLdloc(9);
 			c.EmitDelegate((ref Color color, Tile tile) =>
 			{
-				color = TileGlowDrawing.ActuatedColor(color, tile);
+				color = tile.actColor(color);
 			});
 		}
 
@@ -60,28 +57,28 @@ namespace Avalon.Hooks
 			c.EmitLdloc(9);
 			c.EmitDelegate((ref Color color6, Tile tile) =>
 			{
-				color6 = TileGlowDrawing.ActuatedColor(color6, tile);
+				color6 = tile.actColor(color6);
 			});
 			c.GotoNext(MoveType.After, i => i.MatchCall<Lighting>("GetColor"), i => i.MatchStloc(43));
 			c.EmitLdloca(43);
 			c.EmitLdloc(9);
 			c.EmitDelegate((ref Color color4, Tile tile) =>
 			{
-				color4 = TileGlowDrawing.ActuatedColor(color4, tile);
+				color4 = tile.actColor(color4);
 			});
 			c.GotoNext(MoveType.After, i => i.MatchCall<Lighting>("GetColor"), i => i.MatchStloc(61));
 			c.EmitLdloca(61);
 			c.EmitLdloc(9);
 			c.EmitDelegate((ref Color color2, Tile tile) =>
 			{
-				color2 = TileGlowDrawing.ActuatedColor(color2, tile);
+				color2 = tile.actColor(color2);
 			});
 			c.GotoNext(MoveType.After, i => i.MatchCall<Lighting>("GetColor"), i => i.MatchStloc(82));
 			c.EmitLdloca(82);
 			c.EmitLdloc(9);
 			c.EmitDelegate((ref Color color7, Tile tile) =>
 			{
-				color7 = TileGlowDrawing.ActuatedColor(color7, tile);
+				color7 = tile.actColor(color7);
 			});
 		}
 
@@ -93,7 +90,7 @@ namespace Avalon.Hooks
 			c.EmitLdloc(7);
 			c.EmitDelegate((ref Color tileLight, Tile tile) =>
 			{
-				tileLight = TileGlowDrawing.ActuatedColor(tileLight, tile);
+				tileLight = tile.actColor(tileLight);
 			});
 		}
 
@@ -105,7 +102,7 @@ namespace Avalon.Hooks
 			c.EmitLdloc(10);
 			c.EmitDelegate((ref Color tileLight, Tile tile) =>
 			{
-				tileLight = TileGlowDrawing.ActuatedColor(tileLight, tile);
+				tileLight = tile.actColor(tileLight);
 			});
 		}
 
@@ -117,7 +114,7 @@ namespace Avalon.Hooks
 			c.EmitLdloc(22); //tile2 inside of the x and y loops 
 			c.EmitDelegate((ref Color tileLight, Tile tile2) =>
 			{
-				tileLight = TileGlowDrawing.ActuatedColor(tileLight, tile2);
+				tileLight = tile2.actColor(tileLight);
 			});
 		}
 

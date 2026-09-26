@@ -1,3 +1,4 @@
+using Avalon.Data.Sets;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent;
@@ -12,6 +13,8 @@ public class PoisonGasTrap : ModProjectile
 	{
 		ProjectileID.Sets.ForcePlateDetection[Projectile.type] = false;
 		ProjectileID.Sets.NoLiquidDistortion[Type] = true;
+		ProjectileSets.DontReflect[Type] = true;
+		ProjectileSets.TrapProjectiles[Type] = true;
 	}
 	public override void SetDefaults()
 	{

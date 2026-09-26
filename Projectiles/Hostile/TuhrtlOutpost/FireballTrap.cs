@@ -1,8 +1,9 @@
+using Avalon.Data.Sets;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
 
 namespace Avalon.Projectiles.Hostile.TuhrtlOutpost;
 
@@ -11,7 +12,9 @@ public class FireballTrap : ModProjectile
     public override void SetStaticDefaults()
     {
         ProjectileID.Sets.ForcePlateDetection[Projectile.type] = false;
-    }
+		ProjectileSets.DontReflect[Type] = true;
+		ProjectileSets.TrapProjectiles[Type] = true;
+	}
     public override void SetDefaults()
     {
         Rectangle dims = this.GetDims();

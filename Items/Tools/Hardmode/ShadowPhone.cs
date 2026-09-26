@@ -1,21 +1,24 @@
 using Avalon.Common;
 using Avalon.Common.Extensions;
+using Avalon.Data.Sets;
 using Avalon.Items.Accessories.Info;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Items.Tools.Hardmode;
-
-public class ShadowPhone : ModItem
+public abstract class ShadowPhoneBase : ModItem
 {
 	public override void SetStaticDefaults()
 	{
-		ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
+		ItemID.Sets.SortingPriorityBossSpawns[Type] = 31;
+		ItemID.Sets.ShimmerCountsAsItem[Type] = ModContent.ItemType<ShadowPhoneDummy>();
+		ItemID.Sets.DuplicationMenuToolsFilter[Type] = true;
 	}
-
 	public override void SetDefaults()
 	{
 		Item.DefaultToConsumable(false, useTurn: true, width: 24, height: 28);
@@ -23,63 +26,59 @@ public class ShadowPhone : ModItem
 		Item.rare = ItemRarityID.Red;
 		Item.value = Item.sellPrice(0, 10);
 	}
-	public override void HoldItem(Player player)
+	public override bool AltFunctionUse(Player player)
 	{
-		if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
+		if (player.itemTime == 0 && player.itemAnimation == 0)
 		{
+			player.releaseUseTile = false;
+			Main.mouseRightRelease = false;
 			SoundEngine.PlaySound(SoundID.Unlock, player.position);
-			Item.ChangeItemType(ModContent.ItemType<ShadowPhoneSurface>());
+			Item.ChangeItemType(GetNextShadowPhoneMode(Item));
+			Recipe.FindRecipes();
 		}
+		return true;
 	}
-	public override bool? UseItem(Player player)
+	public sealed override bool? UseItem(Player player)
 	{
-		player.Shellphone_Spawn();
+		TeleportAction(player);
 		SoundEngine.PlaySound(SoundID.Item6, player.position);
 		return true;
 	}
+	public abstract Action<Player> TeleportAction { get; }
 	public override void UpdateInfoAccessory(Player player)
 	{
 		player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
 		player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
 		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
-		player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
-			player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
+		player.accThirdEye = true;
+		player.accFishFinder = true;
+		player.accWeatherRadio = true;
+		player.accCalendar = true;
+		player.accCritterGuide = true;
+		player.accDreamCatcher = true;
+		player.accJarOfSouls = true;
+		player.accStopwatch = true;
+		player.accOreFinder = true;
 		player.accWatch = 3;
 		player.accDepthMeter = 1;
 		player.accCompass = 1;
 	}
-}
-
-public class ShadowPhoneSurface : ModItem
-{
-	public override void SetStaticDefaults()
+	/// <summary>
+	/// Returns -1 if the given item is not a Shadow Phone (defined within ItemSets.ShadowPhoneModeCycleOrder)
+	/// </summary>
+	/// <param name="item"></param>
+	/// <returns></returns>
+	public static int GetNextShadowPhoneMode(Item item)
 	{
-		ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
-	}
-
-	public override void SetDefaults()
-	{
-		Item.DefaultToConsumable(false, useTurn: true, width: 24, height: 28);
-		Item.maxStack = 1;
-		Item.rare = ItemRarityID.Red;
-		Item.value = Item.sellPrice(0, 10);
-	}
-	public override void HoldItem(Player player)
-	{
-		if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
+		int index = Array.IndexOf(ItemSets.ShadowPhoneModeCycleOrder, item.type);
+		if (index != -1)
 		{
-			SoundEngine.PlaySound(SoundID.Unlock, player.position);
-			Item.ChangeItemType(ModContent.ItemType<ShadowPhoneHome>());
+			return index + 1 >= ItemSets.ShadowPhoneModeCycleOrder.Length ? ItemSets.ShadowPhoneModeCycleOrder[1] : ItemSets.ShadowPhoneModeCycleOrder[index + 1];
 		}
+		return -1;
 	}
-	public override bool? UseItem(Player player)
-	{
-		TeleportToSurface(player);
-		SoundEngine.PlaySound(SoundID.Item6, player.position);
-		return true;
-	}
-
-	public void TeleportToSurface(Player p)
+	#region Teleport methods
+	public static void TeleportToSurface(Player p)
 	{
 		//p.noFallDmg = true;
 		float xpos = p.position.X;
@@ -107,49 +106,7 @@ public class ShadowPhoneSurface : ModItem
 			NetMessage.SendData(MessageID.TeleportEntity, -1, -1, null, 0, p.whoAmI, newPos.X, newPos.Y, 7);
 		}
 	}
-
-	public override void UpdateInfoAccessory(Player player)
-	{
-		player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
-		player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
-		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
-		player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
-			player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
-		player.accWatch = 3;
-		player.accDepthMeter = 1;
-		player.accCompass = 1;
-	}
-}
-
-public class ShadowPhoneDungeon : ModItem
-{
-	public override void SetStaticDefaults()
-	{
-		ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
-	}
-	public override void SetDefaults()
-	{
-		Item.DefaultToConsumable(false, useTurn: true, width: 24, height: 28);
-		Item.maxStack = 1;
-		Item.rare = ItemRarityID.Red;
-		Item.value = Item.sellPrice(0, 10);
-	}
-	public override void HoldItem(Player player)
-	{
-		if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
-		{
-			SoundEngine.PlaySound(SoundID.Unlock, player.position);
-			Item.ChangeItemType(ModContent.ItemType<ShadowPhoneJungleTropics>());
-		}
-	}
-	public override bool? UseItem(Player player)
-	{
-		DungeonPort(player);
-		SoundEngine.PlaySound(SoundID.Item6, player.position);
-		return true;
-	}
-
-	public void DungeonPort(Player player)
+	public static void DungeonPort(Player player)
 	{
 		bool canSpawn = false;
 		int num = Main.dungeonX;
@@ -199,128 +156,7 @@ public class ShadowPhoneDungeon : ModItem
 			}
 		}
 	}
-
-	public override void UpdateInfoAccessory(Player player)
-	{
-		player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
-		player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
-		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
-		player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
-			player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
-		player.accWatch = 3;
-		player.accDepthMeter = 1;
-		player.accCompass = 1;
-	}
-}
-
-public class ShadowPhoneOcean : ModItem
-{
-	public override void SetStaticDefaults()
-	{
-		ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
-	}
-	public override void SetDefaults()
-	{
-		Item.DefaultToConsumable(false, useTurn: true, width: 24, height: 28);
-		Item.maxStack = 1;
-		Item.rare = ItemRarityID.Red;
-		Item.value = Item.sellPrice(0, 10);
-	}
-	public override void HoldItem(Player player)
-	{
-		if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
-		{
-			SoundEngine.PlaySound(SoundID.Unlock, player.position);
-			Item.ChangeItemType(ModContent.ItemType<ShadowPhoneHell>());
-		}
-	}
-	public override bool? UseItem(Player player)
-	{
-		player.MagicConch();
-		SoundEngine.PlaySound(SoundID.Item6, player.position);
-		return true;
-	}
-	public override void UpdateInfoAccessory(Player player)
-	{
-		player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
-		player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
-		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
-		player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
-			player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
-		player.accWatch = 3;
-		player.accDepthMeter = 1;
-		player.accCompass = 1;
-	}
-}
-
-public class ShadowPhoneHell : ModItem
-{
-	public override void SetStaticDefaults()
-	{
-		ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
-	}
-	public override void SetDefaults()
-	{
-		Item.DefaultToConsumable(false, useTurn: true, width: 24, height: 28);
-		Item.maxStack = 1;
-		Item.rare = ItemRarityID.Red;
-		Item.value = Item.sellPrice(0, 10);
-	}
-	public override void HoldItem(Player player)
-	{
-		if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
-		{
-			SoundEngine.PlaySound(SoundID.Unlock, player.position);
-			Item.ChangeItemType(ModContent.ItemType<ShadowPhoneRandom>());
-		}
-	}
-	public override bool? UseItem(Player player)
-	{
-		player.DemonConch();
-		SoundEngine.PlaySound(SoundID.Item6, player.position);
-		return true;
-	}
-	public override void UpdateInfoAccessory(Player player)
-	{
-		player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
-		player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
-		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
-		player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
-			player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
-		player.accWatch = 3;
-		player.accDepthMeter = 1;
-		player.accCompass = 1;
-	}
-}
-
-public class ShadowPhoneJungleTropics : ModItem
-{
-	public override void SetStaticDefaults()
-	{
-		ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
-	}
-	public override void SetDefaults()
-	{
-		Item.DefaultToConsumable(false, useTurn: true, width: 24, height: 28);
-		Item.maxStack = 1;
-		Item.rare = ItemRarityID.Red;
-		Item.value = Item.sellPrice(0, 10);
-	}
-	public override bool? UseItem(Player player)
-	{
-		JungleTropicsPort(player);
-		SoundEngine.PlaySound(SoundID.Item6, player.position);
-		return true;
-	}
-	public override void HoldItem(Player player)
-	{
-		if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
-		{
-			SoundEngine.PlaySound(SoundID.Unlock, player.position);
-			Item.ChangeItemType(ModContent.ItemType<ShadowPhoneOcean>());
-		}
-	}
-	public void JungleTropicsPort(Player player)
+	public static void JungleTropicsPort(Player player)
 	{
 		bool canSpawn = false;
 		int num = AvalonWorld.JungleLocationX;
@@ -374,127 +210,69 @@ public class ShadowPhoneJungleTropics : ModItem
 			}
 		}
 	}
-
-	public override void UpdateInfoAccessory(Player player)
-	{
-		player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
-		player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
-		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
-		player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
-			player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
-		player.accWatch = 3;
-		player.accDepthMeter = 1;
-		player.accCompass = 1;
-	}
+	#endregion Teleport methods
 }
 
-public class ShadowPhoneRandom : ModItem
+// The actual right click logic is in AltFunctionUse for convenience of not having to replicate a lengthy flag in the vanilla ItemCheck_ManageRightClickFeatures method since AltFunctionUse is called inside.
+// This detour is just to reset some values which cause undesirable behaviour (by default, returning true in AltFunctionUse makes the item call UseItem when right clicked, this prevents that so the item doesn't get held out).
+public class ShadowPhoneHook : ModHook
 {
-	public override void SetStaticDefaults()
+	protected override void Apply()
 	{
-		ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
+		On_Player.ItemCheck_ManageRightClickFeatures += On_Player_ItemCheck_ManageRightClickFeatures;
 	}
-	public override void SetDefaults()
+
+	private void On_Player_ItemCheck_ManageRightClickFeatures(On_Player.orig_ItemCheck_ManageRightClickFeatures orig, Player self)
 	{
-		Item.DefaultToConsumable(false, useTurn: true, width: 24, height: 28);
-		Item.maxStack = 1;
-		Item.rare = ItemRarityID.Red;
-		Item.value = Item.sellPrice(0, 10);
-	}
-	public override void HoldItem(Player player)
-	{
-		if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
+		orig.Invoke(self);
+		if (ItemLoader.GetItem(self.inventory[self.selectedItem].type) is ShadowPhoneBase)
 		{
-			SoundEngine.PlaySound(SoundID.Unlock, player.position);
-			Item.ChangeItemType(ModContent.ItemType<ShadowPhone>());
+			if (self.altFunctionUse == 1)
+			{
+				self.altFunctionUse = 0;
+				self.controlUseItem = false;
+			}
 		}
 	}
-	public override bool? UseItem(Player player)
+}
+
+public class ShadowPhoneGlobalItem : GlobalItem
+{
+	// Turns the dummy shadow phone item (the one with a blank screen) into the shadow phone (home) item when created, same method as the shellphone uses.
+	// Done in GlobalItem as doing it in the ModItem fails to build for whatever reason.
+	public override void OnCreated(Item item, ItemCreationContext context)
 	{
-		player.TeleportationPotion();
-		SoundEngine.PlaySound(SoundID.Item6, player.position);
-		return true;
+		if (item.type == ModContent.ItemType<ShadowPhoneDummy>())
+		{
+			item.SetDefaults(ModContent.ItemType<ShadowPhoneHome>());
+		}
 	}
 
-	public override void UpdateInfoAccessory(Player player)
+	// Allow right clicking the item slot in the inventory to change it
+	// This COULD be done in the ModItem, but it plays an extra sound automatically
+	public override bool CanRightClick(Item item)
 	{
-		player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
-		player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
-		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
-		player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
-			player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
-		player.accWatch = 3;
-		player.accDepthMeter = 1;
-		player.accCompass = 1;
+		if (Main.mouseRightRelease && Main.mouseRight)
+		{
+			int nextShadowPhoneType = ShadowPhoneBase.GetNextShadowPhoneMode(item);
+			if (nextShadowPhoneType != -1)
+			{
+				SoundEngine.PlaySound(SoundID.Unlock, Main.LocalPlayer.position);
+				item.ChangeItemType(nextShadowPhoneType);
+				return false;
+			}
+		}
+		return base.CanRightClick(item);
 	}
 }
 
-public class ShadowPhoneHome : ModItem
+public class ShadowPhoneDummy : ShadowPhoneBase
 {
-	public override void SetStaticDefaults()
-	{
-		ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
-	}
-
-	public override void SetDefaults()
-	{
-		Item.DefaultToConsumable(false, useTurn: true, width: 24, height: 28);
-		Item.maxStack = 1;
-		Item.rare = ItemRarityID.Red;
-		Item.value = Item.sellPrice(0, 10);
-	}
-	public override void ModifyResearchSorting(ref ContentSamples.CreativeHelper.ItemGroup itemGroup)
-	{
-		itemGroup = 0;
-	}
+	public override Action<Player> TeleportAction => player => { };
 	public override void AddRecipes()
 	{
 		Recipe.Create(Type)
-			.AddIngredient(ItemID.ShellphoneDummy)
-			.AddIngredient(ModContent.ItemType<EyeoftheGods>())
-			.AddIngredient(ModContent.ItemType<CalculatorSpectacles>())
-			.AddIngredient(ItemID.FallenStar, 40)
-			.AddIngredient(ItemID.Diamond, 20)
-			.AddIngredient(ItemID.ChlorophyteBar, 7)
-			.AddIngredient(ItemID.Ectoplasm, 10)
-			.AddTile(TileID.TinkerersWorkbench)
-			.Register();
-
-		Recipe.Create(Type)
-			.AddIngredient(ItemID.Shellphone)
-			.AddIngredient(ModContent.ItemType<EyeoftheGods>())
-			.AddIngredient(ModContent.ItemType<CalculatorSpectacles>())
-			.AddIngredient(ItemID.FallenStar, 40)
-			.AddIngredient(ItemID.Diamond, 20)
-			.AddIngredient(ItemID.ChlorophyteBar, 7)
-			.AddIngredient(ItemID.Ectoplasm, 10)
-			.AddTile(TileID.TinkerersWorkbench)
-			.Register();
-
-		Recipe.Create(Type)
-			.AddIngredient(ItemID.ShellphoneSpawn)
-			.AddIngredient(ModContent.ItemType<EyeoftheGods>())
-			.AddIngredient(ModContent.ItemType<CalculatorSpectacles>())
-			.AddIngredient(ItemID.FallenStar, 40)
-			.AddIngredient(ItemID.Diamond, 20)
-			.AddIngredient(ItemID.ChlorophyteBar, 7)
-			.AddIngredient(ItemID.Ectoplasm, 10)
-			.AddTile(TileID.TinkerersWorkbench)
-			.Register();
-
-		Recipe.Create(Type)
-			.AddIngredient(ItemID.ShellphoneOcean)
-			.AddIngredient(ModContent.ItemType<EyeoftheGods>())
-			.AddIngredient(ModContent.ItemType<CalculatorSpectacles>())
-			.AddIngredient(ItemID.FallenStar, 40)
-			.AddIngredient(ItemID.Diamond, 20)
-			.AddIngredient(ItemID.ChlorophyteBar, 7)
-			.AddIngredient(ItemID.Ectoplasm, 10)
-			.AddTile(TileID.TinkerersWorkbench)
-			.Register();
-
-		Recipe.Create(Type)
-			.AddIngredient(ItemID.ShellphoneHell)
+			.AddRecipeGroup("Shellphone")
 			.AddIngredient(ModContent.ItemType<EyeoftheGods>())
 			.AddIngredient(ModContent.ItemType<CalculatorSpectacles>())
 			.AddIngredient(ItemID.FallenStar, 40)
@@ -504,29 +282,45 @@ public class ShadowPhoneHome : ModItem
 			.AddTile(TileID.TinkerersWorkbench)
 			.Register();
 	}
-	public override bool? UseItem(Player player)
-	{
-		player.Spawn(PlayerSpawnContext.RecallFromItem);
-		SoundEngine.PlaySound(SoundID.Item6, player.position);
-		return true;
-	}
-	public override void HoldItem(Player player)
-	{
-		if (Main.mouseRight && Main.mouseRightRelease && !Main.mapFullscreen && !Main.playerInventory)
-		{
-			SoundEngine.PlaySound(SoundID.Unlock, player.position);
-			Item.ChangeItemType(ModContent.ItemType<ShadowPhoneDungeon>());
-		}
-	}
-	public override void UpdateInfoAccessory(Player player)
-	{
-		player.GetModPlayer<EyeoftheGodsPlayer>().DamageDisplay = true;
-		player.GetModPlayer<EyeoftheGodsPlayer>().DefenseDisplay = true;
-		player.GetModPlayer<CalcSpecPlayer>().CalcSpecDisplay = true;
-		player.accThirdEye = player.accFishFinder = player.accWeatherRadio = player.accCalendar = player.accCritterGuide = player.accDreamCatcher =
-			player.accJarOfSouls = player.accStopwatch = player.accOreFinder = true;
-		player.accWatch = 3;
-		player.accDepthMeter = 1;
-		player.accCompass = 1;
-	}
+}
+
+public class ShadowPhoneHome : ShadowPhoneBase
+{
+	public override Action<Player> TeleportAction => player => player.Spawn(PlayerSpawnContext.RecallFromItem);
+}
+
+public class ShadowPhoneOcean : ShadowPhoneBase
+{
+	public override Action<Player> TeleportAction => player => player.MagicConch();
+}
+
+public class ShadowPhoneHell : ShadowPhoneBase
+{
+	public override Action<Player> TeleportAction => player => player.DemonConch();
+}
+
+[LegacyName("ShadowPhone")]
+public class ShadowPhoneSpawn : ShadowPhoneBase
+{
+	public override Action<Player> TeleportAction => player => player.Shellphone_Spawn();
+}
+
+public class ShadowPhoneSurface : ShadowPhoneBase
+{
+	public override Action<Player> TeleportAction => TeleportToSurface;
+}
+
+public class ShadowPhoneJungleTropics : ShadowPhoneBase
+{
+	public override Action<Player> TeleportAction => JungleTropicsPort;
+}
+
+public class ShadowPhoneDungeon : ShadowPhoneBase
+{
+	public override Action<Player> TeleportAction => DungeonPort;
+}
+
+public class ShadowPhoneRandom : ShadowPhoneBase
+{
+	public override Action<Player> TeleportAction => player => player.TeleportationPotion();
 }

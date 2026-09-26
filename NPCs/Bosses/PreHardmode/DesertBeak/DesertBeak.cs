@@ -254,7 +254,6 @@ public class DesertBeak : ModNPC
 			NPC.timeLeft = 0;
 			NPC.velocity.Y -= 0.2f;
 			NPC.alpha += 2;
-			Main.NewText("phase");
 			Main.npc[leftWing].timeLeft = 0;
 			Main.npc[leftWing].life = 0;
 			Main.npc[leftWing].checkDead();

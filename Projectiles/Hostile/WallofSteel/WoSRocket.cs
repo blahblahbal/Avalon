@@ -1,14 +1,19 @@
-using System;
+using Avalon.Data.Sets;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
 
 namespace Avalon.Projectiles.Hostile.WallofSteel;
 
 public class WoSRocket : ModProjectile
 {
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.DontReflect[Type] = true;
+	}
     public override void SetDefaults()
     {
         Projectile.width = 10;

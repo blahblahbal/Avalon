@@ -8,40 +8,30 @@ namespace Avalon.Data.Sets;
 
 public static class ProjectileSets
 {
-    public static readonly bool[] DontReflect = ProjectileID.Sets.Factory.CreateBoolSet(
-        ProjectileID.Stinger,
-        ProjectileID.RainCloudMoving,
-        ProjectileID.RainCloudRaining,
-        ProjectileID.BloodCloudMoving,
-        ProjectileID.BloodCloudRaining,
-        ProjectileID.FrostHydra,
-        ProjectileID.InfernoFriendlyBolt,
-        ProjectileID.InfernoFriendlyBlast,
-        ProjectileID.PhantasmalDeathray,
-        ProjectileID.SaucerDeathray,
-        ProjectileID.PhantasmalBolt,
-        ProjectileID.PhantasmalEye,
-        ProjectileID.FlyingPiggyBank,
-        ProjectileID.Glowstick,
-        ProjectileID.BouncyGlowstick,
-        ProjectileID.SpelunkerGlowstick,
-        ProjectileID.StickyGlowstick,
-        ProjectileID.WaterGun,
-        ProjectileID.SlimeGun,
-        ProjectileID.SandnadoHostile,
-        ProjectileID.HallowBossLastingRainbow,
-        ProjectileID.HallowBossRainbowStreak,
-		ProjectileID.EyeFire,
-        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrap>(),
-        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrapStarter>(),
-        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrap>(),
-        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrapStarter>(),
-        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrap>(),
-        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrapStarter>(),
-		ModContent.ProjectileType<WoSLaserSmall>(),
-		ModContent.ProjectileType<WoSCursedFireball>(),
-		ModContent.ProjectileType<WoSBeegLaser>(),
-		ModContent.ProjectileType<WoSRocket>());
+	public static readonly bool[] DontReflect = ProjectileID.Sets.Factory.CreateBoolSet(
+		ProjectileID.Stinger,
+		ProjectileID.RainCloudMoving,
+		ProjectileID.RainCloudRaining,
+		ProjectileID.BloodCloudMoving,
+		ProjectileID.BloodCloudRaining,
+		ProjectileID.FrostHydra,
+		ProjectileID.InfernoFriendlyBolt,
+		ProjectileID.InfernoFriendlyBlast,
+		ProjectileID.PhantasmalDeathray,
+		ProjectileID.SaucerDeathray,
+		ProjectileID.PhantasmalBolt,
+		ProjectileID.PhantasmalEye,
+		ProjectileID.FlyingPiggyBank,
+		ProjectileID.Glowstick,
+		ProjectileID.BouncyGlowstick,
+		ProjectileID.SpelunkerGlowstick,
+		ProjectileID.StickyGlowstick,
+		ProjectileID.WaterGun,
+		ProjectileID.SlimeGun,
+		ProjectileID.SandnadoHostile,
+		ProjectileID.HallowBossLastingRainbow,
+		ProjectileID.HallowBossRainbowStreak,
+		ProjectileID.EyeFire);
 		//ModContent.ProjectileType<Ghostflame>(),
 		//ModContent.ProjectileType<WallofSteelLaser>(),
 		//,
@@ -88,13 +78,7 @@ public static class ProjectileSets
         ProjectileID.FlamesTrap,
         ProjectileID.MiniBoulder,
         ProjectileID.BouncyBoulder,
-        ProjectileID.LifeCrystalBoulder,
-        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrap>(),
-        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.PoisonGasTrapStarter>(),
-        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrap>(),
-        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.FireballTrapStarter>(),
-        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrap>(),
-        ModContent.ProjectileType<Projectiles.Hostile.TuhrtlOutpost.CannonballTrapStarter>()
+        ProjectileID.LifeCrystalBoulder
     );
 
 	public static readonly bool[] TrueMeleeProjectiles = ProjectileID.Sets.Factory.CreateBoolSet();
@@ -104,7 +88,6 @@ public static class ProjectileSets
         ProjectileID.HeatRay,
         ProjectileID.GolemFist,
         ProjectileID.Stynger,
-        ProjectileID.PossessedHatchet,
-        ModContent.ProjectileType<PossessedFlamesawProj>()
+        ProjectileID.PossessedHatchet
     );
 }

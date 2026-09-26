@@ -75,6 +75,8 @@ public class IridiumSetBonusPlayer : ModPlayer
 	}
 	public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
 	{
+		if (!Active)
+			return;
 		if (ManaStealCooldown > 0)
 			return;
 		if (!proj.IsMinionOrSentryRelated && !proj.DamageType.CountsAsClass(DamageClass.Magic))

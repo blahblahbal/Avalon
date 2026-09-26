@@ -10,6 +10,10 @@ namespace Avalon.Items.Weapons.Ranged.Misc
 {
 	public class DartShotgun : ModItem
 	{
+		public override void SetStaticDefaults()
+		{
+			ItemID.Sets.IsRangedSpecialistWeapon[Type] = true;
+		}
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ItemID.DartPistol);

@@ -1,4 +1,5 @@
-﻿using Avalon.Items.Weapons.Melee.Boomerangs;
+﻿using Avalon.Data.Sets;
+using Avalon.Items.Weapons.Melee.Boomerangs;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -13,6 +14,11 @@ public class PossessedFlamesawProj : ModProjectile
 {
 	public override string Texture => ModContent.GetInstance<PossessedFlamesaw>().Texture;
 	public override LocalizedText DisplayName => ModContent.GetInstance<PossessedFlamesaw>().DisplayName;
+
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.EarthRelatedItems[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Projectile.light = 0.9f;

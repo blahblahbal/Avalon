@@ -1,8 +1,9 @@
-using System;
 using Avalon;
+using Avalon.Data.Sets;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Graphics.Shaders;
@@ -11,15 +12,16 @@ using Terraria.ModLoader;
 
 namespace Avalon.Projectiles.Hostile.WallofSteel;
 
-	public class WoSBeegLaser : ModProjectile
-	{
-		//private Color laserColor;
-		//private readonly Color[] colorArray = new Color[3];
-		//private int colorShift;
-		private static Asset<Texture2D> BeamMiddleTexture;
-		private static Asset<Texture2D> BeamStartTexture;
-		private static Asset<Texture2D> BeamEndTexture;
-		private static Asset<Texture2D> Gradient;
+public class WoSBeegLaser : ModProjectile
+{
+
+	//private Color laserColor;
+	//private readonly Color[] colorArray = new Color[3];
+	//private int colorShift;
+	private static Asset<Texture2D> BeamMiddleTexture;
+	private static Asset<Texture2D> BeamStartTexture;
+	private static Asset<Texture2D> BeamEndTexture;
+	private static Asset<Texture2D> Gradient;
 
 	public override void Load()
 	{
@@ -28,7 +30,10 @@ namespace Avalon.Projectiles.Hostile.WallofSteel;
 		BeamEndTexture = ModContent.Request<Texture2D>("Avalon/Assets/Textures/WoSBeamEnd");
 		Gradient = ModContent.Request<Texture2D>("Avalon/Assets/Shaders/Gradient");
 	}
-
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.DontReflect[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Projectile.width = 8;
@@ -126,7 +131,7 @@ namespace Avalon.Projectiles.Hostile.WallofSteel;
 			}
 		}
 		Main.EntitySpriteDraw(BeamStartTexture.Value, center2 - Main.screenPosition, null, Color.White, Projectile.rotation, BeamEndTexture.Frame().Top(), new Vector2(Projectile.scale - fadeInOutEased, Projectile.scale), SpriteEffects.None, 0);
-		
+
 		Main.spriteBatch.End();
 		Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
 	}
