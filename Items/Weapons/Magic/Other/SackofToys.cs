@@ -38,7 +38,6 @@ public class SackofToys : ModItem
 			4 => (Main.rand.NextFromList(large), 0.55f),
 			_ => throw new System.NotImplementedException()
 		};
-		type = ModContent.ProjectileType<Toys_Table>();
 		velocity *= velocityMult;
 
 		velocity = AvalonUtils.GetShootSpread(velocity, position, ContentSamples.ItemsByType[Type].shootSpeed * velocityMult, MathF.PI / 8f, random: true);
