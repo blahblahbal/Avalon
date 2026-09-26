@@ -10490,6 +10490,13 @@ Mods: {
 			Pot.DisplayName: Pot
 			PotCoin.DisplayName: Pot Coin
 			PotTorch.DisplayName: Pot Torch
+			Toys_Die.DisplayName: Sack Die
+			Toys_Doll.DisplayName: Sack Doll
+			Toys_Lego.DisplayName: Sack Lego
+			Toys_Marble.DisplayName: Sack Marble
+			Toys_RockingHorse.DisplayName: Sack Rocking Horse
+			Toys_Table.DisplayName: Sack Table
+			Toys_Teddy.DisplayName: Sack Teddy
 		}
 
 		NPCs: {
