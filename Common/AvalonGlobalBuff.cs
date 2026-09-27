@@ -37,5 +37,17 @@ namespace Avalon.Common
 
             base.ModifyBuffText(type, ref buffName, ref tip, ref rare);
         }
+		public override void Update(int type, NPC npc, ref int buffIndex)
+		{
+			switch (type)
+			{
+				case BuffID.Slow:
+					npc.GetGlobalNPC<AvalonGlobalNPCInstance>().Speed *= 0.7f;
+					break;
+				case BuffID.Chilled:
+					npc.GetGlobalNPC<AvalonGlobalNPCInstance>().Speed *= 0.65f;
+					break;
+			}
+		}
     }
 }

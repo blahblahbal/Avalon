@@ -54,10 +54,6 @@ public class PotTorch : ModProjectile
 		}
 		return false;
 	}
-	public override void OnKill(int timeLeft)
-	{
-		
-	}
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 	{
 		target.AddBuff(BuffID.OnFire, 600);

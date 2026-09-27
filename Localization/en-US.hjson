@@ -1365,7 +1365,12 @@ Mods: {
 
 			DarklightLance: {
 				DisplayName: Darklight Lance
-				Tooltip: ""
+				Tooltip:
+					'''
+					Fires alternating light and night beams
+					Light and Night empower each other
+					The spear itself pops the night and light afflictions
+					'''
 			}
 
 			MinersSword: {
@@ -10497,6 +10502,7 @@ Mods: {
 			Toys_RockingHorse.DisplayName: Sack Rocking Horse
 			Toys_Table.DisplayName: Sack Table
 			Toys_Teddy.DisplayName: Sack Teddy
+			DarklightLanceBeam.DisplayName: Darklight Lance Beam
 		}
 
 		NPCs: {
@@ -11801,6 +11807,16 @@ Mods: {
 			RhodiumTag: {
 				DisplayName: Rhodium Tag
 				Description: Mods.Avalon.Buffs.RhodiumTag.Description
+			}
+
+			DarklightLanceLight: {
+				DisplayName: Darklight Lance Light
+				Description: Mods.Avalon.Buffs.DarklightLanceLight.Description
+			}
+
+			DarklightLanceNight: {
+				DisplayName: Darklight Lance Night
+				Description: Mods.Avalon.Buffs.DarklightLanceNight.Description
 			}
 		}
 

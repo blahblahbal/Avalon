@@ -9,7 +9,10 @@ public static class BuffSets
 {
 	public static bool[] CCOrSlowDebuffThatCannotGoOnBossesOrNPCsThatWouldCauseSignificantJank = BuffID.Sets.Factory.CreateNamedSet("CCOrSlowDebuffThatCannotGoOnBossesOrNPCsThatWouldCauseSignificantJank")
 		.Description("Debuffs that can't go on bosses or enemies in the 'StunOrSlowResistan' set. Immunity clearing effects also ignore these")
-		.RegisterBoolSet();
+		.RegisterBoolSet(
+		BuffID.Slow,
+		BuffID.Chilled
+		);
 	public static bool[] ImmunityCannotBeRemovedFromEnemies = BuffID.Sets.Factory.CreateNamedSet("ImmunityCannotBeRemovedFromEnemies")
 		.Description("Buffs in this set won't have enemies's immunities cleared from them while afflicted by Infernal Judgement")
 		.RegisterBoolSet(

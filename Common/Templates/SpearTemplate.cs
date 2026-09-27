@@ -14,7 +14,6 @@ public abstract class SpearTemplate : ModProjectile // Thanks example mod ! ! !
 	public override void SetDefaults()
     {
         Projectile.CloneDefaults(ProjectileID.Spear);
-        //Projectile.aiStyle = -1;
     }
     protected virtual float HoldoutRangeMin => 24f;
     protected virtual float HoldoutRangeMax => 96f;

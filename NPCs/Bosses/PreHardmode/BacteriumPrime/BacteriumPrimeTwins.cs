@@ -78,9 +78,11 @@ public class BacteriumPrimeSmallMelee : BacteriumPrime
 			NPC.SimpleFlyMovement(NPC.Center.DirectionTo(Target.Center) * 3f * speedMultiplier, 0.01f * accelMultiplier);
 		}
 	}
-	public override void FindFrame(int frameHeight)
+
+	public override void OnKill()
 	{
-		base.FindFrame(frameHeight);
+		if(-1 != NPC.FindFirstNPC(ModContent.NPCType<BacteriumPrimeSmallRanged>()))
+			base.OnKill();
 	}
 }
 [AutoloadBossHead]
@@ -109,6 +111,11 @@ public class BacteriumPrimeSmallRanged : BacteriumPrime
 			NPC n = Main.npc[NPC.NewNPC(NPC.GetSource_FromThis(), (int)spawnLocation.X, (int)spawnLocation.Y, tendril, NPC.whoAmI, i / iterations * MathHelper.TwoPi, Main.rand.Next(100), 0, NPC.whoAmI)];
 			NetMessage.SendData(MessageID.SyncNPC, number: n.whoAmI);
 		}
+	}
+	public override void OnKill()
+	{
+		if (-1 != NPC.FindFirstNPC(ModContent.NPCType<BacteriumPrimeSmallRanged>()))
+			base.OnKill();
 	}
 	public override void Behavior()
 	{
