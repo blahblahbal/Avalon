@@ -1,3 +1,4 @@
+using Avalon.Common.Interfaces;
 using Microsoft.Xna.Framework;
 using System.IO;
 using Terraria;
@@ -12,9 +13,10 @@ public class AvalonGlobalNPCInstance : GlobalNPC
     public override bool InstancePerEntity => true;
 
 	/// <summary>
-	/// Multiply this by how much you want to multiply the speed by, do not subtract for the sake of consistency (and it also breaks if it goes <= 0)
+	/// Use the NPC's ChangeSpeed() method instead of changing this manually
 	/// </summary>
 	public float Speed = 1;
+	public float DebuffDuration = 1f;
 	public float[] SpeedUpdateCount = new float[2];
 	public bool AstigSpawned { get; set; }
     public int LacerateStacks { get; set; } = 1;
@@ -51,7 +53,23 @@ public class AvalonGlobalNPCInstance : GlobalNPC
 		On_NPC.AI += On_NPC_AI;
 		On_NPC.FindFrame += On_NPC_FindFrame;
 		On_NPC.UpdateCollision += On_NPC_UpdateCollision;
+		On_NPC.UpdateNPC_BuffSetFlags += On_NPC_UpdateNPC_BuffSetFlags;
 	}
+
+	private void On_NPC_UpdateNPC_BuffSetFlags(On_NPC.orig_UpdateNPC_BuffSetFlags orig, NPC npc, bool lowerBuffTime)
+	{
+		for (int i = 0; i < npc.buffTime.Length; i++)
+		{
+			if (npc.buffTime[i] > 0 && npc.buffType[i] > 0)
+			{
+				ModBuff b = BuffLoader.GetBuff(npc.buffType[i]);
+				if (b is IBuffThatNeedsToUpdateNPCEarly iB)
+					iB.UpdateEarly(npc, ref i);
+			}
+		}
+		orig(npc, lowerBuffTime);
+	}
+
 	private void On_NPC_UpdateCollision(On_NPC.orig_UpdateCollision orig, NPC self)
 	{
 		var gNPC = self.GetGlobalNPC<AvalonGlobalNPCInstance>();
@@ -68,7 +86,6 @@ public class AvalonGlobalNPCInstance : GlobalNPC
 			self.velocity.X /= gNPC.Speed;
 		}
 	}
-
 	private void On_NPC_FindFrame(On_NPC.orig_FindFrame orig, NPC self)
 	{
 		if (self.IsABestiaryIconDummy)
@@ -117,8 +134,8 @@ public class AvalonGlobalNPCInstance : GlobalNPC
 	}
 	public override void ResetEffects(NPC npc)
     {
-
 		Speed = 1;
+		DebuffDuration = 1f;
         NecroticDrain = false;
         Malaria = false;
         Electrified = false;
@@ -142,17 +159,6 @@ public class AvalonGlobalNPCInstance : GlobalNPC
 		{
 			drawColor.G = 255;
 		}
-    }
-    public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
-    {
-        if(Pathogen && npc.ichor)
-        {
-            modifiers.ArmorPenetration += 7;
-        }
-        if (Pathogen && npc.betsysCurse)
-        {
-            modifiers.ArmorPenetration += 20;
-        }
     }
     public override void UpdateLifeRegen(NPC npc, ref int damage)
     {
@@ -291,11 +297,6 @@ public class AvalonGlobalNPCInstance : GlobalNPC
             {
                 damage = 10;
             }
-        }
-        if (npc.lifeRegen < 0 && Pathogen)
-        {
-            damage = (int)(damage * 1.5f);
-            npc.lifeRegen = (int)(npc.lifeRegen * 1.5f);
         }
     }
 }

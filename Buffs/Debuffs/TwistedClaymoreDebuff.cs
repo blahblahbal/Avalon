@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Common.Extensions;
 using Avalon.Core;
 using Avalon.Data.Sets;
 using Avalon.Particles;
@@ -22,8 +23,7 @@ public class TwistedClaymoreDebuff : ModBuff
 	{
 		var tcdn = npc.GetGlobalNPC<TwistedClaymoreDebuffNPC>();
 		tcdn.Active = true;
-		if(!ApplyImmunitiesToStunAndCCDebuffs.ImmuneToCC(npc.type))
-			npc.GetGlobalNPC<AvalonGlobalNPCInstance>().Speed *= 1f - (Utils.Remap(tcdn.Tier, 0, 4, 0.2f, 0.8f) * Utils.Remap(npc.buffTime[buffIndex], 0, 60, 0, 1));
+			npc.ChangeSpeed(1f - (Utils.Remap(tcdn.Tier, 0, 4, 0.2f, 0.8f) * Utils.Remap(npc.buffTime[buffIndex], 0, 60, 0, 1)));
 	}
 	public override bool ReApply(NPC npc, int time, int buffIndex)
 	{

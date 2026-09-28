@@ -61,7 +61,7 @@ public class SpawnHelper
 	}
 	public static bool Surface(ref NPCSpawnInfo spawnInfo)
 	{
-		return spawnInfo.SpawnTileY < Main.worldSurface && NotInDungeonsOrPillar(ref spawnInfo);
+		return spawnInfo.SpawnTileY <= Main.worldSurface && NotInDungeonsOrPillar(ref spawnInfo);
 	}
 	public static bool Underground(ref NPCSpawnInfo spawnInfo)
 	{
@@ -71,8 +71,8 @@ public class SpawnHelper
 	{
 		return spawnInfo.SpawnTileY > Main.rockLayer && NotInDungeonsOrPillar(ref spawnInfo);
 	}
-	public static bool NoWorms(ref NPCSpawnInfo spawnInfo)
+	public static bool NotNoWorms(ref NPCSpawnInfo spawnInfo)
 	{
-		return spawnInfo.SpawnTileY > Main.worldSurface;
+		return spawnInfo.Player.afkCounter < NPC.AFKTimeNeededForNoWorms || spawnInfo.Player.ZoneShadowCandle;
 	}
 }

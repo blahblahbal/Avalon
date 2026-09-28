@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -74,8 +75,10 @@ namespace Avalon.Dusts
 				Main.spriteBatch.Draw(Texture2D.Value, dust.position - Main.screenPosition + new Vector2(2 * dust.scale,0).RotatedBy(i * MathHelper.PiOver2 + dust.rotation), dust.frame, Color.White with { A = 0 } * opacity * dust.scale * 0.25f, dust.rotation, new Vector2(4), scale * dust.scale, SpriteEffects.None, 0);
 			}
 			Main.spriteBatch.Draw(Texture2D.Value, dust.position - Main.screenPosition, dust.frame, Color.White with { A = 128 } * opacity, dust.rotation, new Vector2(4), scale * dust.scale, SpriteEffects.None,0);
-			if(dust.scale * 0.75f > 0.25f)
-				Main.spriteBatch.Draw(Texture2D.Value, dust.position - Main.screenPosition, dust.frame with { X = dust.frame.X + 10}, Color.White with { A = 0 } * opacity, dust.rotation, new Vector2(4), scale * (dust.scale * 0.75f - 0.25f), SpriteEffects.None, 0);
+
+			float glowScale = Math.Min(MathF.Pow(dust.scale, 2),dust.scale) - 0.5f;
+			if(glowScale > 0)
+				Main.spriteBatch.Draw(Texture2D.Value, dust.position - Main.screenPosition, dust.frame with { X = dust.frame.X + 10}, Color.White with { A = 0 } * opacity, dust.rotation, new Vector2(4), scale * glowScale, SpriteEffects.None, 0);
 			return false;
 		}
     }

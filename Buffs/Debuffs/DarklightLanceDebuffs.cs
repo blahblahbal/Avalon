@@ -59,7 +59,7 @@ public class DarklightLanceLight : ModBuff
 	{
 		npc.GetGlobalNPC<DarklightLanceDebuffNPC>().Light = true;
 
-		if (Main.rand.NextBool(2))
+		if (Main.rand.NextBool(5))
 		{
 			Dust d = Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<GlowySoulDust>());
 			d.noGravity = true;
@@ -75,7 +75,7 @@ public class DarklightLanceNight : DarklightLanceLight
 	public override void Update(NPC npc, ref int buffIndex)
 	{
 		npc.GetGlobalNPC<DarklightLanceDebuffNPC>().Night = true;
-		if (Main.rand.NextBool(2))
+		if (Main.rand.NextBool(5))
 		{
 			Dust d = Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<GlowySoulDust>());
 			d.noGravity = true;

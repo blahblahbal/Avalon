@@ -15,7 +15,9 @@ namespace Avalon.Items.Accessories.Hardmode
 		}
 		public override void UpdateEquip(Player player)
 		{
-			player.GetModPlayer<AvalonPlayer>().ThePill = true;
+			var aP = player.GetModPlayer<AvalonPlayer>();
+			aP.ThePill = true;
+			aP.DebuffDuration -= 0.2f;
 			player.potionDelayTime = (int)(player.potionDelayTime * 1.15);
 			player.restorationDelayTime = (int)(player.restorationDelayTime * 1.15);
 			player.mushroomDelayTime = (int)(player.mushroomDelayTime * 1.15);

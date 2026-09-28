@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Common.Players;
 using Terraria;
 using Terraria.ID;
@@ -22,9 +23,9 @@ public class CurseofDelirium : ModBuff
             player.confused = true;
             modPlayer.DeliriumCount--;
         }
-        else if (Main.rand.NextBool(600))
+        else if (Main.rand.NextBool((int)(600 / player.DebuffEfficiency)))
         {
-            modPlayer.DeliriumCount = Main.rand.Next(240, 481);
+            modPlayer.DeliriumCount = (int)(Main.rand.Next(240, 481) / player.DebuffEfficiency);
         }
     }
 }

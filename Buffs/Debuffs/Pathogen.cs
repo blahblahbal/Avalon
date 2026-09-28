@@ -1,4 +1,6 @@
 using Avalon.Common;
+using Avalon.Common.DebuffEfficiency;
+using Avalon.Common.Interfaces;
 using Avalon.Common.Players;
 using Avalon.Dusts;
 using Terraria;
@@ -7,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace Avalon.Buffs.Debuffs;
 
-public class Pathogen : ModBuff
+public class Pathogen : ModBuff, IBuffThatNeedsToUpdatePlayerEarly, IBuffThatNeedsToUpdateNPCEarly
 {
     public override void SetStaticDefaults()
     {
@@ -24,8 +26,10 @@ public class Pathogen : ModBuff
             d.velocity += npc.velocity;
             d.fadeIn = 1.3f;
         }
-        npc.GetGlobalNPC<AvalonGlobalNPCInstance>().Pathogen = true;
-    }
+		var aGNPC = npc.GetGlobalNPC<AvalonGlobalNPCInstance>();
+		aGNPC.Pathogen = true;
+		aGNPC.DebuffDuration += 1;
+	}
     public override void Update(Player player, ref int buffIndex)
     {
         if (Main.rand.NextBool(3))
@@ -36,6 +40,18 @@ public class Pathogen : ModBuff
             d.velocity += player.velocity;
             d.fadeIn = 1.3f;
         }
-        player.GetModPlayer<AvalonPlayer>().Pathogen = true;
-    }
+		var aP = player.GetModPlayer<AvalonPlayer>();
+		aP.Pathogen = true;
+		aP.DebuffDuration += 1;
+	}
+
+	public void UpdateEarly(Player player, ref int buffIndex)
+	{
+		player.GetModPlayer<DebuffEfficiencyPlayer>().DebuffEfficiency += 0.5f;
+	}
+
+	public void UpdateEarly(NPC npc, ref int buffIndex)
+	{
+		npc.GetGlobalNPC<DebuffEfficiencyNPC>().DebuffEfficiency += 0.5f;
+	}
 }

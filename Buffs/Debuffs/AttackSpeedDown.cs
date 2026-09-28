@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Common.Players;
 using Terraria;
 using Terraria.ID;
@@ -14,8 +15,6 @@ public class AttackSpeedDown : ModBuff
     }
     public override void Update(Player player, ref int buffIndex)
     {
-		player.GetAttackSpeed(DamageClass.Generic) -= 0.3f;
-		if (player.GetModPlayer<AvalonPlayer>().Pathogen)
-			player.GetAttackSpeed(DamageClass.Generic) -= 0.1f;
+		player.GetAttackSpeed(DamageClass.Generic) -= 0.3f * player.DebuffEfficiency;
     }
 }

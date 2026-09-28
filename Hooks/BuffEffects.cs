@@ -20,13 +20,15 @@ public class BuffEffects : ModHook
 
 	private static void OnAddBuff(On_Player.orig_AddBuff orig, Player self, int type, int timeToAdd, bool quiet = true, bool foodHack = false)
 	{
-		if (self.GetModPlayer<AvalonPlayer>().Pathogen && Main.debuff[type])
+		var aP = self.GetModPlayer<AvalonPlayer>();
+		if (Main.debuff[type])
 		{
-			timeToAdd *= 2;
+			if(!BuffID.Sets.NurseCannotRemoveDebuff[type])
+				timeToAdd = (int)(timeToAdd * aP.DebuffDuration);
 		}
-		if (self.GetModPlayer<AvalonPlayer>().ThePill && Main.debuff[type] && type != BuffID.PotionSickness)
+		else
 		{
-			timeToAdd = (int)(timeToAdd * 0.8f);
+			timeToAdd = (int)(timeToAdd * aP.BuffDuration);
 		}
 		//for (int buffIndex = 0; buffIndex < Player.MaxBuffs; buffIndex++)
 		//{
@@ -60,9 +62,10 @@ public class BuffEffects : ModHook
 
 	private static void OnAddBuffNPC(On_NPC.orig_AddBuff orig, NPC self, int type, int time, bool quiet = false)
 	{
-		if (self.GetGlobalNPC<AvalonGlobalNPCInstance>().Pathogen && Main.debuff[type])
+		var aN = self.GetGlobalNPC<AvalonGlobalNPCInstance>();
+		if (Main.debuff[type])
 		{
-			time *= 2;
+			time = (int)(time * aN.DebuffDuration);
 		}
 		orig(self, type, time, quiet);
 

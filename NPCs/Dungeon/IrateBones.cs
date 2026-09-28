@@ -1,4 +1,4 @@
-using Avalon.Common;
+using Avalon.Common.Extensions;
 using Avalon.Items.Banners;
 using Avalon.NPCs.Template;
 using Microsoft.Xna.Framework;

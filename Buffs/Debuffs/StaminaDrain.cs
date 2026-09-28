@@ -18,44 +18,27 @@ public class StaminaDrain : ModBuff
 
 	/// <inheritdoc />
 	public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare) {
-		if (stacks == 1)
-		{
-			tip += " 20%";
-		}
-		else if (stacks == 2)
-		{
-			tip += " 40%";
-		}
-		else if (stacks == 3)
-		{
-			tip += " 60%";
-		}
-		else if (stacks == 4)
-		{
-			tip += " 80%";
-		}
-		else if (stacks == 5)
-		{
-			tip += " 100%";
-		}
+		tip += $" {stacks * 20}%";
 	}
 
 	public override void Update(Player player, ref int buffIndex)
 	{
-		player.GetModPlayer<AvalonStaminaPlayer>().StaminaDrain = true;
-		stacks = player.GetModPlayer<AvalonStaminaPlayer>().StaminaDrainStacks;
+		var sp = player.GetModPlayer<AvalonStaminaPlayer>();
+		sp.StaminaDrain = true;
+		stacks = sp.StaminaDrainStacks;
 		if (player.buffTime[buffIndex] == 0)
 		{
-			player.GetModPlayer<AvalonStaminaPlayer>().StaminaDrainStacks = 1;
+			sp.StaminaDrainStacks = 1;
 		}
 	}
 
 	public override bool ReApply(Player player, int time, int buffIndex)
 	{
+		var sp = player.GetModPlayer<AvalonStaminaPlayer>();
 		player.buffTime[buffIndex] += time;
-		if (player.GetModPlayer<AvalonStaminaPlayer>().StaminaDrainStacks < 5)
+		if (sp.StaminaDrainStacks < 5)
 		{
-			player.GetModPlayer<AvalonStaminaPlayer>().StaminaDrainStacks++;
+			sp.StaminaDrainStacks++;
 		}
 		if (player.buffTime[buffIndex] > AvalonStaminaPlayer.StaminaDrainTime)
 		{

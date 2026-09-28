@@ -1,5 +1,6 @@
 ﻿using Avalon.Buffs.Debuffs;
 using Avalon.Common;
+using Avalon.Common.DebuffEfficiency;
 using Avalon.Common.Interfaces;
 using Avalon.Common.Templates;
 using Avalon.Dusts;
@@ -18,7 +19,7 @@ namespace Avalon.Projectiles.Melee.Spears;
 public class DarklightLanceProjectile : SpearTemplate
 {
 	public override LocalizedText DisplayName => ModContent.GetInstance<DarklightLance>().DisplayName;
-	protected override float HoldoutRangeMax => 270;
+	protected override float HoldoutRangeMax => 220;
 	protected override float HoldoutRangeMin => 40;
 
 	public override void AI()
@@ -38,7 +39,7 @@ public class DarklightLanceProjectile : SpearTemplate
 		int dustType = ModContent.DustType<GlowySoulDust>();
 		int explosionAI = -1;
 
-		float multiplier = target.GetGlobalNPC<AvalonGlobalNPCInstance>().Pathogen ? 1.5f : 1;
+		float multiplier = target.GetGlobalNPC<DebuffEfficiencyNPC>().DebuffEfficiency;
 
 		if (gnpc.Light)
 		{
@@ -46,17 +47,17 @@ public class DarklightLanceProjectile : SpearTemplate
 			if (!gnpc.Night)
 				SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
 			lightIndex = target.FindBuffIndex(ModContent.BuffType<DarklightLanceLight>());
-			modifiers.FlatBonusDamage += DarklightLanceDebuffNPC.LifeRegenLoss * target.buffTime[lightIndex] / 120f * multiplier;
+			modifiers.FlatBonusDamage += (DarklightLanceDebuffNPC.LifeRegenLoss * target.buffTime[lightIndex] / 120f) * multiplier;
 		}
 		if (gnpc.Night)
 		{
 			explosionAI = 1;
 			nightIndex = target.FindBuffIndex(ModContent.BuffType<DarklightLanceNight>());
-			modifiers.FlatBonusDamage += DarklightLanceDebuffNPC.LifeRegenLoss * target.buffTime[nightIndex] / 120f * multiplier;
+			modifiers.FlatBonusDamage += (DarklightLanceDebuffNPC.LifeRegenLoss * target.buffTime[nightIndex] / 120f) * multiplier;
 			if (gnpc.Light)
 			{
 				explosionAI = 2;
-				modifiers.FlatBonusDamage += DarklightLanceDebuffNPC.BonusLifeRegenLoss * Math.Min(target.buffTime[lightIndex], target.buffTime[nightIndex]) / 120f * multiplier;
+				modifiers.FlatBonusDamage += (DarklightLanceDebuffNPC.BonusLifeRegenLoss * Math.Min(target.buffTime[lightIndex], target.buffTime[nightIndex]) / 120f) * multiplier;
 			}
 		}
 		if(explosionAI > -1)

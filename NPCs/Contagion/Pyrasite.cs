@@ -63,7 +63,7 @@ public class PyrasiteHead : WormHead
 	}
 	public override float SpawnChance(NPCSpawnInfo spawnInfo)
 	{
-		return SpawnHelper.Contagion(ref spawnInfo) && SpawnHelper.NoWorms(ref spawnInfo)? 0.1f : 0;
+		return SpawnHelper.Contagion(ref spawnInfo) && SpawnHelper.NotNoWorms(ref spawnInfo)? 0.1f : 0;
 	}
 	public override void HitEffect(NPC.HitInfo hit)
 	{

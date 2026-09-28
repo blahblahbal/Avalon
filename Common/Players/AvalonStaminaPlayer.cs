@@ -1,5 +1,6 @@
 using Avalon.Buffs;
 using Avalon.Buffs.Debuffs;
+using Avalon.Common.Extensions;
 using Avalon.Dusts;
 using Avalon.Items.Armor.Hardmode;
 using Avalon.Systems;
@@ -25,7 +26,7 @@ public class AvalonStaminaPlayer : ModPlayer
     public bool SprintUnlocked = false;
     public bool StamFlower = false;
     public bool StaminaDrain = false;
-    public float StaminaDrainMult = 1.2f;
+	public float StaminaDrainMult => 1.2f * Player.DebuffEfficiency;
     public int StaminaDrainStacks = 1;
     public int StaminaRegen;
     public int StaminaRegenCost = 1000;

@@ -1,4 +1,5 @@
 using Avalon.Common;
+using Avalon.Common.Extensions;
 using Avalon.Data.Sets;
 using Terraria;
 using Terraria.ID;
@@ -16,8 +17,7 @@ public class CryoStasis : ModBuff
 
     public override void Update(NPC npc, ref int buffIndex)
     {
-		var gNPC = npc.GetGlobalNPC<AvalonGlobalNPCInstance>();
-		gNPC.Speed *= gNPC.Pathogen? 0.2f : 0.3f;
+		npc.ChangeSpeed(0.3f);
 		if (Main.rand.NextBool())
 		{
 			Dust d = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Snow);

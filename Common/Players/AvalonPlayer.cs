@@ -2,6 +2,7 @@ using Avalon.Achievements;
 using Avalon.Buffs;
 using Avalon.Buffs.AdvancedBuffs;
 using Avalon.Buffs.Debuffs;
+using Avalon.Common.Interfaces;
 using Avalon.Dusts;
 using Avalon.Hooks;
 using Avalon.Items.Accessories.Hardmode;
@@ -172,6 +173,8 @@ public partial class AvalonPlayer : ModPlayer
 	public float CritDamageMult = 1f;
 	public float MeleeScale = 1f;
 	public float BonusTagDamage = 0;
+	public float DebuffDuration = 1f;
+	public float BuffDuration = 1f;
 
 	public bool AdjShimmer;
 	public bool oldAdjShimmer;
@@ -399,6 +402,7 @@ public partial class AvalonPlayer : ModPlayer
 	}
 	public override void Load()
 	{
+		On_Player.UpdateBuffs += On_Player_UpdateBuffs;
 		if (Main.netMode == NetmodeID.Server)
 		{
 			return;
@@ -417,6 +421,21 @@ public partial class AvalonPlayer : ModPlayer
 			Mod, $"{nameof(Avalon)}/{ExxoAvalonOrigins.TextureAssetsPath}/Costumes/LavaMerman_Legs", EquipType.Legs,
 			null, LavaMermanName);
 	}
+
+	private void On_Player_UpdateBuffs(On_Player.orig_UpdateBuffs orig, Player self, int i)
+	{
+		for (int j = 0; j < self.buffTime.Length; j++)
+		{
+			if (self.buffTime[j] > 0 && self.buffType[j] > 0)
+			{
+				ModBuff b = BuffLoader.GetBuff(self.buffType[j]);
+				if (b is IBuffThatNeedsToUpdatePlayerEarly iB)
+					iB.UpdateEarly(self, ref j);
+			}
+		}
+		orig(self, i);
+	}
+
 	public override void ResetEffects()
 	{
 		if (TurnOffDownwardsMovementRestrictions)
@@ -434,6 +453,8 @@ public partial class AvalonPlayer : ModPlayer
 		RangedCritDamage = 0f;
 		MeleeScale = 1f;
 		BonusTagDamage = 0;
+		BuffDuration = 1f;
+		DebuffDuration = 1f;
 		// genies
 		Paramount = false;
 		Zeal = false;
@@ -608,38 +629,6 @@ public partial class AvalonPlayer : ModPlayer
 	}
 	public override void PostUpdateBuffs()
 	{
-		if (Player.lifeRegen < 0 && Pathogen)
-		{
-			Player.lifeRegen = (int)(Player.lifeRegen * 1.5f);
-		}
-		if (Pathogen && Player.ichor)
-		{
-			Player.statDefense -= 7;
-		}
-		if (Pathogen && Player.tipsy)
-		{
-			Player.statDefense -= 2;
-		}
-		if (Pathogen && Player.HasBuff(BuffID.Weak))
-		{
-			Player.statDefense -= 2;
-			Player.GetAttackSpeed(DamageClass.Melee) -= 0.025f;
-			Player.GetDamage(DamageClass.Melee) -= 0.025f;
-			Player.moveSpeed -= 0.05f;
-		}
-		if (Pathogen && Player.brokenArmor)
-		{
-			Player.statDefense *= 0.75f;
-		}
-		if (Pathogen && Player.witheredArmor)
-		{
-			Player.statDefense *= 0.75f;
-		}
-		if (Pathogen && Player.slow)
-		{
-			Player.moveSpeed /= 1.5f;
-		}
-
 		if (Main.netMode != NetmodeID.MultiplayerClient)
 		{
 			int PSickness = 0;

@@ -1,3 +1,4 @@
+using Avalon.Common.Extensions;
 using Avalon.Rarities;
 using Terraria;
 using Terraria.ID;
@@ -42,10 +43,10 @@ namespace Avalon.Common
 			switch (type)
 			{
 				case BuffID.Slow:
-					npc.GetGlobalNPC<AvalonGlobalNPCInstance>().Speed *= 0.7f;
+					npc.ChangeSpeed(0.7f);
 					break;
 				case BuffID.Chilled:
-					npc.GetGlobalNPC<AvalonGlobalNPCInstance>().Speed *= 0.65f;
+					npc.ChangeSpeed(0.65f);
 					break;
 			}
 		}

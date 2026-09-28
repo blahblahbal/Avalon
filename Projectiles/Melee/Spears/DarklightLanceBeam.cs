@@ -62,12 +62,12 @@ public class DarklightLanceBeam : ModProjectile
 			Projectile.velocity *= 0.98f;
 		}
 
-		if (Projectile.velocity != Vector2.Zero)
+		if (Projectile.velocity != Vector2.Zero && Main.rand.NextBool(4))
 		{
 			Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<GlowySoulDust>());
 			d.noGravity = true;
 			d.velocity *= 0.2f;
-			d.velocity += Projectile.velocity * 2;
+			d.velocity += Projectile.velocity;
 
 			if (Main.rand.NextBool(6))
 				d.fadeIn = Main.rand.NextFloat(-6);
