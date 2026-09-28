@@ -134,11 +134,18 @@ public class Toys_Lego : ToysBase
 		Main.projFrames[Type] = 3;
 	}
 }
-public class Toys_Monkey : Toys_Lego { }
+public class Toys_Monkey : Toys_Lego
+{
+	public override void OnSpawn(IEntitySource source)
+	{
+		base.OnSpawn(source);
+		Projectile.frame = Projectile.ai[2] > 0 ? (int)Projectile.ai[2] - 1 : Projectile.frame;
+	}
+}
 public class Toys_Ball : ToysBase
 {
 	public override float Friction => 0.015f;
-	public override float BounceStrength => 0.9f;
+	public override float BounceStrength => 0.95f;
 	public override void SetStaticDefaults()
 	{
 		base.SetStaticDefaults();
@@ -186,7 +193,6 @@ public abstract class Toys_Plush : ToysBase
 {
 	public override float Friction => 0.07f;
 	public override float BounceStrength => 0.05f;
-	public override bool Scale => true;
 	public override void SetStaticDefaults()
 	{
 		base.SetStaticDefaults();
@@ -264,5 +270,68 @@ public class Toys_Table : Toys_RockingHorse
 			Main.EntitySpriteDraw(d with { sourceRect = frame, origin = new Vector2(tod.CoordinateWidth * tod.Width / 2 - segmentX * tod.CoordinateWidth + originOffsetX, tod.CoordinateHeights[segmentY] * tod.Height / 2 - segmentY * tod.CoordinateHeights[segmentY] + originOffsetY) });
 		}
 		return false;
+	}
+}
+public class Toys_MonkeyBarrel : ToysBase
+{
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		ProjectileID.Sets.TrailCacheLength[Type] = 1;
+		Main.projFrames[Type] = 3;
+	}
+	public override void SetDefaults()
+	{
+		base.SetDefaults();
+		Projectile.width = 24;
+		Projectile.height = 24;
+	}
+	public override bool OnTileCollide(Vector2 oldVelocity)
+	{
+		Projectile.Kill();
+		return false;
+	}
+	public override void PostAI()
+	{
+		if (Projectile.timeLeft <= ContentSamples.ProjectilesByType[Type].timeLeft / 2) Projectile.Kill();
+	}
+	public override void OnKill(int timeLeft)
+	{
+		// If we are the original projectile running on the owner, spawn the 5 child projectiles.
+		if (Projectile.owner == Main.myPlayer)
+		{
+			for (int i = 0; i < Main.rand.Next(3, 7); i++)
+			{
+				Vector2 vel = Main.rand.NextVector2CircularEdge(9f, 9f);
+				int monkeyFrame = (Projectile.frame + 1) % 3 + 1;
+				Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, vel, ModContent.ProjectileType<Toys_Monkey>(), Projectile.damage, Projectile.knockBack, Projectile.owner, ai2: monkeyFrame);
+			}
+		}
+
+		// Play explosion sound
+		SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
+
+		for (int i = 0; i < 7; i++)
+		{
+			Dust d = Dust.NewDustDirect(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 100, default, 1.2f);
+			d.velocity *= 1.1f;
+		}
+		//for (int i = 0; i < 5; i++)
+		//{
+		//	Dust d = Dust.NewDustDirect(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default, 2.5f);
+		//	d.noGravity = true;
+		//	d.velocity *= 5f;
+		//	d = Dust.NewDustDirect(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default, 1.5f);
+		//	d.velocity *= 3f;
+		//}
+		Gore g = Gore.NewGoreDirect(new Vector2(Projectile.position.X, Projectile.position.Y), default, Main.rand.NextFromList([GoreID.Smoke1, GoreID.Smoke2, GoreID.Smoke3]), 0.75f);
+		g.velocity *= 0.2f;
+		g.velocity += Main.rand.NextVector2CircularEdge(1f, 1f);
+		g = Gore.NewGoreDirect(new Vector2(Projectile.position.X, Projectile.position.Y), default, Main.rand.NextFromList([GoreID.Smoke1, GoreID.Smoke2, GoreID.Smoke3]), 0.75f);
+		g.velocity *= 0.2f;
+		g.velocity += Main.rand.NextVector2CircularEdge(1f, 1f);
+		g = Gore.NewGoreDirect(new Vector2(Projectile.position.X, Projectile.position.Y), default, Main.rand.NextFromList([GoreID.Smoke1, GoreID.Smoke2, GoreID.Smoke3]), 0.75f);
+		g.velocity *= 0.2f;
+		g.velocity += Main.rand.NextVector2CircularEdge(1f, 1f);
 	}
 }

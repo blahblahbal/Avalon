@@ -16,30 +16,34 @@ public class SackofToys : ModItem
 {
 	public override void SetDefaults()
 	{
-		Item.DefaultToThrownWeapon(ModContent.ProjectileType<Toys_Lego>(), 28, 1.5f, 9f, 20, consumable: false);
+		Item.DefaultToThrownWeapon(ModContent.ProjectileType<Toys_Lego>(), 28, 1.5f, 10f, 20, consumable: false);
 		Item.DamageType = DamageClass.Magic;
 		Item.noUseGraphic = false;
 		Item.useStyle = ItemUseStyleID.Shoot;
 		Item.rare = ItemRarityID.LightRed;
 		Item.value = Item.sellPrice(0, 10);
 	}
-	public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 	{
-		(type, float velocityMult) = Main.rand.NextFromList(
+		(type, float velocityMult, int amount) = Main.rand.NextFromList(
 		[
-			(ModContent.ProjectileType<Toys_Marble>(), 1.3f),
-			(ModContent.ProjectileType<Toys_Die>(), 1.3f),
-			(ModContent.ProjectileType<Toys_Lego>(), 1.15f),
-			(ModContent.ProjectileType<Toys_Monkey>(), 1.15f),
-			(ModContent.ProjectileType<Pot>(), 0.85f),
-			(Main.rand.NextFromList([ModContent.ProjectileType<Toys_PlushDoll>(), ModContent.ProjectileType<Toys_PlushTeddy>(), ModContent.ProjectileType<Toys_PlushSanta>()]), 1f),
-			(Main.rand.NextBool(8) ? ModContent.ProjectileType<Toys_Table>() : ModContent.ProjectileType<Toys_RockingHorse>(), 0.75f),
-			(ModContent.ProjectileType<Toys_Ball>(), 1f)
+			(ModContent.ProjectileType<Toys_Marble>(), 1.3f, Main.rand.Next(2, 4)),
+			(ModContent.ProjectileType<Toys_Die>(), 1.3f, Main.rand.Next(2, 4)),
+			(ModContent.ProjectileType<Toys_Lego>(), 1.15f, Main.rand.Next(1, 4)),
+			(Main.rand.NextFromList([ModContent.ProjectileType<Pot>(), ModContent.ProjectileType<Toys_MonkeyBarrel>()]), 0.85f, 1),
+			(Main.rand.NextFromList([ModContent.ProjectileType<Toys_PlushDoll>(), ModContent.ProjectileType<Toys_PlushTeddy>(), ModContent.ProjectileType<Toys_PlushSanta>()]), 1f, 1),
+			(Main.rand.NextBool(8) ? ModContent.ProjectileType<Toys_Table>() : ModContent.ProjectileType<Toys_RockingHorse>(), 0.75f, 1),
+			(ModContent.ProjectileType<Toys_Ball>(), 1f, 1)
 		]
 		);
 		velocity *= velocityMult;
 
-		velocity = AvalonUtils.GetShootSpread(velocity, position, ContentSamples.ItemsByType[Type].shootSpeed * velocityMult, MathF.PI / 8f, random: true);
+		for (int i = 0; i < amount; i++)
+		{
+			Vector2 velocityMod = AvalonUtils.GetShootSpread(velocity, position, ContentSamples.ItemsByType[Type].shootSpeed * velocityMult, MathF.PI / 8f, Main.rand.NextFloat(-2.5f, 2.5f), random: true);
+			Projectile.NewProjectile(source, position, velocityMod, type, damage, knockback, player.whoAmI);
+		}
+		return false;
 	}
 	public override Vector2? HoldoutOffset()
 	{
