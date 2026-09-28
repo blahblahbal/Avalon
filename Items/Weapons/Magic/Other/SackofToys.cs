@@ -25,19 +25,18 @@ public class SackofToys : ModItem
 	}
 	public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
 	{
-		int[] small = [ModContent.ProjectileType<Toys_Marble>(), ModContent.ProjectileType<Toys_Die>()];
-		int[] dolls = [ModContent.ProjectileType<Toys_Doll>(), ModContent.ProjectileType<Toys_Teddy>()];
-		int[] large = [ModContent.ProjectileType<Toys_Table>(), ModContent.ProjectileType<Toys_RockingHorse>()];
-
-		(type, float velocityMult) = Main.rand.Next(5) switch
-		{
-			0 => (Main.rand.NextFromList(small), 1.3f),
-			1 => (ModContent.ProjectileType<Toys_Lego>(), 1.3f),
-			2 => (ModContent.ProjectileType<Pot>(), 0.65f),
-			3 => (Main.rand.NextFromList(dolls), 0.8f),
-			4 => (Main.rand.NextFromList(large), 0.55f),
-			_ => throw new System.NotImplementedException()
-		};
+		(type, float velocityMult) = Main.rand.NextFromList(
+		[
+			(ModContent.ProjectileType<Toys_Marble>(), 1.3f),
+			(ModContent.ProjectileType<Toys_Die>(), 1.3f),
+			(ModContent.ProjectileType<Toys_Lego>(), 1.15f),
+			(ModContent.ProjectileType<Toys_Monkey>(), 1.15f),
+			(ModContent.ProjectileType<Pot>(), 0.85f),
+			(Main.rand.NextFromList([ModContent.ProjectileType<Toys_PlushDoll>(), ModContent.ProjectileType<Toys_PlushTeddy>(), ModContent.ProjectileType<Toys_PlushSanta>()]), 1f),
+			(Main.rand.NextBool(8) ? ModContent.ProjectileType<Toys_Table>() : ModContent.ProjectileType<Toys_RockingHorse>(), 0.75f),
+			(ModContent.ProjectileType<Toys_Ball>(), 1f)
+		]
+		);
 		velocity *= velocityMult;
 
 		velocity = AvalonUtils.GetShootSpread(velocity, position, ContentSamples.ItemsByType[Type].shootSpeed * velocityMult, MathF.PI / 8f, random: true);

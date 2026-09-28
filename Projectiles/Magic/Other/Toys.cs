@@ -1,6 +1,7 @@
 ﻿using Avalon.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
@@ -31,6 +32,7 @@ public abstract class ToysBase : ModProjectile
 		Projectile.penetrate = -1;
 		Projectile.friendly = true;
 		Projectile.DamageType = DamageClass.Magic;
+		Projectile.timeLeft = 300;
 	}
 	public override void OnSpawn(IEntitySource source)
 	{
@@ -56,6 +58,8 @@ public abstract class ToysBase : ModProjectile
 			Projectile.scale = Utils.Remap(Projectile.ai[1], 0, 11, 0, 1);
 		}
 		Projectile.rotation += Projectile.velocity.X * 0.05f;
+
+		Projectile.Opacity = Projectile.timeLeft / 120f;
 	}
 	public override bool OnTileCollide(Vector2 oldVelocity)
 	{
@@ -68,7 +72,7 @@ public abstract class ToysBase : ModProjectile
 			SoundEngine.PlaySound(DeathSound, Projectile.Center);
 			Projectile.Kill();
 		}
-		else
+		else if (BounceStrength > 0)
 		{
 			bool playSound = false;
 			if (Projectile.velocity.X != oldVelocity.X)
@@ -78,11 +82,12 @@ public abstract class ToysBase : ModProjectile
 			}
 			if (Projectile.velocity.Y != oldVelocity.Y)
 			{
+				// todo: fix this clipping into the floor if the BounceStrength value is too low
 				if (!(Projectile.velocity.Y is >= 0 and <= 0.3f && oldVelocity.Y < 1.2f))
 				{
 					playSound = true;
 					Projectile.velocity.Y = oldVelocity.Y * -BounceStrength;
-					Projectile.velocity.Y += 0.3f;
+					Projectile.velocity.Y += MathF.Min(0.3f, BounceStrength);
 				}
 			}
 			if (playSound) SoundEngine.PlaySound(CollideSound, Projectile.Center);
@@ -105,31 +110,45 @@ public abstract class ToysBase : ModProjectile
 	{
 		Rectangle frame = TextureAssets.Projectile[Type].Frame(verticalFrames: Main.projFrames[Type], frameY: Projectile.frame);
 		Vector2 frameOrigin = frame.Size() / 2f;
+		frameOrigin.Y -= 1;
 
-		DrawData d = new(TextureAssets.Projectile[Type].Value, Vector2.Zero, frame, lightColor, 0, frameOrigin, Projectile.scale, SpriteEffects.None);
+		lightColor *= Projectile.Opacity;
+		DrawData d = new(TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition, frame, lightColor, Projectile.rotation, frameOrigin, Projectile.scale, SpriteEffects.None);
+
 
 		for (int i = Projectile.oldPos.Length - 1; i > 0; i--)
 		{
-			Main.EntitySpriteDraw(d with { position = Projectile.oldPos[i] + (Projectile.Size / 2) - Main.screenPosition, rotation = Projectile.oldRot[i], color = lightColor with { A = 200 } * (1f - (i / (float)Projectile.oldPos.Length)) * 0.75f });
+			Main.EntitySpriteDraw(d with { position = Projectile.oldPos[i] + (Projectile.Size / 2) - Main.screenPosition, rotation = Projectile.oldRot[i], color = lightColor with { A = (byte)(200 * Projectile.Opacity) } * (1f - (i / (float)Projectile.oldPos.Length)) * 0.75f });
 		}
-		Main.EntitySpriteDraw(d with { position = Projectile.Center - Main.screenPosition, rotation = Projectile.rotation, color = lightColor });
+		Main.EntitySpriteDraw(d);
 		return false;
 	}
 }
 public class Toys_Lego : ToysBase
 {
 	public override float Friction => 0.05f;
-	public override float BounceStrength => 0.5f;
+	public override float BounceStrength => 0.3f;
 	public override void SetStaticDefaults()
 	{
 		base.SetStaticDefaults();
 		Main.projFrames[Type] = 3;
 	}
 }
+public class Toys_Monkey : Toys_Lego { }
+public class Toys_Ball : ToysBase
+{
+	public override float Friction => 0.015f;
+	public override float BounceStrength => 0.9f;
+	public override void SetStaticDefaults()
+	{
+		base.SetStaticDefaults();
+		Main.projFrames[Type] = 4;
+	}
+}
 public class Toys_Marble : ToysBase
 {
 	public override float Friction => 0.01f;
-	public override float BounceStrength => 0.675f;
+	public override float BounceStrength => 0.45f;
 	public override void SetStaticDefaults()
 	{
 		base.SetStaticDefaults();
@@ -145,7 +164,7 @@ public class Toys_Marble : ToysBase
 public class Toys_Die : ToysBase
 {
 	public override float Friction => 0.05f;
-	public override float BounceStrength => 0.5f;
+	public override float BounceStrength => 0.35f;
 	public override void SetStaticDefaults()
 	{
 		base.SetStaticDefaults();
@@ -163,10 +182,10 @@ public class Toys_Die : ToysBase
 //	public override float Friction => base.Friction;
 //	public override bool Scale => true;
 //}
-public class Toys_Doll : ToysBase
+public abstract class Toys_Plush : ToysBase
 {
-	public override float Friction => 0.05f;
-	public override float BounceStrength => 0.25f;
+	public override float Friction => 0.07f;
+	public override float BounceStrength => 0.05f;
 	public override bool Scale => true;
 	public override void SetStaticDefaults()
 	{
@@ -180,11 +199,13 @@ public class Toys_Doll : ToysBase
 		Projectile.height = 24;
 	}
 }
-public class Toys_Teddy : Toys_Doll { }
+public class Toys_PlushDoll : Toys_Plush { }
+public class Toys_PlushTeddy : Toys_Plush { }
+public class Toys_PlushSanta : Toys_Plush { }
 public class Toys_RockingHorse : ToysBase
 {
 	public override float Friction => 0.04f;
-	public override float BounceStrength => 0.25f;
+	public override float BounceStrength => 0.225f;
 	public override bool Scale => true;
 	public override void SetStaticDefaults()
 	{
@@ -204,7 +225,7 @@ public class Toys_Table : Toys_RockingHorse
 	public override void SetStaticDefaults()
 	{
 		base.SetStaticDefaults();
-		Main.projFrames[Type] = 13;
+		Main.projFrames[Type] = 12;
 	}
 	public int GetTableStyle()
 	{
@@ -217,20 +238,17 @@ public class Toys_Table : Toys_RockingHorse
 			8 => ContentSamples.ItemsByType[ItemID.PalmWoodTable].placeStyle,
 			9 => ContentSamples.ItemsByType[ItemID.BorealWoodTable].placeStyle,
 			10 => ContentSamples.ItemsByType[ItemID.BambooTable].placeStyle,
-			11 => ContentSamples.ItemsByType[ItemID.BalloonTable].placeStyle,
-			12 => ContentSamples.ItemsByType[ItemID.AshWoodTable].placeStyle,
+			11 => ContentSamples.ItemsByType[ItemID.AshWoodTable].placeStyle,
 			_ => Projectile.frame
 		};
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
 		int style = GetTableStyle();
-		DrawData d = new(Projectile.frame >= 10 ? TextureAssets.Tile[TileID.Tables2].Value : TextureAssets.Projectile[Type].Value, Vector2.Zero, null, lightColor, 0, Vector2.Zero, Projectile.scale, SpriteEffects.None);
+		lightColor *= Projectile.Opacity;
+		DrawData d = new(Projectile.frame >= 10 ? TextureAssets.Tile[TileID.Tables2].Value : TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, Vector2.Zero, Projectile.scale, SpriteEffects.None);
 		TileObjectData tod = TileObjectData.GetTileData(Projectile.frame >= 10 ? TileID.Tables2 : TileID.Tables, style);
 
-		d.position = Projectile.Center - Main.screenPosition;
-		d.rotation = Projectile.rotation;
-		d.color = lightColor;
 		for (int i = 0; i < tod.Width * tod.Height; i++)
 		{
 			int segmentX = i % tod.Width;
