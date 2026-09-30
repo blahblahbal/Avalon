@@ -1,9 +1,6 @@
-﻿using Avalon.Common;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -11,7 +8,6 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Avalon.Projectiles.Magic.Other;
 public abstract class ToysBase : ModProjectile
