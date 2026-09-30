@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
@@ -10,6 +11,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Avalon.Projectiles.Magic.Other;
 public abstract class ToysBase : ModProjectile
@@ -19,10 +21,17 @@ public abstract class ToysBase : ModProjectile
 	public virtual float Friction => 0.03f;
 	public virtual bool Scale => false;
 	public virtual float BounceStrength => 1f;
+	public virtual int Variants => 1;
+	public virtual int TrailAfterimageCount => 2;
+	public virtual float Gravity => 0.3f;
 	public override void SetStaticDefaults()
 	{
-		ProjectileID.Sets.TrailCacheLength[Type] = 3;
-		ProjectileID.Sets.TrailingMode[Type] = 2;
+		if (TrailAfterimageCount > 0)
+		{
+			ProjectileID.Sets.TrailCacheLength[Type] = TrailAfterimageCount + 1;
+			ProjectileID.Sets.TrailingMode[Type] = 2;
+		}
+		Main.projFrames[Type] = Variants;
 	}
 	public override void SetDefaults()
 	{
@@ -51,7 +60,7 @@ public abstract class ToysBase : ModProjectile
 					Projectile.netUpdate = true;
 				}
 			}
-			Projectile.velocity.Y += 0.3f;
+			Projectile.velocity.Y += Gravity;
 		}
 		else if (Scale)
 		{
@@ -72,40 +81,35 @@ public abstract class ToysBase : ModProjectile
 			SoundEngine.PlaySound(DeathSound, Projectile.Center);
 			Projectile.Kill();
 		}
-		else if (BounceStrength > 0)
+		else
 		{
 			bool playSound = false;
-			if (Projectile.velocity.X != oldVelocity.X)
+
+			Vector2 newOldVelocity = Projectile.velocity;
+			if (newOldVelocity.X != oldVelocity.X)
 			{
-				playSound = true;
+				// todo: fix this stopping a couple pixels before the wall, it would probably be similar to the abs gravity check which adds newOldVelocity to pos and sets velocity to 0
 				Projectile.velocity.X = oldVelocity.X * -BounceStrength;
 			}
-			if (Projectile.velocity.Y != oldVelocity.Y)
+			if (newOldVelocity.Y != oldVelocity.Y)
 			{
-				// todo: fix this clipping into the floor if the BounceStrength value is too low
-				if (!(Projectile.velocity.Y is >= 0 and <= 0.3f && oldVelocity.Y < 1.2f))
-				{
-					playSound = true;
-					Projectile.velocity.Y = oldVelocity.Y * -BounceStrength;
-					Projectile.velocity.Y += MathF.Min(0.3f, BounceStrength);
-				}
+				Projectile.velocity.Y = oldVelocity.Y * -BounceStrength + Gravity;
+				Roll(newOldVelocity, oldVelocity);
 			}
+			if (Math.Abs(Projectile.velocity.Y) <= Gravity)
+			{
+				Projectile.position.Y += newOldVelocity.Y;
+				Projectile.velocity.Y = 0;
+			}
+
 			if (playSound) SoundEngine.PlaySound(CollideSound, Projectile.Center);
-			Projectile.velocity.X *= (1f - Friction);
 		}
 		return false;
 	}
-	//public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-	//{
-	//	OnHitEntity(target);
-	//}
-	//public override void OnHitPlayer(Player target, Player.HurtInfo info)
-	//{
-	//	OnHitEntity(target);
-	//}
-	//public void OnHitEntity(Entity target)
-	//{
-	//}
+	public virtual void Roll(Vector2 velocityAtStartOfCollide, Vector2 oldVelocity)
+	{
+		Projectile.velocity.X *= (1f - Friction);
+	}
 	public override bool PreDraw(ref Color lightColor)
 	{
 		Rectangle frame = TextureAssets.Projectile[Type].Frame(verticalFrames: Main.projFrames[Type], frameY: Projectile.frame);
@@ -128,11 +132,7 @@ public class Toys_Lego : ToysBase
 {
 	public override float Friction => 0.05f;
 	public override float BounceStrength => 0.3f;
-	public override void SetStaticDefaults()
-	{
-		base.SetStaticDefaults();
-		Main.projFrames[Type] = 3;
-	}
+	public override int Variants => 3;
 }
 public class Toys_Monkey : Toys_Lego
 {
@@ -146,21 +146,13 @@ public class Toys_Ball : ToysBase
 {
 	public override float Friction => 0.015f;
 	public override float BounceStrength => 0.95f;
-	public override void SetStaticDefaults()
-	{
-		base.SetStaticDefaults();
-		Main.projFrames[Type] = 4;
-	}
+	public override int Variants => 4;
 }
 public class Toys_Marble : ToysBase
 {
 	public override float Friction => 0.01f;
 	public override float BounceStrength => 0.45f;
-	public override void SetStaticDefaults()
-	{
-		base.SetStaticDefaults();
-		Main.projFrames[Type] = 3;
-	}
+	public override int Variants => 3;
 	public override void SetDefaults()
 	{
 		base.SetDefaults();
@@ -172,11 +164,7 @@ public class Toys_Die : ToysBase
 {
 	public override float Friction => 0.05f;
 	public override float BounceStrength => 0.35f;
-	public override void SetStaticDefaults()
-	{
-		base.SetStaticDefaults();
-		Main.projFrames[Type] = 2;
-	}
+	public override int Variants => 2;
 	public override void SetDefaults()
 	{
 		base.SetDefaults();
@@ -193,6 +181,7 @@ public abstract class Toys_Plush : ToysBase
 {
 	public override float Friction => 0.07f;
 	public override float BounceStrength => 0.05f;
+	public override int TrailAfterimageCount => 0;
 	public override void SetStaticDefaults()
 	{
 		base.SetStaticDefaults();
@@ -208,16 +197,12 @@ public abstract class Toys_Plush : ToysBase
 public class Toys_PlushDoll : Toys_Plush { }
 public class Toys_PlushTeddy : Toys_Plush { }
 public class Toys_PlushSanta : Toys_Plush { }
-public class Toys_RockingHorse : ToysBase
+public abstract class Toys_LargeWooden : ToysBase
 {
 	public override float Friction => 0.04f;
 	public override float BounceStrength => 0.225f;
 	public override bool Scale => true;
-	public override void SetStaticDefaults()
-	{
-		base.SetStaticDefaults();
-		ProjectileID.Sets.TrailCacheLength[Type] = 1;
-	}
+	public override int TrailAfterimageCount => 0;
 	public override void SetDefaults()
 	{
 		base.SetDefaults();
@@ -225,14 +210,30 @@ public class Toys_RockingHorse : ToysBase
 		Projectile.height = 36;
 	}
 }
-public class Toys_Table : Toys_RockingHorse
+public class Toys_RockingHorse : Toys_LargeWooden
+{
+	public override void Roll(Vector2 velocityAtStartOfCollide, Vector2 oldVelocity)
+	{
+		base.Roll(velocityAtStartOfCollide, oldVelocity);
+
+		float rotWrapped = MathHelper.WrapAngle(Projectile.rotation);
+		float b = MathF.Abs(rotWrapped) / MathF.PI;
+		if (b > 0.5f) b = Utils.Clamp(1f - b, 0.05f, 1);
+		float a = MathF.Pow(b, 0.75f) * -MathF.Sign(rotWrapped) * 0.25f;
+
+		if (Collision.FindCollisionDirection(out int dir, Projectile.position + new Vector2(Projectile.velocity.X + a, 0), Projectile.width, Projectile.height))
+		{
+			if (dir == 1 && MathF.Sign(a) == -1) return;
+			if (dir == 0 && MathF.Sign(a) == 1) return;
+		}
+		Projectile.velocity.X += a;
+	}
+}
+// todo: make this also roll to stand upright, except unlike the rocking horse, make it also able to roll to being upside down
+public class Toys_Table : Toys_LargeWooden
 {
 	public override string Texture => $"Terraria/Images/Tiles_{TileID.Tables}";
-	public override void SetStaticDefaults()
-	{
-		base.SetStaticDefaults();
-		Main.projFrames[Type] = 12;
-	}
+	public override int Variants => 12;
 	public int GetTableStyle()
 	{
 		return Projectile.frame switch
@@ -274,12 +275,8 @@ public class Toys_Table : Toys_RockingHorse
 }
 public class Toys_MonkeyBarrel : ToysBase
 {
-	public override void SetStaticDefaults()
-	{
-		base.SetStaticDefaults();
-		ProjectileID.Sets.TrailCacheLength[Type] = 1;
-		Main.projFrames[Type] = 3;
-	}
+	public override int Variants => 3;
+	public override int TrailAfterimageCount => 0;
 	public override void SetDefaults()
 	{
 		base.SetDefaults();

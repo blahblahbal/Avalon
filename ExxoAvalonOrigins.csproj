@@ -22,10 +22,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Reference Include="AltLibrary">
-			<HintPath>dllReferences\AltLibrary_v2.1.1.3.dll</HintPath>
-		</Reference>
-		<Reference Include="AltLibrary">
-		  <HintPath>dllReferences\AltLibrary_v2.1.2.8.dll</HintPath>
+		  <HintPath>dllReferences\AltLibrary_v2.2.0.8.dll</HintPath>
 		</Reference>
 		<Reference Include="MagicStorage">
 		  <HintPath>dllReferences\MagicStorage.dll</HintPath>
@@ -35,11 +32,6 @@
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Krafs.Publicizer" Version="2.3.0">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-
 		<Publicize Include="FNA" MemberPattern="^Microsoft.Xna.Framework.Graphics\.SpriteBatch\..*" />
 		<Publicize Include="tModLoader" MemberPattern="^Terraria\.(Tile\.actColor|ModLoader\.RecipeLoader\.FirstRecipeForItem)" />
 	</ItemGroup>
