@@ -12,6 +12,6 @@ public class Coalesced : ModBuff
     }
     public override void Update(Player player, ref int buffIndex)
     {
-        player.GetDamage(DamageClass.Generic) -= 0.1f * player.DebuffEfficiency;
+        player.GetDamage(DamageClass.Generic) -= 0.1f * player.DebuffPotency;
     }
 }

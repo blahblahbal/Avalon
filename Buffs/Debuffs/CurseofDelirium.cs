@@ -23,9 +23,9 @@ public class CurseofDelirium : ModBuff
             player.confused = true;
             modPlayer.DeliriumCount--;
         }
-        else if (Main.rand.NextBool((int)(600 / player.DebuffEfficiency)))
+        else if (Main.rand.NextBool((int)(600 / player.DebuffPotency)))
         {
-            modPlayer.DeliriumCount = (int)(Main.rand.Next(240, 481) / player.DebuffEfficiency);
+            modPlayer.DeliriumCount = (int)(Main.rand.Next(240, 481) / player.DebuffPotency);
         }
     }
 }

@@ -2,32 +2,32 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Common.DebuffEfficiency;
+namespace Avalon.Common.DebuffPotency;
 
-public class DebuffEfficiencyGlobalBuff : GlobalBuff
+public class DebuffPotencyGlobalBuff : GlobalBuff
 {
-	public override void Update(int type, NPC npc, ref int buffIndex)
-	{
-		float efficiency = npc.GetGlobalNPC<DebuffEfficiencyNPC>().DebuffEfficiency;
-		//switch (type)
-		//{
+	//public override void Update(int type, NPC npc, ref int buffIndex)
+	//{
+	//	float efficiency = npc.GetGlobalNPC<DebuffPotencyNPC>().DebuffEfficiency;
+	//	//switch (type)
+	//	//{
 
-		//}
-		var anpc = npc.GetGlobalNPC<AvalonGlobalNPCInstance>();
-		if(anpc.Speed < 1)
-		{
-			anpc.Speed *= 1f - (efficiency - 1f);
-		}
-	}
+	//	//}
+	//	var anpc = npc.GetGlobalNPC<AvalonGlobalNPCInstance>();
+	//	if(anpc.Speed < 1)
+	//	{
+	//		anpc.Speed *= 1f - (efficiency - 1f);
+	//	}
+	//}
 	public override void Update(int type, Player player, ref int buffIndex)
 	{
-		float efficiency = player.GetModPlayer<DebuffEfficiencyPlayer>().DebuffEfficiency;
+		float efficiency = player.GetModPlayer<DebuffPotencyPlayer>().DebuffPotency;
 		float efficiencyDiff = efficiency - 1f;
 		switch (type)
 		{
 			case BuffID.BrokenArmor:
 			case BuffID.WitheredArmor:
-				player.statDefense /= efficiency;
+				player.statDefense *= (1f - (efficiencyDiff * 0.5f));
 				break;
 			case BuffID.Ichor:
 				player.statDefense -= (int)(15 * efficiencyDiff);

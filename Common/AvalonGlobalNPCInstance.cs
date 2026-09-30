@@ -1,5 +1,6 @@
 using Avalon.Common.Interfaces;
 using Microsoft.Xna.Framework;
+using System;
 using System.IO;
 using Terraria;
 using Terraria.ID;
@@ -18,6 +19,8 @@ public class AvalonGlobalNPCInstance : GlobalNPC
 	public float Speed = 1;
 	public float DebuffDuration = 1f;
 	public float[] SpeedUpdateCount = new float[2];
+	public Color EffectColor = Color.White;
+	public int DOTDamage = 0;
 	public bool AstigSpawned { get; set; }
     public int LacerateStacks { get; set; } = 1;
     public bool Lacerated { get; set; }
@@ -29,7 +32,6 @@ public class AvalonGlobalNPCInstance : GlobalNPC
     public bool InfernaSpawned { get; set; }
     public bool JugRunOnce { get; set; }
     public bool LavaWalk { get; set; }
-    public bool Malaria { get; set; }
     public bool NecroticDrain { get; set; }
     public bool NoOneHitKill { get; set; }
     public int ORebirth { get; set; }
@@ -46,7 +48,6 @@ public class AvalonGlobalNPCInstance : GlobalNPC
     public bool CanDamageMobs { get; set; }
     public int DamageMobsTimer { get; set; }
 	public bool SkellyBanana {  get; set; }
-	public bool Dissolving {  get; set; }
 
 	public override void Load()
 	{
@@ -134,17 +135,17 @@ public class AvalonGlobalNPCInstance : GlobalNPC
 	}
 	public override void ResetEffects(NPC npc)
     {
+		DOTDamage = 0;
+		EffectColor = Color.White;
 		Speed = 1;
 		DebuffDuration = 1f;
         NecroticDrain = false;
-        Malaria = false;
         Electrified = false;
         Lacerated = false;
         Virulent = false;
         Inferno = false;
         Pathogen = false;
         Wormed = false;
-		Dissolving = false;
         BacterialInfection = false;
         //BleedStacks = 1;
     }
@@ -155,11 +156,8 @@ public class AvalonGlobalNPCInstance : GlobalNPC
             drawColor.G = (byte)MathHelper.Clamp(drawColor.G - 76,0,255);
             drawColor.R = (byte)MathHelper.Clamp(drawColor.R - 25,0,255);
         }
-		if (Dissolving)
-		{
-			drawColor.G = 255;
-		}
-    }
+		drawColor = drawColor.MultiplyRGBA(EffectColor);
+	}
     public override void UpdateLifeRegen(NPC npc, ref int damage)
     {
         if (npc.HasBuff(BuffID.Electrified))
@@ -189,19 +187,6 @@ public class AvalonGlobalNPCInstance : GlobalNPC
                 damage = 5;
             }
         }
-		if (Dissolving)
-		{
-			if (npc.lifeRegen > 0)
-			{
-				npc.lifeRegen = 0;
-			}
-
-			npc.lifeRegen -= 12;
-			if (damage < 3)
-			{
-				damage = 3;
-			}
-		}
 		if (Wormed)
         {
             if (npc.lifeRegen > 0)
@@ -213,19 +198,6 @@ public class AvalonGlobalNPCInstance : GlobalNPC
             if (damage < 4)
             {
                 damage = 4;
-            }
-        }
-        if (Malaria)
-        {
-            if (npc.lifeRegen > 0)
-            {
-                npc.lifeRegen = 0;
-            }
-
-            npc.lifeRegen -= 6;
-            if (damage < 3)
-            {
-                damage = 3;
             }
         }
         if (Inferno)
@@ -298,5 +270,6 @@ public class AvalonGlobalNPCInstance : GlobalNPC
                 damage = 10;
             }
         }
+		damage = Math.Max(damage, DOTDamage);
     }
 }

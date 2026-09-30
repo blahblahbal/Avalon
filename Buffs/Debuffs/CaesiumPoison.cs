@@ -1,6 +1,8 @@
-using Terraria;
-using Terraria.ModLoader;
+using Avalon.Common.Extensions;
 using Avalon.Common.Players;
+using Terraria;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace Avalon.Buffs.Debuffs;
 
@@ -10,15 +12,10 @@ public class CaesiumPoison : ModBuff
 	{
 		Main.debuff[Type] = true;
 	}
-
 	public override void Update(Player player, ref int buffIndex)
 	{
-		if (player.lifeRegen > 0)
-		{
-			player.lifeRegen = 0;
-		}
-		player.lifeRegenTime = 0;
-		player.GetModPlayer<AvalonPlayer>().CaesiumPoison = true;
+		player.AddDOT(30, NetworkText.FromKey($"Mods.Avalon.DeathText.CaesiumPoison_1", $"{player.name}"));
+		player.endurance -= 0.15f;
 		player.blind = true;
 	}
 }

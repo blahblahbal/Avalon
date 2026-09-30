@@ -1,4 +1,5 @@
-using Avalon.Common.Players;
+using Avalon.Common.Extensions;
+using Avalon.Common.Interfaces;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -6,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Accessories.Hardmode;
 
 [AutoloadEquip(EquipType.Shield)]
-public class DurataniumCrossShield : ModItem
+public class DurataniumCrossShield : ModItem, IAccessoryThatUpdatesBeforeBuffs
 {
 	public override void SetDefaults()
 	{
@@ -15,16 +16,15 @@ public class DurataniumCrossShield : ModItem
 		Item.rare = ItemRarityID.LightRed;
 		Item.value = Item.sellPrice(0, 1, 8);
 	}
-
-	public override void UpdateAccessory(Player player, bool hideVisual)
-	{
-		player.GetModPlayer<AvalonPlayer>().DuraShield = true;
-	}
 	public override void AddRecipes()
 	{
 		Recipe.Create(Type)
 			.AddIngredient(ModContent.ItemType<Material.Bars.DurataniumBar>(), 15)
 			.AddTile(TileID.Anvils)
 			.Register();
+	}
+	public void UpdateAccessoryEarly(Player player)
+	{
+		player.DebuffPotency -= 0.33f;
 	}
 }

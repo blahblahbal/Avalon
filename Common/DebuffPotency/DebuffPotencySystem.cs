@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace Avalon.Common.DebuffEfficiency;
+namespace Avalon.Common.DebuffPotency;
 
-public class DebuffEfficiencySystem : ModSystem
+public class DebuffPotencySystem : ModSystem
 {
 	public override void ModifyLightingBrightness(ref float scale)
 	{
-		float efficiency = 1f - Main.LocalPlayer.GetModPlayer<DebuffEfficiencyPlayer>().DebuffEfficiency;
+		float efficiency = 1f - Main.LocalPlayer.GetModPlayer<DebuffPotencyPlayer>().DebuffPotency;
 		if (Main.LocalPlayer.blind)
 		{
 			scale *= 1f - (0.05f * efficiency);

@@ -29,11 +29,11 @@ public class ElectricBolt : ModProjectile
     }
     public override void OnHitPlayer(Player target, Player.HurtInfo info)
     {
-        if (Main.rand.NextBool(8)) target.AddBuff(ModContent.BuffType<Buffs.Debuffs.Electrified>(), 60 * 6);
+        if (Main.rand.NextBool(8)) target.AddBuff(ModContent.BuffType<Buffs.Debuffs.Volted>(), 60 * 6);
     }
     public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
     {
-        if (Main.rand.NextBool(8)) target.AddBuff(ModContent.BuffType<Buffs.Debuffs.Electrified>(), 60 * 8);
+        if (Main.rand.NextBool(8)) target.AddBuff(ModContent.BuffType<Buffs.Debuffs.Volted>(), 60 * 8);
     }
     public override void OnKill(int timeLeft)
     {

@@ -15,6 +15,6 @@ public class AttackSpeedDown : ModBuff
     }
     public override void Update(Player player, ref int buffIndex)
     {
-		player.GetAttackSpeed(DamageClass.Generic) -= 0.3f * player.DebuffEfficiency;
+		player.GetAttackSpeed(DamageClass.Generic) -= 0.3f * player.DebuffPotency;
     }
 }

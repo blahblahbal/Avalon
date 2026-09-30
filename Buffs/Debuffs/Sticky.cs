@@ -14,7 +14,7 @@ internal class Sticky : ModBuff
 	}
 	public override void Update(Player player, ref int buffIndex)
 	{
-		var potency = player.DebuffEfficiency;
+		var potency = player.DebuffPotency;
 		player.moveSpeed /= 2.5f * potency;
 		if (player.velocity.Y == 0f && Math.Abs(player.velocity.X) > 1f)
 		{

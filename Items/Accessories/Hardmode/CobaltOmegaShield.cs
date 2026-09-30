@@ -1,3 +1,4 @@
+using Avalon.Common.Interfaces;
 using Avalon.Common.Players;
 using Terraria;
 using Terraria.ID;
@@ -6,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Accessories.Hardmode;
 
 [AutoloadEquip(EquipType.Shield)]
-public class CobaltOmegaShield : ModItem
+public class CobaltOmegaShield : ModItem, IAccessoryThatUpdatesBeforeBuffs
 {
 	public override void SetDefaults()
 	{
@@ -29,8 +30,12 @@ public class CobaltOmegaShield : ModItem
 	{
 		player.GetModPlayer<AvalonPlayer>().CobShield = true;
 		player.GetModPlayer<AvalonPlayer>().PallShield = true;
-		player.GetModPlayer<AvalonPlayer>().DuraShield = true;
 		player.GetModPlayer<AvalonPlayer>().CobOmegaShield = true;
 		player.noKnockback = true;
+	}
+	public void UpdateAccessoryEarly(Player player)
+	{
+		var i = ModContent.GetInstance<DurataniumCrossShield>() as IAccessoryThatUpdatesBeforeBuffs;
+		i.UpdateAccessoryEarly(player);
 	}
 }

@@ -3,17 +3,17 @@ using System;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace Avalon.Common.DebuffEfficiency;
+namespace Avalon.Common.DebuffPotency;
 
-public class DebuffEfficiencyPlayer : ModPlayer
+public class DebuffPotencyPlayer : ModPlayer
 {
 	/// <summary>
 	/// Changes to this need to happen before buffs are updated, use IBuffThatNeedsToUpdatePlayerEarly if on a buff.
 	/// </summary>
-	public float DebuffEfficiency = 1;
+	public float DebuffPotency = 1;
 	public override void ResetEffects()
 	{
-		DebuffEfficiency = 1;
+		DebuffPotency = 1;
 	}
 	public override void Load()
 	{
@@ -23,7 +23,7 @@ public class DebuffEfficiencyPlayer : ModPlayer
 	private void On_Player_UpdateJumpHeight(On_Player.orig_UpdateJumpHeight orig, Player self)
 	{
 		orig(self);
-		float efficiencyDiff = self.DebuffEfficiency - 1f;
+		float efficiencyDiff = self.DebuffPotency - 1f;
 		if (self.dazed)
 		{
 			Player.jumpHeight = (int)Math.Round(Player.jumpHeight * (1f - (efficiencyDiff * 1 / 5f)));
@@ -33,10 +33,10 @@ public class DebuffEfficiencyPlayer : ModPlayer
 
 	public override void PostUpdateMiscEffects()
 	{
-		float efficiencyDiff = DebuffEfficiency - 1f;
+		float efficiencyDiff = DebuffPotency - 1f;
 		if(Player.lifeRegen < 0)
 		{
-			Player.lifeRegen = (int)(Player.lifeRegen * (1f - efficiencyDiff));
+			Player.lifeRegen = (int)(Player.lifeRegen * DebuffPotency);
 		}
 		if (Player.slowOgreSpit)
 		{
@@ -66,6 +66,6 @@ public class DebuffEfficiencyPlayer : ModPlayer
 	public override void NaturalLifeRegen(ref float regen)
 	{
 		if (Player.rabid)
-			regen *= 1f - (DebuffEfficiency * 0.5f);
+			regen *= 1f - (DebuffPotency * 0.5f);
 	}
 }

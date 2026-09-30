@@ -1,3 +1,5 @@
+using Avalon.Common.Extensions;
+using Avalon.Common.Interfaces;
 using Avalon.Common.Players;
 using Terraria;
 using Terraria.ID;
@@ -6,7 +8,7 @@ using Terraria.ModLoader;
 namespace Avalon.Items.Accessories.Hardmode;
 
 [AutoloadEquip(EquipType.Shield)]
-public class DurataniumOmegaShield : ModItem
+public class DurataniumOmegaShield : ModItem, IAccessoryThatUpdatesBeforeBuffs
 {
 	public override void SetDefaults()
 	{
@@ -20,9 +22,12 @@ public class DurataniumOmegaShield : ModItem
 	{
 		player.GetModPlayer<AvalonPlayer>().CobShield = true;
 		player.GetModPlayer<AvalonPlayer>().PallShield = true;
-		player.GetModPlayer<AvalonPlayer>().DuraShield = true;
 		player.GetModPlayer<AvalonPlayer>().DuraOmegaShield = true;
 		player.noKnockback = true;
+	}
+	public void UpdateAccessoryEarly(Player player)
+	{
+		player.DebuffPotency -= 0.75f;
 	}
 	public override void AddRecipes()
 	{

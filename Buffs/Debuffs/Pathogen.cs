@@ -1,5 +1,5 @@
 using Avalon.Common;
-using Avalon.Common.DebuffEfficiency;
+using Avalon.Common.DebuffPotency;
 using Avalon.Common.Interfaces;
 using Avalon.Common.Players;
 using Avalon.Dusts;
@@ -47,11 +47,11 @@ public class Pathogen : ModBuff, IBuffThatNeedsToUpdatePlayerEarly, IBuffThatNee
 
 	public void UpdateEarly(Player player, ref int buffIndex)
 	{
-		player.GetModPlayer<DebuffEfficiencyPlayer>().DebuffEfficiency += 0.5f;
+		player.GetModPlayer<DebuffPotencyPlayer>().DebuffPotency += 0.5f;
 	}
 
 	public void UpdateEarly(NPC npc, ref int buffIndex)
 	{
-		npc.GetGlobalNPC<DebuffEfficiencyNPC>().DebuffEfficiency += 0.5f;
+		npc.GetGlobalNPC<DebuffPotencyNPC>().DebuffPotency += 0.5f;
 	}
 }

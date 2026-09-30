@@ -37,6 +37,7 @@ using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.ModLoader.Default;
 using Terraria.ModLoader.IO;
 
 namespace Avalon.Common.Players;
@@ -175,6 +176,8 @@ public partial class AvalonPlayer : ModPlayer
 	public float BonusTagDamage = 0;
 	public float DebuffDuration = 1f;
 	public float BuffDuration = 1f;
+	public NetworkText? DebuffDeathTextOverride = null;
+	public Color EffectColor = Color.White;
 
 	public bool AdjShimmer;
 	public bool oldAdjShimmer;
@@ -295,7 +298,6 @@ public partial class AvalonPlayer : ModPlayer
 	public bool UndeadImmune;
 	public bool CobShield;
 	public bool PallShield;
-	public bool DuraShield;
 	public bool CobOmegaShield;
 	public bool PallOmegaShield;
 	public bool DuraOmegaShield;
@@ -324,10 +326,7 @@ public partial class AvalonPlayer : ModPlayer
 	#endregion
 
 	#region buffs and debuffs
-	public bool Dissolving;
-	public byte DissolvingTimer;
 	public int IcarusTimer;
-	public int InfectDamage;
 	public bool BrokenWeaponry;
 	public bool Unloaded;
 	public bool Lucky;
@@ -339,8 +338,6 @@ public partial class AvalonPlayer : ModPlayer
 	public bool NinjaPotion;
 	public bool Ward;
 	public int WardCurseDOT;
-	public bool CaesiumPoison;
-	public byte CaesiumPoisonTimer;
 	public bool Pathogen;
 	public bool BloodCasting;
 	public bool Vision;
@@ -349,12 +346,8 @@ public partial class AvalonPlayer : ModPlayer
 	public int DeliriumCount;
 	public bool Berserk;
 	public bool SanguineSacrifice;
-	public bool Electrified;
-	public byte ElectrifiedTimer;
 	public bool Gambler;
 	public bool AdvGambler;
-	public bool Malaria;
-	public byte MalariaTimer;
 
 	public bool HungryMinion;
 	public bool GastroMinion;
@@ -422,18 +415,41 @@ public partial class AvalonPlayer : ModPlayer
 			null, LavaMermanName);
 	}
 
-	private void On_Player_UpdateBuffs(On_Player.orig_UpdateBuffs orig, Player self, int i)
+	private void On_Player_UpdateBuffs(On_Player.orig_UpdateBuffs orig, Player player, int i)
 	{
-		for (int j = 0; j < self.buffTime.Length; j++)
+		for(int j = 3; j < 10; j++)
 		{
-			if (self.buffTime[j] > 0 && self.buffType[j] > 0)
+			var item = player.armor[j];
+			if(item.ModItem is IAccessoryThatUpdatesBeforeBuffs b)
 			{
-				ModBuff b = BuffLoader.GetBuff(self.buffType[j]);
-				if (b is IBuffThatNeedsToUpdatePlayerEarly iB)
-					iB.UpdateEarly(self, ref j);
+				b.UpdateAccessoryEarly(player);
 			}
 		}
-		orig(self, i);
+
+		var loader = LoaderManager.Get<AccessorySlotLoader>();
+		var accessoryPlayer = player.GetModPlayer<ModAccessorySlotPlayer>();
+		for (int k = 0; k < accessoryPlayer.SlotCount; k++)
+		{
+			if (loader.ModdedIsSpecificItemSlotUnlockedAndUsable(k, player, vanity: false))
+			{
+				var item = loader.Get(k, player).FunctionalItem;
+				if (item.ModItem is IAccessoryThatUpdatesBeforeBuffs b)
+				{
+					b.UpdateAccessoryEarly(player);
+				}
+			}
+		}
+
+		for (int j = 0; j < player.buffTime.Length; j++)
+		{
+			if (player.buffTime[j] > 0 && player.buffType[j] > 0)
+			{
+				ModBuff b = BuffLoader.GetBuff(player.buffType[j]);
+				if (b is IBuffThatNeedsToUpdatePlayerEarly iB)
+					iB.UpdateEarly(player, ref j);
+			}
+		}
+		orig(player, i);
 	}
 
 	public override void ResetEffects()
@@ -446,6 +462,8 @@ public partial class AvalonPlayer : ModPlayer
 
 		WOSRenderHPText = false;
 		EfficiencyPrefix = 0;
+		DebuffDeathTextOverride = null;
+		EffectColor = Color.White;
 
 		CoughCooldown = false;
 		MagicCritDamage = 0f;
@@ -470,7 +488,6 @@ public partial class AvalonPlayer : ModPlayer
 		NinjaElixir = false;
 		NinjaPotion = false;
 		HeartPickupValueMultiplier = 1f;
-		CaesiumPoison = false;
 		Pathogen = false;
 		HungryMinion = false;
 		PrimeMinion = false;
@@ -479,13 +496,10 @@ public partial class AvalonPlayer : ModPlayer
 		Vision = false;
 		Berserk = false;
 		SanguineSacrifice = false;
-		Electrified = false;
 		Gambler = false;
-		Malaria = false;
 		AdvGambler = false;
 		DupeLoot = false;
 		AdvDupeLoot = false;
-		Dissolving = false;
 
 		// accessories
 		AcidWalk = false;
@@ -525,7 +539,6 @@ public partial class AvalonPlayer : ModPlayer
 		UndeadImmune = false;
 		CobShield = false;
 		PallShield = false;
-		DuraShield = false;
 		CobOmegaShield = false;
 		PallOmegaShield = false;
 		DuraOmegaShield = false;
@@ -1093,7 +1106,11 @@ public partial class AvalonPlayer : ModPlayer
 			}
 			return false;
 		}
-
+		//Main.NewText(damageSource._sourceOtherIndex);
+		if(DebuffDeathTextOverride != null && damageSource._sourceOtherIndex == 8)
+		{
+			damageSource = PlayerDeathReason.ByCustomReason(DebuffDeathTextOverride);
+		}
 		return true;
 	}
 	public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
@@ -1205,6 +1222,10 @@ public partial class AvalonPlayer : ModPlayer
 			g -= 0.3f;
 			r -= 0.1f;
 		}
+		r *= EffectColor.R / 255f;
+		g *= EffectColor.G / 255f;
+		b *= EffectColor.B / 255f;
+		a *= EffectColor.A / 255f;
 	}
 	public override void GetDyeTraderReward(List<int> rewardPool)
 	{
@@ -1335,144 +1356,7 @@ public partial class AvalonPlayer : ModPlayer
 			}
 		}
 	}
-	public override void UpdateBadLifeRegen()
-	{
-		if (Malaria)
-		{
-			MalariaTimer++;
-			if (MalariaTimer % 4 == 0)
-			{
-				int amt = 3;
-				if (DuraShield) amt = 2;
-				else if (DuraOmegaShield) amt = 1;
-				Player.statLife -= amt;
-				CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y, Player.width, Player.height), CombatText.LifeRegen, amt, dramatic: false, dot: true);
-				if (Player.statLife <= 0)
-				{
-					Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.Malaria_1", $"{Player.name}")), 10, 0);
-				}
-				MalariaTimer = 0;
-			}
-		}
-		if (Electrified)
-		{
-			ElectrifiedTimer++;
-			if (ElectrifiedTimer % 4 == 0)
-			{
-				int amt = 3;
-				if (DuraShield) amt = 2;
-				else if (DuraOmegaShield) amt = 1;
-				if (Player.velocity.Length() != 0)
-				{
-					amt += 3;
-				}
-				Player.statLife -= amt;
-				CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y, Player.width, Player.height), CombatText.LifeRegen, amt, dramatic: false, dot: true);
-				if (Player.statLife <= 0)
-				{
-					int type = Main.rand.Next(10) + 1;
-					Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey(type > 4 ? $"Mods.Avalon.DeathText.Electrocuted_{type - 4}" : $"DeathText.Electrocuted_{type}", $"{Player.name}")), 10, 0);
-				}
-				ElectrifiedTimer = 0;
-			}
-		}
-		if (Dissolving)
-		{
-			DissolvingTimer++;
-			if (DissolvingTimer % 10 == 0)
-			{
-				int amt = 4;
-				if (AcidDmgReduction)
-					amt = 2;
-				Player.statLife -= amt;
-				CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y, Player.width, Player.height), CombatText.LifeRegen, amt, dramatic: false, dot: true);
-				if (Player.statLife <= 0)
-				{
-					Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.Acid_{Main.rand.Next(5)}", $"{Player.name}")), 10, 0);
-				}
-				DissolvingTimer = 0;
-			}
-		}
-		if (CaesiumPoison)
-		{
-			CaesiumPoisonTimer++;
-			if (CaesiumPoisonTimer % 6 == 0)
-			{
-				int amt = 3;
-				if (DuraShield) amt = 2;
-				else if (DuraOmegaShield) amt = 1;
-				CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y, Player.width, Player.height), CombatText.LifeRegen, amt, dramatic: false, dot: true);
-				if (Player.statLife <= 0)
-				{
-					Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.CaesiumPoison_1", $"{Player.name}")), 10, 0);
-				}
-				CaesiumPoisonTimer = 0;
-			}
-		}
-		if (DuraShield)
-		{
-			if (Player.poisoned)
-			{
-				int add = 1;
-				if (DuraOmegaShield) add = 2;
-				Player.lifeRegen += add;
-			}
-			if (Player.onFire)
-			{
-				int add = 2;
-				if (DuraOmegaShield) add = 4;
-				Player.lifeRegen += add;
-			}
-			if (Player.venom)
-			{
-				int add = 7;
-				if (DuraOmegaShield) add = 15;
-				Player.lifeRegen += add;
-			}
-			if (Player.onFire3)
-			{
-				int add = 2;
-				if (DuraOmegaShield) add = 4;
-				Player.lifeRegen += add;
-			}
-			if (Player.onFrostBurn)
-			{
-				int add = 4;
-				if (DuraOmegaShield) add = 8;
-				Player.lifeRegen += add;
-			}
-			if (Player.onFrostBurn2)
-			{
-				int add = 4;
-				if (DuraOmegaShield) add = 8;
-				Player.lifeRegen += add;
-			}
-			if (Player.onFire2)
-			{
-				int add = 6;
-				if (DuraOmegaShield) add = 12;
-				Player.lifeRegen += add;
-			}
-			if (Player.burned)
-			{
-				int add = 15;
-				if (DuraOmegaShield) add = 30;
-				Player.lifeRegen += add;
-			}
-			if (Player.electrified)
-			{
-				int add = 2;
-				if (DuraOmegaShield) add = 4;
-				Player.lifeRegen += add;
-				if (Player.controlLeft || Player.controlRight)
-				{
-					add = 8;
-					if (DuraOmegaShield) add = 16;
-					Player.lifeRegen += add;
-				}
-			}
-		}
-	}
+
 	
 	public override void SaveData(TagCompound tag)
 	{
@@ -2879,11 +2763,6 @@ public partial class AvalonPlayer : ModPlayer
 		{
 			Player.NinjaDodge();
 			info.Damage = 0;
-		}
-
-		if (CaesiumPoison)
-		{
-			info.Damage = (int)(info.Damage * 1.15f);
 		}
 	}
 	public override bool ImmuneTo(PlayerDeathReason damageSource, int cooldownCounter, bool dodgeable)

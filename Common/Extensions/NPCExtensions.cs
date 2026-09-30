@@ -1,4 +1,4 @@
-﻿using Avalon.Common.DebuffEfficiency;
+﻿using Avalon.Common.DebuffPotency;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -33,9 +33,18 @@ public static class NPCExtensions
 				return;
 			var n = npc.GetGlobalNPC<AvalonGlobalNPCInstance>();
 			if (speed < 1)
-				speed /= npc.DebuffEfficiency;
+				speed /= npc.DebuffPotency;
 			n.Speed *= speed;
 		}
-		public float DebuffEfficiency => npc.GetGlobalNPC<DebuffEfficiencyNPC>().DebuffEfficiency;
+		public float DebuffPotency => npc.GetGlobalNPC<DebuffPotencyNPC>().DebuffPotency;
+		public AvalonGlobalNPCInstance AvalonGlobalNPCInstance => npc.GetGlobalNPC<AvalonGlobalNPCInstance>();
+		public void AddDOT(int dps, int damage)
+		{
+			var instance = npc.AvalonGlobalNPCInstance;
+			if (npc.lifeRegen > 0)
+				npc.lifeRegen = 0;
+			npc.lifeRegen -= dps * 2;
+			instance.DOTDamage = Math.Max(damage, instance.DOTDamage);
+		}
 	}
 }

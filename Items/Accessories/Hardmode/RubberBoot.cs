@@ -16,6 +16,6 @@ public class RubberBoot : ModItem
 	public override void UpdateAccessory(Player player, bool hideVisual)
 	{
 		player.buffImmune[BuffID.Electrified] = true;
-		player.buffImmune[ModContent.BuffType<Buffs.Debuffs.Electrified>()] = true;
+		player.buffImmune[ModContent.BuffType<Buffs.Debuffs.Volted>()] = true;
 	}
 }

@@ -26,7 +26,7 @@ public class AvalonStaminaPlayer : ModPlayer
     public bool SprintUnlocked = false;
     public bool StamFlower = false;
     public bool StaminaDrain = false;
-	public float StaminaDrainMult => 1.2f * Player.DebuffEfficiency;
+	public float StaminaDrainMult => 1.2f * Player.DebuffPotency;
     public int StaminaDrainStacks = 1;
     public int StaminaRegen;
     public int StaminaRegenCost = 1000;

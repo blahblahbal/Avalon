@@ -24,6 +24,6 @@ public class MidasShoe : ModItem
 	{
 		player.buffImmune[BuffID.Ichor] = true;
 		player.buffImmune[BuffID.Electrified] = true;
-		player.buffImmune[ModContent.BuffType<Buffs.Debuffs.Electrified>()] = true;
+		player.buffImmune[ModContent.BuffType<Buffs.Debuffs.Volted>()] = true;
 	}
 }

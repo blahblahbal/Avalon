@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Avalon.Common.Players;
 using Terraria.Localization;
+using Avalon.Common.Extensions;
 
 namespace Avalon.Buffs.Debuffs;
 
@@ -22,7 +23,7 @@ public class WardCurse : ModBuff
 			float defEffectiveness = 0.5f;
 			if (Main.expertMode) defEffectiveness = 0.75f;
 			if (Main.masterMode) defEffectiveness = 1f;
-			player.Hurt(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.{Name}_1", $"{player.name}")), (player.statDefense * defEffectiveness) + (player.GetModPlayer<AvalonPlayer>().WardCurseDOT / 10 / 5), 0);
+			player.Hurt(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.Avalon.DeathText.{Name}_1", $"{player.name}")), (int)(((player.statDefense * defEffectiveness) + (player.GetModPlayer<AvalonPlayer>().WardCurseDOT / 10 / 5)) * player.DebuffPotency), 0);
 		}
 		if (player.buffTime[buffIndex] == 0)
 		{

@@ -1,6 +1,6 @@
 ﻿using Avalon.Buffs.Debuffs;
 using Avalon.Common;
-using Avalon.Common.DebuffEfficiency;
+using Avalon.Common.DebuffPotency;
 using Avalon.Common.Interfaces;
 using Avalon.Common.Templates;
 using Avalon.Dusts;
@@ -39,7 +39,7 @@ public class DarklightLanceProjectile : SpearTemplate
 		int dustType = ModContent.DustType<GlowySoulDust>();
 		int explosionAI = -1;
 
-		float multiplier = target.GetGlobalNPC<DebuffEfficiencyNPC>().DebuffEfficiency;
+		float multiplier = target.GetGlobalNPC<DebuffPotencyNPC>().DebuffPotency;
 
 		if (gnpc.Light)
 		{

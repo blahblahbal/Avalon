@@ -7374,8 +7374,8 @@ Mods: {
 				Tooltip:
 					'''
 					Greatly increases defense when struck
-					Reduces health regeneration cooldown
-					Slows the effects of damage over time debuffs
+					{$Mods.Avalon.Items.PalladiumCrossShield.Tooltip}
+					{$Mods.Avalon.Items.DurataniumCrossShield.Tooltip}
 					'''
 			}
 
@@ -7389,23 +7389,23 @@ Mods: {
 				Tooltip:
 					'''
 					Greatly reduces health regeneration cooldown
-					Increases defense when struck
-					Slows the effects of damage over time debuffs
+					{$Mods.Avalon.Items.CobaltCrossShield.Tooltip}
+					{$Mods.Avalon.Items.DurataniumCrossShield.Tooltip}
 					'''
 			}
 
 			DurataniumCrossShield: {
 				DisplayName: Duratanium Cross Shield
-				Tooltip: Slows the effects of damage over time debuffs
+				Tooltip: Reduces debuff potency by 33%
 			}
 
 			DurataniumOmegaShield: {
 				DisplayName: Duratanium Omega Shield
 				Tooltip:
 					'''
-					Greatly slows the effects of damage over time debuffs
-					Increases defense when struck
-					Reduces health regeneration cooldown
+					Reduces debuff potency by 75%
+					{$Mods.Avalon.Items.CobaltCrossShield.Tooltip}
+					{$Mods.Avalon.Items.PalladiumCrossShield.Tooltip}
 					'''
 			}
 
@@ -11578,7 +11578,7 @@ Mods: {
 				Description: Blood sacrifice weapons are more powerful
 			}
 
-			Electrified: {
+			Volted: {
 				DisplayName: Volted
 				Description: Losing more life when moving
 			}
