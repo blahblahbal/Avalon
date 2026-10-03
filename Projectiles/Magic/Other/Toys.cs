@@ -79,8 +79,7 @@ public abstract class ToysBase : ModProjectile
 		}
 		else
 		{
-			bool playSound = false;
-
+			float minSpeedForSound = 0.2f;
 			Vector2 newOldVelocity = Projectile.velocity;
 			if (newOldVelocity.X != oldVelocity.X)
 			{
@@ -97,8 +96,8 @@ public abstract class ToysBase : ModProjectile
 				Projectile.position.Y += newOldVelocity.Y;
 				Projectile.velocity.Y = 0;
 			}
-
-			if (playSound) SoundEngine.PlaySound(CollideSound, Projectile.Center);
+			if(CollideSound != null && Projectile.velocity.Distance(Projectile.oldVelocity) > 0.5f)
+				SoundEngine.PlaySound(CollideSound.Value with { volume = CollideSound.Value.volume * Math.Min(Projectile.velocity.Length() * 0.3f,1) * Projectile.Opacity}, Projectile.Center);
 		}
 		return false;
 	}
@@ -126,6 +125,7 @@ public abstract class ToysBase : ModProjectile
 }
 public class Toys_Lego : ToysBase
 {
+	public override SoundStyle? CollideSound => Sounds.Item.ToyMarbleImpact.Asset with { pitchVariance = 0.2f, pitch = 0.2f, volume = 0.7f, MaxInstances = 10 };
 	public override float Friction => 0.05f;
 	public override float BounceStrength => 0.3f;
 	public override int Variants => 3;
@@ -140,12 +140,14 @@ public class Toys_Monkey : Toys_Lego
 }
 public class Toys_Ball : ToysBase
 {
+	public override SoundStyle? CollideSound => Sounds.Item.ToyBallImpact.Asset with { pitchVariance = 0.2f, MaxInstances = 10, volume = 2 };
 	public override float Friction => 0.015f;
 	public override float BounceStrength => 0.95f;
 	public override int Variants => 4;
 }
 public class Toys_Marble : ToysBase
 {
+	public override SoundStyle? CollideSound => Sounds.Item.ToyMarbleImpact.Asset with { pitchVariance = 0.2f, volume = 0.5f, pitch = 0.5f, MaxInstances = 10 };
 	public override float Friction => 0.01f;
 	public override float BounceStrength => 0.45f;
 	public override int Variants => 3;
@@ -158,6 +160,7 @@ public class Toys_Marble : ToysBase
 }
 public class Toys_Die : ToysBase
 {
+	public override SoundStyle? CollideSound => Sounds.Item.ToyDiceImpact.Asset with { pitchVariance = 0.2f, MaxInstances = 10 };
 	public override float Friction => 0.05f;
 	public override float BounceStrength => 0.35f;
 	public override int Variants => 2;
@@ -175,6 +178,7 @@ public class Toys_Die : ToysBase
 //}
 public abstract class Toys_Plush : ToysBase
 {
+	public override SoundStyle? CollideSound => Sounds.Item.ToyPlushImpact.Asset with { pitchVariance = 0.2f, volume = 2, MaxInstances = 10 };
 	public override float Friction => 0.07f;
 	public override float BounceStrength => 0.05f;
 	public override int TrailAfterimageCount => 0;
@@ -195,6 +199,7 @@ public class Toys_PlushTeddy : Toys_Plush { }
 public class Toys_PlushSanta : Toys_Plush { }
 public abstract class Toys_LargeWooden : ToysBase
 {
+	public override SoundStyle? CollideSound => SoundID.Dig with { MaxInstances = 10 };//Sounds.Item.ToyWoodImpact.Asset with { pitchVariance = 0.2f, MaxInstances = 10 };
 	public override float Friction => 0.04f;
 	public override float BounceStrength => 0.225f;
 	public override bool Scale => true;
@@ -302,8 +307,8 @@ public class Toys_MonkeyBarrel : ToysBase
 		}
 
 		// Play explosion sound
-		SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
-
+		SoundEngine.PlaySound(SoundID.Item61 with { volume = 0.7f }, Projectile.Center);
+		SoundEngine.PlaySound(SoundID.DD2_ExplosiveTrapExplode, Projectile.Center);
 		for (int i = 0; i < 7; i++)
 		{
 			Dust d = Dust.NewDustDirect(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 100, default, 1.2f);
