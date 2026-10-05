@@ -12,8 +12,6 @@ namespace Avalon.NPCs.Bosses.PreHardmode.BacteriumPrime;
 [AutoloadBossHead]
 public class BacteriumPrimeSmallMelee : BacteriumPrime
 {
-	public override LocalizedText DisplayName => ModContent.GetInstance<BacteriumPrime>().DisplayName;
-
 	public override void SetStaticDefaults()
 	{
 		base.SetStaticDefaults();
@@ -93,7 +91,6 @@ public class BacteriumPrimeSmallRanged : BacteriumPrime
 		base.SetStaticDefaults();
 		Main.npcFrameCount[NPC.type] = 4;
 	}
-	public override LocalizedText DisplayName => ModContent.GetInstance<BacteriumPrime>().DisplayName;
 	public override void SetDefaults()
 	{
 		base.SetDefaults();
