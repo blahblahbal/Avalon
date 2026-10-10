@@ -37,7 +37,7 @@ public class ContagionSelectionMenu : ModHook {
         new GroupOptionButton<WorldEvilSelection>[Enum.GetValues<WorldEvilSelection>().Length];
 
     /// <inheritdoc />
-    protected override void Apply() {
+    public override void Load() {
         IL_UIWorldCreation.BuildPage += ILBuildPage;
         IL_UIWorldCreation.MakeInfoMenu += ILMakeInfoMenu;
         IL_UIWorldCreation.ShowOptionDescription += ILShowOptionDescription;

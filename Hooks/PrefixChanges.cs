@@ -12,7 +12,7 @@ public class PrefixChanges : ModHook
         return self.IsArmor() || orig(self);
     }
 
-    protected override void Apply()
+    public override void Load()
     {
         On_Item.IsAPrefixableAccessory += OnIsAPrefixableAccessory;
         On_Item.Prefix += On_Item_Prefix;

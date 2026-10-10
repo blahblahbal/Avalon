@@ -17,7 +17,7 @@ namespace Avalon.Hooks;
 [Autoload(Side = ModSide.Client)]
 public class ExtraHealth : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
 		IL_ClassicPlayerResourcesDisplaySet.DrawLife += ILDrawLife;
 		//IL_HorizontalBarsPlayerResourcesDisplaySet.LifeFillingDrawer += ILLifeFillingDrawer;

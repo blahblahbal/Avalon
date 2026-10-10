@@ -15,7 +15,7 @@ namespace Avalon.Hooks;
 
 internal class DungeonWandTooltip : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         On_ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color += On_ItemSlot_Draw_SpriteBatch_ItemArray_int_int_Vector2_Color;
     }

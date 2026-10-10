@@ -100,7 +100,7 @@ public class ContagionMimic : ModNPC
 public class ContagionMimicHook : ModHook
 {
 	public override bool IsLoadingEnabled(Mod mod) => !AltLibrarySupport.Enabled;
-    protected override void Apply()
+    public override void Load()
     {
         On_NPC.NewNPC += On_NPC_NewNPC;
     }

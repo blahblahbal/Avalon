@@ -39,7 +39,7 @@ public class Paintings : ModTile
 }
 public class PaintingsInDungeonHook : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         On_WorldGen.RandPictureTile += On_WorldGen_RandPictureTile;
     }

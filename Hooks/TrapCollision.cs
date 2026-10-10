@@ -11,7 +11,7 @@ namespace Avalon.Hooks;
 [Autoload(Side = ModSide.Both)]
 public class TrapCollision : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Collision.CanTileHurt += OnCanTileHurt;
 		On_Player.ApplyTouchDamage += OnApplyTouchDamage;

@@ -47,7 +47,7 @@ public class SkyInsignia : ModItem
 }
 public class SkyBlessingPickupHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Player.PickupItem += OnPickupItem;
 	}

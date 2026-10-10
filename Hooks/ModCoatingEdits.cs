@@ -10,7 +10,7 @@ namespace Avalon.Hooks
 {
 	public class ModCoatingEdits : ModHook
 	{
-		protected override void Apply()
+		public override void Load()
 		{
 			On_Main.DrawTileEntities += SetDrawTileEntitiesActuator;
 			On_Main.DrawTiles += SetDrawActuator;

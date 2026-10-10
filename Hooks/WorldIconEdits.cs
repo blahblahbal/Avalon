@@ -23,6 +23,8 @@ namespace Avalon.Hooks
 		private static void AddOverlays(string name) => OverlayTextures.Add(name, ModContent.Request<Texture2D>($"Avalon/Assets/Textures/UI/WorldCreation/IconOverlay{name}"));
 		public override void Load()
 		{
+			On_AWorldListItem.GetIcon += ReplaceIcon;
+			IL_UIWorldListItem.ctor += IconOverlays;
 			if (Main.netMode == NetmodeID.Server)
 			{
 				return;
@@ -81,12 +83,6 @@ namespace Avalon.Hooks
 		private static Asset<Texture2D> GetJungleOverlay(byte jungleVariant, bool isCompletion)
 		{
 			return OverlayTextures[(jungleVariant == (byte)WorldJungle.Savanna ? "Savanna" : "Jungle") + (isCompletion ? "Completion" : "")];
-		}
-
-		protected override void Apply()
-		{
-			On_AWorldListItem.GetIcon += ReplaceIcon;
-			IL_UIWorldListItem.ctor += IconOverlays;
 		}
 		// Replaces icon textures
 		private Asset<Texture2D> ReplaceIcon(On_AWorldListItem.orig_GetIcon orig, AWorldListItem self)

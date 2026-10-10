@@ -34,7 +34,7 @@ namespace Avalon.Hooks
 			ZirconGemspark = ModContent.TileType<ZirconGemspark>();
 			PlacedGems = ModContent.TileType<PlacedGems>();
 		}
-		protected override void Apply()
+		public override void Load()
 		{
 			On_Main.shine_Color_int += On_Main_shine_Color_int;
 			On_Main.shine_refVector3_int += On_Main_shine_refVector3_int;

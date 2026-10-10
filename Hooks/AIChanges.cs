@@ -10,7 +10,7 @@ namespace Avalon.Hooks
 {
     class AIChanges : ModHook
     {
-        protected override void Apply()
+        public override void Load()
         {
             IL_NPC.AI_006_Worms += ILAI_006_Worms;
         }

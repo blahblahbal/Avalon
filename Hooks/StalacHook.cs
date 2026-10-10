@@ -11,7 +11,7 @@ namespace Avalon.Hooks
 {
 	internal class StalacHook : ModHook
 	{
-		protected override void Apply()
+		public override void Load()
 		{
 			On_WorldGen.GetDesiredStalagtiteStyle += On_WorldGen_GetDesiredStalactiteStyle;
 

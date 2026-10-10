@@ -16,7 +16,7 @@ namespace Avalon.Hooks
     internal class DryadTextDetour : ModHook
     {
 		public override bool IsLoadingEnabled(Mod mod) => !AltLibrarySupport.Enabled;
-        protected override void Apply()
+        public override void Load()
         {
 			IL_Lang.GetDryadWorldStatusDialog += DryadWorldStatusEdit;
 			IL_WorldGen.AddUpAlignmentCounts += AddUpAligmenttmodEvilsandGoods;

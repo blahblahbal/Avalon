@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace Avalon.Hooks;
 public class ResearchHooks : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_ContentSamples.FillResearchItemOverrides += On_ContentSamples_FillResearchItemOverrides;
 	}

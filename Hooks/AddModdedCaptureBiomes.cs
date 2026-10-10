@@ -20,7 +20,7 @@ namespace Avalon.Hooks
 {
 	public class AddModdedCaptureBiomes : ModHook
 	{
-		protected override void Apply()
+		public override void Load()
 		{
 			IL_CaptureInterface.ModeChangeSettings.DrawWaterChoices += DrawModdedCaptureIcons;
 			On_CaptureBiome.GetCaptureBiome += makeCaptureBiomeSlot;

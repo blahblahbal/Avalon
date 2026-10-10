@@ -16,7 +16,7 @@ namespace Avalon.Hooks
 {
 	public class RetroBackgrounds : ModHook
 	{
-		protected override void Apply()
+		public override void Load()
 		{
 			On_Main.DrawBackground += renderOldNewBackground;
 			On_Main.DrawUnderworldBackground += stopRenderinRetro;

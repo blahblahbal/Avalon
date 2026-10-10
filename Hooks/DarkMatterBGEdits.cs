@@ -14,7 +14,7 @@ namespace Avalon.Hooks;
 [Autoload(Side = ModSide.Client)]
 public class DarkMatterBGEdits : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Main.DrawSunAndMoon += OnDrawSunAndMoon;
 		IL_Main.DrawSurfaceBG += DisbaleHallowRainbow;

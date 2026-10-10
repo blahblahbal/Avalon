@@ -6,7 +6,7 @@ namespace Avalon.Hooks;
 
 internal class RubberGlovesHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Player.ApplyAttackCooldown += On_Player_ApplyAttackCooldown;
 		On_Player.SetMeleeHitCooldown += On_Player_SetMeleeHitCooldown;

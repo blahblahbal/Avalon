@@ -36,7 +36,7 @@ public class ShadowRing : ModItem
 }
 public class ShadowRingHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_PlayerDrawSet.BoringSetup_End += On_PlayerDrawSet_BoringSetup_End;
 		On_PlayerDrawLayers.DrawPlayer_27_HeldItem += On_PlayerDrawLayers_DrawPlayer_27_HeldItem;

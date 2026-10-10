@@ -9,7 +9,7 @@ namespace Avalon.Hooks
 {
 	internal class VisionPotion : ModHook
 	{
-		protected override void Apply()
+		public override void Load()
 		{
 			On_TileDrawing.GetScreenDrawArea += On_TileDrawing_GetScreenDrawArea;
 		}

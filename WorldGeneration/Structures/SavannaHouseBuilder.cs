@@ -57,7 +57,7 @@ public class SavannaCaveHouseHook : ModHook
         ModContent.TileType<TuhrtlBrick>(), ModContent.TileType<Tiles.Savanna.Nest>(), ModContent.TileType<CoughwoodChest>(),
         ModContent.TileType<HellfireChest>(), ModContent.TileType<Chunkstone>(), ModContent.TileType<Snotsand>());
 
-    protected override void Apply()
+    public override void Load()
     {
         On_HouseUtils.CreateBuilder += On_HouseUtils_CreateBuilder;
         On_HouseUtils.AreRoomsValid += On_HouseUtils_AreRoomsValid;

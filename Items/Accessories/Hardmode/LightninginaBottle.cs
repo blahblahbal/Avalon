@@ -35,7 +35,7 @@ public class LightninginaBottle : ModItem
 }
 public class AngryNimbusDropsHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_ItemDropDatabase.RegisterToNPC += On_ItemDropDatabase_RegisterToNPC;
 	}

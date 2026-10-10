@@ -8,7 +8,7 @@ namespace Avalon.Hooks;
 
 internal class GemRobeTimSpawning : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         IL_NPC.SpawnNPC += RobeTimIncrease;
         IL_NPC.SpawnNPC += SlabAndTiledWallHMDungeonFix;

@@ -9,7 +9,7 @@ namespace Avalon.Hooks
 {
 	internal class FishingHooks : ModHook
 	{
-		protected override void Apply()
+		public override void Load()
 		{
 			On_Projectile.FishingCheck_RollItemDrop += On_Projectile_FishingCheck_RollItemDrop;
 		}

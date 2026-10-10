@@ -13,7 +13,7 @@ namespace Avalon.Hooks;
 
 internal class ContagionConversionHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		if (!AltLibrarySupport.Enabled)
 		{

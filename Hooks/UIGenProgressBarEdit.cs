@@ -20,14 +20,10 @@ public class UIGenProgressBarEdit : ModHook
 {
     private Asset<Texture2D> texOuterContagion = null!;
 	public override bool IsLoadingEnabled(Mod mod) => !AltLibrarySupport.Enabled; 
-	public override void Load()
+    public override void Load()
     {
-        texOuterContagion = Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/WorldCreation/LoadingOuterContagion");
-    }
-
-    protected override void Apply()
-    {
-        IL_UIGenProgressBar.DrawSelf += IL_DrawSelf;
+		texOuterContagion = Mod.Assets.Request<Texture2D>($"{ExxoAvalonOrigins.TextureAssetsPath}/UI/WorldCreation/LoadingOuterContagion");
+		IL_UIGenProgressBar.DrawSelf += IL_DrawSelf;
 		On_UIGenProgressBar.DrawSelf += PreventDrawingRetro;
 		On_UIWorldLoad.DrawSelf += EditRetroText;
     }

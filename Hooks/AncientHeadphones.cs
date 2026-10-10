@@ -9,7 +9,7 @@ namespace Avalon.Hooks;
 
 internal class AncientHeadphones : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         On_Main.UpdateAudio_DecideOnNewMusic += OnUpdateAudio_DecideOnNewMusic;
     }

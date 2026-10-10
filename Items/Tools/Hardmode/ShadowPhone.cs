@@ -217,7 +217,7 @@ public abstract class ShadowPhoneBase : ModItem
 // This detour is just to reset some values which cause undesirable behaviour (by default, returning true in AltFunctionUse makes the item call UseItem when right clicked, this prevents that so the item doesn't get held out).
 public class ShadowPhoneHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Player.ItemCheck_ManageRightClickFeatures += On_Player_ItemCheck_ManageRightClickFeatures;
 	}

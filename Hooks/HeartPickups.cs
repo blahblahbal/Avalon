@@ -13,7 +13,7 @@ namespace Avalon.Hooks
 {
     internal class HeartPickups : ModHook
     {
-        protected override void Apply()
+        public override void Load()
         {
             On_Item.NewItem_Inner += OnItemNewItem;
             On_Player.PickupItem += OnPickupItem;

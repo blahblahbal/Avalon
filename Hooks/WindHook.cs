@@ -10,7 +10,7 @@ namespace Avalon.Hooks
 {
 	internal class WindHook : ModHook //Should rename since its nolonger just hooks
 	{
-		protected override void Apply()
+		public override void Load()
 		{
 			IL_TileDrawing.DrawMultiTileGrassInWind += IL_TileDrawing_DrawMultiTileGrassInWind;
 		}

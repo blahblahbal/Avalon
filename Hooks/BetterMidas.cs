@@ -8,7 +8,7 @@ namespace Avalon.Hooks;
 
 internal class BetterMidas : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         On_NPC.NPCLoot_DropMoney += OnNPCDropMoney;
     }

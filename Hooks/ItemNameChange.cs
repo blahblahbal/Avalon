@@ -9,7 +9,7 @@ namespace Avalon.Hooks;
 
 internal class ItemNameChange : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         On_Lang.GetItemName += On_Lang_GetItemName;
     }

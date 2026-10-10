@@ -13,7 +13,7 @@ namespace Avalon.WorldGeneration.SecretSeeds
 {
 	public class CavesWorldGen : ModHook
 	{
-		protected override void Apply()
+		public override void Load()
 		{
 			//blahr moment, i have 0 clue what any of this actually does, and blah doesnt pay me enough to look into it
 			On_WorldGen.MakeDungeon += On_WorldGen_MakeDungeon;

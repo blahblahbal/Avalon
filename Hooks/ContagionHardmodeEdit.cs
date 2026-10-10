@@ -24,8 +24,8 @@ namespace Avalon.Hooks
     internal class ContagionHardmodeEdit : ModHook
     {
 		public override bool IsLoadingEnabled(Mod mod) => !AltLibrarySupport.Enabled;
-        protected override void Apply()
-        {
+		public override void Load()
+		{
             On_WorldGen.GERunner += On_WorldGen_GERunner;
 			On_NPC.CreateBrickBoxForWallOfFlesh += On_NPC_CreateBrickBoxForWallOfFlesh;
         }

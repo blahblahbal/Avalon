@@ -9,7 +9,7 @@ namespace Avalon.Hooks
     internal class BloodMoonTranforms : ModHook
 	{
 		public override bool IsLoadingEnabled(Mod mod) => !AltLibrarySupport.Enabled;
-		protected override void Apply()
+		public override void Load()
         {
             On_NPC.UpdateNPC_BloodMoonTransformations += OnBloodMoonTransformations;
         }

@@ -19,7 +19,7 @@ namespace Avalon.Hooks
 {
     internal class MapTileEdits : ModHook
     {
-        protected override void Apply()
+        public override void Load()
         {
             //On_MapHelper.GetMapTileXnaColor += OnGetMapTileXnaColor;
             On_Main.DoUpdate_AnimateDiscoRGB += OnDoUpdate_AnimateDiscoRGB;

@@ -8,7 +8,7 @@ namespace Avalon.Hooks
 {
     internal class FluidicPrefixHook : ModHook
     {
-        protected override void Apply()
+        public override void Load()
         {
             On_Player.WaterCollision += On_Player_WaterCollision;
             On_Player.HoneyCollision += On_Player_HoneyCollision;

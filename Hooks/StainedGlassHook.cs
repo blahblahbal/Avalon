@@ -10,7 +10,7 @@ namespace Avalon.Hooks
 {
 	internal class StainedGlassHook : ModHook
 	{
-		protected override void Apply()
+		public override void Load()
 		{
 			On_TileLightScanner.ApplySurfaceLight += On_TileLightScanner_ApplySurfaceLight;
 			On_TileLightScanner.ApplyHellLight += On_TileLightScanner_ApplyHellLight;

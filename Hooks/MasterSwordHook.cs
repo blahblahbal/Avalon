@@ -91,7 +91,7 @@ namespace Avalon.Hooks
 		internal static bool killedPrime;
 		internal static bool killedDestroyer;
 		internal static bool allMechsSpawned;
-		protected override void Apply()
+		public override void Load()
 		{
 			On_NPC.SpawnBoss += On_NPC_SpawnBoss;
 		}

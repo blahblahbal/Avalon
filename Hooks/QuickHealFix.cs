@@ -15,7 +15,7 @@ namespace Avalon.Hooks
 {
     internal class QuickHealFix : ModHook
     {
-        protected override void Apply()
+        public override void Load()
         {
             On_Player.QuickHeal_GetItemToUse += On_Player_QuickHeal_GetItemToUse;
         }

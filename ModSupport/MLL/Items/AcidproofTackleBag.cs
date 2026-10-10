@@ -34,7 +34,7 @@ public class AcidproofTackleBag : ModItem
 }
 public class AcidproofTackleBagHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Player.RemoveAnglerAccOptionsFromRewardPool += On_Player_RemoveAnglerAccOptionsFromRewardPool;
 		On_PlayerDrawLayers.DrawPlayer_10_BackAcc += On_PlayerDrawLayers_DrawPlayer_10_BackAcc;

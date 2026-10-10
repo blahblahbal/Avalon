@@ -44,7 +44,7 @@ namespace Avalon.WorldGeneration.SecretSeeds
 		internal static readonly string[] gen = new string[] { "Adding Clouds...", "Adding Titanium Ore...", "Adding Coal...", "Adding Jungle Ore...", "Adding Ice Shrines..", "Adding Caesium Ore...", "Generating Hellcastle:", "Placing hallowed altars:", "Generating Heartstone biomes...", "Adding Ice Caves:",
 				"Placing Avalon's statues:" };
 
-		protected override void Apply()
+		public override void Load()
 		{
 			On_CaveHouseBiome.Place += ReplaceHousesInSpecialSeeds;
 			On_Recipe.PlayerMeetsEnvironmentConditions += On_Recipe_PlayerMeetsEnvironmentConditions;

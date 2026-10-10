@@ -81,7 +81,7 @@ public class PrimeArmsCounter : ModProjectile
 }
 public class UpgradeableMinionHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Player.UpdateProjectileCaches += On_Player_UpdateProjectileCaches;
 		On_Player.ResetProjectileCaches += On_Player_ResetProjectileCaches;

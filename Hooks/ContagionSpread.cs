@@ -17,7 +17,7 @@ namespace Avalon.Hooks
 {
     internal class ContagionSpread : ModHook
     {
-		protected override void Apply()
+		public override void Load()
         {
 			if (!AltLibrarySupport.Enabled)
 			{

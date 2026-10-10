@@ -18,7 +18,7 @@ namespace Avalon.Hooks;
 
 internal class Tropics : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         IL_DesertDescription.RowHasInvalidTiles += IL_DesertDescription_RowHasInvalidTiles;
         IL_WorldGen.PlaceJunglePlant += IL_WorldGen_PlaceJunglePlant;

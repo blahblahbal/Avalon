@@ -13,7 +13,7 @@ namespace Avalon.Hooks;
 
 public class EvilAltar : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
 		if (!AltLibrarySupport.Enabled)
 		{

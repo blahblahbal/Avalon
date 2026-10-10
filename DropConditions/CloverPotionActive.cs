@@ -45,7 +45,7 @@ file class CloverPotionModHook : ModHook
 	/// Gets populated automatically by rules that have already been altered to prevent recursion.
 	/// </summary>
 	private static readonly HashSet<IItemDropRule> Excluded_ItemDropRulesAffectedByCloverPotion = [];
-	protected override void Apply()
+	public override void Load()
 	{
 		MonoModHooks.Add(((Action<NPC, NPCLoot>)NPCLoader.ModifyNPCLoot).Method, ModifyNPCLoot_Detour);
 		MonoModHooks.Add(((Action<GlobalLoot>)NPCLoader.ModifyGlobalLoot).Method, ModifyGlobalLoot_Detour);

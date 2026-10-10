@@ -15,7 +15,7 @@ namespace Avalon.Hooks;
 
 public class PlayerLegFrame : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         IL_Player.PlayerFrame += IL_Player_PlayerFrame;
     }

@@ -28,7 +28,7 @@ public class SilenceCandleGlobalNPC : GlobalNPC
 }
 public class SilenceCandleHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_NPC.NewNPC += On_NPC_NewNPC;
 	}

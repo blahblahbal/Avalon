@@ -183,7 +183,7 @@ public class Breakdawn : ModItem
 }
 public class BreakdawnHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		//IL_WorldGen.KillTile_GetItemDrops += IL_WorldGen_KillTile_GetItemDrops;
 	}

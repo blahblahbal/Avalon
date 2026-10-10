@@ -28,7 +28,7 @@ public class BasaltObeliskBuff : ModBuff
 
 public class DisableBuffTimerDrawing : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Main.TryGetBuffTime += OnTryGetBuffTime;
 	}

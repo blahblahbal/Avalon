@@ -11,7 +11,7 @@ using static Terraria.HitTile;
 namespace Avalon.Hooks;
 internal class KillTileHooks : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		IL_Player.PickTile += IL_Player_PickTile;
 		On_HitTile.AddDamage += On_HitTile_AddDamage;

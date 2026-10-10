@@ -18,7 +18,7 @@ namespace Avalon.ModSupport.MLL.Liquids;
 
 internal class GasHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Main.DoDraw += On_Main_DoDraw;
 		On_Player.Update += On_Player_Update;

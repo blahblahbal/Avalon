@@ -875,7 +875,7 @@ public class WallofSteel : ModNPC
 }
 public class WallOfSteelHPHack : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Main.MouseTextHackZoom_string_string += On_Main_MouseTextHackZoom_string_string;
 	}

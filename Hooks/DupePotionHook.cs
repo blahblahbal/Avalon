@@ -8,7 +8,7 @@ namespace Avalon.Hooks;
 
 internal class DupePotionHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Projectile.AI_061_FishingBobber_GiveItemToPlayer += On_Projectile_AI_061_FishingBobber_GiveItemToPlayer;
 	}

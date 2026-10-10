@@ -8,7 +8,7 @@ namespace Avalon.Hooks;
 
 internal class AmmoHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Player.PickAmmo_Item_refInt32_refSingle_refBoolean_refInt32_refSingle_refInt32_bool += PickAmmo;
 	}

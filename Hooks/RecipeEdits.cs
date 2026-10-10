@@ -14,7 +14,7 @@ using Terraria.ModLoader;
 namespace Avalon.Hooks;
 public class RecipeEdits : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		IL_Recipe.CollectGuideRecipes += RemoveRescipeVisually;
 		IL_Main.DrawGuideCraftText += DontShowItemConditions;

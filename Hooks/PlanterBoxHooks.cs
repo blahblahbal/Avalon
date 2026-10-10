@@ -10,7 +10,7 @@ namespace Avalon.Hooks
 {
     internal class PlanterBoxHooks : ModHook
     {
-        protected override void Apply()
+        public override void Load()
         {
             On_WorldGen.PlaceAlch += OnPlaceAlch;
             On_WorldGen.CheckAlch += OnCheckAlch;

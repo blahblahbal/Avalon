@@ -21,7 +21,7 @@ public class ExtraMana : ModHook
 	private const int ManaPerCrystal = 20;
 	private const int MaxManaTier = 6;
 
-	protected override void Apply()
+	public override void Load()
 	{
 		On_PlayerStatsSnapshot.ctor += OnPlayerStatsSnapshotCtor;
 		On_FancyClassicPlayerResourcesDisplaySet.StarFillingDrawer += OnStarFillingDrawer;

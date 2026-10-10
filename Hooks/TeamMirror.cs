@@ -7,7 +7,7 @@ namespace Avalon.Hooks;
 [Autoload(Side = ModSide.Both)]
 class TeamMirror : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         On_Player.HasUnityPotion += OnHasUnityItem;
         On_Player.TakeUnityPotion += OnTakeUnityItem;

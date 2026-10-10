@@ -9,7 +9,7 @@ namespace Avalon.Hooks;
 
 internal class WallWandHook : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         On_WorldGen.PlaceWall += On_WorldGen_PlaceWall;
     }

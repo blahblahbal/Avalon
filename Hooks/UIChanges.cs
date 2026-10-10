@@ -11,7 +11,7 @@ using Terraria.UI;
 namespace Avalon.Hooks;
 
 public class UIChanges : ModHook {
-    protected override void Apply() {
+    public override void Load() {
         On_UIElement.Remove += OnUIElementRemove;
         On_UIElement.GetElementAt += OnUIElementGetElementAt;
         IL_UIElement.Recalculate += ILUIElementRecalculate;

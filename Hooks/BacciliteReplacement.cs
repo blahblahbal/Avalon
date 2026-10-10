@@ -11,7 +11,7 @@ namespace Avalon.Hooks
 {
     internal class BacciliteReplacement : ModHook
     {
-        protected override void Apply()
+        public override void Load()
         {
 			if (!AltLibrarySupport.Enabled) On_WorldGen.TileRunner += On_WorldGen_TileRunner;
             IL_WorldGen.ShimmerMakeBiome += AddShimmerAlternativeChecks;

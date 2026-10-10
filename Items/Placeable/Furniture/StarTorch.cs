@@ -147,7 +147,7 @@ public class StarTorch : ModItem
 }
 //public class StarTorchHook : ModHook
 //{
-//    protected override void Apply()
+//    public override void Load()
 //    {
 //        On_Player.PlaceThing_Tiles_PlaceIt += On_Player_PlaceThing_Tiles_PlaceIt;
 //    }

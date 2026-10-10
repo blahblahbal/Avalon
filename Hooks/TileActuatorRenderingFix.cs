@@ -10,7 +10,7 @@ namespace Avalon.Hooks
 {
 	public class TileActuatorRenderingFix : ModHook
 	{
-		protected override void Apply()
+		public override void Load()
 		{
 			IL_WallDrawing.DrawWalls += InactiveWallColoring;
 

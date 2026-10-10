@@ -433,7 +433,7 @@ internal class SavannaPassHookAL : ModHook
 	private readonly List<ushort> replaceableTiles = [(ushort)ModContent.TileType<Loam>()];
 
 	FieldInfo? worldScale = typeof(JunglePass).GetField("_worldScale", BindingFlags.Instance | BindingFlags.NonPublic);
-	protected override void Apply()
+	public override void Load()
 	{
 		On_JunglePass.ApplyPass += On_JunglePass_ApplyPass;
 		IL_WorldGen.TileRunner += IL_WorldGen_TileRunner;
@@ -759,7 +759,7 @@ internal class SavannaPassHook : ModHook
 	private readonly List<ushort> replaceableTiles = [ (ushort)ModContent.TileType<Loam>() ];
 
 	FieldInfo? worldScale = typeof(JunglePass).GetField("_worldScale", BindingFlags.Instance | BindingFlags.NonPublic);
-	protected override void Apply()
+	public override void Load()
 	{
 		On_JunglePass.ApplyPass += On_JunglePass_ApplyPass;
 		IL_WorldGen.TileRunner += IL_WorldGen_TileRunner;

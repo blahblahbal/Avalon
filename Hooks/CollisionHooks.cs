@@ -12,7 +12,7 @@ namespace Avalon.Hooks;
 
 internal class CollisionHooks : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Collision.StickyTiles += On_Collision_StickyTiles;
 	}

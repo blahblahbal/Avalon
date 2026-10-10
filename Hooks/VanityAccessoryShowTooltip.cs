@@ -8,7 +8,7 @@ namespace Avalon.Hooks;
 [Autoload(Side = ModSide.Client)]
 internal class VanityAccessoryShowTooltip : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         On_Main.MouseText_DrawItemTooltip_GetLinesInfo += OnMouseText_DrawItemTooltip_GetLinesInfo;
     }

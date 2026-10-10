@@ -7,7 +7,7 @@ namespace Avalon.Hooks;
 
 internal class SkellyBananaHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_NPCWasChatWithTracker.RegisterChatStartWith += On_NPCWasChatWithTracker_RegisterChatStartWith;
 	}

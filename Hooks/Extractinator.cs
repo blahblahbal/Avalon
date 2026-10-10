@@ -8,7 +8,7 @@ namespace Avalon.Hooks
 {
     internal class Extractinator : ModHook
     {
-        protected override void Apply()
+        public override void Load()
         {
             //On_ItemTrader.CreateChlorophyteExtractinator += OnChlorophyteExtractinator;
         }

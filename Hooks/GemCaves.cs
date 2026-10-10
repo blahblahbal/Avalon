@@ -13,7 +13,7 @@ namespace Avalon.Hooks
     internal class GemCaves : ModHook
     {
         private static bool[] Gem = new bool[9];
-        protected override void Apply()
+        public override void Load()
         {
             On_WorldGen.randGem += OnRandGem;
             On_WorldGen.randGemTile += OnRandGemTile;

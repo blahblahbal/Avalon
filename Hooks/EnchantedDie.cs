@@ -7,7 +7,7 @@ namespace Avalon.Hooks
 {
     internal class EnchantedDie : ModHook
     {
-        protected override void Apply()
+        public override void Load()
         {
             On_Main.DamageVar_float_int_float += OnDamageVarFIF;
         }

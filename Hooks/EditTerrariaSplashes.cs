@@ -6,7 +6,7 @@ namespace Avalon.Hooks;
 
 internal class EditTerrariaSplashes : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         On_Lang.GetRandomGameTitle += On_Lang_GetRandomGameTitle;
     }

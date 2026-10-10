@@ -216,7 +216,7 @@ public class GemLocks : ModTile
 }
 public class GemLocksToggle : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_WorldGen.ToggleGemLock += On_WorldGen_ToggleGemLock;
 	}

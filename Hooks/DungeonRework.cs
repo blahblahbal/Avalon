@@ -21,7 +21,7 @@ namespace Avalon.Hooks;
 [Autoload(Side = ModSide.Both)]
 public class DungeonRework : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         On_WorldGen.DungeonPitTrap += OnDungeonPitTrap;
     }
@@ -283,7 +283,7 @@ public class DungeonRework : ModHook
 public class DungeonContagionChest : ModHook
 {
 	public override bool IsLoadingEnabled(Mod mod) => !AltLibrarySupport.Enabled;
-	protected override void Apply()
+	public override void Load()
     {
         On_WorldGen.AddBuriedChest_int_int_int_bool_int_bool_ushort += On_WorldGen_AddBuriedChest_int_int_int_bool_int_bool_ushort;
     }

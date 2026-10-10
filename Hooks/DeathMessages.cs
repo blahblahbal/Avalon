@@ -8,7 +8,7 @@ namespace Avalon.Hooks;
 [Autoload(Side = ModSide.Both)]
 public class DeathMessages : ModHook
 {
-    protected override void Apply() => On_Lang.CreateDeathMessage += OnCreateDeathMessage;
+    public override void Load() => On_Lang.CreateDeathMessage += OnCreateDeathMessage;
 
     private static NetworkText OnCreateDeathMessage(
         On_Lang.orig_CreateDeathMessage orig, string deadPlayerName, int plr = -1, int npc = -1, int proj = -1,

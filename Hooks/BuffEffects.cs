@@ -10,7 +10,7 @@ namespace Avalon.Hooks;
 [Autoload(Side = ModSide.Both)]
 public class BuffEffects : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		//On_Projectile.FishingCheck_RollDropLevels += OnFishingCheckRollDropLevels;
 		//CommonCode.DropItemForEachInteractingPlayerOnThePlayer += OnDropItemForEachInteractingPlayerOnThePlayer;

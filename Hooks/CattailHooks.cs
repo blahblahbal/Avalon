@@ -12,7 +12,7 @@ namespace Avalon.Hooks;
 
 internal class CattailHooks : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Player.PlaceThing_Tiles_PlaceIt_KillGrassForSolids += KillConjoinedGrass_PlaceThing;
 		On_Player.DoesPickTargetTransformOnKill += PickaxeKillTile;

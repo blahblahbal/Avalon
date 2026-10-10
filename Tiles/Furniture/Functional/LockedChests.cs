@@ -201,7 +201,7 @@ namespace Avalon.Tiles.Furniture.Functional
 	}
 	public class VanillaChestLocking : ModHook
 	{
-		protected override void Apply()
+		public override void Load()
 		{
 			On_Chest.Lock += On_Chest_Lock;
 			On_Chest.Unlock += On_Chest_Unlock;

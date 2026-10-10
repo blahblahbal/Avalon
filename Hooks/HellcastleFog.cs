@@ -14,7 +14,7 @@ namespace Avalon.Hooks
 {
     internal class HellcastleFog : ModHook
     {
-        protected override void Apply()
+        public override void Load()
         {
             //IL_AmbientWindSystem.Update += IL_AmbientWindSystem_Update;
             On_Main.DoUpdateInWorld += On_Main_DoUpdateInWorld;

@@ -6,7 +6,7 @@ namespace Avalon.Hooks;
 
 internal class StaminaEquipPage : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         On_ItemSlot.SelectEquipPage += On_ItemSlot_SelectEquipPage;
     }

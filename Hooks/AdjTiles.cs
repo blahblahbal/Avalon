@@ -11,7 +11,7 @@ namespace Avalon.Hooks;
 [Autoload(Side = ModSide.Both)]
 internal class AdjTiles : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         //On_Player.AdjTiles += OnAdjTiles;
         On_Player.AdjTiles += OnAdjTilesPocketBench;

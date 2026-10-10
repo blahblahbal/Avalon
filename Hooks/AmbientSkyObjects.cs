@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Hooks;
 public class AmbientSkyObjects : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_AmbientSky.AnActiveSkyConflictsWithAmbience += On_AmbientSky_AnActiveSkyConflictsWithAmbience; ;
 	}

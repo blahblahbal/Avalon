@@ -137,10 +137,6 @@ public class ExxoAvalonOrigins : Mod
 		fractalProfiles.Add(ModContent.ItemType<VertexOfExcalibur>(), new FinalFractalProfile(80f, new Color(120, 109, 204)));
 
 		// ----------- Server/Client ----------- //
-		while (ModHook.RegisteredHooks.TryDequeue(out ModHook? hook))
-		{
-			hook.ApplyHook();
-		}
 		if (Main.netMode == NetmodeID.Server)
 		{
 			return;

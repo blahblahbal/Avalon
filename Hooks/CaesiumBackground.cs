@@ -21,7 +21,7 @@ public class CaesiumBackground : ModHook
     public Color[] UWBGBottomColor = new Color[2];
     public Asset<Texture2D>[][] UWBGTexture = new Asset<Texture2D>[2][];
 
-    protected override void Apply()
+    public override void Load()
     {
         IL_Main.DrawBG += UWBGInsert;
         IL_Main.DrawCapture += UWBGInsertCapture;

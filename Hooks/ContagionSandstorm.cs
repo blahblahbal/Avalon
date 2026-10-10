@@ -13,7 +13,7 @@ namespace Avalon.Hooks
 {
     internal class ContagionSandstorm : ModHook
     {
-        protected override void Apply()
+        public override void Load()
         {
             On_Sandstorm.ShouldSandstormDustPersist += On_Sandstorm_ShouldSandstormDustPersist;
         }

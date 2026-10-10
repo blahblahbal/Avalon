@@ -10,7 +10,7 @@ namespace Avalon.Hooks;
 
 public class SpelunkerEdit : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         IL_TileDrawing.DrawSingleTile += ILDrawSingleTile;
     }

@@ -10,7 +10,7 @@ namespace Avalon.Hooks
 {
     internal class HerbHooks : ModHook
     {
-        protected override void Apply()
+        public override void Load()
         {
             On_WorldGen.PlaceAlch += On_WorldGen_PlaceAlch;
         }

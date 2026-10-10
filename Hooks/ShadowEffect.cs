@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Avalon.Hooks;
 public class ShadowEffect : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         On_LegacyPlayerRenderer.DrawPlayerFull += OnDrawPlayerFull;
     }

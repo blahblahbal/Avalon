@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace Avalon.Hooks;
 internal class PickPower : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         On_Player.GetPickaxeDamage += OnGetPickaxeDamage;
     }

@@ -6,7 +6,7 @@ namespace Avalon.Hooks;
 
 internal class BiomeTorch : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Player.BiomeTorchHoldStyle += On_Player_BiomeTorchHoldStyle;
 		On_Player.BiomeTorchPlaceStyle += On_Player_BiomeTorchPlaceStyle;

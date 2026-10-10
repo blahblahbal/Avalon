@@ -6,7 +6,7 @@ namespace Avalon.Hooks
 {
     internal class HellHouses : ModHook
     {
-        protected override void Apply()
+        public override void Load()
         {
             // ADD BACK WHEN HELLCASTLE IS RE-ADDED
             if (ModContent.GetInstance<AvalonClientConfig>().UnimplementedStructureGen)

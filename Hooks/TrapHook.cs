@@ -7,7 +7,7 @@ namespace Avalon.Hooks;
 
 internal class TrapHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_Player.PlaceThing_Tiles_PlaceIt_SpinTraps += On_Player_PlaceThing_Tiles_PlaceIt_SpinTraps;
 	}

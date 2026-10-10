@@ -19,7 +19,7 @@ namespace Avalon.Hooks;
 public class JungleSelectionMenu : ModHook
 {
 	public override bool IsLoadingEnabled(Mod mod) => !AltLibrarySupport.Enabled;
-	protected override void Apply()
+	public override void Load()
     {
 		if (ModContent.GetInstance<AvalonClientConfig>().BetaTropicsGen)
 		{

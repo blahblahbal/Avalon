@@ -6,7 +6,7 @@ namespace Avalon.Hooks;
 
 internal class BloodyAmulet : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
 		On_Player.ItemCheck_CheckCanUse += On_Player_ItemCheck_CheckCanUse;
 		On_Player.ItemCheck_UseEventItems += On_Player_ItemCheck_UseEventItems;

@@ -10,7 +10,7 @@ namespace Avalon.Biomes;
 
 public class ContagionHousingHook : ModHook
 {
-	protected override void Apply()
+	public override void Load()
 	{
 		On_WorldGen.GetTileTypeCountByCategory += On_WorldGen_GetTileTypeCountByCategory;
 	}

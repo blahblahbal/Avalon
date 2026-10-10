@@ -11,7 +11,7 @@ namespace Avalon.Hooks;
 [Autoload(Side = ModSide.Both)]
 public class IslandHouse : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         IL_WorldGen.IslandHouse += IL_IslandHouse;
     }

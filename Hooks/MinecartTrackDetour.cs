@@ -39,7 +39,7 @@ namespace Avalon.Hooks
             ModContent.TileType<Paintings>(), ModContent.TileType<PlatinumChest>(), ModContent.TileType<Tiles.Savanna.Loamstone>(), TileID.PlatinumBrick
         };
 
-        protected override void Apply()
+        public override void Load()
         {
             On_TrackGenerator.IsLocationInvalid += On_TrackGenerator_IsLocationInvalid;
         }

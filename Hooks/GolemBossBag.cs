@@ -12,7 +12,7 @@ namespace Avalon.Hooks;
 
 internal class GolemBossBag : ModHook
 {
-    protected override void Apply()
+    public override void Load()
     {
         On_ItemDropDatabase.RegisterBossBags += On_ItemDropDatabase_RegisterBossBags;
     }
