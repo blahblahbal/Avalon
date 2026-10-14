@@ -70,8 +70,4 @@ public class DesertLongswordTornado : ModProjectile
 	{
 		target.velocity.Y = -hit.Knockback * 5.5f;
 	}
-	public override void OnHitPlayer(Player target, Player.HurtInfo info)
-	{
-		target.velocity.Y = -10.5f;
-	}
 }
