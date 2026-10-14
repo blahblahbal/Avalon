@@ -2,6 +2,7 @@
 using Avalon.Buffs.CrystalUnity;
 using Avalon.Common;
 using Avalon.Core;
+using Avalon.Data.Sets;
 using Avalon.Dusts;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
@@ -35,6 +36,7 @@ public class CrystalUnityShard : ModProjectile
 		Main.projFrames[Type] = 10;
 		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 25;
 		ProjectileID.Sets.TrailingMode[Projectile.type] = 3;
+		ProjectileSets.CanBeReflected[Type] = true;
 	}
 
 	public override Color? GetAlpha(Color lightColor)

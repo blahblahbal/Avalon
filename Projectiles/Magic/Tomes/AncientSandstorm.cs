@@ -1,4 +1,5 @@
 ﻿using Avalon.Common;
+using Avalon.Data.Sets;
 using Avalon.Items.Weapons.Magic.Tomes;
 using Microsoft.Xna.Framework;
 using System;

@@ -1,5 +1,6 @@
 using Avalon.Common;
 using Avalon.Common.Extensions;
+using Avalon.Items.Weapons.Magic.Other;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -7,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Weapons.Magic.Other;
+namespace Avalon.Projectiles.Magic.Other;
 
 public class PhantomKnives : ModItem
 {

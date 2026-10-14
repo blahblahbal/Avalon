@@ -1,4 +1,5 @@
 ﻿using Avalon.Core;
+using Avalon.Data.Sets;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,6 +18,7 @@ public class MasterSwordBeam : ModProjectile
 	{
 		ProjectileID.Sets.TrailCacheLength[Type] = 5;
 		ProjectileID.Sets.TrailingMode[Type] = 2;
+		ProjectileSets.CanBeReflected[Type] = true;
 	}
 	public override void SetDefaults()
 	{

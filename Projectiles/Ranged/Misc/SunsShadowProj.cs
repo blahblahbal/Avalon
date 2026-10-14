@@ -1,4 +1,5 @@
-﻿using Avalon.Dusts;
+﻿using Avalon.Data.Sets;
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -11,6 +12,11 @@ public class SunsShadowProj : ModProjectile
 {
 	private Color lightColor;
 	private int dustType;
+
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.CanBeReflected[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Projectile.width = Projectile.height = 10;

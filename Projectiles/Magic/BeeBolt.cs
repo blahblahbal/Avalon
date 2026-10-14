@@ -1,3 +1,4 @@
+using Avalon.Data.Sets;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -10,7 +11,10 @@ public class BeeBolt : ModProjectile
 {
     private Color color;
     private int dustId;
-
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.CanBeReflected[Type] = true;
+	}
     public override void SetDefaults()
     {
         Projectile.CloneDefaults(ProjectileID.SapphireBolt);

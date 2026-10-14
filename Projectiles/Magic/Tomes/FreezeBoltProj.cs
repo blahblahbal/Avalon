@@ -1,4 +1,5 @@
-﻿using Avalon.Items.Weapons.Magic.Tomes;
+﻿using Avalon.Data.Sets;
+using Avalon.Items.Weapons.Magic.Tomes;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -12,6 +13,11 @@ public class FreezeBoltProj : ModProjectile
 {
 	public override string Texture => ModContent.GetInstance<FreezeBolt>().Texture;
 	public override LocalizedText DisplayName => ModContent.GetInstance<FreezeBolt>().DisplayName;
+
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.CanBeReflected[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Projectile.width = Projectile.height = 12;

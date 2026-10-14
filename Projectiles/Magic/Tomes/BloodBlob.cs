@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Avalon.Data.Sets;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
@@ -12,6 +13,7 @@ public class BloodBlob : ModProjectile
 	public override void SetStaticDefaults()
 	{
 		Main.projFrames[Projectile.type] = 4;
+		ProjectileSets.CanBeReflected[Type] = true;
 	}
 	public override void SetDefaults()
 	{

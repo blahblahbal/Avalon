@@ -1,4 +1,5 @@
-﻿using Avalon.Items.Weapons.Ranged.Thrown;
+﻿using Avalon.Data.Sets;
+using Avalon.Items.Weapons.Ranged.Thrown;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -11,6 +12,11 @@ namespace Avalon.Projectiles.Ranged.Thrown;
 public class IcicleProj : ModProjectile
 {
 	public override LocalizedText DisplayName => ModContent.GetInstance<Icicle>().DisplayName;
+
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.CanBeReflected[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Projectile.width = Projectile.height = 12;

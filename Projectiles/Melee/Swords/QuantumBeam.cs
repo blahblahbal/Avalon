@@ -1,4 +1,5 @@
 ﻿using Avalon.Core;
+using Avalon.Data.Sets;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,10 +15,9 @@ namespace Avalon.Projectiles.Melee.Swords;
 
 public class QuantumBeam : ModProjectile
 {
-	private static Asset<Texture2D>? texture2;
 	public override void SetStaticDefaults()
 	{
-		texture2 = ModContent.Request<Texture2D>(Texture + "2");
+		ProjectileSets.CanBeReflected[Type] = true;
 	}
 	public override void SetDefaults()
 	{
@@ -216,6 +216,7 @@ public class QuantumBeam : ModProjectile
 	}
 	public override bool PreDraw(ref Color lightColor)
 	{
+		var texture2 = AssetReferences.Projectiles.Melee.Swords.QuantumBeam2.Asset;
 		Main.spriteBatch.End();
 		BlendState BlendS = new BlendState
 		{

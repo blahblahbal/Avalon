@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Avalon.Data.Sets;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ModLoader;
@@ -7,6 +8,10 @@ namespace Avalon.Projectiles.Magic.Other;
 
 public class IceNote : ModProjectile
 {
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.CanBeReflected[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Projectile.penetrate = 3;

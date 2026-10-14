@@ -1,11 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Avalon.Items.Weapons.Magic.Other;
+using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace Avalon.Items.Weapons.Magic.Other;
+namespace Avalon.Projectiles.Magic.Other;
 
 public class PhantomKnifeSplit : ModProjectile
 {

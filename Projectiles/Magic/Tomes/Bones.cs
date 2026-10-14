@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Avalon.Data.Sets;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -11,11 +12,13 @@ namespace Avalon.Projectiles.Magic.Tomes;
 
 public class Bone1 : ModProjectile
 {
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.CanBeReflected[Type] = true;
+	}
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Projectile.width = dims.Width;
-		Projectile.height = dims.Height / Main.projFrames[Projectile.type];
+		Projectile.width = Projectile.height = 12;
 		Projectile.aiStyle = -1;
 		Projectile.penetrate = 2;
 		Projectile.scale = 1.2f;
@@ -60,9 +63,7 @@ public class Bone2 : Bone1
 {
 	public override void SetDefaults()
 	{
-		Rectangle dims = this.GetDims();
-		Projectile.width = dims.Width;
-		Projectile.height = dims.Height / Main.projFrames[Projectile.type];
+		Projectile.width = Projectile.height = 22;
 		Projectile.aiStyle = -1;
 		Projectile.scale = 1.2f;
 		Projectile.friendly = true;

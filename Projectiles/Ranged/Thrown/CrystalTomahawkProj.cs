@@ -1,4 +1,5 @@
-﻿using Avalon.Items.Weapons.Ranged.Thrown;
+﻿using Avalon.Data.Sets;
+using Avalon.Items.Weapons.Ranged.Thrown;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -20,6 +21,7 @@ public class CrystalTomahawkProj : ModProjectile
 		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
 		ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
 		trailTexture = ModContent.Request<Texture2D>(Texture + "_Trail");
+		ProjectileSets.CanBeReflected[Type] = true;
 	}
 	public override void SetDefaults()
 	{

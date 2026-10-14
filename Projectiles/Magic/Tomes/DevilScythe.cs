@@ -1,5 +1,6 @@
 ﻿using Avalon.Buffs.Debuffs;
 using Avalon.Common.Interfaces;
+using Avalon.Data.Sets;
 using Avalon.Dusts;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
@@ -19,6 +20,7 @@ public class DevilScythe : ModProjectile, ISyncedOnHitEffect
 	{
 		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 32;
 		ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+		ProjectileSets.CanBeReflected[Type] = true;
 	}
 	public override void SetDefaults()
 	{

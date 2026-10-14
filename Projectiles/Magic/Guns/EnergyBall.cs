@@ -1,4 +1,5 @@
-﻿using Avalon.Particles;
+﻿using Avalon.Data.Sets;
+using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -14,6 +15,7 @@ public class EnergyBall : ModProjectile
 	public override void SetStaticDefaults()
 	{
 		Main.projFrames[Type] = 3;
+		ProjectileSets.CanBeReflected[Type] = true;
 	}
 	public override void SetDefaults()
 	{

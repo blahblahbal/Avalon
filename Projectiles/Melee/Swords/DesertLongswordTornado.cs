@@ -1,3 +1,4 @@
+using Avalon.Data.Sets;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -11,6 +12,10 @@ namespace Avalon.Projectiles.Melee.Swords;
 
 public class DesertLongswordTornado : ModProjectile
 {
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.CanBeReflected[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Projectile.width = 40;
@@ -64,5 +69,9 @@ public class DesertLongswordTornado : ModProjectile
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 	{
 		target.velocity.Y = -hit.Knockback * 5.5f;
+	}
+	public override void OnHitPlayer(Player target, Player.HurtInfo info)
+	{
+		target.velocity.Y = -10.5f;
 	}
 }

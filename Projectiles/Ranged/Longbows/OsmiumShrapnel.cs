@@ -1,4 +1,5 @@
-﻿using Avalon.Dusts;
+﻿using Avalon.Data.Sets;
+using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -15,6 +16,7 @@ public class OsmiumShrapnel : ModProjectile
 	{
 		ProjectileID.Sets.TrailCacheLength[Type] = 5;
 		ProjectileID.Sets.TrailingMode[Type] = 2;
+		ProjectileSets.CanBeReflected[Type] = true;
 	}
 	public override void SetDefaults()
 	{

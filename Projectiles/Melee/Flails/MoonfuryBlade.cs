@@ -1,4 +1,5 @@
 ﻿using Avalon.Common;
+using Avalon.Data.Sets;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,10 @@ namespace Avalon.Projectiles.Melee.Flails;
 
 public class MoonfuryBlade : ModProjectile
 {
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.CanBeReflected[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Projectile.width = 48;

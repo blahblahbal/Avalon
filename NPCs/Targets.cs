@@ -28,11 +28,18 @@ public class Target : ModNPC
         NPC.lifeMax = 1000000000;
         NPC.defense = 0;
         NPC.noGravity = true;
-        NPC.width = 20;
         NPC.aiStyle = -1;
-        NPC.height = 20;
+        NPC.width = NPC.height = 32;
         NPC.HitSound = SoundID.NPCHit3;
         NPC.DeathSound = SoundID.NPCDeath14;
         NPC.knockBackResist = 0f;
     }
+}
+public class TargetMirror : Target
+{
+	public override void AI()
+	{
+		NPC.ReflectProjectiles(NPC.Hitbox);
+		NPC.dontTakeDamage = true;
+	}
 }

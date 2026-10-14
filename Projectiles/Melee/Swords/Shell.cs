@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Avalon.Data.Sets;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
@@ -17,6 +18,7 @@ public class Shell : ModProjectile
 		Main.projFrames[Projectile.type] = 4;
 		ProjectileID.Sets.TrailCacheLength[Type] = 6;
 		ProjectileID.Sets.TrailingMode[Type] = 2;
+		ProjectileSets.CanBeReflected[Type] = true;
 	}
 	public override void SetDefaults()
 	{
@@ -49,16 +51,15 @@ public class Shell : ModProjectile
 	public override bool PreDraw(ref Color lightColor)
 	{
 		Asset<Texture2D> texture = TextureAssets.Projectile[Type];
-		int frameHeight = texture.Value.Height / Main.projFrames[Type];
-		Rectangle frame = new Rectangle(0, frameHeight * Projectile.frame, texture.Value.Width, frameHeight);
+		Rectangle frame = texture.Frame(1, 8, 0, Projectile.frame + (Projectile.reflected? 4 : 0), 0);
 		Vector2 drawPos;
 		for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Type]; i++)
 		{
 			drawPos = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2;
-			Main.EntitySpriteDraw(texture.Value, drawPos, frame, lightColor * Projectile.Opacity * ((ProjectileID.Sets.TrailCacheLength[Type] - i) / (float)ProjectileID.Sets.TrailCacheLength[Type]) * 0.5f, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+			Main.EntitySpriteDraw(texture.Value, drawPos, frame, lightColor * Projectile.Opacity * ((ProjectileID.Sets.TrailCacheLength[Type] - i) / (float)ProjectileID.Sets.TrailCacheLength[Type]) * 0.5f, Projectile.rotation, frame.Size() / 2, Projectile.scale, SpriteEffects.None, 0);
 		}
 		drawPos = Projectile.Center - Main.screenPosition;
-		Main.EntitySpriteDraw(texture.Value, drawPos, frame, lightColor * Projectile.Opacity, Projectile.rotation, new Vector2(texture.Value.Width, frameHeight) / 2, Projectile.scale, SpriteEffects.None, 0);
+		Main.EntitySpriteDraw(texture.Value, drawPos, frame, lightColor * Projectile.Opacity, Projectile.rotation, frame.Size() / 2, Projectile.scale, SpriteEffects.None, 0);
 		return false;
 	}
 	public override void OnKill(int timeLeft)

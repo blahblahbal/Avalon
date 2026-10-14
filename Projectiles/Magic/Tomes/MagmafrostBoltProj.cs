@@ -1,4 +1,5 @@
-﻿using Avalon.Items.Weapons.Magic.Tomes;
+﻿using Avalon.Data.Sets;
+using Avalon.Items.Weapons.Magic.Tomes;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -13,6 +14,11 @@ public class MagmafrostBoltProj : ModProjectile
 {
 	public override string Texture => ModContent.GetInstance<MagmafrostBolt>().Texture;
 	public override LocalizedText DisplayName => ModContent.GetInstance<MagmafrostBolt>().DisplayName;
+
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.CanBeReflected[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Projectile.width = Projectile.height = 12;

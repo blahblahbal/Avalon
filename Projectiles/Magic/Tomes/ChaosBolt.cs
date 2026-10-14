@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Avalon.Data.Sets;
+using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ID;
@@ -9,6 +10,11 @@ namespace Avalon.Projectiles.Magic.Tomes;
 public class ChaosBolt : ModProjectile
 {
 	public override string Texture => $"Terraria/Images/NPC_{NPCID.ChaosBall}";
+
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.CanBeReflected[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Projectile.Size = new Vector2(16);

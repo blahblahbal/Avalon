@@ -1,4 +1,5 @@
 ﻿using Avalon.Buffs.Debuffs;
+using Avalon.Data.Sets;
 using Avalon.Dusts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,7 +21,7 @@ public class DarklightLanceBeam : ModProjectile
 {
 	public override void SetStaticDefaults()
 	{
-		base.SetStaticDefaults();
+		ProjectileSets.CanBeReflected[Type] = true;
 	}
 	public override void SetDefaults()
 	{

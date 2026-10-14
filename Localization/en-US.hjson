@@ -10978,6 +10978,7 @@ Mods: {
 			BacteriumTendrilMelee.DisplayName: Bacterium Tendril
 			BacteriumPrimeSmallMelee.DisplayName: Bacterium Minor
 			BacteriumPrimeSmallRanged.DisplayName: Bacterium Major
+			TargetMirror.DisplayName: Target Mirror
 		}
 
 		Buffs: {

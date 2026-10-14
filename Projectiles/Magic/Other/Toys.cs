@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Avalon.Data.Sets;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -28,6 +29,7 @@ public abstract class ToysBase : ModProjectile
 			ProjectileID.Sets.TrailingMode[Type] = 2;
 		}
 		Main.projFrames[Type] = Variants;
+		ProjectileSets.CanBeReflected[Type] = true;
 	}
 	public override void SetDefaults()
 	{

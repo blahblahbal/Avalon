@@ -1,4 +1,5 @@
-﻿using Avalon.Dusts;
+﻿using Avalon.Data.Sets;
+using Avalon.Dusts;
 using Avalon.Items.Weapons.Magic.Wands;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -10,6 +11,10 @@ namespace Avalon.Projectiles.Magic.Wands;
 
 public class JungleFire : ModProjectile
 {
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.CanBeReflected[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Rectangle dims = this.GetDims();

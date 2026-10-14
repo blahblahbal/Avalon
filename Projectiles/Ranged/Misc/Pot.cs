@@ -1,4 +1,5 @@
 ﻿using Avalon;
+using Avalon.Data.Sets;
 using Avalon.Items.Weapons.Ranged.Thrown;
 using Humanizer;
 using Microsoft.Xna.Framework;
@@ -22,6 +23,7 @@ public class Pot : ModProjectile
 	{
 		ProjectileID.Sets.TrailCacheLength[Projectile.type] = 3;
 		ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+		ProjectileSets.CanBeReflected[Type] = true;
 	}
 	public override void SetDefaults()
 	{

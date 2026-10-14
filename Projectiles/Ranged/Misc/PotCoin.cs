@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Avalon.Data.Sets;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent;
@@ -10,6 +11,11 @@ namespace Avalon.Projectiles.Ranged.Misc;
 public class PotCoin : ModProjectile
 {
 	public override string Texture => $"Terraria/Images/Item_{ItemID.GoldCoin}";
+
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.CanBeReflected[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Projectile.Size = new Vector2(12);

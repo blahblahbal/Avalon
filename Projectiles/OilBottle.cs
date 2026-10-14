@@ -3,11 +3,16 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
+using Avalon.Data.Sets;
 
 namespace Avalon.Projectiles;
 
 public class OilBottle : ModProjectile
 {
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.CanBeReflected[Type] = true;
+	}
     public override void SetDefaults()
     {
         Projectile.Size = new Vector2(16);

@@ -1,4 +1,5 @@
 ﻿using Avalon.Core;
+using Avalon.Data.Sets;
 using Avalon.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;

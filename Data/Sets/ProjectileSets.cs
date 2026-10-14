@@ -1,13 +1,12 @@
-using Avalon.Items.Weapons.Melee.Boomerangs;
-using Avalon.Projectiles.Hostile.WallofSteel;
-using Avalon.Projectiles.Melee.Boomerangs;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Avalon.Data.Sets;
 
+[ReinitializeDuringResizeArrays]
 public static class ProjectileSets
 {
+	public static bool[] CanBeReflected = ProjectileID.Sets.Factory.CreateNamedSet("CanBeReflected").Description("Vanilla's logic for determining if something can be reflected should also count these projectiles").RegisterBoolSet();
 	public static readonly bool[] DontReflect = ProjectileID.Sets.Factory.CreateBoolSet(
 		ProjectileID.Stinger,
 		ProjectileID.RainCloudMoving,
@@ -52,16 +51,6 @@ public static class ProjectileSets
 		//ModContent.ProjectileType<WallofSteelLaserStart>(),
 		//ModContent.ProjectileType<CrystalBit>(),
 		//ModContent.ProjectileType<CrystalBeam>(),
-
-
-	public static readonly bool[] MinionProjectiles = ProjectileID.Sets.Factory.CreateBoolSet(
-        ProjectileID.HornetStinger,
-        ProjectileID.ImpFireball,
-        ProjectileID.MiniRetinaLaser,
-        ProjectileID.PygmySpear,
-        ProjectileID.UFOLaser,
-        ProjectileID.MiniSharkron,
-        ProjectileID.StardustCellMinionShot);
 
     public static readonly bool[] TrapProjectiles = ProjectileID.Sets.Factory.CreateBoolSet(
         ProjectileID.PoisonDart,

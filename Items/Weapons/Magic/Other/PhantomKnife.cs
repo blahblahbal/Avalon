@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Avalon.Data.Sets;
+using Avalon.Projectiles.Magic.Other;
+using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ID;
@@ -8,6 +10,10 @@ namespace Avalon.Items.Weapons.Magic.Other;
 
 public class PhantomKnife : ModProjectile
 {
+	public override void SetStaticDefaults()
+	{
+		ProjectileSets.CanBeReflected[Type] = true;
+	}
 	public override void SetDefaults()
 	{
 		Projectile.width = 8;
