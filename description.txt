@@ -1,52 +1,43 @@
-Welcome to Exxo Avalon: Origins! Avalon is a vanilla-oriented mod, expanding on content while keeping to a generally vanilla feel. In this Pre-hardmode release, there are:
-- Several new structures, including the Ice Shrine, the Lava Shrine, and the Evil Shrine
-- A new world evil, the Contagion, which is an alternate to the Corruption and Crimson
-- A stamina mechanic, which is completely optional, but allows you to do things such as teleporting and sprinting without the need for an accessory (this mechanic is currently unfinished but in a somewhat usable state)
-- Several new prefixes (including some for armor only)
-- Mystical Tomes, which are similar to accessories, but only grant stat boosts
-- And some other various things
+Avalon started out as a tConfig mod over a decade ago, and is now finally available for tModLoader!
 
-Music Mod: https://steamcommunity.com/sharedfiles/filedetails/?id=3150771779
+Welcome to Exxo Avalon: Origins! Avalon is a vanilla-oriented mod, expanding on content while keeping to a generally vanilla feel. In this pre-Hardmode release, there are:
+- Several new structures, including the Ice Shrine, the Lava Shrine, and the Evil Shrine.
+- A new world evil, the Contagion, which is an alternate to the Corruption and Crimson.
+- A stamina mechanic, which is completely optional, but allows you to do things such as teleporting and sprinting without the need for an accessory (this mechanic is currently unfinished but in a somewhat usable state).
+- Several new prefixes (including some for armor only).
+- Mystical Tomes, which are similar to accessories, but also grant stat boosts.
+- Plenty more to explore!
 
+Avalon Music: https://steamcommunity.com/sharedfiles/filedetails/?id=3150771779
+Discord Server: https://discord.gg/rtm99Uq
+Report any bugs you find in #bug-reports in the Discord server.
 
-Avalon started out as a tConfig mod over 10 years ago, and is now finally available for tModLoader!
-
-Discord link: https://discord.gg/rtm99Uq
-
-Report any bugs you find in #bug-reports on the discord.
-
-Updates:
-Check the change notes section for patch notes.
-
-Compatibility notes:
-Avalon has compat with Achievements, Tokens, Biome Colored Lava, and Boss Checklist (more to come).
-
+Compatibility:
+Avalon is compatiblie with Achievements, Tokens, Biome Colored Lava, and Boss Checklist. There are more mods to be supported eventually.
 
 Credits:
-
-imkSushi for starting the porting work
-Fox for some code
-Ghasttear for a lot of code
-_Sunshy for some code
-Lion8cake for some code
-Comentdude for some code
-GreenTea for some code
-Jona for some sprites and a lot of code, and for coughing
-Blasfah for many sprites, and some code
-TerrorPenguin for lots of sprites and code
-Fred for some sprites
-Jace for many potion sprites
-PhilCo for some sprites
-Dragonfly for the original Tome sprites, and some others
-Yuyu for many sprites
-Zemmie for Mechasting's music
-The Avalon composers, Ennway, FatCat, Mioqu, Ace, Marlilo, musicman, and HeartPlusUp! for, well, the music obviously
-All the beta testers and discord members for general help with testing the mod
-Relxs, Hadiros, and Lion8cake for assisting with the Sky Fortress construction
-Clicker Class for the armor glowmask code
-Thorium for parent/child projectile syncing code, and various miscellaneous bits of code used for compatibility
-Starlight River for its unsafe TileData saving/loading code
-
+- imkSushi for starting the porting work.
+- Fox for some code.
+- Ghasttear for a lot of code.
+- _Sunshy for some code.
+- Lion8cake for some code.
+- Comentdude for some code.
+- GreenTea for some code.
+- Jona for some sprites and a lot of code, and for coughing.
+- Blasfah for many sprites, and some code.
+- TerrorPenguin for lots of sprites and code.
+- Fred for some sprites.
+- Jace for many potion sprites.
+- PhilCo for some sprites.
+- Dragonfly for the original Tome sprites, and some others.
+- Yuyu for many sprites.
+- Zemmie for Mechasting's music.
+- The Avalon composers: ENNWAY, FatCat, Mioqu, Marlilo, musicman, and HeartPlusUp!
+- All the beta testers and Discord members for general help with testing the mod.
+- Relxs, Hadiros, and Lion8cake for assisting with the Sky Fortress construction.
+- Clicker Class for the armor glowmask code.
+- Thorium for parent and child projectile syncing code, and various miscellaneous bits of code used for compatibility.
+- Starlight River for its unsafe TileData saving and loading code.
 
 Bubbles.ogg from https://freesound.org/people/Avaruusnuija/sounds/476618/
 	License link: http://creativecommons.org/licenses/by/3.0/

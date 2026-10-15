@@ -1,0 +1,99 @@
+[h1]Exxo Avalon: Origins[/h1]
+
+[h2]Information[/h2]
+
+Avalon started out as a tConfig mod over a decade ago, and is now finally available for tModLoader!
+
+Welcome to Exxo Avalon: Origins! Avalon is a vanilla-oriented mod, expanding on content while keeping to a generally vanilla feel. In this pre-Hardmode release, there are:
+[list]
+[*] Several new structures, including the Ice Shrine, the Lava Shrine, and the Evil Shrine.
+[*] A new world evil, the Contagion, which is an alternate to the Corruption and Crimson.
+[*] A stamina mechanic, which is completely optional, but allows you to do things such as teleporting and sprinting without the need for an accessory (this mechanic is currently unfinished but in a somewhat usable state).
+[*] Several new prefixes (including some for armor only).
+[*] Mystical Tomes, which are similar to accessories, but also grant stat boosts.
+[*] Plenty more to explore!
+[/list]
+
+If you want to be informed about previous updates, check the change notes section for patch notes.
+
+[h2]Links[/h2]
+
+If you wish to listen to Avalon's soundtrack, you can install the music mod:
+https://steamcommunity.com/sharedfiles/filedetails/?id=3150771779
+
+Feel free to join our [url=https://discord.gg/rtm99Uq]Discord server[/url], hang out, and report any issues.
+You can also have a look at our [url=https://https://terrariamods.wiki.gg/wiki/Avalon]official wiki[/url] for information.
+
+[h2]Compatibility[/h2]
+Avalon is compatible with Achievements, Tokens, Biome Colored Lava, and Boss Checklist. There are more mods to be supported eventually.
+
+[h2]Credits[/h2]
+
+[h3]Code[/h3]
+
+[list]
+[*] imkSushi
+[*] Ghasttear
+[*] Fox
+[*] Jona
+[*] Blasfah
+[*] TerrorPenguin
+[*] _Sunshy
+[*] Lion8cake
+[*] Comentdude
+[*] GreenTea
+[/list]
+
+[h3]Sprites[/h3]
+
+[list]
+[*] Jona
+[*] TerrorPenguin
+[*] Fred
+[*] Jace
+[*] PhilCo
+[*] Dragonfly
+[*] Yuyu
+[/list]
+
+[h3]Music and Sounds[/h3]
+
+[list]
+[*] ENNWAY
+[*] FatCat
+[*] Mioqu
+[*] Marlilo
+[*] musicman
+[*] HeartPlusUp!
+[*] Zemmie
+[*] Jona
+[/list]
+
+[h3]Other[/h3]
+
+[list]
+[*] Relxs, Hadiros, and Lion8cake for assisting with the Sky Fortress construction.
+[*] Clicker Class or the armor glowmask code.
+[*] Thorium for parent and child projectile syncing code, and various miscellaneous bits of code used for compatibility.
+[*] Starlight River for its unsafe TileData saving and loading code.
+[*] All the beta testers and Discord members for general help with testing the mod.
+[/list]
+
+Bubbles.ogg from https://freesound.org/people/Avaruusnuija/sounds/476618/
+	License link: http://creativecommons.org/licenses/by/3.0/
+
+Railgun.ogg edited from https://freesound.org/people/baefild/sounds/91293/
+	License link: http://creativecommons.org/licenses/by/3.0/
+
+Scroll.ogg shortened from https://freesound.org/people/InspectorJ/sounds/398271/
+	License link: http://creativecommons.org/licenses/by/3.0/
+
+MasterSword.ogg shortened and edited from https://freesound.org/people/jobro/sounds/74834/
+	License link: http://creativecommons.org/licenses/by/3.0/
+
+Both Longbow sounds from https://www.epidemicsound.com/music/featured/
+
+DesertHorn.ogg shortened and edited from https://audiojungle.net/item/horn-calls/24273579
+
+LaserCharge2.ogg shortened from https://freesound.org/people/plasterbrain/sounds/351807/
+	License link: http://creativecommons.org/licenses/by/3.0/
